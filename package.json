@@ -1,0 +1,34 @@
+{
+  "name": "@siedlerchr/types-ol-ext",
+  "version": "1.0.0",
+  "description": "Type definitions for ol-ext",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "tsc -p tsconfig.lint.json --pretty && tslint -p tsconfig.lint.json",
+    "dtslint": "dtslint types"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Siedlerchr/types-ol-ext.git"
+  },
+  "keywords": [
+    "openlayers",
+    "ol-ext",
+    "typescript",
+    "declaration"
+  ],
+  "author": "Siedlerchr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Siedlerchr/types-ol-ext/issues"
+  },
+  "homepage": "https://github.com/Siedlerchr/types-ol-ext#readme",
+  "dependencies": {
+    "@types/ol": "^5.3.3",
+    "dtslint": "^0.8.0",
+    "jsdoc": "^3.6.3",
+    "ol-ext": "^3.1.4",
+    "typescript": "^3.5.3"
+  }
+}
