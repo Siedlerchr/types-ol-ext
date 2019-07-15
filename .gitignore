@@ -74,4 +74,6 @@ typings/
 # Ignore all local history of files
 .history
 
+/ol-ext
+
 # End of https://www.gitignore.io/api/visualstudiocode
