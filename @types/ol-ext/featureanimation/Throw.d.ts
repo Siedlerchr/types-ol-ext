@@ -1,4 +1,8 @@
-import { featureAnimation } from './FeatureAnimation';
+import { featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+
+export interface Options {
+    side?: 'left' | 'right';
+}
 /** Slice animation: feature enter from left
  * @constructor
  * @extends {featureAnimation}
@@ -6,11 +10,9 @@ import { featureAnimation } from './FeatureAnimation';
  *  @param {left|right} options.side side of the animation, default left
  */
 export class Throw extends featureAnimation {
-    constructor(options: {
-        side: 'left' | 'right';
-    });
+    constructor(options?: Options)
     /** Animate
-    * @param {featureAnimationEvent} e
+    * @param {FeatureAnimationEvent} e
      */
-    animate(e: featureAnimationEvent): boolean;
+    animate(e: FeatureAnimationEvent): boolean;
 }

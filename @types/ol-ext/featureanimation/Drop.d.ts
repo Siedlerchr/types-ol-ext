@@ -1,4 +1,10 @@
-import { featureAnimation } from './FeatureAnimation';
+import { featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+
+export interface Options{
+    speed?: number;
+    side?: number;
+}
+
 /** Drop animation: drop a feature on the map
  * @constructor
  * @extends {featureAnimation}
@@ -7,12 +13,9 @@ import { featureAnimation } from './FeatureAnimation';
  *  @param {Number} options.side top or bottom, default top
  */
 export class Drop extends featureAnimation {
-    constructor(options: {
-        speed: number;
-        side: number;
-    });
+    constructor(options?: Options)
     /** Animate
-    * @param {featureAnimationEvent} e
+    * @param {FeatureAnimationEvent} e
      */
-    animate(e: featureAnimationEvent): boolean;
+    animate(e: FeatureAnimationEvent): boolean;
 }

@@ -1,13 +1,13 @@
-import { featureAnimation } from './FeatureAnimation';
+import { featureAnimation, Options, FeatureAnimationEvent } from './FeatureAnimation';
 /** Teleport a feature at a given place
  * @constructor
  * @extends {featureAnimation}
  * @param {featureAnimationOptions} options
  */
 export class Teleport extends featureAnimation {
-    constructor(options: featureAnimationOptions);
+    constructor(options?: Options);
     /** Animate
-    * @param {featureAnimationEvent} e
+    * @param {FeatureAnimationEvent} e
      */
-    animate(e: featureAnimationEvent): boolean;
+    animate(e: FeatureAnimationEvent): boolean;
 }

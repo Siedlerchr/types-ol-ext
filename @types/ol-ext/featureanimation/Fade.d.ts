@@ -1,13 +1,13 @@
-import { featureAnimation } from './FeatureAnimation';
+import { featureAnimation, FeatureAnimationEvent, FeatureAnimationOptions } from './FeatureAnimation';
 /** Fade animation: feature fade in
  * @constructor
  * @extends {featureAnimation}
  * @param {featureAnimationOptions} options
  */
 export class Fade extends featureAnimation {
-    constructor(options: featureAnimationOptions);
+    constructor(options?: FeatureAnimationOptions);
     /** Animate
     * @param {featureAnimationEvent} e
      */
-    animate(e: featureAnimationEvent): boolean;
+    animate(e: FeatureAnimationEvent): boolean;
 }

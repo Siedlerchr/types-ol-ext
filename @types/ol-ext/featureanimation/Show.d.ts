@@ -1,13 +1,13 @@
-import { featureAnimation } from './FeatureAnimation';
+import { featureAnimation, Options, FeatureAnimationEvent } from './FeatureAnimation';
 /** Show an object for a given duration
  * @constructor
  * @extends {featureAnimation}
- * @param {featureAnimationOptions} options
+ * @param {Options} options
  */
 export class Show extends featureAnimation {
-    constructor(options: featureAnimationOptions);
+    constructor(options?: Options);
     /** Animate: just show the object during the laps time
-    * @param {featureAnimationEvent} e
+    * @param {FeatureAnimationEvent} e
      */
-    animate(e: featureAnimationEvent): boolean;
+    animate(e: FeatureAnimationEvent): boolean;
 }

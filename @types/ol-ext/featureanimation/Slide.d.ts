@@ -1,4 +1,8 @@
-import { featureAnimation } from './FeatureAnimation';
+import { featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+
+export interface Options{
+    speed?: number;
+}
 /** Slice animation: feature enter from left
  * @constructor
  * @extends {featureAnimation}
@@ -6,11 +10,9 @@ import { featureAnimation } from './FeatureAnimation';
  *  @param {Number} options.speed speed of the animation, if 0 the duration parameter will be used instead, default 0
  */
 export class Slide extends featureAnimation {
-    constructor(options: {
-        speed: number;
-    });
+    constructor(options: Options)
     /** Animate
     * @param {featureAnimationEvent} e
      */
-    animate(e: featureAnimationEvent): boolean;
+    animate(e: FeatureAnimationEvent): boolean;
 }

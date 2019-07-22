@@ -1,4 +1,4 @@
-import { featureAnimation } from './FeatureAnimation';
+import { featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
 /** Do nothing
  * @constructor
  * @extends {featureAnimation}
@@ -12,5 +12,5 @@ export class Null extends featureAnimation {
      * @return {bool} true to continue animation.
      * @api
      */
-    animate(e: featureAnimationEvent): boolean;
+    animate(e: FeatureAnimationEvent): boolean;
 }

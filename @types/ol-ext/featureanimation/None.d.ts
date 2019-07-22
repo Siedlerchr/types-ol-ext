@@ -1,4 +1,4 @@
-import { featureAnimation } from './FeatureAnimation';
+import { featureAnimation, FeatureAnimationEvent, Options } from './FeatureAnimation';
 /** Do nothing for a given duration
  * @constructor
  * @extends {featureAnimation}
@@ -6,9 +6,9 @@ import { featureAnimation } from './FeatureAnimation';
  *
  */
 export class None extends featureAnimation {
-    constructor(options: featureAnimationShowOptions);
+    constructor(options?: Options);
     /** Animate: do nothing during the laps time
     * @param {featureAnimationEvent} e
      */
-    animate(e: featureAnimationEvent): boolean;
+    animate(e: FeatureAnimationEvent): boolean;
 }

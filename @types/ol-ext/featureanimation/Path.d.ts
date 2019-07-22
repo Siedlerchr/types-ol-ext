@@ -1,6 +1,12 @@
 import Feature from 'ol/Feature';
 import { LineString } from 'ol/geom';
-import { featureAnimation } from './FeatureAnimation';
+import { featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+
+export interface Options{
+    speed?: number;
+    rotate?: number | boolean;
+    path?: LineString | Feature;
+}
 /** Path animation: feature follow a path
  * @constructor
  * @extends {featureAnimation}
@@ -10,13 +16,9 @@ import { featureAnimation } from './FeatureAnimation';
  *  @param {LineString|Feature} options.path the path to follow
  */
 export class Path extends featureAnimation {
-    constructor(options: {
-        speed: number;
-        rotate: number | boolean;
-        path: LineString | Feature;
-    });
+    constructor(options? : Options)
     /** Animate
-    * @param {featureAnimationEvent} e
+    * @param {FeatureAnimationEvent} e
      */
-    animate(e: featureAnimationEvent): boolean;
+    animate(e: FeatureAnimationEvent): boolean;
 }

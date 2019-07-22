@@ -1,4 +1,13 @@
-import { featureAnimation } from './FeatureAnimation';
+import { featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+
+export interface Options {
+    bounce?: number;
+    amplitude?: number;
+    easing: ((p0: number) => number);
+    duration?: number;
+}
+
+
 /** Bounce animation:
  * @constructor
  * @extends {featureAnimation}
@@ -9,14 +18,9 @@ import { featureAnimation } from './FeatureAnimation';
  *	@param {number} options.duration duration in ms, default 1000
  */
 export class Bounce extends featureAnimation {
-    constructor(options: {
-        bounce: number;
-        amplitude: number;
-        easing: ((p0: number) => number);
-        duration: number;
-    });
+    constructor(options?: Options)
     /** Animate
-    * @param {featureAnimationEvent} e
+    * @param {FeatureAnimationEvent} e
      */
-    animate(e: featureAnimationEvent): boolean;
+    animate(e: FeatureAnimationEvent): boolean;
 }
