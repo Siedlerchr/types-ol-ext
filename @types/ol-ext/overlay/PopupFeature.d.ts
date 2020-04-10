@@ -2,6 +2,19 @@ import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import OverlayPositioning from 'ol/OverlayPositioning';
 import { Popup, Template } from './Popup';
+
+export interface Options {
+    popupClass: string;
+    closeBox: boolean;
+    onclose: ((...params: any[]) => any) | undefined;
+    onshow: ((...params: any[]) => any) | undefined;
+    offsetBox: number | number[];
+    positionning: OverlayPositioning | string | undefined;
+    template: Template;
+    canFix: boolean;
+    showImage: boolean;
+    maxChar: boolean;
+}
 /**
  * A popup element to be displayed on a feature.
  *
@@ -22,18 +35,7 @@ import { Popup, Template } from './Popup';
  *  @api stable
  */
 export class PopupFeature extends Popup {
-    constructor(options: {
-        popupClass: string;
-        closeBox: boolean;
-        onclose: ((...params: any[]) => any) | undefined;
-        onshow: ((...params: any[]) => any) | undefined;
-        offsetBox: number | number[];
-        positionning: OverlayPositioning | string | undefined;
-        template: Template;
-        canFix: boolean;
-        showImage: boolean;
-        maxChar: boolean;
-    });
+    constructor(options: Options);
     /** Set the template
      * @param {Template} template A template with a list of properties to use in the popup
      */

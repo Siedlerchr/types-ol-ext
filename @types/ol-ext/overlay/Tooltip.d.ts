@@ -4,6 +4,16 @@ import Feature from 'ol/Feature';
 import Event from 'ol/events/Event';
 import OverlayPositioning from 'ol/OverlayPositioning';
 import { Popup } from './Popup';
+
+export interface Options {
+    popupClass: string;
+    maximumFractionDigits: number;
+    formatLength: (...params: any[]) => any;
+    formatArea: (...params: any[]) => any;
+    getHTML: (...params: any[]) => any;
+    offsetBox: number | number[];
+    positionning: OverlayPositioning | string | undefined;
+}
 /** A tooltip element to be displayed over the map and attached on the cursor position.
  * @constructor
  * @extends {Overlay.Popup}
@@ -19,15 +29,7 @@ import { Popup } from './Popup';
  * @api stable
  */
 export class Tooltip extends Popup {
-    constructor(options: {
-        popupClass: string;
-        maximumFractionDigits: number;
-        formatLength: (...params: any[]) => any;
-        formatArea: (...params: any[]) => any;
-        getHTML: (...params: any[]) => any;
-        offsetBox: number | number[];
-        positionning: OverlayPositioning | string | undefined;
-    });
+    constructor(options: Options);
     /**
      * Set the map instance the control is associated with
      * and add its controls associated to this map.

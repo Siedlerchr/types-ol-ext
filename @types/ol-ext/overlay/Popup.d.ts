@@ -40,6 +40,15 @@ export declare type Template = {
  * @namespace Overlay
  * @see {@link http://openlayers.org/en/latest/apidoc/module-ol_Overlay.html}
  */
+
+ export interface Options {
+    popupClass: string;
+    closeBox: boolean;
+    onclose: ((...params: any[]) => any) | undefined;
+    onshow: ((...params: any[]) => any) | undefined;
+    offsetBox: number | number[];
+    positionning: OverlayPositioning | string | undefined;
+ }
 /**
  * @classdesc
  * A popup element to be displayed over the map and attached to a single map
@@ -64,14 +73,7 @@ popup.hide();
 * @api stable
  */
 export class Popup extends Overlay {
-    constructor(options: {
-        popupClass: string;
-        closeBox: boolean;
-        onclose: ((...params: any[]) => any) | undefined;
-        onshow: ((...params: any[]) => any) | undefined;
-        offsetBox: number | number[];
-        positionning: OverlayPositioning | string | undefined;
-    });
+    constructor(options: Options);
     /**
      * Set a close box to the popup.
      * @param {bool} b
