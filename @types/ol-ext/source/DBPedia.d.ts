@@ -3,21 +3,23 @@ import { FeatureLoader } from 'ol/featureloader';
 import { Vector as VectorSource } from 'ol/source';
 import { AttributionLike } from 'ol/source/Source';
 import { LoadingStrategy } from 'ol/source/Vector';
+
+export interface Options {
+    loader: FeatureLoader;
+    url?: string;
+    maxResolution?: number;
+    lang?: string;
+    limit: number;
+    attributions?: AttributionLike;
+    stragety: LoadingStrategy;
+}
 /**
 * @constructor source.DBPedia
 * @extends {VectorSource}
 * @param {olx.source.DBPedia=} opt_options
  */
 export class DBPedia extends VectorSource {
-    constructor(opt_options?: {
-        loader: FeatureLoader;
-        url?: string;
-        maxResolution?: number;
-        lang?: string;
-        limit: number;
-        attributions?: AttributionLike;
-        stragety: LoadingStrategy;
-    });
+    constructor(opt_options?: Options);
     /** Decode RDF attributes and choose to add feature to the layer
     * @param {feature} the feature
     * @param {attributes} RDF attributes

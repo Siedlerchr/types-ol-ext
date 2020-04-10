@@ -1,6 +1,17 @@
 import { default as Attribution } from 'ol/control/Attribution';
 import { Vector as VectorSource } from 'ol/source';
 import { LoadingStrategy } from 'ol/source/Vector';
+
+export interface Options {
+    url: string;
+    filter: string[];
+    node: boolean;
+    way: boolean;
+    rel: boolean;
+    maxResolution: number;
+    attributions: string | Attribution | string[];
+    strategy: LoadingStrategy;
+}
 /**
  * OSM layer using the Ovepass API
  * @constructor source.Overpass
@@ -16,16 +27,7 @@ import { LoadingStrategy } from 'ol/source/Vector';
  *  @param {LoadingStrategy} options.strategy loading strategy, default loadingstrategy.bbox
  */
 export class Overpass extends VectorSource {
-    constructor(options: {
-        url: string;
-        filter: string[];
-        node: boolean;
-        way: boolean;
-        rel: boolean;
-        maxResolution: number;
-        attributions: string | Attribution | string[];
-        strategy: LoadingStrategy;
-    });
+    constructor(options: Options);
     /** Ovepass API Url
      */
     _url: any;

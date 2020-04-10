@@ -2,6 +2,11 @@ import { Coordinate } from 'ol/coordinate';
 import { Polygon } from 'ol/geom';
 import { ProjectionLike } from 'ol/proj';
 import { Vector as VectorSource } from 'ol/source';
+
+export interface Options {
+    source: VectorSource;
+    Size?: number;
+}
 /** A source for grid binning
  * @constructor
  * @extends {VectorSource}
@@ -12,10 +17,7 @@ import { Vector as VectorSource } from 'ol/source';
  *  @param {(bin: Feature, features: Array<Feature>)} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
  */
 export class GridBin extends VectorSource {
-    constructor(options: {
-        source: VectorSource;
-        Size?: number;
-    });
+    constructor(options: Options);
     /** Set grid projection
      * @param {ProjectionLike} proj
      */

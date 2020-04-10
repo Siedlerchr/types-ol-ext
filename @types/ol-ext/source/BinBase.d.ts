@@ -2,6 +2,11 @@ import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import { Polygon } from 'ol/geom';
 import { Vector as VectorSource } from 'ol/source';
+
+export interface Options {
+    source: VectorSource;
+    listenChange: boolean;
+}
 /** Abstract base class; normally only used for creating subclasses. Bin collector for data
  * @constructor
  * @extends {VectorSource}
@@ -12,10 +17,7 @@ import { Vector as VectorSource } from 'ol/source';
  *  @param {(bin: Feature, features: Array<Feature>)} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
  */
 export class BinBase extends VectorSource {
-    constructor(options: {
-        source: VectorSource;
-        listenChange: boolean;
-    });
+    constructor(options: Options);
     /**
      * Get the bin that contains a feature
      * @param {Feature} f the feature
