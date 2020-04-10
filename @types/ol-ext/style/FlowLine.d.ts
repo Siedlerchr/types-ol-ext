@@ -1,6 +1,14 @@
 import Feature from 'ol/Feature';
 import { Style } from 'ol/style';
 import { ColorLike } from 'ol/colorlike';
+
+export interface Options {
+    visible: boolean;
+    width: number | ((...params: any[]) => number);
+    width2: number;
+    color: ColorLike | ((...params: any[]) => ColorLike);
+    color2: ColorLike;
+}
 /** Flow line style
  * Draw LineString with a variable color / width
  *
@@ -14,13 +22,7 @@ import { ColorLike } from 'ol/colorlike';
  *  @param {colorLike} options.color2 Final sroke color
  */
 export class FlowLine extends Style {
-    constructor(options: {
-        visible: boolean;
-        width: number | ((...params: any[]) => number);
-        width2: number;
-        color: ColorLike | ((...params: any[]) => ColorLike);
-        color2: ColorLike;
-    });
+    constructor(options: Options);
     /** Set the initial width
      * @param {number} width width, default 0
      */

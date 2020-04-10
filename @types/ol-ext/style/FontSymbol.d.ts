@@ -1,4 +1,18 @@
 import { Fill, Stroke, RegularShape } from 'ol/style';
+
+export interface Options {
+    glyph: number;
+    form: string;
+    radius: number;
+    rotation: number;
+    rotateWithView: number;
+    opacity: number;
+    fontSize: number;
+    fontStyle: string;
+    gradient: boolean;
+    fill: Fill;
+    stroke: Stroke;
+}
 /**
  * @classdesc
  * A marker style to use with font symbols.
@@ -24,19 +38,7 @@ import { Fill, Stroke, RegularShape } from 'ol/style';
  * @api
  */
 export class FontSymbol extends RegularShape {
-    constructor(options: {
-        glyph: number;
-        form: string;
-        radius: number;
-        rotation: number;
-        rotateWithView: number;
-        opacity: number;
-        fontSize: number;
-        fontStyle: string;
-        gradient: boolean;
-        fill: Fill;
-        stroke: Stroke;
-    });
+    constructor(options: Options);
     /**
      *	Font defs
      */

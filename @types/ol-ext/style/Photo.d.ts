@@ -1,4 +1,17 @@
 import { Stroke, RegularShape } from 'ol/style';
+
+export interface Options {
+    kind: 'default' | 'square' | 'round' | 'anchored' | 'folio';
+    crop: boolean;
+    radius: number;
+    shadow: boolean;
+    stroke: Stroke;
+    src: string;
+    crossOrigin: string;
+    offsetX: number;
+    offsetY: number;
+    onload: (...params: any[]) => any;
+}
 /**
  * @classdesc
  * Set Photo style for vector features.
@@ -20,18 +33,7 @@ import { Stroke, RegularShape } from 'ol/style';
  * @api
  */
 export class Photo extends RegularShape {
-    constructor(options: {
-        kind: 'default' | 'square' | 'round' | 'anchored' | 'folio';
-        crop: boolean;
-        radius: number;
-        shadow: boolean;
-        stroke: Stroke;
-        src: string;
-        crossOrigin: string;
-        offsetX: number;
-        offsetY: number;
-        onload: (...params: any[]) => any;
-    });
+    constructor(options: Options);
     /**
      * Clones the style.
      * @return {style.Photo}

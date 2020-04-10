@@ -1,4 +1,12 @@
 import { Fill, RegularShape } from 'ol/style';
+
+export interface Options {
+    fill: Fill | undefined;
+    radius: number;
+    blur: number;
+    offsetX: number;
+    offsetY: number;
+}
 /**
  * @classdesc
  * Set Shadow style for point vector features.
@@ -15,13 +23,7 @@ import { Fill, RegularShape } from 'ol/style';
  * @api
  */
 export class Shadow extends RegularShape {
-    constructor(options: {
-        fill: Fill | undefined;
-        radius: number;
-        blur: number;
-        offsetX: number;
-        offsetY: number;
-    });
+    constructor(options: Options);
     /**
      * Clones the style.
      * @return {style.Shadow}
