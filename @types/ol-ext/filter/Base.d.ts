@@ -5,6 +5,10 @@
  * ({@link layer.Base#addFilter}, {@link layer.Base#removeFilter}, {@link layer.Base#getFilters}).
  * @namespace filter
  */
+
+ export interface Options {
+    active?: boolean;
+ }
 /**
  * @classdesc
  * Abstract base class; normally only used for creating subclasses and not instantiated in apps.
@@ -19,9 +23,7 @@
  *  @param {boolean} [options.active]
  */
 export abstract class Base extends Object {
-    constructor(options: {
-        active?: boolean;
-    });
+    constructor(options: Options);
     /** Activate / deactivate filter
     *	@param {boolean} b
      */

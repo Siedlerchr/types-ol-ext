@@ -1,5 +1,10 @@
 import Feature from 'ol/Feature';
 import { Mask } from './Mask';
+
+export interface Options {
+    feature?: Feature;
+    inner?: boolean;
+}
 /** Crop drawing using an Feature
 * @constructor
 * @requires filter
@@ -10,10 +15,7 @@ import { Mask } from './Mask';
 *  @param {boolean} [options.inner=false] mask inner, default false
  */
 export class Crop extends Mask {
-    constructor(options?: {
-        feature?: Feature;
-        inner?: boolean;
-    });
+    constructor(options?: Options);
     /** Draw the feature into canvas
      */
     drawFeaturePath_(): void;

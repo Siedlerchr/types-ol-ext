@@ -1,4 +1,10 @@
 import { Base } from './Base';
+
+export interface Options {
+    margin?: number;
+    padding?: number;
+    fSize?: number | number[];
+}
 /** Fold filer map
 * @constructor
 * @requires filter
@@ -10,11 +16,7 @@ import { Base } from './Base';
 *  @param {number|number[]} [options.fSize] fold Size in px, default 8,10
  */
 export class Fold extends Base {
-    constructor(options?: {
-        margin?: number;
-        padding?: number;
-        fSize?: number | number[];
-    });
+    constructor(options?: Options);
     /** Activate / deactivate filter
     *	@param {boolean} b
      */
