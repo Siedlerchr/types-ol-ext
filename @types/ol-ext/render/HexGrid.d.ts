@@ -1,6 +1,10 @@
 import { Coordinate } from 'ol/coordinate';
 
-
+export interface Options {
+    Size?: number;
+    origin?: Coordinate;
+    layout?: HexagonLayout;
+}
 /** @typedef {'pointy' | 'flat'} HexagonLayout
  *  Layout of a Hexagon. Flat means the bottom part of the hexagon is flat.
  */
@@ -18,11 +22,7 @@ export declare type HexagonLayout = 'pointy' | 'flat';
 *	@param {HexagonLayout} [options.layout] grid layout, default pointy
  */
 export class HexGrid extends Object {
-    constructor(options?: {
-        Size?: number;
-        origin?: Coordinate;
-        layout?: HexagonLayout;
-    });
+    constructor(options?: Options);
     /** Layout
      */
     layout: any;

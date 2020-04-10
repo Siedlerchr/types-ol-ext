@@ -1,6 +1,18 @@
 import { Coordinate } from 'ol/coordinate';
 import Projection from 'ol/proj/Projection';
 import { WMTS } from 'ol/source';
+
+export interface Options {
+    minZoom: number;
+    maxZoom: number;
+    server: string;
+    gppKey: string;
+    authentication: string;
+    format: string;
+    style: string;
+    crossOrigin: string;
+    wrapX: string;
+}
 /** IGN's Geoportail WMTS source
  * @constructor
  * @extends {WMTS}
@@ -17,17 +29,7 @@ import { WMTS } from 'ol/source';
  *  @param {string} options.wrapX default true
  */
 export class Geoportail extends WMTS {
-    constructor(layer?: string, options?: {
-        minZoom: number;
-        maxZoom: number;
-        server: string;
-        gppKey: string;
-        authentication: string;
-        format: string;
-        style: string;
-        crossOrigin: string;
-        wrapX: string;
-    });
+    constructor(layer?: string, options?: Options);
     /** Standard IGN-GEOPORTAIL attribution
      */
     attribution: any;
