@@ -1,6 +1,14 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Stroke, Image } from 'ol/style';
 import { CanvasBase } from './CanvasBase';
+
+export interface Options {
+    className: string;
+    image: Image;
+    src: string;
+    rotateVithView: boolean;
+    style: Stroke;
+}
 /**
  * Draw a compass on the map. The position/Size of the control is defined in the css.
  *
@@ -14,13 +22,7 @@ import { CanvasBase } from './CanvasBase';
  *  @param {style.Stroke} options.style style to draw the lines, default draw no lines
  */
 export class Compass extends CanvasBase {
-    constructor(options?: {
-        className: string;
-        image: Image;
-        src: string;
-        rotateVithView: boolean;
-        style: Stroke;
-    });
+    constructor(options?: Options);
     /**
      * Remove the control from its current map and attach it to the new map.
      * Subclasses may set up event handlers to get notified about changes to

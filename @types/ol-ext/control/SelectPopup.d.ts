@@ -4,6 +4,17 @@ import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import { SelectBase } from './SelectBase';
 import { condition } from './control';
+
+export interface Options {
+    className: string;
+    target: Element | undefined;
+    source: VectorSource | VectorSource[];
+    property: string;
+    max: number;
+    selectAll: number;
+    defaultLabel: string;
+    onchoice: ((...params: any[]) => any) | undefined;
+}
 /**
  * Select features by property using a popup
  *
@@ -21,16 +32,7 @@ import { condition } from './control';
  *  @param {function|undefined} options.onchoice function triggered when an option is clicked, default doSelect
  */
 export class SelectPopup extends SelectBase {
-    constructor(options?: {
-        className: string;
-        target: Element | undefined;
-        source: VectorSource | VectorSource[];
-        property: string;
-        max: number;
-        selectAll: number;
-        defaultLabel: string;
-        onchoice: ((...params: any[]) => any) | undefined;
-    });
+    constructor(options?: Options);
     /**
     * Set the map instance the control associated with.
     * @param {_ol_Map_} map The map instance.

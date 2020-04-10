@@ -3,6 +3,18 @@ import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import { SelectBase } from './SelectBase';
 import { condition } from './control';
+
+export interface Options {
+    className: string;
+    target: Element | undefined;
+    source: VectorSource | VectorSource[];
+    selectLabel?: string;
+    addLabel?: string;
+    caseLabel?: string;
+    allLabel?: string;
+    attrPlaceHolder?: string;
+    valuePlaceHolder?: string;
+}
 /**
  * Select Contr
  * A control to select features by attributes
@@ -22,17 +34,7 @@ import { condition } from './control';
  *  @param {string} [options.valuePlaceHolder=value]
  */
 export class Select extends SelectBase {
-    constructor(options?: {
-        className: string;
-        target: Element | undefined;
-        source: VectorSource | VectorSource[];
-        selectLabel?: string;
-        addLabel?: string;
-        caseLabel?: string;
-        allLabel?: string;
-        attrPlaceHolder?: string;
-        valuePlaceHolder?: string;
-    });
+    constructor(options?: Options);
     /** Add a new condition
      * @param {*} options
      * 	@param {string} options.attr attribute name

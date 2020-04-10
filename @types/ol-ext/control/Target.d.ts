@@ -1,6 +1,11 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Style } from 'ol/style';
 import { CanvasBase } from './CanvasBase';
+
+export interface Options {
+    style: Style | Style[];
+    composite: string;
+}
 /** contrTarget draw a target at the center of the map.
  * @constructor
  * @extends {contrCanvasBase}
@@ -9,10 +14,7 @@ import { CanvasBase } from './CanvasBase';
  *  @param {string} options.composite composite operation = difference|multiply|xor|screen|overlay|darken|lighter|lighten|...
  */
 export class Target extends CanvasBase {
-    constructor(options: {
-        style: Style | Style[];
-        composite: string;
-    });
+    constructor(options: Options);
     /** Set the control visibility
      * @paraam {boolean} b
      */

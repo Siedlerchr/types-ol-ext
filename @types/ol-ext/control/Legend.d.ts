@@ -3,6 +3,17 @@ import Feature from 'ol/Feature';
 import { Size } from 'ol/size';
 import { StyleLike } from 'ol/style/Style';
 import { Style } from 'ol/style';
+
+export interface Options {
+    className: string;
+    title: string;
+    Size: Size | undefined;
+    margin: number | undefined;
+    collapsed: boolean | undefined;
+    collapsible: boolean | undefined;
+    target: Element | string | undefined;
+    style: StyleLike;
+}
 /** Create a legend for styles
  * @constructor
  * @fires select
@@ -18,16 +29,7 @@ import { Style } from 'ol/style';
  * @extends {contrControl}
  */
 export class Legend extends ol_control_Control {
-    constructor(options: {
-        className: string;
-        title: string;
-        Size: Size | undefined;
-        margin: number | undefined;
-        collapsed: boolean | undefined;
-        collapsible: boolean | undefined;
-        target: Element | string | undefined;
-        style: StyleLike;
-    });
+    constructor(options: Options);
     /** Set the style
      * @param { Style | Array<Style> | StyleFunction | undefined	} style a style or a style function to use with features
      */

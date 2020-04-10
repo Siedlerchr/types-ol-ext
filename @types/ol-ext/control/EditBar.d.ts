@@ -4,6 +4,14 @@ import { Vector as VectorSource } from 'ol/source';
 import Event from 'ol/events/Event';
 import { Bar } from './Bar';
 import { position } from './control';
+
+export interface Options {
+    className: string;
+    target: string;
+    edition: boolean;
+    interactions: any;
+    source: VectorSource;    
+}
 /** Control bar for editing in a layer
  * @constructor
  * @extends {contrBar}
@@ -18,13 +26,7 @@ import { position } from './control';
  *	@param {VectorSource} options.source Source for the drawn features.
  */
 export class EditBar extends Bar {
-    constructor(options?: {
-        className: string;
-        target: string;
-        edition: boolean;
-        interactions: any;
-        source: VectorSource;
-    });
+    constructor(options?: Options);
     /**
      * Set the map instance the control is associated with
      * and add its controls associated to this map.

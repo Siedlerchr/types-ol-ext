@@ -1,6 +1,19 @@
 import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import { Layer } from 'ol/layer';
+
+export interface Options {
+    displayInLayerSwitcher: (...params: any[]) => any;
+    show_progress: boolean;
+    mouseover: boolean;
+    reordering: boolean;
+    trash: boolean;
+    oninfo: (...params: any[]) => any;
+    Extent: boolean;
+    onExtent: (...params: any[]) => any;
+    drawDelay: number;
+    collapsed: boolean;    
+}
 /**
  * @classdesc OpenLayers 3 Layer Switcher Contr
  * @fires drawlist
@@ -26,18 +39,7 @@ import { Layer } from 'ol/layer';
  *	- noSwitcherDelete {boolean} to prevent layer deletion (w. trash option = true), default false
  */
 export class LayerSwitcher extends ol_control_Control {
-    constructor(options?: {
-        displayInLayerSwitcher: (...params: any[]) => any;
-        show_progress: boolean;
-        mouseover: boolean;
-        reordering: boolean;
-        trash: boolean;
-        oninfo: (...params: any[]) => any;
-        Extent: boolean;
-        onExtent: (...params: any[]) => any;
-        drawDelay: number;
-        collapsed: boolean;
-    });
+    constructor(options?: Options);
     /** List of tips for internationalization purposes
      */
     tip: any;

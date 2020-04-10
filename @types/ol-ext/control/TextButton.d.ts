@@ -1,4 +1,11 @@
 import { Button } from './Button';
+
+export interface Options {
+    className: string;
+    title: string;
+    html: string;
+    handleClick: (...params: any[]) => any;
+}
 /** A simple push button control drawn as text
  * @constructor
  * @extends {contrButton}
@@ -9,12 +16,7 @@ import { Button } from './Button';
  *	@param {function} options.handleClick callback when control is clicked (or use change:active event)
  */
 export class TextButton extends Button {
-    constructor(options?: {
-        className: string;
-        title: string;
-        html: string;
-        handleClick: (...params: any[]) => any;
-    });
+    constructor(options?: Options);
     /** Set the control visibility
     * @param {boolean} b
      */

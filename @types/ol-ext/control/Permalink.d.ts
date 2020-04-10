@@ -1,6 +1,14 @@
 import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import { Layer } from 'ol/layer';
+
+export interface Options {
+    urlReplace: boolean;
+    fixed: number;
+    anchor: boolean;
+    hidden: boolean;
+    onclick: (...params: any[]) => any;
+}
 /**
  * Permalink Contr
  *
@@ -18,13 +26,7 @@ import { Layer } from 'ol/layer';
  *	@param {function} options.onclick a function called when control is clicked
  */
 export class Permalink extends ol_control_Control {
-    constructor(options?: {
-        urlReplace: boolean;
-        fixed: number;
-        anchor: boolean;
-        hidden: boolean;
-        onclick: (...params: any[]) => any;
-    });
+    constructor(options?: Options);
     /**
      * Set the map instance the control associated with.
      * @param {Map} map The map instance.

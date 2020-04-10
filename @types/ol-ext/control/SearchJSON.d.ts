@@ -1,4 +1,17 @@
 import { Search } from './Search';
+
+export interface Options {
+    className: string;
+    target: Element | string | undefined;
+    label: string | undefined;
+    placeholder: string | undefined;
+    typing: number | undefined;
+    minLength: number | undefined;
+    maxItems: number | undefined;
+    handleResponse: ((...params: any[]) => any) | undefined;
+    url: string | undefined;
+    authentication: string | undefined;
+}
 /**
  * This is the base class for search controls that use a json service to search features.
  * You can use it for simple custom search or as base to new class.
@@ -20,18 +33,7 @@ import { Search } from './Search';
  *	@param {string | undefined} options.authentication: basic authentication for the search API as btoa("login:pwd")
  */
 export class SearchJSON extends Search {
-    constructor(options: {
-        className: string;
-        target: Element | string | undefined;
-        label: string | undefined;
-        placeholder: string | undefined;
-        typing: number | undefined;
-        minLength: number | undefined;
-        maxItems: number | undefined;
-        handleResponse: ((...params: any[]) => any) | undefined;
-        url: string | undefined;
-        authentication: string | undefined;
-    });
+    constructor(options: Options);
     /** Autocomplete function (ajax request to the server)
     * @param {string} s search string
     * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field

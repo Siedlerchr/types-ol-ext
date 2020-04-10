@@ -3,6 +3,17 @@ import ol_control_Control from 'ol/control/Control';
 import { Layer } from 'ol/layer';
 import { ProjectionLike } from 'ol/proj';
 import { Style } from 'ol/style';
+
+export interface Options {
+  projection: ProjectionLike;
+  minZoom: number;
+  maxZoom: number;
+  rotation: boolean;
+  align: 'top' | 'bottom-left' | 'right';
+  layers: Layer[];
+  style: Style | Style[] | undefined;
+  panAnimation: boolean | 'elastic';
+}
 /**
  * OpenLayers 3 Layer Overview Contr
  * The overview can rotate with map.
@@ -23,16 +34,7 @@ import { Style } from 'ol/style';
  *  @param {bool|elastic} options.panAnimation use animation to center map on click, default true
  */
 export class Overview extends ol_control_Control {
-    constructor(options?: {
-        projection: ProjectionLike;
-        minZoom: number;
-        maxZoom: number;
-        rotation: boolean;
-        align: 'top' | 'bottom-left' | 'right';
-        layers: Layer[];
-        style: Style | Style[] | undefined;
-        panAnimation: boolean | 'elastic';
-    });
+    constructor(options?: Options);
     /** Elastic bounce
      *	@param {number} bounce number of bounce
      *	@param {Number} amplitude amplitude of the bounce [0,1]

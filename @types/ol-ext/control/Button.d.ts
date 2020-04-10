@@ -1,4 +1,13 @@
 import ol_control_Control from 'ol/control/Control';
+
+export interface Options {
+    className: string;
+    title: string;
+    name: string;
+    html: string;
+    handleClick: (...params: any[]) => any;
+}
+
 /** A simple push button control
 * @constructor
 * @extends {contrControl}
@@ -10,13 +19,7 @@ import ol_control_Control from 'ol/control/Control';
 *	@param {function} options.handleClick callback when control is clicked (or use change:active event)
  */
 export class Button extends ol_control_Control {
-    constructor(options?: {
-        className: string;
-        title: string;
-        name: string;
-        html: string;
-        handleClick: (...params: any[]) => any;
-    });
+    constructor(options?: Options);
     /** Set the control visibility
     * @param {boolean} b
      */

@@ -3,6 +3,11 @@ import ol_control_Control from 'ol/control/Control';
 import Event from 'ol/events/Event';
 import { Bar } from './Bar';
 import { position } from './control';
+
+export interface Options {
+    className: string;
+    centerLabel: string;
+}
 /** Control bar for OL3
  * The control bar is a container for other controls. It can be used to create toolbars.
  * Control bars can be nested and combined with contrToggle to handle activate/deactivate.
@@ -14,10 +19,7 @@ import { position } from './control';
  *	@param {String} options.centerLabel label for center button, default center
  */
 export class GeolocationBar extends Bar {
-    constructor(options?: {
-        className: string;
-        centerLabel: string;
-    });
+    constructor(options?: Options);
     /** Get the interaction.GeolocationDraw associatedwith the bar
      *
      */

@@ -1,6 +1,14 @@
 import ol_control_Control from 'ol/control/Control';
 import { Layer } from 'ol/layer';
 import { ProjectionLike } from 'ol/proj';
+
+export interface Options {
+    className: string;
+    layer: Layer;
+    projection: ProjectionLike;
+    zone: any[];
+    centerOnClick: boolean;
+}
 /** A control to jump from one zone to another.
  *
  * @constructor
@@ -14,13 +22,7 @@ import { ProjectionLike } from 'ol/proj';
  *  @param {bolean} options.centerOnClick center on click when click on zones, default true
  */
 export class MapZone extends ol_control_Control {
-    constructor(options?: {
-        className: string;
-        layer: Layer;
-        projection: ProjectionLike;
-        zone: any[];
-        centerOnClick: boolean;
-    });
+    constructor(options?: Options);
     /** Set the control visibility
     * @param {boolean} b
      */

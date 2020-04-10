@@ -1,4 +1,11 @@
 import ol_control_Control from 'ol/control/Control';
+
+export interface Options {
+    className: string;
+    imageType: string;
+    quality: number;
+    orientation: string;
+}
 /** Print control to get an image of the map
  *
  * @constructor
@@ -13,12 +20,7 @@ import ol_control_Control from 'ol/control/Control';
  *	@param {string} options.orientation Page orientation (landscape/portrait), default guest the best one
  */
 export class Print extends ol_control_Control {
-    constructor(options?: {
-        className: string;
-        imageType: string;
-        quality: number;
-        orientation: string;
-    });
+    constructor(options?: Options);
     /** Print the map
      * @param {function} cback a callback function that take a string containing the requested data URI.
      * @param {Object} options

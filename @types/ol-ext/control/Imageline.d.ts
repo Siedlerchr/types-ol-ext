@@ -2,6 +2,18 @@ import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
+
+export interface Options {
+    className: string;
+    source: VectorSource;
+    getImage: (...params: any[]) => any;
+    getTitle: (...params: any[]) => any;
+    collapsed: boolean;
+    collapsible: boolean;
+    maxFeatures: number;
+    hover: boolean;
+    linkColor: string | boolean;
+}
 /** Image line control
  *
  * @constructor
@@ -20,17 +32,7 @@ import { Vector as VectorSource } from 'ol/source';
  *	@param {string|boolean} options.linkColor link color or false if no link, default false
  */
 export class Imageline extends ol_control_Control {
-    constructor(options?: {
-        className: string;
-        source: VectorSource;
-        getImage: (...params: any[]) => any;
-        getTitle: (...params: any[]) => any;
-        collapsed: boolean;
-        collapsible: boolean;
-        maxFeatures: number;
-        hover: boolean;
-        linkColor: string | boolean;
-    });
+    constructor(options?: Options);
     /**
      * Remove the control from its current map and attach it to the new map.
      * @param {Map} map Map.

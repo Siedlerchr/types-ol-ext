@@ -4,6 +4,13 @@ import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import { SelectBase } from './SelectBase';
 import { condition } from './control';
+
+export interface Options {
+    className: string;
+    target: Element | undefined;
+    source: VectorSource | VectorSource[];
+    controls: SelectBase[];
+}
 /**
  * A multiselect contr
  * A container that manage other control Select
@@ -18,12 +25,7 @@ import { condition } from './control';
  *  @param {Array<contrSelectBase>} options.controls an array of controls
  */
 export class SelectMulti extends SelectBase {
-    constructor(options?: {
-        className: string;
-        target: Element | undefined;
-        source: VectorSource | VectorSource[];
-        controls: SelectBase[];
-    });
+    constructor(options?: Options);
     /**
     * Set the map instance the control associated with.
     * @param {_ol_Map_} map The map instance.
