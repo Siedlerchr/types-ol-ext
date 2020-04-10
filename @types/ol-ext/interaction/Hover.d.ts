@@ -1,6 +1,13 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Interaction } from 'ol/interaction';
 import Event from 'ol/events/Event';
+
+export interface Options {
+    cursor: string | undefined;
+    layerFilter: ((...params: any[]) => any) | undefined;
+    hitTolerance: number | undefined;
+    handleEvent: ((...params: any[]) => any) | undefined;
+}
 /** Interaction hover do to something when hovering a feature
  * @constructor
  * @extends {Interaction}
@@ -13,12 +20,7 @@ import Event from 'ol/events/Event';
  *	@param { function | undefined } options.handleEvent Method called by the map to notify the interaction that a browser event was dispatched to the map. The function may return false to prevent the propagation of the event to other interactions in the map's interactions chain.
  */
 export class Hover extends Interaction {
-    constructor(options: {
-        cursor: string | undefined;
-        layerFilter: ((...params: any[]) => any) | undefined;
-        hitTolerance: number | undefined;
-        handleEvent: ((...params: any[]) => any) | undefined;
-    }, optionsfeatureFilter: ((...params: any[]) => any) | undefined);
+    constructor(options: Options, optionsfeatureFilter: ((...params: any[]) => any) | undefined);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.

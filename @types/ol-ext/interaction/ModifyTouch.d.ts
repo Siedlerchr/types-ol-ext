@@ -1,6 +1,11 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Modify } from 'ol/interaction';
 import Event from 'ol/events/Event';
+
+export interface Options {
+    title: string | undefined;
+    usePopup: boolean | undefined;
+}
 /** Modify interaction with a popup to delet a point on touch device
  * @constructor
  * @fires showpopup
@@ -11,10 +16,7 @@ import Event from 'ol/events/Event';
  *  @param {Boolean|undefined} options.usePopup use a popup, default true
  */
 export class ModifyTouch extends Modify {
-    constructor(options: {
-        title: string | undefined;
-        usePopup: boolean | undefined;
-    });
+    constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.

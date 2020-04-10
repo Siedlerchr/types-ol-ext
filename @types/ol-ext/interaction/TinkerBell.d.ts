@@ -1,5 +1,9 @@
 import { Pointer } from 'ol/interaction';
 import { Color } from 'ol/color';
+
+export interface Options {
+    color: Color;
+}
 /**
  * @constructor
  * @extends {interaction.Pointer}
@@ -7,9 +11,7 @@ import { Color } from 'ol/color';
  *		- color {color} color of the sparkles
  */
 export class TinkerBell extends Pointer {
-    constructor(options: {
-        color: Color;
-    });
+    constructor(options: Options);
     /** Set the map > start postcompose
      */
     setMap(): void;

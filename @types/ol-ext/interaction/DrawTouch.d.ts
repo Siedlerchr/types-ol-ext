@@ -4,6 +4,14 @@ import { Vector as VectorSource } from 'ol/source';
 import { Style } from 'ol/style';
 import GeometryType from 'ol/geom/GeometryType';
 import { CenterTouch } from './CenterTouch';
+
+export interface Options {
+    source: VectorSource | undefined;
+    type: GeometryType;
+    tap: boolean;
+    targetStyle: Style | Style[];
+    composite: string;
+}
 /** Interaction DrawTouch :
  * @constructor
  * @extends {interaction.CenterTouch}
@@ -16,13 +24,7 @@ import { CenterTouch } from './CenterTouch';
  *  - composite {string} composite operation : difference|multiply|xor|screen|overlay|darken|lighter|lighten|...
  */
 export class DrawTouch extends CenterTouch {
-    constructor(options: {
-        source: VectorSource | undefined;
-        type: GeometryType;
-        tap: boolean;
-        targetStyle: Style | Style[];
-        composite: string;
-    });
+    constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.

@@ -1,5 +1,10 @@
 import Feature from 'ol/Feature';
 import { Interaction } from 'ol/interaction';
+
+export interface Options {
+    active: boolean;
+    cursor: boolean;
+}
 /** A Select interaction to fill feature's properties on click.
  * @constructor
  * @extends {Interaction}
@@ -11,10 +16,7 @@ import { Interaction } from 'ol/interaction';
  * @param {*} properties The properties as key/value
  */
 export class FillAttribute extends Interaction {
-    constructor(options: {
-        active: boolean;
-        cursor: boolean;
-    }, properties: any);
+    constructor(options: Options, properties: any);
     /** Activate the interaction
      * @param {boolean} active
      */

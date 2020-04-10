@@ -3,6 +3,10 @@ import Feature from 'ol/Feature';
 import { Vector } from 'ol/layer';
 import { StyleLike } from 'ol/style/Style';
 import { Interaction } from 'ol/interaction';
+
+export interface Options {
+    layers: Vector[] | ((...params: any[]) => any) | undefined;
+}
 /** Interaction to draw holes in a polygon.
  * It fires a drawstart, drawend event when drawing the hole
  * and a modifystart, modifyend event before and after inserting the hole in the feature geometry.
@@ -17,9 +21,7 @@ import { Interaction } from 'ol/interaction';
  * 	@param { Style | Array<Style> | StyleFunction | undefined }	Style for the selected features, default: default edit style
  */
 export class DrawHole extends Interaction {
-    constructor(options: {
-        layers: Vector[] | ((...params: any[]) => any) | undefined;
-    }, Style: StyleLike);
+    constructor(options: Options, Style: StyleLike);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.

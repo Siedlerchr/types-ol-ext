@@ -7,6 +7,18 @@ import { StyleLike } from 'ol/style/Style';
 import { Interaction } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { Condition as EventsConditionType } from 'ol/events/condition';
+
+export interface Options {
+    source: Layer[];
+    features: Collection<Feature>;
+    style: StyleLike;
+    sides: number;
+    squareCondition: EventsConditionType | undefined;
+    centerCondition: EventsConditionType | undefined;
+    canRotate: boolean;
+    clickTolerance: number;
+    maxCircleCoordinates: number;
+}
 /** Interaction rotate
  * @constructor
  * @extends {Interaction}
@@ -23,17 +35,7 @@ import { Condition as EventsConditionType } from 'ol/events/condition';
  *  @param { number } maxCircleCoordinates Maximum number of point on a circle, default: 100
  */
 export class DrawRegular extends Interaction {
-    constructor(options: {
-        source: Layer[];
-        features: Collection<Feature>;
-        style: StyleLike;
-        sides: number;
-        squareCondition: EventsConditionType | undefined;
-        centerCondition: EventsConditionType | undefined;
-        canRotate: boolean;
-        clickTolerance: number;
-        maxCircleCoordinates: number;
-    });
+    constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.

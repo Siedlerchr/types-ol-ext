@@ -4,6 +4,13 @@ import Feature from 'ol/Feature';
 import { Vector } from 'ol/layer';
 import { Vector as VectorSource } from 'ol/source';
 import { Pointer } from 'ol/interaction';
+
+export interface Options {
+    layers: Vector | Vector[];
+    features: Collection<Feature>;
+    source: VectorSource | undefined;
+    duplicate: boolean;
+}
 /** Offset interaction for offseting feature geometry
  * @constructor
  * @extends {interaction.Pointer}
@@ -17,12 +24,7 @@ import { Pointer } from 'ol/interaction';
  *	@param {boolean} options.duplicate force feature to duplicate (source must be set)
  */
 export class Offset extends Pointer {
-    constructor(options: {
-        layers: Vector | Vector[];
-        features: Collection<Feature>;
-        source: VectorSource | undefined;
-        duplicate: boolean;
-    });
+    constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.

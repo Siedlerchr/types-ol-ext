@@ -2,6 +2,13 @@ import Collection from 'ol/Collection';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import { Interaction } from 'ol/interaction';
+
+export interface Options {
+    condition: (...params: any[]) => any;
+    features: Collection<Feature>;
+    sources: VectorSource | VectorSource[];
+    destination: VectorSource;
+}
 /** An interaction to copy/paste features on a map
  * @constructor
  * @fires focus
@@ -15,12 +22,7 @@ import { Interaction } from 'ol/interaction';
  *  @param {VectorSource} options.destination the source to copy to
  */
 export class CopyPaste extends Interaction {
-    constructor(options: {
-        condition: (...params: any[]) => any;
-        features: Collection<Feature>;
-        sources: VectorSource | VectorSource[];
-        destination: VectorSource;
-    });
+    constructor(options: Options);
     /** Sources to cut feature from
      * @param { VectorSource | Array<VectorSource> } sources
      */

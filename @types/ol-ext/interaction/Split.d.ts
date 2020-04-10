@@ -5,6 +5,14 @@ import Feature from 'ol/Feature';
 import { Style } from 'ol/style';
 import { Interaction } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
+
+export interface Options {
+    features: Collection<Feature>;
+    snapDistance: number;
+    cursor: string | undefined;
+    sketchStyle: Style | Style[] | undefined;
+    tolerance: ((...params: any[]) => number) | undefined;
+}
 /** Interaction split interaction for splitting feature geometry
  * @constructor
  * @extends {Interaction}
@@ -20,13 +28,7 @@ import MapBrowserEvent from 'ol/MapBrowserEvent';
  *  @param {function|undefined} options.tolerance Distance between the calculated intersection and a vertex on the source geometry below which the existing vertex will be used for the split.  Default is 1e-10.
  */
 export class Split extends Interaction {
-    constructor(options: {
-        features: Collection<Feature>;
-        snapDistance: number;
-        cursor: string | undefined;
-        sketchStyle: Style | Style[] | undefined;
-        tolerance: ((...params: any[]) => number) | undefined;
-    });
+    constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.
