@@ -7,6 +7,11 @@ import { Interaction } from 'ol/interaction';
  * @namespace interaction
  * @see {@link https://openlayers.org/en/master/apidoc/module-ol_interaction.html}
  */
+
+ export interface Options {
+    targetSTyle: Style | Style[];
+    composite: string;
+ }
 /** Handles coordinates on the center of the viewport.
  * It can be used as abstract base class used for creating subclasses.
  * The CenterTouch interaction modifies map browser event coordinate and pixel properties to force pointer on the viewport center to any interaction that them.
@@ -18,10 +23,7 @@ import { Interaction } from 'ol/interaction';
  *  - composite {string} composite operation : difference|multiply|xor|screen|overlay|darken|lighter|lighten|...
  */
 export class CenterTouch extends Interaction {
-    constructor(options: {
-        targetSTyle: Style | Style[];
-        composite: string;
-    });
+    constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.

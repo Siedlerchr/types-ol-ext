@@ -1,6 +1,10 @@
 import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import { Style } from 'ol/style';
+
+export interface Options {
+    style: Style;
+}
 /** A control is a visible widget with a DOM element in a fixed position on the screen.
  * They can involve user input (buttons), or be informational only;
  * the position is determined using CSS. B
@@ -26,9 +30,7 @@ import { Style } from 'ol/style';
  *  @param {Style} options.style style used to draw the title.
  */
 export class CanvasBase extends ol_control_Control {
-    constructor(options?: {
-        style: Style;
-    });
+    constructor(options?: Options);
     /**
      * Remove the control from its current map and attach it to the new map.
      * Subclasses may set up event handlers to get notified about changes to

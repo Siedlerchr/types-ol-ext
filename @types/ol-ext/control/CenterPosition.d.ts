@@ -3,6 +3,14 @@ import { CoordinateFormat } from 'ol/coordinate';
 import { ProjectionLike } from 'ol/proj';
 import { Style } from 'ol/style';
 import { CanvasBase } from './CanvasBase';
+
+export interface Options {
+    className: string;
+    style: Style;
+    projection: ProjectionLike;
+    coordinateFormat: CoordinateFormat;
+    canvas: boolean;
+}
 /**
  * A title Control integrated in the canvas (for jpeg/png
  *
@@ -16,13 +24,7 @@ import { CanvasBase } from './CanvasBase';
  *  @param {boolean} options.canvas true to draw in the canvas
  */
 export class CenterPosition extends CanvasBase {
-    constructor(options?: {
-        className: string;
-        style: Style;
-        projection: ProjectionLike;
-        coordinateFormat: CoordinateFormat;
-        canvas: boolean;
-    });
+    constructor(options?: Options);
     /**
      * Change the control style
      * @param {Style} style

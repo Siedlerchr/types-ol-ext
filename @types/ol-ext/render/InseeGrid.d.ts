@@ -1,5 +1,9 @@
 import { Coordinate } from 'ol/coordinate';
 import { ProjectionLike } from 'ol/proj';
+
+export interface Options {
+    Size?: number;
+}
 /**
  * French INSEE grids
  * @classdesc a class to compute French INSEE grids, ie. fix area (200x200m) square grid,
@@ -12,9 +16,7 @@ import { ProjectionLike } from 'ol/proj';
  *  @param {number} [options.Size] Size grid Size in meter, default 200 (200x200m)
  */
 export class InseeGrid extends Object {
-    constructor(options?: {
-        Size?: number;
-    });
+    constructor(options?: Options);
     /** Grid Extent (in EPSG:3035)
      */
     static Extent: any;

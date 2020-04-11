@@ -1,6 +1,12 @@
 import Feature from 'ol/Feature';
 import { Fill } from 'ol/style';
 import { Base } from './Base';
+
+export interface Options {
+    feature?: Feature;
+    fill?: Fill;
+    inner?: boolean;
+}
 /** Mask drawing using an Feature
  * @constructor
  * @requires filter
@@ -11,11 +17,7 @@ import { Base } from './Base';
  *  @param {boolean} [options.inner] mask inner, default false
  */
 export class Mask extends Base {
-    constructor(options?: {
-        feature?: Feature;
-        fill?: Fill;
-        inner?: boolean;
-    });
+    constructor(options?: Options);
     /** Draw the feature into canvas
      */
     drawFeaturePath_(): void;

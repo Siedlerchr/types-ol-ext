@@ -1,6 +1,19 @@
 import Feature from 'ol/Feature';
 import { SearchJSON } from './SearchJSON';
 import { AddressType } from './control';
+
+export interface Options {
+    className: string;
+    apiKey: boolean | undefined;
+    authentication: string | undefined;
+    target: Element | string | undefined;
+    label: string | undefined;
+    placeholder: string | undefined;
+    typing: number | undefined;
+    minLength: number | undefined;
+    maxItems: number | undefined;
+    type: AddressType;
+}
 /**
  * Search places using the French National Base Address (BAN) API.
  *
@@ -22,18 +35,7 @@ import { AddressType } from './control';
  * @see {@link https://geoservices.ign.fr/documentation/geoservices/geocodage.html}
  */
 export class SearchGeoportail extends SearchJSON {
-    constructor(options: {
-        className: string;
-        apiKey: boolean | undefined;
-        authentication: string | undefined;
-        target: Element | string | undefined;
-        label: string | undefined;
-        placeholder: string | undefined;
-        typing: number | undefined;
-        minLength: number | undefined;
-        maxItems: number | undefined;
-        type: AddressType;
-    });
+    constructor(options: Options);
     /** Returns the text to be displayed in the menu
      *	@param {Feature} f the feature
      *	@return {string} the text to be displayed in the index

@@ -7,6 +7,16 @@ import GeometryType from 'ol/geom/GeometryType';
 import { Pointer } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { Condition as EventsConditionType } from 'ol/events/condition';
+
+export interface Options {
+    features: Collection<Feature>;
+    pixelTolerance: number;
+    filter: ((...params: any[]) => any) | undefined;
+    style: Style | Style[] | undefined;
+    condition: EventsConditionType | undefined;
+    deleteCondition: EventsConditionType | undefined;
+    insertVertexCondition: EventsConditionType | undefined;
+}
 /** Interaction for modifying feature geometries. Similar to the core ol/interaction/Modify.
  * The interaction is more suitable to use to handle feature modification: only features concerned
  * by the modification are passed to the events (instead of all feature with ol/interaction/Modify)
@@ -29,15 +39,7 @@ import { Condition as EventsConditionType } from 'ol/events/condition';
  *  @param {EventsConditionType | undefined} options.insertVertexCondition A function that takes an MapBrowserEvent and returns a boolean to indicate whether a new vertex can be added to the sketch features. Default is events.condition.always
  */
 export class ModifyFeature extends Pointer {
-    constructor(options: {
-        features: Collection<Feature>;
-        pixelTolerance: number;
-        filter: ((...params: any[]) => any) | undefined;
-        style: Style | Style[] | undefined;
-        condition: EventsConditionType | undefined;
-        deleteCondition: EventsConditionType | undefined;
-        insertVertexCondition: EventsConditionType | undefined;
-    });
+    constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.

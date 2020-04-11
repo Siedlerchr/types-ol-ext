@@ -1,5 +1,18 @@
 import { Stroke, RegularShape } from 'ol/style';
 import { Color } from 'ol/color';
+
+export interface Options {
+    type: string;
+    radius: number;
+    rotation: number;
+    snapToPixel: boolean;
+    stroke: Stroke;
+    colors: string | Color[];
+    offsetX: number;
+    offsetY: number;
+    animation: number;
+    max: number;
+}
 /**
  * @classdesc
  * Set chart style for vector features.
@@ -22,18 +35,7 @@ import { Color } from 'ol/color';
  * @api
  */
 export class Chart extends RegularShape {
-    constructor(options: {
-        type: string;
-        radius: number;
-        rotation: number;
-        snapToPixel: boolean;
-        stroke: Stroke;
-        colors: string | Color[];
-        offsetX: number;
-        offsetY: number;
-        animation: number;
-        max: number;
-    });
+    constructor(options: Options);
     /** Default color set: classic, dark, pale, pastel, neon
      */
     static colors: any;

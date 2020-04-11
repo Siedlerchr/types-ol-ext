@@ -1,4 +1,19 @@
 import ol_control_Control from 'ol/control/Control';
+
+export interface Options {
+    className: string;
+    target: Element | string | undefined;
+    label: string | undefined;
+    placeholder: string | undefined;
+    inputLabel: string | undefined;
+    noCollapse: string | undefined;
+    typing: number | undefined;
+    minLength: number | undefined;
+    maxItems: number | undefined;
+    maxHistory: number | undefined;
+    getTitle: (...params: any[]) => any;
+    autocomplete: (...params: any[]) => any;
+}
 /**
  * Search Contr
  * This is the base class for search controls. You can use it for simple custom search or as base to new class.
@@ -24,20 +39,7 @@ import ol_control_Control from 'ol/control/Control';
  *  @param {function} options.autocomplete a function that take a search string and callback function to send an array
  */
 export class Search extends ol_control_Control {
-    constructor(options?: {
-        className: string;
-        target: Element | string | undefined;
-        label: string | undefined;
-        placeholder: string | undefined;
-        inputLabel: string | undefined;
-        noCollapse: string | undefined;
-        typing: number | undefined;
-        minLength: number | undefined;
-        maxItems: number | undefined;
-        maxHistory: number | undefined;
-        getTitle: (...params: any[]) => any;
-        autocomplete: (...params: any[]) => any;
-    });
+    constructor(options?: Options);
     /** Get the input field
     *	@return {Element}
     *	@api

@@ -1,4 +1,11 @@
 import ol_control_Control from 'ol/control/Control';
+
+export interface Options {
+    class: string;
+    html: string;
+    on: boolean;
+    toggleFn: (...params: any[]) => any;
+}
 /** A simple control to disable all actions on the map.
  * The control will create an invisible div over the map.
  * @constructor
@@ -10,12 +17,7 @@ import ol_control_Control from 'ol/control/Control';
  *		@param {function} options.toggleFn callback when control is clicked
  */
 export class Disable extends ol_control_Control {
-    constructor(options?: {
-        class: string;
-        html: string;
-        on: boolean;
-        toggleFn: (...params: any[]) => any;
-    });
+    constructor(options?: Options);
     /** Test if the control is on
      * @return {bool}
      * @api stable

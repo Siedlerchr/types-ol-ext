@@ -1,6 +1,10 @@
 import { Map as _ol_Map_ } from 'ol';
 import ol_control_ScaleLine from 'ol/control/ScaleLine';
 import { Style } from 'ol/style';
+
+export interface Options {
+    style: Style;
+}
 /**
  * @classdesc
  *    OpenLayers 3 Scale Line Control integrated in the canvas (for jpeg/png
@@ -12,9 +16,7 @@ import { Style } from 'ol/style';
  * 	@param {Style} options.style used to draw the scale line (default is black/white, 10px Arial).
  */
 export class CanvasScaleLine extends ol_control_ScaleLine {
-    constructor(options?: {
-        style: Style;
-    });
+    constructor(options?: Options);
     /**
      * Remove the control from its current map and attach it to the new map.
      * Subclasses may set up event handlers to get notified about changes to

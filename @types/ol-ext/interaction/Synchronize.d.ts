@@ -1,6 +1,10 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Interaction } from 'ol/interaction';
 import Event from 'ol/events/Event';
+
+export interface Options {
+    map: _ol_Map_[];
+}
 /** Interaction synchronize
  * @constructor
  * @extends {Interaction}
@@ -8,9 +12,7 @@ import Event from 'ol/events/Event';
  *  - maps {Array<Map>} An array of maps to synchronize with the map of the interaction
  */
 export class Synchronize extends Interaction {
-    constructor(options: {
-        map: _ol_Map_[];
-    });
+    constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.

@@ -1,6 +1,22 @@
 import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import { Coordinate } from 'ol/coordinate';
+
+export interface Options {
+    className: string;
+    target: Element | string | undefined;
+    label: string | undefined;
+    placeholder: string | undefined;
+    inputLabel: string | undefined;
+    noCollapse: string | undefined;
+    typing: number | undefined;
+    minLength: number | undefined;
+    maxItems: number | undefined;
+    maxHistory: number | undefined;
+    getTitle: (...params: any[]) => any;
+    autocomplete: (...params: any[]) => any;
+    exclusions: string;
+}
 /**
  * Geoportail isochrone Contr
  * @see https://geoservices.ign.fr/documentation/geoservices/isochrones.html
@@ -25,21 +41,7 @@ import { Coordinate } from 'ol/coordinate';
  *  @param {string} options.exclusions Exclusion list separate with a comma 'Toll,Tunnel,Bridge'
  */
 export class IsochroneGeoportail extends ol_control_Control {
-    constructor(options?: {
-        className: string;
-        target: Element | string | undefined;
-        label: string | undefined;
-        placeholder: string | undefined;
-        inputLabel: string | undefined;
-        noCollapse: string | undefined;
-        typing: number | undefined;
-        minLength: number | undefined;
-        maxItems: number | undefined;
-        maxHistory: number | undefined;
-        getTitle: (...params: any[]) => any;
-        autocomplete: (...params: any[]) => any;
-        exclusions: string;
-    });
+    constructor(options?: Options);
     /**
      * Set the map instance the control is associated with
      * and add its controls associated to this map.

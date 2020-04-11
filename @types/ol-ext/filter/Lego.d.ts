@@ -1,4 +1,10 @@
 import { Base } from './Base';
+
+export interface Options { 
+    img?: string;
+    brickSize?: number;
+    crossOrigin?: null | string | undefined;
+}
 /** Make a map or layer look like made of a set of Lego bricks.
  *  @constructor
  * @requires filter
@@ -9,11 +15,7 @@ import { Base } from './Base';
  *  @param {null | string | undefined} [options.crossOrigin] crossOrigin attribute for loaded images.
  */
 export class Lego extends Base {
-    constructor(options?: {
-        img?: string;
-        brickSize?: number;
-        crossOrigin?: null | string | undefined;
-    });
+    constructor(options?: Options);
     /** Image definition
      */
     img: any;

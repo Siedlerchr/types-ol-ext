@@ -1,5 +1,13 @@
 import ol_control_Control from 'ol/control/Control';
 import { Coordinate } from 'ol/coordinate';
+import { options } from './control';
+
+export interface Options {
+    className: string;
+    content: string | Element;
+    hideOnClick: boolean;
+    closeBox: boolean;
+}
 /** Control overlay for OL3
  * The overlay control is a control that display an overlay over the map
  *
@@ -13,12 +21,7 @@ import { Coordinate } from 'ol/coordinate';
  *	@param {bool} options.closeBox add a closeBox to the control, default false
  */
 export class Overlay extends ol_control_Control {
-    constructor(options?: {
-        className: string;
-        content: string | Element;
-        hideOnClick: boolean;
-        closeBox: boolean;
-    });
+    constructor(options?: Options);
     /** Set the content of the overlay
     * @param {string|Element} html the html to display in the control
      */

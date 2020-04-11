@@ -1,5 +1,15 @@
 import { Overlay } from 'ol';
 import { Coordinate } from 'ol/coordinate';
+
+export interface Options {
+    color: string;
+    backgroundColor: string;
+    contentColor: string;
+    radius: number;
+    popupClass: string;
+    onclose: ((...params: any[]) => any) | undefined;
+    onshow: ((...params: any[]) => any) | undefined;
+}
 /**
  * @classdesc
  * A placemark element to be displayed over the map and attached to a single map
@@ -24,15 +34,7 @@ popup.hide();
 * @api stable
  */
 export class Placemark extends Overlay {
-    constructor(options: {
-        color: string;
-        backgroundColor: string;
-        contentColor: string;
-        radius: number;
-        popupClass: string;
-        onclose: ((...params: any[]) => any) | undefined;
-        onshow: ((...params: any[]) => any) | undefined;
-    });
+    constructor(options: Options);
     /**
      * Set the position and the content of the placemark (hide it before to enable animation).
      * @param {Coordinate|string} coordinate the coordinate of the popup or the HTML content.

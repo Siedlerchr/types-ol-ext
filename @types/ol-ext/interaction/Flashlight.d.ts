@@ -2,6 +2,12 @@ import { Pointer } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { Color } from 'ol/color';
 import { Pixel } from 'ol/pixel';
+
+export interface Options {
+    color: Color;
+    fill: Color;
+    radius: number;
+}
 /**
  * @constructor
  * @extends {interaction.Pointer}
@@ -11,11 +17,7 @@ import { Pixel } from 'ol/pixel';
  *		- radius {number} radius of the flash
  */
 export class Flashlight extends Pointer {
-    constructor(options: {
-        color: Color;
-        fill: Color;
-        radius: number;
-    });
+    constructor(options: Options);
     /** Set the map > start postcompose
      */
     setMap(): void;

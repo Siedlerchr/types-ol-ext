@@ -2,6 +2,24 @@ import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
+
+export interface Options {
+    className: string;
+    features: Feature[];
+    source: VectorSource;
+    interval: number;
+    maxWidth: string;
+    minDate: string;
+    maxDate: string;
+    minZoom: number;
+    maxZoom: number;
+    zoomButton: boolean;
+    getHTML: (...params: any[]) => any;
+    getFeatureDate: (...params: any[]) => any;
+    endFeatureDate: (...params: any[]) => any;
+    graduation: string;
+    scrollTimeout: string;
+}
 /** Timeline control
  *
  * @constructor
@@ -27,23 +45,7 @@ import { Vector as VectorSource } from 'ol/source';
  *	@param {String} options.scrollTimeout Time in milliseconds to get a scroll event, default 15ms
  */
 export class Timeline extends ol_control_Control {
-    constructor(options?: {
-        className: string;
-        features: Feature[];
-        source: VectorSource;
-        interval: number;
-        maxWidth: string;
-        minDate: string;
-        maxDate: string;
-        minZoom: number;
-        maxZoom: number;
-        zoomButton: boolean;
-        getHTML: (...params: any[]) => any;
-        getFeatureDate: (...params: any[]) => any;
-        endFeatureDate: (...params: any[]) => any;
-        graduation: string;
-        scrollTimeout: string;
-    });
+    constructor(options?: Options);
     /**
      * Set the map instance the control is associated with
      * and add interaction attached to it to this map.

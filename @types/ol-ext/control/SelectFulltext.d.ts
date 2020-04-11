@@ -3,6 +3,14 @@ import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import { SelectBase } from './SelectBase';
 import { condition } from './control';
+
+export interface Options {
+    className: string;
+    target: Element | undefined;
+    source: VectorSource | VectorSource[];
+    property: string;
+    onchoice: ((...params: any[]) => any) | undefined;
+}
 /**
  * Select features by property using a simple text input
  *
@@ -17,13 +25,7 @@ import { condition } from './control';
  *  @param {function|undefined} options.onchoice function triggered the text change, default nothing
  */
 export class SelectFulltext extends SelectBase {
-    constructor(options?: {
-        className: string;
-        target: Element | undefined;
-        source: VectorSource | VectorSource[];
-        property: string;
-        onchoice: ((...params: any[]) => any) | undefined;
-    });
+    constructor(options?: Options);
     /** Select features by condition
      */
     doSelect(options: {

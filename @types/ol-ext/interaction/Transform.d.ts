@@ -6,6 +6,24 @@ import { Style } from 'ol/style';
 import { Pointer } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { Condition as EventsConditionType } from 'ol/events/condition';
+
+export interface Options {
+    filter: (f: Feature, l: Layer) => boolean;
+    layers: Layer[];
+    features: Collection<Feature>;
+    addCondition: EventsConditionType | undefined;
+    hitTolerance: number | undefined;
+    translateFeature: boolean;
+    translate: boolean;
+    stretch: boolean;
+    scale: boolean;
+    rotate: boolean;
+    noFlip: boolean;
+    selection: boolean;
+    keepAspectRatio: EventsConditionType | undefined;
+    modifyCenter: EventsConditionType | undefined;
+    style: any;
+}
 /** Interaction rotate
  * @constructor
  * @extends {interaction.Pointer}
@@ -29,23 +47,7 @@ import { Condition as EventsConditionType } from 'ol/events/condition';
  *
  */
 export class Transform extends Pointer {
-    constructor(options: {
-        filter: (f: Feature, l: Layer) => boolean;
-        layers: Layer[];
-        features: Collection<Feature>;
-        addCondition: EventsConditionType | undefined;
-        hitTolerance: number | undefined;
-        translateFeature: boolean;
-        translate: boolean;
-        stretch: boolean;
-        scale: boolean;
-        rotate: boolean;
-        noFlip: boolean;
-        selection: boolean;
-        keepAspectRatio: EventsConditionType | undefined;
-        modifyCenter: EventsConditionType | undefined;
-        style: any;
-    });
+    constructor(options: Options);
     /** Cursors for transform
      */
     Cursors: any;

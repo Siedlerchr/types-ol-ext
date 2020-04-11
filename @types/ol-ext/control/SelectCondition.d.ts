@@ -3,6 +3,16 @@ import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import { SelectBase } from './SelectBase';
 import { condition } from './control';
+
+export interface Options {
+    className: string;
+    target: Element | undefined;
+    source: VectorSource | VectorSource[];
+    label: string;
+    selectAll: number;
+    condition: condition | condition[];
+    onchoice: ((...params: any[]) => any) | undefined;
+}
 /**
  * Select features by property using a condition
  *
@@ -19,15 +29,7 @@ import { condition } from './control';
  *  @param {function|undefined} options.onchoice function triggered when an option is clicked, default doSelect
  */
 export class SelectCondition extends SelectBase {
-    constructor(options?: {
-        className: string;
-        target: Element | undefined;
-        source: VectorSource | VectorSource[];
-        label: string;
-        selectAll: number;
-        condition: condition | condition[];
-        onchoice: ((...params: any[]) => any) | undefined;
-    });
+    constructor(options?: Options);
     /** Set condition to select on
      * @param {condition, Array<condition>} condition
      *  @param {string} attr property to select on

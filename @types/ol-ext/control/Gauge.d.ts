@@ -1,4 +1,11 @@
 import ol_control_Control from 'ol/control/Control';
+
+export interface Options {
+    className: string;
+    title: string;
+    max: number;
+    val: number;
+}
 /** A simple gauge control to display level information on the map.
  *
  * @constructor
@@ -10,12 +17,7 @@ import ol_control_Control from 'ol/control/Control';
  *		@param {number} options.val the value, default 0
  */
 export class Gauge extends ol_control_Control {
-    constructor(options?: {
-        className: string;
-        title: string;
-        max: number;
-        val: number;
-    });
+    constructor(options?: Options);
     /** Set the control title
     * @param {string} title
      */

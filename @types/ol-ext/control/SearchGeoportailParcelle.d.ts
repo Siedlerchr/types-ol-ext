@@ -1,4 +1,17 @@
 import { SearchJSON } from './SearchJSON';
+
+export interface Options {
+    className: string;
+    apiKey: boolean | undefined;
+    authentication: string | undefined;
+    target: Element | string | undefined;
+    label: string | undefined;
+    placeholder: string | undefined;
+    typing: number | undefined;
+    minLength: number | undefined;
+    maxItems: number | undefined;
+    pageSize: number;
+}
 /**
  * Search places using the French National Base Address (BAN) API.
  *
@@ -20,18 +33,7 @@ import { SearchJSON } from './SearchJSON';
  * @see {@link https://geoservices.ign.fr/documentation/geoservices/geocodage.html}
  */
 export class SearchGeoportailParcelle extends SearchJSON {
-    constructor(options: {
-        className: string;
-        apiKey: boolean | undefined;
-        authentication: string | undefined;
-        target: Element | string | undefined;
-        label: string | undefined;
-        placeholder: string | undefined;
-        typing: number | undefined;
-        minLength: number | undefined;
-        maxItems: number | undefined;
-        pageSize: number;
-    });
+    constructor(options: Options);
     /** Set the input parcelle
      * @param {*} p parcel
      * 	@param {string} p.Commune

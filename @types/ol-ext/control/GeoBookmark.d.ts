@@ -1,5 +1,13 @@
 import ol_control_Control from 'ol/control/Control';
 import { Coordinate } from 'ol/coordinate';
+
+export interface Options {
+  className: string;
+  placeholder: string;
+  editable: boolean;
+  namespace: string;
+  marks: any[];
+}
 /** Bookmark positions on ol maps.
  *
  * @constructor
@@ -22,13 +30,7 @@ var bm = new GeoBookmark ({
 });
  */
 export class GeoBookmark extends ol_control_Control {
-    constructor(options: {
-        className: string;
-        placeholder: string;
-        editable: boolean;
-        namespace: string;
-        marks: any[];
-    });
+    constructor(options: Options);
     /** Set bookmarks
     * @param {} bmark a list of bookmarks, default retreave in the localstorage
     * @example

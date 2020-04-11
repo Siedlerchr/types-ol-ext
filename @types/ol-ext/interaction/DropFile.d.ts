@@ -1,6 +1,13 @@
 import Projection from 'ol/proj/Projection';
 import { DragAndDrop } from 'ol/interaction';
 import FeatureFormat from 'ol/format/Feature';
+
+export interface Options {
+    zone: string;
+    projection: Projection;
+    formatConstructors: FeatureFormat[];
+    accept: Array<string> | undefined;
+}
 /** Extend DragAndDrop choose drop zone + fires loadstart, loadend
  * @constructor
  * @extends {interaction.DragAndDrop}
@@ -12,12 +19,7 @@ import FeatureFormat from 'ol/format/Feature';
  *		- accept {Array<string>|undefined} list of eccepted format, default ["gpx","json","geojson","igc","kml","topojson"]
  */
 export class DropFile extends DragAndDrop {
-    constructor(options: {
-        zone: string;
-        projection: Projection;
-        formatConstructors: FeatureFormat[];
-        accept: Array<string> | undefined;
-    });
+    constructor(options: Options);
     /** Set the map
      */
     setMap(): void;

@@ -2,6 +2,11 @@ import { Layer } from 'ol/layer';
 import { Pointer } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { Pixel } from 'ol/pixel';
+
+export interface Options {
+    radius: number;
+    layers: Layer | Layer[];
+}
 /** Clip interaction to clip layers in a circle
  * @constructor
  * @extends {interaction.Pointer}
@@ -10,10 +15,7 @@ import { Pixel } from 'ol/pixel';
  *	@param {layer|Array<layer>} options.layers layers to clip
  */
 export class Clip extends Pointer {
-    constructor(options: {
-        radius: number;
-        layers: Layer | Layer[];
-    });
+    constructor(options: Options);
     /** Set the map > start postcompose
      */
     setMap(): void;

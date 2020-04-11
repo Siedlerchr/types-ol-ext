@@ -3,6 +3,18 @@ import { Vector as VectorSource } from 'ol/source';
 import { StyleLike } from 'ol/style/Style';
 import GeometryType from 'ol/geom/GeometryType';
 import { Interaction } from 'ol/interaction';
+
+export interface Options {
+    source: VectorSource | undefined;
+    type: GeometryType;
+    minAccuracy: number | undefined;
+    condition: ((...params: any[]) => any) | undefined;
+    attributes: any;
+    tolerance: number;
+    zoom: number;
+    followTrack: boolean | 'auto' | 'position' | 'visible';
+    style: StyleLike | undefined;
+}
 /** Interaction to draw on the current geolocation
  *	It combines a draw with a Geolocation
  * @constructor
@@ -21,17 +33,7 @@ import { Interaction } from 'ol/interaction';
  *	@param { Style | Array.<Style> | StyleFunction | undefined } options.style Style for sketch features.
  */
 export class GeolocationDraw extends Interaction {
-    constructor(options: {
-        source: VectorSource | undefined;
-        type: GeometryType;
-        minAccuracy: number | undefined;
-        condition: ((...params: any[]) => any) | undefined;
-        attributes: any;
-        tolerance: number;
-        zoom: number;
-        followTrack: boolean | 'auto' | 'position' | 'visible';
-        style: StyleLike | undefined;
-    });
+    constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.

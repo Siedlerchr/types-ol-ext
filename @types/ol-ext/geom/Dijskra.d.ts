@@ -6,6 +6,13 @@ import { Vector as VectorSource } from 'ol/source';
 /** Algorithms to on a graph (shortest path).
  * @namespace graph
  */
+
+ export interface Options {
+    source: Vector;
+    maxIteration?: number;
+    stepIteration?: number;
+    epsilon?: number;
+ }
 /**
  * @classdesc
  * Compute the shortest paths between nodes in a graph source
@@ -26,12 +33,7 @@ import { Vector as VectorSource } from 'ol/source';
  *  @param {number} [options.epsilon=1E-6] geometric precision (min distance beetween 2 points), default 1E-6
  */
 export class Dijskra {
-    constructor(options: {
-        source: Vector;
-        maxIteration?: number;
-        stepIteration?: number;
-        epsilon?: number;
-    });
+    constructor(options: Options);
     /** Get the weighting of the edge, for example a speed factor
      * The function returns a value beetween ]0,1]
      * - 1   = no weighting

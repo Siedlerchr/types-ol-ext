@@ -1,6 +1,14 @@
 import { Coordinate } from 'ol/coordinate';
 import { Extent } from 'ol/extent';
 import { Base } from './Base';
+
+export interface Options {
+    coords?: Coordinate[];
+    Extent?: Extent;
+    units?: string;
+    keepAspectRatio?: boolean;
+    color?: string;
+}
 /** Clip layer or map
 *  @constructor
 * @requires filter
@@ -13,13 +21,7 @@ import { Base } from './Base';
 *  @param {string} [options.color] backgroundcolor
  */
 export class Clip extends Base {
-    constructor(options?: {
-        coords?: Coordinate[];
-        Extent?: Extent;
-        units?: string;
-        keepAspectRatio?: boolean;
-        color?: string;
-    });
+    constructor(options?: Options);
     /** Activate / deactivate filter
     *	@param {boolean} b
      */

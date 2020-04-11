@@ -3,6 +3,13 @@ import ol_control_Control from 'ol/control/Control';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import { condition } from './control';
+
+export interface Options {
+    className: string;
+    target: Element | undefined;
+    features: Collection<Feature>;
+    source: VectorSource | VectorSource[];
+}
 /**
  * This is the base class for Select controls on attributes values.
  * Abstract base class;
@@ -18,12 +25,7 @@ import { condition } from './control';
  *  @param {Vector | Array<Vector>} options.source the source to search in if no features set
  */
 export class SelectBase extends ol_control_Control {
-    constructor(options?: {
-        className: string;
-        target: Element | undefined;
-        features: Collection<Feature>;
-        source: VectorSource | VectorSource[];
-    });
+    constructor(options?: Options);
     /** Set the current sources
      * @param {VectorSource|Array<VectorSource>|undefined} source
      */

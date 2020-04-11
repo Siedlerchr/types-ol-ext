@@ -1,6 +1,11 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Style } from 'ol/style';
 import { CanvasBase } from './CanvasBase';
+
+export interface Options {
+    title: string;
+    style: Style;
+}
 /**
  * A title Control integrated in the canvas (for jpeg/png
  *
@@ -11,10 +16,7 @@ import { CanvasBase } from './CanvasBase';
  *  @param {Style} options.style style used to draw the title.
  */
 export class CanvasTitle extends CanvasBase {
-    constructor(options?: {
-        title: string;
-        style: Style;
-    });
+    constructor(options?: Options);
     /**
      * Change the control style
      * @param {Style} style

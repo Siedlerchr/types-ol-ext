@@ -3,6 +3,17 @@ import Feature, { FeatureLike } from 'ol/Feature';
 import { Vector } from 'ol/layer';
 import { Style } from 'ol/style';
 import { Select } from 'ol/interaction';
+
+export interface Options {
+    featureStyle: Style;
+    selectCluster: boolean;
+    PointRadius: number;
+    spiral: boolean;
+    circleMaxObject: number;
+    maxObjects: number;
+    animation: boolean;
+    animationDuration: number;
+}
 /**
  * @classdesc
  * Interaction for selecting vector features in a cluster.
@@ -26,16 +37,7 @@ import { Select } from 'ol/interaction';
  * @api stable
  */
 export class SelectCluster extends Select {
-    constructor(options?: {
-        featureStyle: Style;
-        selectCluster: boolean;
-        PointRadius: number;
-        spiral: boolean;
-        circleMaxObject: number;
-        maxObjects: number;
-        animation: boolean;
-        animationDuration: number;
-    });
+    constructor(options?: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.

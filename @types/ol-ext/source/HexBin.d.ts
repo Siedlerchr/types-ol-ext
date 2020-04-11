@@ -3,6 +3,12 @@ import Feature from 'ol/Feature';
 import { Polygon } from 'ol/geom';
 import { Vector as VectorSource } from 'ol/source';
 import { HexGrid } from 'render/HexGrid';
+
+export interface Options {
+    source: VectorSource;
+    Size?: number;
+    origin?: Coordinate;
+}
 /** A source for hexagonal binning
  * @constructor
  * @extends {VectorSource}
@@ -15,11 +21,7 @@ import { HexGrid } from 'render/HexGrid';
  *  @param {(bin: Feature, features: Array<Feature>)} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
  */
 export class HexBin extends VectorSource {
-    constructor(options: {
-        source: VectorSource;
-        Size?: number;
-        origin?: Coordinate;
-    });
+    constructor(options: Options);
     /** The HexGrid
      * 	@type {HexGrid}
      */

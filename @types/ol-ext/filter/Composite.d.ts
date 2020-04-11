@@ -1,4 +1,8 @@
 import { Base } from './Base';
+
+export interface Options {
+    operation: string;
+}
 /** Colorize map or layer
 * @constructor
 * @requires filter
@@ -7,9 +11,7 @@ import { Base } from './Base';
 *   @param {string} options.operation composite operation
  */
 export class Composite extends Base {
-    constructor(options: {
-        operation: string;
-    });
+    constructor(options: Options);
     /** Change the current operation
     *	@param {string} operation composite function
      */

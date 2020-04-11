@@ -4,6 +4,12 @@ import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import { Style } from 'ol/style';
 import { Interaction, Draw, Modify } from 'ol/interaction';
+
+export interface Options {
+    pixelTolerance: number;
+    enableInitialGuides: boolean;
+    style: Style | Style[] | undefined;
+}
 /** Interaction to snap to guidelines
  * @constructor
  * @extends {Interaction}
@@ -13,11 +19,7 @@ import { Interaction, Draw, Modify } from 'ol/interaction';
  *	- style {Style | Array<Style> | undefined} Style for the sektch features.
  */
 export class SnapGuides extends Interaction {
-    constructor(options: {
-        pixelTolerance: number;
-        enableInitialGuides: boolean;
-        style: Style | Style[] | undefined;
-    });
+    constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.

@@ -1,5 +1,11 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Pointer } from 'ol/interaction';
+
+export interface Options {
+    onDrag: undefined;
+    Size: number;
+    alpha: number;
+}
 /** Interaction splitter: acts as a split feature agent while editing vector features (LineString).
  * @constructor
  * @extends {interaction.Pointer}
@@ -9,11 +15,7 @@ import { Pointer } from 'ol/interaction';
  *	- alpha {Number} opacity of the compass, default 0.5
  */
 export class TouchCompass extends Pointer {
-    constructor(options: {
-        onDrag: undefined;
-        Size: number;
-        alpha: number;
-    });
+    constructor(options: Options);
     /** Compass Image as a JS Image object
     * @api
      */

@@ -2,6 +2,14 @@ import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import Event from 'ol/events/Event';
 import { position } from './control';
+
+export interface Options {
+    className: string;
+    group: boolean;
+    toggleOne: boolean;
+    autoDeactivate: boolean;
+    controls: ol_control_Control[];
+}
 /** Control bar for OL3
  * The control bar is a container for other controls. It can be used to create toolbars.
  * Control bars can be nested and combined with contrToggle to handle activate/deactivate.
@@ -16,13 +24,7 @@ import { position } from './control';
  *	@param {Array<_ol_control_>} options.controls a list of control to add to the bar
  */
 export class Bar extends ol_control_Control {
-    constructor(options?: {
-        className: string;
-        group: boolean;
-        toggleOne: boolean;
-        autoDeactivate: boolean;
-        controls: ol_control_Control[];
-    });
+    constructor(options?: Options);
     /** Set the control visibility
     * @param {boolean} b
      */

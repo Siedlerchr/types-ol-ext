@@ -12,6 +12,19 @@ export interface FillPatternOptions {
     char: string;
     font: string;
 }
+
+export interface Options {
+    image: Image | undefined;
+    opacity: number | undefined;
+    pattern: FillPattern;
+    color: Color;
+    fill: Color;
+    offset: number;
+    Size: number;
+    spacing: number;
+    angle: number | boolean;
+    scale: number;
+}
 /**
  * @classdesc
  * Fill style with named pattern
@@ -33,18 +46,7 @@ export interface FillPatternOptions {
  * @api
  */
 export class FillPattern extends Fill {
-    constructor(options?: {
-        image: Image | undefined;
-        opacity: number | undefined;
-        pattern: FillPattern;
-        color: Color;
-        fill: Color;
-        offset: number;
-        Size: number;
-        spacing: number;
-        angle: number | boolean;
-        scale: number;
-    });
+    constructor(options?: Options);
     /**
      * Clones the style.
      * @return {style.FillPattern}

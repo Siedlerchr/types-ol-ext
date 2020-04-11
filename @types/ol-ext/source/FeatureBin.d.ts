@@ -2,6 +2,11 @@ import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import { Polygon } from 'ol/geom';
 import { Vector as VectorSource } from 'ol/source';
+
+export interface Options {
+    source: VectorSource;
+    Size?: number;
+}
 /** A source for INSEE grid
  * @constructor
  * @extends {VectorSource}
@@ -12,10 +17,7 @@ import { Vector as VectorSource } from 'ol/source';
  *  @param {(bin: Feature, features: Array<Feature>)} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
  */
 export class FeatureBin extends VectorSource {
-    constructor(options: {
-        source: VectorSource;
-        Size?: number;
-    });
+    constructor(options: Options);
     /** Set grid Size
      * @param {Feature} features
      */

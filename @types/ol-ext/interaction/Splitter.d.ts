@@ -3,6 +3,14 @@ import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import { Interaction } from 'ol/interaction';
+
+export interface Options {
+    source: VectorSource | VectorSource[];
+    triggerSource: VectorSource;
+    features: Collection<Feature>;
+    filter: (f: Feature) => boolean | undefined;
+    tolerance: ((...params: any[]) => number) | undefined;
+}
 /** Interaction splitter: acts as a split feature agent while editing vector features (LineString).
  * @constructor
  * @extends {Interaction}
@@ -17,13 +25,7 @@ import { Interaction } from 'ol/interaction';
  * @todo verify auto intersection on features that split.
  */
 export class Splitter extends Interaction {
-    constructor(options: {
-        source: VectorSource | VectorSource[];
-        triggerSource: VectorSource;
-        features: Collection<Feature>;
-        filter: (f: Feature) => boolean | undefined;
-        tolerance: ((...params: any[]) => number) | undefined;
-    });
+    constructor(options: Options);
     /** Calculate intersection on 2 segs
     * @param {Array<Coordinate>} s1 first seg to intersect (2 points)
     * @param {Array<Coordinate>} s2 second seg to intersect (2 points)
