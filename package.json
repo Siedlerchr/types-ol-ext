@@ -2,7 +2,7 @@
   "name": "@siedlerchr/types-ol-ext",
   "version": "1.0.0",
   "description": "Type definitions for ol-ext",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tsc -p tsconfig.lint.json --pretty && tslint -p tsconfig.lint.json",
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/Siedlerchr/types-ol-ext#readme",
   "dependencies": {
-    "@types/ol": "^5.3.5",
+    "@types/ol": "^6.3.1",
     "dtslint": "^0.8.0",
     "jsdoc": "^3.6.3",
     "ol": "^6.0.1",
