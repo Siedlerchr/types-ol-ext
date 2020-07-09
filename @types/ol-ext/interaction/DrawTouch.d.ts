@@ -3,7 +3,7 @@ import { Coordinate } from 'ol/coordinate';
 import { Vector as VectorSource } from 'ol/source';
 import { Style } from 'ol/style';
 import GeometryType from 'ol/geom/GeometryType';
-import { CenterTouch } from './CenterTouch';
+import CenterTouch from './CenterTouch';
 
 export interface Options {
     source: VectorSource | undefined;
@@ -23,7 +23,7 @@ export interface Options {
  *  - targetStyle {Style|Array<Style>} a style to draw the target point, default cross style
  *  - composite {string} composite operation : difference|multiply|xor|screen|overlay|darken|lighter|lighten|...
  */
-export class DrawTouch extends CenterTouch {
+export default class DrawTouch extends CenterTouch {
     constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new

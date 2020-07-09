@@ -33,7 +33,7 @@ popup.hide();
 *	@param {function|undefined} options.onshow callback function when popup is shown
 * @api stable
  */
-export class Placemark extends Overlay {
+export default class Placemark extends Overlay {
     constructor(options: Options);
     /**
      * Set the position and the content of the placemark (hide it before to enable animation).

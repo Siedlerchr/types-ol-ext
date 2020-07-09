@@ -38,7 +38,7 @@ export interface Options {
  *  @param {function} options.getTitle a function that takes a feature and return the name to display in the index.
  *  @param {function} options.autocomplete a function that take a search string and callback function to send an array
  */
-export class Search extends ol_control_Control {
+export default class Search extends ol_control_Control {
     constructor(options?: Options);
     /** Get the input field
     *	@return {Element}

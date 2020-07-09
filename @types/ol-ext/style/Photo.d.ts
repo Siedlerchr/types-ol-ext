@@ -32,7 +32,7 @@ export interface Options {
  * @implements {structs.IHasChecksum}
  * @api
  */
-export class Photo extends RegularShape {
+export default class Photo extends RegularShape {
     constructor(options: Options);
     /**
      * Clones the style.

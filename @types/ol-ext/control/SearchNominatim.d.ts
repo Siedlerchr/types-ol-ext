@@ -1,5 +1,5 @@
 import Feature from 'ol/Feature';
-import { Search } from './Search';
+import Search from './Search';
 /**
  * Search places using the Nominatim geocoder from the OpenStreetmap project.
  *
@@ -20,7 +20,7 @@ import { Search } from './Search';
  *	@param {string|undefined} options.url URL to Nominatim API, default "https://nominatim.openstreetmap.org/search"
  * @see {@link https://wiki.openstreetmap.org/wiki/Nominatim}
  */
-export class SearchNominatim extends Search {
+export default class SearchNominatim extends Search {
     constructor(Control?: any);
     /** Returns the text to be displayed in the menu
      *	@param {Feature} f the feature

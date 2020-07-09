@@ -33,7 +33,7 @@ export interface Options {
  *  @param {Style | Array.<Style> | undefined} options.style style to draw the map Extent on the overveiw
  *  @param {bool|elastic} options.panAnimation use animation to center map on click, default true
  */
-export class Overview extends ol_control_Control {
+export default class Overview extends ol_control_Control {
     constructor(options?: Options);
     /** Elastic bounce
      *	@param {number} bounce number of bounce

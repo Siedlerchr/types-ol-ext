@@ -36,7 +36,7 @@ export interface Options {
  * @fires interaction.SelectEvent
  * @api stable
  */
-export class SelectCluster extends Select {
+export default class SelectCluster extends Select {
     constructor(options?: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new

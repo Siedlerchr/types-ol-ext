@@ -21,7 +21,7 @@ export interface Options {
  *  @param {Array<any>} options.zone an array of zone: { name, Extent (in EPSG:4326) }
  *  @param {bolean} options.centerOnClick center on click when click on zones, default true
  */
-export class MapZone extends ol_control_Control {
+export default class MapZone extends ol_control_Control {
     constructor(options?: Options);
     /** Set the control visibility
     * @param {boolean} b

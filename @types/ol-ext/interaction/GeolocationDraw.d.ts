@@ -32,7 +32,7 @@ export interface Options {
  *	@param {boolean|auto|position|visible} options.followTrack true if you want the interaction to follow the track on the map, default true
  *	@param { Style | Array.<Style> | StyleFunction | undefined } options.style Style for sketch features.
  */
-export class GeolocationDraw extends Interaction {
+export default class GeolocationDraw extends Interaction {
     constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new

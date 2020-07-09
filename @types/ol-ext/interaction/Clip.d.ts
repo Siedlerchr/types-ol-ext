@@ -14,7 +14,7 @@ export interface Options {
  *  @param {number} options.radius radius of the clip, default 100
  *	@param {layer|Array<layer>} options.layers layers to clip
  */
-export class Clip extends Pointer {
+export default class Clip extends Pointer {
     constructor(options: Options);
     /** Set the map > start postcompose
      */

@@ -1,6 +1,6 @@
 import Feature from 'ol/Feature';
 import { Fill } from 'ol/style';
-import { Base } from './Base';
+import Base from './Base';
 
 export interface Options {
     feature?: Feature;
@@ -16,7 +16,7 @@ export interface Options {
  *  @param {Fill} [options.fill] style to fill with
  *  @param {boolean} [options.inner] mask inner, default false
  */
-export class Mask extends Base {
+declare class Mask extends Base {
     constructor(options?: Options);
     /** Draw the feature into canvas
      */
@@ -30,3 +30,5 @@ export class Mask extends Base {
      */
     getActive(): boolean;
 }
+
+export default Mask;

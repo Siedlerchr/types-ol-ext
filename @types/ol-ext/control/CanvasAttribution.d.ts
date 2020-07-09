@@ -1,5 +1,5 @@
 import { Map as _ol_Map_ } from 'ol';
-import { default as ol_control_Attribution } from 'ol/control/Attribution';
+import Attribution from 'ol/control/Attribution';
 import { Style } from 'ol/style';
 
 export interface Options {
@@ -15,7 +15,7 @@ export interface Options {
  * @param {Object=} options extend the contrAttribution options.
  * 	@param {Style} options.style  option is usesd to draw the text.
  */
-export class CanvasAttribution extends ol_control_Attribution {
+export default class CanvasAttribution extends Attribution {
     constructor(options?: Options);
     /**
      * Draw attribution on canvas

@@ -29,7 +29,7 @@ var bm = new GeoBookmark ({
   }
 });
  */
-export class GeoBookmark extends ol_control_Control {
+export default class GeoBookmark extends ol_control_Control {
     constructor(options: Options);
     /** Set bookmarks
     * @param {} bmark a list of bookmarks, default retreave in the localstorage

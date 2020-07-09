@@ -8,7 +8,7 @@ import { ImageCanvas } from 'ol/source';
 * @extends {source.ImageCanvas}
 * @param {olx.source.GeoImageOptions=} options
  */
-export class GeoImage extends ImageCanvas {
+export default class GeoImage extends ImageCanvas {
     constructor(options?: {});
     /**
      * Get coordinate of the image center.

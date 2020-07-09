@@ -1,6 +1,6 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Style } from 'ol/style';
-import { CanvasBase } from './CanvasBase';
+import CanvasBase from './CanvasBase';
 
 export interface Options {
     style: Style | Style[];
@@ -13,7 +13,7 @@ export interface Options {
  *  @param {Style|Array<Style>} options.style
  *  @param {string} options.composite composite operation = difference|multiply|xor|screen|overlay|darken|lighter|lighten|...
  */
-export class Target extends CanvasBase {
+export default class Target extends CanvasBase {
     constructor(options: Options);
     /** Set the control visibility
      * @paraam {boolean} b

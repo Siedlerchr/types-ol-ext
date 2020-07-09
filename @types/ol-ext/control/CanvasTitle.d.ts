@@ -1,6 +1,6 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Style } from 'ol/style';
-import { CanvasBase } from './CanvasBase';
+import CanvasBase from './CanvasBase';
 
 export interface Options {
     title: string;
@@ -15,7 +15,7 @@ export interface Options {
  *  @param {string} options.title the title, default 'Title'
  *  @param {Style} options.style style used to draw the title.
  */
-export class CanvasTitle extends CanvasBase {
+export default class CanvasTitle extends CanvasBase {
     constructor(options?: Options);
     /**
      * Change the control style

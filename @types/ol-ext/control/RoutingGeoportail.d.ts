@@ -35,7 +35,7 @@ export interface Options {
  *	@param {function} options.getTitle a function that takes a feature and return the name to display in the index.
  *	@param {function} options.autocomplete a function that take a search string and callback function to send an array
  */
-export class RoutingGeoportail extends ol_control_Control {
+export default class RoutingGeoportail extends ol_control_Control {
     constructor(options?: Options);
     /**
      * Set the map instance the control is associated with

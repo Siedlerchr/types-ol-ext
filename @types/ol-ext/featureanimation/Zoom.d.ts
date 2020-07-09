@@ -1,4 +1,4 @@
-import { featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+import { default as featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
 
 export interface Options {
     zoomOut?: boolean;
@@ -10,10 +10,12 @@ export interface Options {
  * @param {featureAnimationZoomOptions} options
  *  @param {bool} options.zoomOut to zoom out
  */
-export class Zoom extends featureAnimation {
+declare class Zoom extends featureAnimation {
     constructor(options?: Options);
     /** Animate
     * @param {featureAnimationEvent} e
      */
     animate(e: FeatureAnimationEvent): boolean;
 }
+
+export default Zoom;

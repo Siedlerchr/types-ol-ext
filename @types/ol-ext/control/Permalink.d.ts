@@ -25,7 +25,7 @@ export interface Options {
  *	@param {bool} options.hidden hide the button on the map, default false
  *	@param {function} options.onclick a function called when control is clicked
  */
-export class Permalink extends ol_control_Control {
+export default class Permalink extends ol_control_Control {
     constructor(options?: Options);
     /**
      * Set the map instance the control associated with.

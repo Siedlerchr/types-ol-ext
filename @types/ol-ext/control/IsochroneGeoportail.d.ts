@@ -40,7 +40,7 @@ export interface Options {
  *
  *  @param {string} options.exclusions Exclusion list separate with a comma 'Toll,Tunnel,Bridge'
  */
-export class IsochroneGeoportail extends ol_control_Control {
+export default class IsochroneGeoportail extends ol_control_Control {
     constructor(options?: Options);
     /**
      * Set the map instance the control is associated with

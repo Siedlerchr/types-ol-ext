@@ -1,7 +1,7 @@
 import Collection from 'ol/Collection';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
-import { SelectBase } from './SelectBase';
+import SelectBase from './SelectBase';
 import { condition } from './control';
 
 export interface Options {
@@ -33,7 +33,7 @@ export interface Options {
  *  @param {string} [options.attrPlaceHolder=attribute]
  *  @param {string} [options.valuePlaceHolder=value]
  */
-export class Select extends SelectBase {
+export default class Select extends SelectBase {
     constructor(options?: Options);
     /** Add a new condition
      * @param {*} options

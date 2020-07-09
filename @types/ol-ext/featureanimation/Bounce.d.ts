@@ -1,4 +1,4 @@
-import { featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+import { default as featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
 
 export interface Options {
     bounce?: number;
@@ -17,10 +17,12 @@ export interface Options {
  *	@param {easing} options.easing easing used for decaying amplitude, use function(){return 0} for no decay, default easing.linear
  *	@param {number} options.duration duration in ms, default 1000
  */
-export class Bounce extends featureAnimation {
+declare class Bounce extends featureAnimation {
     constructor(options?: Options)
     /** Animate
     * @param {FeatureAnimationEvent} e
      */
     animate(e: FeatureAnimationEvent): boolean;
 }
+
+export default Bounce;

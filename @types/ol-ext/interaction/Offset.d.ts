@@ -23,7 +23,7 @@ export interface Options {
  *	@param {VectorSource | undefined} options.source source to duplicate feature when ctrl key is down
  *	@param {boolean} options.duplicate force feature to duplicate (source must be set)
  */
-export class Offset extends Pointer {
+export default class Offset extends Pointer {
     constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new

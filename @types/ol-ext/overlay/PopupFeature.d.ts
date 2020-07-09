@@ -1,7 +1,7 @@
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import OverlayPositioning from 'ol/OverlayPositioning';
-import { Popup, Template } from './Popup';
+import { default as Popup, Template } from './Popup';
 
 export interface Options {
     popupClass: string;
@@ -34,7 +34,7 @@ export interface Options {
  *  @param {boolean} options.maxChar max char to display in a cell, default 200
  *  @api stable
  */
-export class PopupFeature extends Popup {
+export default class PopupFeature extends Popup {
     constructor(options: Options);
     /** Set the template
      * @param {Template} template A template with a list of properties to use in the popup

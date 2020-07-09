@@ -2,7 +2,7 @@ import { Map as _ol_Map_ } from 'ol';
 import Collection from 'ol/Collection';
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
-import { CanvasBase } from './CanvasBase';
+import CanvasBase from './CanvasBase';
 /**
  * Draw a grid reference on the map and add an index.
  *
@@ -21,7 +21,7 @@ import { CanvasBase } from './CanvasBase';
  *  @param {function|undefined} options.indexTitle a function that takes a feature and return the title to display in the index, default the first letter of property option
  *  @param {string} options.filterLabel label to display in the search bar, default 'filter'
  */
-export class GridReference extends CanvasBase {
+export default class GridReference extends CanvasBase {
     constructor(Control?: any);
     /** Returns the text to be displayed in the index
      * @param {Feature} f the feature

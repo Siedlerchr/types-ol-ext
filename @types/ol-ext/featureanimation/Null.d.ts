@@ -1,9 +1,9 @@
-import { featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+import { default as featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
 /** Do nothing
  * @constructor
  * @extends {featureAnimation}
  */
-export class Null extends featureAnimation {
+declare class Null extends featureAnimation {
     /** Function to perform manipulations onpostcompose.
      * This function is called with an featureAnimationEvent argument.
      * The function will be overridden by the child implementation.
@@ -14,3 +14,5 @@ export class Null extends featureAnimation {
      */
     animate(e: FeatureAnimationEvent): boolean;
 }
+
+export default Null;

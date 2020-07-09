@@ -1,7 +1,7 @@
 import Collection from 'ol/Collection';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
-import { SelectBase } from './SelectBase';
+import SelectBase from './SelectBase';
 import { condition } from './control';
 
 export interface Options {
@@ -24,7 +24,7 @@ export interface Options {
  *  @param {string} options.property property to select on
  *  @param {function|undefined} options.onchoice function triggered the text change, default nothing
  */
-export class SelectFulltext extends SelectBase {
+export default class SelectFulltext extends SelectBase {
     constructor(options?: Options);
     /** Select features by condition
      */

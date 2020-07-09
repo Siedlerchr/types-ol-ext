@@ -1,4 +1,4 @@
-import { Base } from './Base';
+import Base from './Base';
 
 export interface Options {
     operation: string;
@@ -10,7 +10,7 @@ export interface Options {
 * @param {Object} options
 *   @param {string} options.operation composite operation
  */
-export class Composite extends Base {
+declare class Composite extends Base {
     constructor(options: Options);
     /** Change the current operation
     *	@param {string} operation composite function
@@ -25,3 +25,5 @@ export class Composite extends Base {
      */
     getActive(): boolean;
 }
+
+export default Composite;

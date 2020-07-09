@@ -38,7 +38,7 @@ export interface Options {
  *  @param {EventsConditionType | undefined} options.deleteCondition A function that takes an MapBrowserEvent and returns a boolean to indicate whether that event should be handled. By default, events.condition.singleClick with events.condition.altKeyOnly results in a vertex deletion.
  *  @param {EventsConditionType | undefined} options.insertVertexCondition A function that takes an MapBrowserEvent and returns a boolean to indicate whether a new vertex can be added to the sketch features. Default is events.condition.always
  */
-export class ModifyFeature extends Pointer {
+export default class ModifyFeature extends Pointer {
     constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new

@@ -15,7 +15,7 @@ export interface Options {
  * @param {Object} [options]
  *  @param {number} [options.Size] Size grid Size in meter, default 200 (200x200m)
  */
-export class InseeGrid extends Object {
+export default class InseeGrid extends Object {
     constructor(options?: Options);
     /** Grid Extent (in EPSG:3035)
      */

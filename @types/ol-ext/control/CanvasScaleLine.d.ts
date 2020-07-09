@@ -15,7 +15,7 @@ export interface Options {
  * @param {Object=} options extend the contrScaleLine options.
  * 	@param {Style} options.style used to draw the scale line (default is black/white, 10px Arial).
  */
-export class CanvasScaleLine extends ol_control_ScaleLine {
+export default class CanvasScaleLine extends ol_control_ScaleLine {
     constructor(options?: Options);
     /**
      * Remove the control from its current map and attach it to the new map.

@@ -20,7 +20,7 @@ export interface Options {
  *	@param {bool} options.hideOnClick hide the control on click, default false
  *	@param {bool} options.closeBox add a closeBox to the control, default false
  */
-export class Overlay extends ol_control_Control {
+export default class Overlay extends ol_control_Control {
     constructor(options?: Options);
     /** Set the content of the overlay
     * @param {string|Element} html the html to display in the control

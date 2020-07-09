@@ -8,7 +8,7 @@ import { Interaction } from 'ol/interaction';
  * @fires deleteend
  * @param {*} options interaction.Select options
  */
-export class Delete extends Interaction {
+export default class Delete extends Interaction {
     constructor(options: any);
     /** Get vector source of the map
      * @return {Array<VectorSource}

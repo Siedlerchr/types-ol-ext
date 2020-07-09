@@ -1,6 +1,6 @@
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
-import { Search } from './Search';
+import Search from './Search';
 /**
  * Search features.
  *
@@ -20,7 +20,7 @@ import { Search } from './Search';
  *	@param {function} options.getTitle a function that takes a feature and return the name to display in the index, default return the property
  *	@param {function | undefined} options.getSearchString a function that take a feature and return a text to be used as search string, default geTitle() is used as search string
  */
-export class SearchFeature extends Search {
+export default class SearchFeature extends Search {
     constructor(Control?: any);
     /** No history avaliable on features
      */

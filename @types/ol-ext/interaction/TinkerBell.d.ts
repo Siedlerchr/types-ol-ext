@@ -10,7 +10,7 @@ export interface Options {
  *	@param {interaction.TinkerBell.options}  options flashlight param
  *		- color {color} color of the sparkles
  */
-export class TinkerBell extends Pointer {
+export default class TinkerBell extends Pointer {
     constructor(options: Options);
     /** Set the map > start postcompose
      */

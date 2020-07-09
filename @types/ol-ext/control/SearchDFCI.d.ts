@@ -1,4 +1,4 @@
-import { Search } from './Search';
+import Search from './Search';
 /**
  * Search on DFCI grid.
  *
@@ -18,7 +18,7 @@ import { Search } from './Search';
  *	@param {function} options.getTitle a function that takes a feature and return the name to display in the index, default return the property
  *	@param {function | undefined} options.getSearchString a function that take a feature and return a text to be used as search string, default geTitle() is used as search string
  */
-export class SearchDFCI extends Search {
+export default class SearchDFCI extends Search {
     constructor(Control?: any);
     /** Autocomplete function
     * @param {string} s search string

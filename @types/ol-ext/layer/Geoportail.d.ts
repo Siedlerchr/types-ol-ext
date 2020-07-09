@@ -28,7 +28,7 @@ export interface Options {
  *  @param {string} options.crossOrigin default 'anonymous'
  *  @param {string} options.wrapX default true
  */
-export class Geoportail extends WMTS {
+export default class Geoportail extends WMTS {
     constructor(layer?: string, options?: Options);
     /** Standard IGN-GEOPORTAIL attribution
      */

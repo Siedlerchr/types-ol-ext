@@ -1,3 +1,41 @@
+declare module 'ol/Map' {
+    export default interface Map {
+        /** Add a filter to a Map
+         *	@param {filter}
+         */
+        addFilter(filter: Base): void;
+
+        /** Remove a filter to a Map
+         *	@param {filter}
+         */
+        removeFilter(filter: Base): void;
+
+        /** Get filters associated with a Map
+         *	@return {Array<filter>}
+         */
+        getFilters(): Base[];
+    }
+}
+
+declare module 'ol/layer/Layer' {
+    export default interface Layer {
+        /** Add a filter to an ol.Layer
+         *	@param {filter}
+         */
+        addFilter(filter: Base): void;
+
+        /** Remove a filter to an ol.Layer
+         *	@param {filter}
+         */
+        removeFilter(filter: Base): void;
+
+        /** Get filters associated with an ol.Layer
+         *	@return {Array<filter>}
+         */
+        getFilters(): Base[];
+    }
+}
+
 /** Filters are effects that render over a map or a layer.
  * Use the map methods to add or remove filter on a map
  * ({@link Map#addFilter}, {@link Map#removeFilter}, {@link Map#getFilters}).
@@ -22,7 +60,7 @@
  * @param {Object} options Extend {@link _ol_control_Control_} options.
  *  @param {boolean} [options.active]
  */
-export abstract class Base extends Object {
+declare abstract class Base extends Object {
     constructor(options: Options);
     /** Activate / deactivate filter
     *	@param {boolean} b
@@ -33,15 +71,5 @@ export abstract class Base extends Object {
      */
     getActive(): boolean;
 }
-/** Add a filter to an Map
-*	@param {filter}
- */
-export function addFilter(filter: Base): void;
-/** Remove a filter to an Map
-*	@param {filter}
- */
-export function removeFilter(filter: Base): void;
-/** Get filters associated with an Map
-*	@return {Array<filter>}
- */
-export function getFilters(): Base[];
+
+export default Base;

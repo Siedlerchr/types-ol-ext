@@ -19,7 +19,7 @@ export interface Options {
  *	@param {number | undefined} options.hitTolerance Hit-detection tolerance in pixels.
  *	@param { function | undefined } options.handleEvent Method called by the map to notify the interaction that a browser event was dispatched to the map. The function may return false to prevent the propagation of the event to other interactions in the map's interactions chain.
  */
-export class Hover extends Interaction {
+export default class Hover extends Interaction {
     constructor(options: Options, optionsfeatureFilter: ((...params: any[]) => any) | undefined);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new

@@ -2,7 +2,7 @@ import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import { Polygon } from 'ol/geom';
 import { Vector as VectorSource } from 'ol/source';
-import { HexGrid } from 'render/HexGrid';
+import HexGrid from '../render/HexGrid';
 
 export interface Options {
     source: VectorSource;
@@ -20,7 +20,7 @@ export interface Options {
  *  @param {(f: Feature) => Point} [options.geometryFunction] Function that takes an Feature as argument and returns an Point as feature's center.
  *  @param {(bin: Feature, features: Array<Feature>)} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
  */
-export class HexBin extends VectorSource {
+export default class HexBin extends VectorSource {
     constructor(options: Options);
     /** The HexGrid
      * 	@type {HexGrid}

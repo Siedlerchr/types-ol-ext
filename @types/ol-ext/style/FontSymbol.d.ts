@@ -37,7 +37,7 @@ export interface Options {
  * @implements {structs.IHasChecksum}
  * @api
  */
-export class FontSymbol extends RegularShape {
+export default class FontSymbol extends RegularShape {
     constructor(options: Options);
     /**
      *	Font defs

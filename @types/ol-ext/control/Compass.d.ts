@@ -1,6 +1,6 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Stroke, Image } from 'ol/style';
-import { CanvasBase } from './CanvasBase';
+import CanvasBase from './CanvasBase';
 
 export interface Options {
     className: string;
@@ -21,7 +21,7 @@ export interface Options {
  *  @param {boolean} options.rotateVithView rotate vith view (false to show watermark), default true
  *  @param {style.Stroke} options.style style to draw the lines, default draw no lines
  */
-export class Compass extends CanvasBase {
+export default class Compass extends CanvasBase {
     constructor(options?: Options);
     /**
      * Remove the control from its current map and attach it to the new map.

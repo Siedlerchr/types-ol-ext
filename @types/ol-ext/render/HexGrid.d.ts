@@ -21,7 +21,7 @@ export declare type HexagonLayout = 'pointy' | 'flat';
 *	@param {Coordinate} [options.origin] orgin of the grid, default [0,0]
 *	@param {HexagonLayout} [options.layout] grid layout, default pointy
  */
-export class HexGrid extends Object {
+export default class HexGrid extends Object {
     constructor(options?: Options);
     /** Layout
      */
@@ -111,12 +111,12 @@ export class HexGrid extends Object {
     * @param {hex} hex
     * @return {Coordinate}
      */
-    hex2coord(hex: hex): Coordinate;
+    hex2coord(hex: Array<Coordinate>): Coordinate;
     /** Convert coord to hex
     * @param {Coordinate} coord
     * @return {hex}
      */
-    coord2hex(coord: Coordinate): hex;
+    coord2hex(coord: Coordinate): Array<Coordinate>;
     /** Calculate distance between to hexagon (number of cube)
     * @param {Coordinate} a first cube coord
     * @param {Coordinate} a second cube coord

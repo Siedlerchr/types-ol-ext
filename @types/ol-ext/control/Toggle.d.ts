@@ -1,7 +1,7 @@
 import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import { Interaction } from 'ol/interaction';
-import { Bar } from './Bar';
+import Bar from './Bar';
 
 export interface Options {
     className: string;
@@ -31,7 +31,7 @@ export interface Options {
  *	@param {bool} options.autoActive the control will activate when shown in an contrBar, default false
  *	@param {function} options.onToggle callback when control is clicked (or use change:active event)
  */
-export class Toggle extends ol_control_Control {
+export default class Toggle extends ol_control_Control {
     constructor(options?: Options);
     /**
      * Set the map instance the control is associated with

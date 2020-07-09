@@ -24,7 +24,7 @@ export interface Options {
  *  @param {Collection<Feature>} options.features a collection of feature to search in, the collection will be kept in date while selection
  *  @param {Vector | Array<Vector>} options.source the source to search in if no features set
  */
-export class SelectBase extends ol_control_Control {
+export default class SelectBase extends ol_control_Control {
     constructor(options?: Options);
     /** Set the current sources
      * @param {VectorSource|Array<VectorSource>|undefined} source

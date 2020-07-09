@@ -27,7 +27,7 @@ export interface Options {
  *  @param {Style | Array<Style> | undefined} options.sketchStyle Style for the sektch features.
  *  @param {function|undefined} options.tolerance Distance between the calculated intersection and a vertex on the source geometry below which the existing vertex will be used for the split.  Default is 1e-10.
  */
-export class Split extends Interaction {
+export default class Split extends Interaction {
     constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new

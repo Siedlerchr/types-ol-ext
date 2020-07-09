@@ -1,4 +1,4 @@
-import { Base } from './Base';
+import Base from './Base';
 import {Image} from 'ol/style';
 
 /** @typedef {Object} FilterTextureOptions
@@ -25,7 +25,7 @@ export declare type FilterTextureOptions = {
  * @extends {filter.Base}
  * @param {FilterTextureOptions} options
  */
-export class Texture extends Base {
+declare class Texture extends Base {
     constructor(options: FilterTextureOptions);
     /** Set texture
      * @param {FilterTextureOptions} [options]
@@ -48,3 +48,5 @@ export class Texture extends Base {
      */
     getActive(): boolean;
 }
+
+export default Texture;

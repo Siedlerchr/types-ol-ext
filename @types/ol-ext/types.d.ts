@@ -2,7 +2,7 @@ import { Map as _ol_Map_, View, Overlay } from 'ol';
 import { Options as OverlayOptions } from 'ol/Overlay';
 
 import Collection from 'ol/Collection';
-import { default as Attribution, default as ol_control_Attribution } from 'ol/control/Attribution';
+import Attribution from 'ol/control/Attribution';
 import ol_control_Control from 'ol/control/Control';
 import ol_control_ScaleLine from 'ol/control/ScaleLine';
 import { Coordinate, CoordinateFormat } from 'ol/coordinate';
@@ -29,6 +29,7 @@ import { Pixel } from 'ol/pixel';
 import FeatureFormat from 'ol/format/Feature';
 import Event from 'ol/events/Event';
 import OverlayPositioning from 'ol/OverlayPositioning';
+import featureAnimation from './featureanimation/FeatureAnimation';
 
 
 /** The map is the core component of OpenLayers.
@@ -114,7 +115,3 @@ type animationControler = {
     stop: (...params: any[]) => any;
     isPlaying: (...params: any[]) => any;
 };
-
-
-
-

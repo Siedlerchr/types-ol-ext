@@ -9,7 +9,7 @@ import { Pointer } from 'ol/interaction';
  * @param {any} options
  *  @param {Overlay|Array<Overlay} options.overlays the overlays to drag
  */
-export class DragOverlay extends Pointer {
+export default class DragOverlay extends Pointer {
     constructor(options: any);
     /** Add an overlay to the interacton
      * @param {Overlay} ov

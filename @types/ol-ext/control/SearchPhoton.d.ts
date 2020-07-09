@@ -1,5 +1,5 @@
 import Feature from 'ol/Feature';
-import { SearchJSON } from './SearchJSON';
+import SearchJSON from './SearchJSON';
 /**
  * Search places using the photon API.
  *
@@ -21,7 +21,7 @@ import { SearchJSON } from './SearchJSON';
  *	@param {boolean} options.position Search, with priority to geo position, default false
  *	@param {function} options.getTitle a function that takes a feature and return the name to display in the index, default return street + name + contry
  */
-export class SearchPhoton extends SearchJSON {
+export default class SearchPhoton extends SearchJSON {
     constructor(Control?: any);
     /** Returns the text to be displayed in the menu
     *	@param {Feature} f the feature

@@ -34,7 +34,7 @@ export interface Options {
  * @implements {structs.IHasChecksum}
  * @api
  */
-export class Chart extends RegularShape {
+export default class Chart extends RegularShape {
     constructor(options: Options);
     /** Default color set: classic, dark, pale, pastel, neon
      */

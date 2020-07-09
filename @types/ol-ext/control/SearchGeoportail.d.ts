@@ -1,5 +1,5 @@
 import Feature from 'ol/Feature';
-import { SearchJSON } from './SearchJSON';
+import SearchJSON from './SearchJSON';
 import { AddressType } from './control';
 
 export interface Options {
@@ -34,7 +34,7 @@ export interface Options {
  *	@param {StreetAddress|PositionOfInterest|CadastralParcel|Commune} options.type type of search. Using Commune will return the INSEE code, default StreetAddress,PositionOfInterest
  * @see {@link https://geoservices.ign.fr/documentation/geoservices/geocodage.html}
  */
-export class SearchGeoportail extends SearchJSON {
+export default class SearchGeoportail extends SearchJSON {
     constructor(options: Options);
     /** Returns the text to be displayed in the menu
      *	@param {Feature} f the feature

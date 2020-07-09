@@ -1,5 +1,6 @@
 import { Map as _ol_Map_, Overlay } from 'ol';
 import { Options as OverlayOptions } from 'ol/Overlay';
+
 /**
  * @classdesc
  *	The Magnify overlay add a "magnifying glass" effect to an OL3 map that displays
@@ -10,7 +11,7 @@ import { Options as OverlayOptions } from 'ol/Overlay';
  * @param {olx.OverlayOptions} options Overlay options
  * @api stable
  */
-export class Magnify extends Overlay {
+export default class Magnify extends Overlay {
     constructor(options?: OverlayOptions);
     /**
      * Set the map instance the overlay is associated with.

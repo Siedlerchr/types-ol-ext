@@ -29,7 +29,7 @@ export interface Options {
  * @param {Object=} options extend the control options.
  *  @param {Style} options.style style used to draw the title.
  */
-export class CanvasBase extends ol_control_Control {
+export default class CanvasBase extends ol_control_Control {
     constructor(options?: Options);
     /**
      * Remove the control from its current map and attach it to the new map.

@@ -20,7 +20,7 @@ export interface Options {
  * 	@param {Array<layer.Vector> | function | undefined} options.layers A list of layers from which polygons should be selected. Alternatively, a filter function can be provided. default: all visible layers
  * 	@param { Style | Array<Style> | StyleFunction | undefined }	Style for the selected features, default: default edit style
  */
-export class DrawHole extends Interaction {
+export default class DrawHole extends Interaction {
     constructor(options: Options, Style: StyleLike);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new

@@ -1,7 +1,7 @@
 import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import Event from 'ol/events/Event';
-import { Bar } from './Bar';
+import Bar from './Bar';
 import { position } from './control';
 
 export interface Options {
@@ -18,7 +18,7 @@ export interface Options {
  *	@param {String} options.className class of the control
  *	@param {String} options.centerLabel label for center button, default center
  */
-export class GeolocationBar extends Bar {
+export default class GeolocationBar extends Bar {
     constructor(options?: Options);
     /** Get the interaction.GeolocationDraw associatedwith the bar
      *

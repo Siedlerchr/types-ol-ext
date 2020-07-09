@@ -1,4 +1,4 @@
-import { Search } from './Search';
+import Search from './Search';
 
 export interface Options {
     className: string;
@@ -32,7 +32,7 @@ export interface Options {
  *	@param {string|undefined} options.url Url of the search api
  *	@param {string | undefined} options.authentication: basic authentication for the search API as btoa("login:pwd")
  */
-export class SearchJSON extends Search {
+export default class SearchJSON extends Search {
     constructor(options: Options);
     /** Autocomplete function (ajax request to the server)
     * @param {string} s search string
