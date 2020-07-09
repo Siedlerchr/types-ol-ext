@@ -11,7 +11,7 @@ import { Style } from 'ol/style';
  *  @param {number} param.defaultHeight default height if none is return by a propertie
  *  @param {function|string|Number} param.height a height function (returns height giving a feature) or a popertie name for the height or a fixed value
  */
-export class render3D {
+export default class render3D {
     constructor(param: {
         layer: Vector;
         maxResolution: number;

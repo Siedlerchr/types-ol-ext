@@ -38,7 +38,7 @@ export interface Options {
  *	- displayInLayerSwitcher {boolean} display in switcher, default true
  *	- noSwitcherDelete {boolean} to prevent layer deletion (w. trash option = true), default false
  */
-export class LayerSwitcher extends ol_control_Control {
+export default class LayerSwitcher extends ol_control_Control {
     constructor(options?: Options);
     /** List of tips for internationalization purposes
      */

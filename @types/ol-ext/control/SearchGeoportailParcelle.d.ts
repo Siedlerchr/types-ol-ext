@@ -1,4 +1,4 @@
-import { SearchJSON } from './SearchJSON';
+import SearchJSON from './SearchJSON';
 
 export interface Options {
     className: string;
@@ -32,7 +32,7 @@ export interface Options {
  *	@param {Number} options.pageSize item per page for parcelle list paging, use -1 for no paging, default 5
  * @see {@link https://geoservices.ign.fr/documentation/geoservices/geocodage.html}
  */
-export class SearchGeoportailParcelle extends SearchJSON {
+export default class SearchGeoportailParcelle extends SearchJSON {
     constructor(options: Options);
     /** Set the input parcelle
      * @param {*} p parcel

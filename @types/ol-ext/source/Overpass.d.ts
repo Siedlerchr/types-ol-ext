@@ -1,4 +1,4 @@
-import { default as Attribution } from 'ol/control/Attribution';
+import Attribution from 'ol/control/Attribution';
 import { Vector as VectorSource } from 'ol/source';
 import { LoadingStrategy } from 'ol/source/Vector';
 
@@ -26,7 +26,7 @@ export interface Options {
  *  @param {string|Attribution|Array<string>} options.attributions source attribution, default OSM attribution
  *  @param {LoadingStrategy} options.strategy loading strategy, default loadingstrategy.bbox
  */
-export class Overpass extends VectorSource {
+export default class Overpass extends VectorSource {
     constructor(options: Options);
     /** Ovepass API Url
      */

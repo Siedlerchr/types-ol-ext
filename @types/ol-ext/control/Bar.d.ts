@@ -23,7 +23,7 @@ export interface Options {
  *	@param {bool} options.autoDeactivate used with subbar to deactivate all control when top level control deactivate, default false
  *	@param {Array<_ol_control_>} options.controls a list of control to add to the bar
  */
-export class Bar extends ol_control_Control {
+export default class Bar extends ol_control_Control {
     constructor(options?: Options);
     /** Set the control visibility
     * @param {boolean} b

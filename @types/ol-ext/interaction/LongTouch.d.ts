@@ -11,6 +11,6 @@ export interface Options {
  * 	@param {function | undefined} options.handleLongTouchEvent Function handling "longtouch" events, it will receive a mapBrowserEvent.
  *	@param {interger | undefined} options.delay The delay for a long touch in ms, default is 1000
  */
-export class LongTouch extends Interaction {
+export default class LongTouch extends Interaction {
     constructor(options: Options);
 }

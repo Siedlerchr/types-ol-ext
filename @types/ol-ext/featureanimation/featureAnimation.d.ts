@@ -48,7 +48,7 @@ export interface Options {
 *	@param {easing.Function} options.fade an easing function used to fade in the feature, default none
 *	@param {easing.Function} options.easing an easing function for the animation, default easing.linear
  */
-export class featureAnimation {
+declare class featureAnimation {
     constructor(options?: Options);
     /** Function to perform manipulations onpostcompose.
      * This function is called with an featureAnimationEvent argument.
@@ -61,3 +61,4 @@ export class featureAnimation {
     animate(e: FeatureAnimationEvent): boolean;
 }
 
+export default featureAnimation;

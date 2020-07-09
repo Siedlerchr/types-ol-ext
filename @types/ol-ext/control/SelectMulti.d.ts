@@ -2,7 +2,7 @@ import { Map as _ol_Map_ } from 'ol';
 import Collection from 'ol/Collection';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
-import { SelectBase } from './SelectBase';
+import SelectBase from './SelectBase';
 import { condition } from './control';
 
 export interface Options {
@@ -24,7 +24,7 @@ export interface Options {
  *  @param {Vector | Array<Vector>} options.source the source to search in
  *  @param {Array<contrSelectBase>} options.controls an array of controls
  */
-export class SelectMulti extends SelectBase {
+export default class SelectMulti extends SelectBase {
     constructor(options?: Options);
     /**
     * Set the map instance the control associated with.

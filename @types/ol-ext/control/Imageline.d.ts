@@ -31,7 +31,7 @@ export interface Options {
  *	@param {boolean} options.hover select image on hover, default false
  *	@param {string|boolean} options.linkColor link color or false if no link, default false
  */
-export class Imageline extends ol_control_Control {
+export default class Imageline extends ol_control_Control {
     constructor(options?: Options);
     /**
      * Remove the control from its current map and attach it to the new map.

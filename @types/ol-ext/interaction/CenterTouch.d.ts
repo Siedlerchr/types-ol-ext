@@ -22,7 +22,7 @@ import { Interaction } from 'ol/interaction';
  *  - targetStyle {Style|Array<Style>} a style to draw the target point, default cross style
  *  - composite {string} composite operation : difference|multiply|xor|screen|overlay|darken|lighter|lighten|...
  */
-export class CenterTouch extends Interaction {
+export default class CenterTouch extends Interaction {
     constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new

@@ -1,5 +1,5 @@
-import { Map as _ol_Map_ } from 'ol';
-import { CanvasBase } from './CanvasBase';
+import { Map } from 'ol';
+import CanvasBase from './CanvasBase';
 /**
  * Draw a graticule on the map.
  *
@@ -15,7 +15,7 @@ import { CanvasBase } from './CanvasBase';
  *  @param {number} options.borderWidthwidth of the border (in px), default 5px
  *  @param {number} options.marginmargin of the border (in px), default 0px
  */
-export class Graticule extends CanvasBase {
+export default class Graticule extends CanvasBase {
     constructor(_ol_control_?: any);
     /**
      * Remove the control from its current map and attach it to the new map.
@@ -24,7 +24,7 @@ export class Graticule extends CanvasBase {
      * @param {_ol_Map_} map Map.
      * @api stable
      */
-    setMap(map: _ol_Map_): void;
+    setMap(map: Map): void;
     /** Get canvas overlay
      */
     getCanvas(): void;

@@ -1,4 +1,4 @@
-import { Button } from './Button';
+import Button from './Button';
 
 export interface Options {
     className: string;
@@ -15,7 +15,7 @@ export interface Options {
  *	@param {String} options.html html to insert in the control
  *	@param {function} options.handleClick callback when control is clicked (or use change:active event)
  */
-export class TextButton extends Button {
+export default class TextButton extends Button {
     constructor(options?: Options);
     /** Set the control visibility
     * @param {boolean} b

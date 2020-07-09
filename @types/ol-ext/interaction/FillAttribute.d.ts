@@ -15,7 +15,7 @@ export interface Options {
  *  @param {boolean} options.cursor use a paint bucket cursor, default true
  * @param {*} properties The properties as key/value
  */
-export class FillAttribute extends Interaction {
+export default class FillAttribute extends Interaction {
     constructor(options: Options, properties: any);
     /** Activate the interaction
      * @param {boolean} active

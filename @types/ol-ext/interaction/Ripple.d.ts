@@ -14,7 +14,7 @@ export interface Options {
      *		- fill {Color} fill color, default rgba(0,0,0,0.8)
      *		- radius {number} radius of the flash
      */
-export class Ripple extends Pointer {
+export default class Ripple extends Pointer {
     constructor(options: Options);
     /** Set the map > start postcompose
      */

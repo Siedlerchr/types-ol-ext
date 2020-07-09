@@ -19,7 +19,7 @@ export interface Options {
  *  @param {string} options.ppi screen ppi, default 96
  * 	@param {string} options.editable make the control editable, default true
  */
-export class Scale extends ol_control_Control {
+export default class Scale extends ol_control_Control {
     constructor(options?: Options);
     /**
      * Remove the control from its current map and attach it to the new map.

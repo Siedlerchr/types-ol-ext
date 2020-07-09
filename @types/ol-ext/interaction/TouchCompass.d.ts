@@ -14,7 +14,7 @@ export interface Options {
  *	- Size {Number} Size of the compass in px, default 80
  *	- alpha {Number} opacity of the compass, default 0.5
  */
-export class TouchCompass extends Pointer {
+export default class TouchCompass extends Pointer {
     constructor(options: Options);
     /** Compass Image as a JS Image object
     * @api

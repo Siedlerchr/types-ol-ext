@@ -18,7 +18,7 @@ export interface Options {
  *		- formatConstructors {Array<function(new:format.Feature)>|undefined} Format constructors, default [ format.GPX, format.GeoJSON, format.IGC, format.KML, format.TopoJSON ]
  *		- accept {Array<string>|undefined} list of eccepted format, default ["gpx","json","geojson","igc","kml","topojson"]
  */
-export class DropFile extends DragAndDrop {
+export default class DropFile extends DragAndDrop {
     constructor(options: Options);
     /** Set the map
      */

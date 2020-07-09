@@ -19,7 +19,7 @@ export interface Options {
  *	@param {number} options.quality Number between 0 and 1 indicating the image quality to use for image formats that use lossy compression such as image/jpeg and image/webp
  *	@param {string} options.orientation Page orientation (landscape/portrait), default guest the best one
  */
-export class Print extends ol_control_Control {
+export default class Print extends ol_control_Control {
     constructor(options?: Options);
     /** Print the map
      * @param {function} cback a callback function that take a string containing the requested data URI.

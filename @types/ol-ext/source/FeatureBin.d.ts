@@ -16,7 +16,7 @@ export interface Options {
  *  @param {(f: Feature) => Point} [options.geometryFunction] Function that takes an Feature as argument and returns an Point as feature's center.
  *  @param {(bin: Feature, features: Array<Feature>)} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
  */
-export class FeatureBin extends VectorSource {
+export default class FeatureBin extends VectorSource {
     constructor(options: Options);
     /** Set grid Size
      * @param {Feature} features

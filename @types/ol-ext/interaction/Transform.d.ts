@@ -46,7 +46,7 @@ export interface Options {
  *	@param {} options.style list of style for handles
  *
  */
-export class Transform extends Pointer {
+export default class Transform extends Pointer {
     constructor(options: Options);
     /** Cursors for transform
      */

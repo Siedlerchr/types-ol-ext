@@ -1,4 +1,4 @@
-import { featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+import { default as featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
 
 export interface Options {
     side?: 'left' | 'right';
@@ -9,10 +9,12 @@ export interface Options {
  * @param {featureAnimationThrowOptions} options
  *  @param {left|right} options.side side of the animation, default left
  */
-export class Throw extends featureAnimation {
+declare class Throw extends featureAnimation {
     constructor(options?: Options)
     /** Animate
     * @param {FeatureAnimationEvent} e
      */
     animate(e: FeatureAnimationEvent): boolean;
 }
+
+export default Throw;

@@ -2,7 +2,7 @@ import { Map as _ol_Map_ } from 'ol';
 import Collection from 'ol/Collection';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
-import { SelectBase } from './SelectBase';
+import SelectBase from './SelectBase';
 import { condition } from './control';
 
 export interface Options {
@@ -31,7 +31,7 @@ export interface Options {
  *  @param {string} options.defaultLabel label for the default selection
  *  @param {function|undefined} options.onchoice function triggered when an option is clicked, default doSelect
  */
-export class SelectPopup extends SelectBase {
+export default class SelectPopup extends SelectBase {
     constructor(options?: Options);
     /**
     * Set the map instance the control associated with.

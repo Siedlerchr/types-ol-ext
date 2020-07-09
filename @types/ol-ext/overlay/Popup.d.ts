@@ -3,9 +3,6 @@ import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import OverlayPositioning from 'ol/OverlayPositioning';
 
-
-
-
 /** Template attributes for popup
  * @typedef {Object} TemplateAttributes
  * @property {string} title
@@ -72,7 +69,7 @@ popup.hide();
 *		the 'auto' positioning var the popup choose its positioning to stay on the map.
 * @api stable
  */
-export class Popup extends Overlay {
+export default class Popup extends Overlay {
     constructor(options: Options);
     /**
      * Set a close box to the popup.

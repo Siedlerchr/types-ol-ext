@@ -7,7 +7,7 @@ import { Options as VectorSourceOptions } from 'ol/source/Vector';
 * @extends {VectorSource}
 * @param {olx.source.WikiCommons=} options
  */
-export class WikiCommons extends VectorSource {
+export default class WikiCommons extends VectorSource {
     constructor(options?: VectorSourceOptions);
     /** Max resolution to load features
      */

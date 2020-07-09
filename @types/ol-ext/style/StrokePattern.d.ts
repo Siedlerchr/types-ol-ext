@@ -1,4 +1,4 @@
-import { FillPattern } from './FillPattern';
+import FillPattern from './FillPattern';
 
 
 export interface FillPatternOptions {
@@ -32,7 +32,7 @@ export interface FillPatternOptions {
  * @implements {structs.IHasChecksum}
  * @api
  */
-export class StrokePattern extends FillPattern {
+export default class StrokePattern extends FillPattern {
     constructor(options: FillPatternOptions);
     /**
      * Clones the style.

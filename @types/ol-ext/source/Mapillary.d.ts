@@ -7,7 +7,7 @@ import { Options as VectorSourceOptions } from 'ol/source/Vector';
 * @extends {VectorSource}
 * @param {olx.source.Mapillary=} options
  */
-export class Mapillary extends VectorSource {
+export default class Mapillary extends VectorSource {
     constructor(options?: VectorSourceOptions);
     /** Max resolution to load features
      */

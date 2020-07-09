@@ -7,7 +7,7 @@ import { Interaction } from 'ol/interaction';
  * @fires redo
  * @param {*} options
  */
-export class UndoRedo extends Interaction {
+export default class UndoRedo extends Interaction {
     constructor(options: any);
     /** Add a custom undo/redo
      * @param {string} action the action key name

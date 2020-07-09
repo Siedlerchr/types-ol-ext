@@ -24,7 +24,7 @@ export interface Options {
  *	- tolerance {function|undefined} Distance between the calculated intersection and a vertex on the source geometry below which the existing vertex will be used for the split. Default is 1e-10.
  * @todo verify auto intersection on features that split.
  */
-export class Splitter extends Interaction {
+export default class Splitter extends Interaction {
     constructor(options: Options);
     /** Calculate intersection on 2 segs
     * @param {Array<Coordinate>} s1 first seg to intersect (2 points)

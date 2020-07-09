@@ -13,7 +13,7 @@ import { Layer } from 'ol/layer';
  *	@param {number} options.position position propertie of the swipe [0,1], default 0.5
  *	@param {string} options.orientation orientation propertie (vertical|horizontal), default vertical
  */
-export class Swipe extends ol_control_Control {
+export default class Swipe extends ol_control_Control {
     constructor(Control?: any);
     /**
      * Set the map instance the control associated with.

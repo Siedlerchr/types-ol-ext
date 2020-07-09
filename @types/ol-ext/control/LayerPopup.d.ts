@@ -1,6 +1,6 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Layer } from 'ol/layer';
-import { LayerSwitcher } from './LayerSwitcher';
+import LayerSwitcher from './LayerSwitcher';
 /**
  * OpenLayers Layer Switcher Contr
  *
@@ -8,7 +8,7 @@ import { LayerSwitcher } from './LayerSwitcher';
  * @extends {contrLayerSwitcher}
  * @param {Object=} options Control options.
  */
-export class LayerPopup extends LayerSwitcher {
+export default class LayerPopup extends LayerSwitcher {
     constructor(options?: any);
     /** Disable overflow
      */

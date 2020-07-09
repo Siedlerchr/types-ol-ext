@@ -28,7 +28,7 @@ export interface Options {
  *  @param { Style | Array<Style> | StyleFunction | undefined	} options.style a style or a style function to use with features
  * @extends {contrControl}
  */
-export class Legend extends ol_control_Control {
+export default class Legend extends ol_control_Control {
     constructor(options: Options);
     /** Set the style
      * @param { Style | Array<Style> | StyleFunction | undefined	} style a style or a style function to use with features

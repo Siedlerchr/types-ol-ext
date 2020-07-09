@@ -16,7 +16,7 @@ export interface Options {
  *  @param {boolean} hideOnClick hide the control on click, default false
  *  @param {boolean} closeBox add a closeBox to the control, default false
  */
-export class Notification extends ol_control_Control {
+export default class Notification extends ol_control_Control {
     constructor(options?: Options);
     /**
      * Display a notification on the map

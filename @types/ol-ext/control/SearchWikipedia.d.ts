@@ -1,5 +1,5 @@
 import Feature from 'ol/Feature';
-import { SearchJSON } from './SearchJSON';
+import SearchJSON from './SearchJSON';
 /**
  * Search places using the MediaWiki API.
  * @see https://www.mediawiki.org/wiki/API:Main_page
@@ -19,7 +19,7 @@ import { SearchJSON } from './SearchJSON';
  *
  *  @param {string|undefined} options.lang API language, default none
  */
-export class SearchWikipedia extends SearchJSON {
+export default class SearchWikipedia extends SearchJSON {
     constructor(Control?: any);
     /** Returns the text to be displayed in the menu
     *	@param {Feature} f the feature

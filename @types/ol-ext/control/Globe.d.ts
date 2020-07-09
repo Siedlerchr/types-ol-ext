@@ -14,7 +14,7 @@ import { options } from './control';
  * 	@param {Array<layer>} layers list of layers to display on the globe
  * 	@param {Style | Array.<Style> | undefined} style style to draw the position on the map , default a marker
  */
-export class Globe extends ol_control_Control {
+export default class Globe extends ol_control_Control {
     constructor(options?: options);
     /**
      * Set the map instance the control associated with.

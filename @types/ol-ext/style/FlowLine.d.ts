@@ -21,7 +21,7 @@ export interface Options {
  *  @param {colorLike|function} options.color Stroke color or a function that gets a feature and the position (beetween [0,1]) and returns current color
  *  @param {colorLike} options.color2 Final sroke color
  */
-export class FlowLine extends Style {
+export default class FlowLine extends Style {
     constructor(options: Options);
     /** Set the initial width
      * @param {number} width width, default 0

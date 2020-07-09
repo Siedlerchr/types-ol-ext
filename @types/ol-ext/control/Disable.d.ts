@@ -16,7 +16,7 @@ export interface Options {
  *		@param {bool} options.on the control is on
  *		@param {function} options.toggleFn callback when control is clicked
  */
-export class Disable extends ol_control_Control {
+export default class Disable extends ol_control_Control {
     constructor(options?: Options);
     /** Test if the control is on
      * @return {bool}

@@ -32,7 +32,7 @@ import { Vector as VectorSource } from 'ol/source';
  *  @param {number} [options.stepIteration=2000] number of iterations before a calculating event is fired, default 2000
  *  @param {number} [options.epsilon=1E-6] geometric precision (min distance beetween 2 points), default 1E-6
  */
-export class Dijskra {
+declare class Dijskra {
     constructor(options: Options);
     /** Get the weighting of the edge, for example a speed factor
      * The function returns a value beetween ]0,1]
@@ -93,3 +93,5 @@ export class Dijskra {
      */
     getBestWay(): Feature[];
 }
+
+export default Dijskra;

@@ -22,7 +22,7 @@ export interface Options {
  * @implements {structs.IHasChecksum}
  * @api
  */
-export class Shadow extends RegularShape {
+export default class Shadow extends RegularShape {
     constructor(options: Options);
     /**
      * Clones the style.

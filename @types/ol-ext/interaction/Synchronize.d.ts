@@ -11,7 +11,7 @@ export interface Options {
  * @param {olx.interaction.SynchronizeOptions}
  *  - maps {Array<Map>} An array of maps to synchronize with the map of the interaction
  */
-export class Synchronize extends Interaction {
+export default class Synchronize extends Interaction {
     constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new

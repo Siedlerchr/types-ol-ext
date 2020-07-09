@@ -1,6 +1,6 @@
 import { Fill, Stroke, Image } from 'ol/style';
 import { ColorLike } from 'ol/colorlike';
-import { FillPattern } from './FillPattern';
+import FillPattern from './FillPattern';
 /** Vector feature rendering styles.
  * @namespace style
  * @see {@link https://openlayers.org/en/master/apidoc/module-ol_style.html}

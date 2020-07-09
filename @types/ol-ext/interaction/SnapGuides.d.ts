@@ -18,7 +18,7 @@ export interface Options {
  *  - enableInitialGuides {bool | undefined} whether to draw initial guidelines based on the maps orientation, default false.
  *	- style {Style | Array<Style> | undefined} Style for the sektch features.
  */
-export class SnapGuides extends Interaction {
+export default class SnapGuides extends Interaction {
     constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new

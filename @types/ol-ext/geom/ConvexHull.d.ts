@@ -6,4 +6,6 @@ import Projection from 'ol/proj/Projection';
    * @param {Array<Point>} points an array of 2D points
    * @return {Array<Point>} the confvex hull vertices
    */
-export function convexHull(points: Geometry[]): Point[];
+declare function convexHull(points: Geometry[]): Point[];
+
+export default convexHull;

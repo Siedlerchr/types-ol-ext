@@ -3,7 +3,7 @@ import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import Event from 'ol/events/Event';
 import OverlayPositioning from 'ol/OverlayPositioning';
-import { Popup } from './Popup';
+import { default as Popup } from './Popup';
 
 export interface Options {
     popupClass: string;
@@ -28,7 +28,7 @@ export interface Options {
  *		the 'auto' positioning var the popup choose its positioning to stay on the map.
  * @api stable
  */
-export class Tooltip extends Popup {
+export default class Tooltip extends Popup {
     constructor(options: Options);
     /**
      * Set the map instance the control is associated with

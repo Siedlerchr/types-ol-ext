@@ -44,7 +44,7 @@ export interface Options {
  *	@param {String} options.graduation day|month to show month or day graduation, default show only years
  *	@param {String} options.scrollTimeout Time in milliseconds to get a scroll event, default 15ms
  */
-export class Timeline extends ol_control_Control {
+export default class Timeline extends ol_control_Control {
     constructor(options?: Options);
     /**
      * Set the map instance the control is associated with

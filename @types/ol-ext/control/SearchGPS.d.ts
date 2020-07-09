@@ -1,4 +1,4 @@
-import { Search } from './Search';
+import Search from './Search';
 /**
  * Search on GPS coordinate.
  *
@@ -14,7 +14,7 @@ import { Search } from './Search';
  *  @param {number | undefined} options.minLength minimum length to start searching, default 1
  *  @param {number | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
  */
-export class SearchGPS extends Search {
+export default class SearchGPS extends Search {
     constructor(Control?: any);
     /** Autocomplete function
     * @param {string} s search string

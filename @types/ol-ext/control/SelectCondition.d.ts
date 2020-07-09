@@ -1,7 +1,7 @@
 import Collection from 'ol/Collection';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
-import { SelectBase } from './SelectBase';
+import SelectBase from './SelectBase';
 import { condition } from './control';
 
 export interface Options {
@@ -28,7 +28,7 @@ export interface Options {
  *  @param {condition|Array<condition>} options.condition conditions
  *  @param {function|undefined} options.onchoice function triggered when an option is clicked, default doSelect
  */
-export class SelectCondition extends SelectBase {
+export default class SelectCondition extends SelectBase {
     constructor(options?: Options);
     /** Set condition to select on
      * @param {condition, Array<condition>} condition

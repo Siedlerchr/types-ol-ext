@@ -2,7 +2,7 @@ import { Map as _ol_Map_ } from 'ol';
 import { CoordinateFormat } from 'ol/coordinate';
 import { ProjectionLike } from 'ol/proj';
 import { Style } from 'ol/style';
-import { CanvasBase } from './CanvasBase';
+import CanvasBase from './CanvasBase';
 
 export interface Options {
     className: string;
@@ -23,7 +23,7 @@ export interface Options {
  *  @param {Coordinate.CoordinateFormat} options.coordinateFormat A function that takes a Coordinate and transforms it into a string.
  *  @param {boolean} options.canvas true to draw in the canvas
  */
-export class CenterPosition extends CanvasBase {
+export default class CenterPosition extends CanvasBase {
     constructor(options?: Options);
     /**
      * Change the control style

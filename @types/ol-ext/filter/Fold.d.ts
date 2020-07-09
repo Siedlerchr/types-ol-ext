@@ -1,4 +1,4 @@
-import { Base } from './Base';
+import Base from './Base';
 
 export interface Options {
     margin?: number;
@@ -15,7 +15,7 @@ export interface Options {
 *  @param {number} [options.padding] padding in px, default 8
 *  @param {number|number[]} [options.fSize] fold Size in px, default 8,10
  */
-export class Fold extends Base {
+declare class Fold extends Base {
     constructor(options?: Options);
     /** Activate / deactivate filter
     *	@param {boolean} b
@@ -26,3 +26,5 @@ export class Fold extends Base {
      */
     getActive(): boolean;
 }
+
+export default Fold;

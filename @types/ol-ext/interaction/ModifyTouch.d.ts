@@ -15,7 +15,7 @@ export interface Options {
  *  @param {String|undefined} options.title title to display, default "remove point"
  *  @param {Boolean|undefined} options.usePopup use a popup, default true
  */
-export class ModifyTouch extends Modify {
+export default class ModifyTouch extends Modify {
     constructor(options: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new

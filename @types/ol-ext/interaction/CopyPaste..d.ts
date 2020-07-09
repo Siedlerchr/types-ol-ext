@@ -21,7 +21,7 @@ export interface Options {
  *  @param {VectorSource | Array<VectorSource>} options.sources the source to copy from (used for cut), if not defined, it will use the destination
  *  @param {VectorSource} options.destination the source to copy to
  */
-export class CopyPaste extends Interaction {
+export default class CopyPaste extends Interaction {
     constructor(options: Options);
     /** Sources to cut feature from
      * @param { VectorSource | Array<VectorSource> } sources

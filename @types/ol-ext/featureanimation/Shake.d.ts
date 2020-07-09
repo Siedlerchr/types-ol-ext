@@ -1,4 +1,4 @@
-import { featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+import { default as featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
 
 export interface Options{
     bounce?: number;
@@ -13,10 +13,12 @@ export interface Options{
  *	@param {number} options.amplitude amplitude of the animation, default 40
  *	@param {bool} options.horizontal shake horizontally default false (vertical)
  */
-export class Shake extends featureAnimation {
+declare class Shake extends featureAnimation {
     constructor(options?: Options)
     /** Animate
     * @param {featureAnimationEvent} e
      */
     animate(e: FeatureAnimationEvent): boolean;
 }
+
+export default Shake;

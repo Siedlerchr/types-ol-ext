@@ -4,7 +4,7 @@ import { Interaction } from 'ol/interaction';
  * @fires focus
  * @extends {Interaction}
  */
-export class FocusMap extends Interaction {
+export default class FocusMap extends Interaction {
     /** Set the map > add the focus button and focus on the map when pointerdown to enable keyboard events.
      */
     setMap(): void;

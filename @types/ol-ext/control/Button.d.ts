@@ -18,7 +18,7 @@ export interface Options {
 *	@param {String} options.html html to insert in the control
 *	@param {function} options.handleClick callback when control is clicked (or use change:active event)
  */
-export class Button extends ol_control_Control {
+export default class Button extends ol_control_Control {
     constructor(options?: Options);
     /** Set the control visibility
     * @param {boolean} b

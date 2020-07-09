@@ -2,7 +2,7 @@ import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import { Vector as VectorSource } from 'ol/source';
 import Event from 'ol/events/Event';
-import { Bar } from './Bar';
+import Bar from './Bar';
 import { position } from './control';
 
 export interface Options {
@@ -25,7 +25,7 @@ export interface Options {
  *    Each interaction can be an interaction or true (to get the default one) or false to remove it from bar
  *	@param {VectorSource} options.source Source for the drawn features.
  */
-export class EditBar extends Bar {
+export default class EditBar extends Bar {
     constructor(options?: Options);
     /**
      * Set the map instance the control is associated with

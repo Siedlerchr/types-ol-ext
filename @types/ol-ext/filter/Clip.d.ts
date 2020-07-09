@@ -1,6 +1,6 @@
 import { Coordinate } from 'ol/coordinate';
 import { Extent } from 'ol/extent';
-import { Base } from './Base';
+import Base from './Base';
 
 export interface Options {
     coords?: Coordinate[];
@@ -20,7 +20,7 @@ export interface Options {
 *  @param {boolean} [options.keepAspectRatio] keep aspect ratio
 *  @param {string} [options.color] backgroundcolor
  */
-export class Clip extends Base {
+declare class Clip extends Base {
     constructor(options?: Options);
     /** Activate / deactivate filter
     *	@param {boolean} b
@@ -31,3 +31,5 @@ export class Clip extends Base {
      */
     getActive(): boolean;
 }
+
+export default Clip;

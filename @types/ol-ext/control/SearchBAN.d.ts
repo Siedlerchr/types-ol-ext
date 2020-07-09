@@ -1,5 +1,5 @@
 import Feature from 'ol/Feature';
-import { Search } from './Search';
+import Search from './Search';
 /**
  * Search places using the French National Base Address (BAN) API.
  *
@@ -20,7 +20,7 @@ import { Search } from './Search';
  *	@param {function} options.getTitle a function that takes a feature and return the text to display in the menu, default return label attribute
  * @see {@link https://adresse.data.gouv.fr/api/}
  */
-export class SearchBAN extends Search {
+export default class SearchBAN extends Search {
     constructor(Control?: any);
     /** Returns the text to be displayed in the menu
      *	@param {Feature} f the feature

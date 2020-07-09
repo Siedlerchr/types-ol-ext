@@ -1,4 +1,4 @@
-import { Base } from './Base';
+import Base from './Base';
 
 export interface Options { 
     img?: string;
@@ -14,7 +14,7 @@ export interface Options {
  *  @param {number} [options.brickSize] Size of te brick, default 30
  *  @param {null | string | undefined} [options.crossOrigin] crossOrigin attribute for loaded images.
  */
-export class Lego extends Base {
+declare class Lego extends Base {
     constructor(options?: Options);
     /** Image definition
      */
@@ -47,3 +47,5 @@ export class Lego extends Base {
      */
     getActive(): boolean;
 }
+
+export default Lego;

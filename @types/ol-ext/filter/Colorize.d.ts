@@ -1,4 +1,4 @@
-import { Base } from './Base';
+import Base from './Base';
 import { ColorLike } from 'ol/colorlike';
 
 
@@ -24,9 +24,7 @@ export declare type FilterColorizeOptions = {
  * @author Jean-Marc Viglino https://github.com/viglino
  * @param {FilterColorizeOptions} options
  */
-
-
-export class Colorize extends Base {
+declare class Colorize extends Base {
     constructor(options: FilterColorizeOptions);
     /** Set options to the filter
      * @param {FilterColorizeOptions} [options]
@@ -49,3 +47,5 @@ export class Colorize extends Base {
      */
     getActive(): boolean;
 }
+
+export default Colorize;

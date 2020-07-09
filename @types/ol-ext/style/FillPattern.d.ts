@@ -45,7 +45,7 @@ export interface Options {
  * @implements {structs.IHasChecksum}
  * @api
  */
-export class FillPattern extends Fill {
+export default class FillPattern extends Fill {
     constructor(options?: Options);
     /**
      * Clones the style.

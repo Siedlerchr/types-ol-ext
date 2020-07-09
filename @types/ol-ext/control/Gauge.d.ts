@@ -16,7 +16,7 @@ export interface Options {
  *		@param {number} options.max maximum value, default 100;
  *		@param {number} options.val the value, default 0
  */
-export class Gauge extends ol_control_Control {
+export default class Gauge extends ol_control_Control {
     constructor(options?: Options);
     /** Set the control title
     * @param {string} title

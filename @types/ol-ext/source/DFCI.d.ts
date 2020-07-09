@@ -6,7 +6,7 @@ import { Vector as VectorSource } from 'ol/source';
  * @param {any} options Vector source options
  *  @param {Array<Number>} resolutions a list of resolution to change the drawing level, default [1000,100,20]
  */
-export class DFCI extends VectorSource {
+export default class DFCI extends VectorSource {
     constructor(options: any, resolutions: Number[]);
     /** Cacluate grid according Extent/resolution
      */

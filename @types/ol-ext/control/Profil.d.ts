@@ -11,7 +11,7 @@ import { Geometry } from 'ol/geom';
  * @param {Object=} _ol_control_ opt_options.
  *
  */
-export class Profil extends ol_control_Control {
+export default class Profil extends ol_control_Control {
     constructor(_ol_control_?: any);
     /** Custom infos list
     * @api stable
