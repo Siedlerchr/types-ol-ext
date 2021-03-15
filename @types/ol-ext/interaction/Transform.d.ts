@@ -6,6 +6,7 @@ import { Style } from 'ol/style';
 import { Pointer } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { Condition as EventsConditionType } from 'ol/events/condition';
+import { Coordinate } from 'ol/coordinate';
 
 export interface Options {
     filter: (f: Feature, l: Layer) => boolean;
@@ -98,14 +99,14 @@ export default class Transform extends Pointer {
     getFeatures(): Collection<Feature>;
     /**
      * Get the rotation center
-     * @return {Coordinates|undefined}
+     * @return {Array<Coordinate>|undefined}
      */
-    getCenter(): Coordinates | undefined;
+    getCenter(): Array<Coordinate> | undefined;
     /**
      * Set the rotation center
-     * @param {Coordinates|undefined} c the center point, default center on the objet
+     * @param {Array<Coordinate>|undefined} c the center point, default center on the objet
      */
-    setCenter(c: Coordinates | undefined): void;
+    setCenter(c: Array<Coordinate> | undefined): void;
     /**
      * @param {MapBrowserEvent} evt Map browser event.
      */

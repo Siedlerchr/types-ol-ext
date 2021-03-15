@@ -36,7 +36,9 @@ export interface Options {
  * Use the {@link _ol_Map_#animateFeature} or {@link _ol_layer_Vector_#animateFeature} to animate a feature
  * on postcompose in a map or a layer
 * @constructor
-* @fires animationstart|animationend
+* @fires animationstart
+* @fires animating
+* @fires animationend
 * @param {featureAnimationOptions} options
 *	@param {Number} options.duration duration of the animation in ms, default 1000
 *	@param {bool} options.revers revers the animation direction

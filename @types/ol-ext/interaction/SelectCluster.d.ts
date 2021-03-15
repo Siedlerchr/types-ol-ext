@@ -3,6 +3,7 @@ import Feature, { FeatureLike } from 'ol/Feature';
 import { Vector } from 'ol/layer';
 import { Style } from 'ol/style';
 import { Select } from 'ol/interaction';
+import { Coordinate } from 'ol/coordinate';
 
 export interface Options {
     featureStyle: Style;
@@ -63,7 +64,7 @@ export default class SelectCluster extends Select {
     selectCluster(a: Feature): void;
     /**
      * Animate the cluster and spread out the features
-     * @param {Coordinates} the center of the cluster
+     * @param {Array<Coordinate>} the center of the cluster
      */
-    animateCluster_(the: Coordinates): void;
+    animateCluster_(center: Array<Coordinate>, feature: Feature): void;
 }
