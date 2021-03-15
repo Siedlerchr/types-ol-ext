@@ -19,19 +19,22 @@ export interface Options {
  *
  * @constructor
  * @param {} options Options.
- *  @param {number} options.glyph the glyph name or a char to display as symb
+ *  @param {string} [options.color] default #000
+ *  @param {string} options.glyph the glyph name or a char to display as symb
  * 		The name must be added using the {@link style.FontSymbaddDefs} function.
  *  @param {string} options.form
  * 		none|circle|poi|bubble|marker|coma|shield|blazon|bookmark|hexagon|diamond|triangle|sign|ban|lozenge|square
  * 		a form that will enclose the glyph, default none
  *  @param {number} options.radius
  *  @param {number} options.rotation
- *  @param {number} options.rotateWithView
- *  @param {number} options.opacity
- *  @param {number} options.fontSize, default 1
- *  @param {string} options.fontStyle the font style (bold, italic, bold italic, etc), default none
+ *  @param {boolean} options.rotateWithView
+ *  @param {number} [options.opacity]
+ *  @param {number} [options.fontSize] default 1
+ *  @param {string} [options.fontStyle] the font style (bold, italic, bold italic, etc), default none
  *  @param {boolean} options.gradient true to display a gradient on the symbol
- *  @param {_ol_style_Fill_} options.fill
+ *  @param {number} [options.offsetX] default 0
+ *  @param {number} [options.offsetY] default 0
+ *  @param {Fill} options.fill
  *  @param {Stroke} options.stroke
  * @extends {style.RegularShape}
  * @implements {structs.IHasChecksum}

@@ -64,17 +64,17 @@ declare namespace Map {
      */
     function hideTarget(): void;
     /** Pulse an Extent on postcompose
-    *	@param {Coordinates} point to pulse
+    *	@param {Array<Coordinate>} point to pulse
     *	@param {pulse.options} options pulse options param
     *	  @param {projectionLike|undefined} options.projection projection of coords, default no transform
     *	  @param {Number} options.duration animation duration in ms, default 2000
     *	  @param {easing} options.easing easing function, default easing.upAndDown
     *	  @param {style.Stroke} options.style stroke style, default 2px red
      */
-    function animExtent(point: Coordinates, options: PulseOptions): void;
+    function animExtent(point: Array<Coordinate>, options: PulseOptions): void;
     /** Show a markup a point on postcompose
     *	@deprecated use map.animateFeature instead
-    *	@param {Coordinates} point to pulse
+    *	@param {Array<Coordinate>} point to pulse
     *	@param {markup.options} pulse options param
     *		- projection {projection|String|undefined} projection of coords, default none
     *		- delay {Number} delay before mark fadeout
@@ -82,7 +82,7 @@ declare namespace Map {
     *		- style {style.Image|Style|Array<Style>} Image to draw as markup, default red circle
     *	@return Unique key for the listener with a stop function to stop animation
      */
-    function markup(point: Coordinates, options: {
+    function markup(point: Array<Coordinate>, options: {
         projection: ProjectionLike,
         delay: number,
         maxZoom: number,
@@ -90,7 +90,7 @@ declare namespace Map {
     }): any;
     /** Pulse a point on postcompose
     *	@deprecated use map.animateFeature instead
-    *	@param {Coordinates} point to pulse
+    *	@param {Array<Coordinate>} point to pulse
     *	@param {pulse.options} pulse options param
     *		- projection {projection||String} projection of coords
     *		- duration {Number} animation duration in ms, default 3000
@@ -98,7 +98,7 @@ declare namespace Map {
     *		- easing {easing} easing function, default easing.easeOut
     *		- style {style.Image|Style|Array<Style>} Image to draw as markup, default red circle
      */
-    function pulse(point: Coordinates, pulse: PulseOptions): void;
+    function pulse(point: Array<Coordinate>, pulse: PulseOptions): void;
 }
 
 
