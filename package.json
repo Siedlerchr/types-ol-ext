@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Type definitions for ol-ext",
   "main": "",
+  "types": "types.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tsc -p tsconfig.lint.json --pretty && tslint -p tsconfig.lint.json",
-    "dtslint": "dtslint types"
+    "dtslint": "dtslint types",
+    "prepare-npm": "rm -rf ./ol-ext && cp -r @types/ol-ext ./ol-ext && cp package.json ./ol-ext/ && cp README.md ./ol-ext/ && cp LICENSE ./ol-ext/"
   },
   "repository": {
     "type": "git",
@@ -25,12 +27,17 @@
   },
   "homepage": "https://github.com/Siedlerchr/types-ol-ext#readme",
   "dependencies": {
-    "@types/ol": "^6.4.2",
+    "@types/ol": "^6.4.2"
+  },
+  "devDependencies": {
     "dtslint": "^4.0.7",
     "jsdoc": "^3.6.6",
     "ol": "^6.5.0",
     "ol-ext": "^3.1.19",
     "tsd": "^0.14.0",
     "typescript": "^4.2.3"
-  }
+  },
+  "files": [
+    "ol-ext"
+  ]
 }
