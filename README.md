@@ -7,8 +7,8 @@ ol-ext TypeScript declaration
 Add this package with an alias:
 ```sh
 # NPM
-npm i -D @types:ol-ext@npm:@siedlerchr/types-ol-ext
+npm i -D @types/ol-ext@npm:@siedlerchr/types-ol-ext
 
 # Yarn
-yarn add -D @types:ol-ext@npm:@siedlerchr/types-ol-ext
+yarn add -D @types/ol-ext@npm:@siedlerchr/types-ol-ext
 ```
