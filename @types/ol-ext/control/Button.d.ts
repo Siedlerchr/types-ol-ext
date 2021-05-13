@@ -27,13 +27,17 @@ export default class Button extends ol_control_Control {
     /**
      * Set the button title
      * @param {string} title
-     * @returns {undefined}
      */
-    setTitle(title: string): undefined;
+    setTitle(title: string): void;
     /**
      * Set the button html
      * @param {string} html
-     * @returns {undefined}
      */
-    setHtml(html: string): undefined;
+    setHtml(html: string): void;
+
+    /**
+     * Get the button element
+     * @returns {Element}
+     */
+    getButtonElement(): Element
 }

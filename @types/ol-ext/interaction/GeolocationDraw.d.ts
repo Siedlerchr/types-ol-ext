@@ -4,7 +4,7 @@ import { StyleLike } from 'ol/style/Style';
 import GeometryType from 'ol/geom/GeometryType';
 import { Interaction } from 'ol/interaction';
 
-export interface Options {
+export interface GeolocationDrawOptions {
     source: VectorSource | undefined;
     type: GeometryType;
     minAccuracy: number | undefined;
@@ -33,7 +33,7 @@ export interface Options {
  *	@param { Style | Array.<Style> | StyleFunction | undefined } options.style Style for sketch features.
  */
 export default class GeolocationDraw extends Interaction {
-    constructor(options: Options);
+    constructor(options: GeolocationDrawOptions);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.
