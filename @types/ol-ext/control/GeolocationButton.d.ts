@@ -4,9 +4,9 @@ import Toggle from './Toggle';
 
 
 export interface Options extends GeolocationDrawOptions {
-    className: string;
-    title: string;
-    delay: number;
+    className?: string;
+    title?: string;
+    delay?: number;
 }
 
 

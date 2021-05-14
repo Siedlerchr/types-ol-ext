@@ -6,9 +6,9 @@ import Bar from './Bar';
 import { position } from './control';
 
 export interface Options {
-    className: string;
-    centerLabel: string;
-    position: position
+    className?: string;
+    centerLabel?: string;
+    position?: position
 }
 /** Geolocation bar
  * The control bar is a container for other controls. It can be used to create toolbars.
@@ -44,7 +44,7 @@ export default class GeolocationBar extends Bar {
     /** Get controls in the panel
     *	@param {Array<_ol_control_>}
      */
-    getControls(): void;
+    getControls(): ol_control_Control[];
     /** Set tool bar position
     *	@param {top|left|bottom|right} pos
      */

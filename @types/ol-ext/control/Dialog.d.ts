@@ -1,5 +1,5 @@
 import { Map } from "ol";
-import { options } from 'ol-ext/control/control';
+import { ControlOptions } from 'ol-ext/control/control';
 
 export interface Options {
     className: string;

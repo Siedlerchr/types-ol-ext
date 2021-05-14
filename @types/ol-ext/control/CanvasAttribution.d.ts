@@ -1,19 +1,22 @@
 import { Map as _ol_Map_ } from 'ol';
 import Attribution from 'ol/control/Attribution';
 import { Style } from 'ol/style';
+import {Options as AttributionOptions} from 'ol/control/Attribution'
 
-export interface Options {
-    style: Style;   
+export interface Options extends AttributionOptions {
+    style?: Style;
+    canvas?: boolean
 }
 /**
  * @classdesc
- *   OpenLayers 3 Attribution Control integrated in the canvas (for jpeg/png
+ *   OpenLayers 3 Attribution Control integrated in the canvas (for jpeg/png export purposes).
  * @see http://www.kreidefossilien.de/webgis/dokumentation/beispiele/export-map-to-png-with-scale
  *
  * @constructor
- * @extends {contrAttribution}
- * @param {Object=} options extend the contrAttribution options.
- * 	@param {Style} options.style  option is usesd to draw the text.
+ * @extends ol_control_Attribution
+ * @param {Object=} options extend the ol_control_Attribution options.
+ * 	@param {ol_style_Style} options.style  option is usesd to draw the text.
+ *  @paream {boolean} [options.canvas=false] draw on canvas
  */
 export default class CanvasAttribution extends Attribution {
     constructor(options?: Options);

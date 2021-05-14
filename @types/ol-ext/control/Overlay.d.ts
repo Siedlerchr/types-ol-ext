@@ -1,6 +1,6 @@
 import ol_control_Control from 'ol/control/Control';
 import { Coordinate } from 'ol/coordinate';
-import { options } from './control';
+import { ControlOptions } from './control';
 
 export interface Options {
     className: string;
