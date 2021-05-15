@@ -42,7 +42,7 @@ export default class CanvasBase extends ol_control_Control {
     setMap(map: _ol_Map_): void;
     /** Get canvas overlay
      */
-    getCanvas(map: _ol_Map_): void;
+    getCanvas(map: _ol_Map_): HTMLCanvasElement;
     /** Set Style
      * @api
      */

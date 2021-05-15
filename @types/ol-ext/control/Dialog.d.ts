@@ -1,5 +1,5 @@
 import { Map } from "ol";
-import { ControlOptions } from 'ol-ext/control/control';
+import ol_control_Control from 'ol/control/Control';
 
 export interface Options {
     className: string;
@@ -40,7 +40,7 @@ export interface ContentOptions {
  *  @param {boolean} options.hideOnClick close dialog when click the background
  *  @param {boolean} options.closeOnSubmit Prevent closing the dialog on submit
  */
-export default class Dialog {
+export default class Dialog extends ol_control_Control {
 
     constructor(options?: Options);
 
@@ -50,7 +50,7 @@ export default class Dialog {
       *  @param {string} options.title title of the dialog
       *  @param {Object} options.buttons a key/value list of button to show
       */
-    show(options: ShowOptions | Element | string): void
+    show(options?: ShowOptions | Element | string): void
     /**
      * Open the dialog
      */
@@ -74,12 +74,12 @@ export default class Dialog {
 
     hide(): void;
     /** The dialog is shown
-     * @return {bool} true if a dialog is open
+     * @return {boolean} true if a dialog is open
      */
-    isOpen(): any;
+    isOpen(): boolean;
     /** Close the dialog
      * @method Dialog.close
      * @return {boolean} true if a dialog is closed
      */
-    close: boolean
+    close(): boolean
 }

@@ -30,10 +30,10 @@ export interface Options extends OriginalControlOptions {
  *  @param {number} options.stepCoord show a coord every stepCoord, default 1
  *  @param {number} options.spacing spacing beetween lines (in px), default 40px
  *  @param {number} options.borderWidth width of the border (in px), default 5px
- *  @param {number} options.marginmargin of the border (in px), default 0px
+ *  @param {number} options.margin margin of the border (in px), default 0px
  */
 export default class Graticule extends CanvasBase {
-    constructor(_ol_control_?: any);
+    constructor(options?: Options);
     /**
      * Remove the control from its current map and attach it to the new map.
      * Subclasses may set up event handlers to get notified about changes to
@@ -44,7 +44,7 @@ export default class Graticule extends CanvasBase {
     setMap(map: Map): void;
     /** Get canvas overlay
      */
-    getCanvas(): void;
+    getCanvas(): HTMLCanvasElement;
     /** Set Style
      * @api
      */

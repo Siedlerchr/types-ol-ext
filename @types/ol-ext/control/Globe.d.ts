@@ -35,7 +35,7 @@ export default class Globe extends ol_control_Control {
     getGlobe(): _ol_Map_;
     /** Show/hide the globe
      */
-    show(): void;
+    show(b: boolean): void;
     /** Set position on the map
     *	@param {top|bottom-left|right}  align
      */
@@ -44,5 +44,5 @@ export default class Globe extends ol_control_Control {
     * @param {Coordinate} center the point to center to
     * @param {boolean} show show a pointer on the map, defaylt true
      */
-    setCenter(center: Coordinate, show: boolean): void;
+    setCenter(center?: Coordinate, show?: boolean): void;
 }

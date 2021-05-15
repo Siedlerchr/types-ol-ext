@@ -12,12 +12,17 @@ export interface Options {
     Extent: boolean;
     onExtent: (...params: any[]) => any;
     drawDelay: number;
-    collapsed: boolean;    
+    collapsed: boolean;
+    layerGroup: LayerGroup;
 }
-/**
- * @classdesc OpenLayers 3 Layer Switcher Contr
+/
+/** Layer Switcher Control.
  * @fires drawlist
  * @fires toggle
+ * @fires reorder-start
+ * @fires reorder-end
+ * @fires layer:visible
+ * @fires layer:opacity
  *
  * @constructor
  * @extends {ol_control_Control}
@@ -28,14 +33,15 @@ export interface Options {
  *  @param {boolean} options.reordering allow layer reordering, default true
  *  @param {boolean} options.trash add a trash button to delete the layer, default false
  *  @param {function} options.oninfo callback on click on info button, if none no info button is shown DEPRECATED: use on(info) instead
- *  @param {boolean} options.Extent add an Extent button to zoom to the Extent of the layer
- *  @param {function} options.onExtent callback when click on Extent, default fits view to Extent
+ *  @param {boolean} options.extent add an extent button to zoom to the extent of the layer
+ *  @param {function} options.onextent callback when click on extent, default fits view to extent
  *  @param {number} options.drawDelay delay in ms to redraw the layer (usefull to prevent flickering when manipulating the layers)
  *  @param {boolean} options.collapsed collapse the layerswitcher at beginning, default true
+ *  @param {layerGroup} options.layerGroup a layer group to display in the switcher, default display all layers of the map
  *
  * Layers attributes that control the switcher
  *	- allwaysOnTop {boolean} true to force layer stay on top of the others while reordering, default false
- *	- displayInLayerSwitcher {boolean} display in switcher, default true
+ *	- displayInLayerSwitcher {boolean} display the layer in switcher, default true
  *	- noSwitcherDelete {boolean} to prevent layer deletion (w. trash option = true), default false
  */
 export default class LayerSwitcher extends ol_control_Control {
@@ -74,25 +80,15 @@ export default class LayerSwitcher extends ol_control_Control {
      *	@param {Number} dir scroll direction -1|0|1|'+50%'|'-50%'
      */
     overflow(dir: number): void;
-    /** Set the layer associated with a li
-     * @param {Element} li
-     * @param {layer} layer
-     */
-    _setLayerForLI(li: Element, layer: Layer): void;
-    /** Get the layer associated with a li
-     * @param {Element} li
-     * @return {Layer}
-     */
-    _getLayerForLI(li: Element): Layer;
     /**
      *	Draw the panel control (prevent multiple draw due to layers manipulation on the map with a delay function)
      */
     drawPanel(): void;
     /** Change layer visibility according to the baselayer option
-     * @param {Layer}
-     * @param {Array<layer>} related layers
+     * @param {Layer} l
+     * @param {Array<layer>} layers related layers
      */
-    switchLayerVisibility(l: Layer, related: Layer[]): void;
+    switchLayerVisibility(l: Layer, layers: Layer[]): void;
     /** Check if Layer is on the map (depending on zoom and Extent)
      * @param {Layer}
      * @return {boolean}

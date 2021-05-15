@@ -1,5 +1,4 @@
-import { CoordinateFormat } from "ol/coordinate";
-import { ProjectionLike } from "ol/proj";
+
 import { Color } from 'ol/color';
 export interface Options {
     hue: Color

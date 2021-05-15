@@ -14,7 +14,7 @@ export default class LayerPopup extends LayerSwitcher {
      */
     overflow(): void;
     /** Render a list of layer
-     * @param {elt} element to render
+     * @param {Element} element to render
      * @layers {Array{layer}} list of layer to show
      * @api stable
      */
