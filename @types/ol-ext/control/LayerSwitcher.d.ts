@@ -1,21 +1,32 @@
 import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import { Layer } from 'ol/layer';
+import LayerGroup from 'ol/layer/Group';
+import { Extent } from 'ol/extent';
 
 export interface Options {
-    displayInLayerSwitcher: (...params: any[]) => any;
-    show_progress: boolean;
-    mouseover: boolean;
-    reordering: boolean;
-    trash: boolean;
-    oninfo: (...params: any[]) => any;
-    Extent: boolean;
+    displayInLayerSwitcher?: (...params: any[]) => any;
+    show_progress?: boolean;
+    mouseover?: boolean;
+    reordering?: boolean;
+    trash?: boolean;
+    oninfo?: (...params: any[]) => any;
+    extent: Extent;
     onExtent: (...params: any[]) => any;
     drawDelay: number;
     collapsed: boolean;
     layerGroup: LayerGroup;
 }
-/
+
+export interface Tip {
+    up: string;
+    down: string;
+    info: string,
+    extent: string,
+    trash: string,
+    plus: string
+}
+
 /** Layer Switcher Control.
  * @fires drawlist
  * @fires toggle
@@ -48,7 +59,7 @@ export default class LayerSwitcher extends ol_control_Control {
     constructor(options?: Options);
     /** List of tips for internationalization purposes
      */
-    tip: any;
+    tip: Tip;
     /** Test if a layer should be displayed in the switcher
      * @param {layer} layer
      * @return {boolean} true if the layer is displayed
@@ -84,6 +95,18 @@ export default class LayerSwitcher extends ol_control_Control {
      *	Draw the panel control (prevent multiple draw due to layers manipulation on the map with a delay function)
      */
     drawPanel(): void;
+    /** Set opacity for a layer
+     * @param {Layer} layer
+     * @param {Element} li the list element
+     * @api
+     */
+    setLayerOpacity(layer: Layer, li: Element): void
+    /** Set visibility for a layer
+  * @param {Layer} layer
+  * @param {Element} li the list element
+  * @api
+  */
+    setLayerVisibility(layer: Layer, li: Element): void
     /** Change layer visibility according to the baselayer option
      * @param {Layer} l
      * @param {Array<layer>} layers related layers
@@ -96,8 +119,8 @@ export default class LayerSwitcher extends ol_control_Control {
     testLayerVisibility(layer: Layer): boolean;
     /** Render a list of layer
      * @param {Elemen} element to render
-     * @layers {Array{layer}} list of layer to show
+     * @param {Array<Layer>} list of layer to show
      * @api stable
      */
-    drawList(element: Element): void;
+    drawList(element: Element, collection: Layer[]): void;
 }

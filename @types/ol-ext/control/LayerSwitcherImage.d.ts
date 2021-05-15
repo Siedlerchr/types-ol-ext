@@ -2,11 +2,11 @@ import { Map as _ol_Map_ } from 'ol';
 import { Layer } from 'ol/layer';
 import LayerSwitcher from './LayerSwitcher';
 /**
- * @classdesc OpenLayers Layer Switcher Contr
- * @require layer.getPreview
+ * @classdesc OpenLayers Layer Switcher Control.
+ * @require Layer.getPreview
  *
  * @constructor
- * @extends {contrLayerSwitcher}
+ * @extends {ol_control_LayerSwitcher}
  * @param {Object=} options Control options.
  */
 export default class LayerSwitcherImage extends LayerSwitcher {
