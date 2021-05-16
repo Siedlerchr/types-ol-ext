@@ -7,7 +7,7 @@ import { Options, Tip } from 'ol-ext/control/LayerSwitcher';
  * OpenLayers Layer Switcher Contr
  *
  * @constructor
- * @extends {contrLayerSwitcher}
+ * @extends {LayerSwitcher}
  * @param {Object=} options Control options.
  */
 export default class LayerPopup extends LayerSwitcher {

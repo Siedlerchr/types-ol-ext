@@ -1,39 +1,34 @@
 import ol_control_Control from 'ol/control/Control';
 import Feature from 'ol/Feature';
-import { Size } from 'ol/size';
 import { StyleLike } from 'ol/style/Style';
 import { Style } from 'ol/style';
+import ol_legend_Legend from '../legend/Legend';
 
 export interface Options {
     className: string;
+    legend: ol_legend_Legend;
     title: string;
-    Size: Size | undefined;
-    margin: number | undefined;
-    collapsed: boolean | undefined;
-    collapsible: boolean | undefined;
-    target: Element | string | undefined;
-    style: StyleLike;
+    collapsed?: boolean ;
+    collapsible?: boolean ;
+    target?: Element | string;
 }
 /** Create a legend for styles
  * @constructor
+ * @extends {ol_control_CanvasBase}
  * @fires select
  * @param {*} options
  *  @param {String} options.className class of the control
- *  @param {String} options.title Legend title
- *  @param {Size | undefined} options.Size Size of the symboles in the legend, default [40, 25]
- *  @param {number | undefined} options.margin Size of the symbole's margin, default 10
+ *  @param {ol_legend_Legend} options.legend
  *  @param {boolean | undefined} options.collapsed Specify if attributions should be collapsed at startup. Default is true.
- *  @param {boolean | undefined} options.collapsible Specify if attributions can be collapsed, default true.
+ *  @param {boolean | undefined} options.collapsible Specify if legend can be collapsed, default true.
  *  @param {Element | string | undefined} options.target Specify a target if you want the control to be rendered outside of the map's viewport.
- *  @param { Style | Array<Style> | StyleFunction | undefined	} options.style a style or a style function to use with features
- * @extends {contrControl}
  */
 export default class Legend extends ol_control_Control {
     constructor(options: Options);
     /** Set the style
      * @param { Style | Array<Style> | StyleFunction | undefined	} style a style or a style function to use with features
      */
-    setStyle(style: StyleLike | undefined): void;
+    setStyle(style?: StyleLike): void;
     /** Add a new row to the legend
      * * You can provide in options:
      * - a feature width a style
@@ -46,11 +41,11 @@ export default class Legend extends ol_control_Control {
      *  @param {*} options.properties properties to use with a style function
      *  @param {string} options.typeGeom type geom to draw with the style or the properties
      */
-    addRow(options: {
+    addRow(options?: {
         feature: Feature;
         style: Style;
-        properties: any;
-        typeGeom: string;
+        properties?: any;
+        typeGeom?: string;
     }): void;
     /** Add a new row to the legend
      * @param {*} options a list of parameters
@@ -98,5 +93,5 @@ export default class Legend extends ol_control_Control {
         style: Style;
         properties: any;
         typeGeom: string;
-    }, canvas: HTMLCanvasElement | undefined, row: number | undefined): HTMLCanvasElement;
+    }, canvas?: HTMLCanvasElement , row?: number ): HTMLCanvasElement;
 }

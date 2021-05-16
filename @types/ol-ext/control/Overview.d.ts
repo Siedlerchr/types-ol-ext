@@ -6,13 +6,13 @@ import { Style } from 'ol/style';
 
 export interface Options {
   projection: ProjectionLike;
-  minZoom: number;
-  maxZoom: number;
-  rotation: boolean;
+  minZoom?: number;
+  maxZoom?: number;
+  rotation?: boolean;
   align: 'top' | 'bottom-left' | 'right';
   layers: Layer[];
-  style: Style | Style[] | undefined;
-  panAnimation: boolean | 'elastic';
+  style?: Style | Style[];
+  panAnimation?: boolean | 'elastic';
 }
 /**
  * OpenLayers 3 Layer Overview Contr
@@ -29,8 +29,8 @@ export interface Options {
  *  @param {Number} options.maxZoom default 18
  *  @param {boolean} options.rotation enable rotation, default false
  *  @param {top|bottom-left|right} options.align position
- *  @param {Array<layer>} options.layers list of layers
- *  @param {Style | Array.<Style> | undefined} options.style style to draw the map Extent on the overveiw
+ *  @param {Array<Layer>} options.layers list of layers
+ *  @param {Style | Array<Style> | undefined} options.style style to draw the map Extent on the overveiw
  *  @param {bool|elastic} options.panAnimation use animation to center map on click, default true
  */
 export default class Overview extends ol_control_Control {

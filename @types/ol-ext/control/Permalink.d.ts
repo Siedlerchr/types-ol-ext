@@ -3,10 +3,10 @@ import ol_control_Control from 'ol/control/Control';
 import { Layer } from 'ol/layer';
 
 export interface Options {
-    urlReplace: boolean;
-    fixed: number;
-    anchor: boolean;
-    hidden: boolean;
+    urlReplace?: boolean;
+    fixed?: number;
+    anchor?: boolean;
+    hidden?: boolean;
     onclick: (...params: any[]) => any;
 }
 /**
@@ -19,10 +19,10 @@ export interface Options {
  * @constructor
  * @extends {contrControl}
  * @param {Object=} options
- *	@param {bool} options.urlReplace replace url or not, default true
+ *	@param {boolean} options.urlReplace replace url or not, default true
  *	@param {number} options.fixed number of digit in coords, default 6
- *	@param {bool} options.anchor use "#" instead of "?" in href
- *	@param {bool} options.hidden hide the button on the map, default false
+ *	@param {boolean} options.anchor use "#" instead of "?" in href
+ *	@param {boolean} options.hidden hide the button on the map, default false
  *	@param {function} options.onclick a function called when control is clicked
  */
 export default class Permalink extends ol_control_Control {
@@ -34,10 +34,14 @@ export default class Permalink extends ol_control_Control {
     setMap(map: _ol_Map_): void;
     /** Get layer given a permalink name (permalink propertie in the layer)
     *	@param {string} the permalink to search for
-    *	@param {Array<layer>|undefined} an array of layer to search in
+    *	@param {Array<Layer>|undefined} an array of layer to search in
     *	@return {layer|false}
      */
-    getLayerByLink(the: string, an: Layer[] | undefined): Layer | false;
+    getLayerByLink(id: string, layers: Layer[] | undefined): Layer | false;
+    /** Set coordinates as geohash
+     * @param {boolean}
+     */
+    setGeohash(b: boolean): void;
     /** Set map position according to the current link
      */
     setPosition(): void;
@@ -53,7 +57,7 @@ export default class Permalink extends ol_control_Control {
      * @param {string|undefined} value the parameter's value, if undefined or empty string remove the parameter
      * @api stable
      */
-    setUrlParam(key: string, value: string | undefined): void;
+    setUrlParam(key: string, value?: string): void;
     /**
      * Get a parameter url.
      * @param {string} key the key parameter
