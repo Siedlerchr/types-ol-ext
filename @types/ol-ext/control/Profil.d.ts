@@ -8,7 +8,7 @@ import { ProjectionLike } from 'ol/proj';
 export interface Options {
     className: string;
     style: Style;
-    info: { [key: string]: any }
+    info?: { [key: string]: any }
     width: number;
     height: number;
     feature: Feature
@@ -32,7 +32,7 @@ export interface Options {
  * @param {Object=} options
  *  @param {string} options.className
  *  @param {Style} options.style style to draw the profil
- *  @param {*} options.info keys/values for i18n
+ *  @param {*} options.info keys/values for i19n
  *  @param {number} options.width
  *  @param {number} options.height
  *  @param {Feature} options.feature the feature to draw profil
@@ -40,7 +40,7 @@ export interface Options {
  *  @param {boolean} options.zoomable can zoom in the profil
  */
 export default class Profil extends ol_control_Control {
-    constructor(options: any);
+    constructor(options: Options);
 
     /** Show popup info
      * @param {string} info to display as a popup
@@ -51,25 +51,25 @@ export default class Profil extends ol_control_Control {
     * @param { Coordinate|number } where a coordinate or a distance from begining, if none it will hide the point
     * @return {Coordinate} current point
     */
-    showAt(where: Coordinate | number | number): Coordinate;
+    showAt(where: Coordinate | number): Coordinate;
     /** Show point at a time on the profil
        * @param { Date|number } time a Date or a DateTime (in s) to show the profile on, if none it will hide the point
        * @param { boolean } delta true if time is a delta from the start, default false
        * @return { Coordinate } current point
        */
-    showAtTime(time: Date | number, delta: boolean): Coordinate;
+    showAtTime(time?: Date | number, delta?: boolean): Coordinate;
     /** Get the point at a given time on the profil
      * @param { number } time time at which to show the point
      * @return { Coordinate } current point
      */
 
     /** Mouse move over canvas
-  */
+    */
     onMove(e: any): void;
 
     /** Show panel
-* @api stable
-*/
+    * @api stable
+    */
     show(): void;
     /** Hide panel
     * @api stable

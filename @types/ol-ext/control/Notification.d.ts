@@ -23,7 +23,7 @@ export default class Notification extends ol_control_Control {
      * @param {string|node|undefined} what the notification to show, default get the last one
      * @param {number} [duration=3000] duration in ms, if -1 never hide
      */
-    show(what?: string | Node , duration?: number): void;
+    show(what?: string | Node, duration?: number): void;
     /**
      * Remove a notification on the map
      */

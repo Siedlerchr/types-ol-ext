@@ -37,7 +37,7 @@ export default class Permalink extends ol_control_Control {
     *	@param {Array<Layer>|undefined} an array of layer to search in
     *	@return {layer|false}
      */
-    getLayerByLink(id: string, layers: Layer[] | undefined): Layer | false;
+    getLayerByLink(id: string, layers?: Layer[]): Layer | false;
     /** Set coordinates as geohash
      * @param {boolean}
      */

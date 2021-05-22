@@ -1,6 +1,5 @@
 import ol_control_Control from 'ol/control/Control';
 import { Coordinate } from 'ol/coordinate';
-import { ControlOptions } from './control';
 
 export interface Options {
     className: string;
@@ -17,8 +16,8 @@ export interface Options {
  * @param {Object=} options Control options.
  *	@param {String} options.className class of the control
  *	@param {String|Element} options.content
- *	@param {bool} options.hideOnClick hide the control on click, default false
- *	@param {bool} options.closeBox add a closeBox to the control, default false
+ *	@param {boolean} options.hideOnClick hide the control on click, default false
+ *	@param {boolean} options.closeBox add a closeBox to the control, default false
  */
 export default class Overlay extends ol_control_Control {
     constructor(options?: Options);

@@ -10,7 +10,7 @@ export interface Options extends GeolocationDrawOptions {
 }
 
 
-export default class GeolocaionButton extends Toggle {
+export default class GeolocationButton extends Toggle {
     constructor(options? : Options)
 
     setMap(map: _ol_Map_): void;
