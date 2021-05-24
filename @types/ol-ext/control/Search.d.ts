@@ -77,14 +77,14 @@ export default class Search extends ol_control_Control {
   *	@api
    */
   getTitle(f: Feature): string;
-  /** Force search to refresh
-   */
   /** Returns title as text
  *	@param {any} f feature to be displayed
  *	@return {string}
  *	@api
  */
   _getTitleTxt(f: Feature): string
+  /** Force search to refresh
+   */
   search(): void;
   /** Reverse geocode
 * @param {ol.coordinate} coord
