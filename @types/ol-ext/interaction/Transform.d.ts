@@ -45,99 +45,105 @@ export enum TranslateEventType {
     TRANSLATING = 'translating',
     TRANSLATEEND = 'translateend',
 }
-/** Interaction rotate
- * @constructor
- * @extends {interaction.Pointer}
- * @fires select | rotatestart | rotating | rotateend | translatestart | translating | translateend | scalestart | scaling | scaleend
- * @param {any} options
- *  @param {function} options.filter A function that takes a Feature and a Layer and returns true if the feature may be transformed or false otherwise.
- *  @param {Array<Layer>} options.layers array of layers to transform,
- *  @param {Collection<Feature>} options.features collection of feature to transform,
- *	@param {EventsConditionType|undefined} options.addCondition A function that takes an MapBrowserEvent and returns a boolean to indicate whether that event should be handled. default: events.condition.never.
- *	@param {number | undefined} options.hitTolerance Tolerance to select feature in pixel, default 0
- *	@param {bool} options.translateFeature Translate when click on feature
- *	@param {bool} options.translate Can translate the feature
- *	@param {bool} options.stretch can stretch the feature
- *	@param {bool} options.scale can scale the feature
- *	@param {bool} options.rotate can rotate the feature
- *	@param {bool} options.noFlip prevent the feature geometry to flip, default false
- *	@param {bool} options.selection the intraction handle selection/deselection, if not use the select prototype to add features to transform, default true
- *	@param {events.ConditionType | undefined} options.keepAspectRatio A function that takes an MapBrowserEvent and returns a boolean to keep aspect ratio, default events.condition.shiftKeyOnly.
- *	@param {events.ConditionType | undefined} options.modifyCenter A function that takes an MapBrowserEvent and returns a boolean to apply scale & strech from the center, default events.condition.metaKey or events.condition.ctrlKey.
- *	@param {} options.style list of style for handles
+
+/**
+ * Interaction transform
  *
+ * @fires select | rotatestart | rotating | rotateend | translatestart | translating | translateend | scalestart | scaling | scaleend
+ *
+ * @param options
+ * @param options.filter A function that takes a Feature and a Layer and returns true if the feature may be transformed or false otherwise.
+ * @param options.layers array of layers to transform,
+ * @param options.features collection of feature to transform,
+ * @param options.addCondition A function that takes an MapBrowserEvent and returns a boolean to indicate whether that event should be handled. default: events.condition.never.
+ * @param options.hitTolerance Tolerance to select feature in pixel, default 0
+ * @param options.translateFeature Translate when click on feature
+ * @param options.translate Can translate the feature
+ * @param options.stretch can stretch the feature
+ * @param options.scale can scale the feature
+ * @param options.rotate can rotate the feature
+ * @param options.noFlip prevent the feature geometry to flip, default false
+ * @param options.selection the intraction handle selection/deselection, if not use the select prototype to add features to transform, default true
+ * @param options.keepAspectRatio A function that takes an MapBrowserEvent and returns a boolean to keep aspect ratio, default events.condition.shiftKeyOnly.
+ * @param options.modifyCenter A function that takes an MapBrowserEvent and returns a boolean to apply scale & strech from the center, default events.condition.metaKey or events.condition.ctrlKey.
+ * @param options.style list of style for handles
  */
 export default class Transform extends Pointer {
     constructor(options: Options);
-    /** Cursors for transform
+    /**
+     * Cursors for transform
      */
     Cursors: any;
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.
-     * @param {Map} map Map.
+     * @param map Map.
      * @api stable
      */
     setMap(map: _ol_Map_): void;
     /**
      * Activate/deactivate interaction
-     * @param {bool}
+     * @param
      * @api stable
      */
     setActive(b: boolean): void;
-    /** Set efault sketch style
+    /**
+     * Set efault sketch style
      */
     setDefaultStyle(): void;
-    /** Style for handles
+    /**
+     * Style for handles
      */
     style: any;
     /**
      * Set sketch style.
-     * @param {style} style Style name: 'default','translate','rotate','rotate0','scale','scale1','scale2','scale3','scalev','scaleh1','scalev2','scaleh3'
-     * @param {Style|Array<Style>} olstyle
+     * @param style Style name: 'default','translate','rotate','rotate0','scale','scale1','scale2','scale3','scalev','scaleh1','scalev2','scaleh3'
+     * @param olstyle
      * @api stable
      */
     setStyle(style: Style, olstyle: Style | Style[]): void;
-    /** Draw transform sketch
-    * @param {boolean} draw only the center
+    /**
+     * Draw transform sketch
+     * @param draw only the center
      */
     drawSketch_(draw: boolean): void;
-    /** Select a feature to transform
-    * @param {Feature} feature the feature to transform
-    * @param {boolean} add true to add the feature to the selection, default false
+    /**
+     * Select a feature to transform
+     * @param feature the feature to transform
+     * @param add true to add the feature to the selection, default false
      */
     select(feature: Feature | undefined, add: boolean): void;
     /**
-     * @param {MapBrowserEvent} evt Map browser event.
-     * @return {boolean} `true` to start the drag sequence.
+     * @param evt Map browser event.
+     * @return `true` to start the drag sequence.
      */
     handleDownEvent_(evt: MapBrowserEvent): boolean;
     /**
      * Get features to transform
-     * @return {Collection<Feature>}
+     * @return
      */
     getFeatures(): Collection<Feature>;
     /**
      * Get the rotation center
-     * @return {Array<Coordinate>|undefined}
+     * @return
      */
     getCenter(): Array<Coordinate> | undefined;
     /**
      * Set the rotation center
-     * @param {Array<Coordinate>|undefined} c the center point, default center on the objet
+     * @param c the center point, default center on the objet
      */
     setCenter(c: Array<Coordinate> | undefined): void;
     /**
-     * @param {MapBrowserEvent} evt Map browser event.
+     * @param evt Map browser event.
      */
     handleDragEvent_(evt: MapBrowserEvent): void;
     /**
-     * @param {MapBrowserEvent} evt Event.
+     * @param evt Event.
      */
     handleMoveEvent_(evt: MapBrowserEvent): void;
     /**
-     * @param {MapBrowserEvent} evt Map browser event.
-     * @return {boolean} `false` to stop the drag sequence.
+     * @param evt Map browser event.
+     * @return `false` to stop the drag sequence.
      */
     handleUpEvent_(evt: MapBrowserEvent): boolean;
     on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
