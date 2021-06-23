@@ -112,3 +112,8 @@ Temporary Items
 .apdisk
 
 # End of https://www.toptal.com/developers/gitignore/api/macos
+=======
+### WebStorm ###
+.idea/
+*.iml
+out/
