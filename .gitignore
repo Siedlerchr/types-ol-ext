@@ -77,3 +77,8 @@ typings/
 /ol-ext
 
 # End of https://www.gitignore.io/api/visualstudiocode
+
+### WebStorm ###
+.idea/
+*.iml
+out/
