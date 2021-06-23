@@ -1,6 +1,7 @@
 import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import { Coordinate } from 'ol/coordinate';
+import Feature from 'ol/Feature';
 
 export interface Options {
     className: string;
@@ -14,7 +15,7 @@ export interface Options {
     maxItems: number | undefined;
     maxHistory: number | undefined;
     getTitle: (f: Feature) => string;
-    autocomplete: (string, ...params: any[]) => any; // TODO: not sure about the syntax
+    autocomplete: (s: string, ...params: any[]) => any; // TODO: not sure about the syntax
     exclusions: string;
 }
 /**
