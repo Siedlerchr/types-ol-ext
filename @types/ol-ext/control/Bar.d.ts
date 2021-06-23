@@ -40,9 +40,9 @@ export default class Bar extends ol_control_Control {
      */
     setMap(map: _ol_Map_): void;
     /** Get controls in the panel
-    *	@param {Array<_ol_control_>}
+     *	@return {Array<ol_control_Control>}
      */
-    getControls(): void;
+    getControls(): ol_control_Control[];
     /** Set tool bar position
     *	@param {top|left|bottom|right} pos
      */

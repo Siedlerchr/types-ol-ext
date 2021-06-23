@@ -1,11 +1,24 @@
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import Search from './Search';
+export interface Options {
+    className?: string;
+    title?: string
+    target?: Element | string;
+    label: string;
+    placeholder?: string;
+    typing?: number;
+    minLength?: number;
+    maxItems? : number
+    property?: string
+    getTitle?: (f: Feature) => string;
+    getSearchString?: (f: Feature) => string;
+}
 /**
  * Search features.
  *
  * @constructor
- * @extends {contrSearch}
+ * @extends {ol_control_Search}
  * @fires select
  * @param {Object=} Control options.
  *	@param {string} options.className control class name
@@ -13,15 +26,15 @@ import Search from './Search';
  *	@param {string | undefined} options.label Text label to use for the search button, default "search"
  *	@param {string | undefined} options.placeholder placeholder, default "Search..."
  *	@param {number | undefined} options.typing a delay on each typing to start searching (ms), default 300.
- *	@param {number | undefined} options.minLength minimum length to start searching, default 1
- *	@param {number | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
+ *	@param {integer | undefined} options.minLength minimum length to start searching, default 1
+ *	@param {integer | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
  *
  *	@param {string | undefined} options.property a property to display in the index, default 'name'.
  *	@param {function} options.getTitle a function that takes a feature and return the name to display in the index, default return the property
  *	@param {function | undefined} options.getSearchString a function that take a feature and return a text to be used as search string, default geTitle() is used as search string
  */
 export default class SearchFeature extends Search {
-    constructor(Control?: any);
+    constructor(options: Options);
     /** No history avaliable on features
      */
     restoreHistory(): void;
@@ -57,7 +70,7 @@ export default class SearchFeature extends Search {
     * @return {Array<any>|false} an array of search solutions or false if the array is send with the cback argument (asnchronous)
     * @api
      */
-    autocomplete(s: string, cback: (...params: any[]) => any): Array<any> | false;
+    autocomplete(s: string, cback: (...params: any[]) => any): any[] | false;
     /** Get the input field
     *	@return {Element}
     *	@api

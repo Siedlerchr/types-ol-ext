@@ -1,8 +1,9 @@
 import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
-import { Style } from 'ol/style';
+import { Style, Stroke, Fill } from 'ol/style';
+import { Options as ControlOptions } from 'ol/control/Control';
 
-export interface Options {
+export interface Options extends ControlOptions {
     style: Style;
 }
 /** A control is a visible widget with a DOM element in a fixed position on the screen.
@@ -41,7 +42,7 @@ export default class CanvasBase extends ol_control_Control {
     setMap(map: _ol_Map_): void;
     /** Get canvas overlay
      */
-    getCanvas(): void;
+    getCanvas(map: _ol_Map_): HTMLCanvasElement;
     /** Set Style
      * @api
      */
@@ -49,25 +50,25 @@ export default class CanvasBase extends ol_control_Control {
     /** Get style
      * @api
      */
-    getStyle(): void;
+    getStyle(): Style;
     /** Get stroke
      * @api
      */
-    getStroke(): void;
+    getStroke(): Stroke;
     /** Get fill
      * @api
      */
-    getFill(): void;
+    getFill(): Fill;
     /** Get stroke
      * @api
      */
-    getTextStroke(): void;
+    getTextStroke(): Stroke;
     /** Get text fill
      * @api
      */
-    getTextFill(): void;
+    getTextFill(): Fill;
     /** Get text font
      * @api
      */
-    getTextFont(): void;
+    getTextFont(): string;
 }

@@ -2,14 +2,14 @@ import ol_control_Control from 'ol/control/Control';
 
 export interface Options {
     className: string;
-    hideOnClick: boolean;
-    closeBox: boolean;
+    hideOnClick?: boolean;
+    closeBox?: boolean;
 }
 /** Control overlay for OL3
  * The overlay control is a control that display an overlay over the map
  *
  * @constructor
- * @extends {contrControl}
+ * @extends {ol_control_Control}
  * @fire change:visible
  * @param {Object=} options Control options.
  *  @param {string} className class of the control
@@ -23,7 +23,7 @@ export default class Notification extends ol_control_Control {
      * @param {string|node|undefined} what the notification to show, default get the last one
      * @param {number} [duration=3000] duration in ms, if -1 never hide
      */
-    show(what: string | Node | undefined, duration?: number): void;
+    show(what?: string | Node, duration?: number): void;
     /**
      * Remove a notification on the map
      */

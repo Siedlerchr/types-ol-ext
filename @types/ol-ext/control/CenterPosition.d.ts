@@ -1,7 +1,7 @@
 import { Map as _ol_Map_ } from 'ol';
 import { CoordinateFormat } from 'ol/coordinate';
 import { ProjectionLike } from 'ol/proj';
-import { Style } from 'ol/style';
+import { Fill, Stroke, Style } from 'ol/style';
 import CanvasBase from './CanvasBase';
 
 export interface Options {
@@ -57,29 +57,29 @@ export default class CenterPosition extends CanvasBase {
     setMap(map: _ol_Map_): void;
     /** Get canvas overlay
      */
-    getCanvas(): void;
+    getCanvas(): HTMLCanvasElement;
     /** Get style
      * @api
      */
-    getStyle(): void;
+    getStyle(): Style;
     /** Get stroke
      * @api
      */
-    getStroke(): void;
+    getStroke(): Stroke;
     /** Get fill
      * @api
      */
-    getFill(): void;
+    getFill(): Fill;
     /** Get stroke
      * @api
      */
-    getTextStroke(): void;
+    getTextStroke(): Stroke;
     /** Get text fill
      * @api
      */
-    getTextFill(): void;
+    getTextFill(): Fill;
     /** Get text font
      * @api
      */
-    getTextFont(): void;
+    getTextFont(): string;
 }

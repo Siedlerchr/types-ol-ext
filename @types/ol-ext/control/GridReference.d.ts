@@ -3,13 +3,31 @@ import Collection from 'ol/Collection';
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import CanvasBase from './CanvasBase';
+import { Style, Stroke, Fill } from 'ol/style';
+import { Extent } from 'ol/extent';
+import { Size } from 'ol/size';
+import { Vector as VectorSource } from 'ol/source';
+
+export interface Options {
+    style?: Style;
+    maxResolution?: number;
+    Extent?: Extent;
+    Size?: Size;
+    margin?: number;
+    source?: VectorSource;
+    property?: string | ((feature: Feature) => string)
+    sortFeature: (a: Feature, b: Feature) => number
+    indexTitle?: (feature: Feature) => string;
+    filterLabel?: string
+}
+
 /**
  * Draw a grid reference on the map and add an index.
  *
  * @constructor
  * @extends {contrCanvasBase}
  * @fires select
- * @param {Object=} Control options.
+ * @param {Object=} options
  *  @param {Style} options.style Style to use for drawing the grid (stroke and text), default black.
  *  @param {number} options.maxResolution max resolution to display the graticule
  *  @param {Extent} options.Extent Extent of the grid, required
@@ -22,7 +40,7 @@ import CanvasBase from './CanvasBase';
  *  @param {string} options.filterLabel label to display in the search bar, default 'filter'
  */
 export default class GridReference extends CanvasBase {
-    constructor(Control?: any);
+    constructor(Control?: Options);
     /** Returns the text to be displayed in the index
      * @param {Feature} f the feature
      * @return {string} the text to be displayed in the index
@@ -38,10 +56,10 @@ export default class GridReference extends CanvasBase {
     sortFeatures(a: Feature, b: Feature): number;
     /** Get the feature title
      * @param {Feature} f
-     * @return the first letter of the eature name (getFeatureName)
+     * @return the first letter of the feature name (getFeatureName)
      * @api
      */
-    indexTitle(f: Feature): any;
+    indexTitle(f: Feature): string;
     /** Display features in the index
      * @param { Array<Feature> | Collection<Feature> } features
      */
@@ -61,7 +79,7 @@ export default class GridReference extends CanvasBase {
     setMap(map: _ol_Map_): void;
     /** Get canvas overlay
      */
-    getCanvas(): void;
+    getCanvas(): HTMLCanvasElement;
     /** Set Style
      * @api
      */
@@ -69,25 +87,25 @@ export default class GridReference extends CanvasBase {
     /** Get style
      * @api
      */
-    getStyle(): void;
+    getStyle(): Style;
     /** Get stroke
      * @api
      */
-    getStroke(): void;
+    getStroke(): Stroke;
     /** Get fill
      * @api
      */
-    getFill(): void;
+    getFill(): Fill;
     /** Get stroke
      * @api
      */
-    getTextStroke(): void;
+    getTextStroke(): Stroke;
     /** Get text fill
      * @api
      */
-    getTextFill(): void;
+    getTextFill(): Fill;
     /** Get text font
      * @api
      */
-    getTextFont(): void;
+    getTextFont(): string;
 }

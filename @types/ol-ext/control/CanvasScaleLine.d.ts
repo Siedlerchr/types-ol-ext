@@ -1,9 +1,10 @@
 import { Map as _ol_Map_ } from 'ol';
 import ol_control_ScaleLine from 'ol/control/ScaleLine';
 import { Style } from 'ol/style';
+import { Options as ScaleLineOptions } from 'ol/control/ScaleLine';
 
-export interface Options {
-    style: Style;
+export interface Options extends ScaleLineOptions  {
+    style?: Style;
 }
 /**
  * @classdesc

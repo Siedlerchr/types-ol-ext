@@ -1,6 +1,5 @@
-import { Feature, Map as _ol_Map_ } from 'ol';
-import ol_control_Control from 'ol/control/Control';
-import { Coordinate } from 'ol/coordinate';
+import { Feature } from "ol";
+import RoutingGeoportail from "./RoutingGeoportail";
 
 export interface Options {
     className: string;
@@ -19,7 +18,6 @@ export interface Options {
     autocomplete?: (s: String, callback: () => any) => any; //TODO not sure
     timeout?: number
 }
-
 /**
  * Geoportail routing Control.
  * @constructor
@@ -36,30 +34,13 @@ export interface Options {
  *	@param {string | undefined} options.inputLabel label for the input, default none
  *	@param {string | undefined} options.noCollapse prevent collapsing on input blur, default false
  *	@param {number | undefined} options.typing a delay on each typing to start searching (ms) use -1 to prevent autocompletion, default 300.
- *	@param {integer | undefined} options.minLength minimum length to start searching, default 1
- *	@param {integer | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
- *	@param {integer | undefined} options.maxHistory maximum number of items to display in history. Set -1 if you don't want history, default maxItems
+ *	@param {number | undefined} options.minLength minimum length to start searching, default 1
+ *	@param {number | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
+ *	@param {number | undefined} options.maxHistory maximum number of items to display in history. Set -1 if you don't want history, default maxItems
  *	@param {function} options.getTitle a function that takes a feature and return the name to display in the index.
  *	@param {function} options.autocomplete a function that take a search string and callback function to send an array
  *	@param {number} options.timeout default 10s
  */
-export default class RoutingGeoportail extends ol_control_Control {
+export default class ol_control_RoutingDSR extends RoutingGeoportail {
     constructor(options?: Options);
-    /**
-     * Set the map instance the control is associated with
-     * and add its controls associated to this map.
-     * @param {_ol_Map_} map The map instance.
-     */
-    setMap(map: _ol_Map_): void;
-    /** Calculate route
-  * @param {Array<ol.coordinate>|undefined} steps an array of steps in EPSG:4326, default use control input values
-  * @return {boolean} true is a new request is send (more than 2 points to calculate)
-  */
-    calculate(steps?: Coordinate[]): boolean;
-    /** Send an ajax request (GET)
-     * @param {string} url
-     * @param {function} onsuccess callback
-     * @param {function} onerror callback
-     */
-    ajax(url: string, onsuccess: (...params: any[]) => any, onerror: (...params: any[]) => any): void;
 }

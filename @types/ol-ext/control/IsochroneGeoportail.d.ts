@@ -13,15 +13,15 @@ export interface Options {
     minLength: number | undefined;
     maxItems: number | undefined;
     maxHistory: number | undefined;
-    getTitle: (...params: any[]) => any;
-    autocomplete: (...params: any[]) => any;
+    getTitle: (f: Feature) => string;
+    autocomplete: (string, ...params: any[]) => any; // TODO: not sure about the syntax
     exclusions: string;
 }
 /**
- * Geoportail isochrone Contr
+ * Geoportail isochrone Control.
  * @see https://geoservices.ign.fr/documentation/geoservices/isochrones.html
  * @constructor
- * @extends {contrControl}
+ * @extends {ol_control_Control}
  * @fires isochrone
  * @fires error
  * @param {Object=} options
@@ -32,9 +32,9 @@ export interface Options {
  *	@param {string | undefined} options.inputLabel label for the input, default none
  *	@param {string | undefined} options.noCollapse prevent collapsing on input blur, default false
  *	@param {number | undefined} options.typing a delay on each typing to start searching (ms) use -1 to prevent autocompletion, default 300.
- *	@param {number | undefined} options.minLength minimum length to start searching, default 1
- *	@param {number | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
- *	@param {number | undefined} options.maxHistory maximum number of items to display in history. Set -1 if you don't want history, default maxItems
+ *	@param {integer | undefined} options.minLength minimum length to start searching, default 1
+ *	@param {integer | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
+ *	@param {integer | undefined} options.maxHistory maximum number of items to display in history. Set -1 if you don't want history, default maxItems
  *	@param {function} options.getTitle a function that takes a feature and return the name to display in the index.
  *	@param {function} options.autocomplete a function that take a search string and callback function to send an array
  *

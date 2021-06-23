@@ -2,22 +2,22 @@ import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 
 export interface Options {
-    className: string;
-    ppi: string;
-    editable: string;
+    className?: string;
+    ppi?: number;
+    editable?: boolean;
 }
 /**
  * Scale Control
  * A control to display the scale of the center on the map
  *
  * @constructor
- * @extends {contrControl}
+ * @extends {ol_control_Control}
  * @fires select
  * @fires change:input
  * @param {Object=} options
  *  @param {string} options.className control class name
- *  @param {string} options.ppi screen ppi, default 96
- * 	@param {string} options.editable make the control editable, default true
+ *  @param {number} options.ppi screen ppi, default 96
+ * 	@param {boolean} options.editable make the control editable, default true
  */
 export default class Scale extends ol_control_Control {
     constructor(options?: Options);
@@ -31,14 +31,14 @@ export default class Scale extends ol_control_Control {
     setMap(map: _ol_Map_): void;
     /** Display the scale
      */
-    _showScale(): void;
+    getScale(): number
     /** Format the scale 1/d
      * @param {Number} d
      * @return {string} formated string
      */
     formatScale(d: number): string;
     /** Set the current scale (will change the scale of the map)
-     * @param {Number} value the scale factor
-     */
-    setScale(value: number): void;
+   * @param {Number} value the scale factor
+   */
+    setScale(value: number): void
 }

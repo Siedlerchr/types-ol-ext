@@ -1,27 +1,43 @@
 import Feature from 'ol/Feature';
 import Search from './Search';
+
+
+export interface Options {
+    className?: string;
+    title?: string
+    target?: Element | string;
+    label: string;
+    placeholder: string;
+    typing?: number;
+    minLength?: number;
+    maxLength?: number;
+    maxItems? : number
+    url?: string;
+    position?: boolean
+    getTitle?: (f: Feature) => string;
+}
 /**
  * Search places using the French National Base Address (BAN) API.
  *
  * @constructor
- * @extends {contrSearch}
+ * @extends {ol.control.Search}
  * @fires select
  * @param {Object=} Control options.
- *	@param {string} options.className control class name
- *	@param {Element | string | undefined} options.target Specify a target if you want the control to be rendered outside of the map's viewport.
- *	@param {string | undefined} options.label Text label to use for the search button, default "search"
- *	@param {string | undefined} options.placeholder placeholder, default "Search..."
- *	@param {number | undefined} options.typing a delay on each typing to start searching (ms), default 500.
- *	@param {number | undefined} options.minLength minimum length to start searching, default 3
- *	@param {number | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
+ *  @param {string} options.className control class name
+ *  @param {Element | string | undefined} options.target Specify a target if you want the control to be rendered outside of the map's viewport.
+ *  @param {string | undefined} options.label Text label to use for the search button, default "search"
+ *  @param {string | undefined} options.placeholder placeholder, default "Search..."
+ *  @param {number | undefined} options.typing a delay on each typing to start searching (ms), default 500.
+ *  @param {integer | undefined} options.minLength minimum length to start searching, default 3
+ *  @param {integer | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
  *
- *	@param {string|undefined} options.url Url to BAN api, default "https://api-adresse.data.gouv.fr/search/"
- *	@param {boolean} options.position Search, with priority to geo position, default false
- *	@param {function} options.getTitle a function that takes a feature and return the text to display in the menu, default return label attribute
+ *  @param {string|undefined} options.url Url to BAN api, default "https://api-adresse.data.gouv.fr/search/"
+ *  @param {boolean} options.position Search, with priority to geo position, default false
+ *  @param {function} options.getTitle a function that takes a feature and return the text to display in the menu, default return label attribute
  * @see {@link https://adresse.data.gouv.fr/api/}
  */
 export default class SearchBAN extends Search {
-    constructor(Control?: any);
+    constructor(options?: Options);
     /** Returns the text to be displayed in the menu
      *	@param {Feature} f the feature
      *	@return {string} the text to be displayed in the index
@@ -67,7 +83,7 @@ export default class SearchBAN extends Search {
     * @return {Array|false} an array of search solutions or false if the array is send with the cback argument (asnchronous)
     * @api
      */
-    autocomplete(s: string, cback: (...params: any[]) => any): Array<any> | false;
+    autocomplete(s: string, cback: (...params: any[]) => any): any[] | false;
     /** Test if 2 features are equal
      * @param {any} f1
      * @param {any} f2

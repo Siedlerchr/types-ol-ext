@@ -1,29 +1,32 @@
 import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import Event from 'ol/events/Event';
+import GeolocationDraw from '../interaction/GeolocationDraw';
 import Bar from './Bar';
 import { position } from './control';
 
 export interface Options {
-    className: string;
-    centerLabel: string;
+    className?: string;
+    centerLabel?: string;
+    position?: position
 }
-/** Control bar for OL3
+/** Geolocation bar
  * The control bar is a container for other controls. It can be used to create toolbars.
- * Control bars can be nested and combined with contrToggle to handle activate/deactivate.
+ * Control bars can be nested and combined with ol.control.Toggle to handle activate/deactivate.
  *
  * @constructor
- * @extends {contrBar}
- * @param {Object=} options Control options.
- *	@param {String} options.className class of the control
- *	@param {String} options.centerLabel label for center button, default center
+ * @extends {ol_control_Bar}
+ * @param {Object=} options Control bar options.
+ *  @param {String} options.className class of the control
+ *  @param {String} options.centerLabel label for center button, default center
+ *  @param {String} options.position position of the control, default bottom-right
  */
 export default class GeolocationBar extends Bar {
     constructor(options?: Options);
-    /** Get the interaction.GeolocationDraw associatedwith the bar
-     *
+    /** Get the GeolocationDraw associatedwith the bar
+     * @return {GeolocationDraw}
      */
-    getInteraction(): void;
+    getInteraction(): GeolocationDraw;
     /** Set the control visibility
     * @param {boolean} b
      */
@@ -41,7 +44,7 @@ export default class GeolocationBar extends Bar {
     /** Get controls in the panel
     *	@param {Array<_ol_control_>}
      */
-    getControls(): void;
+    getControls(): ol_control_Control[];
     /** Set tool bar position
     *	@param {top|left|bottom|right} pos
      */

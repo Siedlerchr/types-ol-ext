@@ -19,12 +19,12 @@ export interface Options {
 export default class Disable extends ol_control_Control {
     constructor(options?: Options);
     /** Test if the control is on
-     * @return {bool}
+     * @return {boolean}
      * @api stable
      */
     isOn(): boolean;
     /** Disable all action on the map
-     * @param {bool} b, default false
+     * @param {boolean} b, default false
      * @api stable
      */
     disableMap(b: boolean): void;
