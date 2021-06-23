@@ -51,7 +51,7 @@ export default class EditBar extends Bar {
     /** Get controls in the panel
     *	@param {Array<_ol_control_>}
      */
-    getControls(): void;
+    getControls(): ol_control_Control[];
     /** Set tool bar position
     *	@param {top|left|bottom|right} pos
      */

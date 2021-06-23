@@ -31,35 +31,4 @@ export default class Target extends CanvasBase {
      * @api stable
      */
     setMap(map: _ol_Map_): void;
-    /** Get canvas overlay
-     */
-    getCanvas(): void;
-    /** Set Style
-     * @api
-     */
-    setStyle(): void;
-    /** Get style
-     * @api
-     */
-    getStyle(): void;
-    /** Get stroke
-     * @api
-     */
-    getStroke(): void;
-    /** Get fill
-     * @api
-     */
-    getFill(): void;
-    /** Get stroke
-     * @api
-     */
-    getTextStroke(): void;
-    /** Get text fill
-     * @api
-     */
-    getTextFill(): void;
-    /** Get text font
-     * @api
-     */
-    getTextFont(): void;
 }
