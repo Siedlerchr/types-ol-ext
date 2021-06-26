@@ -1,11 +1,11 @@
 import ol_control_Control from 'ol/control/Control';
 
 export interface Options {
-    className: string;
-    title: string;
-    name: string;
-    html: string;
-    handleClick: (...params: any[]) => any;
+    className?: string;
+    title?: string;
+    name?: string;
+    html?: string;
+    handleClick?: (...params: any[]) => any;
 }
 
 /** A simple push button control
