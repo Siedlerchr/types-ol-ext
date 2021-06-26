@@ -2,9 +2,9 @@ import { Feature } from "ol";
 import RoutingGeoportail from "./RoutingGeoportail";
 
 export interface Options {
-    className: string;
-    apiKey: string;
-    authentication: string;
+    className?: string;
+    apiKey?: string;
+    authentication?: string;
     target?: Element | string;
     label?: string;
     placeholder?: string;
@@ -15,7 +15,7 @@ export interface Options {
     maxItems?: number;
     maxHistory?: number;
     getTitle?: (f: Feature) => string;
-    autocomplete?: (s: String, callback: () => any) => any; //TODO not sure
+    autocomplete?: (s: String, callback: ([])) => any; //TODO not sure
     timeout?: number
 }
 /**
@@ -38,7 +38,7 @@ export interface Options {
  *	@param {number | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
  *	@param {number | undefined} options.maxHistory maximum number of items to display in history. Set -1 if you don't want history, default maxItems
  *	@param {function} options.getTitle a function that takes a feature and return the name to display in the index.
- *	@param {function} options.autocomplete a function that take a search string and callback function to send an array
+ *	@param {function} options.autocomplete a function that take a searcsh string and callback function to send an array
  *	@param {number} options.timeout default 10s
  */
 export default class ol_control_RoutingDSR extends RoutingGeoportail {

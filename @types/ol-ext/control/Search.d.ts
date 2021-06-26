@@ -16,11 +16,12 @@ export interface Options {
   maxItems?: number;
   maxHistory?: number;
   getTitle?: (f: Feature) => string;
-  autocomplete?: (s: String, []: any[]) => any;
+  autocomplete?: (s: String, cback: ([])) => [] | false;
   onSelect: (...params: any[]) => any;
   centerOnSelect?: boolean
   zoomOnSelect?: (...params: any[]) => any;
 }
+
 
 /**
  * Search Control.
@@ -36,15 +37,16 @@ export interface Options {
  *  @param {string} options.className control class name
  *  @param {Element | string | undefined} options.target Specify a target if you want the control to be rendered outside of the map's viewport.
  *  @param {string | undefined} options.title Title to use for the search button tooltip, default "Search"
+ *  @param {string | undefined} options.reverseTitle Title to use for the reverse geocoding button tooltip, default "Click on the map..."
  *  @param {string | undefined} options.placeholder placeholder, default "Search..."
  *  @param {boolean | undefined} options.reverse enable reverse geocoding, default false
  *  @param {string | undefined} options.inputLabel label for the input, default none
- *  @param {boolean | undefined} options.collapsed search is collapsed on start, default true
- *  @param {boolean | undefined} options.noCollapse prevent collapsing on input blur, default false
+ *  @param {string | undefined} options.collapsed search is collapsed on start, default true
+ *  @param {string | undefined} options.noCollapse prevent collapsing on input blur, default false
  *  @param {number | undefined} options.typing a delay on each typing to start searching (ms) use -1 to prevent autocompletion, default 300.
- *  @param {number | undefined} options.minLength minimum length to start searching, default 1
- *  @param {number | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
- *  @param {number | undefined} options.maxHistory maximum number of items to display in history. Set -1 if you don't want history, default maxItems
+ *  @param {integer | undefined} options.minLength minimum length to start searching, default 1
+ *  @param {integer | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
+ *  @param {integer | undefined} options.maxHistory maximum number of items to display in history. Set -1 if you don't want history, default maxItems
  *  @param {function} options.getTitle a function that takes a feature and return the name to display in the index.
  *  @param {function} options.autocomplete a function that take a search string and callback function to send an array
  *  @param {function} options.onselect a function called when a search is selected
@@ -82,7 +84,6 @@ export default class Search extends ol_control_Control {
  *	@return {string}
  *	@api
  */
-  _getTitleTxt(f: Feature): string
   /** Force search to refresh
    */
   search(): void;
@@ -91,7 +92,7 @@ export default class Search extends ol_control_Control {
 * @param {function | undefined} cback a callback function, default trigger a select event
 * @api
 */
-  reverseGeocode(coord: Coordinate, cback: (...params: any[]) => any): void
+  reverseGeocode(coord: Coordinate, cback: (...params: any[]) => void): void
   /** Set the input value in the form (for initialisation purpose)
   *	@param {string} value
   *	@param {boolean} search to start a search
@@ -119,19 +120,19 @@ export default class Search extends ol_control_Control {
   /**
    * Get history table
    */
-  getHistory(): void;
+  getHistory(): [] | any;
   /** Autocomplete function
     * @param {string} s search string
     * @param {function} cback a callback function that takes an array to display in the autocomplete field (for asynchronous search)
     * @return {Array|false} an array of search solutions or false if the array is send with the cback argument (asnchronous)
     * @api
     */
-  autocomplete(s: string, cback: ([]) => any): any[] | false;
+   autocomplete(s: string, cback: ([])=> any ): any[] | false;
 
   /** Test if 2 features are equal
    * @param {any} f1
    * @param {any} f2
    * @return {boolean}
    */
-  equalFeatures(f1: any, f2: any): boolean; //TODO js code returns always false
+  equalFeatures(f1: Feature, f2: Feature): boolean;
 }

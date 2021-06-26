@@ -55,7 +55,7 @@ export default class Overview extends ol_control_Control {
      *	@param {Number} amplitude amplitude of the bounce [0,1]
      *	@return {Number}
      */
-    elasticFn(bounce: number, amplitude: number): numbers;
+    elasticFn(bounce: number, amplitude: number): number;
     /** Get overview map
     *	@return {Map}
      */
