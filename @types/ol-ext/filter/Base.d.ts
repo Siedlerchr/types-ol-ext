@@ -1,3 +1,5 @@
+import ol_Object from 'ol/Object'
+
 declare module 'ol/Map' {
     export default interface Map {
         /** Add a filter to a Map
@@ -56,11 +58,11 @@ declare module 'ol/layer/Layer' {
  * to handle filters on layers.
  *
  * @constructor
- * @extends {Object}
+ * @extends {ol_Object}
  * @param {Object} options Extend {@link _ol_control_Control_} options.
  *  @param {boolean} [options.active]
  */
-declare abstract class Base extends Object {
+declare abstract class Base extends ol_Object {
     constructor(options: Options);
     /** Activate / deactivate filter
     *	@param {boolean} b
