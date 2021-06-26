@@ -1,37 +1,38 @@
 import { Map as _ol_Map_ } from 'ol';
-import ol_control_Control from 'ol/control/Control';
 import { Interaction } from 'ol/interaction';
 import Bar from './Bar';
+import Button from './Button';
 
 export interface Options {
-    className: string;
-    title: string;
-    html: string;
-    interaction: Interaction;
-    active: boolean;
-    disable: boolean;
-    bar: Bar;
-    autoActive: boolean;
-    onToggle: (...params: any[]) => any;
+    className?: string;
+    title?: string;
+    html?: string;
+    interaction?: Interaction;
+    active?: boolean;
+    disable?: boolean;
+    bar?: Bar;
+    autoActive?: boolean;
+    onToggle?: (active: boolean) => void;
 }
+
 /** A simple toggle control
  * The control can be created with an interaction to control its activation.
  *
  * @constructor
- * @extends {contrControl}
+ * @extends {Button}
  * @fires change:active, change:disable
  * @param {Object=} options Control options.
- *	@param {String} options.className class of the control
- *	@param {String} options.title title of the control
- *	@param {String} options.html html to insert in the control
- *	@param {interaction} options.interaction interaction associated with the control
- *	@param {bool} options.active the control is created active, default false
- *	@param {bool} options.disable the control is created disabled, default false
- *	@param {contrBar} options.bar a subbar associated with the control (drawn when active if control is nested in a contrBar)
- *	@param {bool} options.autoActive the control will activate when shown in an contrBar, default false
- *	@param {function} options.onToggle callback when control is clicked (or use change:active event)
+ *  @param {String} options.className class of the control
+ *  @param {String} options.title title of the control
+ *  @param {String} options.html html to insert in the control
+ *  @param {ol.interaction} options.interaction interaction associated with the control
+ *  @param {bool} options.active the control is created active, default false
+ *  @param {bool} options.disable the control is created disabled, default false
+ *  @param {ol.control.Bar} options.bar a subbar associated with the control (drawn when active if control is nested in a ol.control.Bar)
+ *  @param {bool} options.autoActive the control will activate when shown in an ol.control.Bar, default false
+ *  @param {function} options.onToggle callback when control is clicked (or use change:active event)
  */
-export default class Toggle extends ol_control_Control {
+export default class Toggle extends Button {
     constructor(options?: Options);
     /**
      * Set the map instance the control is associated with

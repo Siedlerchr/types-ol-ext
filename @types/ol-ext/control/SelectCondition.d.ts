@@ -1,6 +1,5 @@
 import { Vector as VectorSource } from 'ol/source';
-import SelectBase from './SelectBase';
-import { condition } from 'ol-ext/control/SelectBase';
+import SelectBase, { condition } from './SelectBase';
 
 export interface Options {
     className?: string;

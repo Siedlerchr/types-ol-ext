@@ -5,7 +5,7 @@ export interface Options {
     title: string;
     name: string;
     html: string;
-    handleClick: (...params: any[]) => any;
+    handleClick: (e: Event) => void;
 }
 
 /** A simple push button control
