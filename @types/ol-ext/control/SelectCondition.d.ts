@@ -1,5 +1,3 @@
-import Collection from 'ol/Collection';
-import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import SelectBase from './SelectBase';
 import { condition } from 'ol-ext/control/SelectBase';

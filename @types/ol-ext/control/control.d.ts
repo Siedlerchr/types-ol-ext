@@ -11,4 +11,3 @@ export interface ControlOptions {
     style?: Style | Style[];
 }
 
-export function Status(): void;

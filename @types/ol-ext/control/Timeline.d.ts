@@ -4,21 +4,21 @@ import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 
 export interface Options {
-    className: string;
-    features: Feature[];
-    source: VectorSource;
-    interval: number;
-    maxWidth: string;
-    minDate: string;
-    maxDate: string;
-    minZoom: number;
-    maxZoom: number;
-    zoomButton: boolean;
-    getHTML: (...params: any[]) => any;
-    getFeatureDate: (...params: any[]) => any;
-    endFeatureDate: (...params: any[]) => any;
-    graduation: string;
-    scrollTimeout: string;
+    className?: string;
+    features?: Feature[];
+    source?: VectorSource;
+    interval?: number;
+    maxWidth?: string;
+    minDate?: string;
+    maxDate?: string;
+    minZoom?: number;
+    maxZoom?: number;
+    zoomButton?: boolean;
+    getHTML?: (f: Feature) => any;
+    getFeatureDate?: ( f: Feature) => any;
+    endFeatureDate?: (f: Feature) => any;
+    graduation?: string;
+    scrollTimeout?: number;
 }
 /** Timeline control
  *
@@ -42,7 +42,7 @@ export interface Options {
  *	@param {function} options.getFeatureDate a function that takes a feature and returns its date, default the date propertie
  *	@param {function} options.endFeatureDate a function that takes a feature and returns its end date, default no end date
  *	@param {String} options.graduation day|month to show month or day graduation, default show only years
- *	@param {String} options.scrollTimeout Time in milliseconds to get a scroll event, default 15ms
+ *	@param {number} options.scrollTimeout time in milliseconds to get a scroll event, default 15ms
  */
 export default class Timeline extends ol_control_Control {
     constructor(options?: Options);
