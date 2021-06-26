@@ -4,15 +4,15 @@ import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 
 export interface Options {
-    className: string;
+    className?: string;
     source: VectorSource;
-    getImage: (...params: any[]) => any;
-    getTitle: (...params: any[]) => any;
-    collapsed: boolean;
-    collapsible: boolean;
-    maxFeatures: number;
-    hover: boolean;
-    linkColor: string | boolean;
+    getImage?: (f: Feature) => string;
+    getTitle?: (f: Feature) => string;
+    collapsed?: boolean;
+    collapsible?: boolean;
+    maxFeatures?: number;
+    hover?: boolean;
+    linkColor?: string | boolean;
 }
 /** Image line control
  *

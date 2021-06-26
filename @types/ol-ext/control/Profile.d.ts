@@ -6,14 +6,15 @@ import { Coordinate } from 'ol/coordinate';
 import { ProjectionLike } from 'ol/proj';
 
 export interface Options {
-    className: string;
-    style: Style;
+    className?: string;
+    target?: Element | string;
+    style?: Style;
     info?: { [key: string]: any }
-    width: number;
-    height: number;
-    feature: Feature
-    selectable: boolean;
-    zoomable: boolean;
+    width?: number;
+    height?: number;
+    feature?: Feature
+    selectable?: boolean;
+    zoomable?: boolean;
 }
 
 /**
@@ -31,16 +32,16 @@ export interface Options {
  * @fires dragcancel
  * @param {Object=} options
  *  @param {string} options.className
- *  @param {Style} options.style style to draw the profil
+ *  @param {ol.style.Style} options.style style to draw the profil
  *  @param {*} options.info keys/values for i19n
  *  @param {number} options.width
  *  @param {number} options.height
- *  @param {Feature} options.feature the feature to draw profil
+ *  @param {ol.Feature} options.feature the feature to draw profil
  *  @param {boolean} options.selectable enable selection on the profil, default false
  *  @param {boolean} options.zoomable can zoom in the profil
  */
 export default class Profil extends ol_control_Control {
-    constructor(options: Options);
+    constructor(options?: Options);
 
     /** Show popup info
      * @param {string} info to display as a popup
@@ -62,10 +63,6 @@ export default class Profil extends ol_control_Control {
      * @param { number } time time at which to show the point
      * @return { Coordinate } current point
      */
-
-    /** Mouse move over canvas
-    */
-    onMove(e: any): void;
 
     /** Show panel
     * @api stable
@@ -110,4 +107,13 @@ export default class Profil extends ol_control_Control {
         graduation?: number
         amplitude?: number
     }): void;
+
+    /** Get profil image
+     * @param {string|undefined} type image format or 'canvas' to get the canvas image, default image/png.
+     * @param {Number|undefined} encoderOptions between 0 and 1 indicating image quality image/jpeg or image/webp, default 0.92.
+     * @return {string} requested data uri
+     * @api stable
+     */
+    getImage(type?: string, encoderOptions?: number): string;
+
 }

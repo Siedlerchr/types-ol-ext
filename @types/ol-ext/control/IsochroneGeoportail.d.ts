@@ -4,20 +4,21 @@ import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 
 export interface Options {
-    className: string;
-    target: Element | string | undefined;
-    label: string | undefined;
-    placeholder: string | undefined;
-    inputLabel: string | undefined;
-    noCollapse: string | undefined;
-    typing: number | undefined;
-    minLength: number | undefined;
-    maxItems: number | undefined;
-    maxHistory: number | undefined;
+    className?: string;
+    target?: Element | string ;
+    label?: string ;
+    placeholder?: string;
+    inputLabel?: string ;
+    noCollapse?: string;
+    typing?: number
+    minLength?: number;
+    maxItems?: number;
+    maxHistory?: number;
     getTitle: (f: Feature) => string;
     autocomplete: (s: string, ...params: any[]) => any; // TODO: not sure about the syntax
     exclusions: string;
 }
+
 /**
  * Geoportail isochrone Control.
  * @see https://geoservices.ign.fr/documentation/geoservices/isochrones.html
@@ -46,25 +47,26 @@ export default class IsochroneGeoportail extends ol_control_Control {
     /**
      * Set the map instance the control is associated with
      * and add its controls associated to this map.
-     * @param {_ol_Map_} map The map instance.
+     * @param map The map instance.
      */
     setMap(map: _ol_Map_): void;
     /** Set the travel method
-     * @param [string] method The method (time or distance)
+     * @param method The method (time or distance)
      */
-    setMethod(string?: any): void;
+    setMethod(method?: 'time'| 'distance'): void;
     /** Set mode
-     * @param {string} mode The mode: 'car' or 'pedestrian', default 'car'
+     * @param mode The mode: 'car' or 'pedestrian', default 'car'
      */
-    setMode(mode: string): void;
+    setMode(mode?: 'car' | 'pedestrian'): void;
     /** Set direction
-     * @param {string} direction The direction: 'direct' or 'reverse', default direct
+     * @param  direction The direction: 'direct' or 'reverse', default direct
      */
-    setDirection(direction: string): void;
+    setDirection(direction?: 'direct'| 'reverse'): void;
     /** Calculate an isochrone
-     * @param {Coordinate} coord
-     * @param {number|string} option A number as time (in second) or distance (in meter), depend on method propertie
+     * @param  coord
+     * @param  option A number as time (in second) or distance (in meter), depend on method propertie
      * or a string with a unit (s, mn, h for time or km, m)
+     * @param iter number of iterations
      */
-    search(coord: Coordinate, option: number | string): void;
+    search(coord: Coordinate, option: number | string, iter: number): void;
 }

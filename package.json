@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/Siedlerchr/types-ol-ext#readme",
   "dependencies": {
-    "@types/ol": "^6.5.1"
+    "@types/ol": "^6.5.1",
+    "jspdf": "^2.3.1"
   },
   "devDependencies": {
     "dtslint": "^4.1.0",

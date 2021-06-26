@@ -2,10 +2,10 @@ import ol_control_Control from 'ol/control/Control';
 import { Coordinate } from 'ol/coordinate';
 
 export interface Options {
-    className: string;
+    className?: string;
     content: string | Element;
-    hideOnClick: boolean;
-    closeBox: boolean;
+    hideOnClick?: boolean;
+    closeBox?: boolean;
 }
 /** Control overlay for OL3
  * The overlay control is a control that display an overlay over the map

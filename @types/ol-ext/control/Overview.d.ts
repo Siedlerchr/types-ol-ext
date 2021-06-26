@@ -14,23 +14,24 @@ export interface Options {
   style?: Style | Style[];
   panAnimation?: boolean | 'elastic';
 }
+
 /**
- * OpenLayers 3 Layer Overview Contr
+ * OpenLayers 3 Layer Overview Control.
  * The overview can rotate with map.
  * Zoom levels are configurable.
  * Click on the overview will center the map.
  * Change width/height of the overview trough css.
  *
  * @constructor
- * @extends {contrControl}
+ * @extends {ol_control_Control}
  * @param {Object=} options Control options.
- *  @param {ProjectionLike} options.projection The projection. Default is EPSG:3857 (Spherical Mercator).
+ *  @param {ol.ProjectionLike} options.projection The projection. Default is EPSG:3857 (Spherical Mercator).
  *  @param {Number} options.minZoom default 0
  *  @param {Number} options.maxZoom default 18
  *  @param {boolean} options.rotation enable rotation, default false
  *  @param {top|bottom-left|right} options.align position
- *  @param {Array<Layer>} options.layers list of layers
- *  @param {Style | Array<Style> | undefined} options.style style to draw the map Extent on the overveiw
+ *  @param {Array<ol.layer>} options.layers list of layers
+ *  @param {ol.style.Style | Array.<ol.style.Style> | undefined} options.style style to draw the map extent on the overveiw
  *  @param {bool|elastic} options.panAnimation use animation to center map on click, default true
  */
 export default class Overview extends ol_control_Control {
@@ -54,7 +55,7 @@ export default class Overview extends ol_control_Control {
      *	@param {Number} amplitude amplitude of the bounce [0,1]
      *	@return {Number}
      */
-    elasticFn(bounce: number, amplitude: number): void;
+    elasticFn(bounce: number, amplitude: number): numbers;
     /** Get overview map
     *	@return {Map}
      */
@@ -71,7 +72,5 @@ export default class Overview extends ol_control_Control {
      * @param {Map} map The map instance.
      */
     setMap(map: _ol_Map_): void;
-    /** Calculate the Extent of the map and draw it on the overview
-     */
-    calcExtent_(): void;
+
 }
