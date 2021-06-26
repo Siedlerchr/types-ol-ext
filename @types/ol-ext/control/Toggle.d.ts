@@ -4,15 +4,15 @@ import { Interaction } from 'ol/interaction';
 import Bar from './Bar';
 
 export interface Options {
-    className: string;
-    title: string;
-    html: string;
-    interaction: Interaction;
-    active: boolean;
-    disable: boolean;
-    bar: Bar;
-    autoActive: boolean;
-    onToggle: (...params: any[]) => any;
+    className?: string;
+    title?: string;
+    html?: string;
+    interaction?: Interaction;
+    active?: boolean;
+    disable?: boolean;
+    bar?: Bar;
+    autoActive?: boolean;
+    onToggle?: (...params: any[]) => any;
 }
 /** A simple toggle control
  * The control can be created with an interaction to control its activation.

@@ -4,11 +4,11 @@ import Event from 'ol/events/Event';
 import { position } from './control';
 
 export interface Options {
-    className: string;
-    group: boolean;
-    toggleOne: boolean;
-    autoDeactivate: boolean;
-    controls: ol_control_Control[];
+    className?: string;
+    group?: boolean;
+    toggleOne?: boolean;
+    autoDeactivate?: boolean;
+    controls?: ol_control_Control[];
 }
 /** Control bar for OL3
  * The control bar is a container for other controls. It can be used to create toolbars.
