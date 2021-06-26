@@ -10,8 +10,6 @@ import Toggle from 'ol-ext/control/Toggle';
 // import Rotate from 'ol-ext/control/Rotate';
 // import FullScreen from 'ol-ext/control/FullScreen';
 
-import $ = require('jquery');
-
 //  Vector layer
 const vector = new Vector( { source: new VectorSource() })
 
@@ -43,7 +41,7 @@ const selectCtrl = new Toggle(
         interaction: new Select (),
         active:true,
         onToggle: function(active)
-        {	$("#info").text("Select is "+(active?"activated":"deactivated"));
+        {	document.querySelector('#info')!.innerHTML = "Select is "+(active?"activated":"deactivated");
         }
     });
 nested.addControl(selectCtrl);
@@ -58,7 +56,7 @@ const pedit = new Toggle(
             source: vector.getSource()
         }),
         onToggle: function(active)
-        {	$("#info").text("Edition is "+(active?"activated":"deactivated"));
+        {	document.querySelector('#info')!.innerHTML = "Edition is "+(active?"activated":"deactivated");
         }
     });
 nested.addControl ( pedit );
@@ -70,5 +68,11 @@ nested.addControl ( pedit );
 
 // Show info
 function info(i: string)
-{	$("#info").html(i||"");
+{	document.querySelector('#info')!.innerHTML = i||"";
 }
+
+interface Window {
+    mainbar: Bar
+}
+declare var window: Window;
+window.mainbar = mainbar;
