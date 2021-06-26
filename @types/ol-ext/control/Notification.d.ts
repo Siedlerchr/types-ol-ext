@@ -20,8 +20,8 @@ export default class Notification extends ol_control_Control {
     constructor(options?: Options);
     /**
      * Display a notification on the map
-     * @param {string|node|undefined} what the notification to show, default get the last one
-     * @param {number} [duration=3000] duration in ms, if -1 never hide
+     * @param what the notification to show, default get the last one
+     * @param  [duration=3000] duration in ms, if -1 never hide
      */
     show(what?: string | Node, duration?: number): void;
     /**

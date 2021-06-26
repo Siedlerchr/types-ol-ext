@@ -4,27 +4,33 @@ import { Layer } from 'ol/layer';
 
 export interface Options {
     urlReplace?: boolean;
+    localStorage?: boolean;
+    geohash?: boolean
     fixed?: number;
     anchor?: boolean;
+    visible?: boolean
     hidden?: boolean;
     onclick: (...params: any[]) => any;
 }
+/
 /**
- * Permalink Contr
- *
- *	Add a `permalink`property to layers to be handled by the control (and added in the url).
- *  The layer's permalink property is used to name the layer in the url.
- *	The control must be added after all layer are inserted in the map to take them into acount.
+ * Set an hyperlink that will return the user to the current map view.
+ * Just add a `permalink`property to layers to be handled by the control (and added in the url).
+ * The layer's permalink property is used to name the layer in the url.
+ * The control must be added after all layer are inserted in the map to take them into acount.
  *
  * @constructor
- * @extends {contrControl}
+ * @extends {ol_control_Control}
  * @param {Object=} options
- *	@param {boolean} options.urlReplace replace url or not, default true
- *	@param {number} options.fixed number of digit in coords, default 6
- *	@param {boolean} options.anchor use "#" instead of "?" in href
- *	@param {boolean} options.hidden hide the button on the map, default false
- *	@param {function} options.onclick a function called when control is clicked
- */
+ *  @param {boolean} options.urlReplace replace url or not, default true
+ *  @param {boolean} options.localStorage save current map view in localStorage, default false
+ *  @param {boolean} options.geohash use geohash instead of lonlat, default false
+ *  @param {integer} options.fixed number of digit in coords, default 6
+ *  @param {boolean} options.anchor use "#" instead of "?" in href
+ *  @param {boolean} options.visible hide the button on the map, default true
+ *  @param {boolean} options.hidden hide the button on the map, default false DEPRECATED: use visible instead
+ *  @param {function} options.onclick a function called when control is clicked
+*/
 export default class Permalink extends ol_control_Control {
     constructor(options?: Options);
     /**
@@ -74,7 +80,7 @@ export default class Permalink extends ol_control_Control {
     hasUrlParam(key: string): boolean;
     /**
      * Get the permalink
-     * @return {permalink}
+     * @return permalink
      */
     getLink(): string;
     /**
@@ -82,4 +88,5 @@ export default class Permalink extends ol_control_Control {
      *	@param {bool}
      */
     setUrlReplace(replace: boolean): void;
+
 }

@@ -5,7 +5,7 @@ import LayerGroup from 'ol/layer/Group';
 import { Extent } from 'ol/extent';
 
 export interface Options {
-    displayInLayerSwitcher?: (...params: any[]) => any;
+    displayInLayerSwitcher?: (layer: Layer) => boolean;
     show_progress?: boolean;
     mouseover?: boolean;
     reordering?: boolean;
