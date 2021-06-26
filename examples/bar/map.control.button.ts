@@ -41,5 +41,5 @@ map.addControl ( save );
 
 // Show info
 function info(i: string)
-{	document.querySelector('#info')!.innerHTML = i||"";
+{	document.querySelector<HTMLTextAreaElement>('#info')!.innerHTML = i||"";
 }

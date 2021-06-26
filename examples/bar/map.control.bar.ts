@@ -41,7 +41,7 @@ const selectCtrl = new Toggle(
         interaction: new Select (),
         active:true,
         onToggle: function(active)
-        {	document.querySelector('#info')!.innerHTML = "Select is "+(active?"activated":"deactivated");
+        {	document.querySelector<HTMLTextAreaElement>('#info')!.textContent = "Select is "+(active?"activated":"deactivated");
         }
     });
 nested.addControl(selectCtrl);
@@ -56,7 +56,7 @@ const pedit = new Toggle(
             source: vector.getSource()
         }),
         onToggle: function(active)
-        {	document.querySelector('#info')!.innerHTML = "Edition is "+(active?"activated":"deactivated");
+        {	document.querySelector<HTMLTextAreaElement>('#info')!.textContent = "Edition is "+(active?"activated":"deactivated");
         }
     });
 nested.addControl ( pedit );
@@ -68,7 +68,7 @@ nested.addControl ( pedit );
 
 // Show info
 function info(i: string)
-{	document.querySelector('#info')!.innerHTML = i||"";
+{	document.querySelector<HTMLTextAreaElement>('#info')!.innerHTML = i||"";
 }
 
 interface Window {
