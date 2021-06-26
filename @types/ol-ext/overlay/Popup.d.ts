@@ -42,10 +42,10 @@ export declare type Template = {
     popupClass?: string;
     anim?: boolean;
     closeBox?: boolean;
-    onclose?: ((...params: any[]) => any) | undefined;
-    onshow?: ((...params: any[]) => any) | undefined;
+    onclose?: ((...params: any[]) => any);
+    onshow?: ((...params: any[]) => any);
     offsetBox?: number | number[];
-    positioning?: OverlayPositioning | string | undefined;
+    positioning?: OverlayPositioning | string;
  }
 /**
  * @classdesc
