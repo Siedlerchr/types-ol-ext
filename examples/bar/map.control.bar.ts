@@ -71,8 +71,9 @@ function info(i: string)
 {	document.querySelector<HTMLTextAreaElement>('#info')!.innerHTML = i||"";
 }
 
-interface Window {
-    mainbar: Bar
+declare global {
+    interface Window {
+        mainbar: Bar
+    }
 }
-declare var window: Window;
 window.mainbar = mainbar;

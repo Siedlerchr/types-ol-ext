@@ -72,10 +72,11 @@ select.getFeatures().on(['remove'], function(e) {
     popup.hide();
 })
 
-interface Window {
-    popup: Popup,
-    map: Map
+declare global {
+    interface Window {
+        popup: Popup,
+        map: Map
+    }
 }
-declare var window: Window;
 window.popup = popup;
 window.map = map;

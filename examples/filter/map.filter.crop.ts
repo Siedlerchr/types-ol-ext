@@ -44,10 +44,11 @@ function setFilter(){
 }
 setFilter();
 
-interface Window {
-    setFilter(): void
+declare global {
+    interface Window {
+        setFilter(): void
+    }
 }
-declare var window: Window;
 window.setFilter = (): void => {
     setFilter()
 }
