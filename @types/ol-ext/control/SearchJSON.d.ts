@@ -4,15 +4,15 @@ import Search from './Search';
 
 export interface Options {
     className?: string;
-    target?: Element | string | undefined;
-    label?: string | undefined;
-    placeholder?: string | undefined;
-    typing?: number | undefined;
-    minLength?: number | undefined;
-    maxItems?: number | undefined;
-    handleResponse?: ((...params: any[]) => any) | undefined;
-    url?: string | undefined;
-    authentication?: string | undefined;
+    target?: Element | string ;
+    label?: string ;
+    placeholder?: string ;
+    typing?: number ;
+    minLength?: number ;
+    maxItems?: number ;
+    handleResponse?: ((response: any) => any[]);
+    url?: string ;
+    authentication?: string ;
 }
 
 /**
@@ -25,7 +25,8 @@ export interface Options {
  * @param {any} options extend ol.control.Search options
  *  @param {string} options.className control class name
  *  @param {Element | string | undefined} options.target Specify a target if you want the control to be rendered outside of the map's viewport.
- *  @param {string | undefined} options.label Text label to use for the search button, default "search"
+ *  @param {string | undefined} options.title Title to use for the search button tooltip, default "Search"
+ *  @param {string | undefined} options.reverseTitle Title to use for the reverse geocoding button tooltip, default "Click on the map..."
  *  @param {string | undefined} options.placeholder placeholder, default "Search..."
  *  @param {number | undefined} options.typing a delay on each typing to start searching (ms), default 1000.
  *  @param {integer | undefined} options.minLength minimum length to start searching, default 3
@@ -42,13 +43,13 @@ export default class SearchJSON extends Search {
     * @param {string} s search string
     * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field
      */
-    autocomplete(s: string, cback: (...params: any[]) => any): any[] | false;
-    /** Send an ajax request (GET)
+    autocomplete(s: string, cback: ([])=>any ): any[] | false;
+    /** Send ajax request
      * @param {string} url
-     * @param {function} onsuccess callback
-     * @param {function} onerror callback
+     * @param {*} data
+     * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field
      */
-    ajax(url: string, onsuccess: (...params: any[]) => any, onerror: (...params: any[]) => any): void;
+     ajax(url: string, data: any, cback: ([])=> any, options: any): void;
     /**
      * @param {string} s the search string
      * @return {Object} request data (as key:value)

@@ -1,5 +1,4 @@
 import Feature from 'ol/Feature';
-import { Vector as VectorSource } from 'ol/source';
 import Search from './Search';
 export interface Options {
     className?: string;
@@ -14,6 +13,7 @@ export interface Options {
     getTitle?: (f: Feature) => string;
     getSearchString?: (f: Feature) => string;
 }
+
 /**
  * Search features.
  *
@@ -35,73 +35,5 @@ export interface Options {
  */
 export default class SearchFeature extends Search {
     constructor(options: Options);
-    /** No history avaliable on features
-     */
-    restoreHistory(): void;
-    /** No history avaliable on features
-     */
-    saveHistory(): void;
-    /** Returns the text to be displayed in the menu
-    *	@param {Feature} f the feature
-    *	@return {string} the text to be displayed in the index
-    *	@api
-     */
-    getTitle(f: Feature): string;
-    /** Return the string to search in
-    *	@param {Feature} f the feature
-    *	@return {string} the text to be used as search string
-    *	@api
-     */
-    getSearchString(f: Feature): string;
-    /** Get the source
-    *	@return {VectorSource}
-    *	@api
-     */
-    getSource(): VectorSource;
-    /** Get the source
-    *	@param {VectorSource} source
-    *	@api
-     */
-    setSource(source: VectorSource): void;
-    /** Autocomplete function
-    * @param {string} s search string
-    * @param {number} max max
-    * @param {function} cback a callback function that takes an array to display in the autocomplete field (for asynchronous search)
-    * @return {Array<any>|false} an array of search solutions or false if the array is send with the cback argument (asnchronous)
-    * @api
-     */
-    autocomplete(s: string, cback: (...params: any[]) => any): any[] | false;
-    /** Get the input field
-    *	@return {Element}
-    *	@api
-     */
-    getInputField(): Element;
-    /** Force search to refresh
-     */
-    search(): void;
-    /** Set the input value in the form (for initialisation purpose)
-    *	@param {string} value
-    *	@param {boolean} search to start a search
-    *	@api
-     */
-    setInput(value: string, search: boolean): void;
-    /** A ligne has been clicked in the menu > dispatch event
-    *	@param {any} f the feature, as passed in the autocomplete
-    *	@api
-     */
-    select(f: any): void;
-    /**
-     * Remove previous history
-     */
-    clearHistory(): void;
-    /**
-     * Get history table
-     */
-    getHistory(): void;
-    /** Test if 2 features are equal
-     * @param {any} f1
-     * @param {any} f2
-     * @return {boolean}
-     */
-    equalFeatures(f1: any, f2: any): boolean;
+
 }

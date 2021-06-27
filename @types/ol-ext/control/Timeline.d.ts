@@ -3,22 +3,23 @@ import ol_control_Control from 'ol/control/Control';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 
+export type position = 'start'| 'end' | 'middle';
 export interface Options {
-    className: string;
-    features: Feature[];
-    source: VectorSource;
-    interval: number;
-    maxWidth: string;
-    minDate: string;
-    maxDate: string;
-    minZoom: number;
-    maxZoom: number;
-    zoomButton: boolean;
-    getHTML: (...params: any[]) => any;
-    getFeatureDate: (...params: any[]) => any;
-    endFeatureDate: (...params: any[]) => any;
-    graduation: string;
-    scrollTimeout: string;
+    className?: string;
+    features?: Feature[];
+    source?: VectorSource;
+    interval?: number;
+    maxWidth?: string;
+    minDate?: string;
+    maxDate?: string;
+    minZoom?: number;
+    maxZoom?: number;
+    zoomButton?: boolean;
+    getHTML?: (f: Feature) => any;
+    getFeatureDate?: ( f: Feature) => any;
+    endFeatureDate?: (f: Feature) => any;
+    graduation?: 'day' | 'month' ;
+    scrollTimeout?: number;
 }
 /** Timeline control
  *
@@ -42,7 +43,7 @@ export interface Options {
  *	@param {function} options.getFeatureDate a function that takes a feature and returns its date, default the date propertie
  *	@param {function} options.endFeatureDate a function that takes a feature and returns its end date, default no end date
  *	@param {String} options.graduation day|month to show month or day graduation, default show only years
- *	@param {String} options.scrollTimeout Time in milliseconds to get a scroll event, default 15ms
+ *	@param {number} options.scrollTimeout time in milliseconds to get a scroll event, default 15ms
  */
 export default class Timeline extends ol_control_Control {
     constructor(options?: Options);
@@ -59,15 +60,16 @@ export default class Timeline extends ol_control_Control {
      *  @param {Element|string} button.html Content of the element
      *  @param {function} button.click a function called when the button is clicked
      */
-    addButton(button: {
-        title: string;
+    addButton(button?: {
+        className?: string;
+        title?: string;
         html: Element | string;
-        click: (...params: any[]) => any;
+        click: (e: Event) => void;
     }): void;
     /** Set an interval
      * @param {number|string} length the interval length in ms or a farmatted text ie. end with y, 1d, h, mn, s (31 days = '31d'), default none
      */
-    setInterval(length: number | string): void;
+    setInterval(length?: number | string): void;
     /** Is the line collapsed
      * @return {boolean}
      */
@@ -93,20 +95,28 @@ export default class Timeline extends ol_control_Control {
      * Refresh the timeline with new data
      * @param {Number} zoom Zoom factor from 0.25 to 10, default 1
      */
-    refresh(zoom: number): void;
+    refresh(zoom?: number): void;
     /** Center timeline on a date
      * @param {Date|String|feature} feature a date or a feature with a date
      * @param {Object} options
      *  @param {boolean} options.anim animate scroll
      *  @param {string} options.position start, end or middle, default middle
      */
-    setDate(feature: Date | string | Feature, options: {
-        anim: boolean;
-        position: string;
+    setDate(feature: Date | string | Feature, options?: {
+        anim?: boolean;
+        position?: position
     }): void;
     /** Get the date of the center
      * @param {string} position start, end or middle, default middle
      * @return {Date}
      */
-    getDate(position: string): Date;
+    getDate(position: position): Date;
+    /** Get the start date of the control
+     * @return {Date}
+     */
+   getStartDate(): Date;
+   /** Get the end date of the control
+    * @return {Date}
+    */
+   getEndDate(): Date;
 }

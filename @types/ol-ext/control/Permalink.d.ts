@@ -12,7 +12,7 @@ export interface Options {
     hidden?: boolean;
     onclick: (...params: any[]) => any;
 }
-/
+
 /**
  * Set an hyperlink that will return the user to the current map view.
  * Just add a `permalink`property to layers to be handled by the control (and added in the url).

@@ -29,6 +29,10 @@ declare class Mask extends Base {
     *	@return {boolean}
      */
     getActive(): boolean;
+    /** Set fill color
+     *	@internal
+     */
+    fillColor_: string;
 }
 
 export default Mask;

@@ -1,19 +1,20 @@
 import Feature from 'ol/Feature';
 import SearchJSON from './SearchJSON';
-import { AddressType } from './control';
 import { Coordinate } from 'ol/coordinate';
 
+export type AddressType = 'StreetAddress' | 'PositionOfInterest' | 'CadastralParcel' | 'Commune';
 export interface Options {
   className?: string;
   apiKey?: string;
   authentication?: string;
   target?: Element | string;
   label?: string;
+  reverse?: boolean;
   placeholder?: string;
-  typing: number | undefined;
-  minLength: number | undefined;
-  maxItems: number | undefined;
-  type: AddressType;
+  typing?: number;
+  minLength?: number;
+  maxItems?: number;
+  type?: AddressType;
 }
 /**
  * Search places using the French National Base Address (BAN) API.
@@ -38,13 +39,15 @@ export interface Options {
  */
 export default class SearchGeoportail extends SearchJSON {
   constructor(options: Options);
-  /** Returns the text to be displayed in the menu
-   *	@param {ol.Feature} f the feature
-   *	@return {string} the text to be displayed in the index
-   *	@api
+
+   /** Send an ajax request (GET)
+   * @param {string} url
+   * @param {function} onsuccess callback
+   * @param {function} onerror callback
    */
-  getTitle(f: Feature): string;
-  /**
+    ajax(url: string, onsuccess: (...params: any[]) => any, onerror: (...params: any[]) => any): void;
+
+    /**
    * @param {string} s the search string
    * @return {Object} request data (as key:value)
    * @api
@@ -57,61 +60,5 @@ export default class SearchGeoportail extends SearchJSON {
    * @api
    */
   handleResponse(response: any): any[];
-  /** A ligne has been clicked in the menu > dispatch event
-   * @param {any} f the feature, as passed in the autocomplete
-   * @param {boolean} reverse true if reverse geocode
-   * @param {ol.coordinate} coord
-   * @param {*} options options passed to the event
-   *	@api
-   */
-  select(f: Feature, reverse: boolean, coord: Coordinate, options?: any): void
-  /** Search if no position and get the INSEE code
-   * @param {string} s le nom de la commune
-   */
-  searchCommune(s: string): void;
-  /** Autocomplete function (ajax request to the server)
-  * @param {string} s search string
-  * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field
-   */
-  autocomplete(s: string, cback: (...params: any[]) => any): Array<any> | false;
-  /** Send an ajax request (GET)
-   * @param {string} url
-   * @param {function} onsuccess callback
-   * @param {function} onerror callback
-   */
-  ajax(url: string, onsuccess: (...params: any[]) => any, onerror: (...params: any[]) => any): void;
-  /** Get the input field
-  *	@return {Element}
-  *	@api
-   */
-  getInputField(): Element;
-  /** Force search to refresh
-   */
-  search(): void;
-  /** Set the input value in the form (for initialisation purpose)
-  *	@param {string} value
-  *	@param {boolean} search to start a search
-  *	@api
-   */
-  setInput(value: string, search: boolean): void;
-  /** Save history (in the localstorage)
-   */
-  saveHistory(): void;
-  /** Restore history (from the localstorage)
-   */
-  restoreHistory(): void;
-  /**
-   * Remove previous history
-   */
-  clearHistory(): void;
-  /**
-   * Get history table
-   */
-  getHistory(): void;
-  /** Test if 2 features are equal
-   * @param {any} f1
-   * @param {any} f2
-   * @return {boolean}
-   */
-  equalFeatures(f1: any, f2: any): boolean;
+
 }

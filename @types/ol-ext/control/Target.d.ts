@@ -4,7 +4,7 @@ import CanvasBase from './CanvasBase';
 
 export interface Options {
     style: Style | Style[];
-    composite: string;
+    composite: string; //In globalCompositeOperation in TS is also string
 }
 /** contrTarget draw a target at the center of the map.
  * @constructor

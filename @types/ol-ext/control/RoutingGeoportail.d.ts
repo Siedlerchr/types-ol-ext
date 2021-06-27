@@ -3,9 +3,9 @@ import ol_control_Control from 'ol/control/Control';
 import { Coordinate } from 'ol/coordinate';
 
 export interface Options {
-    className: string;
-    apiKey: string;
-    authentication: string;
+    className?: string;
+    apiKey?: string;
+    authentication?: string;
     target?: Element | string;
     label?: string;
     placeholder?: string;
@@ -16,7 +16,7 @@ export interface Options {
     maxItems?: number;
     maxHistory?: number;
     getTitle?: (f: Feature) => string;
-    autocomplete?: (s: String, callback: () => any) => any; //TODO not sure
+    autocomplete?: (s: String, cback: ([])) => [] | false //TODO: https://github.com/Viglino/ol-ext/issues/484#issuecomment-721194232
     timeout?: number
 }
 
@@ -61,5 +61,5 @@ export default class RoutingGeoportail extends ol_control_Control {
      * @param {function} onsuccess callback
      * @param {function} onerror callback
      */
-    ajax(url: string, onsuccess: (...params: any[]) => any, onerror: (...params: any[]) => any): void;
+    ajax(url: string, onsuccess: (...params: any[]) => void, onerror: (...params: any[]) => void): void;
 }

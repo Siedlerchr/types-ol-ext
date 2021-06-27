@@ -1,10 +1,11 @@
 import Button from './Button';
+import BaseEvent from 'ol/events/Event';
 
 export interface Options {
     className: string;
     title: string;
     html: string;
-    handleClick: (...params: any[]) => any;
+    handleClick: (e: Event) => void;
 }
 /** A simple push button control drawn as text
  * @constructor

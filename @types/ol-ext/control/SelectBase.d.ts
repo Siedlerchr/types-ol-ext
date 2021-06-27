@@ -2,8 +2,25 @@ import Collection from 'ol/Collection';
 import ol_control_Control from 'ol/control/Control';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
-import { condition } from './control';
 
+/**
+ *  '=': '=',
+  '!=': '≠',
+  '<': '<',
+  '<=': '≤',
+  '>=': '≥',
+  '>': '>',
+  'contain': '⊂', // ∈
+  '!contain': '⊄',	// ∉
+  'regexp': '≃',
+  '!regexp': '≄'
+ */
+export type operators = '=' | '!=' | '<' | '>' | '<=' | '>=' | '>'| 'contain'| '!contain' | 'regexp' | '!regexep'
+export interface condition {
+    attr: string;
+    op: operators;
+    val: string;
+}
 export interface Options {
     className: string;
     target: Element | undefined;
@@ -41,27 +58,12 @@ export default class SelectBase extends ol_control_Control {
     /** List of operators / translation
      * @api
      */
-    operationsList: any;
+    operationsList: any; //TODO
     /** Escape string for regexp
      * @param {string} search
      * @return {string}
      */
-    _escape(search: string): string;
-    /** Selection features in a list of features
-     * @param {Array<Feature>} result the current list of features
-     * @param {Array<Feature>} features to test in
-     * @param {Object} condition
-     *  @param {string} condition.attr attribute name
-     *  @param {string} condition.op operator
-     *  @param {any} condition.val value to test
-     * @param {boolean} all all conditions must be valid
-     * @param {boolean} usecase use case or not when testing strings
-     */
-    _selectFeatures(result: Feature[], features: Feature[], condition: {
-        attr: string;
-        op: string;
-        val: any;
-    }, all: boolean, usecase: boolean): void;
+
     /** Get vector source
      * @return {Array<VectorSource>}
      */
@@ -75,9 +77,9 @@ export default class SelectBase extends ol_control_Control {
      * @return {Array<Feature>}
      * @fires select
      */
-    doSelect(options: {
-        useCase: boolean;
-        matchAll: boolean;
-        conditions: condition[];
+    doSelect(options?: {
+        useCase?: boolean;
+        matchAll?: boolean;
+        conditions?: condition[];
     }): Feature[];
 }

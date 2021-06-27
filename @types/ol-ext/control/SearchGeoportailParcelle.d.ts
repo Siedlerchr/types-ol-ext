@@ -33,8 +33,7 @@ export interface Options extends SearchOptions {
  *	@param {integer | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
  *
  *	@param {Number} options.pageSize item per page for parcelle list paging, use -1 for no paging, default 5
- * @see {@link https://geoservices.ign.fr/documentation/geoservices/geocodage.html}
- */
+ * @see {@link https://geoservices.ign.fr/documentation/geoservices/geocodage.html} */
 export default class SearchGeoportailParcelle extends SearchJSON {
     constructor(options: Options);
     /** Set the input parcelle
@@ -46,16 +45,16 @@ export default class SearchGeoportailParcelle extends SearchJSON {
      * @param {boolean} search start a search
      */
     setParcelle(p?: {
-        Commune: string;
-        CommuneAbsorbee: string;
-        Section: string;
-        Numero: string;
+        Commune?: string;
+        CommuneAbsorbee?: string;
+        Section?: string;
+        Numero?: string;
     }, search?: boolean): void;
+
     /** Activate parcelle inputs
      * @param {bolean} b
      */
     activateParcelle(b: boolean): void;
-
 
 
     /** Send search request for a parcelle number

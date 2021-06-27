@@ -1,7 +1,7 @@
-import { Overlay } from 'ol';
+import { Overlay as ol_Overlay } from 'ol';
 import { Coordinate } from 'ol/coordinate';
-import Feature from 'ol/Feature';
 import OverlayPositioning from 'ol/OverlayPositioning';
+import Feature from 'ol/Feature';
 
 /** Template attributes for popup
  * @typedef {Object} TemplateAttributes
@@ -12,11 +12,11 @@ import OverlayPositioning from 'ol/OverlayPositioning';
  * @property {boolean|function} visible boolean or a function (feature, value) that decides the visibility of a attribute entry
  */
 export declare type TemplateAttributes = {
-    title: string;
-    format: (...params: any[]) => any;
-    before: string;
-    after: string;
-    visible: boolean | ((...params: any[]) => any);
+    title?: string;
+    format?: (val: any, feature: Feature) => any;
+    before?: string;
+    after?: string;
+    visible?: boolean | ((feature: Feature, val: any) => boolean);
 };
 
 /** Template
@@ -25,11 +25,12 @@ export declare type TemplateAttributes = {
  * @property {Object.<TemplateAttributes>} attributes a list of template attributes
  */
 export declare type Template = {
-    title: string | ((...params: any[]) => any);
-    attributes: {
+    title?: string | ((feature: Feature) => string);
+    attributes?: {
         [key: string]: any;
     };
 };
+
 
 
 /** Openlayers Overlay.
@@ -39,12 +40,13 @@ export declare type Template = {
  */
 
  export interface Options {
-    popupClass: string;
-    closeBox: boolean;
-    onclose: ((...params: any[]) => any) | undefined;
-    onshow: ((...params: any[]) => any) | undefined;
-    offsetBox: number | number[];
-    positionning: OverlayPositioning | string | undefined;
+    popupClass?: string;
+    anim?: boolean;
+    closeBox?: boolean;
+    onclose?: ((...params: any[]) => any);
+    onshow?: ((...params: any[]) => any);
+    offsetBox?: number | number[];
+    positioning?: OverlayPositioning | string;
  }
 /**
  * @classdesc
@@ -58,22 +60,25 @@ popup.show(coordinate, "Hello!");
 popup.hide();
 *
 * @constructor
-* @extends {Overlay}
+* @extends {ol_Overlay}
+* @fires show
+* @fires hide
 * @param {} options Extend Overlay options
 *	@param {String} options.popupClass the a export class of the overlay to style the popup.
-*	@param {bool} options.closeBox popup has a close box, default false.
+*	@param {boolean} options.anim Animate the popup the popup, default false.
+*	@param {boolean} options.closeBox popup has a close box, default false.
 *	@param {function|undefined} options.onclose: callback function when popup is closed
 *	@param {function|undefined} options.onshow callback function when popup is shown
 *	@param {Number|Array<number>} options.offsetBox an offset box
-*	@param {OverlayPositioning | string | undefined} options.positionning
+*	@param {OverlayPositioning | string | undefined} options.positioning
 *		the 'auto' positioning var the popup choose its positioning to stay on the map.
 * @api stable
  */
-export default class Popup extends Overlay {
-    constructor(options: Options);
+export class Popup extends ol_Overlay {
+    constructor(options?: Options);
     /**
      * Set a close box to the popup.
-     * @param {bool} b
+     * @param {boolean} b
      * @api stable
      */
     setClosebox(b: boolean): void;
@@ -101,7 +106,7 @@ export default class Popup extends Overlay {
      * 		or 'auto' to var the popup choose the best position
      * @api stable
      */
-    setPositioning(pos: OverlayPositioning | string | undefined): void;
+    setPositioning(pos?: OverlayPositioning | string ): void;
     /** Check if popup is visible
     * @return {boolean}
      */
@@ -120,7 +125,7 @@ export default class Popup extends Overlay {
     popup.show("New informations");
     * @api stable
      */
-    show(coordinate: Coordinate | undefined, features: Feature | Feature[]): void;
+    show(coordinate: Coordinate | string, html?: string): void;
     /**
      * Hide the popup
      * @api stable

@@ -1,19 +1,15 @@
 import { Map as _ol_Map_ } from 'ol';
-import Collection from 'ol/Collection';
-import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import SelectBase from './SelectBase';
-import { condition } from './control';
-
 export interface Options {
-    className: string;
-    target: Element | undefined;
-    source: VectorSource | VectorSource[];
-    property: string;
-    max: number;
-    selectAll: number;
-    defaultLabel: string;
-    onchoice: ((...params: any[]) => any) | undefined;
+    className?: string;
+    target?: Element ;
+    source?: VectorSource | VectorSource[];
+    property?: string;
+    max?: number;
+    selectAll?: number;
+    defaultLabel?: string;
+    onchoice: ()=>void
 }
 /**
  * Select features by property using a popup
@@ -38,54 +34,9 @@ export default class SelectPopup extends SelectBase {
     * @param {_ol_Map_} map The map instance.
      */
     setMap(map: _ol_Map_): void;
-    /** Select features by attributes
-     */
-    doSelect(options: {
-        useCase: boolean;
-        matchAll: boolean;
-        conditions: condition[];
-    }): Feature[]; /** Set the popup values
+    /**
      * @param {Object} values a key/value list with key = property value, value = title shown in the popup, default search values in the sources
      */
-    setValues(values: any): void;
-    /** Set the current sources
-     * @param {VectorSource|Array<VectorSource>|undefined} source
-     */
-    setSources(source: VectorSource | VectorSource[] | undefined): void;
-    /** Set feature collection to search in
-     * @param {Collection<Feature>} features
-     */
-    setFeatures(features: Collection<Feature>): void;
-    /** Get feature collection to search in
-     * @return {Collection<Feature>}
-     */
-    getFeatures(): Collection<Feature>;
-    /** List of operators / translation
-     * @api
-     */
-    operationsList: any;
-    /** Escape string for regexp
-     * @param {string} search
-     * @return {string}
-     */
-    _escape(search: string): string;
-    /** Selection features in a list of features
-     * @param {Array<Feature>} result the current list of features
-     * @param {Array<Feature>} features to test in
-     * @param {Object} condition
-     *  @param {string} condition.attr attribute name
-     *  @param {string} condition.op operator
-     *  @param {any} condition.val value to test
-     * @param {boolean} all all conditions must be valid
-     * @param {boolean} usecase use case or not when testing strings
-     */
-    _selectFeatures(result: Feature[], features: Feature[], condition: {
-        attr: string;
-        op: string;
-        val: any;
-    }, all: boolean, usecase: boolean): void;
-    /** Get vector source
-     * @return {Array<VectorSource>}
-     */
-    getSources(): VectorSource[];
+    setValues(values: { [key: string]: any }): void;
+
 }

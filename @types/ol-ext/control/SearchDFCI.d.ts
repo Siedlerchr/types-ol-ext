@@ -1,4 +1,21 @@
-import Search from './Search';
+import Search from "./Search";
+import Feature from 'ol/Feature';
+
+export interface Options {
+    className?: string;
+    title?: string
+    target?: Element | string;
+    label?: string;
+    placeholder?: string;
+    typing?: number;
+    minLength?: number;
+    maxLength?: number;
+    maxItems?: number
+    url?: string;
+    position?: boolean;
+    getTitle?: (f: Feature) => string;
+    getSearchString?: (f: Feature) => string;
+}
 /**
  * Search on DFCI grid.
  *
@@ -19,56 +36,6 @@ import Search from './Search';
  *	@param {function | undefined} options.getSearchString a function that take a feature and return a text to be used as search string, default geTitle() is used as search string
  */
 export default class SearchDFCI extends Search {
-    constructor(Control?: any);
-    /** Autocomplete function
-    * @param {string} s search string
-    * @return {Array<any>|false} an array of search solutions or false if the array is send with the cback argument (asnchronous)
-    * @api
-     */
-    autocomplete(s: string): any[] | false;
-    /** Get the input field
-    *	@return {Element}
-    *	@api
-     */
-    getInputField(): Element;
-    /** Returns the text to be displayed in the menu
-    *	@param {any} f feature to be displayed
-    *	@return {string} the text to be displayed in the index, default f.name
-    *	@api
-     */
-    getTitle(f: any): string;
-    /** Force search to refresh
-     */
-    search(): void;
-    /** Set the input value in the form (for initialisation purpose)
-    *	@param {string} value
-    *	@param {boolean} search to start a search
-    *	@api
-     */
-    setInput(value: string, search: boolean): void;
-    /** A ligne has been clicked in the menu > dispatch event
-    *	@param {any} f the feature, as passed in the autocomplete
-    *	@api
-     */
-    select(f: any): void;
-    /** Save history (in the localstorage)
-     */
-    saveHistory(): void;
-    /** Restore history (from the localstorage)
-     */
-    restoreHistory(): void;
-    /**
-     * Remove previous history
-     */
-    clearHistory(): void;
-    /**
-     * Get history table
-     */
-    getHistory(): void;
-    /** Test if 2 features are equal
-     * @param {any} f1
-     * @param {any} f2
-     * @return {boolean}
-     */
-    equalFeatures(f1: any, f2: any): boolean;
+    constructor(options?: Options);
+
 }
