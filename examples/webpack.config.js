@@ -27,11 +27,7 @@ module.exports = {
         test: /\.ts$/,
         loader: 'ts-loader',
         options: {
-          compilerOptions: {
-            allowJs: false,
-            checkJs: false,
-            noEmit: false,
-          },
+          configFile: "examples/tsconfig.json",
         },
       },
     ],
