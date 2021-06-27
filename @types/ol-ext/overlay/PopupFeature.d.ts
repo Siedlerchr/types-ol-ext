@@ -1,19 +1,19 @@
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import OverlayPositioning from 'ol/OverlayPositioning';
-import { default as Popup, Template } from './Popup';
+import { Popup, Template } from './Popup';
 
 export interface Options {
-    popupClass: string;
-    closeBox: boolean;
-    onclose: ((...params: any[]) => any) | undefined;
-    onshow: ((...params: any[]) => any) | undefined;
-    offsetBox: number | number[];
-    positionning: OverlayPositioning | string | undefined;
-    template: Template;
-    canFix: boolean;
-    showImage: boolean;
-    maxChar: boolean;
+    popupClass?: string;
+    closeBox?: boolean;
+    onclose?: ((...params: any[]) => any) ;
+    onshow?: ((...params: any[]) => any);
+    offsetBox?: number | number[];
+    positionning?: OverlayPositioning | string;
+    template?: Template;
+    canFix?: boolean;
+    showImage?: boolean;
+    maxChar?: boolean;
 }
 /**
  * A popup element to be displayed on a feature.
@@ -34,17 +34,18 @@ export interface Options {
  *  @param {boolean} options.maxChar max char to display in a cell, default 200
  *  @api stable
  */
-export default class PopupFeature extends Popup {
-    constructor(options: Options);
+export class PopupFeature{ // we cannot use extends beacuse show breaks polymorphism
+    constructor(options?: Options);
     /** Set the template
      * @param {Template} template A template with a list of properties to use in the popup
      */
     setTemplate(template: Template): void;
-    /** Show the popup on the map
-     * @param {Coordinate|undefined} coordinate Position of the popup
-     * @param {Feature|Array<Feature>} features The features on the popup
-     */
-    show(coordinate: Coordinate | undefined, features: Feature | Feature[]): void;
+     /** Show the popup on the map
+   * @param {ol.coordinate|undefined} coordinate Position of the popup
+   * @param {ol.Feature|Array<ol.Feature>} features The features on the popup
+   * @param {ol.Feature} current The current feature if keepSelection = true, otherwise get the first feature
+   */
+    show(coordinate?: Coordinate, features?: Feature | Feature[], current?: Feature): void;
     /** Fix the popup
      * @param {boolean} fix
      */
@@ -61,7 +62,7 @@ export default class PopupFeature extends Popup {
      * @param {*} options Number or Date toLocaleString options
      * @return {function} a function that takes an attribute and return the formated attribute
      */
-    static localString(locales: string, options: any): (...params: any[]) => any;
+    static localString(locales: string, options: Intl.DateTimeFormatOptions| Intl.NumberFormatOptions): ( a: any) => any;
     /**
      * Set a close box to the popup.
      * @param {bool} b

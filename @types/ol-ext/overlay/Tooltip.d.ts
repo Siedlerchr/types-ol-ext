@@ -3,16 +3,16 @@ import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import Event from 'ol/events/Event';
 import OverlayPositioning from 'ol/OverlayPositioning';
-import { default as Popup } from './Popup';
+import { Popup } from './Popup';
 
 export interface Options {
-    popupClass: string;
-    maximumFractionDigits: number;
-    formatLength: (...params: any[]) => any;
-    formatArea: (...params: any[]) => any;
-    getHTML: (...params: any[]) => any;
-    offsetBox: number | number[];
-    positionning: OverlayPositioning | string | undefined;
+    popupClass?: string;
+    maximumFractionDigits?: number;
+    formatLength?: (length: number) => string;
+    formatArea?: (area: number) => string;
+    getHTML?: (feature: Feature, info: string) => string;
+    offsetBox?: number | number[];
+    positionning?: OverlayPositioning | string ;
 }
 /** A tooltip element to be displayed over the map and attached on the cursor position.
  * @constructor
@@ -29,7 +29,7 @@ export interface Options {
  * @api stable
  */
 export default class Tooltip extends Popup {
-    constructor(options: Options);
+    constructor(options?: Options);
     /**
      * Set the map instance the control is associated with
      * and add its controls associated to this map.
@@ -42,7 +42,7 @@ export default class Tooltip extends Popup {
      * @param {string} info the info string
      * @api
      */
-    getHTML(feature: Feature | undefined, info: string): void;
+    getHTML(feature?: Feature, info?: string): void;
     /** Set the Tooltip info
      * If information is not null it will be set with a delay,
      * thus watever the information is inserted, the significant information will be set.
@@ -50,7 +50,7 @@ export default class Tooltip extends Popup {
      * ttip.set('info','ok'); ttip.set('info', null); will set null
      * @param {string} what The information to display in the tooltip, default remove information
      */
-    setInfo(what: string): void;
+    setInfo(what?: string): void;
     /** Remove the current featue attached to the tip
      * Similar to setFeature() with no argument
      */
@@ -103,7 +103,7 @@ export default class Tooltip extends Popup {
      * 		or 'auto' to var the popup choose the best position
      * @api stable
      */
-    setPositioning(pos: OverlayPositioning | string | undefined): void;
+    setPositioning(pos?: OverlayPositioning | string): void;
     /** Check if popup is visible
     * @return {boolean}
      */
@@ -122,7 +122,6 @@ export default class Tooltip extends Popup {
     popup.show("New informations");
     * @api stable
      */
-    show(coordinate: Coordinate | undefined, features: Feature | Feature[]): void;
     /**
      * Hide the popup
      * @api stable
