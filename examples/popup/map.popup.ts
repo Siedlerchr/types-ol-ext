@@ -5,7 +5,7 @@ import { GeoJSON } from 'ol/format';
 import { Style, Icon } from 'ol/style';
 import { Select } from 'ol/interaction'
 
-import Popup from 'ol-ext/overlay/Popup'
+import { Popup } from 'ol-ext/overlay/Popup'
 
 // Layers
 const stamen = new Tile({
