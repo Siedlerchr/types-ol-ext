@@ -25,5 +25,5 @@ import FillPattern from './FillPattern';
         stroke: Stroke;
         prefix: string;
     }): void;
-   
+
 

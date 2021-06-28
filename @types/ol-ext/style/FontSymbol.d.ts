@@ -1,11 +1,15 @@
+import _ol_ImageStyle  from 'ol/style/Image';
 import { Fill, Stroke, RegularShape } from 'ol/style';
 
+
+export type Form = 'none' | 'circle' | 'poi' | 'bubble' | 'marker' | 'coma' | 'shield' | 'blazon' | 'bookmark' | 'hexagon' | 'diamond' |
+    'triangle' | 'sign' | 'ban' | 'lozenge' | 'square';
 export interface Options {
     color?: string;
     glyph?: string | null;
     text?: string;
     font?: string;
-    form?: string;
+    form?: Form;
     radius?: number;
     rotation?: number;
     rotateWithView?: boolean;
@@ -60,18 +64,19 @@ export interface Glyph {
  *  @param {Fill} options.fill
  *  @param {Stroke} options.stroke
  * @extends {RegularShape}
- * @implements {structs.IHasChecksum}
  * @api
  */
 export default class FontSymbol extends RegularShape {
     constructor(options?: Options);
     /** Cool stuff to get the image symbol for a style
      */
-    getImagePNG(): string | boolean;
     /**
      *	Font defs
      */
-    defs: any;
+    defs: {
+        fonts: any;
+        glyphs: any;
+    };
     /** Static function : add new font defs
      * @param {String|Object} font the font desciption
      * @param {} glyphs a key / value list of glyph definitions.
@@ -79,7 +84,7 @@ export default class FontSymbol extends RegularShape {
      * 		the value is an object that code the font, the caracter code,
      * 		the name and a search string for the glyph.
      */
-    static addDefs(font: string | Font | any, glyphs: { [key: string]: Glyph} ): void;
+    static addDefs(font: string | Font | any, glyphs: { [key: string]: Glyph }): void;
     /**
      * Clones the style.
      * @return {FontSymbol}
@@ -103,14 +108,14 @@ export default class FontSymbol extends RegularShape {
      * @return {Glyph}
      * @api
      */
-    getGlyph(name: string | undefined): Glyph;
+    getGlyph(name?: string): Glyph;
     /** Get glyph definition given a text and a font
      * @param {string|undefined} text
      * @param {string} [font] the font for the text
      * @return {Glyph}
      * @api
      */
-    getTextGlyph(text: string | undefined, font: string): Glyph;
+    getTextGlyph(text?: string, font?: string): Glyph;
     /**
      * Get the glyph name.
      * @return {string} the name
@@ -118,13 +123,15 @@ export default class FontSymbol extends RegularShape {
      */
     getGlyphName(): string;
     /**
-     * Get the stroke style for the symb
+     * Get the font info
      * @return {Font}
      * @api
      */
     getFontInfo(): Font;
-    /**
-     * @inheritDoc
-     */
+
     getChecksum(): string;
+}
+
+export interface ImageStyle extends _ol_ImageStyle {
+    getImagePNG(): string | boolean;
 }

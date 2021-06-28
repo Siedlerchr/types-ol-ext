@@ -2,28 +2,28 @@ import { Fill, Image } from 'ol/style';
 import { Color } from 'ol/color';
 
 export interface FillPatternOptions {
-    size: number;
-    width: number;
-    height: number;
-    circles: number[][];
-    lines: number[][];
-    stroke: number;
-    fill: boolean;
-    char: string;
-    font: string;
+    size?: number;
+    width?: number;
+    height?: number;
+    circles?: number[][];
+    lines?: number[][];
+    stroke?: number;
+    fill?: boolean;
+    char?: string;
+    font?: string;
 }
 
 export interface Options {
-    image: Image | undefined;
-    opacity: number | undefined;
-    pattern: FillPattern;
-    color: Color;
-    fill: Color;
-    offset: number;
-    Size: number;
-    spacing: number;
-    angle: number | boolean;
-    scale: number;
+    image?: Image;
+    opacity?: number;
+    pattern?: FillPattern;
+    color?: Color;
+    fill?: Color;
+    offset?: number;
+    Size?: number;
+    spacing?: number;
+    angle?: number | boolean;
+    scale?: number;
 }
 /**
  * @classdesc
@@ -42,7 +42,6 @@ export interface Options {
  *	@param {number|bool} options.angle angle for hash pattern / true for 45deg dot/circle/cross
  *	@param {number} options.scale pattern scale
  * @extends {Fill}
- * @implements {structs.IHasChecksum}
  * @api
  */
 export default class FillPattern extends Fill {
@@ -56,10 +55,6 @@ export default class FillPattern extends Fill {
     *	@return {canvas}
      */
     getImage(): HTMLCanvasElement;
-    /** Get pattern
-    *	@param {olx.style.FillPatternOption}
-     */
-    getPattern_(options: FillPatternOptions): void;
     /** Static fuction to add char patterns
     *	@param {title}
     *	@param {olx.fillpattern.Option}
@@ -77,5 +72,219 @@ export default class FillPattern extends Fill {
     /** Patterns definitions
         Examples : http://seig.ensg.ign.fr/fichchap.php?NOFICHE=FP31&NOCHEM=CHEMS009&NOLISTE=1&N=8
      */
-    patterns: any;
+    patterns: {
+        hatch: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+        };
+        cross: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+        };
+        dot:  {
+            width: number;
+            height: number;
+            circles: number[][];
+            stroke: boolean;
+            fill: boolean;
+        };
+        circle: {
+            width: number;
+            height: number;
+            circles: number[][];
+            stroke: number;
+            fill: boolean;
+        };
+        square: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+            fill: boolean;
+        };
+        tile: {
+            width: number;
+            height: number;
+            lines: number[][];
+            fill: boolean;
+        };
+        woven:  {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+        };
+        crosses:  {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+        };
+        caps: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+        };
+        nylon: {
+            width: number;
+            height: number;
+            lines: number[][];
+            repeat: number[][];
+            stroke: number;
+        };
+        hexagon: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+            repeat: number[][];
+        };
+        cemetry: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+            repeat: number[][];
+        };
+        sand: {
+            width: number;
+            height: number;
+            circles: number[][];
+            fill: number;
+        };
+        conglomerate: {
+            width: number;
+            height: number;
+            circles: number[][];
+            lines: number[][];
+            stroke: number;
+        };
+        gravel: {
+            width: number;
+            height: number;
+            circles: number[][];
+            lines: number[][];
+            stroke: number;
+        };
+        brick: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+        };
+        dolomite: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+        };
+        coal: {
+            width: number;
+            height: number;
+            lines: number[][];
+            fill: number;
+        };
+        breccia: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+        };
+        clay: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+        };
+        flooded: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+        };
+        chaos: {
+            width: number;
+            height: number;
+            lines: number[][];
+            fill: number;
+        };
+        grass: {
+            width: number;
+            height: number;
+            lines: number[][];
+            repeat: number[][];
+            stroke: number;
+        };
+        swamp: {
+            width: number;
+            height: number;
+            lines: number[][];
+            repeat: number[][];
+            stroke: number;
+        };
+        wave: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+        };
+        vine: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+        };
+        forest: {
+            width: number;
+            height: number;
+            circles: number[][];
+            stroke: number;
+        };
+        scrub: {
+            width: number;
+            height: number;
+            lines: number[][];
+            circles: number[][];
+            stroke: number;
+        };
+        tree: {
+            width: number;
+            height: number;
+            lines: number[][];
+            repeat: number[][];
+            stroke: number;
+        };
+        pine: {
+            width: number;
+            height: number;
+            lines: number[][];
+            repeat: number[][];
+            stroke: number;
+        };
+        pines: {
+            width: number;
+            height: number;
+            lines: number[][];
+            repeat: number[][];
+            stroke: number;
+        };
+        rock: {
+            width: number;
+            height: number;
+            lines: number[][];
+            repeat: number[][];
+            stroke: number;
+        };
+        rocks: {
+            width: number;
+            height: number;
+            lines: number[][];
+            stroke: number;
+        };
+    };
 }

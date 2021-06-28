@@ -1,17 +1,18 @@
 import { Stroke, RegularShape } from 'ol/style';
 import { Color } from 'ol/color';
 
+export type chartType = 'pie' | 'pie3d' | 'donut' | 'bar';
 export interface Options {
-    type: string;
-    radius: number;
-    rotation: number;
-    snapToPixel: boolean;
-    stroke: Stroke;
-    colors: string | Color[];
-    offsetX: number;
-    offsetY: number;
-    animation: number;
-    max: number;
+    type: chartType;
+    radius?: number;
+    rotation?: number;
+    snapToPixel?: boolean;
+    stroke?: Stroke;
+    colors?: string | Color[];
+    offsetX?: number;
+    offsetY?: number;
+    animation?: number;
+    max?: number;
 }
 /**
  * @classdesc
@@ -34,11 +35,8 @@ export interface Options {
  * @implements {structs.IHasChecksum}
  * @api
  */
-export default class Chart extends RegularShape {
-    constructor(options: Options);
-    /** Default color set: classic, dark, pale, pastel, neon
-     */
-    static colors: any;
+export class Chart extends RegularShape {
+    constructor(options?: Options);
     /**
      * Clones the style.
      * @return {style.Chart}
@@ -46,7 +44,7 @@ export default class Chart extends RegularShape {
     clone(): Chart;
     /** Get data associatied with the chart
      */
-    getData(): void;
+    getData(): number[];
     /** Set data associatied with the chart
     *	@param {Array<number>}
      */
@@ -58,7 +56,7 @@ export default class Chart extends RegularShape {
     *	@param {number} symbol radius
     *	@param {number} donut ratio
      */
-    setRadius(symbol: number, donut: number): void;
+    setRadius(symbol: number, ratio: number): void;
     /** Set animation step
     *	@param {false|number} false to stop animation or the step of the animation [0,1]
      */
@@ -67,4 +65,13 @@ export default class Chart extends RegularShape {
      * @inheritDoc
      */
     getChecksum(): string;
+}
+export declare namespace Chart {
+   export namespace colors {
+        const classic: string[];
+        const dark: string[];
+        const pale: string[];
+        const pastel: string[];
+        const neon: string[];
+    }
 }

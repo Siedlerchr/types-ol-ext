@@ -1,11 +1,11 @@
 import { Fill, RegularShape } from 'ol/style';
 
 export interface Options {
-    fill: Fill | undefined;
-    radius: number;
-    blur: number;
-    offsetX: number;
-    offsetY: number;
+    fill?: Fill ;
+    radius?: number;
+    blur?: number;
+    offsetX?: number;
+    offsetY?: number;
 }
 /**
  * @classdesc
@@ -19,11 +19,10 @@ export interface Options {
  * 	 @param {number} options.offsetX x offset, default 0
  * 	 @param {number} options.offsetY y offset, default 0
  * @extends {style.RegularShape}
- * @implements {structs.IHasChecksum}
  * @api
  */
 export default class Shadow extends RegularShape {
-    constructor(options: Options);
+    constructor(options?: Options);
     /**
      * Clones the style.
      * @return {style.Shadow}
