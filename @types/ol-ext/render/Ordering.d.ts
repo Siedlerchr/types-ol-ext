@@ -1,15 +1,16 @@
 import { Geometry } from 'ol/geom';
+import {FeatureLike} from "ol/Feature";
 
 /** y-Ordering
 *	@return ordering function (f0,f1)
   */
-declare function yOrdering(): (f0: Geometry, f1: Geometry) => number;
+declare function yOrdering(): (f0: FeatureLike, f1: FeatureLike) => number;
 
 export interface ZIndexOptions {
   /** ordering attribute, default zIndex */
   attribute?: string;
   /** ordering function for equal values */
-  equalFn?: (f0: Geometry, f1: Geometry) => number;
+  equalFn?: (f0: FeatureLike, f1: FeatureLike) => number;
 }
 
 /** Order with a feature attribute

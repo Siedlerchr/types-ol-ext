@@ -1,16 +1,21 @@
 import FillPattern from './FillPattern';
+import { Image, Fill, Stroke } from 'ol/style';
+import { ColorLike } from 'ol/colorlike';
+import { Size } from 'ol/size';
+import { FillPatternOptions } from 'ol-ext/style/FillPattern';
 
+export interface Options {
+    image?: Image;
+    opactiy?: number;
+    pattern?: FillPattern;
+    color?: ColorLike;
+    fill?: Fill;
+    offset?: number;
+    Size?: number;
+    spacing?: number
+    angle?: number | boolean;
+    scale?: number;
 
-export interface FillPatternOptions {
-    size: number;
-    width: number;
-    height: number;
-    circles: number[][];
-    lines: number[][];
-    stroke: number;
-    fill: boolean;
-    char: string;
-    font: string;
 }
 /**
  * @classdesc
@@ -28,12 +33,11 @@ export interface FillPatternOptions {
  *	@param {number} options.spacing spacing for hash/dot/circle/cross pattern
  *	@param {number|bool} options.angle angle for hash pattern / true for 45deg dot/circle/cross
  *	@param {number} options.scale pattern scale
- * @extends {Fill}
- * @implements {structs.IHasChecksum}
+ * @extends {Stroke}
  * @api
  */
-export default class StrokePattern extends FillPattern {
-    constructor(options: FillPatternOptions);
+export default class StrokePattern extends Stroke {
+    constructor(options?: Options);
     /**
      * Clones the style.
      * @return {style.StrokePattern}
