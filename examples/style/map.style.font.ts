@@ -7,7 +7,7 @@ import { FeatureLike } from 'ol/Feature';
 import Ordering from 'ol-ext/render/Ordering'
 import { Select } from 'ol/interaction'
 
-import FontSymbol from 'ol-ext/style/FontSymbol';
+import FontSymbol, { Form } from 'ol-ext/style/FontSymbol';
 import Shadow from 'ol-ext/style/Shadow';
 
 import 'ol-ext/style/FontMakiDef.js'
@@ -82,7 +82,7 @@ function getFeatureStyle (feature: FeatureLike): Style[] {
     // Font style
     st.push ( new Style({
         image: new FontSymbol({
-            form: document.querySelector<HTMLSelectElement>("#form")!.value, //"hexagone", 
+            form: document.querySelector<HTMLSelectElement>("#form")!.value as Form, //"hexagone",
             gradient: document.querySelector<HTMLInputElement>("#gradient")!.checked,
             glyph: theGlyph,
             text: theText,    // text to use if no glyph is defined
