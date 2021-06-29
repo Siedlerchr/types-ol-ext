@@ -23,7 +23,7 @@
    npm run lint
    ```
 
-2. Prepare package on `./ol-ext` folder
+2. Prepare package on `./npm` folder
 
    ```bash
    npm run prepare-npm
@@ -34,11 +34,11 @@
 1. Check what contents are published by dry-run.
 
    ```bash
-   npm publish ./ol-ext --access=public --dry-run
+   npm publish ./npm --access=public --dry-run
    ```
 
 2. Publish NPM package.
 
    ```bash
-   npm publish ./ol-ext --access=public
+   npm publish ./npm --access=public
    ```
