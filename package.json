@@ -8,6 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tsc -p tsconfig.lint.json --pretty && tslint -p tsconfig.lint.json",
     "dtslint": "dtslint types",
+    "replace-examples": "node scripts/replaceExampleHtmlJsTags.js",
+    "copy-examples": "node scripts/copyExampleBackupJsToTs.js",
+    "build-examples": "webpack -c examples/webpack.config.js --progress --color",
     "prepare-npm": "rm -rf ./ol-ext && cp -r @types/ol-ext ./ol-ext && cp package.json ./ol-ext/ && cp README.md ./ol-ext/ && cp LICENSE ./ol-ext/"
   },
   "repository": {
@@ -31,11 +34,18 @@
     "jspdf": "^2.3.1"
   },
   "devDependencies": {
+    "@types/fs-extra": "^9.0.11",
+    "@types/glob": "^7.1.1",
     "dtslint": "^4.1.0",
+    "fs-extra": "^10.0.0",
     "jsdoc": "^3.6.7",
+    "node-html-parser": "^3.3.6",
     "ol": "^6.5.0",
     "ol-ext": "^3.2.2",
+    "ts-loader": "^9.2.3",
     "tsd": "^0.14.0",
-    "typescript": "^4.3.4"
+    "typescript": "^4.3.4",
+    "webpack": "^5.40.0",
+    "webpack-cli": "^4.7.2"
   }
 }
