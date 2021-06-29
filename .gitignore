@@ -75,6 +75,7 @@ typings/
 .history
 
 /ol-ext
+/npm
 
 # End of https://www.gitignore.io/api/visualstudiocode
 

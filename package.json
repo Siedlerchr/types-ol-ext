@@ -11,7 +11,7 @@
     "replace-examples": "node scripts/replaceExampleHtmlJsTags.js",
     "copy-examples": "node scripts/copyExampleBackupJsToTs.js",
     "build-examples": "webpack -c examples/webpack.config.js --progress --color",
-    "prepare-npm": "rm -rf ./ol-ext && cp -r @types/ol-ext ./ol-ext && cp package.json ./ol-ext/ && cp README.md ./ol-ext/ && cp LICENSE ./ol-ext/"
+    "prepare-npm": "rm -rf ./npm && cp -r @types/ol-ext ./npm && cp package.json ./npm/ && cp README.md ./npm/ && cp LICENSE ./npm/"
   },
   "repository": {
     "type": "git",
