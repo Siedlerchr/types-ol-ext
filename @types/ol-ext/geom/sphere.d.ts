@@ -1,4 +1,5 @@
 import { Coordinate } from 'ol/coordinate';
+import { Map as _ol_Map_ } from 'ol';
 
 /** Compute great circle bearing of two points.
  * @See http://www.movable-type.co.uk/scripts/latlong.html for the original code
@@ -15,7 +16,7 @@ export interface ComputeDestinationPointOptions {
   radius?: number;
 }
 
-/** 
+/**
  * Computes the destination point given an initial point, a distance and a bearing
  * @See http://www.movable-type.co.uk/scripts/latlong.html for the original code
  * @param {ol.coordinate} origin stating point in lonlat coords
@@ -42,3 +43,18 @@ export interface GreatCircleTrackOptions {
  * @return {Array<ol.coordinate>}
  */
 export function greatCircleTrack(origin: Coordinate, destination: Coordinate, options?: GreatCircleTrackOptions): Coordinate[];
+
+/** Get map scale factor
+ * @param {ol_Map} map
+ * @param {number} [dpi=96] dpi, default 96
+ * @return {number}
+ */
+export function getMapScale(map: _ol_Map_, dpi?: number): number
+
+/** Set map scale factor
+ * @param {ol_Map} map
+ * @param {number|string} scale the scale factor or a scale string as 1/xxx
+ * @param {number} [dpi=96] dpi, default 96
+ * @return {number} scale factor
+ */
+declare function setMapScale(map: _ol_Map_, scale: number | string, dpi?: number): number;
