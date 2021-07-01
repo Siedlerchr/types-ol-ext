@@ -3,9 +3,7 @@ import Feature from 'ol/Feature';
 import { LineString } from 'ol/geom';
 import { Vector } from 'ol/layer';
 import { Vector as VectorSource } from 'ol/source';
-/** Algorithms to on a graph (shortest path).
- * @namespace graph
- */
+import ol_Object from 'ol/Object';
 
  export interface Options {
     source: Vector;
@@ -32,8 +30,8 @@ import { Vector as VectorSource } from 'ol/source';
  *  @param {number} [options.stepIteration=2000] number of iterations before a calculating event is fired, default 2000
  *  @param {number} [options.epsilon=1E-6] geometric precision (min distance beetween 2 points), default 1E-6
  */
-declare class Dijskra {
-    constructor(options: Options);
+declare class Dijskra extends ol_Object {
+    constructor(options?: Options);
     /** Get the weighting of the edge, for example a speed factor
      * The function returns a value beetween ]0,1]
      * - 1   = no weighting
@@ -44,7 +42,7 @@ declare class Dijskra {
      * @return {number} a number beetween 0-1
      * @api
      */
-    weight(feature: Feature): number;
+    weight(feature?: Feature): number;
     /** Get the edge direction
      * -  0 : the road is blocked
      * -  1 : direct way

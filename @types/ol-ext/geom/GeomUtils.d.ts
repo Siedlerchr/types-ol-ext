@@ -47,7 +47,7 @@ export function ol_coordinate_offsetCoords(coords: Coordinate[], offset: number)
  * @param {Array<Coordinate>} coords
  * @return {} the index (-1 if not found) and the segment
  */
-export function ol_coordinate_findSegment(pt: Coordinate, coords: Coordinate[]): any;
+export function ol_coordinate_findSegment(pt: Coordinate, coords: Coordinate[]): { index: number, coords: number[] };
 /**
  * Split a Polygon geom with horizontal lines
  * @param {Array<Coordinate>} geom

@@ -4,7 +4,7 @@ export interface Options {
   /** interval beetween lines */
   interval: number;
   /** hatch angle in radian, default PI/2 */
-  angule: number;
+  angle: number;
 }
 
 declare module 'ol/geom/MultiPolygon' {
