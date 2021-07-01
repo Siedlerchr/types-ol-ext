@@ -9,8 +9,8 @@ import { Interaction } from 'ol/interaction';
  */
 
  export interface Options {
-    targetSTyle: Style | Style[];
-    composite: string;
+    targetStyle?: Style | Style[];
+    composite?: string;
  }
 /** Handles coordinates on the center of the viewport.
  * It can be used as abstract base class used for creating subclasses.
@@ -23,7 +23,7 @@ import { Interaction } from 'ol/interaction';
  *  - composite {string} composite operation : difference|multiply|xor|screen|overlay|darken|lighter|lighten|...
  */
 export default class CenterTouch extends Interaction {
-    constructor(options: Options);
+    constructor(options?: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.

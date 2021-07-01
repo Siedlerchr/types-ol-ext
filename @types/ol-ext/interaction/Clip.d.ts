@@ -4,8 +4,8 @@ import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { Pixel } from 'ol/pixel';
 
 export interface Options {
-    radius: number;
-    layers: Layer | Layer[];
+    radius?: number;
+    layers?: Layer | Layer[];
 }
 /** Clip interaction to clip layers in a circle
  * @constructor
