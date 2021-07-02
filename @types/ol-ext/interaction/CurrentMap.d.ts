@@ -5,7 +5,7 @@ import { Map as _ol_Map_ } from 'ol';
 export interface KeyEvent {
     type: string;
     map: _ol_Map_;
-    originalEvent: any;
+    originalEvent: any; // TODO: not sure
 }
 
 export interface Options {
@@ -39,6 +39,6 @@ declare class CurrentMap extends Interaction {
     /** Set the current map
      * @param {ol.Map} map
      */
-    setCurrentMap(map: any): void;
+    setCurrentMap(map: _ol_Map_): void;
 
 }

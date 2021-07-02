@@ -4,6 +4,11 @@ import { Vector as VectorSource } from 'ol/source';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { CurrentMap } from './CurrentMap';
 
+export enum CopyPasteEventType {
+    DELETESTART = 'deletestart',
+    DELETEEND = 'deleteend'
+}
+
 export interface Options {
     condition?: (e: MapBrowserEvent) => 'copy' | 'paste' | 'cut';
     features?: Collection<Feature>;

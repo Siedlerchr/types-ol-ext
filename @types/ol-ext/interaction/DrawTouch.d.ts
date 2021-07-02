@@ -6,25 +6,31 @@ import GeometryType from 'ol/geom/GeometryType';
 import CenterTouch from './CenterTouch';
 
 export interface Options {
-    source: VectorSource | undefined;
-    type: GeometryType;
-    tap: boolean;
-    targetStyle: Style | Style[];
-    composite: string;
+    source?: VectorSource;
+    type: GeometryType.POINT | GeometryType.LINE_STRING | GeometryType.POLYGON;
+    tap?: boolean;
+    style?: Style | Style[];
+    sketchStyle?: Style | Style[];
+    targetStyle?: Style | Style[];
+    composite?: string;
 }
-/** Interaction DrawTouch :
+/** Interaction DrawTouch : pointer is deferred to the center of the viewport and a target is drawn to materialize this point
+ * The interaction modifies map browser event coordinate and pixel properties to force pointer on the viewport center to any interaction that them.
  * @constructor
- * @extends {interaction.CenterTouch}
+ * @fires drawstart
+ * @fires drawend
+ * @fires drawabort
+ * @extends {ol_interaction_CenterTouch}
  * @param {olx.interaction.DrawOptions} options
- *	- source {VectorSource | undefined} Destination source for the drawn features.
- *	- type {GeometryType} Drawing type ('Point', 'LineString', 'Polygon') not ('MultiPoint', 'MultiLineString', 'MultiPolygon' or 'Circle'). Required.
- *	- tap {boolean} enable on tap, default true
- *	Inherited params
- *  - targetStyle {Style|Array<Style>} a style to draw the target point, default cross style
- *  - composite {string} composite operation : difference|multiply|xor|screen|overlay|darken|lighter|lighten|...
- */
-export default class DrawTouch extends CenterTouch {
-    constructor(options: Options);
+ *  @param {ol.source.Vector | undefined} options.source Destination source for the drawn features.
+ *  @param {ol.geom.GeometryType} options.type Drawing type ('Point', 'LineString', 'Polygon') not ('MultiPoint', 'MultiLineString', 'MultiPolygon' or 'Circle'). Required.
+ *	@param {boolean} [options.tap=true] enable point insertion on tap, default true
+ *  @param {ol.style.Style|Array<ol.style.Style>} [options.style] Drawing style
+ *  @param {ol.style.Style|Array<ol.style.Style>} [options.sketchStyle] Sketch style
+ *  @param {ol.style.Style|Array<ol.style.Style>} [options.targetStyle] a style to draw the target point, default cross style
+ *  @param {string} [options.composite] composite operation : difference|multiply|xor|screen|overlay|darken|lighter|lighten|...
+ */export default class DrawTouch extends CenterTouch {
+    constructor(options?: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.
@@ -36,6 +42,9 @@ export default class DrawTouch extends CenterTouch {
     * The interaction.Draw.EventType.DRAWSTART event is dispatched before inserting the feature.
      */
     startDrawing(): void;
+      /** Set geometry type
+     * @param {ol.geom.GeometryType} type
+     */
     /** Get geometry type
     * @return {GeometryType}
      */
