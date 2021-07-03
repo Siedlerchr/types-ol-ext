@@ -1,11 +1,14 @@
 import { Interaction } from 'ol/interaction';
 import { Condition as EventsConditionType } from 'ol/events/condition';
 import { Map as _ol_Map_ } from 'ol';
+import BaseEvent from 'ol/events/Event';
+import { EventsKey } from 'ol/events';
+import { ObjectEvent } from 'ol/Object';
 
 export interface KeyEvent {
     type: string;
     map: _ol_Map_;
-    originalEvent: any; // TODO: not sure
+    originalEvent: KeyboardEvent;
 }
 
 export interface Options {
@@ -40,5 +43,30 @@ declare class CurrentMap extends Interaction {
      * @param {ol.Map} map
      */
     setCurrentMap(map: _ol_Map_): void;
+    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    un(type: string | string[], listener: (p0: any) => any): void;
+    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'change', listener: (evt: BaseEvent) => void): void;
+    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
+    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
+    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
+    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'error', listener: (evt: BaseEvent) => void): void;
+    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
+    on(type: 'focus', listener: (p0: FocusEvent) => void): EventsKey | EventsKey[];
+    once(type: 'focus', listener: (p0: FocusEvent) => void): EventsKey | EventsKey[];
+    un(type: 'focus', listener: (p0: FocusEvent) => void): void;
+}
 
+export class FocusEvent extends BaseEvent {
+    constructor(
+        type: 'focus',
+        map: _ol_Map_
+    );
+    map: _ol_Map_
 }

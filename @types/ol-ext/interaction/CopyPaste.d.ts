@@ -3,6 +3,7 @@ import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { CurrentMap } from './CurrentMap';
+import BaseEvent from 'ol/events/Event';
 
 export enum CopyPasteEventType {
     DELETESTART = 'deletestart',
@@ -71,4 +72,14 @@ export default class CopyPaste extends CurrentMap {
         destination?: VectorSource;
         silent?: boolean;
     }): void
+}
+
+export class CopyPasteEvent extends BaseEvent {
+    constructor(
+        type: CopyPasteEventType,
+        features: Feature[] | Collection<Feature>,
+        time: number
+    );
+    features: Feature[] | Collection<Feature>;
+    time: number;
 }

@@ -5,6 +5,11 @@ import { StyleLike } from 'ol/style/Style';
 import { Draw, Interaction } from 'ol/interaction';
 import Collection from 'ol/Collection';
 import Layer from 'ol-ext/filter/Base';
+import { EventsKey } from 'ol/events';
+import { ModifyEvent } from 'ol/interaction/Modify';
+import BaseEvent from 'ol/events/Event';
+import { DrawEvent } from 'ol/interaction/Draw';
+import { ObjectEvent } from 'ol/Object';
 
 export interface Options {
     layers?: Vector[] | ((...params: any[]) => any);
@@ -50,4 +55,34 @@ export default class DrawHole extends Draw {
      * @return {Feature}
      */
     getPolygon(): Feature;
+    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    un(type: string | string[], listener: (p0: any) => any): void;
+    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'change', listener: (evt: BaseEvent) => void): void;
+    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
+    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
+    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
+    on(type: 'drawabort', listener: (evt: DrawEvent) => void): EventsKey;
+    once(type: 'drawabort', listener: (evt: DrawEvent) => void): EventsKey;
+    un(type: 'drawabort', listener: (evt: DrawEvent) => void): void;
+    on(type: 'drawend', listener: (evt: DrawEvent) => void): EventsKey;
+    once(type: 'drawend', listener: (evt: DrawEvent) => void): EventsKey;
+    un(type: 'drawend', listener: (evt: DrawEvent) => void): void;
+    on(type: 'drawstart', listener: (evt: DrawEvent) => void): EventsKey;
+    once(type: 'drawstart', listener: (evt: DrawEvent) => void): EventsKey;
+    un(type: 'drawstart', listener: (evt: DrawEvent) => void): void;
+    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'error', listener: (evt: BaseEvent) => void): void;
+    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
+    on(type: 'modifyend', listener: (evt: ModifyEvent) => void): EventsKey;
+    once(type: 'modifyend', listener: (evt: ModifyEvent) => void): EventsKey;
+    un(type: 'modifyend', listener: (evt: ModifyEvent) => void): void;
+    on(type: 'modifystart', listener: (evt: ModifyEvent) => void): EventsKey;
+    once(type: 'modifystart', listener: (evt: ModifyEvent) => void): EventsKey;
+    un(type: 'modifystart', listener: (evt: ModifyEvent) => void): void;
 }

@@ -1,6 +1,15 @@
 import Feature from 'ol/Feature';
 import { Interaction, Select } from 'ol/interaction';
-import {Options as SelectOptions} from 'ol/interaction/Select'
+import { Options as SelectOptions, SelectEvent } from 'ol/interaction/Select'
+import { Attributes } from 'ol-ext/interaction/GeolocationDraw';
+import BaseEvent from 'ol/events/Event';
+import { EventsKey } from 'ol/events';
+import { ObjectEvent } from 'ol/Object';
+
+export enum AttributeEventType {
+    SETATTRIBUTESTART = 'setattributestart',
+    SETATTRIBUTEEND = 'setattributeend'
+}
 
 export interface Options extends SelectOptions {
     active?: boolean;
@@ -19,7 +28,7 @@ export interface Options extends SelectOptions {
  * @param {*} properties The properties as key/value
  */
 export default class FillAttribute extends Select {
-    constructor(options: Options, properties: { [key: string]: any});
+    constructor(options: Options, properties: { [key: string]: any });
     /** Activate the interaction
      * @param {boolean} active
      */
@@ -27,7 +36,7 @@ export default class FillAttribute extends Select {
     /** Set attributes
      * @param {*} properties The properties as key/value
      */
-    setAttributes(properties: any): void;
+    setAttributes(properties: { [key: string]: any }): void;
     /** Set an attribute
      * @param {string} key
      * @param {*} val
@@ -46,5 +55,39 @@ export default class FillAttribute extends Select {
      * @param {Array<Feature>} features The features to modify
      * @param {*} properties The properties as key/value
      */
-    fill(features: Feature[], properties: {[key: string]: any}): void;
+    fill(features: Feature[], properties: { [key: string]: any }): void;
+
+    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    un(type: string | string[], listener: (p0: any) => any): void;
+    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'change', listener: (evt: BaseEvent) => void): void;
+    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
+    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
+    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
+    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'error', listener: (evt: BaseEvent) => void): void;
+    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
+    on(type: 'select', listener: (evt: SelectEvent) => void): EventsKey;
+    once(type: 'select', listener: (evt: SelectEvent) => void): EventsKey;
+    un(type: 'select', listener: (evt: SelectEvent) => void): void;
+
+    on(type: 'setattributestart', listener: (evt: AttributeEvent) => void): EventsKey;
+    once(type: 'setattributestart', listener: (evt: AttributeEvent) => void): EventsKey;
+    un(type: 'setattributestart' , listener: (evt: AttributeEvent) => void): void;
+
+    on(type: 'setattributeend', listener: (evt: AttributeEvent) => void): EventsKey;
+    once(type: 'setattributeend', listener: (evt: AttributeEvent) => void): EventsKey;
+    un(type: 'setattributeend' , listener: (evt: AttributeEvent) => void): void;
+}
+
+export class AttributeEvent extends BaseEvent {
+    constructor(type: AttributeEventType,
+        properties: { [key: string]: any }
+    );
+    properties: { [key: string]: any };
 }

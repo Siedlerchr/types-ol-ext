@@ -11,11 +11,11 @@ export interface Options {
 }
 /**
  * @constructor
- * @extends {interaction.Pointer}
- *	@param {flashlight.options} flashlight options param
- *		- color {Color} light color, default transparent
- *		- fill {Color} fill color, default rgba(0,0,0,0.8)
- *		- radius {number} radius of the flash
+ * @extends {ol_interaction_Pointer}
+ * @param {ol.flashlight.options} flashlight options param
+ *	@param {ol.Color} options.color light color, default transparent
+ *  @param {ol.Color} options.fill fill color, default rgba(0,0,0,0.8)
+ *  @param {number} options.radius radius of the flash
  */
 export default class Flashlight extends Pointer {
     constructor(options?: Options);
