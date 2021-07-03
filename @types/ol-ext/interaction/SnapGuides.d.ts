@@ -4,19 +4,23 @@ import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import { Style } from 'ol/style';
 import { Interaction, Draw, Modify } from 'ol/interaction';
+import VectorImageLayer from 'ol/layer/VectorImage';
+import VectorLayer from 'ol/layer/Vector';
 
 export interface Options {
-    pixelTolerance: number;
-    enableInitialGuides: boolean;
-    style: Style | Style[] | undefined;
+    pixelTolerance?: number;
+    enableInitialGuides?: boolean;
+    style?: Style | Style[];
+    vectorClass?: VectorLayer | VectorImageLayer
 }
 /** Interaction to snap to guidelines
  * @constructor
- * @extends {Interaction}
- * @param {olx.interaction.SnapGuidesOptions}
- *	- pixelTolerance {number | undefined} distance (in px) to snap to a guideline, default 10 px
- *  - enableInitialGuides {bool | undefined} whether to draw initial guidelines based on the maps orientation, default false.
- *	- style {Style | Array<Style> | undefined} Style for the sektch features.
+ * @extends {ol_interaction_Interaction}
+ * @param {*} options
+ *  @param {number | undefined} options.pixelTolerance distance (in px) to snap to a guideline, default 10 px
+ *  @param {bool | undefined} options.enableInitialGuides whether to draw initial guidelines based on the maps orientation, default false.
+ *  @param {ol_style_Style | Array<ol_style_Style> | undefined} options.style Style for the sektch features.
+ *  @param {*} options.vectorClass a vector layer class to create the guides with ol6, use ol/layer/VectorImage using ol6
  */
 export default class SnapGuides extends Interaction {
     constructor(options: Options);
@@ -31,10 +35,10 @@ export default class SnapGuides extends Interaction {
     * @param {boolean} active
      */
     setActive(active: boolean): void;
-    /** Clear previous added guidelines
+    /** Clear previous added guideliness
     * @param {Array<Feature> | undefined} features a list of feature to remove, default remove all feature
      */
-    clearGuides(features: Feature[] | undefined): void;
+    clearGuides(features?: Feature[] ): void;
     /** Get guidelines
     * @return {Collection} guidelines features
      */
@@ -43,7 +47,7 @@ export default class SnapGuides extends Interaction {
     * @param {Array<Coordinate>} v the direction vector
     * @return {Feature} feature guide
      */
-    addGuide(v: Coordinate[]): Feature;
+    addGuide(v: Coordinate[], ortho: boolean): Feature;
     /** Add a new orthogonal guide to snap to
     * @param {Array<Coordinate>} v the direction vector
     * @return {Feature} feature guide

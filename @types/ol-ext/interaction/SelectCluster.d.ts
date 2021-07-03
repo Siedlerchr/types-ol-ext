@@ -4,37 +4,38 @@ import { Vector } from 'ol/layer';
 import { Style } from 'ol/style';
 import { Select } from 'ol/interaction';
 import { Coordinate } from 'ol/coordinate';
+import { Extent } from 'ol/extent';
 
 export interface Options {
-    featureStyle: Style;
-    selectCluster: boolean;
-    PointRadius: number;
-    spiral: boolean;
-    circleMaxObject: number;
-    maxObjects: number;
-    animation: boolean;
-    animationDuration: number;
+    featureStyle?: Style;
+    selectCluster?: boolean;
+    pointRadius?: number;
+    spiral?: boolean;
+    circleMaxObject?: number;
+    maxObjects?: number;
+    animate?: boolean;
+    animationDuration?: number;
 }
 /**
  * @classdesc
  * Interaction for selecting vector features in a cluster.
- * It can be used as an interaction.Select.
+ * It can be used as an ol.interaction.Select.
  * When clicking on a cluster, it springs apart to reveal the features in the cluster.
  * Revealed features are selectable and you can pick the one you meant.
  * Revealed features are themselves a cluster with an attribute features that contain the original feature.
  *
  * @constructor
- * @extends {interaction.Select}
+ * @extends {ol.interaction.Select}
  * @param {olx.interaction.SelectOptions=} options SelectOptions.
- *  @param {style} options.featureStyle used to style the revealed features as options.style is used by the Select interaction.
+ *  @param {ol.style} options.featureStyle used to style the revealed features as options.style is used by the Select interaction.
  * 	@param {boolean} options.selectCluster false if you don't want to get cluster selected
- * 	@param {Number} options.PointRadius to calculate distance between the features
+ * 	@param {Number} options.pointRadius to calculate distance between the features
  * 	@param {bool} options.spiral means you want the feature to be placed on a spiral (or a circle)
- * 	@param {Number} options.circleMaxObject number of object that can be place on a circle
+ * 	@param {Number} options.circleMaxObjects number of object that can be place on a circle
  * 	@param {Number} options.maxObjects number of object that can be drawn, other are hidden
- * 	@param {bool} options.animation if the cluster will animate when features spread out, default is false
+ * 	@param {bool} options.animate if the cluster will animate when features spread out, default is false
  * 	@param {Number} options.animationDuration animation duration in ms, default is 500ms
- * @fires interaction.SelectEvent
+ * @fires ol.interaction.SelectEvent
  * @api stable
  */
 export default class SelectCluster extends Select {
@@ -55,16 +56,22 @@ export default class SelectCluster extends Select {
      * Get the layer for the revealed features
      * @api stable
      */
-    getLayer(feature: FeatureLike): Vector;
+    getLayer(): Vector;
     /**
      * Select a cluster
      * @param {Feature} a cluster feature ie. a feature with a 'features' attribute.
      * @api stable
      */
     selectCluster(a: Feature): void;
+
+    /** Helper function to get the extent of a cluster
+   * @param {ol.feature} feature
+   * @return {ol.extent|null} the extent or null if extent is empty (no cluster or superimposed points)
+   */
+    getClusterExtent(feature: Feature): Extent | null
     /**
      * Animate the cluster and spread out the features
      * @param {Array<Coordinate>} the center of the cluster
      */
-    animateCluster_(center: Array<Coordinate>, feature: Feature): void;
+    animateCluster_(center: Coordinate[], feature: Feature): void;
 }

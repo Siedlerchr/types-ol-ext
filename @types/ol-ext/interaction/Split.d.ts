@@ -5,30 +5,42 @@ import Feature from 'ol/Feature';
 import { Style } from 'ol/style';
 import { Interaction } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
+import VectorSource from 'ol/source/Vector';
+import BaseEvent from 'ol/events/Event';
+
+export enum SplitEventType {
+    BEFORESPLIT = 'beforesplit',
+    AFTERSPLIT = 'aftersplit'
+
+}
 
 export interface Options {
-    features: Collection<Feature>;
-    snapDistance: number;
-    cursor: string | undefined;
-    sketchStyle: Style | Style[] | undefined;
-    tolerance: ((...params: any[]) => number) | undefined;
+    source?: VectorSource | VectorSource[];
+    features?: Collection<Feature>;
+    snapDistance?: number;
+    cursor?: string;
+    filter?: (f: Feature) => boolean;
+    featureStyle?: Style | Style[];
+    sketchStyle?: Style | Style[];
+    tolerance?: number
 }
+
 /** Interaction split interaction for splitting feature geometry
  * @constructor
- * @extends {Interaction}
+ * @extends {ol_interaction_Interaction}
  * @fires  beforesplit, aftersplit, pointermove
  * @param {*}
- *  @param {VectorSource|Array{VectorSource}} options.source a list of source to split (configured with useSpatialIndex set to true)
- *  @param {Collection.<Feature>} options.features collection of feature to split
- *  @param {number} options.snapDistance distance (in px) to snap to an object, default 25px
+ *  @param {ol.source.Vector|Array<ol.source.Vector>} options.source a list of source to split (configured with useSpatialIndex set to true)
+ *  @param {ol.Collection.<ol.Feature>} options.features collection of feature to split
+ *  @param {integer} options.snapDistance distance (in px) to snap to an object, default 25px
  *	@param {string|undefined} options.cursor cursor name to display when hovering an objet
  *  @param {function|undefined} opttion.filter a filter that takes a feature and return true if it can be clipped, default always split.
- *  @param Style | Array<Style> | false | undefined} options.featureStyle Style for the selected features, choose false if you don't want feature selection. By default the default edit style is used.
- *  @param {Style | Array<Style> | undefined} options.sketchStyle Style for the sektch features.
- *  @param {function|undefined} options.tolerance Distance between the calculated intersection and a vertex on the source geometry below which the existing vertex will be used for the split.  Default is 1e-10.
+ *  @param ol_style_Style | Array<ol_style_Style> | false | undefined} options.featureStyle Style for the selected features, choose false if you don't want feature selection. By default the default edit style is used.
+ *  @param {ol_style_Style | Array<ol_style_Style> | undefined} options.sketchStyle Style for the sektch features.
+ *  @param {number|undefined} options.tolerance Distance between the calculated intersection and a vertex on the source geometry below which the existing vertex will be used for the split.  Default is 1e-10.
  */
 export default class Split extends Interaction {
-    constructor(options: Options);
+    constructor(options?: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.
@@ -51,4 +63,12 @@ export default class Split extends Interaction {
      * @param {MapBrowserEvent} evt Event.
      */
     handleMoveEvent(evt: MapBrowserEvent): void;
+}
+export class SplitEvent extends BaseEvent {
+    constructor(type: SplitEventType,
+        original: Feature,
+        toSplit: Feature[]
+    );
+    original: Feature;
+    toSplit: Feature[];
 }
