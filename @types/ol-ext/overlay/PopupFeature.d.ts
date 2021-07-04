@@ -1,7 +1,37 @@
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
+import { Overlay } from 'ol';
 import OverlayPositioning from 'ol/OverlayPositioning';
-import { Popup, Template } from './Popup';
+import { Select } from 'ol/interaction';
+
+
+/** Template attributes for popup
+ * @typedef {Object} TemplateAttributes
+ * @property {string} title
+ * @property {function} format a function that takes an attribute and a feature and returns the formated attribute
+ * @property {string} before string to instert before the attribute (prefix)
+ * @property {string} after string to instert after the attribute (sudfix)
+ * @property {boolean|function} visible boolean or a function (feature, value) that decides the visibility of a attribute entry
+ */
+export declare type TemplateAttributes = {
+    title?: string;
+    format?: (val: any, feature?: Feature) => any;
+    before?: string;
+    after?: string;
+    visible?: boolean | ((feature: Feature, val: any) => boolean);
+};
+
+/** Template
+ * @typedef {Object} Template
+ * @property {string|function} title title of the popup, attribute name or a function that takes a feature and returns the title
+ * @property {Object.<TemplateAttributes>} attributes a list of template attributes
+ */
+export declare type Template = {
+    title?: string | ((feature: Feature) => string);
+    attributes?: {
+        [key: string]: TemplateAttributes;
+    };
+};
 
 export interface Options {
     popupClass?: string;
@@ -9,8 +39,10 @@ export interface Options {
     onclose?: ((...params: any[]) => any) ;
     onshow?: ((...params: any[]) => any);
     offsetBox?: number | number[];
-    positionning?: OverlayPositioning | string;
+    positioning?: OverlayPositioning | string;
     template?: Template;
+    select?: Select;
+    keepSelection?: boolean;
     canFix?: boolean;
     showImage?: boolean;
     maxChar?: boolean;
@@ -19,7 +51,7 @@ export interface Options {
  * A popup element to be displayed on a feature.
  *
  * @constructor
- * @extends {Overlay.Popup}
+ * @extends {Overlay}
  * @param {} options Extend Popup options
  *  @param {String} options.popupClass the a export class of the overlay to style the popup.
  *  @param {bool} options.closeBox popup has a close box, default false.
@@ -34,7 +66,7 @@ export interface Options {
  *  @param {boolean} options.maxChar max char to display in a cell, default 200
  *  @api stable
  */
-export class PopupFeature{ // we cannot use extends beacuse show breaks polymorphism
+export default class PopupFeature extends Overlay { // we cannot use extends Popup, because show breaks polymorphism
     constructor(options?: Options);
     /** Set the template
      * @param {Template} template A template with a list of properties to use in the popup
@@ -54,15 +86,6 @@ export class PopupFeature{ // we cannot use extends beacuse show breaks polymorp
      * @return {boolean}
      */
     getFix(): boolean;
-    /** Get a function to use as format to get local string for an attribute
-     * if the attribute is a number: Number.toLocaleString()
-     * if the attribute is a date: Date.toLocaleString()
-     * otherwise the attibute itself
-     * @param {string} locales string with a BCP 47 language tag, or an array of such strings
-     * @param {*} options Number or Date toLocaleString options
-     * @return {function} a function that takes an attribute and return the formated attribute
-     */
-    static localString(locales: string, options: Intl.DateTimeFormatOptions| Intl.NumberFormatOptions): ( a: any) => any;
     /**
      * Set a close box to the popup.
      * @param {bool} b
@@ -104,3 +127,13 @@ export class PopupFeature{ // we cannot use extends beacuse show breaks polymorp
      */
     hide(): void;
 }
+
+/** Get a function to use as format to get local string for an attribute
+ * if the attribute is a number: Number.toLocaleString()
+ * if the attribute is a date: Date.toLocaleString()
+ * otherwise the attibute itself
+ * @param {string} locales string with a BCP 47 language tag, or an array of such strings
+ * @param {*} options Number or Date toLocaleString options
+ * @return {function} a function that takes an attribute and return the formated attribute
+ */
+export function ol_Overlay_PopupFeature_localString(locales?: string | string[], options?: Intl.DateTimeFormatOptions | Intl.NumberFormatOptions): (a: any) => any;
