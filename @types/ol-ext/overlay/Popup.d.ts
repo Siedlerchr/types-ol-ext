@@ -1,36 +1,6 @@
-import { Overlay as ol_Overlay } from 'ol';
+import { Overlay as Overlay } from 'ol';
 import { Coordinate } from 'ol/coordinate';
 import OverlayPositioning from 'ol/OverlayPositioning';
-import Feature from 'ol/Feature';
-
-/** Template attributes for popup
- * @typedef {Object} TemplateAttributes
- * @property {string} title
- * @property {function} format a function that takes an attribute and a feature and returns the formated attribute
- * @property {string} before string to instert before the attribute (prefix)
- * @property {string} after string to instert after the attribute (sudfix)
- * @property {boolean|function} visible boolean or a function (feature, value) that decides the visibility of a attribute entry
- */
-export declare type TemplateAttributes = {
-    title?: string;
-    format?: (val: any, feature: Feature) => any;
-    before?: string;
-    after?: string;
-    visible?: boolean | ((feature: Feature, val: any) => boolean);
-};
-
-/** Template
- * @typedef {Object} Template
- * @property {string|function} title title of the popup, attribute name or a function that takes a feature and returns the title
- * @property {Object.<TemplateAttributes>} attributes a list of template attributes
- */
-export declare type Template = {
-    title?: string | ((feature: Feature) => string);
-    attributes?: {
-        [key: string]: any;
-    };
-};
-
 
 
 /** Openlayers Overlay.
@@ -60,7 +30,7 @@ popup.show(coordinate, "Hello!");
 popup.hide();
 *
 * @constructor
-* @extends {ol_Overlay}
+* @extends {Overlay}
 * @fires show
 * @fires hide
 * @param {} options Extend Overlay options
@@ -74,7 +44,7 @@ popup.hide();
 *		the 'auto' positioning var the popup choose its positioning to stay on the map.
 * @api stable
  */
-export class Popup extends ol_Overlay {
+export default class Popup extends Overlay {
     constructor(options?: Options);
     /**
      * Set a close box to the popup.

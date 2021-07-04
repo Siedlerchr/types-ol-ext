@@ -3,15 +3,15 @@ import { Tile, Vector } from 'ol/layer';
 import { Stamen, Vector as VectorSource } from 'ol/source';
 import { GeoJSON } from 'ol/format';
 import { Style, Icon } from 'ol/style';
-import { Select } from 'ol/interaction'
+import { Select } from 'ol/interaction';
 
-import { Popup } from 'ol-ext/overlay/Popup'
+import Popup from 'ol-ext/overlay/Popup';
 
 // Layers
 const stamen = new Tile({
     source: new Stamen({ layer: 'terrain' })
 });
-stamen.set('title', 'terrain-background')
+stamen.set('title', 'terrain-background');
 
 const layers = [stamen];
 
