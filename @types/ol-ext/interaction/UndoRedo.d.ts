@@ -1,27 +1,46 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Interaction } from 'ol/interaction';
+import BaseEvent from 'ol/events/Event';
+
+export enum UndoRedoEventType {
+    UNDO = 'undo',
+    REDO = 'redo'
+}
+export interface Options {
+    maxLength?: number
+}
+
 /** Undo/redo interaction
  * @constructor
- * @extends {Interaction}
+ * @extends {ol_interaction_Interaction}
  * @fires undo
  * @fires redo
- * @param {*} options
+ * @fires change:add
+ * @fires change:remove
+ * @fires change:clear
+ * @param {Object} options
+ *  @param {number=} options.maxLength max undo stack length (0=Infinity), default Infinity
  */
-export default class UndoRedo extends Interaction {
-    constructor(options: any);
+export class UndoRedo extends Interaction {
+    constructor(options?: Options);
     /** Add a custom undo/redo
      * @param {string} action the action key name
      * @param {function} undoFn function called when undoing
      * @param {function} redoFn function called when redoing
      * @api
      */
-    define(action: string, undoFn: (...params: any[]) => any, redoFn: (...params: any[]) => any): void;
-    /** Set a custom undo/redo
+    define(action: string, undoFn: (e: UndoRedoEvent) => void, redoFn: (e: UndoRedoEvent) => void) : void; //TOOD unsure about the event type
+    /** Add a new custom undo/redo
      * @param {string} action the action key name
-     * @param {any} prop an object that will be passed in the undo/redo fucntions of the action
+     * @param {any} prop an object that will be passed in the undo/redo functions of the action
+     * @param {string} name action name
      * @return {boolean} true if the action is defined
      */
-    push(action: string, prop: any): boolean;
+    push(action: string, prop: any, name: string): boolean;
+    /** Remove undo action from the beginning of the stack.
+     * The action is not returned.
+     */
+    shift(): void
     /** Activate or deactivate the interaction, ie. records or not events on the map.
      * @param {boolean} active
      * @api stable
@@ -67,4 +86,11 @@ export default class UndoRedo extends Interaction {
      * @api
      */
     hasRedo(): number;
+}
+export class UndoRedoEvent extends BaseEvent {
+    constructor(
+        type: UndoRedoEventType,
+        action: any
+    );
+    action: any;
 }
