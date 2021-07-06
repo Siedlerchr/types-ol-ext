@@ -4,16 +4,17 @@ import { Vector } from 'ol/layer';
 import { StyleLike } from 'ol/style/Style';
 import { Select } from 'ol/interaction';
 import { Coordinate } from 'ol/coordinate';
+import { Options as SelectOptions } from 'ol/interaction/Select'
 
-export interface Options {
+export interface Options extends SelectOptions {
     featureStyle: StyleLike;
-    selectCluster: boolean;
+    selectCluster?: boolean;
     pointRadius: number;
-    spiral: boolean;
-    circleMaxObject: number;
-    maxObjects: number;
-    animation: boolean;
-    animationDuration: number;
+    spiral?: boolean;
+    circleMaxObject?: number;
+    maxObjects?: number;
+    animate: boolean;
+    animationDuration?: number;
 }
 /**
  * @classdesc
@@ -32,7 +33,7 @@ export interface Options {
  * 	@param {bool} options.spiral means you want the feature to be placed on a spiral (or a circle)
  * 	@param {Number} options.circleMaxObject number of object that can be place on a circle
  * 	@param {Number} options.maxObjects number of object that can be drawn, other are hidden
- * 	@param {bool} options.animation if the cluster will animate when features spread out, default is false
+ * 	@param {bool} options.animate if the cluster will animate when features spread out, default is false
  * 	@param {Number} options.animationDuration animation duration in ms, default is 500ms
  * @fires interaction.SelectEvent
  * @api stable
