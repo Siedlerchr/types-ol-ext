@@ -2,20 +2,23 @@ import { Pointer } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { Color } from 'ol/color';
 import { Pixel } from 'ol/pixel';
+import { Layer } from 'ol/layer';
 
 export interface Options {
-    color: Color;
+    layer?: Layer;
+    radius?: number;
+    interval?: number;
 }
 /**
-     * @constructor
-     * @extends {interaction.Pointer}
-     *	@param {flashlight.options} flashlight options param
-     *		- color {Color} light color, default transparent
-     *		- fill {Color} fill color, default rgba(0,0,0,0.8)
-     *		- radius {number} radius of the flash
-     */
+ * @constructor
+ * @extends {ol_interaction_Pointer}
+ * @param {*} options
+ *  @param {ol/layer/Layer} options.layer layer to animate
+ *  @param {number} options.radius raindrop radius
+ *  @param {number} options.interval raindrop interval (in ms), default 1000
+ */
 export default class Ripple extends Pointer {
-    constructor(options: Options);
+    constructor(options?: Options);
     /** Set the map > start postcompose
      */
     setMap(): void;
@@ -27,7 +30,5 @@ export default class Ripple extends Pointer {
     *	@param {Pixel|MapBrowserEvent}
      */
     rainDrop(e: Pixel | MapBrowserEvent): void;
-    /** Postcompose function
-     */
-    postcompose_(): void;
+
 }

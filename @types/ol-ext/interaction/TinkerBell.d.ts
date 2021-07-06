@@ -1,8 +1,9 @@
 import { Pointer } from 'ol/interaction';
 import { Color } from 'ol/color';
+import { Map as _ol_Map_ } from 'ol';
 
 export interface Options {
-    color: Color;
+    color?: Color;
 }
 /**
  * @constructor
@@ -11,10 +12,10 @@ export interface Options {
  *		- color {color} color of the sparkles
  */
 export default class TinkerBell extends Pointer {
-    constructor(options: Options);
+    constructor(options?: Options);
     /** Set the map > start postcompose
      */
-    setMap(): void;
+    setMap(map: _ol_Map_): void;
     /** Postcompose function
      */
     postcompose_(): void;

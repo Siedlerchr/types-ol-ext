@@ -1,10 +1,14 @@
-import { Map as _ol_Map_ } from 'ol';
+import { Map as _ol_Map_, MapBrowserEvent } from 'ol';
 import { Pointer } from 'ol/interaction';
 
+export interface Delta {
+    dpixel: number[];
+    traction: number[]
+}
 export interface Options {
-    onDrag: undefined;
-    Size: number;
-    alpha: number;
+    onDrag?: (delta: Delta, pos: MapBrowserEvent) => void; // TODO not sure
+    Size?: number;
+    alpha?: number;
 }
 /** Interaction splitter: acts as a split feature agent while editing vector features (LineString).
  * @constructor
@@ -15,11 +19,11 @@ export interface Options {
  *	- alpha {Number} opacity of the compass, default 0.5
  */
 export default class TouchCompass extends Pointer {
-    constructor(options: Options);
+    constructor(options?: Options);
     /** Compass Image as a JS Image object
     * @api
      */
-    compass: any;
+    compass: HTMLImageElement; //not sure
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.
