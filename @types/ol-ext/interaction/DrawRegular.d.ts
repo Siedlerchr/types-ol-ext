@@ -9,33 +9,34 @@ import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { Condition as EventsConditionType } from 'ol/events/condition';
 
 export interface Options {
-    source: Layer[];
-    features: Collection<Feature>;
-    style: StyleLike;
-    sides: number;
-    squareCondition: EventsConditionType | undefined;
-    centerCondition: EventsConditionType | undefined;
-    canRotate: boolean;
-    clickTolerance: number;
-    maxCircleCoordinates: number;
+    source?: Layer[];
+    features?: Collection<Feature>;
+    style?: StyleLike;
+    sides?: number;
+    squareCondition?: EventsConditionType;
+    centerCondition?: EventsConditionType;
+    canRotate?: boolean;
+    clickTolerance?: number;
+    maxCircleCoordinates?: number;
 }
+
 /** Interaction rotate
  * @constructor
- * @extends {Interaction}
+ * @extends {ol_interaction_Interaction}
  * @fires drawstart, drawing, drawend, drawcancel
  * @param {olx.interaction.TransformOptions} options
- *  @param {Array<Layer>} source Destination source for the drawn features
- *  @param {Collection<Feature>} features Destination collection for the drawn features
- *  @param {Style | Array.<Style> | StyleFunction | undefined} style style for the sketch
- *  @param {number} sides number of sides, default 0 = circle
- *  @param { events.ConditionType | undefined } squareCondition A function that takes an MapBrowserEvent and returns a boolean to draw square features.
- *  @param { events.ConditionType | undefined } centerCondition A function that takes an MapBrowserEvent and returns a boolean to draw centered features.
+ *  @param {Array<ol.Layer>} source Destination source for the drawn features
+ *  @param {ol.Collection<ol.Feature>} features Destination collection for the drawn features
+ *  @param {ol.style.Style | Array.<ol.style.Style> | ol.style.StyleFunction | undefined} style style for the sketch
+ *  @param {integer} sides number of sides, default 0 = circle
+ *  @param { ol.events.ConditionType | undefined } squareCondition A function that takes an ol.MapBrowserEvent and returns a boolean to draw square features.
+ *  @param { ol.events.ConditionType | undefined } centerCondition A function that takes an ol.MapBrowserEvent and returns a boolean to draw centered features.
  *  @param { bool } canRotate Allow rotation when centered + square, default: true
  *  @param { number } clickTolerance click tolerance on touch devices, default: 6
  *  @param { number } maxCircleCoordinates Maximum number of point on a circle, default: 100
  */
 export default class DrawRegular extends Interaction {
-    constructor(options: Options);
+    constructor(options?: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.
@@ -74,7 +75,11 @@ export default class DrawRegular extends Interaction {
     getSides(): number;
     /** Default start angle array for each sides
      */
-    startAngle: any;
+    startAngle: {
+        default: number;
+        3: number;
+        4: number;
+    };
     /** Get geom of the current drawing
     * @return {Polygon | Point}
      */
