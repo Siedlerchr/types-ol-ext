@@ -1,14 +1,14 @@
 import { Map as _ol_Map_ } from 'ol';
 import Feature, { FeatureLike } from 'ol/Feature';
 import { Vector } from 'ol/layer';
-import { Style } from 'ol/style';
+import { StyleLike } from 'ol/style/Style';
 import { Select } from 'ol/interaction';
 import { Coordinate } from 'ol/coordinate';
 
 export interface Options {
-    featureStyle: Style;
+    featureStyle: StyleLike;
     selectCluster: boolean;
-    PointRadius: number;
+    pointRadius: number;
     spiral: boolean;
     circleMaxObject: number;
     maxObjects: number;
@@ -26,9 +26,9 @@ export interface Options {
  * @constructor
  * @extends {interaction.Select}
  * @param {olx.interaction.SelectOptions=} options SelectOptions.
- *  @param {style} options.featureStyle used to style the revealed features as options.style is used by the Select interaction.
+ *  @param {StyleLike} options.featureStyle used to style the revealed features as options.style is used by the Select interaction.
  * 	@param {boolean} options.selectCluster false if you don't want to get cluster selected
- * 	@param {Number} options.PointRadius to calculate distance between the features
+ * 	@param {Number} options.pointRadius to calculate distance between the features
  * 	@param {bool} options.spiral means you want the feature to be placed on a spiral (or a circle)
  * 	@param {Number} options.circleMaxObject number of object that can be place on a circle
  * 	@param {Number} options.maxObjects number of object that can be drawn, other are hidden

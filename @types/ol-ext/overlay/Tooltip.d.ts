@@ -3,7 +3,7 @@ import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import Event from 'ol/events/Event';
 import OverlayPositioning from 'ol/OverlayPositioning';
-import { Popup } from './Popup';
+import Popup from './Popup';
 
 export interface Options {
     popupClass?: string;
