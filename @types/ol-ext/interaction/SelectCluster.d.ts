@@ -4,29 +4,17 @@ import { Vector } from 'ol/layer';
 import { StyleLike } from 'ol/style/Style';
 import { Select } from 'ol/interaction';
 import { Coordinate } from 'ol/coordinate';
-<<<<<<< HEAD
+import { Extent } from 'ol/extent';
 import { Options as SelectOptions } from 'ol/interaction/Select'
 
 export interface Options extends SelectOptions {
-    featureStyle: StyleLike;
-    selectCluster?: boolean;
-    pointRadius: number;
-    spiral?: boolean;
-    circleMaxObject?: number;
-    maxObjects?: number;
-    animate: boolean;
-=======
-import { Extent } from 'ol/extent';
-
-export interface Options {
-    featureStyle?: Style;
+    featureStyle?: StyleLike;
     selectCluster?: boolean;
     pointRadius?: number;
     spiral?: boolean;
     circleMaxObject?: number;
     maxObjects?: number;
     animate?: boolean;
->>>>>>> pub/master
     animationDuration?: number;
 }
 /**
@@ -40,11 +28,7 @@ export interface Options {
  * @constructor
  * @extends {ol.interaction.Select}
  * @param {olx.interaction.SelectOptions=} options SelectOptions.
-<<<<<<< HEAD
- *  @param {StyleLike} options.featureStyle used to style the revealed features as options.style is used by the Select interaction.
-=======
- *  @param {ol.style} options.featureStyle used to style the revealed features as options.style is used by the Select interaction.
->>>>>>> pub/master
+ *  @param {ol.style.StyleLike} options.featureStyle used to style the revealed features as options.style is used by the Select interaction.
  * 	@param {boolean} options.selectCluster false if you don't want to get cluster selected
  * 	@param {Number} options.pointRadius to calculate distance between the features
  * 	@param {bool} options.spiral means you want the feature to be placed on a spiral (or a circle)
