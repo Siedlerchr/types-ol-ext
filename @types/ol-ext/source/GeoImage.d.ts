@@ -3,13 +3,35 @@ import { Extent } from 'ol/extent';
 import { LineString } from 'ol/geom';
 import { Size } from 'ol/size';
 import { ImageCanvas } from 'ol/source';
+
+export interface Options {
+    url?: string;
+    image?: any //TODO: image type
+    imageCenter?: Coordinate
+    imageScale?: Size | number;
+    imageRotate?: number;
+    imageCrop?: Extent;
+    imageMask: Coordinate[];
+}
+
 /** Layer source with georeferencement to place it on a map
 * @constructor
-* @extends {source.ImageCanvas}
-* @param {olx.source.GeoImageOptions=} options
+* @extends {ImageCanvas}
+* @param {Options} options
  */
 export default class GeoImage extends ImageCanvas {
-    constructor(options?: {});
+    constructor(options?: Options);
+
+
+    /** calculate image at extent / resolution
+      * @param {ol/extent/Extent} extent
+      * @param {number} resolution
+      * @param {number} pixelRatio
+      * @param {ol/size/Size} size
+      * @return {HTMLCanvasElement}
+      */
+    calculateImage(extent: Extent, resolution: number, pixelRatio: number, size: Size): HTMLCanvasElement
+
     /**
      * Get coordinate of the image center.
      * @return {Coordinate} coordinate of the image center.

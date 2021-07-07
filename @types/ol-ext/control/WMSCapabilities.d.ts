@@ -82,6 +82,12 @@ export class WMSCapabilities {
 
     getLayerFromOptions(options: any): TileLayer
 
+    /** Test url and return true if it is a valid url string
+     * @param {string} url
+     * @return {bolean}
+     * @api
+     */
+    testUrl(url: string): boolean
     /** Return a WMS ol.layer.Tile for the given capabilities
      * @param {*} caps layer capabilities (read from the capabilities)
      * @param {*} parent capabilities

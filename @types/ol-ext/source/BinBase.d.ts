@@ -1,36 +1,39 @@
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
-import { Polygon } from 'ol/geom';
-import { Vector as VectorSource } from 'ol/source';
+import { Polygon, Point } from 'ol/geom';
+import VectorSource, { Options as VectorOptions } from 'ol/source/Vector';
 
-export interface Options {
-    source: VectorSource;
-    listenChange: boolean;
+export interface Options extends VectorOptions {
+    source?: VectorSource;
+    listenChange?: boolean;
+    geometryFunction?: (f: Feature) => Point;
+    flatAttributes?: (bin: Feature, features: Feature[]) => void;
 }
 /** Abstract base class; normally only used for creating subclasses. Bin collector for data
+/** Abstract base class; normally only used for creating subclasses. Bin collector for data
  * @constructor
- * @extends {VectorSource}
- * @param {Object} options VectorSourceOptions + grid option
- *  @param {VectorSource} options.source Source
+ * @extends {ol.source.Vector}
+ * @param {Object} options ol_source_VectorOptions + grid option
+ *  @param {ol.source.Vector} options.source Source
  *  @param {boolean} options.listenChange listen changes (move) on source features to recalculate the bin, default true
- *  @param {(f: Feature) => Point} [options.geometryFunction] Function that takes an Feature as argument and returns an Point as feature's center.
- *  @param {(bin: Feature, features: Array<Feature>)} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
+ *  @param {fucntion} [options.geometryFunction] Function that takes an ol.Feature as argument and returns an ol.geom.Point as feature's center.
+ *  @param {function} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
  */
 export default class BinBase extends VectorSource {
-    constructor(options: Options);
+    constructor(options?: Options);
     /**
      * Get the bin that contains a feature
      * @param {Feature} f the feature
      * @return {Feature} the bin or null it doesn't exit
      */
-    getBin(f: Feature): Feature;
+    getBin(f: Feature | null): Feature;
     /** Get the grid geometry at the coord
      * @param {Coordinate} coord
      * @param {Object} attributes add key/value to this object to add properties to the grid feature
      * @returns {Polygon}
      * @api
      */
-    getGridGeomAt(coord: Coordinate, attributes: any): Polygon;
+    getGridGeomAt(coord: Coordinate, attributes: { [key: string]: any }): Polygon;
     /** Get the bean at a coord
      * @param {Coordinate} coord
      * @param {boolean} create true to create if doesn't exit
@@ -45,11 +48,10 @@ export default class BinBase extends VectorSource {
      * @return {Array<Feature>}
      */
     getGridFeatures(): Feature[];
-    /** Create bin attributes using the features it contains when exporting
-     * @param {Feature} bin the bin to export
-     * @param {Array<Features>} features the features it contains
-     */
-    _flatAttributes(bin: Feature, features: Feature[]): void;
+    /** Set the flatAttribute function
+    * @param {function} fn Function that takes a bin and the features it contains and aggragate the features in the bin attributes when saving
+    */
+    setFlatAttributesFn(fn: (bin: Feature, features: Feature[]) => void): void
     /**
      * Get the orginal source
      * @return {VectorSource}
