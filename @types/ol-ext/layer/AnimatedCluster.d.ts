@@ -14,5 +14,5 @@ interface ClusterOptions extends Options {
  *  @param {ol.easingFunction} animationMethod easing method to use, default ol.easing.easeOut
  */
 export default class AnimatedCluster extends VectorLayer {
-    constructor(param: ClusterOptions);
+    constructor(options?: ClusterOptions);
 }
