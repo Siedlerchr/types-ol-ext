@@ -1,13 +1,14 @@
 import { Map as _ol_Map_ } from 'ol';
 import Feature, { FeatureLike } from 'ol/Feature';
 import { Vector } from 'ol/layer';
-import { Style } from 'ol/style';
+import { StyleLike } from 'ol/style/Style';
 import { Select } from 'ol/interaction';
 import { Coordinate } from 'ol/coordinate';
 import { Extent } from 'ol/extent';
+import { Options as SelectOptions } from 'ol/interaction/Select'
 
-export interface Options {
-    featureStyle?: Style;
+export interface Options extends SelectOptions {
+    featureStyle?: StyleLike;
     selectCluster?: boolean;
     pointRadius?: number;
     spiral?: boolean;
@@ -27,7 +28,7 @@ export interface Options {
  * @constructor
  * @extends {ol.interaction.Select}
  * @param {olx.interaction.SelectOptions=} options SelectOptions.
- *  @param {ol.style} options.featureStyle used to style the revealed features as options.style is used by the Select interaction.
+ *  @param {ol.style.StyleLike} options.featureStyle used to style the revealed features as options.style is used by the Select interaction.
  * 	@param {boolean} options.selectCluster false if you don't want to get cluster selected
  * 	@param {Number} options.pointRadius to calculate distance between the features
  * 	@param {bool} options.spiral means you want the feature to be placed on a spiral (or a circle)
