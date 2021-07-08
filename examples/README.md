@@ -80,7 +80,7 @@
 
 ### Porting guide
 
-1. jquery needs to be replaced to standard DOM selector.  
+1. jquery needs to be replaced to standard DOM selector.
    Here is some typical examples:
    - `$('xxx').val()` => `document.querySelector<HTMLXXXElement>('xxx')!.value`
    - `$('xxx').val('yyy')` => `document.querySelector<HTMLXXXElement>('xxx')!.value = 'yyy'`
@@ -98,7 +98,7 @@
    window.someVariable = someVariable;
    window.someFunction = (t: string) => {
        someFunction(t);
-   }   
+   }
    ```
 
    - `this` porting seems to be impossible in above function case, so consider to use 1st argument.

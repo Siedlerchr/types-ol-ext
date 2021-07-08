@@ -31,7 +31,7 @@ export class Vector3D extends ImageLayer {
      * Set the height function for the layer
      * @param {function|string|Number} height a height function (returns height giving a feature) or a popertie name or a fixed value
      */
-    setHeight(height: Height ) : void;
+    setHeight(height: Height): void;
     /**
      * Set style associated with the layer
      * @param {ol.style.Style} s
@@ -43,12 +43,6 @@ export class Vector3D extends ImageLayer {
      */
     getStyle(): Style;
 
-    /** Create a function that return height of a feature
-     * @param {function|string|number} h a height function or a popertie name or a fixed value
-     * @return {function} function(f) return height of the feature f
-     * @private
-     */
-    private getHfn;
     /** Animate rendering
      * @param {*} options
      *  @param {string|function|number} options.height an attribute name or a function returning height of a feature or a fixed value

@@ -32,6 +32,18 @@ export interface Options {
     easing?: ((p0: number) => number);
 }
 
+/** An animation controler object an object to control animation with start, stop and isPlaying function.
+ * To be used with {@link olx.Map#animateFeature} or {@link layer.Vector#animateFeature}
+ * @typedef {Object} animationControler
+ * @property {function} start - start animation.
+ * @property {function} stop - stop animation option arguments can be passed in animationend event.
+ * @property {function} isPlaying - return true if animation is playing.
+ */
+export type animationControler = {
+    start: (...params: any[]) => any;
+    stop: (...params: any[]) => any;
+    isPlaying: (...params: any[]) => any;
+};
 /** Feature animation base class
  * Use the {@link _ol_Map_#animateFeature} or {@link _ol_layer_Vector_#animateFeature} to animate a feature
  * on postcompose in a map or a layer
@@ -50,7 +62,7 @@ export interface Options {
 *	@param {easing.Function} options.fade an easing function used to fade in the feature, default none
 *	@param {easing.Function} options.easing an easing function for the animation, default easing.linear
  */
-declare class featureAnimation {
+export class FeatureAnimation {
     constructor(options?: Options);
     /** Function to perform manipulations onpostcompose.
      * This function is called with an featureAnimationEvent argument.
@@ -63,4 +75,3 @@ declare class featureAnimation {
     animate(e: FeatureAnimationEvent): boolean;
 }
 
-export default featureAnimation;

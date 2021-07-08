@@ -1,6 +1,6 @@
-import { default as featureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+import { FeatureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
 
-export interface Options{
+export interface Options {
     speed?: number;
     side?: number;
 }
@@ -12,7 +12,7 @@ export interface Options{
  *  @param {Number} options.speed speed of the feature if 0 the duration parameter will be used instead, default 0
  *  @param {Number} options.side top or bottom, default top
  */
-declare class Drop extends featureAnimation {
+export class Drop extends FeatureAnimation {
     constructor(options?: Options)
     /** Animate
     * @param {FeatureAnimationEvent} e
@@ -20,4 +20,3 @@ declare class Drop extends featureAnimation {
     animate(e: FeatureAnimationEvent): boolean;
 }
 
-export default Drop;
