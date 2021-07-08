@@ -2,6 +2,7 @@ import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import { AttributionLike } from 'ol/source/Source';
 import { Options as VectorSourceOptions } from 'ol/source/Vector';
+
 /**
 * @constructor source.Mapillary
 * @extends {VectorSource}
@@ -9,12 +10,7 @@ import { Options as VectorSourceOptions } from 'ol/source/Vector';
  */
 export default class Mapillary extends VectorSource {
     constructor(options?: VectorSourceOptions);
-    /** Max resolution to load features
-     */
-    _maxResolution: any;
-    /** Query limit
-     */
-    _limit: any;
+
     /** Decode wiki attributes and choose to add feature to the layer
     * @param {feature} the feature
     * @param {attributes} wiki attributes

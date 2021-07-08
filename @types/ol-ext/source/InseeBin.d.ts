@@ -1,12 +1,16 @@
 import { Coordinate } from 'ol/coordinate';
 import { Extent } from 'ol/extent';
-import { Polygon } from 'ol/geom';
+import { Point, Polygon } from 'ol/geom';
 import { ProjectionLike } from 'ol/proj';
-import { Vector as VectorSource } from 'ol/source';
+import BinBase from 'ol-ext/source/BinBase';
+import VectorSource, { Options as VectorSourceOptions } from 'ol/source/Vector';
+import { Feature } from 'ol';
 
 export interface Options {
     source: VectorSource;
     Size?: number;
+    geometryFunction?: (f: Feature) => Point;
+    flatAttributes?: (bin: Feature, features: Feature[]) => void;
 }
 /** A source for INSEE grid
  * @constructor
@@ -17,12 +21,12 @@ export interface Options {
  *  @param {(f: Feature) => Point} [options.geometryFunction] Function that takes an Feature as argument and returns an Point as feature's center.
  *  @param {(bin: Feature, features: Array<Feature>)} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
  */
-export default class InseeBin extends VectorSource {
-    constructor(options: Options);
+export default class InseeBin extends BinBase {
+    constructor(options?: Options);
     /** Set grid Size
-     * @param {number} Size
+     * @param {number} size
      */
-    setSize(Size: number): void;
+    setSize(size: number): void;
     /** Get grid Size
      * @return {number} Size
      */

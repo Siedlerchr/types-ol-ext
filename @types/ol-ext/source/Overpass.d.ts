@@ -3,14 +3,14 @@ import { Vector as VectorSource } from 'ol/source';
 import { LoadingStrategy } from 'ol/source/Vector';
 
 export interface Options {
-    url: string;
-    filter: string[];
-    node: boolean;
-    way: boolean;
-    rel: boolean;
-    maxResolution: number;
-    attributions: string | Attribution | string[];
-    strategy: LoadingStrategy;
+    url?: string;
+    filter?: string[];
+    node?: boolean;
+    way?: boolean;
+    rel?: boolean;
+    maxResolution?: number;
+    attributions?: string | Attribution | string[];
+    strategy?: LoadingStrategy;
 }
 /**
  * OSM layer using the Ovepass API
@@ -27,13 +27,7 @@ export interface Options {
  *  @param {LoadingStrategy} options.strategy loading strategy, default loadingstrategy.bbox
  */
 export default class Overpass extends VectorSource {
-    constructor(options: Options);
-    /** Ovepass API Url
-     */
-    _url: any;
-    /** Max resolution to load features
-     */
-    _maxResolution: any;
+    constructor(options?: Options);
     /** Overwrite Vector clear to fire clearstart / clearend event
      */
     clear(): void;

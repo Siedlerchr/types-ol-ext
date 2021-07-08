@@ -1,10 +1,10 @@
-import { default as featureAnimation, FeatureAnimationEvent, Options } from './FeatureAnimation';
+import { FeatureAnimation, FeatureAnimationEvent, Options } from './FeatureAnimation';
 /** Fade animation: feature fade in
  * @constructor
  * @extends {featureAnimation}
  * @param {featureAnimationOptions} options
  */
-declare class Fade extends featureAnimation {
+export class Fade extends FeatureAnimation {
     constructor(options?: Options);
     /** Animate
     * @param {featureAnimationEvent} e
@@ -12,4 +12,3 @@ declare class Fade extends featureAnimation {
     animate(e: FeatureAnimationEvent): boolean;
 }
 
-export default Fade;

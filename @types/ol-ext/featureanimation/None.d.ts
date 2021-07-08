@@ -1,11 +1,11 @@
-import { default as featureAnimation, FeatureAnimationEvent, Options } from './FeatureAnimation';
+import { FeatureAnimation, FeatureAnimationEvent, Options } from './FeatureAnimation';
 /** Do nothing for a given duration
  * @constructor
  * @extends {featureAnimation}
  * @param {featureAnimationShowOptions} options
  *
  */
-declare class None extends featureAnimation {
+export class None extends FeatureAnimation {
     constructor(options?: Options);
     /** Animate: do nothing during the laps time
     * @param {featureAnimationEvent} e
@@ -13,4 +13,3 @@ declare class None extends featureAnimation {
     animate(e: FeatureAnimationEvent): boolean;
 }
 
-export default None;
