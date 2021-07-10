@@ -1,18 +1,11 @@
 import { Feature } from 'ol';
 import { Coordinate } from 'ol/coordinate';
-import Search from './Search';
+import Search, { Options as SearchOptions } from './Search';
 
-export interface Options {
-    className?: string;
-    target?: Element | string ;
-    label?: string ;
-    placeholder?: string ;
-    typing?: number ;
-    minLength?: number ;
-    maxItems?: number ;
+export interface Options extends SearchOptions {
     handleResponse?: ((response: any) => any[]);
-    url?: string ;
-    authentication?: string ;
+    url?: string;
+    authentication?: string;
 }
 
 /**

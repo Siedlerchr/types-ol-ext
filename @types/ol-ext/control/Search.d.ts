@@ -4,10 +4,12 @@ import { Coordinate } from 'ol/coordinate';
 
 export interface Options {
   className?: string;
-  title?: string
   target?: Element | string;
-  label: string;
-  placeholder: string;
+  title?: string;
+  label?: string;
+  reverseTitle?: string;
+  placeholder?: string;
+  reverse?: boolean;
   inputLabel?: string;
   collapsed?: boolean;
   noCollapse?: boolean;
@@ -17,8 +19,8 @@ export interface Options {
   maxHistory?: number;
   getTitle?: (f: Feature) => string;
   autocomplete?: (s: String, cback: ([])) => [] | false;
-  onSelect: (...params: any[]) => any;
-  centerOnSelect?: boolean
+  onselect?: (...params: any[]) => any;
+  centerOnSelect?: boolean;
   zoomOnSelect?: (...params: any[]) => any;
 }
 

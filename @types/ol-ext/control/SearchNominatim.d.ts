@@ -1,19 +1,10 @@
 import Search from './Search';
-import SearchJSON from 'ol-ext/control/SearchJSON';
+import SearchJSON, { Options as SearchJSONOptions } from 'ol-ext/control/SearchJSON';
 
-export interface Options {
-    className?: string;
+export interface Options extends SearchJSONOptions {
     polygon?: boolean;
-    viewBox?: number[];
-    bounded?: boolean
-    target?: Element | string ;
-    title?: string;
-    reverseTitle?: string;
-    placeholder?: string ;
-    typing?: number ;
-    minLength?: number ;
-    maxItems?: number ;
-    url?: string ;
+    viewbox?: number[];
+    bounded?: boolean;
 }
 
 /**
