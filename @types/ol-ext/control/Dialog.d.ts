@@ -2,20 +2,22 @@ import { Map } from "ol";
 import ol_control_Control from 'ol/control/Control';
 
 export interface Options {
-    className: string;
-    map: Map;
-    target: Element;
-    zoom: boolean;
-    closeBox: boolean;
-    max: number;
-    hiddenOnClick: boolean;
-    closeOnSubmit: boolean
+    className?: string;
+    map?: Map;
+    target?: Element;
+    zoom?: boolean;
+    closeBox?: boolean;
+    max?: number;
+    hideOnClick?: boolean;
+    hideOnBack?: boolean
+    closeOnSubmit?: boolean
 }
 
 export interface ShowOptions {
-    content: Element | string;
-    title: string;
-    buttons: object;
+    content?: Element | string;
+    title?: string;
+    buttons?: {[key: string]: any};
+    onButton?: (button: string, inputs: {[key: string]: any}) => void
 }
 export interface ContentOptions {
     content: Element | string;
@@ -23,8 +25,9 @@ export interface ContentOptions {
     className: string;
     max: number;
     progress: number;
-    buttons: object;
+    buttons: {[key: string]: any};
 }
+
 /**
  * @classdesc
  * Application dialog
@@ -37,33 +40,38 @@ export interface ContentOptions {
  *  @param {boolean} options.zoom add a zoom effect
  *  @param {boolean} options.closeBox add a close button
  *  @param {number} options.max if not null add a progress bar to the dialog, default null
- *  @param {boolean} options.hideOnClick close dialog when click the background
+ *  @param {boolean} options.hideOnClick close dialog when click
+ *  @param {boolean} options.hideOnBack close dialog when click the background
  *  @param {boolean} options.closeOnSubmit Prevent closing the dialog on submit
  */
 export default class Dialog extends ol_control_Control {
 
     constructor(options?: Options);
-
-    /** Show a new dialog
-      * @param { * | Element | string } options options or a content to show
-      *  @param {Element | string} options.content dialog content
-      *  @param {string} options.title title of the dialog
-      *  @param {Object} options.buttons a key/value list of button to show
-      */
+ /** Show a new dialog
+   * @param { * | Element | string } options options or a content to show
+   *  @param {Element | String} options.content dialog content
+   *  @param {string} options.title title of the dialog
+   *  @param {string} options.className dialog class name
+   *  @param {number} options.max if not null add a progress bar to the dialog
+   *  @param {number} options.progress set the progress bar value
+   *  @param {Object} options.buttons a key/value list of button to show
+   *  @param {function} [options.onButton] a function that takes the button id and a list of input by className
+   */
     show(options?: ShowOptions | Element | string): void
     /**
      * Open the dialog
      */
     open(): void;
     /** Set the dialog content
-       * @param {*} options
-       *  @param {Element | String} options.content dialog content
-       *  @param {string} options.title title of the dialog
-       *  @param {string} options.className dialog class name
-       *  @param {number} options.max if not null add a progress bar to the dialog
-       *  @param {number} options.progress set the progress bar value
-       *  @param {Object} options.buttons a key/value list of button to show
-       */
+   * @param {*} options
+   *  @param {Element | String} options.content dialog content
+   *  @param {string} options.title title of the dialog
+   *  @param {string} options.className dialog class name
+   *  @param {number} options.max if not null add a progress bar to the dialog
+   *  @param {number} options.progress set the progress bar value
+   *  @param {Object} options.buttons a key/value list of button to show
+   *  @param {function} [options.onButton] a function that takes the button id and a list of input by className
+   */
     setContent(options?: ContentOptions): void;
     getContentElement(): Element;
     /** Set progress

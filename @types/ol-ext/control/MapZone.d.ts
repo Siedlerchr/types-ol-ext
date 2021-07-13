@@ -7,8 +7,8 @@ import { ProjectionLike } from 'ol/proj';
 import { Map as _ol_Map_ } from 'ol';
 
 export type Zone = {
-    title: string;
-    extent: Extent;
+    title?: string;
+    extent?: Extent;
     map?: _ol_Map_;
     layer?: Layer
 

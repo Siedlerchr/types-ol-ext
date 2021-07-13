@@ -3,8 +3,8 @@ import { Style, Stroke, Fill } from 'ol/style';
 import CanvasBase from './CanvasBase';
 
 export interface Options {
-    title: string;
-    style: Style;
+    title?: string;
+    style?: Style;
 }
 /**
  * A title Control integrated in the canvas (for jpeg/png

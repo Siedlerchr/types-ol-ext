@@ -9,7 +9,6 @@ export interface Options extends GeolocationDrawOptions {
     delay?: number;
 }
 
-
 export default class GeolocationButton extends Toggle {
     constructor(options? : Options)
 

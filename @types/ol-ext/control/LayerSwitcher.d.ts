@@ -1,21 +1,38 @@
 import { Map as _ol_Map_ } from 'ol';
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, { Options as ControlOptions } from 'ol/control/Control';
 import { Layer } from 'ol/layer';
 import LayerGroup from 'ol/layer/Group';
 import { Extent } from 'ol/extent';
+import BaseEvent from 'ol/events/Event';
+import BaseLayer from 'ol/layer/Base';
+import { EventsKey } from 'ol/events';
+import { ObjectEvent } from 'ol/Object';
 
-export interface Options {
+export enum LayerSwitcherEventType {
+    DRAWLIST = "drawlist",
+    LAYERVISIBLE = "layer:visible",
+    LAYEROPACITY = "layer:opacity"
+}
+export enum ToggleEventType {
+    TOGGLE = "toggle"
+}
+export enum LayerSwitcherReorderEventType {
+    REODERSTART = "reoder-start",
+    REORDEREND = "reorder-end",
+}
+
+export interface Options extends ControlOptions {
     displayInLayerSwitcher?: (layer: Layer) => boolean;
     show_progress?: boolean;
     mouseover?: boolean;
     reordering?: boolean;
     trash?: boolean;
     oninfo?: (...params: any[]) => any;
-    extent: Extent;
-    onExtent: (...params: any[]) => any;
-    drawDelay: number;
-    collapsed: boolean;
-    layerGroup: LayerGroup;
+    extent?: Extent;
+    onExtent?: (...params: any[]) => any;
+    drawDelay?: number;
+    collapsed?: boolean;
+    layerGroup?: LayerGroup;
 }
 
 export interface Tip {
@@ -123,4 +140,64 @@ export default class LayerSwitcher extends ol_control_Control {
      * @api stable
      */
     drawList(element: Element, collection: Layer[]): void;
+
+    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    un(type: string | string[], listener: (p0: any) => any): void;
+    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'change', listener: (evt: BaseEvent) => void): void;
+    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'error', listener: (evt: BaseEvent) => void): void;
+    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
+
+    on(type: 'drawlist', listener: (evt: LayerSwitcherEvent) => void): EventsKey;
+    once(type: 'drawlist', listener: (evt: LayerSwitcherEvent) => void): EventsKey;
+    un(type: 'drawlist', listener: (evt: LayerSwitcherEvent) => void): void;
+    on(type: 'layer:visible', listener: (evt: LayerSwitcherEvent) => void): EventsKey;
+    once(type: 'layer:visible', listener: (evt: LayerSwitcherEvent) => void): EventsKey;
+    un(type: 'layer:visible', listener: (evt: LayerSwitcherEvent) => void): void;
+    on(type: 'layer:opacity', listener: (evt: LayerSwitcherEvent) => void): EventsKey;
+    once(type: 'layer:opacity', listener: (evt: LayerSwitcherEvent) => void): EventsKey;
+    un(type: 'layer:opacity', listener: (evt: LayerSwitcherEvent) => void): void;
+    on(type: 'toggle', listener: (evt: ToggleEvent) => void): EventsKey;
+    once(type: 'toggle', listener: (evt: ToggleEvent) => void): EventsKey;
+    un(type: 'toggle', listener: (evt: ToggleEvent) => void): void;
+    on(type: 'reroder-start', listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
+    once(type: 'reorder-start', listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
+    un(type: 'reorder-start', listener: (evt: LayerSwitcherReorderEvent) => void): void;
+    on(type: 'reroder-end', listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
+    once(type: 'reorder-end', listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
+    un(type: 'reorder-end', listener: (evt: LayerSwitcherReorderEvent) => void): void;
+
+}
+export class ToggleEvent extends BaseEvent {
+    constructor(
+        type: ToggleEventType,
+        collapsed: boolean,
+    );
+    collapsed: boolean;
+}
+
+export class LayerSwitcherEvent extends BaseEvent {
+    constructor(
+        type: LayerSwitcherEventType,
+        layer?: Layer,
+        li?: Text | HTMLElement
+    );
+    layer: Layer;
+    li?: Text | HTMLElement
+}
+
+export class LayerSwitcherReorderEvent extends BaseEvent {
+    constructor(
+        type: LayerSwitcherReorderEventType,
+        layer: Layer,
+        group: LayerGroup
+    );
+    layer: Layer;
+    group: LayerGroup;
 }

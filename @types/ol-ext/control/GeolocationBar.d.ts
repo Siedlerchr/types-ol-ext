@@ -2,10 +2,10 @@ import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import Event from 'ol/events/Event';
 import GeolocationDraw from '../interaction/GeolocationDraw';
-import Bar from './Bar';
+import Bar, {Options as BarOptions} from './Bar';
 import { position } from './control';
 
-export interface Options {
+export interface Options extends BarOptions {
     className?: string;
     centerLabel?: string;
     position?: position

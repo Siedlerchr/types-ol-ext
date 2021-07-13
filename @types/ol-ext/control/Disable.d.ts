@@ -1,15 +1,15 @@
 import ol_control_Control from 'ol/control/Control';
 
 export interface Options {
-    class: string;
-    html: string;
-    on: boolean;
-    toggleFn: (...params: any[]) => any;
+    class?: string;
+    html?: string;
+    on?: boolean;
+    toggleFn?: (...params: any[]) => void; //TODO seems not to be used in the original code
 }
 /** A simple control to disable all actions on the map.
  * The control will create an invisible div over the map.
  * @constructor
- * @extends {contrControl}
+ * @extends {ol_control_Control}
  * @param {Object=} options Control options.
  *		@param {String} options.class class of the control
  *		@param {String} options.html html code to insert in the control

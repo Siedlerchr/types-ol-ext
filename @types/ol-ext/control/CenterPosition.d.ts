@@ -5,11 +5,11 @@ import { Fill, Stroke, Style } from 'ol/style';
 import CanvasBase from './CanvasBase';
 
 export interface Options {
-    className: string;
-    style: Style;
-    projection: ProjectionLike;
-    coordinateFormat: CoordinateFormat;
-    canvas: boolean;
+    className?: string;
+    style?: Style;
+    projection?: ProjectionLike;
+    coordinateFormat?: CoordinateFormat;
+    canvas?: boolean;
 }
 /**
  * A title Control integrated in the canvas (for jpeg/png

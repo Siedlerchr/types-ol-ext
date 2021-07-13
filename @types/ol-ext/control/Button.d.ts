@@ -4,7 +4,7 @@ export interface Options {
     className?: string;
     title?: string;
     name?: string;
-    html?: string;
+    html?: string | Element;
     handleClick?: (e: Event) => void;
 }
 

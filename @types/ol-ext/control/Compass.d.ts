@@ -1,13 +1,13 @@
 import { Map as _ol_Map_ } from 'ol';
-import { Stroke, Image, Style, Fill } from 'ol/style';
+import { Stroke, Style, Fill } from 'ol/style';
 import CanvasBase from './CanvasBase';
 
 export interface Options {
-    className: string;
-    image: Image;
-    src: string;
-    rotateVithView: boolean;
-    style: Stroke;
+    className?: string;
+    image?: HTMLImageElement | string;
+    src?: string;
+    rotateVithView?: boolean;
+    style?: Stroke;
 }
 /**
  * Draw a compass on the map. The position/Size of the control is defined in the css.

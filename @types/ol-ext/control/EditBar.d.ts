@@ -4,13 +4,35 @@ import { Vector as VectorSource } from 'ol/source';
 import Event from 'ol/events/Event';
 import Bar from './Bar';
 import { position } from './control';
+import { Interaction, Select, Draw } from 'ol/interaction';
+import Delete from '../interaction/Delete';
+import ModifyFeature from '../interaction/ModifyFeature';
+import DrawRegular from '../interaction/DrawRegular';
+import Transform from '../interaction/Transform';
+import Split from '../interaction/Split';
+import Offset from '../interaction/Offset';
+
+export interface Interactions {
+    Select?: Select | boolean;
+    Delete?: Delete | boolean;
+    Info?: any | boolean; //TODO not yet defined what info interaction is
+    DrawPoint?: Draw | boolean;
+    DrawLine?: Draw | boolean;
+    DrawPolygon?: Draw | boolean;
+    DrawRegular?: DrawRegular| boolean;
+    ModifySelect?: ModifyFeature | boolean;
+    Transform: Transform | boolean;
+    Split?: Split | boolean;
+    Offset?: Offset | boolean;
+
+}
 
 export interface Options {
-    className: string;
-    target: string;
-    edition: boolean;
-    interactions: any;
-    source: VectorSource;    
+    className?: string;
+    target?: string;
+    edition?: boolean;
+    interactions?: typeof Interaction //TODO dig deeper into the type system
+    source?: VectorSource;
 }
 /** Control bar for editing in a layer
  * @constructor

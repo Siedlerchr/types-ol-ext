@@ -1,7 +1,7 @@
 import ol_control_Control from 'ol/control/Control';
 
 export interface Options {
-    className: string;
+    className?: string;
     hideOnClick?: boolean;
     closeBox?: boolean;
 }

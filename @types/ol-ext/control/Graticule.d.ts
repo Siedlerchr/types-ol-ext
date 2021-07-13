@@ -1,20 +1,20 @@
 import { Map } from 'ol';
 import CanvasBase from './CanvasBase';
 import { Fill, Stroke, Style } from 'ol/style';
-import { Options as OriginalControlOptions } from 'ol/control/Control';
+import { Options as ControlOptions } from 'ol/control/Control';
 import { ProjectionLike } from 'ol/proj';
 import { position } from './control'
 import { Coordinate } from 'ol/coordinate';
-export interface Options extends OriginalControlOptions {
+export interface Options extends ControlOptions {
     projection?: ProjectionLike;
     maxResolution?: number;
-    style: Style;
-    step: number;
-    stepCoord: number;
-    spacing: number;
-    borderWidth: number;
-    margin: number;
-    formatCoord: (coordinate: Coordinate, position: position) => string;
+    style?: Style;
+    step?: number;
+    stepCoord?: number;
+    spacing?: number;
+    borderWidth?: number;
+    margin?: number;
+    formatCoord?: (coordinate: Coordinate, position: position) => string;
 }
 
 /**

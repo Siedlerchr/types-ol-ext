@@ -15,8 +15,8 @@ export interface Options {
     maxItems?: number;
     maxHistory?: number;
     getTitle: (f: Feature) => string;
-    autocomplete: (s: string, ...params: any[]) => any; // TODO: not sure about the syntax
-    exclusions: string;
+    autocomplete?: (s: string, ...params: any[]) => any; // TODO: not sure about the syntax
+    exclusions?: string;
 }
 
 /**
