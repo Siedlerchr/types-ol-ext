@@ -1,4 +1,4 @@
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 import { Coordinate } from 'ol/coordinate';
 import { EventsKey } from 'ol/events';
 import BaseEvent from 'ol/events/Event';
@@ -17,7 +17,7 @@ export interface BookmarkContent {
   permament?: boolean
 }
 export type Bookmarks = { [key: string]: BookmarkContent }
-export interface Options {
+export interface Options extends ControlOptions {
   className?: string;
   placeholder?: string;
   editable?: boolean;

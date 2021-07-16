@@ -1,9 +1,8 @@
 import { Vector as VectorSource } from 'ol/source';
-import SelectBase, { condition } from './SelectBase';
+import SelectBase, { condition, Options as SelectOptions} from './SelectBase';
 
-export interface Options {
+export interface Options extends SelectOptions {
     className?: string;
-    target?: Element;
     source?: VectorSource | VectorSource[];
     label?: string;
     selectAll?: number;

@@ -1,10 +1,9 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Style, Stroke, Fill } from 'ol/style';
-import CanvasBase from './CanvasBase';
+import CanvasBase, {Options as CanvasOptions} from './CanvasBase';
 
-export interface Options {
+export interface Options extends CanvasOptions {
     title?: string;
-    style?: Style;
 }
 /**
  * A title Control integrated in the canvas (for jpeg/png

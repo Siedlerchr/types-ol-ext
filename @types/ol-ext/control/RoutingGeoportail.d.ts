@@ -1,12 +1,11 @@
 import { Feature, Map as _ol_Map_ } from 'ol';
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 import { Coordinate } from 'ol/coordinate';
 
-export interface Options {
+export interface Options extends ControlOptions {
     className?: string;
     apiKey?: string;
     authentication?: string;
-    target?: Element | string;
     label?: string;
     placeholder?: string;
     inputLabel?: string;

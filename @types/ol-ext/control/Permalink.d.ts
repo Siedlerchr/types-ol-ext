@@ -1,8 +1,8 @@
 import { Map as _ol_Map_ } from 'ol';
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 import { Layer } from 'ol/layer';
 
-export interface Options {
+export interface Options extends ControlOptions {
     urlReplace?: boolean;
     localStorage?: boolean;
     geohash?: boolean
@@ -10,9 +10,8 @@ export interface Options {
     anchor?: boolean;
     visible?: boolean
     hidden?: boolean;
-    onclick: (...params: any[]) => any;
+    onclick: (link: string) => any;
 }
-
 /**
  * Set an hyperlink that will return the user to the current map view.
  * Just add a `permalink`property to layers to be handled by the control (and added in the url).

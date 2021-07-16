@@ -1,6 +1,6 @@
 export default MapZone;
 
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 import { Extent } from 'ol/extent';
 import { Layer } from 'ol/layer';
 import { ProjectionLike } from 'ol/proj';
@@ -13,7 +13,7 @@ export type Zone = {
     layer?: Layer
 
 }
-export interface Options {
+export interface Options extends ControlOptions {
     className: string;
     layer: Layer | ((zone: Zone) => Layer)
     projection: ProjectionLike;

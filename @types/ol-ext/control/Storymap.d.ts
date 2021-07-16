@@ -1,9 +1,8 @@
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, { Options as ControlOptions } from 'ol/control/Control';
 
-export interface Options {
+export interface Options extends ControlOptions {
     className?: string;
     html?: Element | string;
-    target?: Element| string
 }
 
 /** A control with scroll-driven navigation to create narrative maps
@@ -17,8 +16,8 @@ export interface Options {
  *	@param {Element | string | undefined} options.html The storymap content
  *	@param {Element | string | undefined} options.target The target element to place the story. If no html is provided the content of the target will be used.
  */
-export class ol_control_Storymap extends ol_control_Control{
-    constructor(options: Options);
+export class ol_control_Storymap extends ol_control_Control {
+    constructor(options?: Options);
     /** Scroll to a chapter
      * @param {string} name Name of the chapter to scroll to
      */

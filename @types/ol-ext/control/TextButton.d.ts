@@ -1,11 +1,10 @@
-import Button from './Button';
-import BaseEvent from 'ol/events/Event';
+import Button, {Options as ButtonOptions} from './Button';
 
-export interface Options {
-    className: string;
-    title: string;
-    html: string;
-    handleClick: (e: Event) => void;
+export interface Options extends ButtonOptions{
+    className?: string;
+    title?: string;
+    html?: string;
+    handleClick?: (e: Event) => void;
 }
 /** A simple push button control drawn as text
  * @constructor

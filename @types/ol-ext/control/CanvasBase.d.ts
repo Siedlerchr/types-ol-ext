@@ -4,7 +4,7 @@ import { Style, Stroke, Fill } from 'ol/style';
 import { Options as ControlOptions } from 'ol/control/Control';
 
 export interface Options extends ControlOptions {
-    style: Style;
+    style?: Style;
 }
 export default class CanvasBase extends ol_control_Control {
     constructor(options?: Options);

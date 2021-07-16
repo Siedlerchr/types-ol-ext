@@ -2,8 +2,9 @@
 import { jsPDF } from "jspdf";
 import { Size } from 'ol/size';
 import { Map as _ol_Map_ } from 'ol';
+import ol_control_Control, { Options as ControlOptions } from 'ol/control/Control';
 
-export interface Options {
+export interface Options extends ControlOptions {
     className?: string;
     lang?: string;
     imageType?: string;
@@ -31,7 +32,7 @@ export type PaperSize = 'A0' | 'A1' | 'A2' | 'A3' | 'A4' | 'A5' | 'B4' | 'B5';
  *	@param {function} [options.saveAs] a function to save the image as blob
  *	@param {*} [options.jsPDF] jsPDF object to save map as pdf
  */
-export class ol_control_PrintDialog {
+export class ol_control_PrintDialog extends ol_control_Control {
     /** Add a new language
      * @param {string} lang lang id
      * @param  labels
