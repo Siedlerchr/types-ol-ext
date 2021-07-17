@@ -1,11 +1,11 @@
-import { Feature } from "ol";
-import RoutingGeoportail from "./RoutingGeoportail";
+import { Feature } from 'ol';
+import { Options as ControlOptons } from 'ol/control/Control';
+import RoutingGeoportail from './RoutingGeoportail';
 
-export interface Options {
+export interface Options extends ControlOptons {
     className?: string;
     apiKey?: string;
     authentication?: string;
-    target?: Element | string;
     label?: string;
     placeholder?: string;
     inputLabel?: string;

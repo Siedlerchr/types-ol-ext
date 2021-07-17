@@ -1,13 +1,10 @@
-import Feature from 'ol/Feature';
-import SearchJSON from './SearchJSON';
-import { Coordinate } from 'ol/coordinate';
+import SearchJSON, {Options as SearchJsonOptions} from './SearchJSON';
 
 export type AddressType = 'StreetAddress' | 'PositionOfInterest' | 'CadastralParcel' | 'Commune';
-export interface Options {
+export interface Options extends SearchJsonOptions {
   className?: string;
   apiKey?: string;
   authentication?: string;
-  target?: Element | string;
   label?: string;
   reverse?: boolean;
   placeholder?: string;

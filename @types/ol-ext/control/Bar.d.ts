@@ -1,9 +1,9 @@
 import { Map as _ol_Map_ } from 'ol';
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 import Event from 'ol/events/Event';
 import { position } from './control';
 
-export interface Options {
+export interface Options extends ControlOptions {
     className?: string;
     group?: boolean;
     toggleOne?: boolean;

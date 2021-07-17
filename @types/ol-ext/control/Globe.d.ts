@@ -1,12 +1,16 @@
-import { Map as _ol_Map_ } from 'ol';
-import ol_control_Control from 'ol/control/Control';
+import { Collection, Map as _ol_Map_ } from 'ol';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 import { Coordinate } from 'ol/coordinate';
-import { ControlOptions } from './control';
+import LayerGroup from 'ol/layer/Group';
+import { Style } from 'ol/style';
+import BaseLayer from 'ol/layer/Base';
 
 export interface Options extends ControlOptions {
-    target?: HTMLElement | string;
+    follow?: boolean;
+    align: 'top' | 'bottom-left' | 'right';
+    layers?: BaseLayer[] | Collection<BaseLayer> | LayerGroup;
+    style?: Style | Style[];
 }
-
 /**
  * OpenLayers 3 lobe Overview Contr
  * The globe can rotate with map (follow.)
@@ -20,7 +24,7 @@ export interface Options extends ControlOptions {
  * 	@param {Style | Array.<Style> | undefined} style style to draw the position on the map , default a marker
  */
 export default class Globe extends ol_control_Control {
-    constructor(options?: ControlOptions);
+    constructor(options?: Options);
     /**
      * Set the map instance the control associated with.
      * @param {_ol_Map_} map The map instance.

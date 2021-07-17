@@ -1,16 +1,45 @@
-import { Map as _ol_Map_ } from 'ol';
+import { Collection, Feature, Map as _ol_Map_ } from 'ol';
 import ol_control_Control from 'ol/control/Control';
 import { Vector as VectorSource } from 'ol/source';
 import Event from 'ol/events/Event';
 import Bar from './Bar';
 import { position } from './control';
+import { Interaction, Select, Draw } from 'ol/interaction';
+import Delete from '../interaction/Delete';
+import ModifyFeature from '../interaction/ModifyFeature';
+import DrawRegular from '../interaction/DrawRegular';
+import Transform from '../interaction/Transform';
+import Split from '../interaction/Split';
+import Offset from '../interaction/Offset';
+import { EventsKey } from 'ol/events';
+import BaseEvent from 'ol/events/Event';
+import { ObjectEvent } from 'ol/Object';
+import { Geometry } from 'ol/geom';
+
+export enum EditBarEventType {
+    INFO = 'info'
+}
+
+export interface Interactions {
+    Select?: Select | boolean;
+    Delete?: Delete | boolean;
+    Info?: boolean; // no real interaction
+    DrawPoint?: Draw | boolean;
+    DrawLine?: Draw | boolean;
+    DrawPolygon?: Draw | boolean;
+    DrawRegular?: DrawRegular | boolean;
+    ModifySelect?: ModifyFeature | boolean;
+    Transform: Transform | boolean;
+    Split?: Split | boolean;
+    Offset?: Offset | boolean;
+}
 
 export interface Options {
-    className: string;
-    target: string;
-    edition: boolean;
-    interactions: any;
-    source: VectorSource;    
+    className?: string;
+    target?: string;
+    edition?: boolean;
+    interactions?: Interactions //TODO dig deeper into the type system
+    source?: VectorSource;
 }
 /** Control bar for editing in a layer
  * @constructor
@@ -77,4 +106,26 @@ export default class EditBar extends Bar {
      * @return {contrControl}
      */
     getControlsByName(name: string): ol_control_Control;
+
+    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    un(type: string | string[], listener: (p0: any) => any): void;
+    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'change', listener: (evt: BaseEvent) => void): void;
+    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'error', listener: (evt: BaseEvent) => void): void;
+    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
+}
+export class InfoEvent extends BaseEvent {
+    constructor(
+        type: EditBarEventType,
+        features: Collection<Feature<Geometry>>
+    );
+    features: Collection<Feature<Geometry>>;
+
+
 }

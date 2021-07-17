@@ -1,16 +1,10 @@
-import Collection from 'ol/Collection';
-import Feature from 'ol/Feature';
-import { Vector as VectorSource } from 'ol/source';
-import SelectBase, { condition } from './SelectBase';
+import SelectBase, {Options as SelectOptions} from './SelectBase';
 
-export interface Options {
-    className: string;
-    target: Element | undefined;
-    source: VectorSource | VectorSource[];
+export interface Options extends SelectOptions {
     selectLabel?: string;
     addLabel?: string;
-    caseLabel?: string;
     allLabel?: string;
+    caseLabel?: string;
     attrPlaceHolder?: string;
     valuePlaceHolder?: string;
 }
@@ -33,6 +27,6 @@ export interface Options {
  *  @param {string} [options.valuePlaceHolder=value]
  */
 export default class Select extends SelectBase {
-    constructor(options?: Options);
+    constructor(options?: SelectOptions);
 
 }

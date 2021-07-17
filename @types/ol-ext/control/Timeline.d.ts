@@ -1,10 +1,10 @@
 import { Map as _ol_Map_ } from 'ol';
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 
 export type position = 'start'| 'end' | 'middle';
-export interface Options {
+export interface Options extends ControlOptions {
     className?: string;
     features?: Feature[];
     source?: VectorSource;

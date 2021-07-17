@@ -1,10 +1,10 @@
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 
-export interface Options {
+export interface Options extends ControlOptions {
     className?: string;
     title?: string;
     name?: string;
-    html?: string;
+    html?: string | Element;
     handleClick?: (e: Event) => void;
 }
 

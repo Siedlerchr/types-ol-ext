@@ -1,10 +1,10 @@
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 
-export interface Options {
-    className: string;
-    title: string;
-    max: number;
-    val: number;
+export interface Options extends ControlOptions {
+    className?: string;
+    title?: string;
+    max?: number;
+    val?: number;
 }
 /** A simple gauge control to display level information on the map.
  *

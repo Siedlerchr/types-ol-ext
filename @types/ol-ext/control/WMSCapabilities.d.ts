@@ -2,6 +2,9 @@ import ol_layer_Tile from 'ol/layer/Tile';
 import { Map as _ol_Map_ } from 'ol';
 import Layer from 'ol-ext/filter/Base';
 import TileLayer from 'ol/layer/Tile';
+import Button from './Button';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
+
 
 export interface Capabilities {
     map?: string;
@@ -9,8 +12,7 @@ export interface Capabilities {
     timeout?: number
 }
 
-export interface Options {
-    target?: Element;
+export interface Options extends ControlOptions {
     proxy?: string
     placeholder?: string;
     title?: string;
@@ -40,8 +42,8 @@ export interface Options {
  *  @param {boolean} options.cors Use CORS, default false
  *  @param {boolean} options.trace Log layer info, default false
  */
-export class WMSCapabilities {
-    constructor(options: Options);
+export class WMSCapabilities extends Button {
+    constructor(options?: Options);
 
     /** Create a new layer using options received by getOptionsFromCap method
      * @param {*} options

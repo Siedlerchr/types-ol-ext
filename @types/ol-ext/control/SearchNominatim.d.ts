@@ -1,5 +1,4 @@
-import Search from './Search';
-import SearchJSON, { Options as SearchJSONOptions } from 'ol-ext/control/SearchJSON';
+import SearchJSON, { Options as SearchJSONOptions } from './SearchJSON';
 
 export interface Options extends SearchJSONOptions {
     polygon?: boolean;

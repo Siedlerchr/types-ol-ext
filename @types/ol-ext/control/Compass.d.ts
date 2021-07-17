@@ -1,13 +1,13 @@
 import { Map as _ol_Map_ } from 'ol';
-import { Stroke, Image, Style, Fill } from 'ol/style';
+import { Stroke, Style, Fill } from 'ol/style';
 import CanvasBase from './CanvasBase';
-
-export interface Options {
-    className: string;
-    image: Image;
-    src: string;
-    rotateVithView: boolean;
-    style: Stroke;
+import { Options as ControlOptions } from 'ol/control/Control';
+export interface Options extends ControlOptions {
+    className?: string;
+    image?: HTMLImageElement | string;
+    src?: string;
+    rotateVithView?: boolean;
+    style?: Stroke | Style; //incompatible with CanvasBaseOptions, so we extends control options
 }
 /**
  * Draw a compass on the map. The position/Size of the control is defined in the css.
@@ -62,4 +62,8 @@ export default class Compass extends CanvasBase {
      * @api
      */
     getTextFont(): string;
+    /** Set compass image
+     * @param {Image|string} [img=default] the image or an url or 'compact' or 'default'
+     */
+    setImage(img: HTMLImageElement | string | 'compact' | 'default'): void
 }

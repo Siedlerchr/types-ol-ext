@@ -30,7 +30,7 @@ export interface Options extends SearchOptions {
  *  @param {string | undefined} options.authentication: basic authentication for the search API as btoa("login:pwd")
  */
 export default class SearchJSON extends Search {
-    constructor(options: Options);
+    constructor(options?: Options);
 
     /** Autocomplete function (ajax request to the server)
     * @param {string} s search string

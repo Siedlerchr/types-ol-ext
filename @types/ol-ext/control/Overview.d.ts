@@ -1,10 +1,10 @@
 import { Map as _ol_Map_ } from 'ol';
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 import { Layer } from 'ol/layer';
 import { ProjectionLike } from 'ol/proj';
 import { Style } from 'ol/style';
 
-export interface Options {
+export interface Options extends ControlOptions{
   projection: ProjectionLike;
   minZoom?: number;
   maxZoom?: number;

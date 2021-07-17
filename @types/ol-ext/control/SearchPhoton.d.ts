@@ -4,7 +4,6 @@ import SearchJSON, {Options as SearchOptions} from './SearchJSON';
 
 export interface Options extends SearchOptions {
     className?: string;
-    target?: Element | string ;
     label?: string ;
     placeholder?: string ;
     typing?: number ;

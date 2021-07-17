@@ -1,8 +1,7 @@
-import SearchJSON from './SearchJSON';
+import SearchJSON, { Options as SearchJSONOptions } from './SearchJSON';
 
-export interface Options {
+export interface Options extends SearchJSONOptions {
     className?: string;
-    target?: Element | string ;
     label?: string ;
     placeholder?: string ;
     typing?: number ;
@@ -31,6 +30,6 @@ export interface Options {
  *  @param {string|undefined} options.lang API language, default none
  */
 export default class SearchWikipedia extends SearchJSON {
-    constructor(options?: any);
+    constructor(options?: Options);
 
 }

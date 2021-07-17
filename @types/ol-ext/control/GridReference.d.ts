@@ -2,13 +2,21 @@ import { Map as _ol_Map_ } from 'ol';
 import Collection from 'ol/Collection';
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
-import CanvasBase from './CanvasBase';
+import CanvasBase, { Options as CanvasOptions } from './CanvasBase';
 import { Style, Stroke, Fill } from 'ol/style';
 import { Extent } from 'ol/extent';
 import { Size } from 'ol/size';
 import { Vector as VectorSource } from 'ol/source';
+import { EventsKey } from 'ol/events';
+import { SelectEvent } from 'ol/interaction/Select';
+import BaseEvent from 'ol/events/Event';
+import { ObjectEvent } from 'ol/Object';
 
-export interface Options {
+export enum GridReferenceEventType {
+    SELECT = 'select'
+}
+
+export interface Options extends CanvasOptions {
     style?: Style;
     maxResolution?: number;
     Extent?: Extent;
@@ -108,4 +116,30 @@ export default class GridReference extends CanvasBase {
      * @api
      */
     getTextFont(): string;
+
+    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    un(type: string | string[], listener: (p0: any) => any): void;
+    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'change', listener: (evt: BaseEvent) => void): void;
+    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'error', listener: (evt: BaseEvent) => void): void;
+    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
+
+    on(type: 'select', listener: (evt: GridReferenceSelectEvent) => void): EventsKey;
+    once(type: 'select', listener: (evt: GridReferenceSelectEvent) => void): EventsKey;
+    un(type: 'select', listener: (evt: GridReferenceSelectEvent) => void): void;
+}
+
+export class GridReferenceSelectEvent extends BaseEvent {
+    constructor(
+        type: GridReferenceEventType,
+        feature: Feature
+    );
+
+    feature: Feature;
 }

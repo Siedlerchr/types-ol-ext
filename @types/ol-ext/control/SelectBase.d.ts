@@ -1,5 +1,5 @@
 import Collection from 'ol/Collection';
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 
@@ -21,11 +21,10 @@ export interface condition {
     op: operators;
     val: string;
 }
-export interface Options {
-    className: string;
-    target: Element | undefined;
-    features: Collection<Feature>;
-    source: VectorSource | VectorSource[];
+export interface Options extends ControlOptions {
+    className?: string;
+    features?: Collection<Feature>;
+    source?: VectorSource | VectorSource[];
 }
 /**
  * This is the base class for Select controls on attributes values.
