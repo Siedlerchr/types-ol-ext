@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Type definitions for ol-ext",
   "main": "",
-  "types": "types.d.ts",
+  "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tsc -p tsconfig.lint.json --pretty && tslint -p tsconfig.lint.json",
