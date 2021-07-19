@@ -1,11 +1,9 @@
 import Feature from 'ol/Feature';
-import Search from './Search';
+import Search, {Options as SearchOptions} from './Search';
 
-
-export interface Options {
+export interface Options extends SearchOptions {
     className?: string;
     title?: string
-    target?: Element | string;
     label?: string;
     placeholder?: string;
     typing?: number;

@@ -1,11 +1,14 @@
 import { Map as _ol_Map_ } from 'ol';
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
+import WKT from 'ol/format/WKT'
+import BaseEvent from 'ol/events/Event';
+import { EventsKey } from 'ol/events';
+import { ObjectEvent } from 'ol/Object';
 
-export interface Options {
+export interface Options extends ControlOptions{
     className?: string;
-    target?: Element | string ;
     label?: string ;
     placeholder?: string;
     inputLabel?: string ;
@@ -15,8 +18,8 @@ export interface Options {
     maxItems?: number;
     maxHistory?: number;
     getTitle: (f: Feature) => string;
-    autocomplete: (s: string, ...params: any[]) => any; // TODO: not sure about the syntax
-    exclusions: string;
+    autocomplete?: (s: string, ...params: any[]) => any; // TODO: not sure about the syntax
+    exclusions?: string;
 }
 
 /**
@@ -69,4 +72,32 @@ export default class IsochroneGeoportail extends ol_control_Control {
      * @param iter number of iterations
      */
     search(coord: Coordinate, option: number | string, iter: number): void;
+
+    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+    un(type: string | string[], listener: (p0: any) => any): void;
+    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'change', listener: (evt: BaseEvent) => void): void;
+    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'error', listener: (evt: BaseEvent) => void): void;
+    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
+    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
+
+    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'error', listener: (evt: BaseEvent) => void): void;
+
+    on(type: 'isochrone', listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: 'isochrone', listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: 'isochrone', listener: (evt: BaseEvent) => void): void;
 }
+
+export class IsoChroneEvent extends BaseEvent {
+    constructor(type: 'isochrone')
+    feature: Feature;
+    iteration: number;
+}
+

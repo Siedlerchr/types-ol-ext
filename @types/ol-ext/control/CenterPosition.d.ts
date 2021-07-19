@@ -2,14 +2,14 @@ import { Map as _ol_Map_ } from 'ol';
 import { CoordinateFormat } from 'ol/coordinate';
 import { ProjectionLike } from 'ol/proj';
 import { Fill, Stroke, Style } from 'ol/style';
-import CanvasBase from './CanvasBase';
+import CanvasBase, {Options as CanvasOptions} from './CanvasBase';
 
-export interface Options {
-    className: string;
-    style: Style;
-    projection: ProjectionLike;
-    coordinateFormat: CoordinateFormat;
-    canvas: boolean;
+export interface Options extends CanvasOptions{
+    className?: string;
+    style?: Style;
+    projection?: ProjectionLike;
+    coordinateFormat?: CoordinateFormat;
+    canvas?: boolean;
 }
 /**
  * A title Control integrated in the canvas (for jpeg/png

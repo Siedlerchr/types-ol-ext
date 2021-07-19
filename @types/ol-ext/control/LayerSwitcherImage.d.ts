@@ -1,7 +1,6 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Layer } from 'ol/layer';
-import LayerSwitcher from './LayerSwitcher';
-import { Options } from 'ol-ext/control/LayerSwitcher';
+import LayerSwitcher, {Options} from './LayerSwitcher';
 /**
  * @classdesc OpenLayers Layer Switcher Control.
  * @require Layer.getPreview

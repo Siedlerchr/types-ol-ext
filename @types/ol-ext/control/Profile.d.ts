@@ -1,13 +1,12 @@
-import ol_control_Control from 'ol/control/Control';
+import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 import Feature from 'ol/Feature';
 import { Geometry } from 'ol/geom';
 import { Style } from 'ol/style';
 import { Coordinate } from 'ol/coordinate';
 import { ProjectionLike } from 'ol/proj';
 
-export interface Options {
+export interface Options extends ControlOptions {
     className?: string;
-    target?: Element | string;
     style?: Style;
     info?: { [key: string]: any }
     width?: number;

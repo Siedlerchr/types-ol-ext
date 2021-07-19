@@ -1,12 +1,10 @@
 import { Map as _ol_Map_ } from 'ol';
 import Collection from 'ol/Collection';
-import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
-import SelectBase from './SelectBase';
+import SelectBase, {Options as SelectOptions} from './SelectBase';
 
-export interface Options {
+export interface Options extends SelectOptions {
     className?: string;
-    target?: Element ;
     source?: VectorSource | VectorSource[];
     controls?: SelectBase[];
 }

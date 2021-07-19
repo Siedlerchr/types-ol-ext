@@ -1,15 +1,14 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Vector as VectorSource } from 'ol/source';
-import SelectBase from './SelectBase';
-export interface Options {
+import SelectBase, {Options as SelectOptions} from './SelectBase';
+export interface Options extends SelectOptions{
     className?: string;
-    target?: Element ;
     source?: VectorSource | VectorSource[];
     property?: string;
     max?: number;
     selectAll?: number;
     defaultLabel?: string;
-    onchoice: ()=>void
+    onchoice: () => void
 }
 /**
  * Select features by property using a popup

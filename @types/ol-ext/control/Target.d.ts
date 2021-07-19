@@ -1,9 +1,11 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Style } from 'ol/style';
+import { Options as ControlOptions } from 'ol/control/Control';
+
 import CanvasBase from './CanvasBase';
 
-export interface Options {
-    style: Style | Style[];
+export interface Options extends ControlOptions {
+    style: Style | Style[]; //not compatible with CanvasBase
     composite: string; //In globalCompositeOperation in TS is also string
 }
 /** contrTarget draw a target at the center of the map.

@@ -1,12 +1,10 @@
 import { Feature } from 'ol';
-import SearchJSON from './SearchJSON';
-import { Options as SearchOptions } from './SearchJSON';
+import SearchJSON, { Options as SearchJsonOptions } from './SearchJSON';
 
-export interface Options extends SearchOptions {
+export interface Options extends SearchJsonOptions {
     className?: string;
     apiKey?: string;
     authentication?: string;
-    target?: Element | string;
     label?: string;
     placeholder?: string;
     typing?: number;
