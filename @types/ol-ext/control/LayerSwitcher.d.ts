@@ -1,20 +1,19 @@
-import { Map as _ol_Map_ } from 'ol';
-import ol_control_Control, { Options as ControlOptions } from 'ol/control/Control';
-import { Layer } from 'ol/layer';
-import LayerGroup from 'ol/layer/Group';
-import { Extent } from 'ol/extent';
-import BaseEvent from 'ol/events/Event';
-import BaseLayer from 'ol/layer/Base';
-import { EventsKey } from 'ol/events';
-import { ObjectEvent } from 'ol/Object';
+import { Map as _ol_Map_ } from "ol";
+import ol_control_Control, { Options as ControlOptions } from "ol/control/Control";
+import { Layer } from "ol/layer";
+import LayerGroup from "ol/layer/Group";
+import { Extent } from "ol/extent";
+import BaseEvent from "ol/events/Event";
+import { EventsKey } from "ol/events";
+import { ObjectEvent } from "ol/Object";
 
 export enum LayerSwitcherEventType {
     DRAWLIST = "drawlist",
     LAYERVISIBLE = "layer:visible",
-    LAYEROPACITY = "layer:opacity"
+    LAYEROPACITY = "layer:opacity",
 }
 export enum ToggleEventType {
-    TOGGLE = "toggle"
+    TOGGLE = "toggle",
 }
 export enum LayerSwitcherReorderEventType {
     REODERSTART = "reoder-start",
@@ -27,21 +26,22 @@ export interface Options extends ControlOptions {
     mouseover?: boolean;
     reordering?: boolean;
     trash?: boolean;
-    oninfo?: (...params: any[]) => any;
+    oninfo?: (l: Layer) => void;
     extent?: Extent;
-    onExtent?: (...params: any[]) => any;
+    onExtent?: (l: Layer) => void;
     drawDelay?: number;
     collapsed?: boolean;
     layerGroup?: LayerGroup;
+    noScroll?: boolean;
 }
 
 export interface Tip {
     up: string;
     down: string;
-    info: string,
-    extent: string,
-    trash: string,
-    plus: string
+    info: string;
+    extent: string;
+    trash: string;
+    plus: string;
 }
 
 /** Layer Switcher Control.
@@ -104,36 +104,35 @@ export default class LayerSwitcher extends ol_control_Control {
      * @param {Element|string} html content html
      */
     setHeader(html: Element | string): void;
-    /** Calculate overflow and add scrolls
-     *	@param {Number} dir scroll direction -1|0|1|'+50%'|'-50%'
+    /** get classname of the layer
+     * @param {ol.layer.Layer} layer
+     * @returns {string} the layer classname
+     * @api
      */
-    overflow(dir: number): void;
+    getLayerClass(layer: Layer): string;
+    /** Select a layer
+     * @param {ol.layer.Layer} layer
+     * @api
+     */
+    selectLayer(layer: Layer, silent?: boolean): void;
     /**
      *	Draw the panel control (prevent multiple draw due to layers manipulation on the map with a delay function)
      */
     drawPanel(): void;
-    /** Set opacity for a layer
-     * @param {Layer} layer
+    /** Get selected layer
+     * @returns {ol.layer.Layer}
+     */
+    getSelection(): Layer;
+    /** Get control panel
+     * @api
+     */
+    getPanel(): Element;
+    /** Set visibility for a layer
+     * @param {ol.layer.Layer} layer
      * @param {Element} li the list element
      * @api
      */
-    setLayerOpacity(layer: Layer, li: Element): void
-    /** Set visibility for a layer
-  * @param {Layer} layer
-  * @param {Element} li the list element
-  * @api
-  */
-    setLayerVisibility(layer: Layer, li: Element): void
-    /** Change layer visibility according to the baselayer option
-     * @param {Layer} l
-     * @param {Array<layer>} layers related layers
-     */
-    switchLayerVisibility(l: Layer, layers: Layer[]): void;
-    /** Check if Layer is on the map (depending on zoom and Extent)
-     * @param {Layer}
-     * @return {boolean}
-     */
-    testLayerVisibility(layer: Layer): boolean;
+    setLayerVisibility(layer: Layer, li: Element): void;
     /** Render a list of layer
      * @param {Elemen} element to render
      * @param {Array<Layer>} list of layer to show
@@ -144,60 +143,48 @@ export default class LayerSwitcher extends ol_control_Control {
     on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
     once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
     un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
+    on(type: "change", listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: "change", listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: "change", listener: (evt: BaseEvent) => void): void;
+    on(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
+    once(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
+    un(type: "error", listener: (evt: BaseEvent) => void): void;
+    on(type: "propertychange", listener: (evt: ObjectEvent) => void): EventsKey;
+    once(type: "propertychange", listener: (evt: ObjectEvent) => void): EventsKey;
+    un(type: "propertychange", listener: (evt: ObjectEvent) => void): void;
 
-    on(type: 'drawlist', listener: (evt: LayerSwitcherEvent) => void): EventsKey;
-    once(type: 'drawlist', listener: (evt: LayerSwitcherEvent) => void): EventsKey;
-    un(type: 'drawlist', listener: (evt: LayerSwitcherEvent) => void): void;
-    on(type: 'layer:visible', listener: (evt: LayerSwitcherEvent) => void): EventsKey;
-    once(type: 'layer:visible', listener: (evt: LayerSwitcherEvent) => void): EventsKey;
-    un(type: 'layer:visible', listener: (evt: LayerSwitcherEvent) => void): void;
-    on(type: 'layer:opacity', listener: (evt: LayerSwitcherEvent) => void): EventsKey;
-    once(type: 'layer:opacity', listener: (evt: LayerSwitcherEvent) => void): EventsKey;
-    un(type: 'layer:opacity', listener: (evt: LayerSwitcherEvent) => void): void;
-    on(type: 'toggle', listener: (evt: ToggleEvent) => void): EventsKey;
-    once(type: 'toggle', listener: (evt: ToggleEvent) => void): EventsKey;
-    un(type: 'toggle', listener: (evt: ToggleEvent) => void): void;
-    on(type: 'reroder-start', listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
-    once(type: 'reorder-start', listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
-    un(type: 'reorder-start', listener: (evt: LayerSwitcherReorderEvent) => void): void;
-    on(type: 'reroder-end', listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
-    once(type: 'reorder-end', listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
-    un(type: 'reorder-end', listener: (evt: LayerSwitcherReorderEvent) => void): void;
-
+    on(type: "drawlist", listener: (evt: LayerSwitcherEvent) => void): EventsKey;
+    once(type: "drawlist", listener: (evt: LayerSwitcherEvent) => void): EventsKey;
+    un(type: "drawlist", listener: (evt: LayerSwitcherEvent) => void): void;
+    on(type: "layer:visible", listener: (evt: LayerSwitcherEvent) => void): EventsKey;
+    once(type: "layer:visible", listener: (evt: LayerSwitcherEvent) => void): EventsKey;
+    un(type: "layer:visible", listener: (evt: LayerSwitcherEvent) => void): void;
+    on(type: "layer:opacity", listener: (evt: LayerSwitcherEvent) => void): EventsKey;
+    once(type: "layer:opacity", listener: (evt: LayerSwitcherEvent) => void): EventsKey;
+    un(type: "layer:opacity", listener: (evt: LayerSwitcherEvent) => void): void;
+    on(type: "toggle", listener: (evt: ToggleEvent) => void): EventsKey;
+    once(type: "toggle", listener: (evt: ToggleEvent) => void): EventsKey;
+    un(type: "toggle", listener: (evt: ToggleEvent) => void): void;
+    on(type: "reroder-start", listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
+    once(type: "reorder-start", listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
+    un(type: "reorder-start", listener: (evt: LayerSwitcherReorderEvent) => void): void;
+    on(type: "reroder-end", listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
+    once(type: "reorder-end", listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
+    un(type: "reorder-end", listener: (evt: LayerSwitcherReorderEvent) => void): void;
 }
 export class ToggleEvent extends BaseEvent {
-    constructor(
-        type: ToggleEventType,
-        collapsed: boolean,
-    );
+    constructor(type: ToggleEventType, collapsed: boolean);
     collapsed: boolean;
 }
 
 export class LayerSwitcherEvent extends BaseEvent {
-    constructor(
-        type: LayerSwitcherEventType,
-        layer?: Layer,
-        li?: Text | HTMLElement
-    );
+    constructor(type: LayerSwitcherEventType, layer?: Layer, li?: Text | HTMLElement);
     layer: Layer;
-    li?: Text | HTMLElement
+    li?: Text | HTMLElement;
 }
 
 export class LayerSwitcherReorderEvent extends BaseEvent {
-    constructor(
-        type: LayerSwitcherReorderEventType,
-        layer: Layer,
-        group: LayerGroup
-    );
+    constructor(type: LayerSwitcherReorderEventType, layer: Layer, group: LayerGroup);
     layer: Layer;
     group: LayerGroup;
 }

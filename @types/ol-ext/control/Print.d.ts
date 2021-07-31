@@ -1,7 +1,8 @@
-import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
+import ol_control_Control, { Options as ControlOptions } from 'ol/control/Control';
 
 export interface Options extends ControlOptions {
     className?: string;
+    title?: string
     imageType?: string;
     quality?: number;
     orientation?: 'landscape' | 'portrait';
@@ -16,6 +17,7 @@ export interface Options extends ControlOptions {
  * @extends {ol.control.Control}
  * @param {Object=} options Control options.
  *	@param {String} options.className class of the control
+  *	@param {String} options.title button title
  *	@param {string} options.imageType A string indicating the image format, default image/jpeg
  *	@param {number} options.quality Number between 0 and 1 indicating the image quality to use for image formats that use lossy compression such as image/jpeg and image/webp
  *	@param {string} options.orientation Page orientation (landscape/portrait), default guest the best one

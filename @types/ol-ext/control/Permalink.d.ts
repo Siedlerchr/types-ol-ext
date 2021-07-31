@@ -1,10 +1,10 @@
 import { Map as _ol_Map_ } from 'ol';
-import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
+import ol_control_Control, { Options as ControlOptions } from 'ol/control/Control';
 import { Layer } from 'ol/layer';
 
 export interface Options extends ControlOptions {
     urlReplace?: boolean;
-    localStorage?: boolean;
+    localStorage?: boolean | 'position';
     geohash?: boolean
     fixed?: number;
     anchor?: boolean;
@@ -22,7 +22,7 @@ export interface Options extends ControlOptions {
  * @extends {ol_control_Control}
  * @param {Object=} options
  *  @param {boolean} options.urlReplace replace url or not, default true
- *  @param {boolean} options.localStorage save current map view in localStorage, default false
+ *  @param {boolean|string} [options.localStorage=false] save current map view in localStorage, if 'position' only store map position
  *  @param {boolean} options.geohash use geohash instead of lonlat, default false
  *  @param {integer} options.fixed number of digit in coords, default 6
  *  @param {boolean} options.anchor use "#" instead of "?" in href
@@ -48,14 +48,9 @@ export default class Permalink extends ol_control_Control {
      */
     setGeohash(b: boolean): void;
     /** Set map position according to the current link
+     * @param {boolean} [force=false] if true set the position even if urlReplace is disabled
      */
-    setPosition(): void;
-    /**
-     * Get the parameters added to the url. The object can be changed to add new values.
-     * @return {Object} a key value object added to the url as &key=value
-     * @api stable
-     */
-    getUrlParams(): any;
+    setPosition(force?: boolean): void;
     /**
      * Set a parameter to the url.
      * @param {string} key the key parameter
@@ -77,11 +72,11 @@ export default class Permalink extends ol_control_Control {
      * @api stable
      */
     hasUrlParam(key: string): boolean;
-    /**
-     * Get the permalink
-     * @return permalink
+    /** Get the permalink
+     * @param {boolean|string} [search=false] false: return full link | true: return the search string only | 'position': return position string
+     * @return {permalink}
      */
-    getLink(): string;
+    getLink(search?: boolean | 'position'): string;
     /**
      * Enable / disable url replacement (replaceSate)
      *	@param {bool}
