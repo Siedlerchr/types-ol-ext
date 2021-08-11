@@ -3,7 +3,7 @@ import { Interaction } from 'ol/interaction';
 import Event from 'ol/events/Event';
 
 export interface Options {
-    map: _ol_Map_[];
+    maps: _ol_Map_[];
 }
 /** Interaction synchronize
  * @constructor
