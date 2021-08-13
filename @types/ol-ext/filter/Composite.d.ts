@@ -1,7 +1,7 @@
 import Base from './Base';
 
 export interface Options {
-    operation: string;
+    operation?: string;
 }
 /** Colorize map or layer
 * @constructor
@@ -10,8 +10,8 @@ export interface Options {
 * @param {Object} options
 *   @param {string} options.operation composite operation
  */
-declare class Composite extends Base {
-    constructor(options: Options);
+export class Composite extends Base {
+    constructor(options?: Options);
     /** Change the current operation
     *	@param {string} operation composite function
      */
@@ -26,4 +26,3 @@ declare class Composite extends Base {
     getActive(): boolean;
 }
 
-export default Composite;

@@ -1,5 +1,4 @@
 import Base from './Base';
-import {Image} from 'ol/style';
 
 /** @typedef {Object} FilterTextureOptions
  *  @property {Image | undefined} img Image object for the texture
@@ -10,12 +9,12 @@ import {Image} from 'ol/style';
  *  @property {null | string | undefined} crossOrigin The crossOrigin attribute for loaded images.
  */
 export declare type FilterTextureOptions = {
-    img: Image | undefined;
-    src: string;
-    scale: number;
+    img?: HTMLImageElement| undefined;
+    src?: string;
+    scale?: number;
     opacity?: number;
-    rotate: boolean;
-    crossOrigin: null | string | undefined;
+    rotate?: boolean;
+    crossOrigin?: null | string | undefined;
 };
 
 
@@ -25,7 +24,7 @@ export declare type FilterTextureOptions = {
  * @extends {filter.Base}
  * @param {FilterTextureOptions} options
  */
-declare class Texture extends Base {
+export class Texture extends Base {
     constructor(options: FilterTextureOptions);
     /** Set texture
      * @param {FilterTextureOptions} [options]
@@ -35,10 +34,8 @@ declare class Texture extends Base {
      *	@param {number} offsetX x offset
      *	@param {number} offsetY y offset
      */
-    getPattern(offsetX: number, offsetY: number): void;
-    /** Draw pattern over the map on postcompose
-     */
-    postcompose(): void;
+    getPattern(offsetX: number, offsetY: number): any;
+
     /** Activate / deactivate filter
     *	@param {boolean} b
      */

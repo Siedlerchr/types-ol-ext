@@ -16,7 +16,7 @@ export interface Options {
  *  @param {Fill} [options.fill] style to fill with
  *  @param {boolean} [options.inner] mask inner, default false
  */
-declare class Mask extends Base {
+export class Mask extends Base {
     constructor(options?: Options);
     /** Draw the feature into canvas
      */
@@ -29,10 +29,6 @@ declare class Mask extends Base {
     *	@return {boolean}
      */
     getActive(): boolean;
-    /** Set fill color
-     *	@internal
-     */
-    fillColor_: string;
+
 }
 
-export default Mask;

@@ -8,12 +8,12 @@ import { ColorLike } from 'ol/colorlike';
  *  @property {number} value a [0-1] value to modify the effect value
  *  @property {boolean} inner mask inner, default false
  */
-export declare type FilterColorizeOptions = {
-    color: ColorLike;
-    operation: string;
-    value: number;
-    inner: boolean;
-};
+export interface  FilterColorizeOptions  {
+    color?: ColorLike;
+    operation?: 'enhance' | string;
+    value?: number;
+    inner?: boolean;
+}
 
 
 /** Colorize map or layer
@@ -24,8 +24,8 @@ export declare type FilterColorizeOptions = {
  * @author Jean-Marc Viglino https://github.com/viglino
  * @param {FilterColorizeOptions} options
  */
-declare class Colorize extends Base {
-    constructor(options: FilterColorizeOptions);
+export class Colorize extends Base {
+    constructor(options?: FilterColorizeOptions);
     /** Set options to the filter
      * @param {FilterColorizeOptions} [options]
      */
@@ -33,11 +33,11 @@ declare class Colorize extends Base {
     /** Set the filter value
      *  @param {Color} options.color style to fill with
      */
-    setValue(): void;
+    setValue(color: ColorLike): void;
     /** Set the color value
      *  @param {number} options.value a [0-1] value to modify the effect value
      */
-    setColor(): void;
+    setColor(c: number): void;
     /** Activate / deactivate filter
     *	@param {boolean} b
      */
@@ -48,4 +48,3 @@ declare class Colorize extends Base {
     getActive(): boolean;
 }
 
-export default Colorize;
