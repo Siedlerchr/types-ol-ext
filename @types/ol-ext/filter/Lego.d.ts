@@ -1,10 +1,12 @@
 import Base from './Base';
 
-export interface Options { 
+export interface Options {
     img?: string;
     brickSize?: number;
     crossOrigin?: null | string | undefined;
 }
+
+
 /** Make a map or layer look like made of a set of Lego bricks.
  *  @constructor
  * @requires filter
@@ -14,11 +16,15 @@ export interface Options {
  *  @param {number} [options.brickSize] Size of te brick, default 30
  *  @param {null | string | undefined} [options.crossOrigin] crossOrigin attribute for loaded images.
  */
-declare class Lego extends Base {
+export class Lego extends Base {
     constructor(options?: Options);
     /** Image definition
      */
-    img: any;
+    img: {
+        brick: string;
+        ol3: string;
+        lego: string;
+    };;
     /** Overwrite to handle brickSize
     * @param {string} key
     * @param {any} val
@@ -29,15 +35,13 @@ declare class Lego extends Base {
     *	@param {'brick'|'ol3'|'lego'|undefined} img the pattern, default ol3
     *	@param {string} crossOrigin
      */
-    setBrick(width: number, img: 'brick' | 'ol3' | 'lego' | undefined, crossOrigin: string): void;
+    setBrick(width?: number, img?: 'brick' | 'ol3' | 'lego' | undefined, crossOrigin?: string): void;
     /** Get translated pattern
     *	@param {number} offsetX x offset
     *	@param {number} offsetY y offset
      */
     getPattern(offsetX: number, offsetY: number): void;
-    /** Postcompose operation
-     */
-    postcompose(): void;
+
     /** Activate / deactivate filter
     *	@param {boolean} b
      */
@@ -48,4 +52,3 @@ declare class Lego extends Base {
     getActive(): boolean;
 }
 
-export default Lego;

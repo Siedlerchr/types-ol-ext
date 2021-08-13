@@ -20,7 +20,7 @@ export interface Options {
 *  @param {boolean} [options.keepAspectRatio] keep aspect ratio
 *  @param {string} [options.color] backgroundcolor
  */
-declare class Clip extends Base {
+export class Clip extends Base {
     constructor(options?: Options);
     /** Activate / deactivate filter
     *	@param {boolean} b
@@ -31,5 +31,3 @@ declare class Clip extends Base {
      */
     getActive(): boolean;
 }
-
-export default Clip;
