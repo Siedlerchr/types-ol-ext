@@ -1,8 +1,4 @@
-import { Extent } from "ol/extent";
-import { Layer } from "ol/layer";
-import LayerGroup from "ol/layer/Group";
 import LayerSwitcher, {Options} from './LayerSwitcher';
-import ol_control_Control, { Options as ControlOptions } from "ol/control/Control";
 import Control from 'ol/control/Control';
 
 

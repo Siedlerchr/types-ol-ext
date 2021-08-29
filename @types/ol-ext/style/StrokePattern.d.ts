@@ -2,7 +2,7 @@ import FillPattern from './FillPattern';
 import { Image, Fill, Stroke } from 'ol/style';
 import { ColorLike } from 'ol/colorlike';
 import { Size } from 'ol/size';
-import { FillPatternOptions } from 'ol-ext/style/FillPattern';
+import { FillPatternOptions } from './FillPattern';
 
 export interface Options {
     image?: Image;

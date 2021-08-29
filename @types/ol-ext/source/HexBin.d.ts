@@ -1,9 +1,9 @@
-import BinBase from 'ol-ext/source/BinBase';
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import { Point, Polygon } from 'ol/geom';
 import HexagonLayout from '../render/HexGrid';
 import VectorSource, { Options as VectorSourceOptions } from 'ol/source/Vector';
+import {BinBase} from './BinBase';
 
 export interface Options extends VectorSourceOptions {
     source?: VectorSource;

@@ -1,7 +1,7 @@
 import ol_layer_Tile from "ol/layer/Tile";
 import { Map as _ol_Map_ } from "ol";
 import TileLayer from "ol/layer/Tile";
-import Button from "./Button";
+import {Button} from "./Button";
 import { Options as ControlOptions } from "ol/control/Control";
 import Dialog from "./Dialog";
 

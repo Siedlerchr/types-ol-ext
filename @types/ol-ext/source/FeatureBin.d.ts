@@ -2,7 +2,7 @@ import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import { Point, Polygon } from 'ol/geom';
 import VectorSource, { Options as VectorSourceOptions } from 'ol/source/Vector';
-import BinBase from './BinBase'
+import {BinBase} from './BinBase'
 
 export interface Options {
     source?: VectorSource;

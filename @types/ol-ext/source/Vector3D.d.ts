@@ -1,11 +1,13 @@
 import { Feature } from "ol";
-import { Vector } from "ol/layer";
 import ImageLayer from "ol/layer/Image";
 import { Style } from 'ol/style';
 import * as olEasing from 'ol/easing';
+import VectorSource from 'ol/source/Vector';
+import { StyleLike } from 'ol/style/Style';
 export interface Options {
-    source?: Vector;
-    styler?: Style;
+    source?: VectorSource;
+    style?: StyleLike;
+    maxResolution?: number;
     defaultHeight?: number;
     height?: Height
     center?: number[];
@@ -17,7 +19,7 @@ export type Height = ((f: Feature) => number) | string | number;
  * @constructor
  * @extends {pl.layer.Image}
  * @param {Object} options
- *  @param {ol.layer.Vector} options.source the source to display in 3D
+ *  @param {ol.source.Vector} options.source the source to display in 3D
  *  @param {ol.style.Style} options.styler drawing style
  *  @param {number} options.maxResolution  max resolution to render 3D
  *  @param {number} options.defaultHeight default height if none is return by a propertie

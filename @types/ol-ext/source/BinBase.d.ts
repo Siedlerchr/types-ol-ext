@@ -19,7 +19,7 @@ export interface Options extends VectorOptions {
  *  @param {fucntion} [options.geometryFunction] Function that takes an ol.Feature as argument and returns an ol.geom.Point as feature's center.
  *  @param {function} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
  */
-export default class BinBase extends VectorSource {
+export class BinBase extends VectorSource {
     constructor(options?: Options);
     /**
      * Get the bin that contains a feature

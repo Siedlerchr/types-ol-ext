@@ -2,7 +2,7 @@ import { Coordinate } from 'ol/coordinate';
 import { Extent } from 'ol/extent';
 import { Point, Polygon } from 'ol/geom';
 import { ProjectionLike } from 'ol/proj';
-import BinBase from 'ol-ext/source/BinBase';
+import {BinBase} from './BinBase';
 import VectorSource, { Options as VectorSourceOptions } from 'ol/source/Vector';
 import { Feature } from 'ol';
 

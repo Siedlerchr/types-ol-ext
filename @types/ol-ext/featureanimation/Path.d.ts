@@ -1,7 +1,7 @@
 import Feature from 'ol/Feature';
 import { LineString } from 'ol/geom';
 import { FeatureAnimationEvent } from './FeatureAnimation';
-import { FeatureAnimation } from 'ol-ext/featureanimation/FeatureAnimation';
+import { FeatureAnimation } from './FeatureAnimation';
 
 export interface Options {
     speed?: number;

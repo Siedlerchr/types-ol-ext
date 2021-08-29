@@ -1,7 +1,6 @@
 import Feature from 'ol/Feature';
 import { Interaction, Select } from 'ol/interaction';
 import { Options as SelectOptions, SelectEvent } from 'ol/interaction/Select'
-import { Attributes } from 'ol-ext/interaction/GeolocationDraw';
 import BaseEvent from 'ol/events/Event';
 import { EventsKey } from 'ol/events';
 import { ObjectEvent } from 'ol/Object';

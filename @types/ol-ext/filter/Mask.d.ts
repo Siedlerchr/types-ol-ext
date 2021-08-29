@@ -17,7 +17,9 @@ export interface Options {
  *  @param {boolean} [options.inner] mask inner, default false
  */
 export class Mask extends Base {
+
     constructor(options?: Options);
+
     /** Draw the feature into canvas
      */
     drawFeaturePath_(): void;
@@ -29,6 +31,8 @@ export class Mask extends Base {
     *	@return {boolean}
      */
     getActive(): boolean;
+
+    fillColor_: string;
 
 }
 

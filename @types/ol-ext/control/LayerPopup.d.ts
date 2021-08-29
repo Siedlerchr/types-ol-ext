@@ -1,7 +1,7 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Layer } from 'ol/layer';
 import LayerSwitcher from './LayerSwitcher';
-import { Options, Tip } from 'ol-ext/control/LayerSwitcher';
+import { Options } from './LayerSwitcher';
 
 /**
  * OpenLayers Layer Switcher Contr
