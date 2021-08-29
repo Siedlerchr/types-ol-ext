@@ -28,7 +28,11 @@ fetch('../data/dvf-75-2017-100m.geojson').then(resp => resp.json()).then(data =>
     const features = (new GeoJSON()).readFeatures(data);
     features.forEach((f) => {
         f.getGeometry()?.transform('EPSG:4326', map.getView().getProjection());
-        //      f.setGeometry(f.getGeometry().getInteriorPoint());
+
+        const type = f.getGeometry();
+        if (type instanceof Polygon) {
+            f.setGeometry(type.getInteriorPoint());
+        }
     });
     vectorSource.addFeatures(features);
     doAnime();
@@ -59,6 +63,6 @@ map.addLayer(vector);
 const height = 0;
 function doAnime() {
     if (vector.animating()) return;
-    vector.setHeight(height ? 0 :  ((f: Feature) => f.get('nb') * 20));
+    vector.setHeight(height ? 0 : ((f: Feature) => f.get('nb') * 20));
     vector.animate({ height });
 }
