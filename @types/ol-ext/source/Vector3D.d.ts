@@ -26,7 +26,7 @@ export type Height = ((f: Feature) => number) | string | number;
  *  @param {function|string|Number} options.height a height function (returns height giving a feature) or a popertie name for the height or a fixed value
  *  @param {Array<number>} options.center center of the view, default [.5,1]
  */
-export class Vector3D extends ImageLayer {
+export default class Vector3D extends ImageLayer {
     constructor(options?: Options);
 
     /**

@@ -5,7 +5,7 @@ import TileLayer from 'ol/layer/Tile';
 import { OSM } from 'ol/source';
 import VectorSource from 'ol/source/Vector';
 import { GeoJSON } from 'ol/format';
-import { Vector3D } from 'ol-ext/source/Vector3D';
+import Vector3D, { Height } from 'ol-ext/source/Vector3D';
 import { Stroke, Style } from 'ol/style';
 import { Polygon } from 'ol/geom';
 
@@ -29,15 +29,16 @@ fetch('../data/dvf-75-2017-100m.geojson').then(resp => resp.json()).then(data =>
     features.forEach((f) => {
         f.getGeometry()?.transform('EPSG:4326', map.getView().getProjection());
 
-        const type = f.getGeometry();
-        if (type instanceof Polygon) {
-            f.setGeometry(type.getInteriorPoint());
-        }
+        // const type = f.getGeometry();
+        // if (type instanceof Polygon) {
+        //     f.setGeometry(type.getInteriorPoint());
+        // }
     });
     vectorSource.addFeatures(features);
+    document.querySelector<HTMLDivElement>('.loading')!.style.display = 'none';
     doAnime();
 });
-// TODO: Not a constructor error
+
 const vector = new Vector3D({
     source: vectorSource,
     style: new Style({
@@ -60,9 +61,20 @@ const vector = new Vector3D({
 });
 map.addLayer(vector);
 
-const height = 0;
+let height: Height = 0;
 function doAnime() {
     if (vector.animating()) return;
-    vector.setHeight(height ? 0 : ((f: Feature) => f.get('nb') * 20));
+    height = height ? 0 : ((f: Feature) => f.get('nb') * 20);
     vector.animate({ height });
+}
+
+declare global {
+    interface Window {
+        height: Height,
+        doAnime(): void
+    }
+}
+window.height = height;
+window.doAnime = () => {
+    doAnime();
 }
