@@ -1,7 +1,7 @@
 import ol_layer_Tile from "ol/layer/Tile";
 import { Map as _ol_Map_ } from "ol";
 import TileLayer from "ol/layer/Tile";
-import {Button} from "./Button";
+import Button from "./Button";
 import { Options as ControlOptions } from "ol/control/Control";
 import Dialog from "./Dialog";
 
@@ -42,7 +42,7 @@ export interface Options extends ControlOptions {
  *  @param {boolean} options.cors Use CORS, default false
  *  @param {boolean} options.trace Log layer info, default false
  */
-export class WMSCapabilities extends Button {
+export default class WMSCapabilities extends Button {
   constructor(options?: Options);
 
   /** Create a new layer using options received by getOptionsFromCap method

@@ -44,8 +44,8 @@ const vectorSource = new VectorSource(
 const vector = new Vector(
     {	source: vectorSource
     });
-vector.set('name', '1914-18')
-vector.set('preview', "http://www.culture.gouv.fr/Wave/image/memoire/2445/sap40_z0004141_v.jpg")
+vector.set('name', '1914-18');
+vector.set('preview', "http://www.culture.gouv.fr/Wave/image/memoire/2445/sap40_z0004141_v.jpg");
 
 // The map
 const map = new Map

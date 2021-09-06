@@ -1,4 +1,4 @@
-import { WMSCapabilities, Options } from "./WMSCapabilities";
+import WMSCapabilities, { Options } from "./WMSCapabilities";
 import TileLayer from "ol/layer/Tile";
 
 /** WMTSCapabilities
@@ -20,7 +20,7 @@ import TileLayer from "ol/layer/Tile";
  *  @param {boolean} options.cors Use CORS, default false
  *  @param {boolean} options.trace Log layer info, default false
  */
-export class WMTSCapabilities extends WMSCapabilities {
+export default class WMTSCapabilities extends WMSCapabilities {
   constructor(options?: Options);
 
   /** Get Capabilities request parameters

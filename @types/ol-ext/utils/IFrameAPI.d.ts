@@ -3,7 +3,7 @@
  * @constructor
  * @param {string} targetOrigin, default '*'
  */
-export class ol_ext_IFrameAPI {
+export default class IFrameAPI {
     constructor(targetOrigin?: string);
 
     /** Add properties

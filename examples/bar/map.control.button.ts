@@ -1,8 +1,7 @@
 import { Map, View } from 'ol';
 import { Tile } from 'ol/layer';
 import { OSM } from 'ol/source';
-
-import { Button } from 'ol-ext/control/Button';
+import Button from 'ol-ext/control/Button';
 
 // The map
 const map = new Map
@@ -18,7 +17,7 @@ const map = new Map
       ]
   });
 
-console.log("ok")
+console.log("ok");
 // Add a custom push button with onToggle function
 const hello = new Button(
   {

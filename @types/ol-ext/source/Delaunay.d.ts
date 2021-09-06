@@ -16,7 +16,7 @@ export interface CircumCirlce {
  * @param {*} options extend ol/source/Vector options
  *  @param {ol/source/Vector} options.source the source that contains the points
  */
-export class Delauny extends VectorSource{
+export default class Delauny extends VectorSource{
     constructor(options?: Options);
 
     /** Clear source (and points)

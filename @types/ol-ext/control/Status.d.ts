@@ -19,7 +19,7 @@ export interface Options extends ControlOptions {
  *  @param {string} options.position position of the status 'top', 'left', 'bottom' or 'right', default top
  *  @param {boolean} options.visible default true
  */
-export class Status  extends ol_control_Control{
+export default class Status extends ol_control_Control{
     constructor(options: any);
     /** Set visiblitity
      * @param {boolean} visible

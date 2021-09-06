@@ -61,3 +61,4 @@ export class BinBase extends VectorSource {
      */
     clear(): void;
 }
+export default BinBase;

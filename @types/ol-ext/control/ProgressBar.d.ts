@@ -15,7 +15,7 @@ export interface Options extends ControlOptions {
  *  @param {String} [options.label] waiting label
  *  @param {ol_layer_Layer} [options.layers] a tile layer with tileload envents
  */
-export class ol_control_ProgressBar extends Control {
+export default class ProgressBar extends Control {
     constructor(options?: Options);
     /** Set the control visibility
      * @param {Number} [n] progress percentage, a number beetween 0,1, default hide progress bar

@@ -10,7 +10,7 @@ export interface Options extends VectorSourceOptions{
  * @param {*} options source options
  *  @param {string} options.url GeoRSS feed url
  */
-export class GeoRSS extends VectorSource{
+export default class GeoRSS extends VectorSource{
     constructor(options?: Options);
 
 }

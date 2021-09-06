@@ -1,7 +1,7 @@
 import DragOverlay from "./DragOverlay";
 import { Coordinate } from 'ol/coordinate';
 import { InteractionOptions } from "ol/interaction/Interaction";
-import {Button} from '.././control/Button';
+import Button from '.././control/Button';
 import { Map as _ol_Map_, Overlay } from 'ol';
 import { Pixel } from 'ol/pixel';
 

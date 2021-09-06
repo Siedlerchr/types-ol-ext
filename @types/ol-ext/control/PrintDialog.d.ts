@@ -41,7 +41,7 @@ export type PaperSize = 'A0' | 'A1' | 'A2' | 'A3' | 'A4' | 'A5' | 'B4' | 'B5';
  *	@param {function} [options.saveAs] a function to save the image as blob
  *	@param {*} [options.jsPDF] jsPDF object to save map as pdf
  */
-export class PrintDialog extends ol_control_Control {
+export default class PrintDialog extends ol_control_Control {
     /** Add a new language
      * @param {string} lang lang id
      * @param  labels

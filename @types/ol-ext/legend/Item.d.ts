@@ -1,7 +1,6 @@
 import Feature from 'ol/Feature';
 import { StyleLike } from 'ol/style/Style';
 import { Size } from 'ol/size';
-export default ol_legend_Item;
 /**
  * ol/legend/Item options
  */
@@ -46,7 +45,7 @@ export type olLegendItemOptions = {
  * @fires select
  * @param {olLegendItemOptions} options
  */
-declare class ol_legend_Item {
+export default class LegendItem {
     constructor(options?: olLegendItemOptions);
     /** Set the legend title
      * @param {string} title

@@ -16,7 +16,7 @@ export interface Options extends InteractionOptions {
  *  @param {string} options.className cursor class name
  *  @param {ol.coordinate} options.coordinate position of the cursor
  */
-export class TouchCursorSelect extends DragOverlay {
+export default class TouchCursorSelect extends DragOverlay {
     constructor(options?: Options);
 
     /**

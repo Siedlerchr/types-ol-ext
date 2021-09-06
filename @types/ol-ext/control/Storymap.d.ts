@@ -16,7 +16,7 @@ export interface Options extends ControlOptions {
  *	@param {Element | string | undefined} options.html The storymap content
  *	@param {Element | string | undefined} options.target The target element to place the story. If no html is provided the content of the target will be used.
  */
-export class ol_control_Storymap extends ol_control_Control {
+export default class Storymap extends ol_control_Control {
     constructor(options?: Options);
     /** Scroll to a chapter
      * @param {string} name Name of the chapter to scroll to

@@ -1,5 +1,4 @@
 import { Map, View, Feature } from 'ol';
-import { Tile, Vector } from 'ol/layer';
 import { defaults as interaction_defaults } from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
 import { OSM } from 'ol/source';
@@ -70,11 +69,11 @@ function doAnime() {
 
 declare global {
     interface Window {
-        height: Height,
-        doAnime(): void
+        height: Height;
+        doAnime(): void;
     }
 }
 window.height = height;
 window.doAnime = () => {
     doAnime();
-}
+};

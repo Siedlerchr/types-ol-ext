@@ -11,7 +11,7 @@ import Toggle from 'ol-ext/control/Toggle';
 // import FullScreen from 'ol-ext/control/FullScreen';
 
 //  Vector layer
-const vector = new Vector({ source: new VectorSource() })
+const vector = new Vector({ source: new VectorSource() });
 
 // The map
 const map = new Map
@@ -43,7 +43,7 @@ const selectCtrl = new Toggle(
         title: "Select",
         interaction: new Select(),
         active: true,
-        onToggle: function (active) {
+        onToggle(active) {
             document.querySelector<HTMLTextAreaElement>('#info')!.textContent = "Select is " + (active ? "activated" : "deactivated");
         }
     });
@@ -60,7 +60,7 @@ const pedit = new Toggle(
                 type: GeometryType.POINT,
                 source: vector.getSource()
             }),
-        onToggle: function (active) {
+        onToggle(active) {
             document.querySelector<HTMLTextAreaElement>('#info')!.textContent = "Edition is " + (active ? "activated" : "deactivated");
         }
     });
@@ -78,7 +78,7 @@ function info(i: string) {
 
 declare global {
     interface Window {
-        mainbar: Bar
+        mainbar: Bar;
     }
 }
 window.mainbar = mainbar;

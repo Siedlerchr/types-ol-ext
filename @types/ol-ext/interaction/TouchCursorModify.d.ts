@@ -33,7 +33,7 @@ export interface Options extends InteractionOptions {
  *  @param {ol.style.Style | Array<ol.style.Style> | undefined} options.style Style for the sketch features.
  *  @param {boolean} options.wrapX Wrap the world horizontally on the sketch overlay, default false
  */
-export class TouchCursorModify extends TouchCursor {
+export default class TouchCursorModify extends TouchCursor {
     constructor(options?: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new

@@ -1,7 +1,7 @@
 import { TouchCursor } from "./TouchCursor";
 import { Coordinate } from 'ol/coordinate';
 import { InteractionOptions } from "ol/interaction/Interaction";
-import { Button } from "../control/Button";
+import  Button  from "../control/Button";
 import GeometryType from 'ol/geom/GeometryType';
 import VectorSource from 'ol/source/Vector';
 import Collection from 'ol/Collection';

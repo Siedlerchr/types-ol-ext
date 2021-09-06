@@ -32,7 +32,7 @@ export interface Options {
  *  @param {number} options.featureLimit maximum features in the source before refresh, default Infinity
  *  @param {boolean} [options.pagination] experimental enable pagination, default no pagination
  */
-export class ol_source_TileWFS extends VectorSource {
+export default class TileWFS extends VectorSource {
     constructor(options?: Options);
 
     on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];

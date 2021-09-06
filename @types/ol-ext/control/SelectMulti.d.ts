@@ -1,5 +1,4 @@
 import { Map as _ol_Map_ } from 'ol';
-import Collection from 'ol/Collection';
 import { Vector as VectorSource } from 'ol/source';
 import SelectBase, {Options as SelectOptions} from './SelectBase';
 
