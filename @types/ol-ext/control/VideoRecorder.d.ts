@@ -22,8 +22,8 @@ export interface Options extends ControlOptions{
  *	@param {number} [options.videoBitsPerSecond=5000000] bitrate for the video
  *	@param {DOMElement|string} [options.videoTarget] video element or the container to add the video when finished or 'DIALOG' to show it in a dialog, default none
  */
-export class VideoRecorder extends ol_control_Control {
-    constructor(options: Options);
+export default class VideoRecorder extends ol_control_Control {
+    constructor(options?: Options);
     /**
      * Remove the control from its current map and attach it to the new map.
      * Subclasses may set up event handlers to get notified about changes to

@@ -1,5 +1,6 @@
-import Layer from 'ol-ext/filter/Base';
-import Clip from 'ol-ext/interaction/Clip';
+import { Layer } from "ol/layer";
+import Clip from "./Clip";
+
 export interface Options {
     radius?: number;
     layers?: Layer | Layer[];

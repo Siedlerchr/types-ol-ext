@@ -1,6 +1,7 @@
 import { Stroke, RegularShape } from 'ol/style';
 import { Color } from 'ol/color';
 
+export default Chart;
 export type chartType = 'pie' | 'pie3d' | 'donut' | 'bar';
 export interface Options {
     type: chartType;

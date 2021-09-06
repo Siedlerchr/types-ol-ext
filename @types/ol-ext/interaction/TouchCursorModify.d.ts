@@ -1,5 +1,24 @@
+import { Collection, Feature, Map as _ol_Map_ } from 'ol';
+import { Coordinate } from 'ol/coordinate';
+import { InteractionOptions } from 'ol/interaction/Interaction';
+import VectorSource from 'ol/source/Vector';
+import { StyleLike } from 'ol/style/Style';
 import ModifyFeature from './ModifyFeature';
 import { TouchCursor } from './TouchCursor';
+export interface Options extends InteractionOptions {
+    className?: string;
+    coordinate?: Coordinate;
+    source?: VectorSource;
+    sources?: VectorSource | VectorSource[];
+    features?: Collection<Feature>;
+    filter?: (f: Feature)=> boolean;
+    pixelTolerance?: number;
+    style?: StyleLike;
+    wrapX?: boolean;
+}
+
+
+
 /** TouchCursor interaction + ModifyFeature
  * @constructor
  * @extends {ol_interaction_TouchCursor}
@@ -14,15 +33,15 @@ import { TouchCursor } from './TouchCursor';
  *  @param {ol.style.Style | Array<ol.style.Style> | undefined} options.style Style for the sketch features.
  *  @param {boolean} options.wrapX Wrap the world horizontally on the sketch overlay, default false
  */
-export class TouchCursorModify extends TouchCursor {
-    constructor(options: any);
+export default class TouchCursorModify extends TouchCursor {
+    constructor(options?: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.
      * @param {_ol_Map_} map Map.
      * @api stable
      */
-    setMap(map: any): void;
+    setMap(map: _ol_Map_): void;
     /**
      * Activate or deactivate the interaction.
      * @param {boolean} active Active.
@@ -30,7 +49,7 @@ export class TouchCursorModify extends TouchCursor {
      * @observable
      * @api
      */
-    setActive(b: any, position: any | null): void;
+    setActive(b: boolean, position: Coordinate | null): void;
     /**
      * Get the modify interaction.
      * @retunr {ol.interaction.ModifyFeature}

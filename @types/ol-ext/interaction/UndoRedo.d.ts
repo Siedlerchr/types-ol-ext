@@ -21,7 +21,7 @@ export interface Options {
  * @param {Object} options
  *  @param {number=} options.maxLength max undo stack length (0=Infinity), default Infinity
  */
-export class UndoRedo extends Interaction {
+export default class UndoRedo extends Interaction {
     constructor(options?: Options);
     /** Add a custom undo/redo
      * @param {string} action the action key name

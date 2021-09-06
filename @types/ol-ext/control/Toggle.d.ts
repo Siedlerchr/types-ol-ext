@@ -2,7 +2,7 @@ import { Map as _ol_Map_ } from 'ol';
 import { Interaction } from 'ol/interaction';
 import Bar from './Bar';
 import Button from './Button';
-import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
+import { Options as ControlOptions } from 'ol/control/Control';
 
 export interface Options extends ControlOptions {
     className?: string;

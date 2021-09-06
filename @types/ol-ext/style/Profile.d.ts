@@ -18,7 +18,7 @@ export interface Options {
  *  @param {number} options.zIndex
  *  @param {ol.geom.Geometry} options.geometry
  */
-export class ol_style_Profile extends Style {
+export default class Profile extends Style {
     constructor(options?: Options);
     /** Set style stroke
      * @param {ol.style.Stroke}

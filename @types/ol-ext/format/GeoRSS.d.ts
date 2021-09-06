@@ -11,7 +11,7 @@ export interface Options {
  *  @param {ol.ProjectionLike} options.dataProjection Projection of the data we are reading. If not provided `EPSG:4326`
  *  @param {ol.ProjectionLike} options.featureProjection Projection of the feature geometries created by the format reader. If not provided, features will be returned in the dataProjection.
  */
-export class GeoRSS extends Object {
+export default class GeoRSS extends Object {
 
     constructor(options?: Options);
     /**

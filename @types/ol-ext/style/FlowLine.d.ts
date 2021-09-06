@@ -35,7 +35,7 @@ export interface Options {
 *  @param {number} options.offset0 offset at line start
 *  @param {number} options.offset1 offset at line end
 */
-export class FlowLine extends Style {
+export default class FlowLine extends Style {
     constructor(options?: Options);
     /** Set the initial width
      * @param {number} width width, default 0

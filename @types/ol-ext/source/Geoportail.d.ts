@@ -30,7 +30,7 @@ export type MimeType= 'text/plain' | 'text/html' | 'application/json';
  *  @param {string} options.wrapX default true
 */
 
-export class Geoportail extends WMTS {
+export default class Geoportail extends WMTS {
     constructor(options?: Options);
 
     /** Get a tile load function to load tiles with basic authentication

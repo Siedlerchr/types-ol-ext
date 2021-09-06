@@ -1,4 +1,5 @@
-import { SVGFilter } from 'ol-ext/filter/SVGFilter';
+import { SVGFilter } from "./SVGFilter";
+
 export interface CanvasFilterOptions {
     /**
      * Takes an IRI pointing to an SVG filter element

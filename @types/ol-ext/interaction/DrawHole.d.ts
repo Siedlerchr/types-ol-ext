@@ -1,10 +1,9 @@
 import { Map as _ol_Map_ } from 'ol';
 import Feature from 'ol/Feature';
-import { Vector } from 'ol/layer';
+import { Layer, Vector } from 'ol/layer';
 import { StyleLike } from 'ol/style/Style';
 import { Draw, Interaction } from 'ol/interaction';
 import Collection from 'ol/Collection';
-import Layer from 'ol-ext/filter/Base';
 import { EventsKey } from 'ol/events';
 import { ModifyEvent } from 'ol/interaction/Modify';
 import BaseEvent from 'ol/events/Event';

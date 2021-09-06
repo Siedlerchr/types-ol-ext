@@ -1,4 +1,3 @@
-import { Geometry } from 'ol/geom';
 import {FeatureLike} from "ol/Feature";
 
 /** y-Ordering

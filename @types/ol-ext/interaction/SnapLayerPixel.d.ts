@@ -1,5 +1,5 @@
 import { Interaction } from 'ol/interaction';
-import Layer from 'ol-ext/filter/Base';
+import { Layer } from 'ol/layer';
 
 export class Options {
     layer?: Layer;

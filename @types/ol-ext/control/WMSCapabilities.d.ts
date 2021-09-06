@@ -42,7 +42,7 @@ export interface Options extends ControlOptions {
  *  @param {boolean} options.cors Use CORS, default false
  *  @param {boolean} options.trace Log layer info, default false
  */
-export class WMSCapabilities extends Button {
+export default class WMSCapabilities extends Button {
   constructor(options?: Options);
 
   /** Create a new layer using options received by getOptionsFromCap method

@@ -3,7 +3,7 @@ import { Coordinate } from 'ol/coordinate';
 import { Point, Polygon } from 'ol/geom';
 import { ProjectionLike } from 'ol/proj';
 import VectorSource, { Options as VectorSourceOptions } from 'ol/source/Vector';
-import BinBase from './BinBase';
+import {BinBase} from './BinBase';
 
 export interface Options extends VectorSourceOptions {
     source?: VectorSource;

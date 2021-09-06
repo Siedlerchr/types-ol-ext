@@ -1,8 +1,4 @@
-import { Extent } from "ol/extent";
-import { Layer } from "ol/layer";
-import LayerGroup from "ol/layer/Group";
 import LayerSwitcher, {Options} from './LayerSwitcher';
-import ol_control_Control, { Options as ControlOptions } from "ol/control/Control";
 import Control from 'ol/control/Control';
 
 
@@ -38,7 +34,7 @@ import Control from 'ol/control/Control';
  *	- displayInLayerSwitcher {boolean} display the layer in switcher, default true
  *	- noSwitcherDelete {boolean} to prevent layer deletion (w. trash option = true), default false
  */
-export class LayerShop extends LayerSwitcher{
+export default class LayerShop extends LayerSwitcher{
     constructor(options?: Options);
     /** Set the map instance the control is associated with.
      * @param {_ol_Map_} map The map instance.

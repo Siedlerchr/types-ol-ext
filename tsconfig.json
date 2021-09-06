@@ -2,19 +2,31 @@
   "compilerOptions": {
     "baseUrl": "./",
     "forceConsistentCasingInFileNames": true,
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
     "noEmit": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "paths": {
-      "*": ["@types/*", "node_modules/@types/*"]
+      "ol": [
+        "node_modules/@types/ol"
+      ],
+      "ol/*": [
+        "node_modules/@types/ol/*"
+      ]
     },
     "resolveJsonModule": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
-    "target": "es5"
+    "target": "es5",
+    "esModuleInterop": true
   },
-  "include": ["test/**/*.ts", "@types/**/*.d.ts"]
+  "include": [
+    "test/**/*.ts",
+    "@types/**/*.d.ts"
+  ]
 }

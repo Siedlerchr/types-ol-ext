@@ -18,7 +18,7 @@ export interface Options {
  *  @param {number} [options.scale=4] scale factor, use large factor to enhance performances (but minor accuracy)
  *  @param {string|function} options.weight The feature attribute to use for the weight or a function that returns a weight from a feature. Weight values should range from 0 to 100. Default use the weight attribute of the feature.
  */
-export class ol_source_IDW extends ImageCanvas {
+export default class IDW extends ImageCanvas {
   constructor(options?: Options);
   /** Get the source
    */

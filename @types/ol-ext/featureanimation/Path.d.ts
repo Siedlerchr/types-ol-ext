@@ -1,7 +1,7 @@
 import Feature from 'ol/Feature';
 import { LineString } from 'ol/geom';
 import { FeatureAnimationEvent } from './FeatureAnimation';
-import { FeatureAnimation } from 'ol-ext/featureanimation/FeatureAnimation';
+import FeatureAnimation  from './FeatureAnimation';
 
 export interface Options {
     speed?: number;
@@ -16,7 +16,7 @@ export interface Options {
  *  @param {Number|boolean} options.rotate rotate the symbol when following the path, true or the initial rotation, default false
  *  @param {LineString|Feature} options.path the path to follow
  */
-export class Path extends FeatureAnimation {
+export default class Path extends FeatureAnimation {
     constructor(options?: Options)
     /** Animate
     * @param {FeatureAnimationEvent} e

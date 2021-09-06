@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
+    "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["dom", "esnext"],
     "module": "commonjs",
@@ -14,6 +15,7 @@
     "resolveJsonModule": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
+    "esModuleInterop": true,
     "target": "es5",
     "rootDir": "./",
     "outDir": "../ol-ext/examples"

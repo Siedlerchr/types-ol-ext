@@ -18,7 +18,7 @@ export interface Options {
 * @extends {VectorSource}
 * @param {olx.source.DBPedia=} opt_options
  */
-export class DBPedia extends VectorSource {
+export default class DBPedia extends VectorSource {
     constructor(opt_options?: Options);
     /** Decode RDF attributes and choose to add feature to the layer
     * @param {feature} the feature

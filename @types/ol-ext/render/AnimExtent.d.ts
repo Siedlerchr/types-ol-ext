@@ -2,7 +2,7 @@ import { Coordinate } from 'ol/coordinate';
 import { ProjectionLike } from 'ol/proj';
 import { Stroke } from 'ol/style';
 import Feature from 'ol/Feature';
-import { FeatureAnimation, animationControler } from 'ol-ext/featureanimation/FeatureAnimation';
+import  FeatureAnimation, {animationControler } from '../featureanimation/FeatureAnimation';
 declare module 'ol/Map' {
 
     export interface Options {

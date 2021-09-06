@@ -69,7 +69,7 @@ export enum TranslateEventType {
  * @param options.style list of style for handles
  */
 export default class Transform extends Pointer {
-    constructor(options: Options);
+    constructor(options?: Options);
     /**
      * Cursors for transform
      */

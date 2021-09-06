@@ -1,4 +1,4 @@
-import Button, {Options as ButtonOptions} from './Button';
+import Button, {Options as ButtonOptions} from './Button'
 
 export interface Options extends ButtonOptions{
     className?: string;

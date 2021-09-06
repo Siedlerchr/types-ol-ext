@@ -3,6 +3,7 @@ import { jsPDF } from "jspdf";
 import { Size } from 'ol/size';
 import { Map as _ol_Map_ } from 'ol';
 import ol_control_Control, { Options as ControlOptions } from 'ol/control/Control';
+import Print from './Print';
 
 export interface Options extends ControlOptions {
     className?: string;
@@ -10,7 +11,11 @@ export interface Options extends ControlOptions {
     imageType?: string;
     quality?: number;
     orientation?: 'landscape' | 'portrait';
-    immediate?: boolean
+    immediate?: boolean;
+    openWindow?: boolean;
+    copy?: boolean;
+    print?: boolean;
+    pdf?: true;
     saveAs?: (blob: Blob, name: string) => void
     northImage?: 'default' | 'compact';
     jsPDF?: jsPDF
@@ -29,10 +34,14 @@ export type PaperSize = 'A0' | 'A1' | 'A2' | 'A3' | 'A4' | 'A5' | 'B4' | 'B5';
  *	@param {number} options.quality Number between 0 and 1 indicating the image quality to use for image formats that use lossy compression such as image/jpeg and image/webp
  *	@param {string} options.orientation Page orientation (landscape/portrait), default guest the best one
  *	@param {boolean} options.immediate force print even if render is not complete,  default false
+ *	@param {boolean} [options.openWindow=false] open the file in a new window on print
+ *	@param {boolean} [options.copy=true] add a copy select option
+ *	@param {boolean} [options.print=true] add a print select option
+ *	@param {boolean} [options.pdf=true] add a pdf select option
  *	@param {function} [options.saveAs] a function to save the image as blob
  *	@param {*} [options.jsPDF] jsPDF object to save map as pdf
  */
-export class ol_control_PrintDialog extends ol_control_Control {
+export default class PrintDialog extends ol_control_Control {
     /** Add a new language
      * @param {string} lang lang id
      * @param  labels
@@ -114,4 +123,104 @@ export class ol_control_PrintDialog extends ol_control_Control {
         margin?: number
     }): void;
 
+
+    /** Get print control
+     * @returns {Print}
+     */
+    getrintControl(): Print
+    /** Print dialog labels (for customisation) */
+    _labels: {
+        en: {
+            title: string;
+            orientation: string;
+            portrait: string;
+            landscape: string;
+            size: string;
+            custom: string;
+            margin: string;
+            scale: string;
+            legend: string;
+            north: string;
+            mapTitle: string;
+            saveas: string;
+            saveLegend: string;
+            copied: string;
+            errorMsg: string;
+            printBt: string;
+            cancel: string;
+        };
+        fr: {
+            title: string;
+            orientation: string;
+            portrait: string;
+            landscape: string;
+            size: string;
+            custom: string;
+            margin: string;
+            scale: string;
+            legend: string;
+            north: string;
+            mapTitle: string;
+            saveas: string;
+            saveLegend: string;
+            copied: string;
+            errorMsg: string;
+            printBt: string;
+            cancel: string;
+        };
+    };
+    /** List of paper size */
+    paperSize: {
+        '': any;
+        A0: number[];
+        A1: number[];
+        A2: number[];
+        A3: number[];
+        A4: number[];
+        A5: number[];
+        B4: number[];
+        B5: number[];
+    };
+    /** List of margin size */
+    marginSize: {
+        none: number;
+        small: number;
+        large: number;
+    };
+    /** List of legeng options * /
+    ol_control_PrintDialog.prototype.legendOptions = {
+      off: 'Hide legend',
+      on: 'Show legend'
+    };
+
+    /** List of print image file formats */
+    formats: ({
+        title: string;
+        imageType: string;
+        clipboard: boolean;
+        quality?: undefined;
+        pdf?: undefined;
+    } | {
+        title: string;
+        imageType: string;
+        quality: number;
+        clipboard?: undefined;
+        pdf?: undefined;
+    } | {
+        title: string;
+        imageType: string;
+        pdf: boolean;
+        clipboard?: undefined;
+        quality?: undefined;
+    })[];
+    /** List of print scale */
+    scales: {
+        ' 5000': string;
+        ' 10000': string;
+        ' 25000': string;
+        ' 50000': string;
+        ' 100000': string;
+        ' 250000': string;
+        ' 1000000': string;
+    };
 }

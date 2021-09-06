@@ -16,7 +16,7 @@ export interface Options extends RasterSourceOptions {
  *  @param {number} radius default 4
  *  @param {number} intensity default 25
  */
-export class ol_source_OilPainting extends RasterSource {
+export default class OilPainting extends RasterSource {
     constructor(options?: Options );
     /** Set value and force change
      */

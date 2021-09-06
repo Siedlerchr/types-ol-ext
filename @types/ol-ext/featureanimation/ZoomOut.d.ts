@@ -1,4 +1,4 @@
-import { FeatureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+import FeatureAnimation, { FeatureAnimationEvent } from './FeatureAnimation';
 
 export interface Options {
     zoomOut?: boolean;
@@ -8,7 +8,7 @@ export interface Options {
  * @constructor
  * @extends {featureAnimation}
  */
-export class ZoomOut extends FeatureAnimation {
+export default class ZoomOut extends FeatureAnimation {
     constructor(options?: Options)
     /** Function to perform manipulations onpostcompose.
      * This function is called with an featureAnimationEvent argument.

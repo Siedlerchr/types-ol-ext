@@ -4,8 +4,6 @@ import FeatureFormat from 'ol/format/Feature';
 import { Map as _ol_Map_ } from 'ol';
 import BaseEvent from 'ol/events/Event';
 import Feature from 'ol/Feature';
-import Collection from 'ol/Collection';
-import { ProjectionLike } from 'ol/proj';
 import { EventsKey } from 'ol/events';
 import { DragAndDropEvent } from 'ol/interaction/DragAndDrop';
 import { ObjectEvent } from 'ol/Object';

@@ -5,7 +5,6 @@ import Feature from 'ol/Feature';
 import { Layer } from 'ol/layer';
 import BaseEvent from 'ol/events/Event';
 import Collection from 'ol/Collection';
-import Scale from 'ol-ext/control/Scale';
 import { Pixel } from 'ol/pixel';
 import { Coordinate } from 'ol/coordinate';
 import { Geometry } from 'ol/geom';

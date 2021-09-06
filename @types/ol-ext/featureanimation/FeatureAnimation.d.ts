@@ -62,7 +62,7 @@ export type animationControler = {
 *	@param {easing.Function} options.fade an easing function used to fade in the feature, default none
 *	@param {easing.Function} options.easing an easing function for the animation, default easing.linear
  */
-export class FeatureAnimation {
+export default class FeatureAnimation {
     constructor(options?: Options);
     /** Function to perform manipulations onpostcompose.
      * This function is called with an featureAnimationEvent argument.
