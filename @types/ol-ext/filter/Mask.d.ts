@@ -16,7 +16,7 @@ export interface Options {
  *  @param {Fill} [options.fill] style to fill with
  *  @param {boolean} [options.inner] mask inner, default false
  */
-export class Mask extends Base {
+export default class Mask extends Base {
 
     constructor(options?: Options);
 

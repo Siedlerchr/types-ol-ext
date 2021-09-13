@@ -4,8 +4,8 @@ import { Stamen, OSM } from 'ol/source';
 import { MultiPolygon } from 'ol/geom';
 import { Fill } from 'ol/style';
 import 'ol-ext/filter/Base';
-import {Crop} from 'ol-ext/filter/Crop';
-import {Mask} from 'ol-ext/filter/Mask';
+import Crop from 'ol-ext/filter/Crop';
+import Mask from 'ol-ext/filter/Mask';
 
 const osm = new Tile({ source: new OSM() });
 // The map
