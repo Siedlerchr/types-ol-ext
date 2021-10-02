@@ -7,34 +7,36 @@ import { StyleLike } from 'ol/style/Style';
 import { Interaction } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { Condition as EventsConditionType } from 'ol/events/condition';
+import { condition } from '../control/SelectBase';
 
 export interface Options {
     source?: Layer[];
     features?: Collection<Feature>;
     style?: StyleLike;
     sides?: number;
+    condition: EventsConditionType;
     squareCondition?: EventsConditionType;
     centerCondition?: EventsConditionType;
     canRotate?: boolean;
     clickTolerance?: number;
     maxCircleCoordinates?: number;
 }
-
-/** Interaction rotate
- * @constructor
- * @extends {ol_interaction_Interaction}
- * @fires drawstart, drawing, drawend, drawcancel
- * @param {olx.interaction.TransformOptions} options
- *  @param {Array<ol.Layer>} source Destination source for the drawn features
- *  @param {ol.Collection<ol.Feature>} features Destination collection for the drawn features
- *  @param {ol.style.Style | Array.<ol.style.Style> | ol.style.StyleFunction | undefined} style style for the sketch
- *  @param {integer} sides number of sides, default 0 = circle
- *  @param { ol.events.ConditionType | undefined } squareCondition A function that takes an ol.MapBrowserEvent and returns a boolean to draw square features.
- *  @param { ol.events.ConditionType | undefined } centerCondition A function that takes an ol.MapBrowserEvent and returns a boolean to draw centered features.
- *  @param { bool } canRotate Allow rotation when centered + square, default: true
- *  @param { number } clickTolerance click tolerance on touch devices, default: 6
- *  @param { number } maxCircleCoordinates Maximum number of point on a circle, default: 100
- */
+/*
+* @constructor
+* @extends {ol_interaction_Interaction}
+* @fires drawstart, drawing, drawend, drawcancel
+* @param {olx.interaction.TransformOptions} options
+*  @param {Array<ol.Layer>} options.source Destination source for the drawn features
+*  @param {ol.Collection<ol.Feature>} options.features Destination collection for the drawn features
+*  @param {ol.style.Style | Array.<ol.style.Style> | ol.style.StyleFunction | undefined} options.style style for the sketch
+*  @param {integer} options.sides number of sides, default 0 = circle
+*  @param { ol.events.ConditionType | undefined } options.condition A function that takes an ol.MapBrowserEvent and returns a boolean that event should be handled. By default module:ol/events/condition.always.
+*  @param { ol.events.ConditionType | undefined } options.squareCondition A function that takes an ol.MapBrowserEvent and returns a boolean to draw square features. Default test shift key
+*  @param { ol.events.ConditionType | undefined } options.centerCondition A function that takes an ol.MapBrowserEvent and returns a boolean to draw centered features. Default check Ctrl key
+*  @param { bool } options.canRotate Allow rotation when centered + square, default: true
+*  @param { number } options.clickTolerance click tolerance on touch devices, default: 6
+*  @param { number } options.maxCircleCoordinates Maximum number of point on a circle, default: 100
+*/
 export default class DrawRegular extends Interaction {
     constructor(options?: Options);
     /**

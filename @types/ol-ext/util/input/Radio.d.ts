@@ -1,25 +1,21 @@
-import Slider from "./Slider";
+import CheckBox from './Checkbox';
 
 export interface Options {
     className?: string;
     input?: Element;
     parent?: Element;
-    size?: number[];
 }
 
-/** Checkbox input
+/** Switch input
  * @constructor
- * @extends {ol_ext_input_Slider}
+ * @extends {ol_ext_input_Checkbox}
+ * @fires check
  * @param {*} options
  *  @param {string} [options.className]
  *  @param {Element} [options.input] input element, if non create one
  *  @param {Element} [options.parent] parent element, if create an input
- *  @param {Array<number>} [options.size] a list of size (default 0,1,2,3,5,10,15,20)
  */
-export default class Width extends Slider {
+export default class Radio extends CheckBox {
     constructor(options?: Options);
-    /** Get the current value
-     * @returns {number}
-     */
-    getValue(): number;
+
 }

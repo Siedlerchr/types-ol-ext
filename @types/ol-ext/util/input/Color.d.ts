@@ -7,7 +7,7 @@ export interface Options {
     parent?: Element;
     fixed?: boolean;
     autoClose?: boolean;
-    visible?: boolean;
+    hidden?: boolean;
 }
 
 
@@ -24,6 +24,8 @@ export interface Options {
  *  @param {boolean} [options.fixed=false] don't use a popup, default use a popup
  *  @param {boolean} [options.autoClose=true] close when click on color
  *  @param {boolean} [options.visible=false] display the input
+ *  @param {boolean} [options.hidden=true] display the input
+
  */
 export default class Color extends Base {
     constructor(options?: Options);
