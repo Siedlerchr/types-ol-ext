@@ -1,6 +1,6 @@
 # types-ol-ext
 
-ol-ext TypeScript declaration
+[ol-ext](https://github.com/Viglino/ol-ext) TypeScript declaration. If you encounter any missing typings or wrong, please open an issue!
 
 ## Installation
 
