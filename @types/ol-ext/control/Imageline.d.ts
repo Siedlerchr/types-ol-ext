@@ -5,11 +5,13 @@ import BaseEvent from 'ol/events/Event';
 import Feature from 'ol/Feature';
 import { ObjectEvent } from 'ol/Object';
 import { Vector as VectorSource } from 'ol/source';
+import VectorLayer from 'ol/layer/Vector';
 
 
 export interface Options extends ControlOptions {
     className?: string;
-    source: VectorSource;
+    source?: VectorSource;
+    layers?: VectorLayer[];
     getImage?: (f: Feature) => string;
     getTitle?: (f: Feature) => string;
     collapsed?: boolean;
@@ -21,17 +23,19 @@ export interface Options extends ControlOptions {
 /** Image line control
  *
  * @constructor
- * @extends {contrControl}
+ * @extends {ol.control.Control}
  * @fires select
  * @fires collapse
  * @param {Object=} options Control options.
  *	@param {String} options.className class of the control
- *	@param {VectorSource} options.source a vector source that contains the images
- *	@param {function} options.getImage a function that gets a feature and return the image url, default return the img propertie
+ *	@param {Array<ol.source.Vector>|ol.source.Vector} options.source vector sources that contains the images
+ *	@param {Array<ol.layer.Vector>} options.layers A list of layers to display images. If no source and no layers, all visible layers will be considered.
+ *	@param {function} options.getImage a function that gets a feature and return the image url or false if no image to Show, default return the img propertie
  *	@param {function} options.getTitle a function that gets a feature and return the title, default return an empty string
  *	@param {boolean} options.collapsed the line is collapse, default false
  *	@param {boolean} options.collapsible the line is collapsible, default false
  *	@param {number} options.maxFeatures the maximum image element in the line, default 100
+ *	@param {number} options.useExtent only show feature in the current extent
  *	@param {boolean} options.hover select image on hover, default false
  *	@param {string|boolean} options.linkColor link color or false if no link, default false
  */
