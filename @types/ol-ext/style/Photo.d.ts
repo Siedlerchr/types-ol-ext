@@ -6,11 +6,11 @@ export interface Options {
     radius?: number;
     shadow?: boolean;
     stroke?: Stroke;
-    src: string;
+    src?: string;
     crossOrigin?: string;
     offsetX?: number;
     offsetY?: number;
-    onload: () => void;
+    onload?: () => void;
 }
 /**
  * @classdesc

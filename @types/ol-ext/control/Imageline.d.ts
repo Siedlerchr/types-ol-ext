@@ -76,7 +76,7 @@ export default class Imageline extends ol_control_Control {
      * @param {boolean} scroll scroll the line to center on the image, default true
      * @api
      */
-    select(feature: Feature, scroll: boolean): void;
+    select(feature: Feature, scroll?: boolean): void;
 
     on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
     once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
