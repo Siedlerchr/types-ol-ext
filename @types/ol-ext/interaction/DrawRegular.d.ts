@@ -2,7 +2,7 @@ import { Map as _ol_Map_ } from "ol";
 import Collection from "ol/Collection";
 import Feature from "ol/Feature";
 import { Geometry, Point, Polygon } from "ol/geom";
-import { Layer } from "ol/layer";
+import { Vector as VectorSource } from "ol/source";
 import { StyleLike } from "ol/style/Style";
 import { Interaction } from "ol/interaction";
 import MapBrowserEvent from "ol/MapBrowserEvent";
@@ -15,11 +15,11 @@ import { Pixel } from "ol/pixel";
 import { Coordinate } from "ol/coordinate";
 
 export interface Options {
-  source?: Layer[];
+  source?: VectorSource;
   features?: Collection<Feature>;
   style?: StyleLike;
   sides?: number;
-  condition: EventsConditionType;
+  condition?: EventsConditionType;
   squareCondition?: EventsConditionType;
   centerCondition?: EventsConditionType;
   canRotate?: boolean;
