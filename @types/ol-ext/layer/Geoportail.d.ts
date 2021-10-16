@@ -1,35 +1,26 @@
 import { Coordinate } from 'ol/coordinate';
 import Projection from 'ol/proj/Projection';
-import { WMTS } from 'ol/source';
+import {Options as TileLayerOptions} from 'ol/layer/BaseTile';
+import { ProjectionLike } from 'ol/proj';
+import {Options as GeoPortailOptions} from '../source/Geoportail'
+import Tile from 'ol/layer/Tile';
 
-export interface Options {
-    minZoom: number;
-    maxZoom: number;
-    server: string;
-    gppKey: string;
-    authentication: string;
-    format: string;
-    style: string;
-    crossOrigin: string;
-    wrapX: string;
-}
-/** IGN's Geoportail WMTS source
+export interface Options extends TileLayerOptions {
+    layer?: string
+    gpgKey?: string;
+    projection?: ProjectionLike;
+}/** IGN's Geoportail WMTS layer definition
  * @constructor
- * @extends {WMTS}
- * @param {String=} layer Layer name.
- * @param {olx.source.OSMOptions=} options WMTS options
- *  @param {number} options.minZoom
- *  @param {number} options.maxZoom
- *  @param {string} options.server
- *  @param {string} options.gppKey api key, default 'choisirgeoportail'
- *  @param {string} options.authentication basic authentication associated with the gppKey as btoa("login:pwd")
- *  @param {string} options.format image format, default 'image/jpeg'
- *  @param {string} options.style layer style, default 'normal'
- *  @param {string} options.crossOrigin default 'anonymous'
- *  @param {string} options.wrapX default true
+ * @extends {ol.layer.Tile}
+ * @param {olx.layer.WMTSOptions=} options WMTS options if not defined default are used
+ *  @param {string} options.layer Geoportail layer name
+ *  @param {string} options.gppKey Geoportail API key, default use layer registered key
+ *  @param {ol.projectionLike} [options.projection=EPSG:3857] projection for the extent, default EPSG:3857
+ * @param {olx.source.WMTSOptions=} tileoptions WMTS options if not defined default are used
  */
-export default class Geoportail extends WMTS {
-    constructor(layer?: string, options?: Options);
+export default class Geoportail extends Tile {
+    // TODO unsure about the params!
+    constructor(layer?: string, options?: Options, tileoptions?: GeoPortailOptions);
     /** Standard IGN-GEOPORTAIL attribution
      */
     attribution: any;

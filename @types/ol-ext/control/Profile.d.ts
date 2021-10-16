@@ -7,7 +7,9 @@ import { ProjectionLike } from 'ol/proj';
 
 export interface Options extends ControlOptions {
     className?: string;
+    title?: string;
     style?: Style;
+    selectStyle?: Style
     info?: { [key: string]: any }
     width?: number;
     height?: number;
@@ -31,7 +33,9 @@ export interface Options extends ControlOptions {
  * @fires dragcancel
  * @param {Object=} options
  *  @param {string} options.className
- *  @param {ol.style.Style} options.style style to draw the profil
+ *	@param {String} options.title button title
+ *  @param {ol.style.Style} [options.style] style to draw the profil, default darkblue
+ *  @param {ol.style.Style} [options.selectStyle] style for selection, default darkblue fill
  *  @param {*} options.info keys/values for i19n
  *  @param {number} options.width
  *  @param {number} options.height

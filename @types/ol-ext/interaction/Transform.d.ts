@@ -21,6 +21,7 @@ export interface Options {
     hitTolerance?: number;
     translateFeature?: boolean;
     translate?: boolean;
+    translateBBox?: boolean
     stretch?: boolean;
     scale?: boolean;
     rotate?: boolean;
@@ -28,6 +29,8 @@ export interface Options {
     selection?: boolean;
     keepAspectRatio?: EventsConditionType;
     modifyCenter?: EventsConditionType;
+    enableRotatedTransform?: boolean;
+    keepRectangle?: boolean;
     style?: any;
 }
 export enum RotateEventType {
@@ -58,6 +61,7 @@ export enum TranslateEventType {
  * @param options.addCondition A function that takes an MapBrowserEvent and returns a boolean to indicate whether that event should be handled. default: events.condition.never.
  * @param options.hitTolerance Tolerance to select feature in pixel, default 0
  * @param options.translateFeature Translate when click on feature
+ * @param options.translateBBox Enable translate when the user drags inside the bounding box
  * @param options.translate Can translate the feature
  * @param options.stretch can stretch the feature
  * @param options.scale can scale the feature
@@ -66,6 +70,7 @@ export enum TranslateEventType {
  * @param options.selection the intraction handle selection/deselection, if not use the select prototype to add features to transform, default true
  * @param options.keepAspectRatio A function that takes an MapBrowserEvent and returns a boolean to keep aspect ratio, default events.condition.shiftKeyOnly.
  * @param options.modifyCenter A function that takes an MapBrowserEvent and returns a boolean to apply scale & strech from the center, default events.condition.metaKey or events.condition.ctrlKey.
+ * @parm options.enableRotatedTransform Enable transform when map is rotated
  * @param options.style list of style for handles
  */
 export default class Transform extends Pointer {
