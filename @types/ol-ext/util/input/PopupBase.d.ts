@@ -1,6 +1,6 @@
 import { ColorLike } from 'ol/colorlike';
-import Base from './Base';
-export interface Options {
+import Base, { Options as BaseOptions } from './Base';
+export interface Options extends BaseOptions {
     className?: string;
     color?: ColorLike;
     input?: Element;

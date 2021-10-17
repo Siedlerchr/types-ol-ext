@@ -1,6 +1,6 @@
-import CheckBox from './Checkbox';
+import CheckBox, { Options as CheckBoxOptions } from './Checkbox';
 
-export interface Options {
+export interface Options extends CheckBoxOptions {
     className?: string;
     input?: Element;
     parent?: Element;

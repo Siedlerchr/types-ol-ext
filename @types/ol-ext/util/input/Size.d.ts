@@ -1,5 +1,5 @@
-import List from './List';
-export interface Options {
+import List, { Options as ListOptions } from './List';
+export interface Options extends ListOptions {
     className?: string;
     input?: Element;
     parent?: Element;
@@ -8,7 +8,7 @@ export interface Options {
 
 /** Checkbox input
  * @constructor
- * @extends {ol_ext_input_Slider}
+ * @extends {ol_ext_input_List}
  * @param {*} options
  *  @param {string} [options.className]
  *  @param {Element} [options.input] input element, if non create one
