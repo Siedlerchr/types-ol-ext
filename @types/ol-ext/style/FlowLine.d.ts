@@ -12,6 +12,7 @@ export interface Options {
     arrowClor?: ColorLike;
     lineCap: CanvasLineCap;
     arrowSize?: number | Size;
+    noOverlap?: boolean
     offset0?: number;
     offset1?: number
 }
@@ -32,6 +33,7 @@ export interface Options {
 *  @param {ColorLike} options.arrowColor Color of arrows, if not defined used color or color2
 *  @param {string} options.lineCap CanvasRenderingContext2D.lineCap 'butt' | 'round' | 'square', default 'butt'
 *  @param {number|ol.size} options.arrowSize height and width of the arrow, default 16
+ *  @param {boolean} [options.noOverlap=false] prevent segments overlaping
 *  @param {number} options.offset0 offset at line start
 *  @param {number} options.offset1 offset at line end
 */

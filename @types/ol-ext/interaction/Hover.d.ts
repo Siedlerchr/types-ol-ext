@@ -96,14 +96,17 @@ export class HoverEvent extends BaseEvent {
     constructor(
         type: HoverEventType,
         feature: Feature<Geometry>,
-        features: Collection<Feature>,
-        scale: number[],
+        layer: Layer,
+        coordinate: Coordinate,
         pixel: Pixel,
-        coordinate: Coordinate
+        map: _ol_Map_,
+        originalEvent: BaseEvent,
+        dragging: any //TODO
     );
-    feature: Feature<Geometry>;
-    features: Collection<Feature<Geometry>>;
-    scale: number[];
-    pixel: Pixel;
-    coordinate: Coordinate;
+        layer: Layer;
+        coordinate: Coordinate;
+        pixel: Pixel;
+        map: _ol_Map_;
+        originalEvent: BaseEvent;
+        dragging: any //TODO
 }

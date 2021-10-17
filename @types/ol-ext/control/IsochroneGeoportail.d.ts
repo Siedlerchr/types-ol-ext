@@ -1,25 +1,25 @@
-import { Map as _ol_Map_ } from 'ol';
-import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
-import { Coordinate } from 'ol/coordinate';
-import Feature from 'ol/Feature';
-import WKT from 'ol/format/WKT'
-import BaseEvent from 'ol/events/Event';
-import { EventsKey } from 'ol/events';
-import { ObjectEvent } from 'ol/Object';
+import { Map as _ol_Map_ } from "ol";
+import ol_control_Control, { Options as ControlOptions } from "ol/control/Control";
+import { Coordinate } from "ol/coordinate";
+import Feature from "ol/Feature";
+import BaseEvent from "ol/events/Event";
+import { EventsKey } from "ol/events";
+import { ObjectEvent } from "ol/Object";
 
-export interface Options extends ControlOptions{
-    className?: string;
-    label?: string ;
-    placeholder?: string;
-    inputLabel?: string ;
-    noCollapse?: string;
-    typing?: number
-    minLength?: number;
-    maxItems?: number;
-    maxHistory?: number;
-    getTitle: (f: Feature) => string;
-    autocomplete?: (s: string, ...params: any[]) => any; // TODO: not sure about the syntax
-    exclusions?: string;
+export interface Options extends ControlOptions {
+  className?: string;
+  apiKey?: string;
+  label?: string;
+  placeholder?: string;
+  inputLabel?: string;
+  noCollapse?: string;
+  typing?: number;
+  minLength?: number;
+  maxItems?: number;
+  maxHistory?: number;
+  getTitle: (f: Feature) => string;
+  autocomplete?: (s: string, ...params: any[]) => any; // TODO: not sure about the syntax
+  exclusions?: string;
 }
 
 /**
@@ -31,6 +31,7 @@ export interface Options extends ControlOptions{
  * @fires error
  * @param {Object=} options
  *	@param {string} options.className control class name
+ *	@param {string} [options.apiKey] Geoportail apo key
  *	@param {Element | string | undefined} options.target Specify a target if you want the control to be rendered outside of the map's viewport.
  *	@param {string | undefined} options.label Text label to use for the search button, default "search"
  *	@param {string | undefined} options.placeholder placeholder, default "Search..."
@@ -46,58 +47,57 @@ export interface Options extends ControlOptions{
  *  @param {string} options.exclusions Exclusion list separate with a comma 'Toll,Tunnel,Bridge'
  */
 export default class IsochroneGeoportail extends ol_control_Control {
-    constructor(options?: Options);
-    /**
-     * Set the map instance the control is associated with
-     * and add its controls associated to this map.
-     * @param map The map instance.
-     */
-    setMap(map: _ol_Map_): void;
-    /** Set the travel method
-     * @param method The method (time or distance)
-     */
-    setMethod(method?: 'time'| 'distance'): void;
-    /** Set mode
-     * @param mode The mode: 'car' or 'pedestrian', default 'car'
-     */
-    setMode(mode?: 'car' | 'pedestrian'): void;
-    /** Set direction
-     * @param  direction The direction: 'direct' or 'reverse', default direct
-     */
-    setDirection(direction?: 'direct'| 'reverse'): void;
-    /** Calculate an isochrone
-     * @param  coord
-     * @param  option A number as time (in second) or distance (in meter), depend on method propertie
-     * or a string with a unit (s, mn, h for time or km, m)
-     * @param iter number of iterations
-     */
-    search(coord: Coordinate, option: number | string, iter: number): void;
+  constructor(options?: Options);
+  /**
+   * Set the map instance the control is associated with
+   * and add its controls associated to this map.
+   * @param map The map instance.
+   */
+  setMap(map: _ol_Map_): void;
+  /** Set the travel method
+   * @param method The method (time or distance)
+   */
+  setMethod(method?: "time" | "distance"): void;
+  /** Set mode
+   * @param mode The mode: 'car' or 'pedestrian', default 'car'
+   */
+  setMode(mode?: "car" | "pedestrian"): void;
+  /** Set direction
+   * @param  direction The direction: 'direct' or 'reverse', default direct
+   */
+  setDirection(direction?: "direct" | "reverse"): void;
+  /** Calculate an isochrone
+   * @param  coord
+   * @param  option A number as time (in second) or distance (in meter), depend on method propertie
+   * or a string with a unit (s, mn, h for time or km, m)
+   * @param iter number of iterations
+   */
+  search(coord: Coordinate, option: number | string, iter: number): void;
 
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
+  on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+  once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
+  un(type: string | string[], listener: (p0: any) => any): void;
+  on(type: "change", listener: (evt: BaseEvent) => void): EventsKey;
+  once(type: "change", listener: (evt: BaseEvent) => void): EventsKey;
+  un(type: "change", listener: (evt: BaseEvent) => void): void;
+  on(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
+  once(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
+  un(type: "error", listener: (evt: BaseEvent) => void): void;
+  on(type: "propertychange", listener: (evt: ObjectEvent) => void): EventsKey;
+  once(type: "propertychange", listener: (evt: ObjectEvent) => void): EventsKey;
+  un(type: "propertychange", listener: (evt: ObjectEvent) => void): void;
 
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
+  on(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
+  once(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
+  un(type: "error", listener: (evt: BaseEvent) => void): void;
 
-    on(type: 'isochrone', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'isochrone', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'isochrone', listener: (evt: BaseEvent) => void): void;
+  on(type: "isochrone", listener: (evt: BaseEvent) => void): EventsKey;
+  once(type: "isochrone", listener: (evt: BaseEvent) => void): EventsKey;
+  un(type: "isochrone", listener: (evt: BaseEvent) => void): void;
 }
 
 export class IsoChroneEvent extends BaseEvent {
-    constructor(type: 'isochrone')
-    feature: Feature;
-    iteration: number;
+  constructor(type: "isochrone");
+  feature: Feature;
+  iteration: number;
 }
-

@@ -47,7 +47,7 @@ for (const tsExamplePath of tsExamplePaths) {
       }
     } else {
       const code = script.text;
-      if (code && code.indexOf('ol.Map') >= 0) {
+      if (code && (code.indexOf('ol.Map') >= 0 || code.indexOf('ol.ext') >= 0)) {
         const exampleJsPath = exampleHtmlPath.replace(/\.html$/, '.js');
         const exampleJsBakPath = exampleJsPath + '.bak';
         fs.writeFileSync(exampleJsBakPath, code);

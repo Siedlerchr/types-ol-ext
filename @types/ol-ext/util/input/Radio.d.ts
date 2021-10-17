@@ -1,7 +1,7 @@
 import CheckBox, { Options as CheckBoxOptions } from './Checkbox';
 
 export interface Options extends CheckBoxOptions {
-    clasName?: string;
+    className?: string;
     input?: Element;
     parent?: Element;
 }
@@ -15,6 +15,7 @@ export interface Options extends CheckBoxOptions {
  *  @param {Element} [options.input] input element, if non create one
  *  @param {Element} [options.parent] parent element, if create an input
  */
-export default class Switch extends CheckBox {
-    constructor(options?: Options );
+export default class Radio extends CheckBox {
+    constructor(options?: Options);
+
 }

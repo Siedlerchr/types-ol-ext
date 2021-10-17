@@ -1,5 +1,5 @@
-import Base from "./Base";
-export interface Options {
+import Base, { Options as BaseOptions } from "./Base";
+export interface Options extends BaseOptions {
     className?: string;
     input?: Element;
     parent?: Element;

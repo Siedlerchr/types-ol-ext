@@ -1,5 +1,5 @@
-import Base from "./Base";
-export interface Options {
+import Base, { Options as BaseOptions } from "./Base";
+export interface Options extends BaseOptions {
     className?: string;
     options?: any[];
     input?: Element;
@@ -18,7 +18,6 @@ export interface Options {
  *  @param {Element} [options.parent] parent element, if create an input
  *  @param {boolean} [options.fixed=false] don't use a popup, default use a popup
  *  @param {string} [options.align=left] align popup left/right/middle
- *  @param {boolean} [options.fixed=false] no popup
  */
 export default class List extends Base {
     constructor(options: any);

@@ -1,19 +1,19 @@
-import Base from "./Base";
+import PopupBase, { Options as PopupBaseOptions } from "./PopupBase";
 import { ColorLike } from 'ol/colorlike';
 
-export interface Options {
+export interface Options extends PopupBaseOptions {
     className?: string;
+    color?: ColorLike;
     input?: Element;
     parent?: Element;
     fixed?: boolean;
     autoClose?: boolean;
-    visible?: boolean;
+    hidden?: boolean;
 }
-
 
 /** Color picker
  * @constructor
- * @extends {ol_ext_input_Base}
+ * @extends {ol_ext_input_PopupBase}
  * @fires change:color
  * @fires color
  * @param {*} options
@@ -24,8 +24,10 @@ export interface Options {
  *  @param {boolean} [options.fixed=false] don't use a popup, default use a popup
  *  @param {boolean} [options.autoClose=true] close when click on color
  *  @param {boolean} [options.visible=false] display the input
+ *  @param {boolean} [options.hidden=true] display the input
+
  */
-export default class Color extends Base {
+export default class Color extends PopupBase {
     constructor(options?: Options);
 
     /** Add color to palette
@@ -37,7 +39,7 @@ export default class Color extends Base {
      /** Set Color
      * @param { Array<number> }
      */
-    setColor(color: number[]): void;
+    setColor(color: string | number[]): void;
     /** Get current color
      * @param {boolean} [opacity=true]
      * @return {Array<number>}

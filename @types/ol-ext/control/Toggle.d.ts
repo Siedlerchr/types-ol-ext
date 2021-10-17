@@ -45,6 +45,10 @@ export default class Toggle extends Button {
     * @return {contrBar}
      */
     getSubBar(): Bar;
+    /** Set the subbar associated with a control
+     * @param {ol_control_Bar} [bar] a subbar if none remove the current subbar
+     */
+    setSubBar(bar: Bar): void
     /**
      * Test if the control is disabled.
      * @return {bool}.

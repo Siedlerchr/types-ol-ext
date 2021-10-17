@@ -1,10 +1,9 @@
-import List, { Options as ListOptions } from "./List";
-
+import List, { Options as ListOptions } from './List';
 export interface Options extends ListOptions {
     className?: string;
     input?: Element;
     parent?: Element;
-    size?: number[];
+    size?: number[]
 }
 
 /** Checkbox input
@@ -14,10 +13,10 @@ export interface Options extends ListOptions {
  *  @param {string} [options.className]
  *  @param {Element} [options.input] input element, if non create one
  *  @param {Element} [options.parent] parent element, if create an input
- *  @param {Array<number>} [options.size] a list of size (default 0,1,2,3,5,10,15,20)
+ *  @param {Array<number>} [options.size] a list of size (default 0,2,3,5,8,13,21,34,55)
  */
-export default class Width extends List {
-    constructor(options?: Options);
+export default class Size extends List {
+    constructor(options: any);
     /** Get the current value
      * @returns {number}
      */

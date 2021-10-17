@@ -8,6 +8,7 @@ export interface Options {
     step?: number;
     val?: string | number;
     checked?: boolean;
+    hidden?: boolean
     disabled?: boolean;
     parent?: Element
 }
@@ -23,6 +24,7 @@ export interface Options {
  *  @param {number} [options.step] input step, if no input
  *  @param {string|number} [options.val] input value
  *  @param {boolean} [options.checked] check input
+ *  @param {boolean} [options.hidden] the input is display:none
  *  @param {boolean} [options.disabled] disable input
  *  @param {Element} [options.parent] parent element, if no input
  */
