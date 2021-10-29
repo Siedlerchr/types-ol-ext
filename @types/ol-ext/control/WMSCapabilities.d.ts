@@ -1,9 +1,9 @@
-import ol_layer_Tile from "ol/layer/Tile";
 import { Map as _ol_Map_ } from "ol";
 import TileLayer from "ol/layer/Tile";
 import Button from "./Button";
 import { Options as ControlOptions } from "ol/control/Control";
 import Dialog from "./Dialog";
+import Layer from '../filter/Base';
 
 export interface Capabilities {
   map?: string;
@@ -24,6 +24,7 @@ export interface Options extends ControlOptions {
   timeout?: number;
   cors?: boolean;
   trace?: boolean;
+  onSelect?: (layer: Layer, options: any) => void;
 }
 
 /** WMSCapabilities
@@ -41,6 +42,8 @@ export interface Options extends ControlOptions {
  *  @param {number} options.timeout Timeout for getCapabilities request, default 1000
  *  @param {boolean} options.cors Use CORS, default false
  *  @param {boolean} options.trace Log layer info, default false
+ *  @param {function} [options.onselect] callback function that takes a layer and layer options on select layer
+
  */
 export default class WMSCapabilities extends Button {
   constructor(options?: Options);
