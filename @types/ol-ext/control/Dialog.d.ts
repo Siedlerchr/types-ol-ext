@@ -5,6 +5,7 @@ export interface Options extends ControlOptions {
     className?: string;
     map?: Map;
     zoom?: boolean;
+    fullscreen?: boolean;
     closeBox?: boolean;
     max?: number;
     hideOnClick?: boolean;
