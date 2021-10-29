@@ -28,7 +28,7 @@
    npx gulp serve
    ```
 
-   Then access http://localhost:8181 and check some examples.
+   Then access [http://localhost:8181](http://localhost:8181) and check some examples.
 
    To stop the local server, press Ctrl+C on the terminal.
 
