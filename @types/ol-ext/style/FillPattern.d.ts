@@ -1,5 +1,6 @@
-import { Fill, Image } from "ol/style";
+import { Fill, Image, Icon } from 'ol/style';
 import { Color } from "ol/color";
+import { ColorLike } from 'ol/colorlike';
 
 export interface FillPatternOptions {
   size?: number;
@@ -11,16 +12,19 @@ export interface FillPatternOptions {
   fill?: boolean;
   char?: string;
   font?: string;
+  angle?: boolean;
 }
 
 export interface Options {
+  pattern?: string;
   image?: Image;
+  ratio?:number,
+  icon?: Icon
   opacity?: number;
-  pattern?: FillPattern;
-  color?: Color;
-  fill?: Color;
+  color?: ColorLike;
+  fill?: Fill;
   offset?: number;
-  Size?: number;
+  size?: number;
   spacing?: number;
   angle?: number | boolean;
   scale?: number;

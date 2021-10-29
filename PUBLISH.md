@@ -29,7 +29,7 @@
    npm run prepare-npm
    ```
 
-## Publish NPM package
+## Publish NPM packag
 
 1. Check what contents are published by dry-run.
 

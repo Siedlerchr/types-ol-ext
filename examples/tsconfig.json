@@ -3,19 +3,26 @@
     "baseUrl": "./",
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
     "noEmit": false,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "paths": {
-      "*": ["../@types/*", "../node_modules/@types/*"]
+      "*": [
+        "../@types/*",
+        "../node_modules/@types/*"
+      ]
     },
     "resolveJsonModule": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "target": "es5",
     "rootDir": "./",
     "outDir": "../ol-ext/examples"
