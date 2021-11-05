@@ -5,7 +5,7 @@ export interface Options extends BaseOptions {
     color?: ColorLike;
     input?: Element;
     parent?: Element;
-    fixed?: boolean;
+    position?: 'popup' | 'fixed' | 'inline';
     autoClose?: boolean;
     hidden?: boolean
 }
@@ -21,7 +21,7 @@ export interface Options extends BaseOptions {
  *  @param {ol.colorLike} [options.color] default color
  *  @param {Element} [options.input] input element, if non create one
  *  @param {Element} [options.parent] parent element, if create an input
- *  @param {boolean} [options.fixed=false] don't use a popup, default use a popup
+ *  @param {string} [options.position='popup'] fixed | popup | inline (no popup)
  *  @param {boolean} [options.autoClose=true] close when click on color
  *  @param {boolean} [options.hidden=false] display the input
  */

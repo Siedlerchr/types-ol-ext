@@ -1,6 +1,6 @@
 {
   "name": "@siedlerchr/types-ol-ext",
-  "version": "1.3.1",
+  "version": "1.4.1",
   "description": "Type definitions for ol-ext",
   "main": "",
   "types": "index.d.ts",
@@ -34,9 +34,9 @@
     "jspdf": "^2.4.0"
   },
   "devDependencies": {
-    "@types/jquery": "^3.5.8",
     "@types/fs-extra": "^9.0.13",
     "@types/glob": "^7.2.0",
+    "@types/jquery": "^3.5.8",
     "@types/webpack": "^5.28.0",
     "dtslint": "^4.2.0",
     "exports-loader": "^3.1.0",
