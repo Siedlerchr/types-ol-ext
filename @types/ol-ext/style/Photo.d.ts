@@ -1,7 +1,7 @@
 import { Stroke, RegularShape } from 'ol/style';
 import { Pixel } from 'ol/pixel';
 export interface Options {
-    kind?: 'default' | 'square' | 'round' | 'anchored' | 'folio';
+    kind?: 'default' | 'square' | 'circle' | 'anchored' | 'folio';
     crop?: boolean;
     radius?: number;
     shadow?: boolean;
@@ -12,21 +12,22 @@ export interface Options {
     offsetY?: number;
     onload?: () => void;
 }
+
 /**
  * @classdesc
  * Set Photo style for vector features.
  *
  * @constructor
  * @param {} options
- *  @param { default | square | round | anchored | folio } options.kind
+ *  @param { default | square | circle | anchored | folio } options.kind
  *  @param {boolean} options.crop crop within square, default is false
- *  @param {number} options.radius symbol size
+ *  @param {Number} options.radius symbol size
  *  @param {boolean} options.shadow drop a shadow
- *  @param {Stroke} options.stroke
- *  @param {string} options.src image src
- *  @param {string} options.crossOrigin The crossOrigin attribute for loaded images. Note that you must provide a crossOrigin value if you want to access pixel data with the Canvas renderer.
- *  @param {number} options.offsetX Horizontal offset in pixels. Default is 0.
- *  @param {number} options.offsetY Vertical offset in pixels. Default is 0.
+ *  @param {ol_style_Stroke} options.stroke
+ *  @param {String} options.src image src
+ *  @param {String} options.crossOrigin The crossOrigin attribute for loaded images. Note that you must provide a crossOrigin value if you want to access pixel data with the Canvas renderer.
+ *  @param {Number} options.offsetX Horizontal offset in pixels. Default is 0.
+ *  @param {Number} options.offsetY Vertical offset in pixels. Default is 0.
  *  @param {function} options.onload callback when image is loaded (to redraw the layer)
  * @extends {RegularShape}
  * @api

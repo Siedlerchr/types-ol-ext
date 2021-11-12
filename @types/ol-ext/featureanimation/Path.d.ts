@@ -7,6 +7,7 @@ export interface Options {
     speed?: number;
     rotate?: number | boolean;
     path?: LineString | Feature;
+    duration?: Number
 }
 /** Path animation: feature follow a path
  * @constructor
@@ -15,6 +16,8 @@ export interface Options {
  *  @param {Number} options.speed speed of the feature, if 0 the duration parameter will be used instead, default 0
  *  @param {Number|boolean} options.rotate rotate the symbol when following the path, true or the initial rotation, default false
  *  @param {LineString|Feature} options.path the path to follow
+ *  *  @param {Number} options.duration duration of the animation in ms
+
  */
 export default class Path extends FeatureAnimation {
     constructor(options?: Options)
