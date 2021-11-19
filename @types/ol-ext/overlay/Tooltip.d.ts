@@ -72,7 +72,7 @@ export default class Tooltip extends Popup {
     /** Set a feature associated with the tooltips, measure info on the feature will be added in the tooltip
      * @param {Feature|Event} feature an Feature or an event (object) with a feature property
      */
-    setFeature(feature: Feature | Event): void;
+    setFeature(feature?: Feature | Event): void;
     /**
      * Set a close box to the popup.
      * @param {bool} b
