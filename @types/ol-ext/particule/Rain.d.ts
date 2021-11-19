@@ -7,7 +7,7 @@ import { Options as BaseOptions } from './Base';
  *  @param {ol.Overlay} options.overlay
  *  @param {ol.pixel} coordinate the position of the particule
  */
-export default class Rain {
+export default class Rain extends Base {
   constructor(options?: BaseOptions);
   /** Draw the particule
    * @param {CanvasRenderingContext2D } ctx

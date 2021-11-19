@@ -7,7 +7,7 @@ import {Options as BaseOptions} from './Base'
  *  @param {ol.Overlay} options.overlay
  *  @param {ol.pixel} coordinate the position of the particule
  */
-declare class RainDrop extends Base {
+export default class RainDrop extends Base {
     constructor(options?: BaseOptions);
 
     /** Draw the particule

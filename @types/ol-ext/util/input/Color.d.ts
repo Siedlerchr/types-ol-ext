@@ -6,7 +6,7 @@ export interface Options extends PopupBaseOptions {
   color?: ColorLike;
   input?: Element;
   parent?: Element;
-  hasTab?: boolean;
+  hastab?: boolean;
   paletteLabel?: string;
   pickerLabel?: string;
   position?: 'popup' | 'fixed' | 'inline';

@@ -5,6 +5,7 @@
 ## Installation
 
 Add this package with an alias:
+
 ```sh
 # NPM
 npm i -D @types/ol-ext@npm:@siedlerchr/types-ol-ext

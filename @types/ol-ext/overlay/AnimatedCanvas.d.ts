@@ -1,12 +1,15 @@
 import { Map as _ol_Map_, Overlay } from 'ol';
 import { Options as OverlayOptions } from 'ol/Overlay';
+import Base from '../particule/Base';
 
 export interface Options extends OverlayOptions {
   className?: string;
   density?: number;
+  speed?: number;
   angle?: number;
   animate?: boolean;
   fps?: number;
+  particule?: typeof Base
 }
 
 /** An overlay to play animations on top of the map
