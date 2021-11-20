@@ -8,7 +8,6 @@ import Snow from 'ol-ext/particule/Snow';
 import Cloud from 'ol-ext/particule/Cloud';
 import RainDrop from 'ol-ext/particule/RainDrop';
 
-
 // Layers
 const layers = [
   new TileLayer({
@@ -23,7 +22,7 @@ const map = new _ol_Map({
     zoom: 5,
     center: [166326, 5992663],
   }),
-  layers: layers,
+  layers,
 });
 
 // Birds
