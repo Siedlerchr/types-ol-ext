@@ -20,10 +20,12 @@ export type Bookmarks = { [key: string]: BookmarkContent }
 export interface Options extends ControlOptions {
   className?: string;
   placeholder?: string;
+  deleteTitle?: string;
   editable?: boolean;
   namespace?: string;
   marks?: Bookmarks;
 }
+
 /** Bookmark positions on ol maps.
  *
  * @constructor
@@ -35,6 +37,7 @@ export interface Options extends ControlOptions {
  *  @param {string} options.className default ol-bookmark
  *  @param {string | undefined} options.title Title to use for the button tooltip, default "Geobookmarks"
  *  @param {string} options.placeholder input placeholder, default Add a new geomark...
+ *  @param {string} [options.deleteTitle='Suppr.'] title for delete buttons
  *  @param {bool} options.editable enable modification, default true
  *  @param {string} options.namespace a namespace to save the boolmark (if more than one on a page), default ol
  *  @param {Array<any>} options.marks a list of default bookmarks:
