@@ -9,24 +9,15 @@ import Cloud from 'ol-ext/particule/Cloud';
 import RainDrop from 'ol-ext/particule/RainDrop';
 
 
-
-declare global {
-    interface Window {
-        ol: {
-            particule: {}
-        }
-    }
-}
-
 // Layers
-var layers = [
+const layers = [
   new TileLayer({
     source: new Stamen({ layer: 'terrain' }),
   }),
 ];
 
 // The map
-var map = new _ol_Map({
+const map = new _ol_Map({
   target: 'map',
   view: new View({
     zoom: 5,
@@ -36,7 +27,7 @@ var map = new _ol_Map({
 });
 
 // Birds
-var birds = new AnimatedCanvas({
+const birds = new AnimatedCanvas({
   particule: Bird,
   density: 0.2,
   angle: Math.PI / 3,
@@ -46,7 +37,7 @@ birds.setVisible(false);
 map.addOverlay(birds);
 
 // Rain
-var rain = new AnimatedCanvas({
+const rain = new AnimatedCanvas({
   particule: Rain,
   density: 1,
   angle: (2 * Math.PI) / 5,
@@ -56,7 +47,7 @@ rain.setVisible(false);
 map.addOverlay(rain);
 
 // Snow
-var snow = new AnimatedCanvas({
+const snow = new AnimatedCanvas({
   particule: Snow,
   density: 5,
   angle: Math.PI / 2,
@@ -66,7 +57,7 @@ snow.setVisible(false);
 map.addOverlay(snow);
 
 // Clouds
-var cloud = new AnimatedCanvas({
+const cloud = new AnimatedCanvas({
   particule: Cloud,
   density: 2,
   angle: Math.PI / 3,
@@ -75,7 +66,7 @@ var cloud = new AnimatedCanvas({
 map.addOverlay(cloud);
 
 // Clouds
-var cloud2 = new AnimatedCanvas({
+const cloud2 = new AnimatedCanvas({
   particule: Cloud,
   density: 1.5,
   angle: Math.PI / 4,
@@ -85,10 +76,27 @@ cloud2.setVisible(false);
 map.addOverlay(cloud2);
 
 // Raindrop
-var raindrop = new AnimatedCanvas({
+const raindrop = new AnimatedCanvas({
   particule: RainDrop,
   density: 1,
   speed: 5,
 });
 raindrop.setVisible(false);
 map.addOverlay(raindrop);
+
+declare global {
+  interface Window {
+    cloud: AnimatedCanvas;
+    cloud2: AnimatedCanvas;
+    rain: AnimatedCanvas;
+    raindrop: AnimatedCanvas;
+    snow: AnimatedCanvas;
+    birds: AnimatedCanvas;
+  }
+}
+window.cloud = cloud;
+window.cloud2 = cloud2;
+window.rain = rain;
+window.raindrop = raindrop;
+window.snow = snow;
+window.birds = birds;
