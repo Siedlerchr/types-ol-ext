@@ -6,6 +6,7 @@ import { Stamen, Vector } from 'ol/source';
 import { Style, Stroke } from 'ol/style';
 import VectorLayer from 'ol/layer/Vector';
 import CircleStyle from 'ol/style/Circle';
+import cspline from 'ol-ext/render/Cspline';
 
   // Layers
   const layer = new TileLayer({ source: new Stamen({ layer: 'watercolor' }) });
@@ -34,6 +35,7 @@ import CircleStyle from 'ol/style/Circle';
         pointsPerSeg: Number($("#pps").val()),
         normalize: $("#normalize").prop("checked")
       };
+      //TODO cspline not found
       const csp = f.getGeometry()?.cspline(opt);
 
       return [ new Style({
