@@ -15,7 +15,7 @@ export interface Options {
  *	@param {Integer} options.pointsPerSeg number of points per segment to add if no resolution is provided, default add 10 points per segment
  * @return {Array<Coordinate>}
  */
-export default function cspline(line: Coordinate[], options?: Options): Coordinate[];
+export default function ol_coordinate_cspline(line: Coordinate[], options?: Options): Coordinate[];
 
 declare module 'ol/geom' {
   interface Geometry {
