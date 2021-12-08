@@ -1,4 +1,5 @@
 import { Coordinate } from 'ol/coordinate';
+import { Geometry } from 'ol/geom';
 import BaseObject from 'ol/Object';
 
 export interface Options {
@@ -18,7 +19,6 @@ declare module 'ol/Coordinate' {
    */
   export function cspline(line: Coordinate[], options?: Options): Coordinate[];
 }
-
 declare module 'ol/geom' {
   export interface Geometry {
     /** Cache cspline calculation on a geometry
@@ -31,3 +31,4 @@ declare module 'ol/geom' {
     cspline(options?: Options): Geometry;
   }
 }
+
