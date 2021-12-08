@@ -1,13 +1,19 @@
 import { View, Collection, Feature, Map } from 'ol';
-import { LineString, Circle, MultiPoint, Point, Geometry } from 'ol/geom';
+import { LineString, MultiPoint, Point, Geometry } from 'ol/geom';
 import { Modify } from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
 import { Stamen, Vector } from 'ol/source';
 import { Style, Stroke } from 'ol/style';
 import VectorLayer from 'ol/layer/Vector';
 import CircleStyle from 'ol/style/Circle';
-import cspline from 'ol-ext/render/Cspline';
-import GeometryType from 'ol/geom/GeometryType';
+import 'ol-ext/render/Cspline';
+
+declare global {
+  interface Window {
+    $(selector: any, context?: any): any;
+    vector: VectorLayer;
+  }
+}
 
 // Layers
 const layer = new TileLayer({ source: new Stamen({ layer: 'watercolor' }) });
@@ -45,7 +51,6 @@ const vector = new VectorLayer({
 
     const geomType = f.getGeometry() as Geometry;
     console.log(geomType?.getType())
-    //cspline is not a function runtime error
     const csp = geomType.cspline(opt) as LineString;
 
     return [
@@ -77,3 +82,5 @@ map.addLayer(vector);
 
 const mod = new Modify({ features });
 map.addInteraction(mod);
+
+window.vector = vector;
