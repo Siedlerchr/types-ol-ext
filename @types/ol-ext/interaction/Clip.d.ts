@@ -1,7 +1,7 @@
-import { Layer } from "ol/layer";
-import { Pointer } from "ol/interaction";
-import MapBrowserEvent from "ol/MapBrowserEvent";
-import { Pixel } from "ol/pixel";
+import { Layer } from 'ol/layer';
+import { Pointer } from 'ol/interaction';
+import MapBrowserEvent from 'ol/MapBrowserEvent';
+import { Pixel } from 'ol/pixel';
 
 export interface Options {
   radius?: number;
@@ -27,6 +27,9 @@ export default class Clip extends Pointer {
    *	@param {layer|Array<layer>} layer to clip
    */
   addLayer(layer: Layer | Layer[]): void;
+  /** Remove all layers
+   */
+  removeLayers(): void;
   /** Remove a layer to clip
    *	@param {layer|Array<layer>} layer to clip
    */
