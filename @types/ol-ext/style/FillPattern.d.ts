@@ -1,6 +1,5 @@
 import { Fill, Image, Icon } from 'ol/style';
 import { Color } from "ol/color";
-import { ColorLike } from 'ol/colorlike';
 
 export interface FillPatternOptions {
   size?: number;
@@ -21,7 +20,7 @@ export interface Options {
   ratio?:number,
   icon?: Icon
   opacity?: number;
-  color?: ColorLike;
+  color?: Color;
   fill?: Fill;
   offset?: number;
   size?: number;

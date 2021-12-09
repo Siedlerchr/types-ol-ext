@@ -1,4 +1,3 @@
-import { TouchCursor } from './TouchCursor';
 import DragOverlay from './DragOverlay';
 import { InteractionOptions } from 'ol/interaction/Interaction';
 import { Coordinate } from 'ol/coordinate';
