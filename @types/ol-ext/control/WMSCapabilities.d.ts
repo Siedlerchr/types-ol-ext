@@ -1,15 +1,47 @@
-import { Map as _ol_Map_ } from "ol";
-import TileLayer from "ol/layer/Tile";
-import Button from "./Button";
-import { Options as ControlOptions } from "ol/control/Control";
-import Dialog from "./Dialog";
+import { Map as _ol_Map_ } from 'ol';
+import TileLayer from 'ol/layer/Tile';
+import Button from './Button';
+import { Options as ControlOptions } from 'ol/control/Control';
+import Dialog from './Dialog';
 import Layer from '../filter/Base';
+import { Extent } from 'ol/extent';
 
 export interface Capabilities {
   map?: string;
   version?: string;
   timeout?: number;
   onLoad?: () => void;
+}
+
+export interface ReturnCapabilitiesOptions {
+  layer: {
+    title: string;
+    extent: Extent;
+    queryable: any;
+    abstract: any;
+    minResolution: number;
+    maxResolution: number;
+  };
+  source: {
+    url: string;
+    srs: string;
+    attribution: string[];
+    crossOrigin: string | null;
+    params: {
+      LAYERS: string;
+      FORMAT: string;
+      VERSION: string;
+    };
+  };
+  data: {
+    title: string;
+    abstract: any;
+    logo: string | undefined;
+    keyword: any;
+    legend: string;
+    opaque: boolean;
+    queryable: boolean;
+  };
 }
 
 export interface Options extends ControlOptions {
@@ -51,7 +83,7 @@ export default class WMSCapabilities extends Button {
   /** Create a new layer using options received by getOptionsFromCap method
    * @param {*} options
    */
-  getLayerFromOptions(options: any): TileLayer;
+  getLayerFromOptions(options: ReturnCapabilitiesOptions): TileLayer;
   /**
    * Set the map instance the control is associated with
    * and add its controls associated to this map.
@@ -79,7 +111,7 @@ export default class WMSCapabilities extends Button {
    *  @param {number} [options.timeout=10000] timout to get the capabilities, default 10000
    *  @param {function} [options.onload] callback function
    */
-  getCapabilities(url: string, options: Capabilities): void;
+  getCapabilities(url: string, options?: Capabilities): void;
 
   /** Load a layer using service
    * @param {string} url service url
@@ -107,7 +139,7 @@ export default class WMSCapabilities extends Button {
    * @param {*} parent capabilities
    * @return {*} options
    */
-  getOptionsFromCap(caps: any, parent: any): TileLayer;
+  getOptionsFromCap(caps: any, parent: any): ReturnCapabilitiesOptions;
   /** Error list: a key/value list of error to display in the dialog
    * Overwrite it to handle internationalization
    */

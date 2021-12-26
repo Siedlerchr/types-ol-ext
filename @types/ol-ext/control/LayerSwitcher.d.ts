@@ -33,6 +33,7 @@ export interface Options extends ControlOptions {
     collapsed?: boolean;
     layerGroup?: LayerGroup;
     noScroll?: boolean;
+    onchangeCheck?: (l: Layer) => void;
 }
 
 export interface Tip {
@@ -66,7 +67,8 @@ export interface Tip {
  *  @param {number} options.drawDelay delay in ms to redraw the layer (usefull to prevent flickering when manipulating the layers)
  *  @param {boolean} options.collapsed collapse the layerswitcher at beginning, default true
  *  @param {layerGroup} options.layerGroup a layer group to display in the switcher, default display all layers of the map
- *
+ *  @param {function} options.onchangeCheck optional callback on click on checkbox, you can call this method for doing operations after check/uncheck a layer
+
  * Layers attributes that control the switcher
  *	- allwaysOnTop {boolean} true to force layer stay on top of the others while reordering, default false
  *	- displayInLayerSwitcher {boolean} display the layer in switcher, default true

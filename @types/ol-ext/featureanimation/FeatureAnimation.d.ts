@@ -7,6 +7,7 @@ import { Coordinate } from 'ol/coordinate';
 import { FrameState } from 'ol/PluggableMap';
 import VectorContext from 'ol/render/VectorContext';
 import { StyleLike } from 'ol/style/Style';
+import { Object as _OL_OBJECT } from 'ol';
 
 export interface FeatureAnimationEvent {
     vectorContext: VectorContext,
@@ -31,6 +32,9 @@ export interface Options {
     fade?: ((p0: number) => number);
     easing?: ((p0: number) => number);
 }
+interface IObjectKeys {
+    [key: string]: string | number | undefined;
+  }
 
 /** An animation controler object an object to control animation with start, stop and isPlaying function.
  * To be used with {@link olx.Map#animateFeature} or {@link layer.Vector#animateFeature}
@@ -62,15 +66,18 @@ export type animationControler = {
 *	@param {easing.Function} options.fade an easing function used to fade in the feature, default none
 *	@param {easing.Function} options.easing an easing function for the animation, default easing.linear
  */
-export default class FeatureAnimation {
+export default class featureAnimation extends _OL_OBJECT  {
     constructor(options?: Options);
+
+    [key: string]: any;
+
     /** Function to perform manipulations onpostcompose.
      * This function is called with an featureAnimationEvent argument.
      * The function will be overridden by the child implementation.
      * Return true to keep this function for the next frame, false to remove it.
      * @param {FeatureAnimationEvent} e
      * @return {bool} true to continue animation.
-     * @api
+     * @apis
      */
     animate(e: FeatureAnimationEvent): boolean;
 }
