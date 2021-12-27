@@ -42,7 +42,7 @@ declare module 'ol/Layer' {
     /** Animate feature on a vector layer
      * @fires animationstart, animationend
      * @param {ol.Feature} feature Feature to animate
-     * @param {ol_featureAnimation|Array<ol_featureAnimation>} fanim the animation to play
+     * @param {featureAnimation|Array<featureAnimation>} fanim the animation to play
      * @param {boolean} useFilter use the filters of the layer
      * @return {animationControler} an object to control animation with start, stop and isPlaying function
      */
