@@ -100,7 +100,7 @@ $(window).on('load', () => {
                             image: (p == 'Image (PNG)') ? new Icon({ src: imgFile }) : undefined,
                             ratio: 1,
                             icon: p == 'Image (PNG)' ? new Icon({ src: 'data/target.png' }) : undefined,
-                            color: $("#color").val()?.toString(),
+                            color: $("#color").text(),
                             offset: Number($("#offset").val()),
                             scale: Number($("#scale").val()),
                             fill: new Fill({ color: $("#bg").val()?.toString() }),

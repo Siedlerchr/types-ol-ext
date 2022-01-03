@@ -111,7 +111,8 @@ function addFeatureAt(p: Coordinate) {
       break;
   }
 
-/* TODO: Indexing does not yet work
+ //TODO: Indexing does not yet work
+ /*
   vector.getSource().addFeature(f);
   vector.animateFeature(f, [
     new featureAnimation[$('#anim2').text()] ({

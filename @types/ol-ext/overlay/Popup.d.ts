@@ -1,5 +1,6 @@
 import { Overlay as Overlay } from 'ol';
 import { Coordinate } from 'ol/coordinate';
+import { Options as OverlayOptions } from 'ol/Overlay';
 import OverlayPositioning from 'ol/OverlayPositioning';
 
 
@@ -9,16 +10,20 @@ import OverlayPositioning from 'ol/OverlayPositioning';
  * @see {@link http://openlayers.org/en/latest/apidoc/module-ol_Overlay.html}
  */
 
- export interface Options {
+
+ export interface Options extends OverlayOptions {
     popupClass?: string;
     anim?: boolean;
     closeBox?: boolean;
     onclose?: ((...params: any[]) => any);
     onshow?: ((...params: any[]) => any);
     offsetBox?: number | number[];
-    positioning?: OverlayPositioning | string;
+    positioning?: OverlayPositioning | any | undefined; // workaround with any for 'auto'
  }
+
+
 /**
+ *
  * @classdesc
  * A popup element to be displayed over the map and attached to a single map
  * location. The popup are customized using CSS.

@@ -22,9 +22,9 @@ const popup = new Popup (
         onshow: function(){ console.log("You opened the box"); },
         onclose: function(){ console.log("You close the box"); },
         positioning: 'auto',
-        anim: true
-        //autoPan: true,
-        //autoPanAnimation: { duration: 250 }
+        anim: true,
+        autoPan: true,
+        autoPanAnimation: { duration: 250 }
     });
 
 // The map
@@ -56,7 +56,7 @@ const vector = new Vector({
 vector.set('name', 'Fonds de guerre 14-18')
 map.addLayer(vector);
 
-// Control Select 
+// Control Select
 const select = new Select({});
 map.addInteraction(select);
 

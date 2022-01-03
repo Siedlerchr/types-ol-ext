@@ -4,7 +4,7 @@ import { Stroke } from 'ol/style';
 import Feature from 'ol/Feature';
 import featureAnimation from '../featureanimation/FeatureAnimation';
 import { animationControler } from '../featureanimation/FeatureAnimation';
-import { Vector } from 'ol/layer';
+
 declare module 'ol/Map' {
   export interface Options {
     projection?: ProjectionLike;
@@ -24,7 +24,7 @@ declare module 'ol/Map' {
   function animExtent(point: Coordinate, options?: Options): void;
 }
 
-declare module 'ol/Layer' {
+declare module 'ol/layer' {
   /** An animation controller object an object to control animation with start, stop and isPlaying function.
    * To be used with {@link olx.Map#animateFeature} or {@link layer.Vector#animateFeature}
    * @typedef {Object} animationControler
