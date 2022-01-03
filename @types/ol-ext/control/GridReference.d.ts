@@ -19,12 +19,12 @@ export enum GridReferenceEventType {
 export interface Options extends CanvasOptions {
     style?: Style;
     maxResolution?: number;
-    Extent?: Extent;
-    Size?: Size;
+    extent?: Extent;
+    size?: Size;
     margin?: number;
     source?: VectorSource;
     property?: string | ((feature: Feature) => string)
-    sortFeature: (a: Feature, b: Feature) => number
+    sortFeatures?: (a: Feature, b: Feature) => number
     indexTitle?: (feature: Feature) => string;
     filterLabel?: string
 }
