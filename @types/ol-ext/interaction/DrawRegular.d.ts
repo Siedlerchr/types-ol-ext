@@ -23,6 +23,7 @@ export interface Options {
   squareCondition?: EventsConditionType;
   centerCondition?: EventsConditionType;
   canRotate?: boolean;
+  geometryName?: string;
   clickTolerance?: number;
   maxCircleCoordinates?: number;
 }
@@ -39,6 +40,7 @@ export interface Options {
  *  @param { ol.events.ConditionType | undefined } options.squareCondition A function that takes an ol.MapBrowserEvent and returns a boolean to draw square features. Default test shift key
  *  @param { ol.events.ConditionType | undefined } options.centerCondition A function that takes an ol.MapBrowserEvent and returns a boolean to draw centered features. Default check Ctrl key
  *  @param { bool } options.canRotate Allow rotation when centered + square, default: true
+ *  @param { string } [options.geometryName=geometry]
  *  @param { number } options.clickTolerance click tolerance on touch devices, default: 6
  *  @param { number } options.maxCircleCoordinates Maximum number of point on a circle, default: 100
  */
