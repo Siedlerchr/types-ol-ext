@@ -2,10 +2,11 @@ import { Layer } from 'ol/layer';
 import { Pointer } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { Pixel } from 'ol/pixel';
+import BaseLayer from 'ol/layer/Base';
 
 export interface Options {
   radius?: number;
-  layers?: Layer | Layer[];
+  layers?: BaseLayer | BaseLayer[];
 }
 /** Clip interaction to clip layers in a circle
  * @constructor

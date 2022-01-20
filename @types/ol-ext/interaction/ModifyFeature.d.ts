@@ -19,12 +19,12 @@ export enum ModifyingEventType {
 }
 
 export interface Options {
-    source? : VectorSource;
+    source?: VectorSource;
     features?: Collection<Feature>;
     pixelTolerance?: number;
     filter?: (feature: Feature) => boolean;
-    style?: Style | Style[] ;
-    condition?: EventsConditionType ;
+    style?: Style | Style[];
+    condition?: EventsConditionType;
     deleteCondition?: EventsConditionType;
     insertVertexCondition?: EventsConditionType;
     wrapX?: boolean;
@@ -68,6 +68,12 @@ export default class ModifyFeature extends Pointer {
      * @api stable
      */
     setActive(active: boolean): void;
+
+    /** Change the filter function
+     * @param {function|undefined} options.filter a filter that takes a feature and return true if it can be modified, default always true.
+     */
+    setFilter(filter?: (f: Feature) => boolean): void
+
     /** Get nearest coordinate in a list
     * @param {Coordinate} pt the point to find nearest
     * @param {geom} coords list of coordinates
@@ -77,7 +83,7 @@ export default class ModifyFeature extends Pointer {
         coord: Coordinate,
         dist: number,
         ring?: number
-        pt?:  Coordinate,
+        pt?: Coordinate,
     } | false;
     /** Get arcs concerned by a modification
      * @param {geom} geom the geometry concerned

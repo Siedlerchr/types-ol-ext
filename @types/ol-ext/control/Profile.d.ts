@@ -97,6 +97,7 @@ export default class Profil extends ol_control_Control {
    *  @param {string} options.unit 'm' or 'km', default km
    *  @param {Number|undefined} options.zmin default 0
    *  @param {Number|undefined} options.zmax default max Z of the feature
+   *  @param {integer|undefined} options.zDigits number of digits for z graduation, default 0
    *  @param {Number|undefined} options.graduation z graduation default 100
    *  @param {integer|undefined} options.amplitude amplitude of the altitude, default zmax-zmin
    * @api stable
@@ -107,6 +108,7 @@ export default class Profil extends ol_control_Control {
         unit?: 'm' | 'km'
         zmin?: number
         zmax?: number;
+        zDigits?: number
         graduation?: number
         amplitude?: number
     }): void;

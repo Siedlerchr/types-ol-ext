@@ -4,7 +4,7 @@ import { Layer } from "ol/layer";
 export interface Options extends ControlOptions {
     className?: string;
     label?: string;
-    layer?: Layer
+    layer?: Layer | Layer[]
 }
 
 /** A simple push button control
