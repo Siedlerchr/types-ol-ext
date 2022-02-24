@@ -49,7 +49,7 @@ export interface Options extends InteractionOptions {
  *  @param {string} options.geometryName Geometry name to use for features created by the draw interaction.
  *  @param {boolean} options.wrapX Wrap the world horizontally on the sketch overlay, default false
  */
-export class TouchCursorDraw extends TouchCursor  {
+export default class TouchCursorDraw extends TouchCursor  {
     constructor(options?: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
