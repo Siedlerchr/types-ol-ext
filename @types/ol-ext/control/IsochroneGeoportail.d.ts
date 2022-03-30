@@ -5,7 +5,12 @@ import Feature from "ol/Feature";
 import BaseEvent from "ol/events/Event";
 import { EventsKey } from "ol/events";
 import { ObjectEvent } from "ol/Object";
+import { CombinedOnSignature, EventTypes, OnSignature } from "ol/Observable";
+import { Types } from "ol/ObjectEventType";
 
+type IsochroneGeoportailOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange' | 'isochrone', ObjectEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'isochrone', Return>;
 export interface Options extends ControlOptions {
   className?: string;
   apiKey?: string;
@@ -74,26 +79,9 @@ export default class IsochroneGeoportail extends ol_control_Control {
    */
   search(coord: Coordinate, option: number | string, iter: number): void;
 
-  on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-  once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-  un(type: string | string[], listener: (p0: any) => any): void;
-  on(type: "change", listener: (evt: BaseEvent) => void): EventsKey;
-  once(type: "change", listener: (evt: BaseEvent) => void): EventsKey;
-  un(type: "change", listener: (evt: BaseEvent) => void): void;
-  on(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
-  once(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
-  un(type: "error", listener: (evt: BaseEvent) => void): void;
-  on(type: "propertychange", listener: (evt: ObjectEvent) => void): EventsKey;
-  once(type: "propertychange", listener: (evt: ObjectEvent) => void): EventsKey;
-  un(type: "propertychange", listener: (evt: ObjectEvent) => void): void;
-
-  on(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
-  once(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
-  un(type: "error", listener: (evt: BaseEvent) => void): void;
-
-  on(type: "isochrone", listener: (evt: BaseEvent) => void): EventsKey;
-  once(type: "isochrone", listener: (evt: BaseEvent) => void): EventsKey;
-  un(type: "isochrone", listener: (evt: BaseEvent) => void): void;
+  on: IsochroneGeoportailOnSignature<EventsKey>;
+  once: IsochroneGeoportailOnSignature<EventsKey>;
+  un: IsochroneGeoportailOnSignature<void>;
 }
 
 export class IsoChroneEvent extends BaseEvent {
