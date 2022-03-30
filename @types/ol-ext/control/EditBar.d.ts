@@ -15,6 +15,12 @@ import { EventsKey } from 'ol/events';
 import BaseEvent from 'ol/events/Event';
 import { ObjectEvent } from 'ol/Object';
 import { Geometry } from 'ol/geom';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
+
+type EditBarOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange', Return>
 
 export enum EditBarEventType {
   INFO = 'info',
@@ -40,7 +46,7 @@ export interface Interactions {
   Offset?: Offset | boolean;
 }
 
-export interface Options {
+export interface EditBarOptions {
   className?: string;
   target?: string;
   edition?: boolean;
@@ -61,7 +67,7 @@ export interface Options {
  *	@param {VectorSource} options.source Source for the drawn features.
  */
 export default class EditBar extends Bar {
-  constructor(options?: Options);
+  constructor(options?: EditBarOptions);
   /**
    * Set the map instance the control is associated with
    * and add its controls associated to this map.
@@ -111,24 +117,9 @@ export default class EditBar extends Bar {
    */
   getControlsByName(name: string): ol_control_Control;
 
-  on(
-    type: string | string[],
-    listener: (p0: any) => any
-  ): EventsKey | EventsKey[];
-  once(
-    type: string | string[],
-    listener: (p0: any) => any
-  ): EventsKey | EventsKey[];
-  un(type: string | string[], listener: (p0: any) => any): void;
-  on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-  once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-  un(type: 'change', listener: (evt: BaseEvent) => void): void;
-  on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-  once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-  un(type: 'error', listener: (evt: BaseEvent) => void): void;
-  on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-  once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-  un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
+  on: EditBarOnSignature<EventsKey>;
+  once: EditBarOnSignature<EventsKey>;
+  un: EditBarOnSignature<void>;
 }
 export class InfoEvent extends BaseEvent {
   constructor(type: EditBarEventType, features: Collection<Feature<Geometry>>);
