@@ -6,8 +6,14 @@ import Feature from 'ol/Feature';
 import { ObjectEvent } from 'ol/Object';
 import { Vector as VectorSource } from 'ol/source';
 import VectorLayer from 'ol/layer/Vector';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
 
-
+type ImageLineOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'select', ImageLineSelectEvent, Return> &
+  OnSignature<Types | 'collapse', ImageLineCollapseEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'select' | 'collapse', Return>;
 export interface Options extends ControlOptions {
     className?: string;
     source?: VectorSource;
@@ -78,26 +84,9 @@ export default class Imageline extends ol_control_Control {
      */
     select(feature: Feature, scroll?: boolean): void;
 
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
-
-    on(type: 'select', listener: (evt: ImageLineSelectEvent) => void): EventsKey;
-    once(type: 'select', listener: (evt: ImageLineSelectEvent) => void): EventsKey;
-    un(type: 'select', listener: (evt: ImageLineSelectEvent) => void): void;
-
-    on(type: 'collapse', listener: (evt: ImageLineCollapseEvent) => void): EventsKey;
-    once(type: 'select', listener: (evt: ImageLineCollapseEvent) => void): EventsKey;
-    un(type: 'select', listener: (evt: ImageLineCollapseEvent) => void): void;
+    on: ImageLineOnSignature<EventsKey>;
+    once: ImageLineOnSignature<EventsKey>;
+    un: ImageLineOnSignature<void>;
 }
 export class ImageLineSelectEvent extends BaseEvent {
     constructor(
