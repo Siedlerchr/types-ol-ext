@@ -4,17 +4,18 @@ import { Coordinate } from 'ol/coordinate';
 import { Feature } from 'ol';
 import { WriteOptions } from 'ol/format/Feature';
 import { Geometry } from 'ol/geom';
+import { Feature as geojson_Feature, FeatureCollection } from 'geojson';
 
 
 export declare type GeoJSONWithoutWriteGeometryObject = new (entries?: ReadonlyArray<ol_format_GeoJSON> | null)
     => { [P in Exclude<keyof ol_format_GeoJSON, 'writeGeometryObject'>]: ol_format_GeoJSON[P] };
 
 declare const GeoJSONWithoutWriteGeometryObject: GeoJSONWithoutWriteGeometryObject;
-export interface GeoJSONXFeature extends GeoJSON.Feature {
+export interface GeoJSONXFeature extends geojson_Feature {
     decimals: number;
     hashProperties: any[];
 }
-export interface GeoJSONXFeatureCollection extends GeoJSON.FeatureCollection {
+export interface GeoJSONXFeatureCollection extends FeatureCollection {
     decimals: number;
     hashProperties: any[];
 }
