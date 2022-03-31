@@ -2,7 +2,6 @@ import { Map as _ol_Map_ } from "ol";
 import { Extent } from 'ol/extent';
 import ol_control_Control, { Options as ControlOptions } from "ol/control/Control";
 import { Layer } from "ol/layer";
-import { position } from '../../../npm/control/Timeline';
 
 export interface Options extends ControlOptions{
     layer?: Layer;
