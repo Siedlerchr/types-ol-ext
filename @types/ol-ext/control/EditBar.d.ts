@@ -22,7 +22,8 @@ import { Options as DrawOptions } from 'ol/interaction/Draw';
 
 type EditBarOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
-  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange', Return>;
+  OnSignature<Types | 'info', InfoEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'info', Return>;
 
 export enum EditBarEventType {
   INFO = 'info',
