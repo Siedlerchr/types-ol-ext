@@ -11,7 +11,6 @@ import { Vector as VectorSource } from 'ol/source';
 import { EventsKey } from 'ol/events';
 import BaseEvent from 'ol/events/Event';
 import { ObjectEvent } from 'ol/Object';
-import { ModifyEventType } from 'ol/interaction/Modify';
 import Geometry from 'ol/geom/Geometry';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import { Types } from 'ol/ObjectEventType';
@@ -24,7 +23,10 @@ type ModifyFeatureOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
 export enum ModifyingEventType {
     MODIFYING = 'modifying'
 }
-
+export enum ModifyEventType {
+    MODIFYSTART = 'modifystart',
+    MODIFYEND = 'modifyend'
+}
 export interface Options {
     source?: VectorSource;
     features?: Collection<Feature>;
