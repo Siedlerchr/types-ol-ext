@@ -38,7 +38,7 @@ declare module 'ol/layer' {
     isPlaying: (...params: any[]) => any;
   };
 
-  interface Vector {
+  interface Vector<VectorSourceType> {
     /** Animate feature on a vector layer
      * @fires animationstart, animationend
      * @param {ol.Feature} feature Feature to animate
