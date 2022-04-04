@@ -11,6 +11,7 @@ import { EventsKey } from 'ol/events';
 import { ObjectEvent } from 'ol/Object';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import { Types } from 'ol/ObjectEventType';
+import { Geometry } from 'ol/geom';
 
 type OffsetOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
@@ -19,7 +20,7 @@ type OffsetOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'offsetend', OffsetEndEvent, Return> &
   CombinedOnSignature<EventTypes | Types | 'change' | 'change:active' | 'error' | 'propertychange' | 'offsetstart' | 'offsetting' | 'offsetend', Return>
 export interface Options {
-    layers?: Vector | Vector[];
+    layers?: Vector<VectorSource<Geometry>> | Vector<VectorSource<Geometry>>[];
     features?: Collection<Feature>;
     source?: VectorSource;
     duplicate?: boolean;

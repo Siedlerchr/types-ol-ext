@@ -1,5 +1,7 @@
 import VectorLayer from 'ol/layer/Vector';
 import { Options } from 'ol/layer/BaseVector';
+import VectorSource from 'ol/source/Vector';
+import { Geometry } from 'ol/geom';
 
 interface ClusterOptions extends Options {
     animationDuration?: number;
@@ -13,6 +15,6 @@ interface ClusterOptions extends Options {
  *  @param {Number} options.animationDuration animation duration in ms, default is 700ms 
  *  @param {ol.easingFunction} animationMethod easing method to use, default ol.easing.easeOut
  */
-export default class AnimatedCluster extends VectorLayer {
+export default class AnimatedCluster extends VectorLayer<VectorSource<Geometry>> {
     constructor(options?: ClusterOptions);
 }

@@ -1,12 +1,12 @@
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
-import { LineString } from 'ol/geom';
+import { Geometry, LineString } from 'ol/geom';
 import { Vector } from 'ol/layer';
 import { Vector as VectorSource } from 'ol/source';
 import ol_Object from 'ol/Object';
 
  export interface Options {
-    source: Vector;
+    source: Vector<VectorSource<Geometry>>;
     maxIteration?: number;
     stepIteration?: number;
     epsilon?: number;

@@ -11,6 +11,8 @@ import { DrawEvent } from 'ol/interaction/Draw';
 import { ObjectEvent } from 'ol/Object';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import { Types } from 'ol/ObjectEventType';
+import VectorSource from 'ol/source/Vector';
+import { Geometry } from 'ol/geom';
 
 type DrawHoleOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
@@ -19,7 +21,7 @@ type DrawHoleOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawabort' | 'drawend' | 'drawstart' | 'modifyend' | 'modifystart', Return>;
 
 export interface Options {
-    layers?: Vector[] | ((...params: any[]) => any);
+    layers?: Vector<VectorSource<Geometry>>[] | ((...params: any[]) => any);
     features?: Feature[] | Collection<Feature> | ((feature: Feature, layer: Layer) => boolean)
     style?: StyleLike
 }

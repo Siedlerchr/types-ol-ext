@@ -8,6 +8,7 @@ import { Vector as VectorSource } from 'ol/source';
 import VectorLayer from 'ol/layer/Vector';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import { Types } from 'ol/ObjectEventType';
+import { Geometry } from 'ol/geom';
 
 type ImageLineOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
@@ -17,7 +18,7 @@ type ImageLineOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
 export interface Options extends ControlOptions {
     className?: string;
     source?: VectorSource;
-    layers?: VectorLayer[];
+    layers?: VectorLayer<VectorSource<Geometry>>[];
     getImage?: (f: Feature) => string;
     getTitle?: (f: Feature) => string;
     collapsed?: boolean;
