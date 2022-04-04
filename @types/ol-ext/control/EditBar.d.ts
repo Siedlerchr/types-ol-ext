@@ -17,10 +17,12 @@ import { ObjectEvent } from 'ol/Object';
 import { Geometry } from 'ol/geom';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import { Types } from 'ol/ObjectEventType';
+import { Options as SelectOptions } from 'ol/interaction/Select';
+import { Options as DrawOptions } from 'ol/interaction/Draw';
 
 type EditBarOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
-  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange', Return>
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange', Return>;
 
 export enum EditBarEventType {
   INFO = 'info',
@@ -127,13 +129,13 @@ export class InfoEvent extends BaseEvent {
 }
 
 declare module 'ol/interaction/Select' {
-  interface Options {
+  interface OLExtSelectOptions extends SelectOptions {
     title?: string;
   }
 }
 
 declare module 'ol/interaction/Draw' {
-  interface Options {
+  interface OLExtDrawOptions extends DrawOptions {
     title?: string;
   }
 }
