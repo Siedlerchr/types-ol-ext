@@ -7,7 +7,7 @@ import Collection from 'ol/Collection';
 import { EventsKey } from 'ol/events';
 import { ModifyEvent } from 'ol/interaction/Modify';
 import BaseEvent from 'ol/events/Event';
-import { DrawEvent } from 'ol/interaction/Draw';
+import { DrawEvent } from './DrawRegular';
 import { ObjectEvent } from 'ol/Object';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import { Types } from 'ol/ObjectEventType';

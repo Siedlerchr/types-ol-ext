@@ -125,7 +125,7 @@ export class ModifyEvent extends BaseEvent {
     /**
      * The features being modified.
      */
-    features: Collection<Feature<Geometry>>;
+    features: Feature<Geometry>[];
     /**
      * Associated {@link module:ol/MapBrowserEvent}.
      */

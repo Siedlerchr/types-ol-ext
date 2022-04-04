@@ -147,4 +147,5 @@ export class DrawEvent extends BaseEvent {
   coordinate: Coordinate;
   square?: boolean;
   centered?: boolean;
+  oldValue?: string;
 }
