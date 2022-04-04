@@ -13,6 +13,13 @@ import BaseEvent from 'ol/events/Event';
 import { ObjectEvent } from 'ol/Object';
 import { ModifyEventType } from 'ol/interaction/Modify';
 import Geometry from 'ol/geom/Geometry';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
+
+type ModifyFeatureOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'modifyend' | 'modifystart' | 'modifying', ModifyEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'modifyend' | 'modifystart' | 'modifying', Return>;
 
 export enum ModifyingEventType {
     MODIFYING = 'modifying'
@@ -103,30 +110,9 @@ export default class ModifyFeature extends Pointer {
      */
     removePoint(): void;
 
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'modifyend', listener: (evt: ModifyEvent) => void): EventsKey;
-    once(type: 'modifyend', listener: (evt: ModifyEvent) => void): EventsKey;
-    un(type: 'modifyend', listener: (evt: ModifyEvent) => void): void;
-    on(type: 'modifystart', listener: (evt: ModifyEvent) => void): EventsKey;
-    once(type: 'modifystart', listener: (evt: ModifyEvent) => void): EventsKey;
-    un(type: 'modifystart', listener: (evt: ModifyEvent) => void): void;
-    on(type: 'modifying', listener: (evt: ModifyEvent) => void): EventsKey;
-    once(type: 'modifying', listener: (evt: ModifyEvent) => void): EventsKey;
-    un(type: 'modifying', listener: (evt: ModifyEvent) => void): void;
+    on: ModifyFeatureOnSignature<EventsKey>;
+    once: ModifyFeatureOnSignature<EventsKey>;
+    un: ModifyFeatureOnSignature<void>;
 }
 export class ModifyEvent extends BaseEvent {
     constructor(
