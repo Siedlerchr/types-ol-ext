@@ -9,9 +9,15 @@ import BaseEvent from 'ol/events/Event';
 import { Coordinate } from 'ol/coordinate';
 import { EventsKey } from 'ol/events';
 import { ObjectEvent } from 'ol/Object';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
 
-
-
+type OffsetOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'offsetstart', OffsetStartEvent, Return> &
+  OnSignature<Types | 'offsetting', OffsettingEvent, Return> &
+  OnSignature<Types | 'offsetend', OffsetEndEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'change:active' | 'error' | 'propertychange' | 'offsetstart' | 'offsetting' | 'offsetend', Return>
 export interface Options {
     layers?: Vector | Vector[];
     features?: Collection<Feature>;
@@ -41,31 +47,9 @@ export default class Offset extends Pointer {
      * @api stable
      */
     setMap(map: _ol_Map_): void;
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
-
-    on(type: 'offsetstart', listener: (evt: OffsetStartEvent) => void): EventsKey;
-    once(type: 'offsetstart', listener: (evt: OffsetStartEvent) => void): EventsKey;
-    un(type: 'offsetstart', listener: (evt: OffsetStartEvent) => void): void;
-    on(type: 'offsetting', listener: (evt: OffsettingEvent) => void): EventsKey;
-    once(type: 'offsetting', listener: (evt: OffsettingEvent) => void): EventsKey;
-    un(type: 'offsetting', listener: (evt: OffsettingEvent) => void): void;
-    on(type: 'offsetend', listener: (evt: OffsetEndEvent) => void): EventsKey;
-    once(type: 'offsetend', listener: (evt: OffsetEndEvent) => void): EventsKey;
-    un(type: 'offsetend', listener: (evt: OffsetEndEvent) => void): void;
+    on: OffsetOnSignature<EventsKey>;
+    once: OffsetOnSignature<EventsKey>;
+    un: OffsetOnSignature<void>;
 }
 
 export class OffsetStartEvent extends BaseEvent {
