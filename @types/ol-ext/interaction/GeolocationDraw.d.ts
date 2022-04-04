@@ -34,7 +34,7 @@ export interface Attributes {
 
 export interface GeolocationDrawOptions {
     source?: VectorSource;
-    type?: GeometryType.POINT | GeometryType.LINE_STRING | GeometryType.POLYGON;
+    type?: typeof GeometryType.POINT | typeof GeometryType.LINE_STRING | typeof GeometryType.POLYGON;
     minAccuracy?: number;
     condition?: ((loc: _ol_Geolocation) => boolean);
     attributes?: Attributes;
