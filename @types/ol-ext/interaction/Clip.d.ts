@@ -36,9 +36,9 @@ export default class Clip extends Pointer {
    */
   removeLayer(layer: Layer | Layer[]): void;
   /** Set position of the clip
-   *  @param {Pixel|MapBrowserEvent}
+   *  @param {Pixel|MapBrowserEvent<UIEvent>}
    */
-  setPosition(e: Pixel | MapBrowserEvent): void;
+  setPosition(e: Pixel | MapBrowserEvent<UIEvent>): void;
   /** Set position of the clip
    * @param {Pixel} pixel
    */

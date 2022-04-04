@@ -98,10 +98,10 @@ export default class ModifyFeature extends Pointer {
      */
     getArcs(geom: GeometryType, coord: Coordinate): void;
     /**
-     * @param {MapBrowserEvent} evt Map browser event.
+     * @param {MapBrowserEvent<UIEvent>} evt Map browser event.
      * @return {boolean} `true` to start the drag sequence.
      */
-    handleDownEvent(evt: MapBrowserEvent): boolean;
+    handleDownEvent(evt: MapBrowserEvent<UIEvent>): boolean;
     /** Get modified features
      * @return {Array<Feature>} list of modified features
      */

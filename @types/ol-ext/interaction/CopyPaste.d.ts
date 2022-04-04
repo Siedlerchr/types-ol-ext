@@ -11,7 +11,7 @@ export enum CopyPasteEventType {
 }
 
 export interface Options {
-    condition?: (e: MapBrowserEvent) => 'copy' | 'paste' | 'cut';
+    condition?: (e: MapBrowserEvent<UIEvent>) => 'copy' | 'paste' | 'cut';
     features?: Collection<Feature>;
     sources?: VectorSource | VectorSource[];
     destination?: VectorSource;
