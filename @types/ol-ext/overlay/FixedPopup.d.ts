@@ -13,7 +13,7 @@ export interface Options{
     onClose?: () => void;
     onShow?: () => void;
     offsetBox?: number | number[];
-    positioning?: OverlayPositioning
+    positioning?: typeof OverlayPositioning
 }
 
 /**

@@ -12,7 +12,7 @@ export interface Options {
     formatArea?: (area: number) => string;
     getHTML?: (feature: Feature, info: string) => string;
     offsetBox?: number | number[];
-    positionning?: OverlayPositioning | string ;
+    positionning?: typeof OverlayPositioning | string ;
 }
 /** A tooltip element to be displayed over the map and attached on the cursor position.
  * @constructor
@@ -103,7 +103,7 @@ export default class Tooltip extends Popup {
      * 		or 'auto' to var the popup choose the best position
      * @api stable
      */
-    setPositioning(pos?: OverlayPositioning | string): void;
+    setPositioning(pos?: typeof OverlayPositioning | string): void;
     /** Check if popup is visible
     * @return {boolean}
      */

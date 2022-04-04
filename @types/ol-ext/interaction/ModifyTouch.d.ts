@@ -23,7 +23,7 @@ export enum PopupEventType {
 export interface Options {
     title?: string;
     className?: string;
-    positioning?: OverlayPositioning;
+    positioning?: typeof OverlayPositioning;
     offsetBox?: number | number[];
     usePopup?: boolean;
 }

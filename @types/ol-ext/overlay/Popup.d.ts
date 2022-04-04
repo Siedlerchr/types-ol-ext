@@ -18,7 +18,7 @@ import OverlayPositioning from 'ol/OverlayPositioning';
     onclose?: ((...params: any[]) => any);
     onshow?: ((...params: any[]) => any);
     offsetBox?: number | number[];
-    positioning?: OverlayPositioning | any | undefined; // workaround with any for 'auto'
+    positioning?: typeof OverlayPositioning | any | undefined; // workaround with any for 'auto'
  }
 
 
@@ -81,7 +81,7 @@ export default class Popup extends Overlay {
      * 		or 'auto' to var the popup choose the best position
      * @api stable
      */
-    setPositioning(pos?: OverlayPositioning | string ): void;
+    setPositioning(pos?: typeof OverlayPositioning | string ): void;
     /** Check if popup is visible
     * @return {boolean}
      */

@@ -86,7 +86,7 @@ export default class ModifyFeature extends Pointer {
     * @param {geom} coords list of coordinates
     * @return {*} the nearest point with a coord (projected point), dist (distance to the geom), ring (if Polygon)
      */
-    getNearestCoord(pt: Coordinate, coords: GeometryType): {
+    getNearestCoord(pt: Coordinate, coords: typeof GeometryType): {
         coord: Coordinate,
         dist: number,
         ring?: number
@@ -96,7 +96,7 @@ export default class ModifyFeature extends Pointer {
      * @param {geom} geom the geometry concerned
      * @param {Coordinate} coord pointed coordinates
      */
-    getArcs(geom: GeometryType, coord: Coordinate): void;
+    getArcs(geom: typeof GeometryType, coord: Coordinate): void;
     /**
      * @param {MapBrowserEvent<UIEvent>} evt Map browser event.
      * @return {boolean} `true` to start the drag sequence.

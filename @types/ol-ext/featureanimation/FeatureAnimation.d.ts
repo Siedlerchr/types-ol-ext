@@ -19,7 +19,7 @@ export interface FeatureAnimationEvent {
     // Feature information
     feature: FeatureLike,
     geom: Geometry
-    typeGeom: GeometryType,
+    typeGeom: typeof GeometryType,
     bbox: Extent
     coord: Coordinate
     style: StyleLike
