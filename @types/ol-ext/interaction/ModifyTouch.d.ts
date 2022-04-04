@@ -7,6 +7,14 @@ import { Coordinate } from 'ol/coordinate';
 import { EventsKey } from 'ol/events';
 import { ObjectEvent } from 'ol/Object';
 import { ModifyEvent } from './ModifyFeature';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
+
+type ModifyTouchOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'modifyend' | 'modifystart', ModifyEvent, Return> &
+  OnSignature<Types | 'showpopup' | 'hidepopup', PopupEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'modifyend' | 'modifystart' | 'showpopup' | 'hidepopup', Return>
 
 export enum PopupEventType {
     SHOWPOPUP = 'showpopup',
@@ -65,34 +73,9 @@ export default class ModifyTouch extends Modify {
      */
     getPopupContent(): Element;
 
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'modifyend', listener: (evt: ModifyEvent) => void): EventsKey;
-    once(type: 'modifyend', listener: (evt: ModifyEvent) => void): EventsKey;
-    un(type: 'modifyend', listener: (evt: ModifyEvent) => void): void;
-    on(type: 'modifystart', listener: (evt: ModifyEvent) => void): EventsKey;
-    once(type: 'modifystart', listener: (evt: ModifyEvent) => void): EventsKey;
-    un(type: 'modifystart', listener: (evt: ModifyEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
-
-    on(type: 'showpopup', listener: (evt: PopupEvent) => void): EventsKey;
-    once(type: 'showpopup', listener: (evt: PopupEvent) => void): EventsKey;
-    un(type: 'showpopup', listener: (evt: PopupEvent) => void): void;
-    on(type: 'hidepopup', listener: (evt: PopupEvent) => void): EventsKey;
-    once(type: 'hidepopup', listener: (evt: PopupEvent) => void): EventsKey;
-    un(type: 'hidepopup', listener: (evt: PopupEvent) => void): void;
+    on: ModifyTouchOnSignature<EventsKey>;
+    once: ModifyTouchOnSignature<EventsKey>;
+    un: ModifyTouchOnSignature<void>;
 }
 
 export class PopupEvent extends BaseEvent{
