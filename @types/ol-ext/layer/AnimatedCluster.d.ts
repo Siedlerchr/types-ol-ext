@@ -3,7 +3,7 @@ import { Options } from 'ol/layer/BaseVector';
 import VectorSource from 'ol/source/Vector';
 import { Geometry } from 'ol/geom';
 
-interface ClusterOptions extends Options {
+interface ClusterOptions extends Options<VectorSource> {
     animationDuration?: number;
     easingFunction?: (t: number) => number;
 }

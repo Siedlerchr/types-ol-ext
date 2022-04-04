@@ -5,6 +5,7 @@ import { Options as ControlOptions } from 'ol/control/Control';
 import Dialog from './Dialog';
 import Layer from '../filter/Base';
 import { Extent } from 'ol/extent';
+import TileSource from 'ol/source/Tile';
 
 export interface Capabilities {
   map?: string;
@@ -83,7 +84,7 @@ export default class WMSCapabilities extends Button {
   /** Create a new layer using options received by getOptionsFromCap method
    * @param {*} options
    */
-  getLayerFromOptions(options: ReturnCapabilitiesOptions): TileLayer;
+  getLayerFromOptions(options: ReturnCapabilitiesOptions): TileLayer<TileSource>;
   /**
    * Set the map instance the control is associated with
    * and add its controls associated to this map.
