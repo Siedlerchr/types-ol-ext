@@ -7,6 +7,13 @@ import { EventsKey } from 'ol/events';
 import BaseEvent from 'ol/events/Event';
 import { ObjectEvent } from 'ol/Object';
 import { SplitEvent } from './Split';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
+
+type SplitterOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'beforesplit' | 'aftersplit', SplitEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'beforesplit' | 'aftersplit', Return>
 
 export interface Options {
     source?: VectorSource | VectorSource[];
@@ -49,26 +56,7 @@ export class Splitter extends Interaction {
     /** Feature source is changing
      */
     onChangeFeature(): void;
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
-
-    on(type: 'beforesplit', listener: (evt: SplitEvent) => void): EventsKey;
-    once(type: 'beforesplit', listener: (evt: SplitEvent) => void): EventsKey;
-    un(type: 'beforesplit', listener: (evt: SplitEvent) => void): void;
-    on(type: 'aftersplit', listener: (evt: SplitEvent) => void): EventsKey;
-    once(type: 'aftersplit', listener: (evt: SplitEvent) => void): EventsKey;
-    un(type: 'aftersplit', listener: (evt: SplitEvent) => void): void;
+    on: SplitterOnSignature<EventsKey>;
+    once: SplitterOnSignature<EventsKey>;
+    un: SplitterOnSignature<void>;
 }
