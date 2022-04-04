@@ -6,7 +6,7 @@ import { Style } from 'ol/style';
 import { Interaction, Draw, Modify } from 'ol/interaction';
 import VectorImageLayer from 'ol/layer/VectorImage';
 import VectorLayer from 'ol/layer/Vector';
-import { Vector as VectorSource } from 'ol/source/Vector';
+import VectorSource from 'ol/source/Vector';
 import { Geometry } from 'ol/geom';
 
 export interface Options {
