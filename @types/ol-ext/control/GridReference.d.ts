@@ -8,7 +8,6 @@ import { Extent } from 'ol/extent';
 import { Size } from 'ol/size';
 import { Vector as VectorSource } from 'ol/source';
 import { EventsKey } from 'ol/events';
-import { SelectEvent } from 'ol/interaction/Select';
 import BaseEvent from 'ol/events/Event';
 import { ObjectEvent } from 'ol/Object';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
@@ -16,7 +15,7 @@ import { Types } from 'ol/ObjectEventType';
 
 type GridReferenceOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'select', SelectEvent, Return> &
+  OnSignature<Types | 'select', GridReferenceSelectEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'select', Return>;
 
 export enum GridReferenceEventType {
