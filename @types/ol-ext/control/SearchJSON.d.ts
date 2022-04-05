@@ -6,14 +6,6 @@ import { Types } from 'ol/ObjectEventType';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import Search, { Options as SearchOptions } from './Search';
 
-type SearchEventOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
-  OnSignature<Types | 'select', SearchEvent, Return> &
-  CombinedOnSignature<Types | EventTypes | 'select', Return>;
-
-export enum SearchEventType {
-  SELECT = 'select',
-}
-
 export interface Options extends SearchOptions {
     handleResponse?: ((response: any) => any[]);
     url?: string;
@@ -120,13 +112,4 @@ export default class SearchJSON extends Search {
     on: SearchEventOnSignature<EventsKey>;
     once: SearchEventOnSignature<EventsKey>;
     un: SearchEventOnSignature<void>;
-}
-
-export class SearchEvent extends BaseEvent {
-  constructor(type: SearchEventType, search: any, reverse: boolean, coordinate: Coordinate, option?: Options);
-
-  search: any;
-  reverse: boolean;
-  coordinate: Coordinate;
-  options?: Options;
 }
