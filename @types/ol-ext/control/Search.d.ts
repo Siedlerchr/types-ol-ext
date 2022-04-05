@@ -6,7 +6,7 @@ import BaseEvent from 'ol/events/Event';
 type SearchEventOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
   OnSignature<Types | 'select', SearchEvent, Return> &
-  CombinedOnSignature<Types | EventTypes | 'select', Return>;
+  CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange'| 'select', Return>;
 
 export enum SearchEventType {
   SELECT = 'select',
