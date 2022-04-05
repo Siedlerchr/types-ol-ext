@@ -18,8 +18,8 @@ import { Types } from "ol/ObjectEventType";
 
 type DrawRegularOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'drawabort' | 'drawend' | 'drawstart', DrawEvent, Return> &
-  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawabort' | 'drawend' | 'drawstart', Return>;
+  OnSignature<Types | 'drawabort' | 'drawend' | 'drawstart' | 'drawing', DrawEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawabort' | 'drawend' | 'drawstart' | 'drawing', Return>;
 export interface Options {
   source?: VectorSource;
   features?: Collection<Feature>;
@@ -136,6 +136,7 @@ declare enum DrawEventType {
   DRAWSTART = "drawstart",
   DRAWEND = "drawend",
   DRAWCANCEL = "drawcancel",
+  DRAWING = "drawing",
 }
 export class DrawEvent extends BaseEvent {
   constructor(type: DrawEventType, feature: Feature<Geometry>);
