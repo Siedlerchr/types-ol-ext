@@ -176,7 +176,7 @@ map.addInteraction(new Select())
 
 declare global {
     interface Window {
-        vector: Vector,
+        vector: Vector<VectorSource>,
 
         setOptions(glyph: string, form: string, color: string, scolor: string, fcolor: string, border: number,
                    radius: number, fsize: number, offset: boolean, gradient: boolean, shadow: boolean): void,
