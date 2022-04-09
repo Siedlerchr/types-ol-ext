@@ -1,4 +1,18 @@
+import { EventsKey } from 'ol/events';
+import BaseEvent from 'ol/events/Event';
+import { ObjectEvent } from 'ol/Object';
+import { Types } from 'ol/ObjectEventType';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import SearchJSON, { Options as SearchJSONOptions } from './SearchJSON';
+
+type SearchNominatimOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'select', SearchNominatimEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'select', Return>;
+
+export enum SearchNominatimType {
+  SELECT = 'select',
+}
 
 export interface Options extends SearchJSONOptions {
     polygon?: boolean;
@@ -31,4 +45,14 @@ export interface Options extends SearchJSONOptions {
 export default class SearchNominatim extends SearchJSON {
     constructor(options?: Options);
 
+    on: SearchNominatimOnSignature<EventsKey>;
+    once: SearchNominatimOnSignature<EventsKey>;
+    un: SearchNominatimOnSignature<void>;
+}
+
+export class SearchNominatimEvent extends BaseEvent {
+  constructor(type: SearchNominatimType, search: any, coordinate: number[]);
+
+  search: any;
+  coordinate: number[];
 }
