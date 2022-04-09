@@ -1,4 +1,19 @@
+import { EventsKey } from "ol/events";
+import BaseEvent from "ol/events/Event";
+import { ObjectEvent } from "ol/Object";
+import { Types } from "ol/ObjectEventType";
+import { CombinedOnSignature, EventTypes, OnSignature } from "ol/Observable";
 import Base, { Options as BaseOptions } from "./Base";
+
+type ListOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'change:value', ListEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'change:value', Return>;
+
+export enum ListType {
+  CHANGE_VALUE = 'change:value',
+}
+
 export interface Options extends BaseOptions {
     className?: string;
     options?: any[];
@@ -23,4 +38,19 @@ export default class List extends Base {
     constructor(options: any);
     element: HTMLElement | Text;
     popup: HTMLElement | Text;
+
+    /** Get the current value
+     * @returns {number}
+     */
+    getValue(): number;
+
+    on: ListOnSignature<EventsKey>;
+    once: ListOnSignature<EventsKey>;
+    un: ListOnSignature<void>;
+}
+
+export class ListEvent extends BaseEvent {
+  constructor(type: ListType, value: number);
+
+  value: number;
 }
