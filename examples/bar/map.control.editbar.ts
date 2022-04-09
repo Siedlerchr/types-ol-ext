@@ -26,7 +26,7 @@ const note = new Notification();
 map.addControl(note);
 
 // Add the editr
-const select = new Select({ title: 'Sélection' });
+const select = new Select(/*{ title: 'Sélection' }*/);
 select.set('title', 'Sélection');
 const edit = new EditBar({
   // Translate interaction title / label

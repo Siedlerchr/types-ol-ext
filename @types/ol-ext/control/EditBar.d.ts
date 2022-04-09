@@ -17,8 +17,6 @@ import { ObjectEvent } from 'ol/Object';
 import { Geometry } from 'ol/geom';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import { Types } from 'ol/ObjectEventType';
-import { Options as SelectOptions } from 'ol/interaction/Select';
-import { Options as DrawOptions } from 'ol/interaction/Draw';
 
 type EditBarOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
@@ -49,7 +47,7 @@ export interface Interactions {
   Offset?: Offset | boolean;
 }
 
-export interface EditBarOptions {
+export interface Options {
   className?: string;
   target?: string;
   edition?: boolean;
@@ -70,7 +68,7 @@ export interface EditBarOptions {
  *	@param {VectorSource} options.source Source for the drawn features.
  */
 export default class EditBar extends Bar {
-  constructor(options?: EditBarOptions);
+  constructor(options?: Options);
   /**
    * Set the map instance the control is associated with
    * and add its controls associated to this map.
@@ -127,16 +125,4 @@ export default class EditBar extends Bar {
 export class InfoEvent extends BaseEvent {
   constructor(type: EditBarEventType, features: Collection<Feature<Geometry>>);
   features: Collection<Feature<Geometry>>;
-}
-
-declare module 'ol/interaction/Select' {
-  interface OLExtSelectOptions extends SelectOptions {
-    title?: string;
-  }
-}
-
-declare module 'ol/interaction/Draw' {
-  interface OLExtDrawOptions extends DrawOptions {
-    title?: string;
-  }
 }
