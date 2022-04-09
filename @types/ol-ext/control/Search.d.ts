@@ -2,8 +2,12 @@ import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control'
 import { Feature, Map as _ol_Map_ } from 'ol';
 import { Coordinate } from 'ol/coordinate';
 import BaseEvent from 'ol/events/Event';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { ObjectEvent } from 'ol/Object';
+import { Types } from 'ol/ObjectEventType';
+import { EventsKey } from 'ol/events';
 
-type SearchEventOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+export type SearchOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
   OnSignature<Types | 'select', SearchEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange'| 'select', Return>;
@@ -146,6 +150,10 @@ export default class Search extends ol_control_Control {
    * @return {boolean}
    */
   equalFeatures(f1: Feature, f2: Feature): boolean;
+
+  on: SearchOnSignature<EventsKey>;
+  once: SearchOnSignature<EventsKey>;
+  un: SearchOnSignature<void>;
 }
 
 export class SearchEvent extends BaseEvent {
