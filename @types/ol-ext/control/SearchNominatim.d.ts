@@ -1,3 +1,4 @@
+import { Coordinate } from 'ol/coordinate';
 import { EventsKey } from 'ol/events';
 import BaseEvent from 'ol/events/Event';
 import { ObjectEvent } from 'ol/Object';
@@ -51,8 +52,8 @@ export default class SearchNominatim extends SearchJSON {
 }
 
 export class SearchNominatimEvent extends BaseEvent {
-  constructor(type: SearchNominatimType, search: any, coordinate: number[]);
+  constructor(type: SearchNominatimType, search: any, coordinate: Coordinate);
 
   search: any;
-  coordinate: number[];
+  coordinate: Coordinate;
 }
