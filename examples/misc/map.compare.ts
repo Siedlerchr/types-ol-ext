@@ -12,8 +12,6 @@ import { click } from 'ol/events/condition';
 import Popup from 'ol-ext/overlay/Popup';
 import { containsCoordinate } from 'ol/extent';
 import { CollectionEvent } from 'ol/Collection';
-import Geometry from 'ol/geom/Geometry';
-import GeometryType from 'ol/geom/GeometryType';
 import { Point } from 'ol/geom';
 // Layers
 var mapbox = new TileLayer({
@@ -77,7 +75,7 @@ map.addOverlay(popup1);
 var popup2 = new Popup({ anim: true, closeBox: true });
 map2.addOverlay(popup2);
 
-function showPopup(e: CollectionEvent<Feature<Geometry>>, popup: Popup) {
+function showPopup(e: CollectionEvent, popup: Popup) {
     var feature = e.element;
     var content = "";
     if (!feature.get('text')) return;
