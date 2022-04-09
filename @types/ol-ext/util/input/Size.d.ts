@@ -1,11 +1,12 @@
 import { EventsKey } from 'ol/events';
 import BaseEvent from 'ol/events/Event';
+import { ObjectEvent } from 'ol/Object';
 import { Types } from 'ol/ObjectEventType';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import List, { Options as ListOptions } from './List';
 
 type SizeOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
-  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvenr, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
   OnSignature<Types | 'change:value', SizeEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'change:value', Return>;
 
