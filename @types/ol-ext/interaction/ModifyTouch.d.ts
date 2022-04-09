@@ -6,15 +6,15 @@ import Feature from 'ol/Feature';
 import { Coordinate } from 'ol/coordinate';
 import { EventsKey } from 'ol/events';
 import { ObjectEvent } from 'ol/Object';
-import { ModifyEvent } from './ModifyFeature';
+import { ModifyEvent } from 'ol/interaction/Modify';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import { Types } from 'ol/ObjectEventType';
 
 type ModifyTouchOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'modifyend' | 'modifystart', ModifyEvent, Return> &
+  OnSignature<Types | 'modifyend' | 'modifystart' | 'modifying', ModifyEvent, Return> &
   OnSignature<Types | 'showpopup' | 'hidepopup', PopupEvent, Return> &
-  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'modifyend' | 'modifystart' | 'showpopup' | 'hidepopup', Return>
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'modifyend' | 'modifystart' | 'modifying' | 'showpopup' | 'hidepopup', Return>
 
 export enum PopupEventType {
     SHOWPOPUP = 'showpopup',
