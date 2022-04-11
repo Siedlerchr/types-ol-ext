@@ -25,16 +25,16 @@ export interface FeatureAnimationEvent {
     style: StyleLike
 }
 export interface Options {
+    speed?: Number;
     duration?: number;
     revers?: boolean;
     repeat?: number;
     hiddenStyle?: Style;
+    side?: boolean;
+    horizontal?: boolean;
     fade?: ((p0: number) => number);
     easing?: ((p0: number) => number);
 }
-interface IObjectKeys {
-    [key: string]: string | number | undefined;
-  }
 
 /** An animation controler object an object to control animation with start, stop and isPlaying function.
  * To be used with {@link olx.Map#animateFeature} or {@link layer.Vector#animateFeature}
@@ -66,10 +66,8 @@ export type animationControler = {
 *	@param {easing.Function} options.fade an easing function used to fade in the feature, default none
 *	@param {easing.Function} options.easing an easing function for the animation, default easing.linear
  */
-export default class featureAnimation extends _OL_OBJECT  {
+export class FeatureAnimation extends _OL_OBJECT {
     constructor(options?: Options);
-
-    [key: string]: any;
 
     /** Function to perform manipulations onpostcompose.
      * This function is called with an featureAnimationEvent argument.
@@ -82,3 +80,5 @@ export default class featureAnimation extends _OL_OBJECT  {
     animate(e: FeatureAnimationEvent): boolean;
 }
 
+export const featureAnimation: { [key:string]: typeof FeatureAnimation}
+export default featureAnimation
