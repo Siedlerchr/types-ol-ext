@@ -1,4 +1,4 @@
-import FeatureAnimation, { Options, FeatureAnimationEvent } from './FeatureAnimation';
+import { FeatureAnimation, Options, FeatureAnimationEvent } from './FeatureAnimation';
 /** Teleport a feature at a given place
  * @constructor
  * @extends {featureAnimation}
