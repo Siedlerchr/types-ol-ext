@@ -1,4 +1,4 @@
-import  FeatureAnimation, {FeatureAnimationEvent, Options } from './FeatureAnimation';
+import {FeatureAnimation, FeatureAnimationEvent, Options } from './FeatureAnimation';
 /** Do nothing for a given duration
  * @constructor
  * @extends {featureAnimation}

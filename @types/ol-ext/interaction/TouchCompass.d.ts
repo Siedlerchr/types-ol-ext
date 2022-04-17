@@ -6,7 +6,7 @@ export interface Delta {
     traction: number[]
 }
 export interface Options {
-    onDrag?: (delta: Delta, pos: MapBrowserEvent) => void; // TODO not sure
+    onDrag?: (delta: Delta, pos: MapBrowserEvent<UIEvent>) => void; // TODO not sure
     Size?: number;
     alpha?: number;
 }

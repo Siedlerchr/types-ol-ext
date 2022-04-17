@@ -4,25 +4,18 @@
     "forceConsistentCasingInFileNames": true,
     "lib": [
       "dom",
-      "esnext"
+      "es2017"
     ],
     "module": "commonjs",
     "moduleResolution": "node",
     "noEmit": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "paths": {
-      "ol": [
-        "node_modules/@types/ol"
-      ],
-      "ol/*": [
-        "node_modules/@types/ol/*"
-      ]
-    },
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
-    "target": "es5",
+    "target": "ES2017",
     "esModuleInterop": true
   },
   "include": [

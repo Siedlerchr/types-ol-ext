@@ -2,7 +2,7 @@ import { Interaction } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 
 export interface Options {
-    handleLongTouchEvent?:  (evt: MapBrowserEvent) => void;
+    handleLongTouchEvent?:  (evt: MapBrowserEvent<UIEvent>) => void;
     pixelTolerance? : number;
     delay?: number;
 }

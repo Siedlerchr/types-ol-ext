@@ -1,4 +1,4 @@
-import FeatureAnimation, { FeatureAnimationEvent, Options } from './FeatureAnimation';
+import {FeatureAnimation, FeatureAnimationEvent, Options } from './FeatureAnimation';
 /** Fade animation: feature fade in
  * @constructor
  * @extends {featureAnimation}

@@ -111,11 +111,9 @@ function addFeatureAt(p: Coordinate) {
       break;
   }
 
- //TODO: Indexing does not yet work
- /*
-  vector.getSource().addFeature(f);
+  vector.getSource()?.addFeature(f);
   vector.animateFeature(f, [
-    new featureAnimation[$('#anim2').text()] ({
+    new featureAnimation[$('#anim').text()] ({
       speed: Number($('#speed').val()),
       duration: Number(1000 -Number($('#speed').val()) * 300),
       side: $('#side').prop('checked'),
@@ -130,7 +128,7 @@ function addFeatureAt(p: Coordinate) {
 
 // Add 10 random features
 function add10() {
-  vector.getSource().clear();
+  vector.getSource()?.clear();
   let ex = map.getView().calculateExtent(map.getSize());
   for (let i = 0; i < 10; i++) {
     setTimeout(function () {
@@ -153,7 +151,7 @@ map.on('singleclick', function (evt) {
   });
   if (f) {
     // Remove feature
-    vector.getSource().removeFeature(f);
+    vector.getSource()?.removeFeature(f);
     // Show animation
     vector.animateFeature(f, [
       new featureAnimation[$('#anim').text()]({
@@ -169,5 +167,3 @@ map.on('singleclick', function (evt) {
 
 
 });
-*/
-}

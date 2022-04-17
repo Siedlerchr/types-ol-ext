@@ -1,4 +1,19 @@
+import { EventsKey } from "ol/events";
+import BaseEvent from "ol/events/Event";
+import { ObjectEvent } from "ol/Object";
+import { Types } from "ol/ObjectEventType";
+import { CombinedOnSignature, EventTypes, OnSignature } from "ol/Observable";
 import Base, { Options as BaseOptions } from "./Base";
+
+type SliderOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'change:value', SliderEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'change:value', Return>;
+
+export enum SliderType {
+  CHANGE_VALUE = 'change:value',
+}
+
 export interface Options extends BaseOptions {
     className?: string;
     input?: Element;
@@ -39,4 +54,14 @@ export default class Slider extends Base {
      * @returns {number}
      */
     getValue(): number;
+
+    on: SliderOnSignature<EventsKey>;
+    once: SliderOnSignature<EventsKey>;
+    un: SliderOnSignature<void>;
+}
+
+export class SliderEvent extends BaseEvent {
+  constructor(type: SliderType, value: number);
+
+  value: number;
 }

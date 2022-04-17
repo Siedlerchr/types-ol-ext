@@ -6,6 +6,15 @@ import { Extent } from "ol/extent";
 import BaseEvent from "ol/events/Event";
 import { EventsKey } from "ol/events";
 import { ObjectEvent } from "ol/Object";
+import { CombinedOnSignature, EventTypes, OnSignature } from "ol/Observable";
+import { Types } from "ol/ObjectEventType";
+
+type LayerSwitcherOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'drawlist' | 'layer:visible' | 'layer:opacity', LayerSwitcherEvent, Return> &
+  OnSignature<Types | 'toggle', ToggleEvent, Return> &
+  OnSignature<Types | 'reroder-start' | 'reroder-end', LayerSwitcherReorderEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'drawlist' | 'layer:visible' | 'layer:opacity' | 'toggle' | 'reroder-start' | 'reroder-end', Return>;
 
 export enum LayerSwitcherEventType {
     DRAWLIST = "drawlist",
@@ -142,37 +151,9 @@ export default class LayerSwitcher extends ol_control_Control {
      */
     drawList(element: Element, collection: Layer[]): void;
 
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: "change", listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: "change", listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: "change", listener: (evt: BaseEvent) => void): void;
-    on(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: "error", listener: (evt: BaseEvent) => void): void;
-    on(type: "propertychange", listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: "propertychange", listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: "propertychange", listener: (evt: ObjectEvent) => void): void;
-
-    on(type: "drawlist", listener: (evt: LayerSwitcherEvent) => void): EventsKey;
-    once(type: "drawlist", listener: (evt: LayerSwitcherEvent) => void): EventsKey;
-    un(type: "drawlist", listener: (evt: LayerSwitcherEvent) => void): void;
-    on(type: "layer:visible", listener: (evt: LayerSwitcherEvent) => void): EventsKey;
-    once(type: "layer:visible", listener: (evt: LayerSwitcherEvent) => void): EventsKey;
-    un(type: "layer:visible", listener: (evt: LayerSwitcherEvent) => void): void;
-    on(type: "layer:opacity", listener: (evt: LayerSwitcherEvent) => void): EventsKey;
-    once(type: "layer:opacity", listener: (evt: LayerSwitcherEvent) => void): EventsKey;
-    un(type: "layer:opacity", listener: (evt: LayerSwitcherEvent) => void): void;
-    on(type: "toggle", listener: (evt: ToggleEvent) => void): EventsKey;
-    once(type: "toggle", listener: (evt: ToggleEvent) => void): EventsKey;
-    un(type: "toggle", listener: (evt: ToggleEvent) => void): void;
-    on(type: "reroder-start", listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
-    once(type: "reorder-start", listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
-    un(type: "reorder-start", listener: (evt: LayerSwitcherReorderEvent) => void): void;
-    on(type: "reroder-end", listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
-    once(type: "reorder-end", listener: (evt: LayerSwitcherReorderEvent) => void): EventsKey;
-    un(type: "reorder-end", listener: (evt: LayerSwitcherReorderEvent) => void): void;
+    on: LayerSwitcherOnSignature<EventsKey>;
+    once: LayerSwitcherOnSignature<EventsKey>;
+    un: LayerSwitcherOnSignature<void>;
 }
 export class ToggleEvent extends BaseEvent {
     constructor(type: ToggleEventType, collapsed: boolean);

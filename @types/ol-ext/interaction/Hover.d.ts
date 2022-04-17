@@ -10,6 +10,13 @@ import { Coordinate } from 'ol/coordinate';
 import { Geometry } from 'ol/geom';
 import { EventsKey } from 'ol/events';
 import { ObjectEvent } from 'ol/Object';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
+
+type HoverOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'hover' | 'enter' | 'leave', HoverEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'hover' | 'enter' | 'leave', Return>;
 
 export enum HoverEventType {
     HOVER = 'hover',
@@ -65,31 +72,10 @@ export default class Hover extends Interaction {
      * @param {boolean} b
      */
     setActive(b: boolean): void
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
 
-    on(type: 'hover', listener: (evt: HoverEvent) => void): EventsKey;
-    once(type: 'hover', listener: (evt: HoverEvent) => void): EventsKey;
-    un(type: 'hover', listener: (evt: HoverEvent) => void): void;
-    on(type: 'enter', listener: (evt: HoverEvent) => void): EventsKey;
-    once(type: 'enter', listener: (evt: HoverEvent) => void): EventsKey;
-    un(type: 'enter', listener: (evt: HoverEvent) => void): void;
-    on(type: 'leave', listener: (evt: HoverEvent) => void): EventsKey;
-    once(type: 'leave', listener: (evt: HoverEvent) => void): EventsKey;
-    un(type: 'leave', listener: (evt: HoverEvent) => void): void;
+    on: HoverOnSignature<EventsKey>;
+    once: HoverOnSignature<EventsKey>;
+    un: HoverOnSignature<void>;
 }
 
 export class HoverEvent extends BaseEvent {

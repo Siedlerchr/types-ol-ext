@@ -4,6 +4,13 @@ import { Map as _ol_Map_ } from 'ol';
 import BaseEvent from 'ol/events/Event';
 import { EventsKey } from 'ol/events';
 import { ObjectEvent } from 'ol/Object';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
+
+type CurrentMapOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'focus', FocusEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'focus', Return>;
 
 export interface KeyEvent {
     type: string;
@@ -43,24 +50,10 @@ declare class CurrentMap extends Interaction {
      * @param {ol.Map} map
      */
     setCurrentMap(map: _ol_Map_): void;
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'focus', listener: (p0: FocusEvent) => void): EventsKey | EventsKey[];
-    once(type: 'focus', listener: (p0: FocusEvent) => void): EventsKey | EventsKey[];
-    un(type: 'focus', listener: (p0: FocusEvent) => void): void;
+
+    on: CurrentMapOnSignature<EventsKey>;
+    once: CurrentMapOnSignature<EventsKey>;
+    un: CurrentMapOnSignature<void>;
 }
 
 export class FocusEvent extends BaseEvent {

@@ -13,7 +13,7 @@ export interface Options extends InteractionOptions {
     coordinate?: Coordinate;
     buttons?: Button[];
     maxButtons?: number;
-    type?: GeometryType;
+    type?: typeof GeometryType;
     types?: string[];
     source?: VectorSource;
     features?: Collection<Feature>;

@@ -8,9 +8,15 @@ import { Extent } from 'ol/extent';
 import { Size } from 'ol/size';
 import { Vector as VectorSource } from 'ol/source';
 import { EventsKey } from 'ol/events';
-import { SelectEvent } from 'ol/interaction/Select';
 import BaseEvent from 'ol/events/Event';
 import { ObjectEvent } from 'ol/Object';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
+
+type GridReferenceOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'select', GridReferenceSelectEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'select', Return>;
 
 export enum GridReferenceEventType {
   SELECT = 'select',
@@ -132,34 +138,9 @@ export default class GridReference extends CanvasBase {
    */
   getTextFont(): string;
 
-  on(
-    type: string | string[],
-    listener: (p0: any) => any
-  ): EventsKey | EventsKey[];
-  once(
-    type: string | string[],
-    listener: (p0: any) => any
-  ): EventsKey | EventsKey[];
-  un(type: string | string[], listener: (p0: any) => any): void;
-  on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-  once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-  un(type: 'change', listener: (evt: BaseEvent) => void): void;
-  on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-  once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-  un(type: 'error', listener: (evt: BaseEvent) => void): void;
-  on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-  once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-  un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
-
-  on(
-    type: 'select',
-    listener: (evt: GridReferenceSelectEvent) => void
-  ): EventsKey;
-  once(
-    type: 'select',
-    listener: (evt: GridReferenceSelectEvent) => void
-  ): EventsKey;
-  un(type: 'select', listener: (evt: GridReferenceSelectEvent) => void): void;
+  on: GridReferenceOnSignature<EventsKey>;
+  once: GridReferenceOnSignature<EventsKey>;
+  un: GridReferenceOnSignature<void>;
 }
 
 export class GridReferenceSelectEvent extends BaseEvent {

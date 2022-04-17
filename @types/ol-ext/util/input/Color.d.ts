@@ -1,5 +1,19 @@
 import PopupBase, { Options as PopupBaseOptions } from './PopupBase';
 import { ColorLike } from 'ol/colorlike';
+import BaseEvent from 'ol/events/Event';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
+import { ObjectEvent } from 'ol/Object';
+import { EventsKey } from 'ol/events';
+
+type ColorOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'color', ColorEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change' | 'error' | 'propertychange' | 'color', Return>;
+
+export enum ColorType {
+  COLOR = 'color',
+}
 
 export interface Options extends PopupBaseOptions {
   className?: string;
@@ -85,4 +99,14 @@ export default class Color extends PopupBase {
    * @returns {Array<number>} Color
    */
   getColorFromID(id: number): number[];
+
+  on: ColorOnSignature<EventsKey>;
+  once: ColorOnSignature<EventsKey>;
+  un: ColorOnSignature<void>;
+}
+
+export class ColorEvent extends BaseEvent {
+  constructor(type: ColorType, color: string | number[]);
+
+  color: string | number[];
 }

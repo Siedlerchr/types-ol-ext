@@ -3,6 +3,7 @@ import { Tile, Vector } from 'ol/layer';
 import { Stamen, Vector as VectorSource } from 'ol/source';
 import { defaults as control_defaults } from 'ol/control';
 import DrawRegular from 'ol-ext/interaction/DrawRegular';
+import { LinearRing, MultiPolygon, Polygon } from 'ol/geom';
 
 declare global {
     interface Window {
@@ -38,7 +39,7 @@ vector.set('name', 'Vecteur');
 map.addLayer(vector);
 
 const interaction = new DrawRegular ({
-    source: vector.getSource(),
+    source: vector.getSource() as VectorSource,
     // condition: ol.events.condition.altKeyOnly,
     sides: $("#sides").val() ,
     canRotate: $("#rotation").prop('checked')
@@ -50,9 +51,12 @@ interaction.on('drawstart', function(e) {
 
 // Events handlers
 interaction.on('drawing', function(e) {
-    if (e.feature.getGeometry().getArea) $('#info').html(
-        (e.feature.getGeometry().getArea() / 1000000).toFixed(2)
-        + " km<sup>2</sup>");
+    if (e.feature.getGeometry() instanceof LinearRing || e.feature.getGeometry() instanceof Polygon || e.feature.getGeometry() instanceof MultiPolygon) {
+        const geometry = e.feature.getGeometry() as LinearRing || Polygon || MultiPolygon
+        $('#info').html(
+            (geometry.getArea() / 1000000).toFixed(2)
+            + " km<sup>2</sup>");
+    }
 });
 interaction.on('drawend', function(e) { $('#info').text(""); });
 window.interaction = interaction;

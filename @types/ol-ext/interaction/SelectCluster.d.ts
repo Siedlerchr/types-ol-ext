@@ -6,6 +6,8 @@ import { Select } from 'ol/interaction';
 import { Coordinate } from 'ol/coordinate';
 import { Extent } from 'ol/extent';
 import { Options as SelectOptions } from 'ol/interaction/Select'
+import VectorSource from 'ol/source/Vector';
+import { Geometry } from 'ol/geom';
 
 export interface Options extends SelectOptions {
     featureStyle?: StyleLike;
@@ -57,7 +59,7 @@ export default class SelectCluster extends Select {
      * Get the layer for the revealed features
      * @api stable
      */
-    getLayer(): Vector;
+    getLayer(): Vector<VectorSource<Geometry>>;
     /**
      * Select a cluster
      * @param {Feature} a cluster feature ie. a feature with a 'features' attribute.

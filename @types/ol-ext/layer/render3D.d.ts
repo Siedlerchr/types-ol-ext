@@ -1,4 +1,6 @@
+import { Geometry } from 'ol/geom';
 import { Vector } from 'ol/layer';
+import VectorSource from 'ol/source/Vector';
 import { Style } from 'ol/style';
 /**
  * @classdesc
@@ -13,7 +15,7 @@ import { Style } from 'ol/style';
  */
 export default class render3D {
     constructor(param: {
-        layer: Vector;
+        layer: Vector<VectorSource<Geometry>>;
         maxResolution: number;
         defaultHeight: number;
         height: ((...params: any[]) => any) | string | number;

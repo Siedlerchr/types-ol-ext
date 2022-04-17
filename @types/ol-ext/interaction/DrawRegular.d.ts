@@ -13,7 +13,13 @@ import BaseEvent from "ol/events/Event";
 import { ObjectEvent } from "ol/Object";
 import { Pixel } from "ol/pixel";
 import { Coordinate } from "ol/coordinate";
+import { CombinedOnSignature, EventTypes, OnSignature } from "ol/Observable";
+import { Types } from "ol/ObjectEventType";
 
+type DrawRegularOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'drawabort' | 'drawend' | 'drawstart' | 'drawing', DrawEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawabort' | 'drawend' | 'drawstart' | 'drawing', Return>;
 export interface Options {
   source?: VectorSource;
   features?: Collection<Feature>;
@@ -103,54 +109,34 @@ export default class DrawRegular extends Interaction {
   /**
    * @param {MapBrowserEvent} evt Map browser event.
    */
-  handleEvent_(evt: MapBrowserEvent): void;
+  handleEvent_(evt: MapBrowserEvent<UIEvent>): void;
   /** Stop drawing.
    */
   finishDrawing(): void;
   /**
    * @param {MapBrowserEvent} evt Event.
    */
-  handleMoveEvent_(evt: MapBrowserEvent): void;
+  handleMoveEvent_(evt: MapBrowserEvent<UIEvent>): void;
   /** Start an new draw
    * @param {MapBrowserEvent} evt Map browser event.
    * @return {boolean} `false` to stop the drag sequence.
    */
-  start_(evt: MapBrowserEvent): boolean;
+  start_(evt: MapBrowserEvent<UIEvent>): boolean;
   /** End drawing
    * @param {MapBrowserEvent} evt Map browser event.
    * @return {boolean} `false` to stop the drag sequence.
    */
-  end_(evt: MapBrowserEvent): boolean;
+  end_(evt: MapBrowserEvent<UIEvent>): boolean;
 
-  on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-  once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-  un(type: string | string[], listener: (p0: any) => any): void;
-  on(type: "change", listener: (evt: BaseEvent) => void): EventsKey;
-  once(type: "change", listener: (evt: BaseEvent) => void): EventsKey;
-  un(type: "change", listener: (evt: BaseEvent) => void): void;
-  on(type: "change:active", listener: (evt: ObjectEvent) => void): EventsKey;
-  once(type: "change:active", listener: (evt: ObjectEvent) => void): EventsKey;
-  un(type: "change:active", listener: (evt: ObjectEvent) => void): void;
-  on(type: "drawabort", listener: (evt: DrawEvent) => void): EventsKey;
-  once(type: "drawabort", listener: (evt: DrawEvent) => void): EventsKey;
-  un(type: "drawabort", listener: (evt: DrawEvent) => void): void;
-  on(type: "drawend", listener: (evt: DrawEvent) => void): EventsKey;
-  once(type: "drawend", listener: (evt: DrawEvent) => void): EventsKey;
-  un(type: "drawend", listener: (evt: DrawEvent) => void): void;
-  on(type: "drawstart", listener: (evt: DrawEvent) => void): EventsKey;
-  once(type: "drawstart", listener: (evt: DrawEvent) => void): EventsKey;
-  un(type: "drawstart", listener: (evt: DrawEvent) => void): void;
-  on(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
-  once(type: "error", listener: (evt: BaseEvent) => void): EventsKey;
-  un(type: "error", listener: (evt: BaseEvent) => void): void;
-  on(type: "propertychange", listener: (evt: ObjectEvent) => void): EventsKey;
-  once(type: "propertychange", listener: (evt: ObjectEvent) => void): EventsKey;
-  un(type: "propertychange", listener: (evt: ObjectEvent) => void): void;
+  on: DrawRegularOnSignature<EventsKey>;
+  once: DrawRegularOnSignature<EventsKey>;
+  un: DrawRegularOnSignature<void>;
 }
 declare enum DrawEventType {
   DRAWSTART = "drawstart",
   DRAWEND = "drawend",
   DRAWCANCEL = "drawcancel",
+  DRAWING = "drawing",
 }
 export class DrawEvent extends BaseEvent {
   constructor(type: DrawEventType, feature: Feature<Geometry>);
@@ -162,4 +148,5 @@ export class DrawEvent extends BaseEvent {
   coordinate: Coordinate;
   square?: boolean;
   centered?: boolean;
+  oldValue?: string;
 }

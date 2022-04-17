@@ -10,6 +10,14 @@ import { FilterFunction, SelectEvent } from 'ol/interaction/Select';
 import { Layer } from 'ol/layer';
 import { Source } from 'ol/source';
 import { StyleLike } from 'ol/style/Style';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
+
+type DeleteOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'select', SelectEvent, Return> &
+  OnSignature<Types | 'deletestart' | 'deleteend', DeleteEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'select' | 'deletestart' | 'deleteend', Return>;
 
 export interface Options {
     addCondition?: Condition;
@@ -43,31 +51,9 @@ export default class Delete extends Select {
      * @api
      */
     delete(features: Collection<Feature> | Feature[]): void;
-
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'select', listener: (evt: SelectEvent) => void): EventsKey;
-    once(type: 'select', listener: (evt: SelectEvent) => void): EventsKey;
-    un(type: 'select', listener: (evt: SelectEvent) => void): void;
-    on(type: 'deletestart', listener: (evt: DeleteEvent) => void): EventsKey | EventsKey[];
-    once(type: 'deletestart', listener: (evt: DeleteEvent) => void): EventsKey | EventsKey[];
-    un(type: 'deletestart', listener: (evt: DeleteEvent) => void): void;
-    on(type: 'deleteend', listener: (evt: DeleteEvent) => void): EventsKey | EventsKey[];
-    once(type: 'deleteend', listener: (evt: DeleteEvent) => void): EventsKey | EventsKey[];
-    un(type: 'deleteend', listener: (evt: DeleteEvent) => void): void;
+    on: DeleteOnSignature<EventsKey>;
+    once: DeleteOnSignature<EventsKey>;
+    un: DeleteOnSignature<void>;
 }
 
 export class DeleteEvent extends BaseEvent {

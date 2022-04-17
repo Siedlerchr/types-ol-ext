@@ -118,12 +118,12 @@ $(window).on('load', () => {
                 style: getStyle
             });
         map.addLayer(vector);
-        vector.getSource().addFeature(new Feature(new Polygon([[[259274, 6398696], [63595, 5958419], [635956, 5772524], [259274, 6398696]]])));
+        vector.getSource()?.addFeature(new Feature(new Polygon([[[259274, 6398696], [63595, 5958419], [635956, 5772524], [259274, 6398696]]])));
 
         // global so we can remove it later
         const interaction = new Draw({
             type: GeometryType.POLYGON,
-            source: vector.getSource()
+            source: vector.getSource() as VectorSource
         });
         map.addInteraction(interaction);
 
