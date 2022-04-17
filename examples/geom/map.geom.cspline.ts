@@ -7,11 +7,12 @@ import { Style, Stroke } from 'ol/style';
 import VectorLayer from 'ol/layer/Vector';
 import CircleStyle from 'ol/style/Circle';
 import 'ol-ext/render/Cspline';
+import VectorSource from 'ol/source/Vector';
 
 declare global {
   interface Window {
     $(selector: any, context?: any): any;
-    vector: VectorLayer;
+    vector: VectorLayer<VectorSource>;
   }
 }
 

@@ -4,8 +4,9 @@ import { Options as TileLayerOptions } from "ol/layer/BaseTile";
 import { ProjectionLike } from "ol/proj";
 import { Options as GeoPortailOptions } from "../source/Geoportail";
 import Tile from "ol/layer/Tile";
+import TileSource from "ol/source/Tile";
 
-export interface Options extends TileLayerOptions {
+export interface Options extends TileLayerOptions<TileSource> {
   layer?: string;
   gpgKey?: string;
   projection?: ProjectionLike;
@@ -19,7 +20,7 @@ export interface Options extends TileLayerOptions {
  *  @param {ol.projectionLike} [options.projection=EPSG:3857] projection for the extent, default EPSG:3857
  * @param {olx.source.WMTSOptions=} tileoptions WMTS options if not defined default are used
  */
-export default class Geoportail extends Tile {
+export default class Geoportail extends Tile<TileSource> {
   // TODO unsure about the params!
   constructor(layer?: string, options?: Options, tileoptions?: GeoPortailOptions);
   /** Standard IGN-GEOPORTAIL attribution

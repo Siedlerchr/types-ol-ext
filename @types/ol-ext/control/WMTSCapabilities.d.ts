@@ -1,5 +1,6 @@
 import WMSCapabilities, { Options } from "./WMSCapabilities";
 import TileLayer from "ol/layer/Tile";
+import TileSource from "ol/source/Tile";
 
 /** WMTSCapabilities
  * @constructor
@@ -42,5 +43,5 @@ export default class WMTSCapabilities extends WMSCapabilities {
   /** Create a new layer using options received by getOptionsFromCap method
    * @param {*} options
    */
-  getLayerFromOptions(options: any): TileLayer;
+  getLayerFromOptions(options: any): TileLayer<TileSource>;
 }

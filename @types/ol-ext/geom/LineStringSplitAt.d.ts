@@ -1,4 +1,5 @@
 import { Coordinate } from 'ol/coordinate';
+import LineString from 'ol/geom/LineString';
 
 declare module 'ol/geom/LineString' {
   export default interface LineString {

@@ -6,12 +6,14 @@ import { Style } from 'ol/style';
 import { Interaction, Draw, Modify } from 'ol/interaction';
 import VectorImageLayer from 'ol/layer/VectorImage';
 import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import { Geometry } from 'ol/geom';
 
 export interface Options {
     pixelTolerance?: number;
     enableInitialGuides?: boolean;
     style?: Style | Style[];
-    vectorClass?: VectorLayer | VectorImageLayer
+    vectorClass?: VectorLayer<VectorSource<Geometry>> | VectorImageLayer<VectorSource<Geometry>>
 }
 /** Interaction to snap to guidelines
  * @constructor

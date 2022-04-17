@@ -1,6 +1,8 @@
 import { Feature } from 'ol';
 import { Coordinate } from 'ol/coordinate';
-import Search, { Options as SearchOptions } from './Search';
+import { EventsKey } from 'ol/events';
+import BaseEvent from 'ol/events/Event';
+import Search, { Options as SearchOptions, SearchEvent, SearchOnSignature } from './Search';
 
 export interface Options extends SearchOptions {
     handleResponse?: ((response: any) => any[]);
@@ -104,4 +106,9 @@ export default class SearchJSON extends Search {
      * @return {boolean}
      */
     equalFeatures(f1: any, f2: any): boolean;
+
+    on: SearchOnSignature<EventsKey>;
+    once: SearchOnSignature<EventsKey>;
+    un: SearchOnSignature<void>;
 }
+

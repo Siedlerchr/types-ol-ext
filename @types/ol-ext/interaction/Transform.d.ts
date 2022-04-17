@@ -12,6 +12,15 @@ import { Geometry } from 'ol/geom';
 import { Pixel } from 'ol/pixel';
 import { EventsKey } from 'ol/events';
 import { ObjectEvent } from 'ol/Object';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
+
+type TransformOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'rotatestart' | 'rotating' | 'rotateend', RotateEvent, Return> &
+  OnSignature<Types | 'scalestart' | 'scaling' | 'scaleend', ScaleEvent, Return> &
+  OnSignature<Types | 'translatestart' | 'translating' | 'translateend', TranslateEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'rotatestart' | 'rotating' | 'rotateend' | 'scalestart' | 'scaling' | 'scaleend' | 'translatestart' | 'translating' | 'translateend', Return>
 
 export interface Options {
     filter?: (f: Feature, l: Layer) => boolean;
@@ -122,7 +131,7 @@ export default class Transform extends Pointer {
      * @param evt Map browser event.
      * @return `true` to start the drag sequence.
      */
-    handleDownEvent_(evt: MapBrowserEvent): boolean;
+    handleDownEvent_(evt: MapBrowserEvent<UIEvent>): boolean;
     /**
      * Get features to transform
      * @return
@@ -141,58 +150,19 @@ export default class Transform extends Pointer {
     /**
      * @param evt Map browser event.
      */
-    handleDragEvent_(evt: MapBrowserEvent): void;
+    handleDragEvent_(evt: MapBrowserEvent<UIEvent>): void;
     /**
      * @param evt Event.
      */
-    handleMoveEvent_(evt: MapBrowserEvent): void;
+    handleMoveEvent_(evt: MapBrowserEvent<UIEvent>): void;
     /**
      * @param evt Map browser event.
      * @return `false` to stop the drag sequence.
      */
-    handleUpEvent_(evt: MapBrowserEvent): boolean;
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'rotatestart', listener: (evt: RotateEvent) => void): EventsKey | EventsKey[];
-    once(type: 'rotatestart', listener: (evt: RotateEvent) => void): EventsKey | EventsKey[];
-    un(type: 'rotatestart', listener: (evt: RotateEvent) => void): void;
-    on(type: 'rotating', listener: (evt: RotateEvent) => void): EventsKey | EventsKey[];
-    once(type: 'rotating', listener: (evt: RotateEvent) => void): EventsKey | EventsKey[];
-    un(type: 'rotating', listener: (evt: RotateEvent) => void): void;
-    on(type: 'rotateend', listener: (evt: RotateEvent) => void): EventsKey | EventsKey[];
-    once(type: 'rotateend', listener: (evt: RotateEvent) => void): EventsKey | EventsKey[];
-    un(type: 'rotateend', listener: (evt: RotateEvent) => void): void;
-    on(type: 'scalestart', listener: (evt: ScaleEvent) => void): EventsKey | EventsKey[];
-    once(type: 'scalestart', listener: (evt: ScaleEvent) => void): EventsKey | EventsKey[];
-    un(type: 'scalestart', listener: (evt: ScaleEvent) => void): void;
-    on(type: 'scaling', listener: (evt: ScaleEvent) => void): EventsKey | EventsKey[];
-    once(type: 'scaling', listener: (evt: ScaleEvent) => void): EventsKey | EventsKey[];
-    un(type: 'scaling', listener: (evt: ScaleEvent) => void): void;
-    on(type: 'scaleend', listener: (evt: ScaleEvent) => void): EventsKey | EventsKey[];
-    once(type: 'scaleend', listener: (evt: ScaleEvent) => void): EventsKey | EventsKey[];
-    un(type: 'scaleend', listener: (evt: ScaleEvent) => void): void;
-    on(type: 'translatestart', listener: (evt: TranslateEvent) => void): EventsKey | EventsKey[];
-    once(type: 'translatestart', listener: (evt: TranslateEvent) => void): EventsKey | EventsKey[];
-    un(type: 'translatestart', listener: (evt: TranslateEvent) => void): void;
-    on(type: 'translating', listener: (evt: TranslateEvent) => void): EventsKey | EventsKey[];
-    once(type: 'translating', listener: (evt: TranslateEvent) => void): EventsKey | EventsKey[];
-    un(type: 'translating', listener: (evt: TranslateEvent) => void): void;
-    on(type: 'translateend', listener: (evt: TranslateEvent) => void): EventsKey | EventsKey[];
-    once(type: 'translateend', listener: (evt: TranslateEvent) => void): EventsKey | EventsKey[];
-    un(type: 'translateend', listener: (evt: TranslateEvent) => void): void;
+    handleUpEvent_(evt: MapBrowserEvent<UIEvent>): boolean;
+    on: TransformOnSignature<EventsKey>;
+    once: TransformOnSignature<EventsKey>;
+    un: TransformOnSignature<void>;
 }
 export class RotateEvent extends BaseEvent {
     constructor(

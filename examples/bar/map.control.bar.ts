@@ -6,6 +6,7 @@ import GeometryType from 'ol/geom/GeometryType';
 
 import Bar from 'ol-ext/control/Bar';
 import Toggle from 'ol-ext/control/Toggle';
+import { Geometry } from 'ol/geom';
 // import ZoomToExtent from 'ol-ext/control/ZoomToExtent';
 // import Rotate from 'ol-ext/control/Rotate';
 // import FullScreen from 'ol-ext/control/FullScreen';
@@ -58,7 +59,7 @@ const pedit = new Toggle(
         interaction: new Draw
             ({
                 type: GeometryType.POINT,
-                source: vector.getSource()
+                source: vector.getSource() as VectorSource<Geometry>
             }),
         onToggle(active) {
             document.querySelector<HTMLTextAreaElement>('#info')!.textContent = "Edition is " + (active ? "activated" : "deactivated");

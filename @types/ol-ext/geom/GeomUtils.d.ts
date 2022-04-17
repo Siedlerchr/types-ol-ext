@@ -2,7 +2,6 @@ import { Coordinate } from "ol/coordinate";
 import Feature from "ol/Feature";
 import { Geometry } from "ol/geom";
 import GeometryType from "ol/geom/GeometryType";
-import { Circle } from "ol/style";
 import Polygon from './Scribble';
 import MultiPolygon from './Scribble';
 
@@ -11,7 +10,7 @@ import MultiPolygon from './Scribble';
  * @param {ol.Coordinate[]|number[]} coordinates the geometry coordinates
  * @return {ol.geom.Geometry} the geometry
  */
-export function ol_geom_createFromType(type: GeometryType, coordinates: Coordinate[] | number[]): Geometry;
+export function ol_geom_createFromType(type: typeof GeometryType, coordinates: Coordinate[] | number[]): Geometry;
 
 /** Distance beetween 2 points
  *	Useful geometric functions
@@ -72,21 +71,20 @@ declare module "ol/geom/Circle" {
 }
 
 declare module "ol/geom/Polygon" {
-    export default interface Polygon {
-        /** Sample a Polygon at a distance
-         * @param {number} d
-         * @returns {ol_geom_Polygon}
-         */
-       sampleAt(d: number): Polygon;
-    }
+  export default interface Polygon {
+    /** Sample a Polygon at a distance
+     * @param {number} d
+     * @returns {ol_geom_Polygon}
+    */
+    sampleAt(d: number): typeof Polygon;
   }
-
-  declare module "ol/geom/MultiPolygon" {
-    export default interface MultiPolygon {
-        /** Sample a Polygon at a distance
-         * @param {number} d
-         * @returns {ol_geom_Polygon}
-         */
-       sampleAt(d: number): MultiPolygon;
-    }
+}
+declare module "ol/geom/MultiPolygon" {
+  export default interface MultiPolygon {
+    /** Sample a Polygon at a distance
+     * @param {number} d
+     * @returns {ol_geom_Polygon}
+     */
+    sampleAt(d: number): typeof MultiPolygon;
   }
+}

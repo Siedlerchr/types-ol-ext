@@ -11,13 +11,22 @@ import { Vector as VectorSource } from 'ol/source';
 import { EventsKey } from 'ol/events';
 import BaseEvent from 'ol/events/Event';
 import { ObjectEvent } from 'ol/Object';
-import { ModifyEventType } from 'ol/interaction/Modify';
 import Geometry from 'ol/geom/Geometry';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
+
+type ModifyFeatureOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'modifyend' | 'modifystart' | 'modifying', ModifyEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'modifyend' | 'modifystart' | 'modifying', Return>;
 
 export enum ModifyingEventType {
     MODIFYING = 'modifying'
 }
-
+export enum ModifyEventType {
+    MODIFYSTART = 'modifystart',
+    MODIFYEND = 'modifyend'
+}
 export interface Options {
     source?: VectorSource;
     features?: Collection<Feature>;
@@ -79,7 +88,7 @@ export default class ModifyFeature extends Pointer {
     * @param {geom} coords list of coordinates
     * @return {*} the nearest point with a coord (projected point), dist (distance to the geom), ring (if Polygon)
      */
-    getNearestCoord(pt: Coordinate, coords: GeometryType): {
+    getNearestCoord(pt: Coordinate, coords: typeof GeometryType): {
         coord: Coordinate,
         dist: number,
         ring?: number
@@ -89,12 +98,12 @@ export default class ModifyFeature extends Pointer {
      * @param {geom} geom the geometry concerned
      * @param {Coordinate} coord pointed coordinates
      */
-    getArcs(geom: GeometryType, coord: Coordinate): void;
+    getArcs(geom: typeof GeometryType, coord: Coordinate): void;
     /**
-     * @param {MapBrowserEvent} evt Map browser event.
+     * @param {MapBrowserEvent<UIEvent>} evt Map browser event.
      * @return {boolean} `true` to start the drag sequence.
      */
-    handleDownEvent(evt: MapBrowserEvent): boolean;
+    handleDownEvent(evt: MapBrowserEvent<UIEvent>): boolean;
     /** Get modified features
      * @return {Array<Feature>} list of modified features
      */
@@ -103,30 +112,9 @@ export default class ModifyFeature extends Pointer {
      */
     removePoint(): void;
 
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'modifyend', listener: (evt: ModifyEvent) => void): EventsKey;
-    once(type: 'modifyend', listener: (evt: ModifyEvent) => void): EventsKey;
-    un(type: 'modifyend', listener: (evt: ModifyEvent) => void): void;
-    on(type: 'modifystart', listener: (evt: ModifyEvent) => void): EventsKey;
-    once(type: 'modifystart', listener: (evt: ModifyEvent) => void): EventsKey;
-    un(type: 'modifystart', listener: (evt: ModifyEvent) => void): void;
-    on(type: 'modifying', listener: (evt: ModifyEvent) => void): EventsKey;
-    once(type: 'modifying', listener: (evt: ModifyEvent) => void): EventsKey;
-    un(type: 'modifying', listener: (evt: ModifyEvent) => void): void;
+    on: ModifyFeatureOnSignature<EventsKey>;
+    once: ModifyFeatureOnSignature<EventsKey>;
+    un: ModifyFeatureOnSignature<void>;
 }
 export class ModifyEvent extends BaseEvent {
     constructor(
@@ -137,7 +125,7 @@ export class ModifyEvent extends BaseEvent {
     /**
      * The features being modified.
      */
-    features: Collection<Feature<Geometry>>;
+    features: Feature<Geometry>[];
     /**
      * Associated {@link module:ol/MapBrowserEvent}.
      */

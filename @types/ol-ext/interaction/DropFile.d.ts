@@ -7,6 +7,14 @@ import Feature from 'ol/Feature';
 import { EventsKey } from 'ol/events';
 import { DragAndDropEvent } from 'ol/interaction/DragAndDrop';
 import { ObjectEvent } from 'ol/Object';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
+
+type DropFileOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'addfeatures', DragAndDropEvent, Return> &
+  OnSignature<Types | 'loadstart' | 'loadend', LoadEvent, Return> &
+  CombinedOnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange' | 'addfeatures' | 'loadstart' | 'loadend', Return>;
 
 export enum LoadEventType {
     LOADSTART = 'loadstart',
@@ -40,31 +48,10 @@ export default class DropFile extends DragAndDrop {
     /** Do something when over
      */
     ondrop(e: Event): void;
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'addfeatures', listener: (evt: DragAndDropEvent) => void): EventsKey;
-    once(type: 'addfeatures', listener: (evt: DragAndDropEvent) => void): EventsKey;
-    un(type: 'addfeatures', listener: (evt: DragAndDropEvent) => void): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
 
-    on(type: 'loadstart', listener: (evt: LoadEvent) => void): EventsKey;
-    once(type: 'loadstart', listener: (evt: LoadEvent) => void): EventsKey;
-    un(type: 'loadstart', listener: (evt: LoadEvent) => void): void;
-    on(type: 'loadend', listener: (evt: LoadEvent) => void): EventsKey;
-    once(type: 'loadend', listener: (evt: LoadEvent) => void): EventsKey;
-    un(type: 'loadend', listener: (evt: LoadEvent) => void): void;
+    on: DropFileOnSignature<EventsKey>;
+    once: DropFileOnSignature<EventsKey>;
+    un: DropFileOnSignature<void>;
 }
 export class LoadEvent extends BaseEvent {
     constructor(

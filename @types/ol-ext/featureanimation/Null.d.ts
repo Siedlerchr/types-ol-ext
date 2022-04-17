@@ -1,4 +1,4 @@
-import FeatureAnimation, {FeatureAnimationEvent } from './FeatureAnimation';
+import {FeatureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
 
 /** Do nothing
  * @constructor

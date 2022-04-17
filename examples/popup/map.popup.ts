@@ -61,14 +61,14 @@ const select = new Select({});
 map.addInteraction(select);
 
 // On selected => show/hide popup
-select.getFeatures().on(['add'], function(e) {
+select.getFeatures().on('add', function(e) {
     const feature = e.element;
     let content = "";
     content += "<img src='"+feature.get("img")+"'/>";
     content += feature.get("text");
     popup.show(feature.getGeometry().getFirstCoordinate(), content);
 });
-select.getFeatures().on(['remove'], function(e) {
+select.getFeatures().on('remove', function(e) {
     popup.hide();
 })
 

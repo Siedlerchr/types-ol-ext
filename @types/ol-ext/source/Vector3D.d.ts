@@ -4,6 +4,7 @@ import { Style } from 'ol/style';
 import * as olEasing from 'ol/easing';
 import VectorSource from 'ol/source/Vector';
 import { StyleLike } from 'ol/style/Style';
+import ImageSource from "ol/source/Image";
 export interface Options {
     source?: VectorSource;
     style?: StyleLike;
@@ -26,7 +27,7 @@ export type Height = ((f: Feature) => number) | string | number;
  *  @param {function|string|Number} options.height a height function (returns height giving a feature) or a popertie name for the height or a fixed value
  *  @param {Array<number>} options.center center of the view, default [.5,1]
  */
-export default class Vector3D extends ImageLayer {
+export default class Vector3D extends ImageLayer<ImageSource> {
     constructor(options?: Options);
 
     /**

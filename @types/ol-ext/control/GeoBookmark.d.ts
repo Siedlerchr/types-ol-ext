@@ -3,7 +3,13 @@ import { Coordinate } from 'ol/coordinate';
 import { EventsKey } from 'ol/events';
 import BaseEvent from 'ol/events/Event';
 import { ObjectEvent } from 'ol/Object';
+import { Types } from 'ol/ObjectEventType';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 
+type GeoBookmarkOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'add' | 'remove' | 'select', BookmarkEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'add' | 'remove' | 'select', Return>;
 
 export enum BookMarkEventType {
   ADD = "add",
@@ -77,28 +83,9 @@ export default class GeoBookmark extends ol_control_Control {
    */
   addBookmark(name: string, position?: Coordinate, zoom?: number, permanent?: boolean): void;
 
-  on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-  once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-  un(type: string | string[], listener: (p0: any) => any): void;
-  on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-  once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-  un(type: 'change', listener: (evt: BaseEvent) => void): void;
-  on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-  once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-  un(type: 'error', listener: (evt: BaseEvent) => void): void;
-  on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-  once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-  un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
-
-  on(type: 'add', listener: (evt: BookmarkEvent) => void): EventsKey;
-  once(type: 'add', listener: (evt: BookmarkEvent) => void): EventsKey;
-  un(type: 'add', listener: (evt: BookmarkEvent) => void): void;
-  on(type: 'remove', listener: (evt: BookmarkEvent) => void): EventsKey;
-  once(type: 'remove', listener: (evt: BookmarkEvent) => void): EventsKey;
-  un(type: 'remove', listener: (evt: BookmarkEvent) => void): void;
-  on(type: 'select', listener: (evt: BookmarkEvent) => void): EventsKey;
-  once(type: 'select', listener: (evt: BookmarkEvent) => void): EventsKey;
-  un(type: 'select', listener: (evt: BookmarkEvent) => void): void;
+  on: GeoBookmarkOnSignature<EventsKey>;
+  once: GeoBookmarkOnSignature<EventsKey>;
+  un: GeoBookmarkOnSignature<void>;
 }
 
 export class BookmarkEvent extends BaseEvent {

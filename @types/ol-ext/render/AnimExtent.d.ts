@@ -2,7 +2,7 @@ import { Coordinate } from 'ol/coordinate';
 import { ProjectionLike } from 'ol/proj';
 import { Stroke } from 'ol/style';
 import Feature from 'ol/Feature';
-import featureAnimation from '../featureanimation/FeatureAnimation';
+import { FeatureAnimation } from '../featureanimation/FeatureAnimation';
 import { animationControler } from '../featureanimation/FeatureAnimation';
 
 declare module 'ol/Map' {
@@ -38,7 +38,7 @@ declare module 'ol/layer' {
     isPlaying: (...params: any[]) => any;
   };
 
-  interface Vector {
+  interface Vector<VectorSourceType> {
     /** Animate feature on a vector layer
      * @fires animationstart, animationend
      * @param {ol.Feature} feature Feature to animate
@@ -48,7 +48,7 @@ declare module 'ol/layer' {
      */
     animateFeature(
       feature: Feature,
-      fanim: featureAnimation | featureAnimation[],
+      fanim: FeatureAnimation | FeatureAnimation[],
       useFilter?: boolean
     ): animationControler;
   }

@@ -7,7 +7,7 @@ import CenterTouch from './CenterTouch';
 
 export interface Options {
     source?: VectorSource;
-    type: GeometryType.POINT | GeometryType.LINE_STRING | GeometryType.POLYGON;
+    type: typeof GeometryType.POINT | typeof GeometryType.LINE_STRING | typeof GeometryType.POLYGON;
     tap?: boolean;
     style?: Style | Style[];
     sketchStyle?: Style | Style[];
@@ -48,7 +48,7 @@ export interface Options {
     /** Get geometry type
     * @return {GeometryType}
      */
-    getGeometryType(): GeometryType;
+    getGeometryType(): typeof GeometryType;
     /** Start drawing and add the sketch feature to the target layer.
     * The interaction.Draw.EventType.DRAWEND event is dispatched before inserting the feature.
      */

@@ -6,7 +6,6 @@ import { GeoJSON } from 'ol/format';
 import { Style, Circle, Stroke, Text, Fill } from 'ol/style';
 import { getCenter } from 'ol/extent';
 import SearchNominatim from 'ol-ext/control/SearchNominatim';
-import Popup from "ol-ext/overlay/Popup";
 
 // Layers
 const layers = [ new Tile({ source: new OSM() }) ];
@@ -59,12 +58,12 @@ map.addControl (search);
 // Select feature when click on the reference index
 search.on('select', function(e)
 {	// console.log(e);
-    sLayer.getSource().clear();
+    sLayer.getSource()?.clear();
     // Check if we get a geojson to describe the search
     if (e.search.geojson) {
         const format = new GeoJSON();
         const f = format.readFeature(e.search.geojson, { dataProjection: "EPSG:4326", featureProjection: map.getView().getProjection() });
-        sLayer.getSource().addFeature(f);
+        sLayer.getSource()?.addFeature(f);
         const view = map.getView();
         const resolution = view.getResolutionForExtent(f.getGeometry()!.getExtent(), map.getSize());
         const zoom = view.getZoomForResolution(resolution)!;

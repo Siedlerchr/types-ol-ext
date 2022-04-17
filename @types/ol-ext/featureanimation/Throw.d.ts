@@ -1,4 +1,4 @@
-import  FeatureAnimation, {FeatureAnimationEvent } from './FeatureAnimation';
+import  {FeatureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
 
 export interface Options {
     side?: 'left' | 'right';

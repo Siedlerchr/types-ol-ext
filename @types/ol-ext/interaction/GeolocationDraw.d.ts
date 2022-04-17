@@ -10,6 +10,14 @@ import BaseEvent from 'ol/events/Event';
 import Feature from 'ol/Feature';
 import { EventsKey } from 'ol/events';
 import { ObjectEvent } from 'ol/Object';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { Types } from 'ol/ObjectEventType';
+
+type GeolocationDrawOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'drawing' | 'tracking', GeolocationDrawEvent, Return> &
+  OnSignature<Types | 'following', FollowingEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawing' | 'tracking' | 'following', Return>;
 
 export enum GeolocationDrawEventType {
     DRAWING = 'drawing',
@@ -26,7 +34,7 @@ export interface Attributes {
 
 export interface GeolocationDrawOptions {
     source?: VectorSource;
-    type?: GeometryType.POINT | GeometryType.LINE_STRING | GeometryType.POLYGON;
+    type?: typeof GeometryType.POINT | typeof GeometryType.LINE_STRING | typeof GeometryType.POLYGON;
     minAccuracy?: number;
     condition?: ((loc: _ol_Geolocation) => boolean);
     attributes?: Attributes;
@@ -124,32 +132,10 @@ export default class GeolocationDraw extends Interaction {
      * @api
      */
     getPosition(loc: _ol_Geolocation): number[]
-    on(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    once(type: string | string[], listener: (p0: any) => any): EventsKey | EventsKey[];
-    un(type: string | string[], listener: (p0: any) => any): void;
-    on(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'change', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'change', listener: (evt: BaseEvent) => void): void;
-    on(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'change:active', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'change:active', listener: (evt: ObjectEvent) => void): void;
-    on(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    once(type: 'error', listener: (evt: BaseEvent) => void): EventsKey;
-    un(type: 'error', listener: (evt: BaseEvent) => void): void;
-    on(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    once(type: 'propertychange', listener: (evt: ObjectEvent) => void): EventsKey;
-    un(type: 'propertychange', listener: (evt: ObjectEvent) => void): void;
 
-    on(type: 'drawing', listener: (evt: GeolocationDrawEvent) => void): EventsKey;
-    once(type: 'drawing', listener: (evt: GeolocationDrawEvent) => void): EventsKey;
-    un(type: 'drawing', listener: (evt: GeolocationDrawEvent) => void): void;
-    on(type: 'tracking', listener: (evt: GeolocationDrawEvent) => void): EventsKey;
-    once(type: 'tracking', listener: (evt: GeolocationDrawEvent) => void): EventsKey;
-    un(type: 'tracking', listener: (evt: GeolocationDrawEvent) => void): void;
-
-    on(type: 'following', listener: (evt: FollowingEvent) => void): EventsKey;
-    once(type: 'following', listener: (evt: FollowingEvent) => void): EventsKey;
-    un(type: 'following', listener: (evt: FollowingEvent) => void): void;
+    on: GeolocationDrawOnSignature<EventsKey>;
+    once: GeolocationDrawOnSignature<EventsKey>;
+    un: GeolocationDrawOnSignature<void>;
 }
 
 export class GeolocationDrawEvent extends BaseEvent {
