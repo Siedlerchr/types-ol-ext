@@ -1,19 +1,19 @@
 import Feature from 'ol/Feature';
-import SearchJSON, {Options as SearchOptions} from './SearchJSON';
+import SearchJSON, { Options as SearchOptions } from './SearchJSON';
 
 
 export interface Options extends SearchOptions {
     className?: string;
-    label?: string ;
-    placeholder?: string ;
-    typing?: number ;
-    minLength?: number ;
-    maxItems?: number ;
+    label?: string;
+    placeholder?: string;
+    typing?: number;
+    minLength?: number;
+    maxItems?: number;
     handleResponse?: ((response: any) => any[]);
     url?: string;
     lang?: string;
     position?: boolean;
-    getTitle: (f: Feature) => string;
+    getTitle?: (f: Feature) => string;
 }
 /**
  * Search places using the photon API.
@@ -38,5 +38,4 @@ export interface Options extends SearchOptions {
  */
 export default class SearchPhoton extends SearchJSON {
     constructor(options?: Options);
-
 }

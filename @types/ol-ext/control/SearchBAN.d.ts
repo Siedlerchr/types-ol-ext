@@ -1,5 +1,5 @@
 import Feature from 'ol/Feature';
-import Search, {Options as SearchOptions} from './Search';
+import SearchPhoton, { Options as SearchOptions } from './SearchPhoton';
 
 export interface Options extends SearchOptions {
     className?: string;
@@ -9,10 +9,13 @@ export interface Options extends SearchOptions {
     typing?: number;
     minLength?: number;
     maxLength?: number;
-    maxItems? : number
+    maxItems?: number
     url?: string;
     position?: boolean
     getTitle?: (f: Feature) => string;
+    citycode?: string;
+    postcode?: string;
+    type?: 'housenumber' | 'street'
 }
 /**
  * Search places using the French National Base Address (BAN) API.
@@ -33,9 +36,12 @@ export interface Options extends SearchOptions {
  *  @param {string|undefined} options.url Url to BAN api, default "https://api-adresse.data.gouv.fr/search/"
  *  @param {boolean} options.position Search, with priority to geo position, default false
  *  @param {function} options.getTitle a function that takes a feature and return the text to display in the menu, default return label attribute
+ *  @param {string|undefined} options.citycode limit search to an administrative area defined by its city code (code commune insee)
+ *  @param {string|undefined} options.postcode limit search to a postal code
+ *  @param {string|undefined} options.type type of result: 'housenumber' | 'street'
  * @see {@link https://adresse.data.gouv.fr/api/}
  */
-export default class SearchBAN extends Search {
+export default class SearchBAN extends SearchPhoton {
     constructor(options?: Options);
 
 }
