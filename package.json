@@ -44,11 +44,11 @@
     "jsdoc": "^3.6.10",
     "node-html-parser": "^5.3.3",
     "ol": "^6.14.1",
-    "ol-ext": "^3.2.24",
+    "ol-ext": "^3.2.25",
     "ts-loader": "^9.3.0",
     "tsd": "^0.19.1",
-    "typescript": "^4.6.4",
-    "webpack": "^5.72.0",
-    "webpack-cli": "^4.9.2"
+    "typescript": "^4.7.3",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
   }
 }
