@@ -1,8 +1,8 @@
-import {FeatureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+import {FeatureAnimation, FeatureAnimationEvent, Options as FeatureAnimationOptions  } from './FeatureAnimation';
 
-export interface Options {
+export interface Options extends FeatureAnimationOptions{
     speed?: number;
-    side?: number;
+    side?: 'top' | 'bottom';
 }
 
 /** Drop animation: drop a feature on the map

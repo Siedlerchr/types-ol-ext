@@ -1,16 +1,20 @@
 import { FeatureAnimation, FeatureAnimationEvent, Options as FeatureAnimationOptions } from './FeatureAnimation';
+
 export interface Options extends FeatureAnimationOptions {
-    speed?: number;
+    nb?: number
 }
-/** Fade animation: feature fade in
+
+
+/** Blink a feature
  * @constructor
  * @extends {ol_featureAnimation}
  * @param {ol_featureAnimationOptions} options
+ *  @param {Number} options.nb number of blink, default 10
  */
-export default class Fade extends FeatureAnimation {
-    constructor(options?: FeatureAnimationOptions);
+export default class Blink extends FeatureAnimation {
+    constructor(options?: Options)
     /** Animate
-    * @param {featureAnimationEvent} e
+    * @param {FeatureAnimationEvent} e
      */
     animate(e: FeatureAnimationEvent): boolean;
 }

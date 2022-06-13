@@ -2,8 +2,8 @@ import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control'
 
 export interface Options extends ControlOptions {
     className?: string;
-    hideOnClick?: boolean;
     closeBox?: boolean;
+    hideOnClick?: boolean;
 }
 /** Control overlay for OL3
  * The overlay control is a control that display an overlay over the map
@@ -13,8 +13,8 @@ export interface Options extends ControlOptions {
  * @fire change:visible
  * @param {Object=} options Control options.
  *  @param {string} className class of the control
- *  @param {boolean} hideOnClick hide the control on click, default false
- *  @param {boolean} closeBox add a closeBox to the control, default false
+ *  @param {boolean} options.closeBox add a close button
+ *  @param {boolean} options.hideOnClick close dialog when click
  */
 export default class Notification extends ol_control_Control {
     constructor(options?: Options);

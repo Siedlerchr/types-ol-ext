@@ -6,7 +6,7 @@ import { ObjectEvent } from 'ol/Object';
 import { Types } from 'ol/ObjectEventType';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 
-type GeoBookmarkOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+export type GeoBookmarkOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
   OnSignature<Types | 'add' | 'remove' | 'select', BookmarkEvent, Return> &
   CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'add' | 'remove' | 'select', Return>;

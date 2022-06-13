@@ -23,22 +23,27 @@ export interface condition {
 }
 export interface Options extends ControlOptions {
     className?: string;
+    content?: Element
     features?: Collection<Feature>;
     source?: VectorSource | VectorSource[];
+    btInfo?: string;
 }
+/**
 /**
  * This is the base class for Select controls on attributes values.
  * Abstract base class;
  * normally only used for creating subclasses and not instantiated in apps.
  *
  * @constructor
- * @extends {contrControl}
+ * @extends {ol_control_Control}
  * @fires select
  * @param {Object=} options
  *  @param {string} options.className control class name
+ *  @param {Element} options.content form element
  *  @param {Element | undefined} options.target Specify a target if you want the control to be rendered outside of the map's viewport.
- *  @param {Collection<Feature>} options.features a collection of feature to search in, the collection will be kept in date while selection
- *  @param {Vector | Array<Vector>} options.source the source to search in if no features set
+ *  @param {ol.Collection<ol.Feature>} options.features a collection of feature to search in, the collection will be kept in date while selection
+ *  @param {ol.source.Vector | Array<ol.source.Vector>} options.source the source to search in if no features set
+ *  @param {string} options.btInfo ok button label
  */
 export default class SelectBase extends ol_control_Control {
     constructor(options?: Options);

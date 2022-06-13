@@ -16,11 +16,11 @@ import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import { Types } from 'ol/ObjectEventType';
 
 type TransformOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
-  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'rotatestart' | 'rotating' | 'rotateend', RotateEvent, Return> &
-  OnSignature<Types | 'scalestart' | 'scaling' | 'scaleend', ScaleEvent, Return> &
-  OnSignature<Types | 'translatestart' | 'translating' | 'translateend', TranslateEvent, Return> &
-  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'rotatestart' | 'rotating' | 'rotateend' | 'scalestart' | 'scaling' | 'scaleend' | 'translatestart' | 'translating' | 'translateend', Return>
+    OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+    OnSignature<Types | 'rotatestart' | 'rotating' | 'rotateend', RotateEvent, Return> &
+    OnSignature<Types | 'scalestart' | 'scaling' | 'scaleend', ScaleEvent, Return> &
+    OnSignature<Types | 'translatestart' | 'translating' | 'translateend', TranslateEvent, Return> &
+    CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'rotatestart' | 'rotating' | 'rotateend' | 'scalestart' | 'scaling' | 'scaleend' | 'translatestart' | 'translating' | 'translateend', Return>
 
 export interface Options {
     filter?: (f: Feature, l: Layer) => boolean;
@@ -41,6 +41,7 @@ export interface Options {
     enableRotatedTransform?: boolean;
     keepRectangle?: boolean;
     style?: any;
+    pointRadius?: number | number[] | ((f: Feature) => number | number[])
 }
 export enum RotateEventType {
     ROTATESTART = 'rotatestart',
@@ -81,6 +82,8 @@ export enum TranslateEventType {
  * @param options.modifyCenter A function that takes an MapBrowserEvent and returns a boolean to apply scale & strech from the center, default events.condition.metaKey or events.condition.ctrlKey.
  * @parm options.enableRotatedTransform Enable transform when map is rotated
  * @param options.style list of style for handles
+ * @param {number|Array<number>|function} [options.pointRadius=0] radius for points or a function that takes a feature and returns the radius (or [radiusX, radiusY]). If not null show handles to transform the points
+
  */
 export default class Transform extends Pointer {
     constructor(options?: Options);

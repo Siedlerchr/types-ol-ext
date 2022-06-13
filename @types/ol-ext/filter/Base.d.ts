@@ -59,7 +59,7 @@ declare module 'ol/layer/Layer' {
  *
  * @constructor
  * @extends {ol_Object}
- * @param {Object} options Extend {@link _ol_control_Control_} options.
+ * @param {Object} options
  *  @param {boolean} [options.active]
  */
 declare abstract class Base extends ol_Object {
