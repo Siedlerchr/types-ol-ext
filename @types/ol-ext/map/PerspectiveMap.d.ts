@@ -1,7 +1,8 @@
 import Map, { Options as MapOptions } from 'ol/Map';
+import { Condition } from 'ol/events/condition';
 
 export interface Options extends MapOptions {
-
+    tiltCondition?: Condition
 }
 
 /** A map with a perspective

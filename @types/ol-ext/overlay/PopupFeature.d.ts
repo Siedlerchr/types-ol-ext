@@ -45,25 +45,30 @@ export interface Options {
     keepSelection?: boolean;
     canFix?: boolean;
     showImage?: boolean;
-    maxChar?: boolean;
+    maxChar?: number;
 }
 /**
  * A popup element to be displayed on a feature.
  *
  * @constructor
- * @extends {Overlay}
+ * @extends {ol_Overlay_Popup}
+ * @fires show
+ * @fires hide
+ * @fires select
  * @param {} options Extend Popup options
- *  @param {String} options.popupClass the a export class of the overlay to style the popup.
- *  @param {bool} options.closeBox popup has a close box, default false.
- *  @param {function|undefined} options.onclose: callback function when popup is closed
+ *  @param {String} options.popupClass the a class of the overlay to style the popup.
+ *  @param {boolean} options.closeBox popup has a close box, default false.
+ *  @param {funcetion|undefined} options.onclose: callback function when popup is closed
  *  @param {function|undefined} options.onshow callback function when popup is shown
  *  @param {Number|Array<number>} options.offsetBox an offset box
- *  @param {OverlayPositioning | string | undefined} options.positionning
+ *  @param {ol.OverlayPositioning | string | undefined} options.positionning
  *    the 'auto' positioning var the popup choose its positioning to stay on the map.
- *  @param {Template} options.template A template with a list of properties to use in the popup
+ *  @param {Template|function} options.template A template with a list of properties to use in the popup or a function that takes a feature and returns a Template
+ *  @param {ol.interaction.Select} options.select a select interaction to get features from
+ *  @param {boolean} options.keepSelection keep original selection, otherwise set selection to the current popup feature and add a counter to change current feature, default false
  *  @param {boolean} options.canFix Enable popup to be fixed, default false
  *  @param {boolean} options.showImage display image url as image, default false
- *  @param {boolean} options.maxChar max char to display in a cell, default 200
+ *  @param {number} options.maxChar max char to display in a cell, default 200
  *  @api stable
  */
 export default class PopupFeature extends Overlay { // we cannot use extends Popup, because show breaks polymorphism
