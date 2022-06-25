@@ -13,9 +13,9 @@ import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import { Types } from 'ol/ObjectEventType';
 
 type SplitOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
-  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'beforesplit' | 'aftersplit', SplitEvent, Return> &
-  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'beforesplit' | 'aftersplit', Return>
+    OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+    OnSignature<Types | 'beforesplit' | 'aftersplit', SplitEvent, Return> &
+    CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'beforesplit' | 'aftersplit', Return>
 
 
 export enum SplitEventType {
@@ -25,7 +25,7 @@ export enum SplitEventType {
 }
 
 export interface Options {
-    source?: VectorSource | VectorSource[];
+    sources?: VectorSource | VectorSource[];
     features?: Collection<Feature>;
     snapDistance?: number;
     cursor?: string;
@@ -40,8 +40,8 @@ export interface Options {
  * @extends {ol_interaction_Interaction}
  * @fires  beforesplit, aftersplit, pointermove
  * @param {*}
- *  @param {ol.source.Vector|Array<ol.source.Vector>} options.source a list of source to split (configured with useSpatialIndex set to true)
- *  @param {ol.Collection.<ol.Feature>} options.features collection of feature to split
+ *  @param {ol.source.Vector|Array<ol.source.Vector>} [options.sources] a list of source to split (configured with useSpatialIndex set to true), if none use map visible layers.
+ *  @param {ol.Collection.<ol.Feature>} options.features collection of feature to split (instead of a list of sources)
  *  @param {integer} options.snapDistance distance (in px) to snap to an object, default 25px
  *	@param {string|undefined} options.cursor cursor name to display when hovering an objet
  *  @param {function|undefined} opttion.filter a filter that takes a feature and return true if it can be clipped, default always split.
@@ -54,10 +54,18 @@ export default class Split extends Interaction {
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.
-     * @param {Map} map Map.
+     * @param {_ol_Map_} map Map.
      * @api stable
      */
     setMap(map: _ol_Map_): void;
+    /** Get sources to split features in
+     * @return {Array<VectorSource>}
+     */
+    getSources(): VectorSource[]
+    /** Set sources to split features in
+     * @param {VectorSource|Array<VectorSource>} [sources]
+     */
+    setSources(sources: VectorSource| VectorSource[]): void
     /** Get nearest coordinate in a list
     * @param {Coordinate} pt the point to find nearest
     * @param {Array<Coordinate>} coords list of coordinates

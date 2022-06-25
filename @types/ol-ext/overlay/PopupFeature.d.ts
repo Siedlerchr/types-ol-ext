@@ -36,11 +36,11 @@ export declare type Template = {
 export interface Options {
     popupClass?: string;
     closeBox?: boolean;
-    onclose?: ((...params: any[]) => any) ;
+    onclose?: ((...params: any[]) => any);
     onshow?: ((...params: any[]) => any);
     offsetBox?: number | number[];
     positioning?: typeof OverlayPositioning | string;
-    template?: Template;
+    template?: Template | ((f: Feature) => Template);
     select?: Select;
     keepSelection?: boolean;
     canFix?: boolean;
@@ -55,16 +55,16 @@ export interface Options {
  * @fires show
  * @fires hide
  * @fires select
- * @param {} options Extend Popup options
- *  @param {String} options.popupClass the a class of the overlay to style the popup.
+ * @param {} options Extend Popup opt^ions
+ *  @param {String} options.popupClass the^ a class of the overlay to style the popup.
  *  @param {boolean} options.closeBox popup has a close box, default false.
  *  @param {funcetion|undefined} options.onclose: callback function when popup is closed
  *  @param {function|undefined} options.onshow callback function when popup is shown
  *  @param {Number|Array<number>} options.offsetBox an offset box
  *  @param {ol.OverlayPositioning | string | undefined} options.positionning
  *    the 'auto' positioning var the popup choose its positioning to stay on the map.
- *  @param {Template|function} options.template A template with a list of properties to use in the popup or a function that takes a feature and returns a Template
- *  @param {ol.interaction.Select} options.select a select interaction to get features from
+ *  @param {Template|function} [options.template] A template with a list of properties to use in the popup or a function that takes a feature and returns a Template, default use all feature properties
+ *  @param {Select} options.select a select interaction to get features from
  *  @param {boolean} options.keepSelection keep original selection, otherwise set selection to the current popup feature and add a counter to change current feature, default false
  *  @param {boolean} options.canFix Enable popup to be fixed, default false
  *  @param {boolean} options.showImage display image url as image, default false
@@ -73,15 +73,16 @@ export interface Options {
  */
 export default class PopupFeature extends Overlay { // we cannot use extends Popup, because show breaks polymorphism
     constructor(options?: Options);
+
     /** Set the template
-     * @param {Template} template A template with a list of properties to use in the popup
+     * @param {Template} [template] A template with a list of properties to use in the popup, default use all features properties
      */
-    setTemplate(template: Template): void;
-     /** Show the popup on the map
-   * @param {ol.coordinate|undefined} coordinate Position of the popup
-   * @param {ol.Feature|Array<ol.Feature>} features The features on the popup
-   * @param {ol.Feature} current The current feature if keepSelection = true, otherwise get the first feature
-   */
+    setTemplate(template?: Template): void;
+    /** Show the popup on the map
+  * @param {ol.coordinate|undefined} coordinate Position of the popup
+  * @param {Feature|Array<Feature>} features The features on the popup
+  * @param {Feature} current The current feature if keepSelection = true, otherwise get the first feature
+  */
     show(coordinate?: Coordinate, features?: Feature | Feature[], current?: Feature): void;
     /** Fix the popup
      * @param {boolean} fix
