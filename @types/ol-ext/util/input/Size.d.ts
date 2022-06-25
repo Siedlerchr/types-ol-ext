@@ -23,7 +23,7 @@ export interface Options extends ListOptions {
 
 /** Checkbox input
  * @constructor
- * @extends {ol_ext_input_List}
+ * @extends {List}
  * @param {*} options
  *  @param {string} [options.className]
  *  @param {Element} [options.input] input element, if non create one

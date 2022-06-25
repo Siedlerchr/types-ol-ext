@@ -51,32 +51,31 @@ export interface Options extends ControlOptions {
   title?: string;
   searchLabel?: string;
   loadLabel?: string;
-  popupLayer?: boolean;
-  services?: { [key: string]: string };
   srs?: string[];
   timeout?: number;
   cors?: boolean;
+  optional?: string;
   trace?: boolean;
-  onSelect?: (layer: Layer, options: any) => void;
+  services?: { [key: string]: string };
 }
-
 /** WMSCapabilities
  * @constructor
+ * @fires load
+ * @fires capabilities
+ * @extends {ol_control_Button}
  * @param {*} options
- *  @param {string|Element} options.target the target to set the dialog, use document.body to have fullwindow dialog
- *  @param {string} options.proxy proxy to use when requesting Getcapabilites, default none (suppose the service use CORS)
- *  @param {string} options.placeholder input placeholder, default 'service url...'
- *  @param {string} options.title dialog title, default 'WMS'
- *  @param {string} options.searchLabel Label for search button, default 'search'
- *  @param {string} options.loadLabel Label for load button, default 'load'
- *  @param {boolean} options.popupLayer Use a popup for the layers, default false
- *  @param {*} options.services a key/url object of services for quick access in a menu
- *  @param {Array<string>} options.srs an array of supported srs, default map projection code or 'EPSG:3857'
- *  @param {number} options.timeout Timeout for getCapabilities request, default 1000
- *  @param {boolean} options.cors Use CORS, default false
- *  @param {boolean} options.trace Log layer info, default false
- *  @param {function} [options.onselect] callback function that takes a layer and layer options on select layer
-
+ *  @param {string|Element} [options.target] the target to set the dialog, use document.body to have fullwindow dialog
+ *  @param {string} [options.proxy] proxy to use when requesting Getcapabilites, default none (suppose the service use CORS)
+ *  @param {string} [options.placeholder='service url...'] input placeholder, default 'service url...'
+ *  @param {string} [options.title=WMS] dialog title, default 'WMS'
+ *  @param {string} [options.searchLabel='search'] Label for search button, default 'search'
+ *  @param {string} [options.loadLabel='load'] Label for load button, default 'load'
+ *  @param {Array<string>} [options.srs] an array of supported srs, default map projection code or 'EPSG:3857'
+ *  @param {number} [options.timeout=1000] Timeout for getCapabilities request, default 1000
+ *  @param {boolean} [options.cors=false] Use CORS, default false
+ *  @param {string} [options.optional] a list of optional url properties (when set in the request url), separated with ','
+ *  @param {boolean} [options.trace=false] Log layer info, default false
+ *  @param {*} [options.services] a key/url object of services for quick access in a menu
  */
 export default class WMSCapabilities extends Button {
   constructor(options?: Options);

@@ -30,7 +30,6 @@ export interface Options {
     revers?: boolean;
     repeat?: number;
     hiddenStyle?: Style;
-    side?: boolean;
     horizontal?: boolean;
     fade?: ((p0: number) => number);
     easing?: ((p0: number) => number);

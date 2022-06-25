@@ -6,15 +6,18 @@ export interface Options {
     feature?: Feature;
     fill?: Fill;
     inner?: boolean;
+    wrapX?: boolean;
 }
-/** Mask drawing using an Feature
+
+/** Mask drawing using an ol.Feature
  * @constructor
- * @requires filter
- * @extends {filter.Base}
+ * @requires ol_filter
+ * @extends {Base}
  * @param {Object} [options]
- *  @param {Feature} [options.feature] feature to mask with
- *  @param {Fill} [options.fill] style to fill with
- *  @param {boolean} [options.inner] mask inner, default false
+ *  @param {ol.Feature} [options.feature] feature to mask with
+ *  @param {ol.style.Fill} [options.fill] style to fill with
+ *  @param {boolean} [options.inner=false] mask inner, default false
+ *  @param {boolean} [options.wrapX=false] wrap around the world, default false
  */
 export default class Mask extends Base {
 

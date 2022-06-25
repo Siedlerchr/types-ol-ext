@@ -1,6 +1,6 @@
-import { FeatureAnimation, FeatureAnimationEvent } from './FeatureAnimation';
+import { FeatureAnimation, FeatureAnimationEvent, Options as FeatureAnimationOptions } from './FeatureAnimation';
 
-export interface Options {
+export interface Options extends FeatureAnimationOptions{
     speed?: number;
 }
 /** Slice animation: feature enter from left

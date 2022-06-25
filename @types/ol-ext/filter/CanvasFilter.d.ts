@@ -4,7 +4,7 @@ export interface CanvasFilterOptions {
     /**
      * Takes an IRI pointing to an SVG filter element
      */
-    url: any;
+    url: string | SVGFilter;
     /**
      * Gaussian blur value in px
      */
@@ -47,6 +47,7 @@ export interface CanvasFilterOptions {
      */
     sepia: number;
 }
+
 /** @typedef {Object} CanvasFilterOptions
  * @property {url} url Takes an IRI pointing to an SVG filter element
  * @property {number} blur Gaussian blur value in px
@@ -61,6 +62,7 @@ export interface CanvasFilterOptions {
  * @property {number} saturate Saturates the drawing, 0: unsaturated, 100: unchanged
  * @property {number} sepia Converts the drawing to sepia, 0: sepia, 100: unchanged
  */
+
 /** Add a canvas Context2D filter to a layer
  * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/filter
  * @constructor

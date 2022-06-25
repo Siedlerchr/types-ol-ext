@@ -37,11 +37,11 @@ export interface Options extends ControlOptions {
  *  @param {ol.style.Style} [options.style] style to draw the profil, default darkblue
  *  @param {ol.style.Style} [options.selectStyle] style for selection, default darkblue fill
  *  @param {*} options.info keys/values for i19n
- *  @param {number} options.width
- *  @param {number} options.height
- *  @param {ol.Feature} options.feature the feature to draw profil
- *  @param {boolean} options.selectable enable selection on the profil, default false
- *  @param {boolean} options.zoomable can zoom in the profil
+ *  @param {number} [options.width=300]
+ *  @param {number} [options.height=150]
+ *  @param {ol.Feature} [options.feature] the feature to draw profil
+ *  @param {boolean} [options.selectable=false] enable selection on the profil, default false
+ *  @param {boolean} [options.zoomable=false] can zoom in the profil
  */
 export default class Profil extends ol_control_Control {
     constructor(options?: Options);
@@ -90,27 +90,29 @@ export default class Profil extends ol_control_Control {
     getSelection(start: number, end: number): Coordinate[];
     /**
    * Set the geometry to draw the profil.
-   * @param {Feature|Geometry} f the feature.
+   * @param {ol.Feature|ol.geom.Geometry} f the feature.
    * @param {Object=} options
-   *  @param {ProjectionLike} options.projection feature projection, default projection of the map
-   *  @param {string} options.zunit 'm' or 'km', default m
-   *  @param {string} options.unit 'm' or 'km', default km
-   *  @param {Number|undefined} options.zmin default 0
+   *  @param {ol.ProjectionLike} [options.projection] feature projection, default projection of the map
+   *  @param {string} [options.zunit='m'] 'm' or 'km', default m
+   *  @param {string} [options.unit='km'] 'm' or 'km', default km
+   *  @param {Number|undefined} [options.zmin=0] default 0
    *  @param {Number|undefined} options.zmax default max Z of the feature
-   *  @param {integer|undefined} options.zDigits number of digits for z graduation, default 0
-   *  @param {Number|undefined} options.graduation z graduation default 100
-   *  @param {integer|undefined} options.amplitude amplitude of the altitude, default zmax-zmin
+   *  @param {integer|undefined} [options.zDigits=0] number of digits for z graduation, default 0
+   *  @param {integer|undefined} [options.zMaxChars] maximum number of chars to be used for z graduation before switching to scientific notation
+   *  @param {Number|undefined} [options.graduation=100] z graduation default 100
+   *  @param {integer|undefined} [options.amplitude] amplitude of the altitude, default zmax-zmin
    * @api stable
    */
     setGeometry(f: Feature | Geometry, options?: {
         projection?: ProjectionLike;
         zunit?: 'm' | 'km';
-        unit?: 'm' | 'km'
-        zmin?: number
+        unit?: 'm' | 'km';
+        zmin?: number;
         zmax?: number;
-        zDigits?: number
-        graduation?: number
-        amplitude?: number
+        zDigits?: number;
+        zMaxChars?: number;
+        graduation?: number;
+        amplitude?: number;
     }): void;
 
     /** Get profil image

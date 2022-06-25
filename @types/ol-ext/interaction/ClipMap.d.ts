@@ -2,20 +2,17 @@ import { Layer } from 'ol/layer';
 import { Pointer } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { Pixel } from 'ol/pixel';
-import BaseLayer from 'ol/layer/Base';
 
 export interface Options {
   radius?: number;
-  layers?: BaseLayer | BaseLayer[];
 }
 /** Clip interaction to clip layers in a circle
  * @constructor
- * @extends {interaction.Pointer}
- * @param {interaction.Clip.options} options flashlight  param
- *  @param {number} options.radius radius of the clip, default 100
- *	@param {layer|Array<layer>} options.layers layers to clip
+ * @extends {ol_interaction_Pointer}
+ * @param {ol_interaction_ClipMap.options} options flashlight  param
+ *  @param {number} options.radius radius of the clip, default 100 (px)
  */
-export default class Clip extends Pointer {
+export default class ClipMap extends Pointer {
   constructor(options?: Options);
   /** Set the map > start postcompose
    */

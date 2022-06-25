@@ -11,44 +11,45 @@ import OverlayPositioning from 'ol/OverlayPositioning';
  */
 
 
- export interface Options extends OverlayOptions {
+export interface Options extends OverlayOptions {
     popupClass?: string;
     anim?: boolean;
     closeBox?: boolean;
-    onclose?: ((...params: any[]) => any);
-    onshow?: ((...params: any[]) => any);
+    onclose?: () => void;
+    onshow?: () => void;
     offsetBox?: number | number[];
     positioning?: typeof OverlayPositioning | any | undefined; // workaround with any for 'auto'
- }
+}
+
 
 
 /**
- *
  * @classdesc
  * A popup element to be displayed over the map and attached to a single map
  * location. The popup are customized using CSS.
  *
  * @example
-var popup = new Overlay.Popup();
+var popup = new ol_Overlay_Popup();
 map.addOverlay(popup);
 popup.show(coordinate, "Hello!");
 popup.hide();
 *
 * @constructor
-* @extends {Overlay}
+* @extends {ol_Overlay}
 * @fires show
 * @fires hide
 * @param {} options Extend Overlay options
-*	@param {String} options.popupClass the a export class of the overlay to style the popup.
-*	@param {boolean} options.anim Animate the popup the popup, default false.
-*	@param {boolean} options.closeBox popup has a close box, default false.
-*	@param {function|undefined} options.onclose: callback function when popup is closed
-*	@param {function|undefined} options.onshow callback function when popup is shown
-*	@param {Number|Array<number>} options.offsetBox an offset box
-*	@param {OverlayPositioning | string | undefined} options.positioning
+*	 @param {String} [options.popupClass] the a class of the overlay to style the popup.
+*	 @param {boolean} [options.anim Animate=false] the popup the popup, default false.
+*	 @param {boolean} [options.closeBox=false] popup has a close box, default false.
+*	 @param {function|undefined} [options.onclose] callback function when popup is closed
+*	 @param {function|undefined} [options.onshow] callback function when popup is shown
+*	 @param {Number|Array<number>} [options.offsetBox] an offset box
+*	 @param {ol.OverlayPositioning | string | undefined} options.positioning
 *		the 'auto' positioning var the popup choose its positioning to stay on the map.
+*	 @param {boolean} [options.minibar=false] add a mini vertical bar
 * @api stable
- */
+*/
 export default class Popup extends Overlay {
     constructor(options?: Options);
     /**
@@ -81,7 +82,7 @@ export default class Popup extends Overlay {
      * 		or 'auto' to var the popup choose the best position
      * @api stable
      */
-    setPositioning(pos?: typeof OverlayPositioning | string ): void;
+    setPositioning(pos?: typeof OverlayPositioning | string): void;
     /** Check if popup is visible
     * @return {boolean}
      */

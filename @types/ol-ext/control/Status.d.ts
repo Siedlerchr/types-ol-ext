@@ -9,10 +9,9 @@ export interface Options extends ControlOptions {
 }
 
 
-/** A control with scroll-driven navigation to create narrative maps
- *
- * @constructors
- * @extends {ol.control.Control}
+/** A control to display status information on top of the map
+ * @constructor
+ * @extends {ol_control_Control}
  * @param {Object=} options Control options.
  *	@param {String} options.className class of the control
  *  @param {string} options.status status, default none

@@ -20,7 +20,7 @@ export interface Options extends ControlOptions {
     northImage?: 'default' | 'compact';
     jsPDF?: jsPDF
 }
-export type PaperSize = 'A0' | 'A1' | 'A2' | 'A3' | 'A4' | 'A5' | 'B4' | 'B5';
+export type PaperSize = 'A0' | 'A1' | 'A2' | 'A3' | 'A4' | 'US Letter'| 'A5' | 'B4' | 'B5';
 /** Print control to get an image of the map
  * @constructor
  * @fire print
