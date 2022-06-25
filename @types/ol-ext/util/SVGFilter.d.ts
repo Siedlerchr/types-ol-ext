@@ -1,4 +1,11 @@
 import ol_ext_SVGOperation from "./SVGOperation";
+
+
+export interface Options {
+    operation?: ol_ext_SVGOperation;
+    id?: string;
+    color?: 'linear' | 'sRGB'
+}
 /** SVG filter
  * @param {*} options
  *  @param {ol_ext_SVGOperation} option.operation
@@ -6,7 +13,7 @@ import ol_ext_SVGOperation from "./SVGOperation";
  *  @param {string} option.color color interpolation filters, linear or sRGB
  */
 export default class SVGFilter {
-    constructor(options: any);
+    constructor(options?: Options);
 
     /** Get filter ID
      * @return {string}

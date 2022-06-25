@@ -20,7 +20,7 @@ export enum BookMarkEventType {
 export interface BookmarkContent {
   pos: number[];
   zoom: number;
-  permament?: boolean
+  permanent?: boolean
 }
 export type Bookmarks = { [key: string]: BookmarkContent }
 export interface Options extends ControlOptions {

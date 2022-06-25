@@ -27,6 +27,7 @@ export interface FeatureAnimationEvent {
 export interface Options {
     speed?: Number;
     duration?: number;
+    side?: any
     revers?: boolean;
     repeat?: number;
     hiddenStyle?: Style;
