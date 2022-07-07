@@ -3,8 +3,9 @@ import { Map as _ol_Map_, Overlay } from 'ol';
 import { Pixel } from 'ol/pixel';
 import { Style } from 'ol/style';
 import OverlayPositioning from 'ol/OverlayPositioning';
-
-export interface Options{
+import { Options as OverlayOptions } from 'ol/Overlay';
+import Popup from './Popup';
+export interface Options extends OverlayOptions {
     popupClass?: string;
     style?: Style;
     minScale?: number;
@@ -13,7 +14,7 @@ export interface Options{
     onClose?: () => void;
     onShow?: () => void;
     offsetBox?: number | number[];
-    positioning?: typeof OverlayPositioning
+    positioning?: typeof OverlayPositioning | any | undefined; // workaround with any for 'auto'
 }
 
 /**
@@ -37,7 +38,7 @@ export interface Options{
  *		the 'auto' positioning var the popup choose its positioning to stay on the map.
  * @api stable
  */
-export default class FixedPopup extends Overlay {
+export default class FixedPopup extends Popup {
     constructor(options?: Options);
 
     /**
@@ -82,4 +83,6 @@ export default class FixedPopup extends Overlay {
      * @return {Style} style
      */
     getLinkStyle(): Style
+
+
 }

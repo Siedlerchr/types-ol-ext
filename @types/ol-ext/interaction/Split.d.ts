@@ -65,7 +65,7 @@ export default class Split extends Interaction {
     /** Set sources to split features in
      * @param {VectorSource|Array<VectorSource>} [sources]
      */
-    setSources(sources: VectorSource| VectorSource[]): void
+    setSources(sources: VectorSource | VectorSource[]): void
     /** Get nearest coordinate in a list
     * @param {Coordinate} pt the point to find nearest
     * @param {Array<Coordinate>} coords list of coordinates

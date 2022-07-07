@@ -17,6 +17,7 @@ export interface Options {
     fontSize?: number;
     fontStyle?: string;
     gradient?: boolean;
+    displacement?: number[];
     offsetX?: number;
     offsetY?: number;
     fill?: Fill;
@@ -43,24 +44,25 @@ export interface Glyph {
  * A marker style to use with font symbols.
  *
  * @constructor
- * @param {} options Options.
+ * @param {Options=} options Options.
  *  @param {string} [options.color] default #000
  *  @param {string} options.glyph the glyph name or a char to display as symbol.
- * 		The name must be added using the {@link FontSymbol.addDefs} function.
+ *    The name must be added using the {@link FontSymbol.addDefs} function.
  *  @param {string} [options.text] a text to display as a glyph
  *  @param {string} [options.font] font to use with the text option
  *  @param {string} options.form
- * 		none|circle|poi|bubble|marker|coma|shield|blazon|bookmark|hexagon|diamond|triangle|sign|ban|lozenge|square
- * 		a form that will enclose the glyph, default none
+ * 	  none|circle|poi|bubble|marker|coma|shield|blazon|bookmark|hexagon|diamond|triangle|sign|ban|lozenge|square
+ * 	  a form that will enclose the glyph, default none
  *  @param {number} options.radius
  *  @param {number} options.rotation
  *  @param {boolean} options.rotateWithView
  *  @param {number} [options.opacity=1]
- *  @param {number} [options.fontSize=1] default 1
+ *  @param {number} [options.fontSize=1] size of the font compare to the radius, fontSize greater than 1 will exceed the symbol extent
  *  @param {string} [options.fontStyle] the font style (bold, italic, bold italic, etc), default none
  *  @param {boolean} options.gradient true to display a gradient on the symbol
- *  @param {number} [options.offsetX=0] default 0
- *  @param {number} [options.offsetY=0] default 0
+ *  @param {Array<number>} [options.displacement] to use with ol > 6
+ * 	@param {number} [options.offsetX=0] Horizontal offset in pixels, deprecated use displacement with ol>6
+ * 	@param {number} [options.offsetY=0] Vertical offset in pixels, deprecated use displacement with ol>6
  *  @param {Fill} options.fill
  *  @param {Stroke} options.stroke
  * @extends {RegularShape}

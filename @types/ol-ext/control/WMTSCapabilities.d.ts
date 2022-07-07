@@ -1,6 +1,7 @@
 import WMSCapabilities, { Options } from "./WMSCapabilities";
 import TileLayer from "ol/layer/Tile";
 import TileSource from "ol/source/Tile";
+import WMTSTileGrid from "ol/tilegrid/WMTS";
 
 /** WMTSCapabilities
  * @constructor
@@ -32,6 +33,17 @@ export default class WMTSCapabilities extends WMSCapabilities {
     REQUEST: "GetCapabilities";
     VERSION: string;
   };
+
+
+  /** Get WMTS tile grid (only EPSG:3857)
+ * @param {string} tileMatrixSet
+ * @param {number} minZoom
+ * @param {number} maxZoom
+ * @param {boolean} tilePrefix
+ * @returns {WMTSTileGrid}
+ * @private
+ */
+  getTileGrid(tileMatrixSet: string, minZoom: number, maxZoom: number, tilePrefix: boolean): WMTSTileGrid
 
   /** Return a WMTS options for the given capabilities
    * @param {*} caps layer capabilities (read from the capabilities)

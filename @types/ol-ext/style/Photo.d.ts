@@ -8,6 +8,7 @@ export interface Options {
     stroke?: Stroke;
     src?: string;
     crossOrigin?: string;
+    displacement?: number[];
     offsetX?: number;
     offsetY?: number;
     onload?: () => void;
@@ -18,7 +19,7 @@ export interface Options {
  * Set Photo style for vector features.
  *
  * @constructor
- * @param {} options
+ * @param {Options=} options
  *  @param { default | square | circle | anchored | folio } options.kind
  *  @param {boolean} options.crop crop within square, default is false
  *  @param {Number} options.radius symbol size
@@ -26,9 +27,10 @@ export interface Options {
  *  @param {ol_style_Stroke} options.stroke
  *  @param {String} options.src image src
  *  @param {String} options.crossOrigin The crossOrigin attribute for loaded images. Note that you must provide a crossOrigin value if you want to access pixel data with the Canvas renderer.
- *  @param {Number} options.offsetX Horizontal offset in pixels. Default is 0.
- *  @param {Number} options.offsetY Vertical offset in pixels. Default is 0.
- *  @param {function} options.onload callback when image is loaded (to redraw the layer)
+ *  @param {Array<number>} [options.displacement] to use with ol > 6
+ * 	@param {number} [options.offsetX=0] Horizontal offset in pixels, deprecated use displacement with ol>6
+ * 	@param {number} [options.offsetY=0] Vertical offset in pixels, deprecated use displacement with ol>6
+ *  @param {function} [options.onload] callback when image is loaded (to redraw the layer)
  * @extends {RegularShape}
  * @api
  */
@@ -43,6 +45,12 @@ export default class Photo extends RegularShape {
      * @return {ol_style_Photo}
      */
     clone(): Photo;
-
+    /**
+     * Get the image icon.
+     * @param {number} pixelRatio Pixel ratio.
+     * @return {HTMLCanvasElement} Image or Canvas element.
+     * @api
+     */
+    getImage(pielratio: number): HTMLCanvasElement
     getChecksum(): string;
 }

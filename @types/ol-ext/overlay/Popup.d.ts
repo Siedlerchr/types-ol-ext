@@ -101,7 +101,7 @@ export default class Popup extends Overlay {
     popup.show("New informations");
     * @api stable
      */
-    show(coordinate: Coordinate | string, html?: string): void;
+    show(coordinate?: Coordinate | string, html?: string): void;
     /**
      * Hide the popup
      * @api stable
