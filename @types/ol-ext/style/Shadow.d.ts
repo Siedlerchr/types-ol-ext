@@ -4,6 +4,7 @@ export interface Options {
     fill?: Fill ;
     radius?: number;
     blur?: number;
+    displacement?: number[];
     offsetX?: number;
     offsetY?: number;
 }
@@ -12,10 +13,11 @@ export interface Options {
  * Set Shadow style for point vector features.
  *
  * @constructor
- * @param {} options Options.
+ * @param {Options=} options Options.
  *   @param {Fill | undefined} options.fill fill style, default rgba(0,0,0,0.5)
  *   @param {number} options.radius point radius
  * 	 @param {number} options.blur lur radius, default radius/3
+ *   @param {Array<number>} [options.displacement] to use with ol > 6
  * 	 @param {number} options.offsetX x offset, default 0
  * 	 @param {number} options.offsetY y offset, default 0
  * @extends {style.RegularShape}
