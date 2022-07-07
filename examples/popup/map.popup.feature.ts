@@ -7,7 +7,6 @@ import { Style, RegularShape, Stroke, Text, Fill } from 'ol/style';
 import { Select } from 'ol/interaction';
 import Feature from 'ol/Feature';
 import { singleClick } from 'ol/events/condition';
-
 import PopupFeature, { ol_Overlay_PopupFeature_localString as localString } from 'ol-ext/overlay/PopupFeature';
 
 // Layers
@@ -103,9 +102,9 @@ const popup = new PopupFeature({
                     }
                 }
                 /* Using localString with a date * /
-                'date': { 
-                  title: 'Date', 
-                  format: PopupFeature.localString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) 
+                'date': {
+                  title: 'Date',
+                  format: PopupFeature.localString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
                 }
                 /**/
             }
