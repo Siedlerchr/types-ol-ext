@@ -90,7 +90,7 @@ export default class Popup extends Overlay {
     /**
      * Set the position and the content of the popup.
      * @param {Coordinate|string} coordinate the coordinate of the popup or the HTML content.
-     * @param {string|undefined} html the HTML content (undefined = previous content).
+     * @param {string|HTMLElement|undefined} html the HTML content (undefined = previous content).
      * @example
     var popup = new Overlay.Popup();
     // Show popup
@@ -101,7 +101,7 @@ export default class Popup extends Overlay {
     popup.show("New informations");
     * @api stable
      */
-    show(coordinate?: Coordinate | string, html?: string): void;
+    show(coordinate?: Coordinate | string, html?: string | HTMLElement): void;
     /**
      * Hide the popup
      * @api stable
