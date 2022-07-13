@@ -1,6 +1,6 @@
 {
   "name": "@siedlerchr/types-ol-ext",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Type definitions for ol-ext",
   "main": "",
   "types": "index.d.ts",
@@ -33,9 +33,9 @@
     "jspdf": "^2.5.1"
   },
   "devDependencies": {
-    "@definitelytyped/dtslint": "^0.0.111",
+    "@definitelytyped/dtslint": "^0.0.121",
     "@types/fs-extra": "^9.0.13",
-    "@types/geojson": "^7946.0.8",
+    "@types/geojson": "^7946.0.9",
     "@types/glob": "^7.2.0",
     "@types/jquery": "^3.5.14",
     "@types/webpack": "^5.28.0",
@@ -44,7 +44,7 @@
     "jsdoc": "^3.6.10",
     "node-html-parser": "^5.3.3",
     "ol": "^6.14.1",
-    "ol-ext": "^3.2.27",
+    "ol-ext": "^3.2.28",
     "ts-loader": "^9.3.1",
     "tsd": "^0.21.0",
     "typescript": "^4.7.4",

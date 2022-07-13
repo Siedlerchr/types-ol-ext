@@ -14,12 +14,13 @@ import { Types } from 'ol/ObjectEventType';
 import { Geometry } from 'ol/geom';
 
 type OffsetOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
-  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'offsetstart', OffsetStartEvent, Return> &
-  OnSignature<Types | 'offsetting', OffsettingEvent, Return> &
-  OnSignature<Types | 'offsetend', OffsetEndEvent, Return> &
-  CombinedOnSignature<EventTypes | Types | 'change' | 'change:active' | 'error' | 'propertychange' | 'offsetstart' | 'offsetting' | 'offsetend', Return>
+    OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+    OnSignature<Types | 'offsetstart', OffsetStartEvent, Return> &
+    OnSignature<Types | 'offsetting', OffsettingEvent, Return> &
+    OnSignature<Types | 'offsetend', OffsetEndEvent, Return> &
+    CombinedOnSignature<EventTypes | Types | 'change' | 'change:active' | 'error' | 'propertychange' | 'offsetstart' | 'offsetting' | 'offsetend', Return>
 export interface Options {
+    filter?: (f: Feature, l: Layer) => boolean;
     layers?: Vector<VectorSource<Geometry>> | Vector<VectorSource<Geometry>>[];
     features?: Collection<Feature>;
     source?: VectorSource;
@@ -28,19 +29,20 @@ export interface Options {
 }
 /** Offset interaction for offseting feature geometry
  * @constructor
- * @extends {ol_interaction_Pointer}
+ * @extends {Pointer}
  * @fires offsetstart
  * @fires offsetting
  * @fires offsetend
- * @param {any} options
- *	@param {ol.layer.Vector | Array<ol.layer.Vector>} options.layers list of feature to transform
- *	@param {ol.Collection.<ol.Feature>} options.features collection of feature to transform
- *	@param {ol.source.Vector | undefined} options.source source to duplicate feature when ctrl key is down
+ * @param {Options} options
+ *  @param {Function} [options.filter] a function that takes a feature and a layer and return true if the feature can be modified
+ *	@param {Vector | Array<Vector>} options.layers list of feature to transform
+ *	@param {Collection<Feature>} options.features collection of feature to transform
+ *	@param {VectorSource | undefined} options.source source to duplicate feature when ctrl key is down
  *	@param {boolean} options.duplicate force feature to duplicate (source must be set)
- *  @param {ol.style.Style | Array.<ol.style.Style> | ol.style.StyleFunction | undefined} style style for the sketch
+ *  @param {Style | Array<Style> | StyleFunction | undefined} style style for the sketch
  */
 export default class Offset extends Pointer {
-    constructor(options: Options);
+    constructor(option?: Options);
     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.
