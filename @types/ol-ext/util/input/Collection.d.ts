@@ -1,7 +1,7 @@
 import ol_Collection from 'ol/Collection';
 export interface Options<T> {
     target?: Element;
-    collection? : ol_Collection<T> //todo unsure
+    collection?: ol_Collection<T> //todo unsure
     getTitle?: (elt: any) => Element | string
 
 }
@@ -42,4 +42,14 @@ export default class Collection<T>{
     /** Redraw the list
      */
     refresh(): void;
+
+    /** Set the collection
+  * @param {ol_Collection} collection
+  */
+    setCollection(collection: Collection): void
+
+    /** Remove current collection (listeners)
+     * /!\ remove collection when input list is removed from the DOM
+     */
+    removeCollection(): void
 }

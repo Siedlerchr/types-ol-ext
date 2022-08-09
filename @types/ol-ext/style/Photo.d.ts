@@ -53,4 +53,9 @@ export default class Photo extends RegularShape {
      */
     getImage(pielratio: number): HTMLCanvasElement
     getChecksum(): string;
+
+    /** Returns the photo image
+  * @returns {HTMLImageElement}
+  */
+    getPhoto(): HTMLImageElement;
 }
