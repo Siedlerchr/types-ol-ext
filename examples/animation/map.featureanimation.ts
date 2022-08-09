@@ -9,7 +9,6 @@ import { LineString, Point, Polygon } from 'ol/geom';
 import { Coordinate } from 'ol/coordinate';
 import 'ol-ext/render/AnimExtent';
 import featureAnimation from 'ol-ext/featureanimation/FeatureAnimation';
-import { getKey } from 'ol/tilecoord';
 // Layers
 let layer = new TileLayer({
   source: new Stamen({ layer: 'terrain' }),

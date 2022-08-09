@@ -1,6 +1,6 @@
 {
   "name": "@siedlerchr/types-ol-ext",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Type definitions for ol-ext",
   "main": "",
   "types": "index.d.ts",

@@ -4,8 +4,7 @@ import { Tile, Vector } from 'ol/layer';
 import { Stamen, Vector as VectorSource } from 'ol/source';
 import { Fill, Icon, Style } from 'ol/style';
 import { Draw } from 'ol/interaction';
-import GeometryType from 'ol/geom/GeometryType';
-import { Geometry, Polygon } from 'ol/geom';
+import { Polygon } from 'ol/geom';
 
 let refresh: any;
 const imgFile = '../data/pattern.png';
@@ -122,7 +121,7 @@ $(window).on('load', () => {
 
         // global so we can remove it later
         const interaction = new Draw({
-            type: GeometryType.POLYGON,
+            type: 'Polygon',
             source: vector.getSource() as VectorSource
         });
         map.addInteraction(interaction);

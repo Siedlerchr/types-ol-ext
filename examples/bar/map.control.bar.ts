@@ -2,7 +2,6 @@ import { Map, View } from 'ol';
 import { Vector, Tile } from 'ol/layer';
 import { Vector as VectorSource, OSM } from 'ol/source';
 import { Select, Draw } from 'ol/interaction';
-import GeometryType from 'ol/geom/GeometryType';
 
 import Bar from 'ol-ext/control/Bar';
 import Toggle from 'ol-ext/control/Toggle';
@@ -58,7 +57,7 @@ const pedit = new Toggle(
         title: 'Point',
         interaction: new Draw
             ({
-                type: GeometryType.POINT,
+                type: 'Point',
                 source: vector.getSource() as VectorSource<Geometry>
             }),
         onToggle(active) {
