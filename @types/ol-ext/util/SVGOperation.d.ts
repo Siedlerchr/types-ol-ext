@@ -3,7 +3,7 @@
  *  @param {string} attributes.feoperation filter primitive tag name
  */
 export default class SVGOperation {
-    constructor(attributes: any);
+    constructor(attributes: string | any);
     /** Get filter name
      * @return {string}
      */

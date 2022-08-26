@@ -1,7 +1,8 @@
-import { WMTS } from 'ol/source';
+import { WMTS} from 'ol/source/WMTS';
+import { Options as SourceOptions } from 'ol/source/TileImage';
 import { Coordinate } from 'ol/coordinate';
 import { ProjectionLike } from 'ol/proj';
-export interface Options {
+export interface Options extends SourceOptions{
     layer?: string;
     minZoom?: number;
     server?: string;
