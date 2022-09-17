@@ -37,8 +37,8 @@ export interface viewTourDestinations {
     /**
      * Optional anchor to remain fixed during a rotation or resolution animation.
      */
-    anchor?: anchor;
-};
+    anchor?: Coordinate;
+}
 
 export type Destination = {
     x: number,

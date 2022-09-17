@@ -75,7 +75,7 @@ map.addOverlay(popup1);
 var popup2 = new Popup({ anim: true, closeBox: true });
 map2.addOverlay(popup2);
 
-function showPopup(e: CollectionEvent, popup: Popup) {
+function showPopup(e: CollectionEvent<Feature>, popup: Popup) {
     var feature = e.element;
     var content = "";
     if (!feature.get('text')) return;

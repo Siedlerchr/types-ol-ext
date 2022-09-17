@@ -1,6 +1,5 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Modify } from 'ol/interaction';
-import OverlayPositioning from 'ol/OverlayPositioning';
 import BaseEvent from 'ol/events/Event';
 import Feature from 'ol/Feature';
 import { Coordinate } from 'ol/coordinate';
@@ -9,6 +8,7 @@ import { ObjectEvent } from 'ol/Object';
 import { ModifyEvent } from 'ol/interaction/Modify';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import { Types } from 'ol/ObjectEventType';
+import Positioning from 'ol/Overlay';
 
 type ModifyTouchOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
@@ -23,7 +23,7 @@ export enum PopupEventType {
 export interface Options {
     title?: string;
     className?: string;
-    positioning?: typeof OverlayPositioning;
+    positioning?: Positioning;
     offsetBox?: number | number[];
     usePopup?: boolean;
 }

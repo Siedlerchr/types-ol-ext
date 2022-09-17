@@ -3,7 +3,6 @@ import Collection from 'ol/Collection';
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import { Style } from 'ol/style';
-import GeometryType from 'ol/geom/GeometryType';
 import { Pointer } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
 import { Condition as EventsConditionType } from 'ol/events/condition';
@@ -11,14 +10,14 @@ import { Vector as VectorSource } from 'ol/source';
 import { EventsKey } from 'ol/events';
 import BaseEvent from 'ol/events/Event';
 import { ObjectEvent } from 'ol/Object';
-import Geometry from 'ol/geom/Geometry';
+import Geometry, { Type } from 'ol/geom/Geometry';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import { Types } from 'ol/ObjectEventType';
 
 type ModifyFeatureOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
-  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'modifyend' | 'modifystart' | 'modifying', ModifyEvent, Return> &
-  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'modifyend' | 'modifystart' | 'modifying', Return>;
+    OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+    OnSignature<Types | 'modifyend' | 'modifystart' | 'modifying', ModifyEvent, Return> &
+    CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'modifyend' | 'modifystart' | 'modifying', Return>;
 
 export enum ModifyingEventType {
     MODIFYING = 'modifying'
@@ -84,21 +83,22 @@ export default class ModifyFeature extends Pointer {
     setFilter(filter?: (f: Feature) => boolean): void
 
     /** Get nearest coordinate in a list
-    * @param {Coordinate} pt the point to find nearest
-    * @param {geom} coords list of coordinates
-    * @return {*} the nearest point with a coord (projected point), dist (distance to the geom), ring (if Polygon)
-     */
-    getNearestCoord(pt: Coordinate, coords: typeof GeometryType): {
+   * @param {ol.coordinate} pt the point to find nearest
+   * @param {ol.geom} geom Geometry
+   * @return {*} the nearest point with a coord (projected point), dist (distance to the geom), ring (if Polygon)
+   */
+    getNearestCoord(pt: Coordinate, geom: Type): {
         coord: Coordinate,
         dist: number,
         ring?: number
         pt?: Coordinate,
     } | false;
+    
     /** Get arcs concerned by a modification
      * @param {geom} geom the geometry concerned
      * @param {Coordinate} coord pointed coordinates
      */
-    getArcs(geom: typeof GeometryType, coord: Coordinate): void;
+    getArcs(geom: Type, coord: Coordinate): void;
     /**
      * @param {MapBrowserEvent<UIEvent>} evt Map browser event.
      * @return {boolean} `true` to start the drag sequence.

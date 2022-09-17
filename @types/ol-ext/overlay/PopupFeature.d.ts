@@ -1,8 +1,8 @@
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import { Overlay } from 'ol';
-import OverlayPositioning from 'ol/OverlayPositioning';
 import { Select } from 'ol/interaction';
+import { Positioning } from 'ol/Overlay';
 
 
 /** Template attributes for popup
@@ -39,7 +39,7 @@ export interface Options {
     onclose?: ((...params: any[]) => any);
     onshow?: ((...params: any[]) => any);
     offsetBox?: number | number[];
-    positioning?: typeof OverlayPositioning | string;
+    positioning?: Positioning | string;
     template?: Template | ((f: Feature) => Template);
     select?: Select;
     keepSelection?: boolean;
@@ -122,7 +122,7 @@ export default class PopupFeature extends Overlay { // we cannot use extends Pop
      * 		or 'auto' to var the popup choose the best position
      * @api stable
      */
-    setPositioning(pos: typeof OverlayPositioning | string | undefined): void;
+    setPositioning(pos: Positioning | string | undefined): void;
     /** Check if popup is visible
     * @return {boolean}
      */

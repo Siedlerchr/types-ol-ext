@@ -1,7 +1,6 @@
-import { Overlay as Overlay } from 'ol';
+import { Overlay } from 'ol';
 import { Coordinate } from 'ol/coordinate';
-import { Options as OverlayOptions } from 'ol/Overlay';
-import OverlayPositioning from 'ol/OverlayPositioning';
+import { Options as OverlayOptions, Positioning } from 'ol/Overlay';
 
 
 /** Openlayers Overlay.
@@ -9,8 +8,6 @@ import OverlayPositioning from 'ol/OverlayPositioning';
  * @namespace Overlay
  * @see {@link http://openlayers.org/en/latest/apidoc/module-ol_Overlay.html}
  */
-
-
 export interface Options extends OverlayOptions {
     popupClass?: string;
     anim?: boolean;
@@ -18,9 +15,9 @@ export interface Options extends OverlayOptions {
     onclose?: () => void;
     onshow?: () => void;
     offsetBox?: number | number[];
-    positioning?: typeof OverlayPositioning | any | undefined; // workaround with any for 'auto'
+    positioning?: Positioning | any | undefined; // workaround with any for 'auto'
+    minibar?: boolean;
 }
-
 
 
 /**
@@ -82,7 +79,7 @@ export default class Popup extends Overlay {
      * 		or 'auto' to var the popup choose the best position
      * @api stable
      */
-    setPositioning(pos?: typeof OverlayPositioning | string): void;
+    setPositioning(pos?: Positioning | string): void;
     /** Check if popup is visible
     * @return {boolean}
      */

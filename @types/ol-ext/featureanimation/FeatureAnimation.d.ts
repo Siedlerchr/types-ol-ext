@@ -1,13 +1,13 @@
 import { Style } from 'ol/style'
 import { FeatureLike } from 'ol/Feature';
 import { Geometry } from 'ol/geom';
-import GeometryType from 'ol/geom/GeometryType';
 import { Extent } from 'ol/extent';
 import { Coordinate } from 'ol/coordinate';
-import { FrameState } from 'ol/PluggableMap';
 import VectorContext from 'ol/render/VectorContext';
 import { StyleLike } from 'ol/style/Style';
 import { Object as _OL_OBJECT } from 'ol';
+import { Type } from 'ol/geom/Geometry';
+import { FrameState } from 'ol/Map';
 
 export interface FeatureAnimationEvent {
     vectorContext: VectorContext,
@@ -19,7 +19,7 @@ export interface FeatureAnimationEvent {
     // Feature information
     feature: FeatureLike,
     geom: Geometry
-    typeGeom: typeof GeometryType,
+    typeGeom:  Type,
     bbox: Extent
     coord: Coordinate
     style: StyleLike

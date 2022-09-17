@@ -33,11 +33,11 @@ export default class TextStreamReader {
      * @param {function} getLine a function that gets the current line as argument. Return false to stop reading
      * @param {function} [progress] a function that gets the progress on each chunk (beetween 0,1) and a boolean set to true on end
      */
-    readLines(getLine: (line: string) => void, progress?: (number, boolean) => void): void;
+    readLines(getLine: (line: string) => void, progress?: (arg0: number, arg1: boolean) => void): void;
     /** Read a set of line chunk from the stream
      * @param {function} getLines a function that gets lines read as an Array<String>.
      * @param {function} [progress] a function that gets the progress (beetween 0,1) and a boolean set to true on end of file
      */
-    readChunk(getLines: (lines: string[]) => void, progress?: (number, boolean) => void): void
+    readChunk(getLines: (lines: string[]) => void, progress?: (arg0: number, arg1: boolean) => void): void
 
 }

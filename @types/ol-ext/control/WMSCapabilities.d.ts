@@ -3,7 +3,6 @@ import TileLayer from 'ol/layer/Tile';
 import Button from './Button';
 import { Options as ControlOptions } from 'ol/control/Control';
 import Dialog from './Dialog';
-import Layer from '../filter/Base';
 import { Extent } from 'ol/extent';
 import TileSource from 'ol/source/Tile';
 

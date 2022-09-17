@@ -1,4 +1,3 @@
-export default ol_ext_Worker;
 /** Worker helper to create a worker from code
  * @constructor
  * @param {function} mainFn main worker function
