@@ -1,6 +1,5 @@
 import { Pointer } from 'ol/interaction';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
-import { Color } from 'ol/color';
 import { Pixel } from 'ol/pixel';
 import { Layer } from 'ol/layer';
 

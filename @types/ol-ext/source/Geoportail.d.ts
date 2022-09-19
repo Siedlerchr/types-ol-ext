@@ -1,4 +1,4 @@
-import { WMTS} from 'ol/source/WMTS';
+import WMTS from 'ol/source/WMTS';
 import { Options as SourceOptions } from 'ol/source/TileImage';
 import { Coordinate } from 'ol/coordinate';
 import { ProjectionLike } from 'ol/proj';

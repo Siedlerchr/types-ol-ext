@@ -2,7 +2,7 @@ import { Map as _ol_Map_, Overlay } from 'ol';
 
 import { Pixel } from 'ol/pixel';
 import { Style } from 'ol/style';
-import OverlayPositioning from 'ol/OverlayPositioning';
+import Positioning from 'ol/Overlay';
 import { Options as OverlayOptions } from 'ol/Overlay';
 import Popup from './Popup';
 export interface Options extends OverlayOptions {
@@ -14,7 +14,7 @@ export interface Options extends OverlayOptions {
     onClose?: () => void;
     onShow?: () => void;
     offsetBox?: number | number[];
-    positioning?: typeof OverlayPositioning | any | undefined; // workaround with any for 'auto'
+    positioning?: typeof Positioning | any | undefined; // workaround with any for 'auto'
 }
 
 /**

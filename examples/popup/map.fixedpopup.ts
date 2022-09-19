@@ -8,8 +8,7 @@ import TileLayer from 'ol/layer/Tile';
 import FixedPopup from 'ol-ext/overlay/FixedPopup';
 import VectorLayer from 'ol/layer/Vector';
 import { LineString, Point } from 'ol/geom';
-import Fixed from '../../@types/ol-ext/overlay/Fixed';
-import Popup from '../../@types/ol-ext/overlay/Popup';
+import Popup from 'ol-ext/overlay/Popup';
 
 // Layers
 const layers = [

@@ -2,18 +2,18 @@ import { TouchCursor } from "./TouchCursor";
 import { Coordinate } from 'ol/coordinate';
 import { InteractionOptions } from "ol/interaction/Interaction";
 import  Button  from "../control/Button";
-import GeometryType from 'ol/geom/GeometryType';
 import VectorSource from 'ol/source/Vector';
 import Collection from 'ol/Collection';
 import { Feature, Map as _ol_Map_ } from 'ol';
 import { StyleLike } from 'ol/style/Style';
+import { Type } from "ol/geom/Geometry";
 
 export interface Options extends InteractionOptions {
     className?: string;
     coordinate?: Coordinate;
     buttons?: Button[];
     maxButtons?: number;
-    type?: typeof GeometryType;
+    type?: Type;
     types?: string[];
     source?: VectorSource;
     features?: Collection<Feature>;

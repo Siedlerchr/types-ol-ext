@@ -46,9 +46,9 @@ function setText(t: string) {
     vector.changed();
 }
 // Fill font glyphs
-const glyph = FontSymbol.prototype.defs.glyphs;
+const glyph = FontSymbol.defs.glyphs;
 const opt: HTMLDivElement = document.querySelector<HTMLDivElement>(".options")!;
-for (const font in FontSymbol.prototype.defs.fonts) {
+for (const font in FontSymbol.defs.fonts) {
     const h2 = document.createElement("h2");
     h2.textContent = font+":";
     opt.appendChild(h2);

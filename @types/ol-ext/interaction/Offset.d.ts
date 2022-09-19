@@ -1,7 +1,7 @@
 import { Map as _ol_Map_ } from 'ol';
 import Collection from 'ol/Collection';
 import Feature from 'ol/Feature';
-import { Vector } from 'ol/layer';
+import { Layer, Vector } from 'ol/layer';
 import { Vector as VectorSource } from 'ol/source';
 import { Pointer } from 'ol/interaction';
 import { StyleLike } from 'ol/style/Style';

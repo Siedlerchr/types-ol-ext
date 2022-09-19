@@ -8,14 +8,30 @@ import Width from 'ol-ext/util/input/Width';
 import List from 'ol-ext/util/input/List';
 import PopupBase from 'ol-ext/util/input/PopupBase';
 import { asString } from 'ol/color';
+import { Map as _ol_Map } from 'ol';
+import Dialog from 'ol-ext/control/Dialog';
+import Range from 'ol-ext/util/input/Range';
 
 declare global {
   interface Window {
     $(selector: any, context?: any): any;
     [key: string]: any;
+    dialog: Dialog;
   }
 }
 
+/* A dialog with a color input */ 
+const fakeMap = new _ol_Map();
+const dialog = new Dialog({ fullscreen: true });
+fakeMap.addControl(dialog);
+dialog.setContent({
+  title: 'Color',
+  content: 'Color : '
+});
+const inputColor = new Color({ position: 'fixed', parent: dialog.getContentElement() })
+window.dialog = dialog;
+
+/* Set inputs */
 const switcher = new Switch({
   input: $('.switch').get(0),
   html: 'off',
@@ -34,11 +50,7 @@ $('.radio').each((i: number, elem: Element) => {
     after: 'radio ' + (i + 1),
     checked: !i,
   });
-  if (i === 0) {
-    window.radio1 = radio;
-  } else {
-    window.radio2 = radio;
-  }
+  window['radio'+(i+1)] = radio;
 });
 
 const slider = new Slider({ input: $('.slider').get(0) });
@@ -122,4 +134,13 @@ arrow.on('change:value', (e) => {
 
 const popup = new PopupBase({
   input: $('.popup').get(0),
+});
+
+const range = new Range({
+  input: $('.range').get(0),
+});
+var range2 = new Range({
+  input: $('.range2').get(0),
+  input2: $('.range2').get(1),
+  overflow: true
 });

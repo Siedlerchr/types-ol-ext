@@ -1,11 +1,11 @@
 import { Map as _ol_Map_ } from 'ol';
 import { Vector as VectorSource } from 'ol/source';
 import { StyleLike } from 'ol/style/Style';
-import GeometryType from 'ol/geom/GeometryType';
 import { Interaction } from 'ol/interaction';
 import { Coordinate } from 'ol/coordinate';
 import { Geolocation as _ol_Geolocation } from 'ol';
 import { Geometry, LineString, Polygon } from 'ol/geom';
+import { Type } from 'ol/geom/Geometry';
 import BaseEvent from 'ol/events/Event';
 import Feature from 'ol/Feature';
 import { EventsKey } from 'ol/events';
@@ -14,10 +14,10 @@ import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
 import { Types } from 'ol/ObjectEventType';
 
 type GeolocationDrawOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
-  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'drawing' | 'tracking', GeolocationDrawEvent, Return> &
-  OnSignature<Types | 'following', FollowingEvent, Return> &
-  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawing' | 'tracking' | 'following', Return>;
+    OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+    OnSignature<Types | 'drawing' | 'tracking', GeolocationDrawEvent, Return> &
+    OnSignature<Types | 'following', FollowingEvent, Return> &
+    CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawing' | 'tracking' | 'following', Return>;
 
 export enum GeolocationDrawEventType {
     DRAWING = 'drawing',
@@ -34,7 +34,7 @@ export interface Attributes {
 
 export interface GeolocationDrawOptions {
     source?: VectorSource;
-    type?: typeof GeometryType.POINT | typeof GeometryType.LINE_STRING | typeof GeometryType.POLYGON;
+    type?: 'Point' | 'LineString' | 'Polygon';
     minAccuracy?: number;
     condition?: ((loc: _ol_Geolocation) => boolean);
     attributes?: Attributes;

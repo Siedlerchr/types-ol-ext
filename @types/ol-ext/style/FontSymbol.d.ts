@@ -39,6 +39,11 @@ export interface Glyph {
     search: string
 }
 
+export interface FontDefs {
+    fonts: { [key:string]: Font },
+    glyphs: { [key:string]: Glyph }
+}
+
 /**
  * @classdesc
  * A marker style to use with font symbols.
@@ -75,10 +80,7 @@ export default class FontSymbol extends RegularShape {
     /**
      *	Font defs
      */
-    defs: {
-        fonts: any;
-        glyphs: any;
-    };
+    static defs: FontDefs;
     /** Static function : add new font defs
      * @param {String|Object} font the font desciption
      * @param {} glyphs a key / value list of glyph definitions.

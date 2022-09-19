@@ -9,6 +9,15 @@ import { LineString, Point, Polygon } from 'ol/geom';
 import { Coordinate } from 'ol/coordinate';
 import 'ol-ext/render/AnimExtent';
 import featureAnimation from 'ol-ext/featureanimation/FeatureAnimation';
+
+declare global {
+  interface Window {
+    $(selector: any, context?: any): any,
+    add10(): void
+  }
+}
+const $ = window.$;
+
 // Layers
 let layer = new TileLayer({
   source: new Stamen({ layer: 'terrain' }),
@@ -112,12 +121,12 @@ function addFeatureAt(p: Coordinate) {
 
   vector.getSource()?.addFeature(f);
   vector.animateFeature(f, [
-    new featureAnimation[$('#anim').text()] ({
+    new featureAnimation[$('#anim').val()] ({
       speed: Number($('#speed').val()),
       duration: Number(1000 -Number($('#speed').val()) * 300),
       side: $('#side').prop('checked'),
     }),
-    new featureAnimation[$('#anim2').text()]({
+    new featureAnimation[$('#anim2').val()]({
       speed: Number($('#speed').val()),
       duration: Number(1000 - Number($('#speed').val()) * 300),
       horizontal: /Slide/.test($('#anim').text()),
@@ -138,6 +147,9 @@ function add10() {
     }, 100 * i);
   }
 }
+window.add10 = (): void => {
+  add10();
+}
 add10();
 
 // Drop a feature on click
@@ -153,7 +165,7 @@ map.on('singleclick', function (evt) {
     vector.getSource()?.removeFeature(f);
     // Show animation
     vector.animateFeature(f, [
-      new featureAnimation[$('#anim').text()]({
+      new featureAnimation[$('#anim').val()]({
         speed: Number($('#speed').val()),
         duration: Number(1000 - Number($('#speed').val()) * 300),
         side: $('#side').prop('checked'),

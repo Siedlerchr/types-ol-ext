@@ -2,12 +2,12 @@ import { Map as _ol_Map_ } from 'ol';
 import { Coordinate } from 'ol/coordinate';
 import { Vector as VectorSource } from 'ol/source';
 import { Style } from 'ol/style';
-import GeometryType from 'ol/geom/GeometryType';
 import CenterTouch from './CenterTouch';
+import { Type } from 'ol/geom/Geometry';
 
 export interface Options {
     source?: VectorSource;
-    type: typeof GeometryType.POINT | typeof GeometryType.LINE_STRING | typeof GeometryType.POLYGON;
+    type: 'Point'| 'LineString' | 'Polygon'
     tap?: boolean;
     style?: Style | Style[];
     sketchStyle?: Style | Style[];
@@ -48,7 +48,7 @@ export interface Options {
     /** Get geometry type
     * @return {GeometryType}
      */
-    getGeometryType(): typeof GeometryType;
+    getGeometryType(): Type;
     /** Start drawing and add the sketch feature to the target layer.
     * The interaction.Draw.EventType.DRAWEND event is dispatched before inserting the feature.
      */

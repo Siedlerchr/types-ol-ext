@@ -23,7 +23,7 @@
     "strictNullChecks": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es5",
+    "target": "ES6",
     "rootDir": "./",
     "outDir": "../ol-ext/examples"
   }

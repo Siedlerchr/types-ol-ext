@@ -2,8 +2,8 @@ import { Map as _ol_Map_ } from 'ol';
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import Event from 'ol/events/Event';
-import OverlayPositioning from 'ol/OverlayPositioning';
 import Popup from './Popup';
+import { Positioning } from 'ol/Overlay';
 
 export interface Options {
     popupClass?: string;
@@ -12,7 +12,7 @@ export interface Options {
     formatArea?: (area: number) => string;
     getHTML?: (feature: Feature, info: string) => string;
     offsetBox?: number | number[];
-    positionning?: typeof OverlayPositioning | string ;
+    Positioning?: Positioning | string;
 }
 /** A tooltip element to be displayed over the map and attached on the cursor position.
  * @constructor
@@ -103,7 +103,7 @@ export default class Tooltip extends Popup {
      * 		or 'auto' to var the popup choose the best position
      * @api stable
      */
-    setPositioning(pos?: typeof OverlayPositioning | string): void;
+    setPositioning(pos?: Positioning | string): void;
     /** Check if popup is visible
     * @return {boolean}
      */
