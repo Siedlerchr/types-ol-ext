@@ -9,6 +9,13 @@ import { Polygon } from 'ol/geom';
 let refresh: any;
 const imgFile = '../data/pattern.png';
 
+declare global {
+  interface Window {
+    $(selector: any, context?: any): any,
+    refresh(): void
+  }
+}
+
 $(window).on('load', () => {
        FillPattern.addPattern("copy (char pattern)", { char: "©" });
        FillPattern.addPattern("bug (fontawesome)", { char: '\uf188', size: 12, font: "10px FontAwesome" });
@@ -21,7 +28,7 @@ $(window).on('load', () => {
 
         let pat = "hatch";
         const spattern = $("#pselect");
-        for (const i in FillPattern.prototype.patterns) {
+        for (const i in FillPattern.patterns) {
             const p = new FillPattern({ pattern: i });
             $("<div>").attr('title', i)
                 .css("background-image", 'url("' + p.getImage().toDataURL() + '")')
@@ -66,6 +73,9 @@ $(window).on('load', () => {
                 });
             $("#select").css('background-image', 'url(' + p.getImage().toDataURL() + ')');
         };
+        window.refresh = (): void => {
+            refresh();
+        }
 
         // Layers
         const layer = new Tile({
@@ -99,7 +109,7 @@ $(window).on('load', () => {
                             image: (p == 'Image (PNG)') ? new Icon({ src: imgFile }) : undefined,
                             ratio: 1,
                             icon: p == 'Image (PNG)' ? new Icon({ src: 'data/target.png' }) : undefined,
-                            color: $("#color").text(),
+                            color: $("#color").val()?.toString(),
                             offset: Number($("#offset").val()),
                             scale: Number($("#scale").val()),
                             fill: new Fill({ color: $("#bg").val()?.toString() }),

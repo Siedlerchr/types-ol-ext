@@ -76,7 +76,7 @@ export default class FillPattern extends Fill {
   /** Patterns definitions
    * @see pattern generator http://www.imagico.de/map/jsdotpattern.php
    */
-  patterns: {
+  static patterns: {
     hatch: {
       width: number;
       height: number;
