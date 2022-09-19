@@ -3,6 +3,13 @@ import { Tile } from 'ol/layer';
 import { Stamen } from 'ol/source';
 import GeoBookmark from 'ol-ext/control/GeoBookmark';
 import { transform } from 'ol/proj';
+
+declare global {
+  interface Window {
+    bm: GeoBookmark
+  }
+}
+
 // The map
 var map = new Map
 	({
@@ -24,3 +31,5 @@ var bm = new GeoBookmark({
 	}
 });
 map.addControl(bm);
+
+window.bm = bm;
