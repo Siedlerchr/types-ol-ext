@@ -12,7 +12,7 @@ export interface Options{
 }
 /** French Geoportail alti coding
  *
- * @param {ol.geom.Geometry} geom
+ * @param {Geometry} geom
  * @param {Object} options
  *  @param {ol/proj~ProjectionLike} [options.projection='EPSG:3857'] geometry projection, default 'EPSG:3857'
  *  @param {string} [options.apiKey='choisirgeoportail'] Geoportail API key

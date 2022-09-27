@@ -31,6 +31,16 @@ module.exports = {
           configFile: "examples/tsconfig.json",
         },
       },
+      {
+        test: /\.m?js/,
+        type: "javascript/auto",
+      },
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
     ],
   }
 }

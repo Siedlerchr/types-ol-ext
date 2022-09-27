@@ -2,7 +2,7 @@ import { Overlay } from 'ol';
 import { Pointer } from 'ol/interaction';
 import BaseEvent from 'ol/events/Event';
 import MapBrowserEvent from 'ol/MapBrowserEvent';
-import { FrameState } from 'ol/PluggableMap';
+import { FrameState } from 'ol/Map';
 import { Coordinate } from 'ol/coordinate';
 import { EventsKey } from 'ol/events';
 import { ObjectEvent } from 'ol/Object';
