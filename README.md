@@ -2,10 +2,7 @@
 
 [ol-ext](https://github.com/Viglino/ol-ext) TypeScript declaration. If you encounter any missing typings or wrong, please open an issue!
 
-## NOT YET COMPATIBLE WITH OPENLAYERS >= 7
-
-see https://github.com/Viglino/ol-ext/issues/839 
-
+Version >=3.0.0 is compatible with ol-ext 4.0.x and ol7
 
 ## Installation
 

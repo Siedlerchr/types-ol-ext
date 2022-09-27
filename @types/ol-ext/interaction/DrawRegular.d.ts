@@ -7,7 +7,6 @@ import { StyleLike } from "ol/style/Style";
 import { Interaction } from "ol/interaction";
 import MapBrowserEvent from "ol/MapBrowserEvent";
 import { Condition as EventsConditionType } from "ol/events/condition";
-import { condition } from "../control/SelectBase";
 import { EventsKey } from "ol/events";
 import BaseEvent from "ol/events/Event";
 import { ObjectEvent } from "ol/Object";

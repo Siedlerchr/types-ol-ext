@@ -1,5 +1,5 @@
 import Feature from 'ol/Feature';
-import { Interaction, Select } from 'ol/interaction';
+import { Select } from 'ol/interaction';
 import { Options as SelectOptions, SelectEvent } from 'ol/interaction/Select'
 import BaseEvent from 'ol/events/Event';
 import { EventsKey } from 'ol/events';

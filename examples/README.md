@@ -24,8 +24,7 @@
    ```bash
    cd /path/to/types-ol-ext
    cd ol-ext
-   npx gulp
-   npx gulp serve
+   npm run start
    ```
 
    Then access [http://localhost:8181](http://localhost:8181) and check some examples.

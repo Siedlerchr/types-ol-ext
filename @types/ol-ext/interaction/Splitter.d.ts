@@ -4,7 +4,6 @@ import Feature from 'ol/Feature';
 import { Vector as VectorSource } from 'ol/source';
 import { Interaction } from 'ol/interaction';
 import { EventsKey } from 'ol/events';
-import BaseEvent from 'ol/events/Event';
 import { ObjectEvent } from 'ol/Object';
 import { SplitEvent } from './Split';
 import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
