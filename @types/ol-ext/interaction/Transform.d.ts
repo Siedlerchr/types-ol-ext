@@ -20,7 +20,8 @@ type TransformOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
     OnSignature<Types | 'rotatestart' | 'rotating' | 'rotateend', RotateEvent, Return> &
     OnSignature<Types | 'scalestart' | 'scaling' | 'scaleend', ScaleEvent, Return> &
     OnSignature<Types | 'translatestart' | 'translating' | 'translateend', TranslateEvent, Return> &
-    CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'rotatestart' | 'rotating' | 'rotateend' | 'scalestart' | 'scaling' | 'scaleend' | 'translatestart' | 'translating' | 'translateend', Return>
+    OnSignature<Types | 'select' , SelectEvent, Return> &
+    CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'rotatestart' | 'rotating' | 'rotateend' | 'scalestart' | 'scaling' | 'scaleend' | 'translatestart' | 'translating' | 'translateend' | 'select', Return>
 
 export interface Options {
     filter?: (f: Feature, l: Layer) => boolean;
@@ -59,6 +60,7 @@ export enum TranslateEventType {
     TRANSLATEEND = 'translateend',
 }
 
+export type SelectEventType = 'select';
 /**
  * Interaction transform
  *
@@ -85,13 +87,29 @@ export enum TranslateEventType {
  * @param {number|Array<number>|function} [options.pointRadius=0] radius for points or a function that takes a feature and returns the radius (or [radiusX, radiusY]). If not null show handles to transform the points
 
  */
+
+export type olExtStyle = 'default' | 'translate' | 'rotate' | 'rotate0' | 'scale' | 'scale1' | 'scale2' | 'scale3' | 'scalev' | 'scaleh1' | 'scalev2' | 'scaleh3'
 export default class Transform extends Pointer {
     constructor(options?: Options);
     /**
      * Cursors for transform
      */
-    Cursors: any;
-    /**
+     Cursors: {
+        default: string;
+        select: string;
+        translate: string;
+        rotate: string;
+        rotate0: string;
+        scale: string;
+        scale1: string;
+        scale2: string;
+        scale3: string;
+        scalev: string;
+        scaleh1: string;
+        scalev2: string;
+        scaleh3: string;
+    };
+     /**
      * Remove the interaction from its current map, if any,  and attach it to a new
      * map, if any. Pass `null` to just remove the interaction from the current map.
      * @param map Map.
@@ -118,7 +136,7 @@ export default class Transform extends Pointer {
      * @param olstyle
      * @api stable
      */
-    setStyle(style: Style, olstyle: Style | Style[]): void;
+    setStyle(style: olExtStyle, olstyle: Style | Style[]): void;
     /**
      * Draw transform sketch
      * @param draw only the center
@@ -211,4 +229,17 @@ export class TranslateEvent extends BaseEvent {
     delta: [number, number];
     pixel: Pixel;
     coordinate: Coordinate;
+}
+
+export class SelectEvent extends BaseEvent{
+    constructor(
+        type: SelectEventType,
+        feature: Feature<Geometry>,
+        features: Collection<Feature<Geometry>>,
+    )
+    feature: Feature<Geometry>;
+    features: Collection<Feature<Geometry>>;
+    pixel: Pixel;
+    coordinate: Coordinate;
+
 }
