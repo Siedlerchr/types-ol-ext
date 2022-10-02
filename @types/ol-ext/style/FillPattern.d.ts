@@ -2,18 +2,6 @@ import { Fill, Image, Icon } from 'ol/style';
 import { Color } from "ol/color";
 import { ColorLike } from 'ol/colorlike';
 
-export interface FillPatternOptions {
-  size?: number;
-  width?: number;
-  height?: number;
-  circles?: number[][];
-  lines?: number[][];
-  stroke?: number;
-  fill?: boolean;
-  char?: string;
-  font?: string;
-  angle?: boolean;
-}
 
 export interface Options {
   pattern?: string;
@@ -29,22 +17,23 @@ export interface Options {
   angle?: number | boolean;
   scale?: number;
 }
+
 /**
  * @classdesc
  * Fill style with named pattern
  *
  * @constructor
  * @param {olx.style.FillPatternOption=}  options
- *	@param {ol.style.Image|undefined} options.image an image pattern, image must be preloaded to draw on first call
- *	@param {number|undefined} options.opacity opacity with image pattern, default:1
- *	@param {olx.style.fillPattern} options.pattern pattern name (override by image option)
- *	@param {Color} options.color pattern color
- *	@param {Fill} options.fill fill color (background)
- *	@param {number} options.offset pattern offset for hash/dot/circle/cross pattern
- *	@param {number} options.size line size for hash/dot/circle/cross pattern
- *	@param {number} options.spacing spacing for hash/dot/circle/cross pattern
- *	@param {number|bool} options.angle angle for hash pattern / true for 45deg dot/circle/cross
- *	@param {number} options.scale pattern scale
+ *  @param {Image|undefined} options.image an image pattern, image must be preloaded to draw on first call
+ *  @param {number|undefined} options.opacity opacity with image pattern, default:1
+ *  @param {string} options.pattern pattern name (override by image option)
+ *  @param {Color|ColorLike} options.color pattern color
+ *  @param {Fill} options.fill fill color (background)
+ *  @param {number} options.offset pattern offset for hash/dot/circle/cross pattern
+ *  @param {number} options.size line size for hash/dot/circle/cross pattern
+ *  @param {number} options.spacing spacing for hash/dot/circle/cross pattern
+ *  @param {number|boolean} options.angle angle for hash pattern / true for 45deg dot/circle/cross
+ *  @param {number} options.scale pattern scale 
  * @extends {Fill}
  * @api
  */

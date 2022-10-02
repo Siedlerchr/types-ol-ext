@@ -7,7 +7,7 @@ import { FillPatternOptions } from './FillPattern';
 export interface Options {
     image?: Image;
     opactiy?: number;
-    pattern?: FillPattern;
+    pattern?: string;
     color?: ColorLike;
     fill?: Fill;
     offset?: number;
@@ -15,7 +15,6 @@ export interface Options {
     spacing?: number
     angle?: number | boolean;
     scale?: number;
-
 }
 /**
  * @classdesc
@@ -23,16 +22,16 @@ export interface Options {
  *
  * @constructor
  * @param {any}  options
- *	@param {style.Image|undefined} options.image an image pattern, image must be preloaded to draw on first call
+ *	@param {Image|undefined} options.image an image pattern, image must be preloaded to draw on first call
  *	@param {number|undefined} options.opacity opacity with image pattern, default:1
- *	@param {olx.style.fillPattern} options.pattern pattern name (override by image option)
- *	@param {colorLike} options.color pattern color
+ *	@param {string} options.pattern pattern name (override by image option)
+ *	@param {ColorLike} options.color pattern color
  *	@param {Fill} options.fill fill color (background)
  *	@param {number} options.offset pattern offset for hash/dot/circle/cross pattern
- *	@param {number} options.Size line Size for hash/dot/circle/cross pattern
+ *	@param {number} options.size line size for hash/dot/circle/cross pattern
  *	@param {number} options.spacing spacing for hash/dot/circle/cross pattern
  *	@param {number|bool} options.angle angle for hash pattern / true for 45deg dot/circle/cross
- *	@param {number} options.scale pattern scale
+ *	@param {number} options.scale pattern scale 
  * @extends {Stroke}
  * @api
  */
