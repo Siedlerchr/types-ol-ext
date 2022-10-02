@@ -46,8 +46,4 @@ export default class StrokePattern extends Stroke {
     *	@return {canvas}
      */
     getImage(): HTMLCanvasElement;
-    /** Get pattern
-    *	@param {olx.style.FillPatternOption}
-     */
-    getPattern_(options: FillPatternOptions): void;
 }
