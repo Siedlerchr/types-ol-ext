@@ -15,7 +15,6 @@ export interface Options {
     spacing?: number
     angle?: number | boolean;
     scale?: number;
-
 }
 /**
  * @classdesc
@@ -23,11 +22,11 @@ export interface Options {
  *
  * @constructor
  * @param {any}  options
- *	@param {ol.style.Image|undefined} options.image an image pattern, image must be preloaded to draw on first call
+ *	@param {Image|undefined} options.image an image pattern, image must be preloaded to draw on first call
  *	@param {number|undefined} options.opacity opacity with image pattern, default:1
  *	@param {string} options.pattern pattern name (override by image option)
- *	@param {ol.colorLike} options.color pattern color
- *	@param {ol.style.Fill} options.fill fill color (background)
+ *	@param {ColorLike} options.color pattern color
+ *	@param {Fill} options.fill fill color (background)
  *	@param {number} options.offset pattern offset for hash/dot/circle/cross pattern
  *	@param {number} options.size line size for hash/dot/circle/cross pattern
  *	@param {number} options.spacing spacing for hash/dot/circle/cross pattern
