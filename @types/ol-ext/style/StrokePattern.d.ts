@@ -1,8 +1,5 @@
-import FillPattern from './FillPattern';
 import { Image, Fill, Stroke } from 'ol/style';
 import { ColorLike } from 'ol/colorlike';
-import { Size } from 'ol/size';
-import { FillPatternOptions } from './FillPattern';
 
 export interface Options {
     image?: Image;
@@ -30,7 +27,7 @@ export interface Options {
  *	@param {number} options.offset pattern offset for hash/dot/circle/cross pattern
  *	@param {number} options.size line size for hash/dot/circle/cross pattern
  *	@param {number} options.spacing spacing for hash/dot/circle/cross pattern
- *	@param {number|bool} options.angle angle for hash pattern / true for 45deg dot/circle/cross
+ *	@param {number|boolean} options.angle angle for hash pattern / true for 45deg dot/circle/cross
  *	@param {number} options.scale pattern scale 
  * @extends {Stroke}
  * @api

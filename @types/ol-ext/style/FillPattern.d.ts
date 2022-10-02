@@ -2,6 +2,18 @@ import { Fill, Image, Icon } from 'ol/style';
 import { Color } from "ol/color";
 import { ColorLike } from 'ol/colorlike';
 
+export interface FillPatternOptions {
+  size?: number;
+  width?: number;
+  height?: number;
+  circles?: number[][];
+  lines?: number[][];
+  stroke?: number;
+  fill?: boolean;
+  char?: string;
+  font?: string;
+  angle?: boolean;
+}
 
 export interface Options {
   pattern?: string;
@@ -50,7 +62,7 @@ export default class FillPattern extends Fill {
   getImage(): HTMLCanvasElement;
   /** Static fuction to add char patterns
    * @param {title}
-   * @param {*} options
+   * @param {FillPatternOptions} options
    *  @param {integer} [options.size=10] default 10
    *  @param {integer} [options. width=10] default 10
    *  @param {integer} [options.height=10] default 10
