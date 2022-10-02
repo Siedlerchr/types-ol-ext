@@ -53,7 +53,7 @@ export default class Graticule extends CanvasBase {
     /** Set Style
      * @api
      */
-    setStyle(): void;
+    setStyle(style: Style): void;
     /** Get style
      * @api
      */
