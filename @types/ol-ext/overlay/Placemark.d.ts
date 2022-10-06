@@ -2,13 +2,13 @@ import { Overlay } from 'ol';
 import { Coordinate } from 'ol/coordinate';
 
 export interface Options {
-    color: string;
-    backgroundColor: string;
-    contentColor: string;
-    radius: number;
-    popupClass: string;
-    onclose: ((...params: any[]) => any) | undefined;
-    onshow: ((...params: any[]) => any) | undefined;
+    color?: string;
+    backgroundColor?: string;
+    contentColor?: string;
+    radius?: number;
+    popupClass?: string;
+    onclose?: ((...params: any[]) => any) | undefined;
+    onshow?: ((...params: any[]) => any) | undefined;
 }
 /**
  * @classdesc
@@ -34,13 +34,13 @@ popup.hide();
 * @api stable
  */
 export default class Placemark extends Overlay {
-    constructor(options: Options);
+    constructor(options?: Options);
     /**
      * Set the position and the content of the placemark (hide it before to enable animation).
      * @param {Coordinate|string} coordinate the coordinate of the popup or the HTML content.
      * @param {string|undefined} html the HTML content (undefined = previous content).
      */
-    show(coordinate: Coordinate | string, html: string | undefined): void;
+    show(coordinate: Coordinate | string, html?: string | undefined): void;
     /**
      * Set the placemark color.
      * @param {string} color
@@ -66,4 +66,6 @@ export default class Placemark extends Overlay {
      * @param {number} Size Size in pixel
      */
     setRadius(Size: number): void;
+
+    hide(): void;
 }
