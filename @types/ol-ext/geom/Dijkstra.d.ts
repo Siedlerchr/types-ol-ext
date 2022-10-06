@@ -1,16 +1,28 @@
 import { Coordinate } from 'ol/coordinate';
 import Feature from 'ol/Feature';
 import { Geometry, LineString } from 'ol/geom';
-import { Vector } from 'ol/layer';
-import { Vector as VectorSource } from 'ol/source';
 import ol_Object from 'ol/Object';
+import VectorSource from 'ol/source/Vector';
+import BaseEvent from 'ol/events/Event';
+import { ObjectEvent } from 'ol/Object';
+import { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable';
+import { EventsKey } from 'ol/events';
+import { Types } from 'ol/ObjectEventType';
 
- export interface Options {
-    source: Vector<VectorSource<Geometry>>;
+export interface Options {
+    source: VectorSource
     maxIteration?: number;
     stepIteration?: number;
     epsilon?: number;
- }
+}
+
+type DijkstraOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+    OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+    OnSignature<Types | 'finish', DijkstraFinishEvent, Return> &
+    OnSignature<Types | 'pause', DijkstraPauseEvent, Return> &
+    OnSignature<Types | 'start' | 'calculating', BaseEvent, Return> &
+    CombinedOnSignature<Types | EventTypes, Return>;
+
 /**
  * @classdesc
  * Compute the shortest paths between nodes in a graph source
@@ -25,12 +37,12 @@ import ol_Object from 'ol/Object';
  * @fires finish
  * @fires pause
  * @param {any} options
- *  @param {Vector} options.source the source for the edges
+ *  @param {VectorSource} options.source the source for the edges
  *  @param {number} [options.maxIteration=20000] maximum iterations before a pause event is fired, default 20000
  *  @param {number} [options.stepIteration=2000] number of iterations before a calculating event is fired, default 2000
  *  @param {number} [options.epsilon=1E-6] geometric precision (min distance beetween 2 points), default 1E-6
  */
-declare class Dijskra extends ol_Object {
+export default class Dijskra extends ol_Object {
     constructor(options?: Options);
     /** Get the weighting of the edge, for example a speed factor
      * The function returns a value beetween ]0,1]
@@ -90,6 +102,25 @@ declare class Dijskra extends ol_Object {
      * @return {Array<Feature>}
      */
     getBestWay(): Feature[];
+
+    on: DijkstraOnSignature<EventsKey>;
+    once: DijkstraOnSignature<EventsKey>;
+    un: DijkstraOnSignature<void>;
 }
 
-export default Dijskra;
+export class DijkstraFinishEvent extends BaseEvent {
+    constructor(type: 'finish',
+        route: Feature<Geometry>[],
+        wDistance: number,
+        distance: number
+    )
+    route: Feature<Geometry>[];
+    wDistance: number;
+    distance: number;
+}
+export class DijkstraPauseEvent extends BaseEvent {
+    constructor(type: 'pause',
+        overflow: boolean
+    )
+    overflow: boolean;
+}
