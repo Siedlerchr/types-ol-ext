@@ -4,7 +4,7 @@ import { Stamen, Vector as VectorSource } from 'ol/source';
 import { GeoJSON } from 'ol/format';
 import { Style, Circle, Stroke, Fill } from 'ol/style';
 import TileLayer from 'ol/layer/Tile';
-import Dijskra from 'ol-ext/geom/Dijskra';
+import Dijskra from 'ol-ext/geom/Dijkstra';
 import { getLength } from 'ol/sphere'
 import { Coordinate } from 'ol/coordinate';
 import { unByKey } from 'ol/Observable';
@@ -17,11 +17,11 @@ import Feature from 'ol/Feature';
 var speed: {[char: string]: number } = { A: 1, P: 1, R: 1, L: 1 };
 declare global {
     interface Window {
-        map: _ol_Map
+        map: _ol_Map;
+        nodes: VectorLayer<VectorSource<Geometry>>;
     }
 }
 const $ = window.$;
-
 
 
 function calcSpeed() {
@@ -135,7 +135,7 @@ dijkstra.on('calculating', function (e) {
 
 // Get the weight of an edge
 dijkstra.weight = function (feature) {
-    var type = feature ? feature.get('type') as keyof typeof speed : speed.A;
+    var type = feature ? feature.get('type') as keyof typeof speed : 'A';
     if (!speed[type]) console.error(type)
     return speed[type] || speed.L;
 };
@@ -194,3 +194,4 @@ map.on('click', function (e) {
 
 window.calcSpeed = calcSpeed
 window.map = map;
+window.nodes = nodes;
