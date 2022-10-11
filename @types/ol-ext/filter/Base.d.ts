@@ -62,8 +62,8 @@ declare module 'ol/layer/Layer' {
  * @param {Object} options
  *  @param {boolean} [options.active]
  */
-declare abstract class Base extends ol_Object {
-    constructor(options: Options);
+export default abstract class Base extends ol_Object {
+    constructor(options?: Options);
     /** Activate / deactivate filter
     *	@param {boolean} b
      */
@@ -73,5 +73,3 @@ declare abstract class Base extends ol_Object {
      */
     getActive(): boolean;
 }
-
-export default Base;

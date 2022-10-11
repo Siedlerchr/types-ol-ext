@@ -24,7 +24,7 @@ export declare type FilterTextureOptions = {
  * @extends {filter.Base}
  * @param {FilterTextureOptions} options
  */
-export class Texture extends Base {
+export default class Texture extends Base {
     constructor(options: FilterTextureOptions);
     /** Set texture
      * @param {FilterTextureOptions} [options]
@@ -46,4 +46,3 @@ export class Texture extends Base {
     getActive(): boolean;
 }
 
-export default Texture;

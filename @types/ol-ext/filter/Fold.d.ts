@@ -21,7 +21,7 @@ export interface Options {
  *  @param {boolean} [options.shadow=true] true to display shadow
  *  @param {number} [options.opacity=.2] effect opacity
  */
-declare class Fold extends Base {
+export default class Fold extends Base {
     constructor(options?: Options);
     /** Activate / deactivate filter
     *	@param {boolean} b
@@ -33,4 +33,3 @@ declare class Fold extends Base {
     getActive(): boolean;
 }
 
-export default Fold;

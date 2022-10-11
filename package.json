@@ -44,7 +44,7 @@
     "jsdoc": "^3.6.11",
     "node-html-parser": "^5.4.2",
     "ol": "^7.1.0",
-    "ol-ext": "^4.0.1",
+    "ol-ext": "^4.0.2",
     "ts-loader": "^9.4.1",
     "tsd": "^0.24.1",
     "typescript": "^4.8.4",
