@@ -10,7 +10,7 @@ export interface Options extends ControlOptions {
     anchor?: boolean;
     visible?: boolean
     hidden?: boolean;
-    onclick: (link: string) => any;
+    onclick?: (link: string) => any;
 }
 /**
  * Set an hyperlink that will return the user to the current map view.

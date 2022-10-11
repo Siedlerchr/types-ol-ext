@@ -71,7 +71,7 @@ export interface CanvasFilterOptions {
  * @param {CanvasFilterOptions} options
  */
 export default class CanvasFilter {
-    constructor(options: CanvasFilterOptions);
+    constructor(options?: CanvasFilterOptions);
     /** Add a new svg filter
      * @param {string|ol.ext.SVGFilter} url IRI pointing to an SVG filter element
      */

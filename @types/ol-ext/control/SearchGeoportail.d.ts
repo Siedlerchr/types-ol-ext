@@ -35,7 +35,7 @@ export interface Options extends SearchJsonOptions {
  * @see {@link https://geoservices.ign.fr/documentation/geoservices/geocodage.html}
  */
 export default class SearchGeoportail extends SearchJSON {
-  constructor(options: Options);
+  constructor(options?: Options);
 
    /** Send an ajax request (GET)
    * @param {string} url
