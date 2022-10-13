@@ -21,7 +21,7 @@ export interface FilterPencilSketchOptions {
  * @extends {ol_filter_Base}
  * @param {FilterPencilSketchOptions} options
  */
-export class PencilSketch extends Base {
+export default class PencilSketch extends Base {
     constructor(options?: FilterPencilSketchOptions);
 
 }

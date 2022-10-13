@@ -1,6 +1,5 @@
 import Base from "./Base";
 
-export default ol_filter_Pointillism;
 export type FilterPointillismOptions = {
     /**
      * saturation, default 2
@@ -15,7 +14,7 @@ export type FilterPointillismOptions = {
  * @extends {ol_filter_Base}
  * @param {FilterPointillismOptions} options
  */
-export class ol_filter_Pointillism extends Base {
+export default class Pointillism extends Base {
     constructor(options?: FilterPointillismOptions);
 
 }

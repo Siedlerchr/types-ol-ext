@@ -21,6 +21,7 @@ export interface BookmarkContent {
   pos: number[];
   zoom: number;
   permanent?: boolean
+  rot?: number
 }
 export type Bookmarks = { [key: string]: BookmarkContent }
 export interface Options extends ControlOptions {

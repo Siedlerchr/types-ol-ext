@@ -18,7 +18,7 @@ export interface Options {
  *  @param {string} options.filter filter to apply (as {@link https://developer.mozilla.org/en-US/docs/Web/CSS/filter CSS property})
  *  @param {boolan} options.display show/hide layer from CSS (but keep it in layer list)
  */
-export class ol_filter_CSS extends Base {
+export default class CSS extends Base {
   constructor(options?: Options);
   /** Modify blend mode
    * @param {string} blend mix-blend-mode to apply (as {@link https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode CSS property})

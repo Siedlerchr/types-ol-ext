@@ -10,7 +10,7 @@ export interface Options {
 * @param {Object} options
 *   @param {string} options.operation composite operation
  */
-export class Composite extends Base {
+export default class Composite extends Base {
     constructor(options?: Options);
     /** Change the current operation
     *	@param {string} operation composite function

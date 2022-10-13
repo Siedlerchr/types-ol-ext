@@ -24,7 +24,7 @@ export interface  FilterColorizeOptions  {
  * @author Jean-Marc Viglino https://github.com/viglino
  * @param {FilterColorizeOptions} options
  */
-export class Colorize extends Base {
+export default class Colorize extends Base {
     constructor(options?: FilterColorizeOptions);
     /** Set options to the filter
      * @param {FilterColorizeOptions} [options]

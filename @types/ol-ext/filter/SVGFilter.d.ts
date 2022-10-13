@@ -6,7 +6,7 @@ import Base from './Base';
  * @extends {ol_filter_Base}
  * @param {ol_ext_SVGFilter|Array<ol_ext_SVGFilter>} filters
  */
-export class SVGFilter extends Base {
+export default class SVGFilter extends Base {
     constructor(filters?: SVGFilter | SVGFilter[]);
     /** Add a new svg filter
      * @param {ol.ext.SVGFilter} filter

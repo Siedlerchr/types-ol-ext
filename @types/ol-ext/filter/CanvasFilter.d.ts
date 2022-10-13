@@ -1,4 +1,4 @@
-import { SVGFilter } from "./SVGFilter";
+import SVGFilter from "./SVGFilter";
 
 export interface CanvasFilterOptions {
     /**
@@ -70,8 +70,8 @@ export interface CanvasFilterOptions {
  * @extends {ol_filter_Base}
  * @param {CanvasFilterOptions} options
  */
-export class ol_filter_CanvasFilter {
-    constructor(options: CanvasFilterOptions);
+export default class CanvasFilter {
+    constructor(options?: CanvasFilterOptions);
     /** Add a new svg filter
      * @param {string|ol.ext.SVGFilter} url IRI pointing to an SVG filter element
      */
