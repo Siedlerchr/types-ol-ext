@@ -1,4 +1,5 @@
 import { Map as _ol_Map_ } from 'ol';
+import Control from 'ol/control/Control';
 import ol_control_Control, {Options as ControlOptions} from 'ol/control/Control';
 import Event from 'ol/events/Event';
 import { position } from './control';
@@ -21,7 +22,7 @@ export interface Options extends ControlOptions {
  *	@param {bool} options.group is a group, default false
  *	@param {bool} options.toggleOne only one toggle control is active at a time, default false
  *	@param {bool} options.autoDeactivate used with subbar to deactivate all control when top level control deactivate, default false
- *	@param {Array<_ol_control_>} options.controls a list of control to add to the bar
+ *	@param {Array<Control>} options.controls a list of control to add to the bar
  */
 export default class Bar extends ol_control_Control {
     constructor(options?: Options);

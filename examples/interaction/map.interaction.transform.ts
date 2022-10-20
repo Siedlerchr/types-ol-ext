@@ -188,7 +188,6 @@ var startRadius = 10;
 var d = [0, 0];
 
 
-type GeoWithoutPoint = Exclude<Type, 'Point'>
 // Handle rotate on first point
 var firstPoint = false;
 interaction.on('select', function (e: SelectEvent) {
