@@ -162,12 +162,12 @@ export default class Transform extends Pointer {
      * Get the rotation center
      * @return
      */
-    getCenter(): Array<Coordinate> | undefined;
+    getCenter(): Coordinate | undefined;
     /**
      * Set the rotation center
      * @param c the center point, default center on the objet
      */
-    setCenter(c: Array<Coordinate> | undefined): void;
+    setCenter(c: Coordinate | undefined): void;
     /**
      * @param evt Map browser event.
      */
