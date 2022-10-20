@@ -6,11 +6,10 @@ import Feature from 'ol/Feature';
 import { Style, RegularShape, Fill, Stroke, Text } from 'ol/style';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import { Circle, LineString, Point, Polygon, Geometry } from 'ol/geom';
+import { Circle, LineString, Point, Polygon } from 'ol/geom';
 import { FeatureLike } from 'ol/Feature';
-import { always, Condition, shiftKeyOnly } from 'ol/events/condition';
+import { always, shiftKeyOnly } from 'ol/events/condition';
 import { SelectEvent } from 'ol-ext/interaction/Transform';
-import { Type } from 'ol/geom/Geometry';
 import { KeyEvent } from 'ol-ext/interaction/CurrentMap';
 
 declare global {
