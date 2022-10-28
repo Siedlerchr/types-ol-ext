@@ -1,29 +1,43 @@
 import ol_Collection from "ol/Collection";
 import ol_legend_Item, { olLegendItemOptions } from "./Item";
-import ol_style_Text from "ol/style/Text";
-import { Style } from 'ol/style';
-import { StyleFunction } from "ol/style/Style";
+import { Style, Text } from 'ol/style';
+import { StyleFunction, StyleLike } from 'ol/style/Style';
+import { Size } from "ol/size";
+import Layer from "ol/layer/Layer";
 
+
+export interface Options {
+    title?: string;
+    maxWidth?: number;
+    size?: Size;
+    margin?: number;
+    layer?: Layer
+    textStyle?: Text;
+    titleStyle?: Text;
+    style?: StyleLike
+}
 /** Legend class to draw features in a legend element
  * @constructor
  * @fires select
  * @fires refresh
  * @param {*} options
  *  @param {String} options.title Legend title
- *  @param {ol.size | undefined} options.size Size of the symboles in the legend, default [40, 25]
- *  @param {number | undefined} options.margin Size of the symbole's margin, default 10
- *  @param { ol_style_Text | undefined } options.textStyle a text style for the legend, default 16px sans-serif
+ *  @param {number} [options.maxWidth] maximum legend width
+ *  @param {ol.size} [options.size] Size of the symboles in the legend, default [40, 25]
+ *  @param {number} [options.margin=10] Size of the symbole's margin, default 10
+ *  @param { ol.layer.Base } [layer] layer associated with the legend
+ *  @param { ol.style.Text} [options.textStyle='16px sans-serif'] a text style for the legend, default 16px sans-serif
+ *  @param { ol.style.Text} [options.titleStyle='bold 16px sans-serif'] a text style for the legend title, default textStyle + bold
  *  @param { ol.style.Style | Array<ol.style.Style> | ol.StyleFunction | undefined	} options.style a style or a style function to use with features
  */
 export default class ol_legend_Legend {
     /** Get a symbol image for a given legend item
-     * @param {olLegendItemOptions} item
-     * @param {HTMLCanvasElement|undefined} canvas a canvas to draw in, if none creat one
-     * @param {int|undefined} row row number to draw in canvas, default 0
-     * @return {HTMLCanvasElement}
-     */
+    * @param {olLegendItemOptions} item
+    * @param {Canvas|undefined} canvas a canvas to draw in, if none creat one
+    * @param {int|undefined} offsetY Y offset to draw in canvas, default 0
+    */
     static getLegendImage(item: olLegendItemOptions, canvas?: HTMLCanvasElement | undefined, row?: number): HTMLCanvasElement;
-    constructor(options: any);
+    constructor(options?: Options);
 
     /** Set legend title
      * @param {string} title
@@ -36,7 +50,12 @@ export default class ol_legend_Legend {
     /** Get text Style
      * @returns {ol_style_Text}
      */
-    getTextStyle(): ol_style_Text;
+    getTextStyle(): Text;
+
+    /** Set the layer associated with the legend
+  * @param {ol.layer.Layer} [layer]
+  */
+    setLayer(layer: Layer): void
     /** Set legend size
      * @param {ol.size} size
      */
@@ -60,16 +79,35 @@ export default class ol_legend_Legend {
     /** Get item collection
      * @param {ol_Collection}
      */
-    getItems(): ol_Collection<any>;
+    getItems(): ol_Collection<ol_legend_Item>;
+    /** Remove an item at index
+      * @param {ol_legend_Item} item
+      */
+    removeItem(item: ol_legend_Item): void;
+    /*
+    * @param {number} index
+    */
+    removeItemAt(index: number): void;
     /** Refresh the legend
      */
     refresh(): void;
-    /** Get the image for a style
-     * @param {olLegendItemOptions} item
-     * @param {HTMLCanvasElement|undefined} canvas a canvas to draw in, if none creat one
-     * @param {number|undefined} row row number to draw in canvas, default 0
-     * @return {HTMLCanvasElement}
+
+    /** Calculate the legend height
+     * @return {number}
      */
-    getLegendImage(item: olLegendItemOptions, canvas?: HTMLCanvasElement, row?: number): HTMLCanvasElement;
+    getHeight(): number;
+
+    /** Calculate the legend width
+     * @return {number}
+     */
+    getWidth(): number;
+
+    /** Get the image for a style 
+     * @param {olLegendItemOptions} item 
+     * @param {Canvas|undefined} canvas a canvas to draw in, if none create one
+     * @param {int|undefined} offsetY Y offset to draw in canvas, default 0
+     * @return {CanvasElement}
+     */
+    getLegendImage(item: olLegendItemOptions, canvas?: HTMLCanvasElement, offsetY?: number): HTMLCanvasElement;
 }
 
