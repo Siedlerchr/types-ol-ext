@@ -6,7 +6,7 @@ export interface Options {
     feature?: Feature;
     shadowWidth?: number;
     shadowMapUnits?: boolean;
-    shadowColor: ColorLike
+    shadowColor?: ColorLike
     inner?: boolean;
     wrapX?: boolean;
 }

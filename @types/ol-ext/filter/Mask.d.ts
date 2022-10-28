@@ -8,7 +8,7 @@ export interface Options {
     fill?: Fill;
     shadowWidth?: number;
     shadowMapUnits?: boolean;
-    shadowColor: ColorLike;
+    shadowColor?: ColorLike;
     inner?: boolean;
     wrapX?: boolean;
 }

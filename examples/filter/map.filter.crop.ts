@@ -33,7 +33,7 @@ osm.addFilter(mask);
 function setFilter(){
     mask.set('inner', document.querySelector<HTMLInputElement>("#inner")!.checked);
     crop.set('inner', document.querySelector<HTMLInputElement>("#inner")!.checked);
-    mask.fillColor_ = document.querySelector<HTMLSelectElement>("#color")!.value;
+    mask.setFillColor( document.querySelector<HTMLSelectElement>("#color")!.value);
     // Activate
     mask.set('active', false);
     crop.set('active', false);
