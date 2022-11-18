@@ -18,6 +18,7 @@ export interface Options extends SelectOptions {
     maxObjects?: number;
     animate?: boolean;
     animationDuration?: number;
+    autoClose?: boolean;
 }
 /**
  * @classdesc
@@ -38,6 +39,7 @@ export interface Options extends SelectOptions {
  * 	@param {Number} options.maxObjects number of object that can be drawn, other are hidden
  * 	@param {bool} options.animate if the cluster will animate when features spread out, default is false
  * 	@param {Number} options.animationDuration animation duration in ms, default is 500ms
+ *	@param {boolean} options.autoClose if selecting a cluster should close previously selected clusters. False to get toggle feature. Default is true
  * @fires ol.interaction.SelectEvent
  * @api stable
  */

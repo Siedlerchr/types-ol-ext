@@ -12,6 +12,7 @@ export interface Options {
     offsetX?: number;
     offsetY?: number;
     onload?: () => void;
+    onerror?: () => void;
 }
 
 /**
@@ -30,7 +31,8 @@ export interface Options {
  *  @param {Array<number>} [options.displacement] to use with ol > 6
  * 	@param {number} [options.offsetX=0] Horizontal offset in pixels, deprecated use displacement with ol>6
  * 	@param {number} [options.offsetY=0] Vertical offset in pixels, deprecated use displacement with ol>6
- *  @param {function} [options.onload] callback when image is loaded (to redraw the layer)
+ *  @param {function} [options.onload] callback when image is loaded (to redraw the layer)#
+ *  @param {function} [options.onerror] callback when image is on error (not loaded)
  * @extends {RegularShape}
  * @api
  */

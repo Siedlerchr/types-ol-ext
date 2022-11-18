@@ -53,8 +53,8 @@ export default class ol_legend_Legend {
     getTextStyle(): Text;
 
     /** Set the layer associated with the legend
-  * @param {ol.layer.Layer} [layer]
-  */
+    * @param {ol.layer.Layer} [layer]
+    */
     setLayer(layer: Layer): void
     /** Set legend size
      * @param {ol.size} size
