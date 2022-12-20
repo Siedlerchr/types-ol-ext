@@ -9,6 +9,17 @@ export interface Options extends ControlOptions {
     immediate?: boolean
 }
 
+export interface PrintOptions {
+    imageType: string;
+    quality: number;
+    immediate: boolean;
+    size?: boolean | undefined;
+    format?: boolean | undefined;
+    orient?: boolean | undefined;
+    margin?: boolean | undefined;
+    any: any
+}
+
 /** Print control to get an image of the map
  * @constructor
  * @fire print
@@ -38,14 +49,20 @@ export default class Print extends ol_control_Control {
      *  @param {*} options.any any options passed to the print event when fired
      * @api
      */
-    print(options: {
-        imageType?: string;
-        quality?: number;
-        immediate?: boolean;
-        size?: number[];
-        format: string;
-        orient: string;
-        margin: number;
-        any: any;
-    }): void;
+    print(options?: PrintOptions): void
+
+    /** Fast print
+     * @param {*} options print options
+     *  @param {HTMLCanvasElement|undefined} [options.canvas] if none create one, only for ol@6+
+     *  @parama {string} options.imageType
+     */
+    fastPrint(options: PrintOptions & {
+        canvas?: HTMLCanvasElement
+    }, callback: (elem: HTMLCanvasElement) => void): void;
+
+    /** Helper function to copy result to clipboard
+   * @param {any} options print options
+   * @param {function} callback a callback function that takes a boolean if copy
+   */
+    copyMap(options?: PrintOptions, callback?: (result: boolean) => void): void
 }
