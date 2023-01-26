@@ -91,6 +91,5 @@ export class SplitEvent extends BaseEvent {
         toSplit: Feature[]
     );
     original: Feature;
-    toSplit: Feature[];
-
+    features: Feature[];
 }
