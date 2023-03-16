@@ -1,5 +1,6 @@
-import { Coordinate } from 'ol/coordinate';
-import { ProjectionLike } from 'ol/proj';
+import type { Coordinate } from 'ol/coordinate'
+import type { ProjectionLike } from 'ol/proj'
+
 /** Convert coordinate to French DFCI grid
  * @param {Coordinate} coord
  * @param {number} level [0-3]
@@ -7,12 +8,14 @@ import { ProjectionLike } from 'ol/proj';
  * @return {String} the DFCI index
  */
 export function ol_coordinate_toDFCI(coord: Coordinate, level: number, projection: ProjectionLike): string;
+
 /** Get coordinate from French DFCI index
-   * @param {String} index the DFCI index
-   * @param {Projection} projection result projection, default EPSG:27572
-   * @return {Coordinate} coord
-   */
+ * @param {String} index the DFCI index
+ * @param {Projection} projection result projection, default EPSG:27572
+ * @return {Coordinate} coord
+ */
 export function ol_coordinate_fromDFCI(index: string, projection: ProjectionLike): Coordinate;
+
 /** The string is a valid DFCI index
  * @param {string} index DFCI index
  * @return {boolean}

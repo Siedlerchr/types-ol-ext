@@ -1,8 +1,7 @@
-
-import { Coordinate } from 'ol/coordinate';
-import { ProjectionLike } from 'ol/proj';
-import { Stroke, Image, Style } from 'ol/style';
-
+import type { Coordinate } from 'ol/coordinate'
+import type { ProjectionLike } from 'ol/proj'
+import type { Style } from 'ol/style'
+import { Stroke, Image } from 'ol/style'
 
 /** The map is the core component of OpenLayers.
  * For a map to render, a view, one or more layers, and a target container are needed:
@@ -19,14 +18,14 @@ declare module 'ol/Map' {
   }
 
   /** Pulse a point on postcompose
-  *	@deprecated use map.animateFeature instead
-  *	@param {Array<Coordinate>} point to pulse
-  *	@param {pulse.options} pulse options param
-  *		- projection {projection||String} projection of coords
-  *		- duration {Number} animation duration in ms, default 3000
-  *		- amplitude {Number} movement amplitude 0: none - 0.5: start at 0.5*radius of the image - 1: max, default 1
-  *		- easing {easing} easing function, default easing.easeOut
-  *		- style {style.Image|Style|Array<Style>} Image to draw as markup, default red circle
+   *  @deprecated use map.animateFeature instead
+   *  @param {Array<Coordinate>} point to pulse
+   *  @param {pulse.options} pulse options param
+   *    - projection {projection||String} projection of coords
+   *    - duration {Number} animation duration in ms, default 3000
+   *    - amplitude {Number} movement amplitude 0: none - 0.5: start at 0.5*radius of the image - 1: max, default 1
+   *    - easing {easing} easing function, default easing.easeOut
+   *    - style {style.Image|Style|Array<Style>} Image to draw as markup, default red circle
    */
   function pulse(point: Coordinate[], options?: PulseOptions): void;
 

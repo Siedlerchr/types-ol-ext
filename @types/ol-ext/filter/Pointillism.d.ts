@@ -1,10 +1,10 @@
-import Base from "./Base";
+import Base from './Base'
 
 export type FilterPointillismOptions = {
-    /**
-     * saturation, default 2
-     */
-    saturate?: number;
+  /**
+   * saturation, default 2
+   */
+  saturate?: number;
 };
 /** @typedef {Object} FilterPointillismOptions
  * @property {number} saturate saturation, default 2
@@ -12,9 +12,10 @@ export type FilterPointillismOptions = {
 /** A pointillism filter to turn maps into pointillism paintings
  * @constructor
  * @extends {ol_filter_Base}
- * @param {FilterPointillismOptions} options
  */
 export default class Pointillism extends Base {
-    constructor(options?: FilterPointillismOptions);
-
+  /**
+   * @param {FilterPointillismOptions} options
+   */
+  constructor(options?: FilterPointillismOptions);
 }

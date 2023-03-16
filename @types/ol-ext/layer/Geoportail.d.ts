@@ -1,34 +1,40 @@
-import { Coordinate } from "ol/coordinate";
-import Projection from "ol/proj/Projection";
-import { Options as TileLayerOptions } from "ol/layer/BaseTile";
-import { ProjectionLike } from "ol/proj";
-import { Options as GeoPortailOptions } from "../source/Geoportail";
-import Tile from "ol/layer/Tile";
-import TileSource from "ol/source/Tile";
+import type { Coordinate } from 'ol/coordinate'
+import type Projection from 'ol/proj/Projection'
+import type { Options as TileLayerOptions } from 'ol/layer/BaseTile'
+import type { ProjectionLike } from 'ol/proj'
+import Tile from 'ol/layer/Tile'
+import type TileSource from 'ol/source/Tile'
+import type { Options as GeoPortailOptions } from '../source/Geoportail'
 
 export interface Options extends TileLayerOptions<TileSource> {
   layer?: string;
   gpgKey?: string;
   projection?: ProjectionLike;
 }
+
 /** IGN's Geoportail WMTS layer definition
  * @constructor
  * @extends {ol.layer.Tile}
- * @param {olx.layer.WMTSOptions=} options WMTS options if not defined default are used
- *  @param {string} options.layer Geoportail layer name
- *  @param {string} options.gppKey Geoportail API key, default use layer registered key
- *  @param {ol.projectionLike} [options.projection=EPSG:3857] projection for the extent, default EPSG:3857
- * @param {olx.source.WMTSOptions=} tileoptions WMTS options if not defined default are used
  */
 export default class Geoportail extends Tile<TileSource> {
   // TODO unsure about the params!
+  /**
+   * @param {olx.layer.WMTSOptions=} options WMTS options if not defined default are used
+   *  @param {string} options.layer Geoportail layer name
+   *  @param {string} options.gppKey Geoportail API key, default use layer registered key
+   *  @param {ol.projectionLike} [options.projection=EPSG:3857] projection for the extent, default EPSG:3857
+   * @param {olx.source.WMTSOptions=} tileoptions WMTS options if not defined default are used
+   */
   constructor(layer?: string, options?: Options, tileoptions?: GeoPortailOptions);
+
   /** Standard IGN-GEOPORTAIL attribution
    */
-  attribution: any;
+  attribution: any
+
   /** Get service URL according to server url or standard url
    */
   serviceURL(): void;
+
   /**
    * Return the associated API key of the Map.
    * @function
@@ -36,6 +42,7 @@ export default class Geoportail extends Tile<TileSource> {
    * @api stable
    */
   getGPPKey(): any;
+
   /**
    * Set the associated API key to the Map.
    * @param {String} key the API key.
@@ -43,6 +50,7 @@ export default class Geoportail extends Tile<TileSource> {
    * @api stable
    */
   setGPPKey(key: string, authentication: string): void;
+
   /** Return the GetFeatureInfo URL for the passed coordinate, resolution, and
    * projection. Return `undefined` if the GetFeatureInfo URL cannot be
    * constructed.
@@ -61,6 +69,7 @@ export default class Geoportail extends Tile<TileSource> {
       INFO_FORMAT: string;
     }
   ): string | undefined;
+
   /** Get feature info
    * @param {Coordinate} coord
    * @param {Number} resolution
@@ -80,30 +89,34 @@ export default class Geoportail extends Tile<TileSource> {
       error: (...params: any[]) => any;
     }
   ): void;
+
   /** Register new layer capability
-     * @param {string} layer layer name
-     * @param {*} capability
-     */
-   static register(layer: string, capability: any): void;
-   /** Check if a layer registered with a key?
-    * @param {string} layer layer name
-    * @returns {boolean}
-    */
-   static isRegistered(layer: string): boolean;
-   /** Load capabilities from the service
-    * @param {string} gppKey the API key to get capabilities for
-    * @return {*} Promise-like response
-    */
-   static loadCapabilities(gppKey: string, all: any): Promise<any>;
-   /** Get Key capabilities
-    * @param {string} gppKey the API key to get capabilities for
-    * @return {*} Promise-like response
-    */
-   static getCapabilities(gppKey: string): Promise<any>;
+   * @param {string} layer layer name
+   * @param {*} capability
+   */
+  static register(layer: string, capability: any): void;
+
+  /** Check if a layer registered with a key?
+   * @param {string} layer layer name
+   * @returns {boolean}
+   */
+  static isRegistered(layer: string): boolean;
+
+  /** Load capabilities from the service
+   * @param {string} gppKey the API key to get capabilities for
+   * @return {*} Promise-like response
+   */
+  static loadCapabilities(gppKey: string, all: any): Promise<any>;
+
+  /** Get Key capabilities
+   * @param {string} gppKey the API key to get capabilities for
+   * @return {*} Promise-like response
+   */
+  static getCapabilities(gppKey: string): Promise<any>;
 }
 
 export const capabilities: {
-  "GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2": {
+  'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2': {
     key: string;
     server: string;
     layer: string;
@@ -131,7 +144,7 @@ export const capabilities: {
       };
     };
   };
-  "CADASTRALPARCELS.PARCELLAIRE_EXPRESS": {
+  'CADASTRALPARCELS.PARCELLAIRE_EXPRESS': {
     key: string;
     server: string;
     layer: string;
@@ -159,7 +172,7 @@ export const capabilities: {
       };
     };
   };
-  "ORTHOIMAGERY.ORTHOPHOTOS": {
+  'ORTHOIMAGERY.ORTHOPHOTOS': {
     key: string;
     server: string;
     layer: string;
@@ -196,7 +209,7 @@ export const capabilities: {
           bbox: number[];
         }[];
       };
-      "BOURGOGNE-FRANCHE-COMTE": {
+      'BOURGOGNE-FRANCHE-COMTE': {
         href: string;
         attribution: string;
         logo: string;
@@ -240,18 +253,18 @@ export const capabilities: {
         maxZoom: number;
         constraint: (
           | {
-              minZoom: number;
-              maxZoom: number;
-              bbox: number[];
-            }
+          minZoom: number;
+          maxZoom: number;
+          bbox: number[];
+        }
           | {
-              bbox: number[];
-              minZoom?: undefined;
-              maxZoom?: undefined;
-            }
-        )[];
+          bbox: number[];
+          minZoom?: undefined;
+          maxZoom?: undefined;
+        }
+          )[];
       };
-      "E-MEGALIS": {
+      'E-MEGALIS': {
         href: string;
         attribution: string;
         logo: string;
@@ -335,7 +348,7 @@ export const capabilities: {
           bbox: number[];
         }[];
       };
-      "e-Megalis": {
+      'e-Megalis': {
         href: string;
         attribution: string;
         logo: string;
@@ -371,7 +384,7 @@ export const capabilities: {
           bbox: number[];
         }[];
       };
-      "MEGALIS-BRETAGNE": {
+      'MEGALIS-BRETAGNE': {
         href: string;
         attribution: string;
         logo: string;
@@ -395,7 +408,7 @@ export const capabilities: {
           bbox: number[];
         }[];
       };
-      "LANGUEDOC-ROUSSILLON": {
+      'LANGUEDOC-ROUSSILLON': {
         href: string;
         attribution: string;
         logo: string;
@@ -589,7 +602,7 @@ export const capabilities: {
       };
     };
   };
-  "GEOGRAPHICALGRIDSYSTEMS.MAPS.SCAN-EXPRESS.STANDARD": {
+  'GEOGRAPHICALGRIDSYSTEMS.MAPS.SCAN-EXPRESS.STANDARD': {
     server: string;
     layer: string;
     title: string;
@@ -616,7 +629,7 @@ export const capabilities: {
       };
     };
   };
-  "GEOGRAPHICALGRIDSYSTEMS.MAPS": {
+  'GEOGRAPHICALGRIDSYSTEMS.MAPS': {
     server: string;
     layer: string;
     title: string;
@@ -655,7 +668,7 @@ export const capabilities: {
       };
     };
   };
-  "GEOGRAPHICALGRIDSYSTEMS.SLOPES.MOUNTAIN": {
+  'GEOGRAPHICALGRIDSYSTEMS.SLOPES.MOUNTAIN': {
     key: string;
     server: string;
     layer: string;
@@ -710,7 +723,7 @@ export const capabilities: {
       };
     };
   };
-  "ELEVATION.SLOPES": {
+  'ELEVATION.SLOPES': {
     key: string;
     server: string;
     layer: string;
@@ -738,7 +751,7 @@ export const capabilities: {
       };
     };
   };
-  "GEOGRAPHICALGRIDSYSTEMS.MAPS.BDUNI.J1": {
+  'GEOGRAPHICALGRIDSYSTEMS.MAPS.BDUNI.J1': {
     key: string;
     server: string;
     layer: string;
@@ -766,7 +779,7 @@ export const capabilities: {
       };
     };
   };
-  "TRANSPORTNETWORKS.ROADS": {
+  'TRANSPORTNETWORKS.ROADS': {
     server: string;
     layer: string;
     title: string;
@@ -793,4 +806,4 @@ export const capabilities: {
       };
     };
   };
-};
+}

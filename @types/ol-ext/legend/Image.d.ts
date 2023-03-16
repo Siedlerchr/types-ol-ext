@@ -1,53 +1,58 @@
-import ol_Object from 'ol/Object';
-import { Size } from 'ol/size';
+import ol_Object from 'ol/Object'
+import type { Size } from 'ol/size'
 
 export interface Options {
-    url: string,
-    title?: string
-    img?: HTMLImageElement | HTMLCanvasElement
-    className?: string;
-    width?: number;
+  url: string,
+  title?: string
+  img?: HTMLImageElement | HTMLCanvasElement
+  className?: string;
+  width?: number;
 }
+
 /** A class for legend image
  * @constructor
  * @fires changed
- * @param {Object} options
- *  @param {string} url
- *  @param {string} [title]
- *  @param {HTMLImageElement|HTMLCanvasElement} [img] an image to display
- *  @param {string} [src] legend image url (if no img option)
- *  @param {string} [className] 'center' to center the title
- *  @param {number} [width] legend width, default use the image width
+
  */
 export default class Image extends ol_Object {
+  /**
+   * @param {Object} options
+   *  @param {string} url
+   *  @param {string} [title]
+   *  @param {HTMLImageElement|HTMLCanvasElement} [img] an image to display
+   *  @param {string} [src] legend image url (if no img option)
+   *  @param {string} [className] 'center' to center the title
+   *  @param {number} [width] legend width, default use the image width
+   */
+  constructor(options?: Options);
 
-    constructor(options?: Options);
-    /** Set the legend title
-     * @param {string} title
-     */
-    setTitle(title: string): void;
+  /** Set the legend title
+   * @param {string} title
+   */
+  setTitle(title: string): void;
 
-    /** Set the item width
-     * @param {number} [width] legend width, default use the image width
-     */
-    setWidth(width?: number): void;
-    /** Get image width
-     * @return {number}
-     */
-    getWidth(): number;
+  /** Set the item width
+   * @param {number} [width] legend width, default use the image width
+   */
+  setWidth(width?: number): void;
 
-    /** Get image height
-     * @return {number}
-     */
-    getHeight(): number;
+  /** Get image width
+   * @return {number}
+   */
+  getWidth(): number;
 
-    /** Get Image
-     * @returns {Image}
-     */
-    getImage(): HTMLImageElement | HTMLCanvasElement
+  /** Get image height
+   * @return {number}
+   */
+  getHeight(): number;
 
-    /** Get element
-    * @param {Size} size symbol size
-    */
-    getElement(size: Size, onclick: (click: boolean) => void): HTMLElement
+  /** Get Image
+   * @returns {Image}
+   */
+  getImage(): HTMLImageElement | HTMLCanvasElement
+
+  /** Get element
+   * @param {Size} size symbol size
+   */
+  getElement(size: Size, onclick: (click: boolean) => void): HTMLElement
 }

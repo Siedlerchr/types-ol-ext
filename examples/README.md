@@ -40,8 +40,8 @@
    npm run replace-examples
    ```
 
-   - Only `ol`/`ol-ext` related `<script>` tags will be replaced.
-   - Main example code will be backed up as `./ol-ext/examples/**/*.js.bak`.
+    - Only `ol`/`ol-ext` related `<script>` tags will be replaced.
+    - Main example code will be backed up as `./ol-ext/examples/**/*.js.bak`.
 
 2. Build examples TypeScript in `./examples/**/*.ts` to generate `./ol-ext/examples/**/*.js`.
 
@@ -58,7 +58,7 @@
    npx gulp serve
    ```
 
-   - Currently, TypeScript ol-ext examples are a quite few.
+    - Currently, TypeScript ol-ext examples are a quite few.
 
 ## Port original JavaScript examples to TypeScript
 
@@ -66,7 +66,7 @@
 
    ```html
    :
-   <script type="text/javascript">
+   <script type='text/javascript'>
      :
      var map = new ol.Map
      :
@@ -81,11 +81,12 @@
 
 1. jquery needs to be replaced to standard DOM selector.
    Here is some typical examples:
-   - `$('xxx').val()` => `document.querySelector<HTMLXXXElement>('xxx')!.value`
-   - `$('xxx').val('yyy')` => `document.querySelector<HTMLXXXElement>('xxx')!.value = 'yyy'`
-   - `$('xxx').text()` => `document.querySelector<HTMLXXXElement>('xxx')!.textContent`
-   - `$('xxx').prop('checked')` => `document.querySelector<HTMLInputElement>('xxx')!.checked`
-2. To bridge TypeScript variable/function to HTML, override window object at the bottom of TypeScript code like as follows.
+    - `$('xxx').val()` => `document.querySelector<HTMLXXXElement>('xxx')!.value`
+    - `$('xxx').val('yyy')` => `document.querySelector<HTMLXXXElement>('xxx')!.value = 'yyy'`
+    - `$('xxx').text()` => `document.querySelector<HTMLXXXElement>('xxx')!.textContent`
+    - `$('xxx').prop('checked')` => `document.querySelector<HTMLInputElement>('xxx')!.checked`
+2. To bridge TypeScript variable/function to HTML, override window object at the bottom of TypeScript code like as
+   follows.
 
    ```ts
    declare global {
@@ -100,7 +101,7 @@
    }
    ```
 
-   - `this` porting seems to be impossible in above function case, so consider to use 1st argument.
+    - `this` porting seems to be impossible in above function case, so consider to use 1st argument.
 
 ## Debug TypeScript code
 

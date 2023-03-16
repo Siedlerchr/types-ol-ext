@@ -1,4 +1,4 @@
-import Base from './Base';
+import Base from './Base'
 
 /** @typedef {Object} FilterTextureOptions
  *  @property {Image | undefined} img Image object for the texture
@@ -9,40 +9,43 @@ import Base from './Base';
  *  @property {null | string | undefined} crossOrigin The crossOrigin attribute for loaded images.
  */
 export declare type FilterTextureOptions = {
-    img?: HTMLImageElement| undefined;
-    src?: string;
-    scale?: number;
-    opacity?: number;
-    rotate?: boolean;
-    crossOrigin?: null | string | undefined;
+  img?: HTMLImageElement | undefined;
+  src?: string;
+  scale?: number;
+  opacity?: number;
+  rotate?: boolean;
+  crossOrigin?: null | string | undefined;
 };
-
 
 /** Add texture effects on maps or layers
  * @constructor
  * @requires filter
  * @extends {filter.Base}
- * @param {FilterTextureOptions} options
  */
 export default class Texture extends Base {
-    constructor(options: FilterTextureOptions);
-    /** Set texture
-     * @param {FilterTextureOptions} [options]
-     */
-    setFilter(options?: FilterTextureOptions): void;
-    /** Get translated pattern
-     *	@param {number} offsetX x offset
-     *	@param {number} offsetY y offset
-     */
-    getPattern(offsetX: number, offsetY: number): any;
+  /**
+   * @param {FilterTextureOptions} options
+   */
+  constructor(options: FilterTextureOptions);
 
-    /** Activate / deactivate filter
-    *	@param {boolean} b
-     */
-    setActive(b: boolean): void;
-    /** Get filter active
-    *	@return {boolean}
-     */
-    getActive(): boolean;
+  /** Set texture
+   * @param {FilterTextureOptions} [options]
+   */
+  setFilter(options?: FilterTextureOptions): void;
+
+  /** Get translated pattern
+   *  @param {number} offsetX x offset
+   *  @param {number} offsetY y offset
+   */
+  getPattern(offsetX: number, offsetY: number): any;
+
+  /** Activate / deactivate filter
+   *  @param {boolean} b
+   */
+  setActive(b: boolean): void;
+
+  /** Get filter active
+   *  @return {boolean}
+   */
+  getActive(): boolean;
 }
-

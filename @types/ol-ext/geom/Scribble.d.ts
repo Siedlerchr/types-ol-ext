@@ -1,5 +1,5 @@
-import MultiLineString from 'ol/geom/MultiLineString';
-import { Geometry } from 'ol/geom';
+import type MultiLineString from 'ol/geom/MultiLineString'
+import type { Geometry } from 'ol/geom'
 
 export interface Options {
   /** interval beetween lines */
@@ -17,7 +17,7 @@ declare module 'ol/geom/MultiPolygon' {
      * @param {Number} options.angle hatch angle in radian, default PI/2
      * @return {ol_geom_MultiLineString|null} the resulting MultiLineString geometry or null if none
      */
-    scribbleFill(options: Options): MultiLineString|null;
+    scribbleFill(options: Options): MultiLineString | null;
   }
 }
 
@@ -30,7 +30,7 @@ declare module 'ol/geom/Polygon' {
      * @param {Number} options.angle hatch angle in radian, default PI/2
      * @return {ol_geom_MultiLineString|null} the resulting MultiLineString geometry or null if none
      */
-    scribbleFill(options: Options): MultiLineString|null;
+    scribbleFill(options: Options): MultiLineString | null;
   }
 }
 /** Calculate a MultiPolyline to fill a geomatry (Polygon or MultiPolygon) with a scribble effect that appears hand-made
@@ -41,6 +41,6 @@ declare module 'ol/geom/Polygon' {
  * @return {Geometry} the resulting MultiLineString geometry or initial geometry
  */
 export default function ol_geom_scribbleFill(geom: Geometry, options?: {
-    interval?: number;
-    angle?: number;
-}): Geometry;
+  interval?: number;
+  angle?: number;
+}): Geometry

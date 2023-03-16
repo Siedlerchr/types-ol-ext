@@ -1,15 +1,16 @@
-import { ProjectionLike } from 'ol/proj';
-import { Geometry } from 'ol/geom';
-import { Coordinate } from 'ol/coordinate';
+import type { ProjectionLike } from 'ol/proj'
+import type { Geometry } from 'ol/geom'
+import type { Coordinate } from 'ol/coordinate'
 
-export interface Options{
-    projection?: ProjectionLike;
-    apiKey?: string
-    sampling?: number;
-    samplingDist?: number;
-    success?: (result: Geometry ) => void;
-    error?: (error: any) => void;
+export interface Options {
+  projection?: ProjectionLike;
+  apiKey?: string;
+  sampling?: number;
+  samplingDist?: number;
+  success?: (result: Geometry) => void;
+  error?: (error: any) => void;
 }
+
 /** French Geoportail alti coding
  *
  * @param {Geometry} geom
@@ -22,6 +23,7 @@ export interface Options{
  *  @param {string} options.error
  */
 export function ol_geom_GPAltiCode(geom: Geometry, options: Options): void;
+
 /** Calculate elevation on coordinates or on a set of coordinates
  * @param {ol.coordinate|Array<ol.coordinate>} coord coordinate or an array of coordinates
  * @param {Object} options
@@ -31,8 +33,8 @@ export function ol_geom_GPAltiCode(geom: Geometry, options: Options): void;
  *  @param {string} options.error
  */
 export function ol_coordinate_GPAltiCode(coord: Coordinate | Coordinate[], options: {
-    projection?: ProjectionLike,
-    apiKey?: string,
-    success?: (g: Coordinate) => void,
-    error?: (e: any) => void
+  projection?: ProjectionLike,
+  apiKey?: string,
+  success?: (g: Coordinate) => void,
+  error?: (e: any) => void
 }): void;
