@@ -1,51 +1,51 @@
-import SVGFilter from "./SVGFilter";
+import type SVGFilter from './SVGFilter'
 
 export interface CanvasFilterOptions {
-    /**
-     * Takes an IRI pointing to an SVG filter element
-     */
-    url: string | SVGFilter;
-    /**
-     * Gaussian blur value in px
-     */
-    blur: number;
-    /**
-     * linear multiplier to the drawing, under 100: darkens the image, over 100 brightens it
-     */
-    brightness: number;
-    /**
-     * Adjusts the contrast, under 0: black, 100 no change
-     */
-    contrast: number;
-    /**
-     * Applies a drop shadow effect, pixel offset
-     */
-    shadow: any;
-    /**
-     * Blur radius
-     */
-    shadowBlur: number;
-    shadowColor: number;
-    /**
-     * 0: unchanged, 100: completely grayscale
-     */
-    grayscale: number;
-    /**
-     * Hue rotation angle in deg
-     */
-    hueRotate: number;
-    /**
-     * Inverts the drawing, 0: unchanged, 100: invert
-     */
-    invert: number;
-    /**
-     * Saturates the drawing, 0: unsaturated, 100: unchanged
-     */
-    saturate: number;
-    /**
-     * Converts the drawing to sepia, 0: sepia, 100: unchanged
-     */
-    sepia: number;
+  /**
+   * Takes an IRI pointing to an SVG filter element
+   */
+  url: string | SVGFilter;
+  /**
+   * Gaussian blur value in px
+   */
+  blur: number;
+  /**
+   * linear multiplier to the drawing, under 100: darkens the image, over 100 brightens it
+   */
+  brightness: number;
+  /**
+   * Adjusts the contrast, under 0: black, 100 no change
+   */
+  contrast: number;
+  /**
+   * Applies a drop shadow effect, pixel offset
+   */
+  shadow: any;
+  /**
+   * Blur radius
+   */
+  shadowBlur: number;
+  shadowColor: number;
+  /**
+   * 0: unchanged, 100: completely grayscale
+   */
+  grayscale: number;
+  /**
+   * Hue rotation angle in deg
+   */
+  hueRotate: number;
+  /**
+   * Inverts the drawing, 0: unchanged, 100: invert
+   */
+  invert: number;
+  /**
+   * Saturates the drawing, 0: unsaturated, 100: unchanged
+   */
+  saturate: number;
+  /**
+   * Converts the drawing to sepia, 0: sepia, 100: unchanged
+   */
+  sepia: number;
 }
 
 /** @typedef {Object} CanvasFilterOptions
@@ -68,17 +68,20 @@ export interface CanvasFilterOptions {
  * @constructor
  * @requires ol.filter
  * @extends {ol_filter_Base}
- * @param {CanvasFilterOptions} options
  */
 export default class CanvasFilter {
-    constructor(options?: CanvasFilterOptions);
-    /** Add a new svg filter
-     * @param {string|ol.ext.SVGFilter} url IRI pointing to an SVG filter element
-     */
-    addSVGFilter(url: string | SVGFilter): void;
-    /** Remove a svg filter
-     * @param {string|ol.ext.SVGFilter} url IRI pointing to an SVG filter element
-     */
-    removeSVGFilter(url: string | SVGFilter): void;
+  /**
+   * @param {CanvasFilterOptions} options
+   */
+  constructor(options?: CanvasFilterOptions);
 
+  /** Add a new svg filter
+   * @param {string|ol.ext.SVGFilter} url IRI pointing to an SVG filter element
+   */
+  addSVGFilter(url: string | SVGFilter): void;
+
+  /** Remove a svg filter
+   * @param {string|ol.ext.SVGFilter} url IRI pointing to an SVG filter element
+   */
+  removeSVGFilter(url: string | SVGFilter): void;
 }

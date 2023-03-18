@@ -1,5 +1,5 @@
-import { Coordinate } from 'ol/coordinate';
-import { Map as _ol_Map_ } from 'ol';
+import type { Coordinate } from 'ol/coordinate'
+import type { Map as _ol_Map_ } from 'ol'
 
 /** Compute great circle bearing of two points.
  * @See http://www.movable-type.co.uk/scripts/latlong.html for the original code

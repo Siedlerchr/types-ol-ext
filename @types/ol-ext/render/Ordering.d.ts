@@ -1,8 +1,8 @@
-import {FeatureLike} from "ol/Feature";
+import type { FeatureLike } from 'ol/Feature'
 
 /** y-Ordering
-*	@return ordering function (f0,f1)
-  */
+ *  @return ordering function (f0,f1)
+ */
 declare function yOrdering(): (f0: FeatureLike, f1: FeatureLike) => number;
 
 export interface ZIndexOptions {
@@ -19,8 +19,8 @@ export interface ZIndexOptions {
  * @return ordering function (f0,f1)
  */
 declare function zIndex(options: {
-    attribute: string;
-    equalFn: (...params: any[]) => any;
+  attribute: string;
+  equalFn: (...params: any[]) => any;
 }): any;
 
 interface Ordering {
@@ -28,6 +28,6 @@ interface Ordering {
   zIndex: typeof zIndex;
 }
 
-declare const ordering: Ordering;
+declare const ordering: Ordering
 
-export default ordering;
+export default ordering

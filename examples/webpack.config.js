@@ -1,16 +1,16 @@
-const path = require('path');
-const glob = require('glob');
+const path = require('path')
+const glob = require('glob')
 
 module.exports = {
   entry: () => {
-    const entries = {};
+    const entries = {}
     glob.sync('./examples/**/*.ts').forEach(file => {
-      const basename = path.basename(file).replace(path.extname(file), '');
-      const dirname = path.basename(path.dirname(file));
-      const key = dirname + '/' + basename;
-      entries[key] = file;
+      const basename = path.basename(file).replace(path.extname(file), '')
+      const dirname = path.basename(path.dirname(file))
+      const key = `${dirname}/${basename}`
+      entries[key] = file
     })
-    return entries;
+    return entries
   },
   output: {
     path: path.resolve(__dirname, '..', 'ol-ext', 'examples'),
@@ -20,7 +20,7 @@ module.exports = {
   mode: 'development',
   devtool: 'source-map',
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
   },
   module: {
     rules: [
@@ -28,12 +28,12 @@ module.exports = {
         test: /\.ts$/,
         loader: 'ts-loader',
         options: {
-          configFile: "examples/tsconfig.json",
+          configFile: 'examples/tsconfig.json',
         },
       },
       {
         test: /\.m?js/,
-        type: "javascript/auto",
+        type: 'javascript/auto',
       },
       {
         test: /\.m?js/,
@@ -42,5 +42,5 @@ module.exports = {
         },
       },
     ],
-  }
+  },
 }

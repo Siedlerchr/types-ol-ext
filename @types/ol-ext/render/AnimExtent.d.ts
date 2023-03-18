@@ -1,9 +1,8 @@
-import { Coordinate } from 'ol/coordinate';
-import { ProjectionLike } from 'ol/proj';
-import { Stroke } from 'ol/style';
-import Feature from 'ol/Feature';
-import { FeatureAnimation } from '../featureanimation/FeatureAnimation';
-import { animationControler } from '../featureanimation/FeatureAnimation';
+import type { Coordinate } from 'ol/coordinate'
+import type { ProjectionLike } from 'ol/proj'
+import type { Stroke } from 'ol/style'
+import type Feature from 'ol/Feature'
+import type { FeatureAnimation, animationControler } from '../featureanimation/FeatureAnimation'
 
 declare module 'ol/Map' {
   export interface Options {
@@ -14,12 +13,12 @@ declare module 'ol/Map' {
   }
 
   /** Pulse an Extent on postcompose
-   *	@param {Array<Coordinate>} point to pulse
-   *	@param {pulse.options} options pulse options param
-   *	  @param {projectionLike|undefined} options.projection projection of coords, default no transform
-   *	  @param {Number} options.duration animation duration in ms, default 2000
-   *	  @param {easing} options.easing easing function, default easing.upAndDown
-   *	  @param {style.Stroke} options.style stroke style, default 2px red
+   *  @param {Array<Coordinate>} point to pulse
+   *  @param {pulse.options} options pulse options param
+   *    @param {projectionLike|undefined} options.projection projection of coords, default no transform
+   *    @param {Number} options.duration animation duration in ms, default 2000
+   *    @param {easing} options.easing easing function, default easing.upAndDown
+   *    @param {style.Stroke} options.style stroke style, default 2px red
    */
   function animExtent(point: Coordinate, options?: Options): void;
 }

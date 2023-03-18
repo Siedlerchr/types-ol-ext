@@ -1,6 +1,7 @@
-import { Fill, Image, Icon } from 'ol/style';
-import { Color } from "ol/color";
-import { ColorLike } from 'ol/colorlike';
+import type { Image, Icon } from 'ol/style'
+import { Fill } from 'ol/style'
+import type { Color } from 'ol/color'
+import type { ColorLike } from 'ol/colorlike'
 
 export interface FillPatternOptions {
   size?: number;
@@ -18,10 +19,10 @@ export interface FillPatternOptions {
 export interface Options {
   pattern?: string;
   image?: Image;
-  ratio?:number,
+  ratio?: number,
   icon?: Icon
   opacity?: number;
-  color?:  Color | ColorLike;
+  color?: Color | ColorLike;
   fill?: Fill;
   offset?: number;
   size?: number;
@@ -35,31 +36,37 @@ export interface Options {
  * Fill style with named pattern
  *
  * @constructor
- * @param {olx.style.FillPatternOption=}  options
- *  @param {Image|undefined} options.image an image pattern, image must be preloaded to draw on first call
- *  @param {number|undefined} options.opacity opacity with image pattern, default:1
- *  @param {string} options.pattern pattern name (override by image option)
- *  @param {Color|ColorLike} options.color pattern color
- *  @param {Fill} options.fill fill color (background)
- *  @param {number} options.offset pattern offset for hash/dot/circle/cross pattern
- *  @param {number} options.size line size for hash/dot/circle/cross pattern
- *  @param {number} options.spacing spacing for hash/dot/circle/cross pattern
- *  @param {number|boolean} options.angle angle for hash pattern / true for 45deg dot/circle/cross
- *  @param {number} options.scale pattern scale 
+
  * @extends {Fill}
  * @api
  */
 export default class FillPattern extends Fill {
+  /**
+   * @param {olx.style.FillPatternOption=}  options
+   *  @param {Image|undefined} options.image an image pattern, image must be preloaded to draw on first call
+   *  @param {number|undefined} options.opacity opacity with image pattern, default:1
+   *  @param {string} options.pattern pattern name (override by image option)
+   *  @param {Color|ColorLike} options.color pattern color
+   *  @param {Fill} options.fill fill color (background)
+   *  @param {number} options.offset pattern offset for hash/dot/circle/cross pattern
+   *  @param {number} options.size line size for hash/dot/circle/cross pattern
+   *  @param {number} options.spacing spacing for hash/dot/circle/cross pattern
+   *  @param {number|boolean} options.angle angle for hash pattern / true for 45deg dot/circle/cross
+   *  @param {number} options.scale pattern scale
+   */
   constructor(options?: Options);
+
   /**
    * Clones the style.
    * @return {style.FillPattern}
    */
   clone(): FillPattern;
+
   /** Get canvas used as pattern
-   *	@return {canvas}
+   *  @return {canvas}
    */
   getImage(): HTMLCanvasElement;
+
   /** Static fuction to add char patterns
    * @param {title}
    * @param {FillPatternOptions} options
@@ -74,6 +81,7 @@ export default class FillPattern extends Fill {
    *  @param {string} [font="10px Arial"]
    */
   static addPattern(title: string, options: FillPatternOptions): void;
+
   /** Patterns definitions
    * @see pattern generator http://www.imagico.de/map/jsdotpattern.php
    */
@@ -346,5 +354,5 @@ export default class FillPattern extends Fill {
       lines: number[][];
       stroke: number;
     };
-  };
+  }
 }
