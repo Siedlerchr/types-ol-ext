@@ -13,6 +13,7 @@ export interface Options extends SearchOptions {
   property?: string;
   getTitle?: (f: Feature) => string;
   getSearchString?: (f: Feature) => string;
+  sort: (f1: Feature, f2: Feature) => number;
 }
 
 /**
@@ -38,5 +39,10 @@ export default class SearchFeature extends Search {
    *  @param {function} options.getTitle a function that takes a feature and return the name to display in the index, default return the property
    *  @param {function | undefined} options.getSearchString a function that take a feature and return a text to be used as search string, default geTitle() is used as search string
    */
-  constructor(options: Options);
+  constructor(options?: Options);
+
+  /** Set function to sort autocomplete results
+   * @param {function} sort a sort function that takes 2 features and returns 0, -1 or 1
+   */
+  setSortFunction(sort: (f1: Feature, f2: Feature) => number): void
 }

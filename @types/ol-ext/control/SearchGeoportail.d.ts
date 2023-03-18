@@ -6,6 +6,7 @@ export type AddressType = 'StreetAddress' | 'PositionOfInterest' | 'CadastralPar
 export interface Options extends SearchJsonOptions {
   className?: string;
   apiKey?: string;
+  version?: string;
   authentication?: string;
   label?: string;
   reverse?: boolean;
@@ -30,6 +31,7 @@ export default class SearchGeoportail extends SearchJSON {
    * @param {any} options extend ol.control.SearchJSON options
    *  @param {string} options.className control class name
    *  @param {string | undefined} options.apiKey the service api key.
+   *  @param {string | undefined} [options.version] API version '2' to use geocodage-beta-2, default v1.
    *  @param {string | undefined} options.authentication: basic authentication for the service API as btoa("login:pwd")
    *  @param {Element | string | undefined} options.target Specify a target if you want the control to be rendered outside of the map's viewport.
    *  @param {string | undefined} options.label Text label to use for the search button, default "search"

@@ -1,14 +1,14 @@
 import type Projection from 'ol/proj/Projection'
-import { DragAndDrop, Interaction } from 'ol/interaction'
+import { Interaction } from 'ol/interaction'
 import type FeatureFormat from 'ol/format/Feature'
 import type { Map as _ol_Map_ } from 'ol'
 import BaseEvent from 'ol/events/Event'
-import type Feature from 'ol/Feature'
 import type { EventsKey } from 'ol/events'
 import type { DragAndDropEvent } from 'ol/interaction/DragAndDrop'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Types } from 'ol/ObjectEventType'
+import type Feature from 'ol/Feature'
 
 type DropFileOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
@@ -42,7 +42,7 @@ export default class DropFile extends Interaction {
    *  @param {Array<function(new:ol.format.Feature)>|undefined} options.formatConstructors Format constructors, default [ ol.format.GPX, ol.format.GeoJSONX, ol.format.GeoJSONP, ol.format.GeoJSON, ol.format.IGC, ol.format.KML, ol.format.TopoJSON ]
    *  @param {Array<string>|undefined} options.accept list of accepted format, default ["gpx","json","geojsonx","geojsonp","geojson","igc","kml","topojson"]
    */
-  constructor(options: Options);
+  constructor(options?: Options);
 
   /** Set the map
    */
