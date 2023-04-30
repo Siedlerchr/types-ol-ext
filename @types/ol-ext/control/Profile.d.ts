@@ -54,7 +54,12 @@ export default class Profil extends ol_control_Control {
    * @api stable
    */
   popup(info: string): void;
-
+  
+  /**
+   * Refresh the profil
+   */
+  refresh(): void;
+  
   /** Show point at coordinate or a distance on the profil
    * @param { Coordinate|number } where a coordinate or a distance from begining, if none it will hide the point
    * @return {Coordinate} current point
@@ -72,7 +77,8 @@ export default class Profil extends ol_control_Control {
    * @param { number } time time at which to show the point
    * @return { Coordinate } current point
    */
-
+  pointAtTime(time): Coordinate;
+  
   /** Show panel
    * @api stable
    */
