@@ -21,6 +21,8 @@ export interface Options extends ControlOptions {
  */
 export default class Bar extends ol_control_Control {
   /**
+   * @fires control:active
+   * @fires control:adds
    * @param {Object=} options Control options.
    *  @param {String} options.className class of the control
    *  @param {bool} options.group is a group, default false
