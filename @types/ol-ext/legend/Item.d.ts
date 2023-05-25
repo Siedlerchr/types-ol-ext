@@ -1,3 +1,4 @@
+import type BaseObject from 'ol/Object';
 import type Feature from 'ol/Feature'
 import type { StyleLike } from 'ol/style/Style'
 import type { Size } from 'ol/size'
@@ -62,7 +63,7 @@ export type olLegendItemOptions = {
  * @constructor
  * @fires select
  */
-export default class LegendItem {
+export default class LegendItem extends BaseObject {
   /**
    * @param {olLegendItemOptions} options
    */
