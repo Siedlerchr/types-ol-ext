@@ -66,7 +66,7 @@ export default class ol_legend_Legend {
   /** Set legend size
    * @param {ol.size} size
    */
-  set(key: any, value: any, opt_silent: any): void;
+  set(size: Size): void;
 
   /** Get legend list element
    * @returns {Element}
