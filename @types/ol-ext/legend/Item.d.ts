@@ -11,7 +11,7 @@ export type olLegendItemOptions = {
    * row title
    */
   title: string;
-  className: string;
+  className?: string;
   /**
    * a feature to draw on the legend
    */
@@ -25,10 +25,21 @@ export type olLegendItemOptions = {
    */
   properties?: any;
   /**
-   * a style or a style function to use to draw the legend
+   * a style or a style function to use to draw the legend symbol
    */
-  style: StyleLike;
-  textStyle: Text
+  style?: StyleLike;
+  /**
+   * a text style to draw the item title in the legend
+   */
+  textStyle?: Text;
+  /**
+   * the symbol width, default use the default width
+   */
+  width?: number;
+  /**
+   * the symbol height, default use the default height
+   */
+  height?: number;
   size?: Size
   margin?: number
 };
@@ -41,6 +52,8 @@ export type olLegendItemOptions = {
  *  @property {Object} properties a set of properties to use with a style function
  *  @property {StyleLike} style a style or a style function to use to draw the legend symbol
  *  @property {Text} textStyle a text style to draw the item title in the legend
+ *  @property {number|undefined} width the symbol width, default use the default width
+ *  @property {number|undefined} height the symbol height, default use the default height
  *  @property {Size|undefined} size
  *  @property {number|undefined} margin
  */
