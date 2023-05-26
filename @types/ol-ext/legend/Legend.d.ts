@@ -5,6 +5,7 @@ import type { Size } from 'ol/size'
 import type Layer from 'ol/layer/Layer'
 import type ol_legend_Item from './Item'
 import type { olLegendItemOptions } from './Item'
+import type BaseObject from 'ol/Object';
 
 export interface Options {
   title?: string;
@@ -22,7 +23,7 @@ export interface Options {
  * @fires select
  * @fires refresh
  */
-export default class ol_legend_Legend {
+export default class ol_legend_Legend extends BaseObject {
   /** Get a symbol image for a given legend item
    * @param {olLegendItemOptions} item
    * @param {Canvas|undefined} canvas a canvas to draw in, if none creat one
@@ -66,7 +67,7 @@ export default class ol_legend_Legend {
   /** Set legend size
    * @param {ol.size} size
    */
-  set(key: any, value: any, opt_silent: any): void;
+  set(size: Size): void;
 
   /** Get legend list element
    * @returns {Element}
@@ -124,4 +125,16 @@ export default class ol_legend_Legend {
    * @return {CanvasElement}
    */
   getLegendImage(item: olLegendItemOptions, canvas?: HTMLCanvasElement, offsetY?: number): HTMLCanvasElement;
+
+  // The following function is already declared in ol/Object.d.ts
+  // but we still have to redeclare it here, otherwise it's being hidden
+  // by set(size: Size), which is declared above.
+  /**
+   * Sets a value.
+   * @param {string} key Key name.
+   * @param {*} value Value.
+   * @param {boolean} [opt_silent] Update without triggering an event.
+   * @api
+   */
+  set(key: string, value: any, opt_silent?: boolean | undefined): void;
 }

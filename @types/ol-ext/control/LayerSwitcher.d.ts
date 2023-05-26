@@ -39,7 +39,7 @@ export interface Options extends ControlOptions {
   reordering?: boolean;
   trash?: boolean;
   oninfo?: (l: Layer) => void;
-  extent?: Extent;
+  extent?: boolean;
   onExtent?: (l: Layer) => void;
   drawDelay?: number;
   collapsed?: boolean;
