@@ -63,7 +63,7 @@ export default class GeoImage extends ImageCanvas {
 
   /**
    * Get image rotation.
-   * @return {Number} rotation in degre.
+   * @return {Number} rotation in radian.
    * @api stable
    */
   getRotation(): number;
