@@ -3,6 +3,10 @@ import type { Size } from 'ol/size'
 import type { Map as _ol_Map_ } from 'ol'
 import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
+import BaseEvent from 'ol/events/Event'
 import type Print from './Print'
 
 export interface Options extends ControlOptions {
@@ -19,6 +23,15 @@ export interface Options extends ControlOptions {
   saveAs?: (blob: Blob, name: string) => void;
   northImage?: 'default' | 'compact';
   jsPDF?: jsPDF;
+}
+
+type PrintOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<Types | 'printing', PrintingEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'printing', Return>;
+
+export enum PrintEventType {
+  PRINT = 'printing'
 }
 
 export type PaperSize = 'A0' | 'A1' | 'A2' | 'A3' | 'A4' | 'US Letter' | 'A5' | 'B4' | 'B5';
@@ -245,4 +258,26 @@ export default class PrintDialog extends ol_control_Control {
     ' 250000': string;
     ' 1000000': string;
   }
+}
+
+export class PrintingEvent extends BaseEvent {
+  constructor(type: PrintEventType);
+
+  type: string
+
+  imageType: string
+
+  quality: number
+
+  immediate: boolean
+
+  size?: boolean | undefined
+
+  format?: boolean | undefined
+
+  orient?: boolean | undefined
+
+  margin?: boolean | undefined
+
+  any: any
 }

@@ -1,8 +1,8 @@
-import type BaseObject from 'ol/Object';
 import type Feature from 'ol/Feature'
 import type { StyleLike } from 'ol/style/Style'
 import type { Size } from 'ol/size'
 import type { Text } from 'ol/style'
+import BaseObject from 'ol/Object'
 
 /**
  * ol/legend/Item options
@@ -76,7 +76,7 @@ export default class LegendItem extends BaseObject {
 
   /** Get element
    * @param {ol.size} size symbol size
-   * @callback onClick
+   * @param {function} onclick
    */
-  getElement(size: Size, onclick: any): HTMLElement | Text;
+  getElement(size: Size, onclick: (callback: boolean) => void): HTMLElement | Text;
 }

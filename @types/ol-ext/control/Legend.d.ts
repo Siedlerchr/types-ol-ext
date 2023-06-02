@@ -6,6 +6,7 @@ export interface Options extends CanvasOptions {
   className?: string;
   legend?: ol_legend_Legend;
   title?: string;
+  emptyTitle?: string
   collapsed?: boolean;
   collapsible?: boolean;
 }
@@ -19,6 +20,8 @@ export default class Legend extends CanvasBase {
   /**
    * @param {*} options
    *  @param {String} options.className class of the control
+   *  @param {String} [options.title="legend"] control title
+   *  @param {String} [options.emptyTitle="no legend"] control title when legend is empty
    *  @param {ol_legend_Legend} options.legend
    *  @param {boolean | undefined} options.collapsed Specify if legend should be collapsed at startup. Default is true.
    *  @param {boolean | undefined} options.collapsible Specify if legend can be collapsed, default true.
