@@ -9,7 +9,7 @@ export interface Options {
   color?: ColorLike;
   fill?: Fill;
   offset?: number;
-  Size?: number;
+  size?: number;
   spacing?: number;
   angle?: number | boolean;
   scale?: number;
