@@ -24,7 +24,7 @@ export interface Options {
   opacity?: number;
   color?: Color | ColorLike;
   fill?: Fill;
-  offset?: number;
+  offset?: number | [number, number];
   size?: number;
   spacing?: number;
   angle?: number | boolean;
@@ -48,7 +48,7 @@ export default class FillPattern extends Fill {
    *  @param {string} options.pattern pattern name (override by image option)
    *  @param {Color|ColorLike} options.color pattern color
    *  @param {Fill} options.fill fill color (background)
-   *  @param {number} options.offset pattern offset for hash/dot/circle/cross pattern
+   *  @param {number|Array<number>} options.offset pattern offset for hash/dot/circle/cross pattern
    *  @param {number} options.size line size for hash/dot/circle/cross pattern
    *  @param {number} options.spacing spacing for hash/dot/circle/cross pattern
    *  @param {number|boolean} options.angle angle for hash pattern / true for 45deg dot/circle/cross
