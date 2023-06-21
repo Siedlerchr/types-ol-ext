@@ -1,18 +1,20 @@
-import type { Stroke } from 'ol/style'
-import { RegularShape } from 'ol/style'
-import type { Color } from 'ol/color'
+import type { Color } from 'ol/color';
+import type { Stroke } from 'ol/style';
+import { RegularShape } from 'ol/style';
 
-export default Chart
+export default Chart;
 export type chartType = 'pie' | 'pie3d' | 'donut' | 'bar';
 
 export interface Options {
   type: chartType;
+  data: number[];
   radius?: number;
   rotation?: number;
   snapToPixel?: boolean;
   stroke?: Stroke;
-  colors?: string | Color[];
-  displacemet?: number;
+  colors?: string | Color[] | string[];
+  rotateWithView?: boolean;
+  displacement?: number;
   offsetX?: number;
   offsetY?: number;
   animation?: number;
@@ -87,10 +89,10 @@ export class Chart extends RegularShape {
 
 export declare namespace Chart {
   export namespace colors {
-    const classic: string[]
-    const dark: string[]
-    const pale: string[]
-    const pastel: string[]
-    const neon: string[]
+    const classic: string[];
+    const dark: string[];
+    const pale: string[];
+    const pastel: string[];
+    const neon: string[];
   }
 }
