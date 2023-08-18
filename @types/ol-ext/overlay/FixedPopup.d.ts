@@ -13,8 +13,8 @@ export interface Options extends OverlayOptions {
   minScale?: number;
   maxScale?: number;
   closeBox?: boolean;
-  onClose?: () => void;
-  onShow?: () => void;
+  onclose?: () => void;
+  onshow?: () => void;
   offsetBox?: number | number[];
   positioning?: typeof Positioning | any | undefined; // workaround with any for 'auto'
 }
