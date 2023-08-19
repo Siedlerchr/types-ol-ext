@@ -153,7 +153,8 @@ dijkstra.direction = function (feature) {
 // Get the real length of the geom
 dijkstra.getLength = function (geom) {
   let castedGeom: Geometry
-  if (geom instanceof Feature<Geometry>) {
+  const f = Feature<Geometry>
+  if (geom instanceof f) {
     castedGeom = geom.getGeometry()!
     return getLength(castedGeom)
   }

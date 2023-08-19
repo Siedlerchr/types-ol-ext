@@ -16,7 +16,7 @@
    cd /path/to/types-ol-ext
    git clone git@github.com:Viglino/ol-ext.git
    cd ol-ext
-   npm install
+   yarn install
    ```
 
 3. Check whether original JavaScript ol-ext examples can be launched locally.
@@ -24,7 +24,7 @@
    ```bash
    cd /path/to/types-ol-ext
    cd ol-ext
-   npm run start
+   yarn start
    ```
 
    Then access [http://localhost:8181](http://localhost:8181) and check some examples.
