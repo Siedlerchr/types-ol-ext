@@ -1,4 +1,3 @@
-import type BaseObject from 'ol/Object';
 import type Feature from 'ol/Feature'
 import type { StyleLike } from 'ol/style/Style'
 import type { Size } from 'ol/size'
