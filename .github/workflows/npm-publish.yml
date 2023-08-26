@@ -32,6 +32,7 @@ jobs:
       - run: npm ci
       - run: npm run lint 
       - run: npm run prepare-npm
-      - run: npm publish
+      - run: npm publish ./npm --access=public --dry-run
+      - run: npm publish ./npm --access=public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
