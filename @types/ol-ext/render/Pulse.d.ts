@@ -1,7 +1,6 @@
 import type { Coordinate } from 'ol/coordinate'
 import type { ProjectionLike } from 'ol/proj'
 import type { Style } from 'ol/style'
-import { Stroke, Image } from 'ol/style'
 
 /** The map is the core component of OpenLayers.
  * For a map to render, a view, one or more layers, and a target container are needed:

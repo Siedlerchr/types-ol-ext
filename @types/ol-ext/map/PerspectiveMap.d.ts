@@ -1,4 +1,4 @@
-import type { Options as MapOptions } from 'ol/Map'
+import type { MapOptions } from 'ol/Map'
 import Map from 'ol/Map'
 import type { Condition } from 'ol/events/condition'
 
@@ -17,7 +17,7 @@ export class PerspectiveMap extends Map {
    * @param {olx.MapOptions=} options
    *  @param {ol.events.condition} tiltCondition , default altKeyOnly
    */
-  constructor(options?: MapOptions);
+  constructor(options?: Options);
 
   /** Get pixel ratio for the map
    */

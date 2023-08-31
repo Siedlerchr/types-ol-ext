@@ -89,22 +89,20 @@ export default class HexGrid extends Object {
   /** Convert offset to cube coords
    * @param {Coordinate} c cube coordinate
    * @return {Coordinate} offset coordinate
-   * /
-   HexGrid.prototype.cube2offset = function(c)
-   {	return hex2offset(cube2hex(c));
-    };
-   /** Convert cube to offset coords
-   * @param {Coordinate} o offset coordinate
-   * @return {Coordinate} cube coordinate
-   * /
-   HexGrid.prototype.offset2cube = function (o)
-   {	return hex2cube(offset2Hex(o));
-    };
-   /** Round cube coords
-   * @param {Coordinate} h cube coordinate
-   * @return {Coordinate} rounded cube coordinate
    */
-  cube_round(c: Coordinate, o: Coordinate, h: Coordinate): void;
+  cube2offset(c: Coordinate): Coordinate
+
+  /** Convert cube to offset coords
+  * @param {Coordinate} o offset coordinate
+  * @return {Coordinate} cube coordinate
+  */
+  offsetToCube(o: Coordinate): Coordinate
+
+  /** Round cube coords
+  * @param {Coordinate} h cube coordinate
+  * @return {Coordinate} rounded cube coordinate
+  */
+  cube_round(c: Coordinate, o: Coordinate, h: Coordinate): Coordinate;
 
   /** Round axial coords
    * @param {Coordinate} h axial coordinate
