@@ -55,7 +55,7 @@
    ```bash
    cd /path/to/types-ol-ext
    cd ol-ext
-   npx gulp serve
+   yarn start
    ```
 
     - Currently, TypeScript ol-ext examples are a quite few.
