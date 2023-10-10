@@ -1,5 +1,5 @@
 import TileLayer from 'ol/layer/Tile'
-import { Stamen } from 'ol/source'
+import { StadiaMaps } from 'ol/source'
 import { Map, View, Feature } from 'ol'
 import {
   Style, Stroke, Fill, RegularShape,
@@ -23,7 +23,7 @@ const { $ } = window
 
 // Layers
 const layer = new TileLayer({
-  source: new Stamen({ layer: 'terrain' }),
+  source: new StadiaMaps({ layer: 'stamen_terrain' }),
 })
 
 // The map

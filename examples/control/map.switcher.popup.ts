@@ -1,6 +1,6 @@
 import { Map, View } from 'ol'
 import { Tile, Vector } from 'ol/layer'
-import { Stamen, OSM, Vector as VectorSource } from 'ol/source'
+import { StadiaMaps, OSM, Vector as VectorSource } from 'ol/source'
 import { GeoJSON } from 'ol/format'
 import { defaults as control_defaults } from 'ol/control'
 import LayerPopup from 'ol-ext/control/LayerPopup'
@@ -8,8 +8,8 @@ import LayerPopup from 'ol-ext/control/LayerPopup'
 // Two base layers
 const stamen = new Tile(
   {
-    source: new Stamen({
-      layer: 'watercolor',
+    source: new StadiaMaps({
+      layer: 'stamen_watercolor',
     }),
   },
 )
@@ -19,7 +19,7 @@ stamen.set('baseLayer', true)
 const stamen2 = new Tile(
   {
     visible: false,
-    source: new Stamen({
+    source: new StadiaMaps({
       layer: 'toner',
     }),
   },

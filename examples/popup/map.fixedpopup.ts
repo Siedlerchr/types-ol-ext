@@ -1,5 +1,5 @@
 import { Map, View } from 'ol'
-import { Stamen, Vector as VectorSource } from 'ol/source'
+import { StadiaMaps, Vector as VectorSource } from 'ol/source'
 import { GeoJSON } from 'ol/format'
 import { Style, Fill, Icon } from 'ol/style'
 import { Select } from 'ol/interaction'
@@ -14,8 +14,8 @@ import type Popup from 'ol-ext/overlay/Popup'
 // Layers
 const layers = [
   new TileLayer({
-    // title:'terrain-background',
-    source: new Stamen({ layer: 'terrain' }),
+    // title:'stamen_terrain-background',
+    source: new StadiaMaps({ layer: 'stamen_terrain' }),
   }),
 ]
 

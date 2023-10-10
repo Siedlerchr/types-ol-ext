@@ -1,6 +1,6 @@
 import { Map, View } from 'ol'
 import { Tile, Vector } from 'ol/layer'
-import { Stamen, Vector as VectorSource } from 'ol/source'
+import { StadiaMaps, Vector as VectorSource } from 'ol/source'
 import { defaults as interaction_defaults, Select } from 'ol/interaction'
 import { GeoJSON } from 'ol/format'
 import {
@@ -12,9 +12,9 @@ import PopupFeature, { ol_Overlay_PopupFeature_localString as localString } from
 
 // Layers
 const stamen = new Tile({
-  source: new Stamen({ layer: 'terrain' }),
+  source: new StadiaMaps({ layer: 'stamen_terrain' }),
 })
-stamen.set('title', 'terrain-background')
+stamen.set('title', 'stamen_terrain-background')
 
 const layers = [stamen]
 

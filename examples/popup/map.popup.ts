@@ -1,7 +1,7 @@
 import type { Feature } from 'ol'
 import { Map, View } from 'ol'
 import { Tile, Vector } from 'ol/layer'
-import { Stamen, Vector as VectorSource } from 'ol/source'
+import { StadiaMaps, Vector as VectorSource } from 'ol/source'
 import { GeoJSON } from 'ol/format'
 import { Style, Icon } from 'ol/style'
 import { Select } from 'ol/interaction'
@@ -11,9 +11,9 @@ import type { Polygon } from 'ol/geom'
 
 // Layers
 const stamen = new Tile({
-  source: new Stamen({ layer: 'terrain' }),
+  source: new StadiaMaps({ layer: 'stamen_terrain' }),
 })
-stamen.set('title', 'terrain-background')
+stamen.set('title', 'stamen_terrain-background')
 
 const layers = [stamen]
 

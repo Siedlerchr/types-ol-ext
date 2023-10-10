@@ -1,6 +1,6 @@
 import type { Map as _ol_Map } from 'ol'
 import { Map, View } from 'ol'
-import { Stamen, Vector as VectorSource } from 'ol/source'
+import { StadiaMaps, Vector as VectorSource } from 'ol/source'
 import { GeoJSON } from 'ol/format'
 import {
   Style, Circle, Stroke, Fill,
@@ -43,7 +43,7 @@ function calcSpeed() {
 calcSpeed()
 
 // Layers
-const layers = [new TileLayer({ source: new Stamen({ layer: 'watercolor' }) })]
+const layers = [new TileLayer({ source: new StadiaMaps({ layer: 'stamen_watercolor' }) })]
 
 // The map
 const map = new Map({

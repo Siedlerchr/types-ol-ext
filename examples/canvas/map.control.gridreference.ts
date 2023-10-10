@@ -1,5 +1,5 @@
 import TileLayer from 'ol/layer/Tile'
-import { Stamen } from 'ol/source'
+import { StadiaMaps } from 'ol/source'
 import type { Feature } from 'ol'
 import { Map, View } from 'ol'
 import { defaults, Select } from 'ol/interaction'
@@ -12,8 +12,8 @@ import type { Point } from 'ol/geom'
 // Layers
 const layers = [
   new TileLayer({
-    // title:'terrain-background',
-    source: new Stamen({ layer: 'terrain' }),
+    // title:'stamen_terrain-background',
+    source: new StadiaMaps({ layer: 'stamen_terrain' }),
   }),
 ]
 

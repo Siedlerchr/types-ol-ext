@@ -1,7 +1,7 @@
 import { Map, View } from 'ol'
 import { unByKey } from 'ol/Observable'
 import { Tile, Vector } from 'ol/layer'
-import { Stamen, OSM, Vector as VectorSource } from 'ol/source'
+import { StadiaMaps, OSM, Vector as VectorSource } from 'ol/source'
 import { GeoJSON } from 'ol/format'
 import { Style, Stroke } from 'ol/style'
 import { Select } from 'ol/interaction'
@@ -21,8 +21,8 @@ const { $ } = window
 
 // Two base layers
 const stamen = new Tile({
-  source: new Stamen({
-    layer: 'watercolor',
+  source: new StadiaMaps({
+    layer: 'stamen_watercolor',
   }),
 })
 stamen.set('title', 'Watercolor')

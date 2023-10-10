@@ -1,6 +1,6 @@
 import { View, Map as _ol_Map } from 'ol'
 import TileLayer from 'ol/layer/Tile'
-import { Stamen } from 'ol/source'
+import { StadiaMaps } from 'ol/source'
 import AnimatedCanvas from 'ol-ext/overlay/AnimatedCanvas'
 import Bird from 'ol-ext/particule/Bird'
 import Rain from 'ol-ext/particule/Rain'
@@ -11,7 +11,7 @@ import RainDrop from 'ol-ext/particule/RainDrop'
 // Layers
 const layers = [
   new TileLayer({
-    source: new Stamen({ layer: 'terrain' }),
+    source: new StadiaMaps({ layer: 'stamen_terrain' }),
   }),
 ]
 

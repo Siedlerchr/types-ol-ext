@@ -1,6 +1,6 @@
 import { Map, View, Feature } from 'ol'
 import { Tile } from 'ol/layer'
-import { Stamen, OSM } from 'ol/source'
+import { StadiaMaps, OSM } from 'ol/source'
 import { MultiPolygon } from 'ol/geom'
 import { Fill } from 'ol/style'
 import 'ol-ext/filter/Base'
@@ -16,7 +16,7 @@ const map = new Map({
     center: [-337743, 6059005],
   }),
   layers: [
-    new Tile({ source: new Stamen({ layer: 'watercolor' }) }),
+    new Tile({ source: new StadiaMaps({ layer: 'stamen_watercolor' }) }),
     osm,
   ],
 })
