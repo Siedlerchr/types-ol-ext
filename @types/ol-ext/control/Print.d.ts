@@ -14,13 +14,14 @@ export interface PrintOptions {
   imageType: string;
   quality: number;
   immediate: boolean;
-  size?: boolean | undefined;
-  format?: boolean | undefined;
-  orient?: boolean | undefined;
-  margin?: boolean | undefined;
+  size?: number[] | undefined;
+  format?: PaperSize | undefined;
+  orient?: string | undefined;
+  margin?: number | undefined;
   any: any;
 }
 
+export type PaperSize = 'A0' | 'A1' | 'A2' | 'A3' | 'A4' | 'US Letter' | 'A5' | 'B4' | 'B5';
 /** Print control to get an image of the map
  * @constructor
  * @fire print
@@ -45,10 +46,10 @@ export default class Print extends ol_control_Control {
    *  @param {string} options.imageType A string indicating the image format, default the control one
    *  @param {number} options.quality Number between 0 and 1 indicating the image quality to use for image formats that use lossy compression such as image/jpeg and image/webp
    *  @param {boolean} options.immediate true to prevent delay for printing
-   *  @param {boolean} [options.size=[210,297]]
-   *  @param {boolean} [options.format=a4]
-   *  @param {boolean} [options.orient] default control orientation
-   *  @param {boolean} [options.margin=10]
+   *  @param {number[]} [options.size=[210,297]]
+   *  @param {PaperSize} [options.format=a4]
+   *  @param {string} [options.orient] default control orientation (landscape/portrait)
+   *  @param {number} [options.margin=10]
    *  @param {*} options.any any options passed to the print event when fired
    * @api
    */
