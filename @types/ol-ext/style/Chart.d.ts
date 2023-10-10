@@ -1,8 +1,8 @@
-import type { Color } from 'ol/color';
-import type { Stroke } from 'ol/style';
-import { RegularShape } from 'ol/style';
+import type { Color } from 'ol/color'
+import type { Stroke } from 'ol/style'
+import { RegularShape } from 'ol/style'
 
-export default Chart;
+export default Chart
 export type chartType = 'pie' | 'pie3d' | 'donut' | 'bar';
 
 export interface Options {
@@ -10,6 +10,7 @@ export interface Options {
   data: number[];
   radius?: number;
   rotation?: number;
+  declutterMode?: 'obstacle' | 'none' | undefined
   snapToPixel?: boolean;
   stroke?: Stroke;
   colors?: string | Color[] | string[];
@@ -40,6 +41,7 @@ export class Chart extends RegularShape {
    *  @param {String} options.type Chart type: pie,pie3D, donut or bar
    *  @param {number} options.radius Chart radius/size, default 20
    *  @param {number} options.rotation Rotation in radians (positive rotation clockwise). Default is 0.
+   *  @param {string} [options.declutterMode] Declutter mode "declutter" | "obstacle" | "none" | undefined
    *  @param {bool} options.snapToPixel use integral numbers of pixels, default true
    *  @param {_ol_style_Stroke_} options.stroke stroke style
    *  @param {String|Array<ol_color>} options.colors predefined color set "classic","dark","pale","pastel","neon" / array of color string, default classic
@@ -89,10 +91,10 @@ export class Chart extends RegularShape {
 
 export declare namespace Chart {
   export namespace colors {
-    const classic: string[];
-    const dark: string[];
-    const pale: string[];
-    const pastel: string[];
-    const neon: string[];
+    const classic: string[]
+    const dark: string[]
+    const pale: string[]
+    const pastel: string[]
+    const neon: string[]
   }
 }

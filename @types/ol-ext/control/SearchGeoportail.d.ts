@@ -15,6 +15,7 @@ export interface Options extends SearchJsonOptions {
   minLength?: number;
   maxItems?: number;
   type?: AddressType;
+  terr?: 'METROPOLE'|'DOMTOM'| string;
 }
 
 /**
@@ -42,6 +43,7 @@ export default class SearchGeoportail extends SearchJSON {
    *  @param {integer | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
    *
    *  @param {StreetAddress|PositionOfInterest|CadastralParcel|Commune} options.type type of search. Using Commune will return the INSEE code, default StreetAddress,PositionOfInterest
+   *  @param {string} options.terr territory METROPOLE|DOMTOM|dep code
    */
   constructor(options?: Options);
 
