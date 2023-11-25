@@ -29,7 +29,7 @@
     "url": "https://github.com/Siedlerchr/types-ol-ext/issues"
   },
   "homepage": "https://github.com/Siedlerchr/types-ol-ext#readme",
-  "dependencies": {
+  "peerDependencies": {
     "jspdf": "^2.5.1"
   },
   "devDependencies": {
