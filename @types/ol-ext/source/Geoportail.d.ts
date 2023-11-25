@@ -7,7 +7,7 @@ export interface Options extends SourceOptions {
   layer?: string;
   minZoom?: number;
   server?: string;
-  gppKey?: string;
+  gppKey?: string | 'gpf';
   authentication?: string;
   format?: string;
   style?: string;
@@ -30,7 +30,7 @@ export default class Geoportail extends WMTS {
    *  @param {number} options.minZoom
    *  @param {number} options.maxZoom
    *  @param {string} options.server
-   *  @param {string} options.gppKey api key, default 'choisirgeoportail'
+   *  @param {string} options.gppKey api key or 'gpf' for new Geoplatform services, default 'choisirgeopor
    *  @param {string} options.authentication basic authentication associated with the gppKey as btoa("login:pwd")
    *  @param {string} options.format image format, default 'image/jpeg'
    *  @param {string} options.style layer style, default 'normal'

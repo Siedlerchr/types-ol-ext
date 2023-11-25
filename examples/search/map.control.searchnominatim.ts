@@ -4,7 +4,7 @@ import { OSM, Vector as VectorSource } from 'ol/source'
 import { defaults as interaction_defaults } from 'ol/interaction'
 import { GeoJSON } from 'ol/format'
 import {
-  Style, Circle, Stroke, Text, Fill,
+  Style, Circle, Stroke, Fill,
 } from 'ol/style'
 import { getCenter } from 'ol/extent'
 import SearchNominatim from 'ol-ext/control/SearchNominatim'
@@ -64,16 +64,17 @@ search.on('select', e => { // console.log(e);
   sLayer.getSource()?.clear()
   // Check if we get a geojson to describe the search
   if (e.search.geojson) {
-    const format = new GeoJSON()
-    const f = format.readFeature(e.search.geojson, {
+    const f = new GeoJSON().readFeatures(e.search.geojson, {
       dataProjection: 'EPSG:4326',
       featureProjection: map.getView().getProjection(),
     })
-    sLayer.getSource()?.addFeature(f)
+
+    sLayer.getSource()?.addFeatures(f)
+
     const view = map.getView()
-    const resolution = view.getResolutionForExtent(f.getGeometry()!.getExtent(), map.getSize())
+    const resolution = view.getResolutionForExtent(f[0].getGeometry()!.getExtent(), map.getSize())
     const zoom = view.getZoomForResolution(resolution)!
-    const center = getCenter(f.getGeometry()!.getExtent())
+    const center = getCenter(f[0].getGeometry()!.getExtent())
     // redraw before zoom
     setTimeout(() => {
       view.animate({

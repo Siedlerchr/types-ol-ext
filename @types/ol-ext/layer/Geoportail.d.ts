@@ -21,7 +21,7 @@ export default class Geoportail extends Tile<TileSource> {
   /**
    * @param {olx.layer.WMTSOptions=} options WMTS options if not defined default are used
    *  @param {string} options.layer Geoportail layer name
-   *  @param {string} options.gppKey Geoportail API key, default use layer registered key
+   *  @param {string} options.gppKey Geoportail API key or 'gpf' for new Geoplatform services, default use layer registered key
    *  @param {ol.projectionLike} [options.projection=EPSG:3857] projection for the extent, default EPSG:3857
    * @param {olx.source.WMTSOptions=} tileoptions WMTS options if not defined default are used
    */

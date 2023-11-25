@@ -8,7 +8,6 @@ import TileLayer from 'ol/layer/Tile'
 import FixedPopup from 'ol-ext/overlay/FixedPopup'
 import VectorLayer from 'ol/layer/Vector'
 import type { Point } from 'ol/geom'
-import { LineString } from 'ol/geom'
 import type Popup from 'ol-ext/overlay/Popup'
 
 // Layers

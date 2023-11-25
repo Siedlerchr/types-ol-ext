@@ -1,7 +1,7 @@
 import type { Options as SearchJsonOptions } from './SearchJSON'
 import SearchJSON from './SearchJSON'
 
-export type AddressType = 'StreetAddress' | 'PositionOfInterest' | 'CadastralParcel' | 'Commune';
+export type AddressType = 'StreetAddress' | 'PositionOfInterest' | 'CadastralParcel'| 'Commune'
 
 export interface Options extends SearchJsonOptions {
   className?: string;
@@ -31,7 +31,7 @@ export default class SearchGeoportail extends SearchJSON {
   /**
    * @param {any} options extend ol.control.SearchJSON options
    *  @param {string} options.className control class name
-   *  @param {string | undefined} options.apiKey the service api key.
+   *  @param {string | undefined} options.apiKey {string} options.gppKey Geoportail API key or 'gpf' for new Geoplatform services, default use layer registered key
    *  @param {string | undefined} [options.version] API version '2' to use geocodage-beta-2, default v1.
    *  @param {string | undefined} options.authentication: basic authentication for the service API as btoa("login:pwd")
    *  @param {Element | string | undefined} options.target Specify a target if you want the control to be rendered outside of the map's viewport.
@@ -41,10 +41,13 @@ export default class SearchGeoportail extends SearchJSON {
    *  @param {number | undefined} options.typing a delay on each typing to start searching (ms), default 500.
    *  @param {integer | undefined} options.minLength minimum length to start searching, default 3
    *  @param {integer | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
+   *  @param {StreetAddress|PositionOfInterest|CadastralParcel|Commune} [options.type] type of search. Using Commune will return the INSEE code, default StreetAddress,PositionOfInterest
+   *  @param {string} [options.terr] territory METROPOLE|DOMTOM|dep code
+   *  @param {boolean} [options.position] Search, with priority to geo position (map center), default false
+   *  @param {ol.extent} [options.bbox] if set search inside the bbox (in map projection)
+   *  @param {boolean} [options.useExtent] returns candidates inside the current map extent, default false
    *
-   *  @param {StreetAddress|PositionOfInterest|CadastralParcel|Commune} options.type type of search. Using Commune will return the INSEE code, default StreetAddress,PositionOfInterest
-   *  @param {string} options.terr territory METROPOLE|DOMTOM|dep code
-   */
+ */
   constructor(options?: Options);
 
   /** Send an ajax request (GET)

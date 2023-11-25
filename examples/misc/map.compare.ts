@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Feature } from 'ol'
 import { View, Map as _ol_Map } from 'ol'
 import TileLayer from 'ol/layer/Tile'

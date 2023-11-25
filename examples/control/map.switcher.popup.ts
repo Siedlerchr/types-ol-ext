@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Map, View } from 'ol'
 import { Tile, Vector } from 'ol/layer'
 import { StadiaMaps, OSM, Vector as VectorSource } from 'ol/source'
