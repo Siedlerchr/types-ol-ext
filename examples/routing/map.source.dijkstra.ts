@@ -22,7 +22,7 @@ let speed: { [char: string]: number } = {
 declare global {
   interface Window {
     map: _ol_Map;
-    nodes: VectorLayer<VectorSource<Geometry>>;
+    nodes: VectorLayer<VectorSource>;
   }
 }
 const { $ } = window
@@ -141,17 +141,17 @@ dijkstra.on('calculating', e => {
 })
 
 // Get the weight of an edge
-dijkstra.weight = function (feature) {
+dijkstra.weight = feature => {
   const type = feature ? feature.get('type') as keyof typeof speed : 'A'
   if (!speed[type]) console.error(type)
   return speed[type] || speed.L
 }
 // Get direction of the edge
-dijkstra.direction = function (feature) {
+dijkstra.direction = feature => {
   return feature.get('dir')
 }
 // Get the real length of the geom
-dijkstra.getLength = function (geom) {
+dijkstra.getLength = geom => {
   let castedGeom: Geometry
   const f = Feature<Geometry>
   if (geom instanceof f) {
