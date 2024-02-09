@@ -12,7 +12,7 @@ export interface Options extends MapOptions {
  * @fires change:perspective
 
  */
-export class PerspectiveMap extends Map {
+export default class PerspectiveMap extends Map {
   /**
    * @param {olx.MapOptions=} options
    *  @param {ol.events.condition} tiltCondition , default altKeyOnly
