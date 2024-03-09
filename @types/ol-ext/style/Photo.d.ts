@@ -6,7 +6,7 @@ export interface Options {
   kind?: 'default' | 'square' | 'circle' | 'anchored' | 'folio';
   crop?: boolean;
   radius?: number;
-  shadow?: boolean;
+  shadow?: number;
   declutterMode?: 'obstacle' | 'none' | undefined
   stroke?: Stroke;
   src?: string;
@@ -33,7 +33,7 @@ export default class Photo extends RegularShape {
    *  @param { default | square | circle | anchored | folio } options.kind
    *  @param {boolean} options.crop crop within square, default is false
    *  @param {Number} options.radius symbol size
-   *  @param {boolean} options.shadow drop a shadow
+   *  @param {Number} [options.shadow=0] drop a shadow (the shadow width in pixel)
    *  @param {string} [options.declutterMode] Declutter mode "declutter" | "obstacle" | "none" | undefined
    *  @param {ol_style_Stroke} options.stroke
    *  @param {String} options.src image src

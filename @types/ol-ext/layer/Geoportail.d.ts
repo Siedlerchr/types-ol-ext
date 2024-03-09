@@ -7,6 +7,7 @@ import type TileSource from 'ol/source/Tile'
 import type { Options as GeoPortailOptions } from '../source/Geoportail'
 
 export interface Options extends TileLayerOptions<TileSource> {
+  baseLayer?: boolean,
   layer?: string;
   gpgKey?: string;
   projection?: ProjectionLike;
@@ -25,7 +26,7 @@ export default class Geoportail extends Tile<TileSource> {
    *  @param {ol.projectionLike} [options.projection=EPSG:3857] projection for the extent, default EPSG:3857
    * @param {olx.source.WMTSOptions=} tileoptions WMTS options if not defined default are used
    */
-  constructor(layer?: string, options?: Options, tileoptions?: GeoPortailOptions);
+  constructor(layer?: string | Options, options?: Options, tileoptions?: GeoPortailOptions);
 
   /** Standard IGN-GEOPORTAIL attribution
    */
@@ -113,643 +114,153 @@ export default class Geoportail extends Tile<TileSource> {
    * @return {*} Promise-like response
    */
   static getCapabilities(gppKey: string): Promise<any>;
+
+  static themes: {
+    theme: string;
+    rex: RegExp;
+  }[]
 }
 
 export const capabilities: {
   'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2': {
-    key: string;
-    server: string;
     layer: string;
-    title: string;
+    theme: string;
+    desc: string;
+    server: string;
+    bbox: number[];
     format: string;
-    style: string;
-    queryable: boolean;
-    tilematrix: string;
     minZoom: number;
     maxZoom: number;
-    bbox: number[];
-    desc: string;
     originators: {
-      IGN: {
-        href: string;
+      Geoservices: {
         attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
+        href: string;
       };
     };
+    queryable: boolean;
+    style: string;
+    tilematrix: string;
+    title: string;
   };
   'CADASTRALPARCELS.PARCELLAIRE_EXPRESS': {
-    key: string;
-    server: string;
     layer: string;
-    title: string;
+    theme: string;
+    desc: string;
+    server: string;
+    bbox: number[];
     format: string;
-    style: string;
-    queryable: boolean;
-    tilematrix: string;
     minZoom: number;
     maxZoom: number;
-    bbox: number[];
-    desc: string;
     originators: {
-      IGN: {
-        href: string;
+      Geoservices: {
         attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
+        href: string;
       };
     };
+    queryable: boolean;
+    style: string;
+    tilematrix: string;
+    title: string;
   };
   'ORTHOIMAGERY.ORTHOPHOTOS': {
-    key: string;
-    server: string;
     layer: string;
-    title: string;
-    format: string;
-    style: string;
-    queryable: boolean;
-    tilematrix: string;
-    minZoom: number;
-    bbox: number[];
+    theme: string;
     desc: string;
-    originators: {
-      CRCORSE: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      SIGLR: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      'BOURGOGNE-FRANCHE-COMTE': {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      FEDER_AUVERGNE: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      FEDER_PAYSDELALOIRE: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      IGN: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: (
-          | {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }
-          | {
-          bbox: number[];
-          minZoom?: undefined;
-          maxZoom?: undefined;
-        }
-          )[];
-      };
-      'E-MEGALIS': {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      FEDER2: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      PREFECTURE_GUADELOUPE: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      OCCITANIE: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      RGD_SAVOIE: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      CG45: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      CRAIG: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      'e-Megalis': {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      PPIGE: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      CG06: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      'MEGALIS-BRETAGNE': {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      FEDER: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      'LANGUEDOC-ROUSSILLON': {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      GRAND_EST: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      CNES_AUVERGNE: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      HAUTS_DE_FRANCE: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      MPM: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      DITTT: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      CNES_978: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      CNES_ALSACE: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      CNES_974: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      CNES_975: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      CNES_976: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      CNES_977: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      CNES: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      ASTRIUM: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      CNES_971: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      CNES_972: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-    };
-  };
-  'GEOGRAPHICALGRIDSYSTEMS.MAPS.SCAN-EXPRESS.STANDARD': {
     server: string;
-    layer: string;
-    title: string;
+    bbox: number[];
     format: string;
-    style: string;
-    queryable: boolean;
-    tilematrix: string;
     minZoom: number;
     maxZoom: number;
-    bbox: number[];
-    desc: string;
     originators: {
-      IGN: {
-        href: string;
+      Geoservices: {
         attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
+        href: string;
       };
     };
+    queryable: boolean;
+    style: string;
+    tilematrix: string;
+    title: string;
   };
   'GEOGRAPHICALGRIDSYSTEMS.MAPS': {
-    server: string;
     layer: string;
-    title: string;
+    theme: string;
+    desc: string;
+    server: string;
+    bbox: number[];
     format: string;
-    style: string;
-    queryable: boolean;
-    tilematrix: string;
     minZoom: number;
     maxZoom: number;
-    bbox: number[];
-    desc: string;
     originators: {
-      IGN: {
-        href: string;
+      Geoservices: {
         attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-      DITTT: {
         href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
       };
     };
+    queryable: boolean;
+    style: string;
+    tilematrix: string;
+    title: string;
+  };
+  'ADMINEXPRESS-COG-CARTO.LATEST': {
+    layer: string;
+    theme: string;
+    desc: string;
+    server: string;
+    bbox: number[];
+    format: string;
+    minZoom: number;
+    maxZoom: number;
+    originators: {
+      Geoservices: {
+        attribution: string;
+        href: string;
+      };
+    };
+    queryable: boolean;
+    style: string;
+    tilematrix: string;
+    title: string;
   };
   'GEOGRAPHICALGRIDSYSTEMS.SLOPES.MOUNTAIN': {
-    key: string;
-    server: string;
     layer: string;
-    title: string;
+    theme: string;
+    desc: string;
+    server: string;
+    bbox: number[];
     format: string;
-    style: string;
-    queryable: boolean;
-    tilematrix: string;
     minZoom: number;
     maxZoom: number;
-    bbox: number[];
-    desc: string;
     originators: {
-      IGN: {
-        href: string;
+      Geoservices: {
         attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
+        href: string;
       };
     };
-  };
-  ADMINEXPRESS_COG_2018: {
-    server: string;
-    layer: string;
-    title: string;
-    format: string;
-    style: string;
     queryable: boolean;
+    style: string;
     tilematrix: string;
-    minZoom: number;
-    maxZoom: number;
-    bbox: number[];
-    desc: string;
-    originators: {
-      IGN: {
-        href: string;
-        attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
-      };
-    };
+    title: string;
   };
   'ELEVATION.SLOPES': {
-    key: string;
-    server: string;
     layer: string;
-    title: string;
+    theme: string;
+    desc: string;
+    server: string;
+    bbox: number[];
     format: string;
-    style: string;
-    queryable: boolean;
-    tilematrix: string;
     minZoom: number;
     maxZoom: number;
-    bbox: number[];
-    desc: string;
     originators: {
-      IGN: {
-        href: string;
+      Geoservices: {
         attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
+        href: string;
       };
     };
+    queryable: boolean;
+    style: string;
+    tilematrix: string;
+    title: string;
   };
   'GEOGRAPHICALGRIDSYSTEMS.MAPS.BDUNI.J1': {
     key: string;
@@ -780,30 +291,87 @@ export const capabilities: {
     };
   };
   'TRANSPORTNETWORKS.ROADS': {
-    server: string;
     layer: string;
-    title: string;
+    theme: string;
+    desc: string;
+    server: string;
+    bbox: number[];
     format: string;
-    style: string;
-    queryable: boolean;
-    tilematrix: string;
     minZoom: number;
     maxZoom: number;
-    bbox: number[];
-    desc: string;
     originators: {
-      IGN: {
-        href: string;
+      Geoservices: {
         attribution: string;
-        logo: string;
-        minZoom: number;
-        maxZoom: number;
-        constraint: {
-          minZoom: number;
-          maxZoom: number;
-          bbox: number[];
-        }[];
+        href: string;
       };
     };
+    queryable: boolean;
+    style: string;
+    tilematrix: string;
+    title: string;
+  };
+  'GEOGRAPHICALNAMES.NAMES': {
+    layer: string;
+    theme: string;
+    desc: string;
+    server: string;
+    bbox: number[];
+    format: string;
+    minZoom: number;
+    maxZoom: number;
+    originators: {
+      Geoservices: {
+        attribution: string;
+        href: string;
+      };
+    };
+    queryable: boolean;
+    style: string;
+    tilematrix: string;
+    title: string;
+    legend: string[];
+  };
+  'CARTES.NATURALEARTH': {
+    layer: string;
+    theme: string;
+    desc: string;
+    server: string;
+    bbox: number[];
+    format: string;
+    minZoom: number;
+    maxZoom: number;
+    originators: {
+      Geoservices: {
+        attribution: string;
+        href: string;
+      };
+    };
+    queryable: boolean;
+    style: string;
+    tilematrix: string;
+    title: string;
+    legend: string[];
+  };
+  'GEOGRAPHICALGRIDSYSTEMS.MAPS.OVERVIEW': {
+    layer: string;
+    key: string;
+    theme: string;
+    desc: string;
+    server: string;
+    bbox: number[];
+    format: string;
+    minZoom: number;
+    maxZoom: number;
+    originators: {
+      Geoservices: {
+        attribution: string;
+        href: string;
+      };
+    };
+    queryable: boolean;
+    style: string;
+    tilematrix: string;
+    title: string;
+    legend: string[];
   };
 }

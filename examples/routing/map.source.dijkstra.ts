@@ -88,7 +88,7 @@ const dijkstra = new Dijskra({
   source: graph,
 })
 // Start processing
-dijkstra.on('start', e => {
+dijkstra.on('start', () => {
   $('#warning').hide()
   $('#notfound').hide()
   $('#notfound0').hide()
@@ -132,7 +132,7 @@ dijkstra.on('pause', e => {
   }
 })
 // Calculating > show the current "best way"
-dijkstra.on('calculating', e => {
+dijkstra.on('calculating', () => {
   if ($('#path').prop('checked')) {
     const route = dijkstra.getBestWay()
     result.clear()

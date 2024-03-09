@@ -5,7 +5,6 @@ import { Select, Draw } from 'ol/interaction'
 
 import Bar from 'ol-ext/control/Bar'
 import Toggle from 'ol-ext/control/Toggle'
-import { Geometry } from 'ol/geom'
 // import ZoomToExtent from 'ol-ext/control/ZoomToExtent';
 // import Rotate from 'ol-ext/control/Rotate';
 // import FullScreen from 'ol-ext/control/FullScreen';

@@ -1,7 +1,7 @@
 import type { Options as SearchJsonOptions } from './SearchJSON'
 import SearchJSON from './SearchJSON'
 
-export type AddressType = 'StreetAddress' | 'PositionOfInterest' | 'CadastralParcel'| 'Commune'
+export type AddressType = 'StreetAddress' | 'PositionOfInterest' | 'CadastralParcel' | 'Commune'
 
 export interface Options extends SearchJsonOptions {
   className?: string;
@@ -15,7 +15,7 @@ export interface Options extends SearchJsonOptions {
   minLength?: number;
   maxItems?: number;
   type?: AddressType;
-  terr?: 'METROPOLE'|'DOMTOM'| string;
+  terr?: 'METROPOLE' | 'DOMTOM' | string;
 }
 
 /**

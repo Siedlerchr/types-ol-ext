@@ -5,9 +5,14 @@ import SearchJSON from './SearchJSON'
 export interface Options extends SearchJsonOptions {
   className?: string;
   apiKey?: string;
+  target?: HTMLElement | string
   authentication?: string;
   label?: string;
   placeholder?: string;
+  prefixPlaceholder?: string,
+  sectionPlaceholder?: string,
+  numberPlaceholder?: string,
+  arrondPlaceholder?: string,
   typing?: number;
   minLength?: number;
   maxItems?: number;
@@ -24,18 +29,20 @@ export interface Options extends SearchJsonOptions {
  * @see {@link https://geoservices.ign.fr/documentation/geoservices/geocodage.html} */
 export default class SearchGeoportailParcelle extends SearchJSON {
   /**
-   * @param {any} options extend ol.control.SearchJSON options
-   *  @param {string} options.className control class name
-   *  @param {boolean | undefined} options.apiKey the service api key.
-   *  @param {string | undefined} options.authentication: basic authentication for the service API as btoa("login:pwd")
-   *  @param {Element | string | undefined} options.target Specify a target if you want the control to be rendered outside of the map's viewport.
-   *  @param {string | undefined} options.label Text label to use for the search button, default "search"
-   *  @param {string | undefined} options.placeholder placeholder, default "Search..."
-   *  @param {number | undefined} options.typing a delay on each typing to start searching (ms), default 500.
-   *  @param {integer | undefined} options.minLength minimum length to start searching, default 3
-   *  @param {integer | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
-   *
-   *  @param {Number} options.pageSize item per page for parcelle list paging, use -1 for no paging, default 5
+   * @param {string} options.className control class name
+   * @param {boolean | undefined} [options.apiKey] the service api key.
+   * @param {string | undefined} options.authentication: basic authentication for the service API as btoa("login:pwd")
+   * @param {Element | string | undefined} options.target Specify a target if you want the control to be rendered outside of the map's viewport.
+   * @param {string | undefined} options.label Text label to use for the search button, default "search"
+   * @param {string | undefined} options.placeholder placeholder for city input, default "Choisissez une commune..."
+   * @param {string | undefined} options.prefixPlaceholder placeholder for prefix input, default "Préfixe"
+   * @param {string | undefined} options.sectionPlaceholder placeholder for section input, default "Section"
+   * @param {string | undefined} options.numberPlaceholder placeholder for number input, default "Numéro"
+   * @param {string | undefined} options.arrondPlaceholder placeholder for arrondissement, default "Arrond."
+   * @param {number | undefined} options.typing a delay on each typing to start searching (ms), default 500.
+   * @param {integer | undefined} options.minLength minimum length to start searching, default 3
+   * @param {integer | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
+   * @param {Number} options.pageSize item per page for parcelle list paging, use -1 for no paging, default 5
    */
   constructor(options: Options);
 
@@ -139,6 +146,11 @@ export default class SearchGeoportailParcelle extends SearchJSON {
    * Remove previous history
    */
   clearHistory(): void;
+
+  /**
+   * Clear the parcel list
+   */
+  clearParcelList(): void
 
   /**
    * Get history table

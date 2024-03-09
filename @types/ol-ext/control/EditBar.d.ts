@@ -52,7 +52,7 @@ export interface Options {
   target?: string;
   edition?: boolean;
   interactions?: Interactions; // TODO dig deeper into the type system
-  source?: VectorSource;
+  source?: VectorSource | null;
 }
 
 /** Control bar for editing in a layer
