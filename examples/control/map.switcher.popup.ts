@@ -1,31 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Map, View } from 'ol'
 import { Tile, Vector } from 'ol/layer'
-import { Stamen, OSM, Vector as VectorSource } from 'ol/source'
+import { OSM, Vector as VectorSource } from 'ol/source'
 import { GeoJSON } from 'ol/format'
 import { defaults as control_defaults } from 'ol/control'
 import LayerPopup from 'ol-ext/control/LayerPopup'
+import Geoportail from 'ol-ext/layer/Geoportail'
 
 // Two base layers
-const stamen = new Tile(
+const ortho = new Geoportail(
   {
-    source: new Stamen({
-      layer: 'watercolor',
-    }),
+    baseLayer: true,
+    layer: 'ORTHOIMAGERY.ORTHOPHOTOS',
   },
 )
-stamen.set('title', 'Watercolor')
-stamen.set('baseLayer', true)
-
-const stamen2 = new Tile(
-  {
-    visible: false,
-    source: new Stamen({
-      layer: 'toner',
-    }),
-  },
-)
-stamen2.set('title', 'Toner')
-stamen2.set('baseLayer', true)
+const mapign = new Geoportail({
+  baseLayer: true,
+  visible: false,
+  layer: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2',
+})
 
 const osm = new Tile(
   {
@@ -65,5 +58,5 @@ const map = new Map({
     center: [173664, 6166327],
   }),
   controls: control_defaults().extend([new LayerPopup()]),
-  layers: [stamen, stamen2, osm, vector],
+  layers: [ortho, mapign, osm, vector],
 })

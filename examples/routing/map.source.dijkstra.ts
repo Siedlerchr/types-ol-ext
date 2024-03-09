@@ -1,6 +1,6 @@
 import type { Map as _ol_Map } from 'ol'
 import { Map, View } from 'ol'
-import { Stamen, Vector as VectorSource } from 'ol/source'
+import { StadiaMaps, Vector as VectorSource } from 'ol/source'
 import { GeoJSON } from 'ol/format'
 import {
   Style, Circle, Stroke, Fill,
@@ -22,7 +22,7 @@ let speed: { [char: string]: number } = {
 declare global {
   interface Window {
     map: _ol_Map;
-    nodes: VectorLayer<VectorSource<Geometry>>;
+    nodes: VectorLayer<VectorSource>;
   }
 }
 const { $ } = window
@@ -43,7 +43,7 @@ function calcSpeed() {
 calcSpeed()
 
 // Layers
-const layers = [new TileLayer({ source: new Stamen({ layer: 'watercolor' }) })]
+const layers = [new TileLayer({ source: new StadiaMaps({ layer: 'stamen_watercolor' }) })]
 
 // The map
 const map = new Map({
@@ -88,7 +88,7 @@ const dijkstra = new Dijskra({
   source: graph,
 })
 // Start processing
-dijkstra.on('start', e => {
+dijkstra.on('start', () => {
   $('#warning').hide()
   $('#notfound').hide()
   $('#notfound0').hide()
@@ -132,7 +132,7 @@ dijkstra.on('pause', e => {
   }
 })
 // Calculating > show the current "best way"
-dijkstra.on('calculating', e => {
+dijkstra.on('calculating', () => {
   if ($('#path').prop('checked')) {
     const route = dijkstra.getBestWay()
     result.clear()
@@ -141,17 +141,17 @@ dijkstra.on('calculating', e => {
 })
 
 // Get the weight of an edge
-dijkstra.weight = function (feature) {
+dijkstra.weight = feature => {
   const type = feature ? feature.get('type') as keyof typeof speed : 'A'
   if (!speed[type]) console.error(type)
   return speed[type] || speed.L
 }
 // Get direction of the edge
-dijkstra.direction = function (feature) {
+dijkstra.direction = feature => {
   return feature.get('dir')
 }
 // Get the real length of the geom
-dijkstra.getLength = function (geom) {
+dijkstra.getLength = geom => {
   let castedGeom: Geometry
   const f = Feature<Geometry>
   if (geom instanceof f) {

@@ -1,6 +1,6 @@
 import { Map, View, Feature } from 'ol'
 import { Tile, Vector } from 'ol/layer'
-import { Stamen, Vector as VectorSource } from 'ol/source'
+import { StadiaMaps, Vector as VectorSource } from 'ol/source'
 import { Style, Fill, Stroke } from 'ol/style'
 import { GeoJSON } from 'ol/format'
 import type { FeatureLike } from 'ol/Feature'
@@ -19,7 +19,7 @@ import 'ol-ext/style/FontAwesomeDef.js'
 // FontSymbol.prototype.defs.fonts.FontAwesome.font = "Font Awesome 5 Free";
 
 // Layers
-const layer = new Tile({ source: new Stamen({ layer: 'watercolor' }) })
+const layer = new Tile({ source: new StadiaMaps({ layer: 'stamen_watercolor' }) })
 
 // The map
 const map = new Map({

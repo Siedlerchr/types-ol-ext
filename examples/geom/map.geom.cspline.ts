@@ -7,7 +7,7 @@ import {
 } from 'ol/geom'
 import { Modify } from 'ol/interaction'
 import TileLayer from 'ol/layer/Tile'
-import { Stamen, Vector } from 'ol/source'
+import { StadiaMaps, Vector } from 'ol/source'
 import { Style, Stroke } from 'ol/style'
 import VectorLayer from 'ol/layer/Vector'
 import CircleStyle from 'ol/style/Circle'
@@ -23,7 +23,7 @@ declare global {
 }
 
 // Layers
-const layer = new TileLayer({ source: new Stamen({ layer: 'watercolor' }) })
+const layer = new TileLayer({ source: new StadiaMaps({ layer: 'stamen_watercolor' }) })
 
 // The map
 const map = new Map({

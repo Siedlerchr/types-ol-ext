@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Feature } from 'ol'
 import { View, Map as _ol_Map } from 'ol'
 import TileLayer from 'ol/layer/Tile'
-import { Stamen, XYZ } from 'ol/source'
+import { StadiaMaps, XYZ } from 'ol/source'
 import VectorSource from 'ol/source/Vector'
 import VectorLayer from 'ol/layer/Vector'
 import { GeoJSON } from 'ol/format'
@@ -23,7 +24,7 @@ const mapbox = new TileLayer({
   }),
 })
 const stamen = new TileLayer({
-  source: new Stamen({ layer: 'watercolor' }),
+  source: new StadiaMaps({ layer: 'stamen_watercolor' }),
 })
 
 // The map
@@ -34,7 +35,7 @@ const map = new _ol_Map({
     center: [262600, 6250704],
   }),
   layers: [new TileLayer({
-    source: new Stamen({ layer: 'watercolor' }),
+    source: new StadiaMaps({ layer: 'stamen_watercolor' }),
   })],
 })
 
@@ -45,7 +46,7 @@ const map2 = new _ol_Map({
     center: [166326, 5992663],
   }),
   layers: [new TileLayer({
-    source: new Stamen({ layer: 'toner' }),
+    source: new StadiaMaps({ layer: 'stamen_toner_labels' }),
   })],
 })
 

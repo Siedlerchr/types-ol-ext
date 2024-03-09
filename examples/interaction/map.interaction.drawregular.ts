@@ -1,6 +1,6 @@
 import { Map, View } from 'ol'
 import { Tile, Vector } from 'ol/layer'
-import { Stamen, Vector as VectorSource } from 'ol/source'
+import { StadiaMaps, Vector as VectorSource } from 'ol/source'
 import { defaults as control_defaults } from 'ol/control'
 import DrawRegular from 'ol-ext/interaction/DrawRegular'
 import { LinearRing, MultiPolygon, Polygon } from 'ol/geom'
@@ -16,9 +16,9 @@ const { $ } = window
 
 // Layers
 const stamen = new Tile({
-  source: new Stamen({ layer: 'terrain' }),
+  source: new StadiaMaps({ layer: 'stamen_terrain' }),
 })
-stamen.set('title', 'terrain-background')
+stamen.set('title', 'stamen_terrain-background')
 const layers = [stamen]
 
 // The map

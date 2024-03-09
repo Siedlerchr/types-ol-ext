@@ -1,11 +1,12 @@
 import { Map, View, Feature } from 'ol'
 import { Tile } from 'ol/layer'
-import { Stamen, OSM } from 'ol/source'
+import { OSM } from 'ol/source'
 import { MultiPolygon } from 'ol/geom'
 import { Fill } from 'ol/style'
 import 'ol-ext/filter/Base'
 import Crop from 'ol-ext/filter/Crop'
 import Mask from 'ol-ext/filter/Mask'
+import Geoportail from 'ol-ext/layer/Geoportail'
 
 const osm = new Tile({ source: new OSM() })
 // The map
@@ -16,7 +17,7 @@ const map = new Map({
     center: [-337743, 6059005],
   }),
   layers: [
-    new Tile({ source: new Stamen({ layer: 'watercolor' }) }),
+    new Geoportail('ORTHOIMAGERY.ORTHOPHOTOS'),
     osm,
   ],
 })

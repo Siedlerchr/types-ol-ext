@@ -1,5 +1,4 @@
-import TileLayer from 'ol/layer/Tile'
-import { Stamen } from 'ol/source'
+import Geoportail from 'ol-ext/layer/Geoportail'
 import { Map, View, Feature } from 'ol'
 import {
   Style, Stroke, Fill, RegularShape,
@@ -22,9 +21,7 @@ declare global {
 const { $ } = window
 
 // Layers
-const layer = new TileLayer({
-  source: new Stamen({ layer: 'terrain' }),
-})
+const layer = new Geoportail('ORTHOIMAGERY.ORTHOPHOTOS')
 
 // The map
 const map = new Map({
@@ -67,7 +64,10 @@ const style = [
     }),
   }),
 ]
-style[1].getImage().getAnchor()[1] += 10
+const anchor = style[1]?.getImage()?.getAnchor()
+if (anchor != null) {
+  anchor[1] += 10
+}
 
 // Vector layer
 const source = new VectorSource()

@@ -1,5 +1,3 @@
-import TileLayer from 'ol/layer/Tile'
-import { Stamen } from 'ol/source'
 import type { Feature } from 'ol'
 import { Map, View } from 'ol'
 import { defaults, Select } from 'ol/interaction'
@@ -9,12 +7,11 @@ import VectorSource from 'ol/source/Vector'
 import { Style, Icon } from 'ol/style'
 import GridReference from 'ol-ext/control/GridReference'
 import type { Point } from 'ol/geom'
+import Geoportail from 'ol-ext/layer/Geoportail'
 // Layers
 const layers = [
-  new TileLayer({
-    // title:'terrain-background',
-    source: new Stamen({ layer: 'terrain' }),
-  }),
+  new Geoportail('ORTHOIMAGERY.ORTHOPHOTOS'),
+  new Geoportail('GEOGRAPHICALNAMES.NAMES'),
 ]
 
 // The map

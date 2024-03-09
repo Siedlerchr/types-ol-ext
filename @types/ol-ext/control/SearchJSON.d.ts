@@ -1,10 +1,9 @@
 import type { Feature } from 'ol'
 import type { Coordinate } from 'ol/coordinate'
 import type { EventsKey } from 'ol/events'
-import BaseEvent from 'ol/events/Event'
 import type { Geometry } from 'ol/geom'
 import type { Options as SearchOptions, SearchOnSignature } from './Search'
-import Search, { SearchEvent } from './Search'
+import Search from './Search'
 
 export interface Options extends SearchOptions {
   handleResponse?: ((response: any) => any[]);

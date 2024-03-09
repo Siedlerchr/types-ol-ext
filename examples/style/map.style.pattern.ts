@@ -1,7 +1,7 @@
 import FillPattern from 'ol-ext/style/FillPattern'
 import { Map, View, Feature } from 'ol'
 import { Tile, Vector } from 'ol/layer'
-import { Stamen, Vector as VectorSource } from 'ol/source'
+import { StadiaMaps, Vector as VectorSource } from 'ol/source'
 import { Fill, Icon, Style } from 'ol/style'
 import { Draw } from 'ol/interaction'
 import { Polygon } from 'ol/geom'
@@ -89,8 +89,8 @@ $(window).on('load', () => {
 
   // Layers
   const layer = new Tile({
-    // title: 'terrain-background',
-    source: new Stamen({ layer: 'terrain' }),
+    // title: 'stamen_terrain-background',
+    source: new StadiaMaps({ layer: 'stamen_terrain' }),
   })
 
   /* fix offset ?!

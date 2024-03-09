@@ -1,6 +1,6 @@
 import { Map, View } from 'ol'
 import { Tile } from 'ol/layer'
-import { Stamen } from 'ol/source'
+import { StadiaMaps } from 'ol/source'
 import Clip from 'ol-ext/interaction/Clip'
 
 declare global {
@@ -14,11 +14,11 @@ const { $ } = window
 
 // Layers
 const mapbox = new Tile({
-  source: new Stamen({ layer: 'terrain' }),
+  source: new StadiaMaps({ layer: 'stamen_terrain' }),
 })
-mapbox.set('title', 'terrain-background')
+mapbox.set('title', 'stamen_terrain-background')
 const stamen = new Tile({
-  source: new Stamen({ layer: 'watercolor' }),
+  source: new StadiaMaps({ layer: 'stamen_watercolor' }),
 })
 
 // The map

@@ -30,6 +30,7 @@ export interface Options {
   radius?: number;
   rotation?: number;
   rotateWithView?: boolean;
+  declutterMode?: 'obstacle' | 'none' | undefined
   opacity?: number;
   fontSize?: number;
   fontStyle?: string;
@@ -84,6 +85,7 @@ export default class FontSymbol extends RegularShape {
    *  @param {number} options.radius
    *  @param {number} options.rotation
    *  @param {boolean} options.rotateWithView
+   *  @param {string} [options.declutterMode] Declutter mode "declutter" | "obstacle" | "none" | undefined
    *  @param {number} [options.opacity=1]
    *  @param {number} [options.fontSize=1] size of the font compare to the radius, fontSize greater than 1 will exceed the symbol extent
    *  @param {string} [options.fontStyle] the font style (bold, italic, bold italic, etc), default none

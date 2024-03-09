@@ -1,6 +1,6 @@
 import { Map, View } from 'ol'
 import { Tile } from 'ol/layer'
-import { Stamen } from 'ol/source'
+import { StadiaMaps } from 'ol/source'
 import type { SelectEvent } from 'ol-ext/interaction/Transform'
 import Transform from 'ol-ext/interaction/Transform'
 import type { FeatureLike } from 'ol/Feature'
@@ -28,8 +28,8 @@ const { $ } = window
 // Layers
 const layers = [
   new Tile({
-    // title:'terrain-background',
-    source: new Stamen({ layer: 'terrain' }),
+    // title:'stamen_terrain-background',
+    source: new StadiaMaps({ layer: 'stamen_terrain' }),
   }),
 ]
 // The map

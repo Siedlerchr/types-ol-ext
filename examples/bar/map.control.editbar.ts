@@ -8,7 +8,6 @@ import Notification from 'ol-ext/control/Notification'
 import { Select } from 'ol/interaction'
 import Tooltip from 'ol-ext/overlay/Tooltip'
 import type { SelectEvent } from 'ol/interaction/Select'
-import type { Geometry } from 'ol/geom'
 import type ModifyFeature from 'ol-ext/interaction/ModifyFeature'
 import type DrawRegular from 'ol-ext/interaction/DrawRegular'
 import type DrawHole from 'ol-ext/interaction/DrawHole'
@@ -42,7 +41,7 @@ const edit = new EditBar({
       circleLabel: 'cercle',
     },
   },
-  source: vector.getSource() as VectorSource<Geometry>,
+  source: vector.getSource(),
 })
 map.addControl(edit)
 
@@ -55,13 +54,13 @@ map.addOverlay(tooltip);
     tooltip.setInfo('Drag points on features to edit...')
   } else tooltip.setInfo()
 })
-edit.getInteraction('Select').on('change:active', e => {
+edit.getInteraction('Select').on('change:active', () => {
   tooltip.setInfo('')
 });
 (edit.getInteraction('ModifySelect') as ModifyFeature).on('modifystart', e => {
   if (e.features.length === 1) tooltip.setFeature(e.features[0])
 });
-(edit.getInteraction('ModifySelect') as ModifyFeature).on('modifyend', e => {
+(edit.getInteraction('ModifySelect') as ModifyFeature).on('modifyend', () => {
   tooltip.setFeature()
 })
 edit.getInteraction('DrawPoint').on('change:active', e => {
@@ -71,7 +70,7 @@ edit.getInteraction('DrawPoint').on('change:active', e => {
   tooltip.setFeature()
   tooltip.setInfo(e.oldValue ? '' : 'Click map to start drawing line...')
 });
-(edit.getInteraction('DrawLine') as Draw).on('drawend', e => {
+(edit.getInteraction('DrawLine') as Draw).on('drawend', () => {
   tooltip.setFeature()
   // oldValue doesn't exist in DrawEvent
   // tooltip.setInfo(e.oldValue ? '' : 'Click map to start drawing line...');
@@ -88,7 +87,7 @@ edit.getInteraction('DrawPoint').on('change:active', e => {
   tooltip.setFeature()
   tooltip.setInfo(e.oldValue ? '' : 'Click map to start drawing shape...')
 });
-(edit.getInteraction('DrawPolygon') as Draw).on('drawend', e => {
+(edit.getInteraction('DrawPolygon') as Draw).on('drawend', () => {
   tooltip.setFeature()
   // tooltip.setInfo(e.oldValue ? '' : 'Click map to start drawing shape...');
 });

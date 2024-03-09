@@ -1,7 +1,6 @@
 import { Map, View } from 'ol'
-import { Tile } from 'ol/layer'
-import { Stamen } from 'ol/source'
 import GeoBookmark from 'ol-ext/control/GeoBookmark'
+import Geoportail from 'ol-ext/layer/Geoportail'
 import { transform } from 'ol/proj'
 
 declare global {
@@ -15,7 +14,7 @@ const map = new Map
 ({
   target: 'map',
   view: new View({ zoom: 13, center: [649083, 5408224] }),
-  layers: [new Tile({ source: new Stamen({ layer: 'watercolor' }) })],
+  layers: [new Geoportail('GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2')],
 })
 
 const bm = new GeoBookmark({
