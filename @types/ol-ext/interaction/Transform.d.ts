@@ -159,7 +159,7 @@ export default class Transform extends Pointer {
    * @param {Stroke} options.pointStroke Stroke style for handles
    * @param {Fill} options.pointFill Fill style for handles
    */
-  setDefaultStyle(options: OlExtTransformDefaultStyle): void;
+  setDefaultStyle(options?: OlExtTransformDefaultStyle): void;
 
   /**
    * Style for handles
