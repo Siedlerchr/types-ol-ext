@@ -2,7 +2,7 @@ import type { Map as _ol_Map_ } from 'ol'
 import type Collection from 'ol/Collection'
 import type Feature from 'ol/Feature'
 import type { Layer } from 'ol/layer'
-import type { Style } from 'ol/style'
+import type { Fill, Stroke, Style } from 'ol/style'
 import { Pointer } from 'ol/interaction'
 import type MapBrowserEvent from 'ol/MapBrowserEvent'
 import type { Condition as EventsConditionType } from 'ol/events/condition'
@@ -85,6 +85,14 @@ export type olExtStyle =
   | 'scaleh1'
   | 'scalev2'
   | 'scaleh3'
+
+export interface OlExtTransformDefaultStyle {
+  stroke?: Stroke;
+  fill?: Fill;
+  pointStroke?: Stroke;
+  pointFill?: Fill
+}
+
 export default class Transform extends Pointer {
   /**
    * @param options
@@ -103,7 +111,7 @@ export default class Transform extends Pointer {
    * @param options.selection the intraction handle selection/deselection, if not use the select prototype to add features to transform, default true
    * @param options.keepAspectRatio A function that takes an MapBrowserEvent and returns a boolean to keep aspect ratio, default events.condition.shiftKeyOnly.
    * @param options.modifyCenter A function that takes an MapBrowserEvent and returns a boolean to apply scale & strech from the center, default events.condition.metaKey or events.condition.ctrlKey.
-   * @parm options.enableRotatedTransform Enable transform when map is rotated
+   * @param options.enableRotatedTransform Enable transform when map is rotated
    * @param options.style list of style for handles
    * @param {number|Array<number>|function} [options.pointRadius=0] radius for points or a function that takes a feature and returns the radius (or [radiusX, radiusY]). If not null show handles to transform the points
    */
@@ -144,9 +152,14 @@ export default class Transform extends Pointer {
   setActive(b: boolean): void;
 
   /**
-   * Set efault sketch style
+   * Set default sketch style
+   * @param {OlExtTransformDefaultStyle} options Style options for the default style
+   * @param {Stroke} options.stroke Stroke style for selection rectangle
+   * @param {Fill} options.fill Fill style for selection rectangle
+   * @param {Stroke} options.pointStroke Stroke style for handles
+   * @param {Fill} options.pointFill Fill style for handles
    */
-  setDefaultStyle(): void;
+  setDefaultStyle(options: OlExtTransformDefaultStyle): void;
 
   /**
    * Style for handles
