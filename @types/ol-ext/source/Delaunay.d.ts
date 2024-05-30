@@ -1,10 +1,10 @@
 import type { Options as VectorSourceOptions } from 'ol/source/Vector'
 import VectorSource from 'ol/source/Vector'
 import type { Coordinate } from 'ol/coordinate'
-import type { Feature } from 'ol'
+import type Feature from 'ol/Feature'
 import type Polygon from 'ol/geom/Polygon'
 
-export interface Options extends VectorSourceOptions {
+export interface Options extends VectorSourceOptions<Feature> {
   source?: VectorSource;
 }
 

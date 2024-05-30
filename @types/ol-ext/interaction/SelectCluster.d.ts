@@ -1,7 +1,6 @@
 import type { Map as _ol_Map_ } from 'ol'
 import type Feature from 'ol/Feature'
-import { FeatureLike } from 'ol/Feature'
-import type { Vector } from 'ol/layer'
+import type VectorLayer from 'ol/layer/Vector'
 import type { StyleLike } from 'ol/style/Style'
 import { Select } from 'ol/interaction'
 import type { Coordinate } from 'ol/coordinate'
@@ -69,7 +68,7 @@ export default class SelectCluster extends Select {
    * Get the layer for the revealed features
    * @api stable
    */
-  getLayer(): Vector<VectorSource<Geometry>>;
+  getLayer(): VectorLayer<VectorSource<Feature<Geometry>>>;
 
   /**
    * Select a cluster

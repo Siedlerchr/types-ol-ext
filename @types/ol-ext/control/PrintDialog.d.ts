@@ -64,7 +64,7 @@ export default class PrintDialog extends ol_control_Control {
    *  @param {function} [options.saveAs] a function to save the image as blob
    *  @param {*} [options.jsPDF] jsPDF object to save map as pdf
    */
-  constructor(options: any);
+  constructor(options?: Options);
 
   /** Check if the dialog is oprn
    * @return {boolean}

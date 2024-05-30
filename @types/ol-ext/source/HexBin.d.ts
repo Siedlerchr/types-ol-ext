@@ -6,7 +6,7 @@ import type VectorSource from 'ol/source/Vector'
 import type HexagonLayout from '../render/HexGrid'
 import { BinBase } from './BinBase'
 
-export interface Options extends VectorSourceOptions {
+export interface Options extends VectorSourceOptions<Feature> {
   source?: VectorSource;
   size?: number;
   origin?: Coordinate;

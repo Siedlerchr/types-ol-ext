@@ -20,7 +20,7 @@ type ImageLineOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
 export interface Options extends ControlOptions {
   className?: string;
   source?: VectorSource;
-  layers?: VectorLayer<VectorSource<Geometry>>[];
+  layers?: VectorLayer<VectorSource<Feature<Geometry>>>[];
   getImage?: (f: Feature) => string;
   getTitle?: (f: Feature) => string;
   collapsed?: boolean;

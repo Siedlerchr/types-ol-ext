@@ -1,6 +1,6 @@
 import type { Map as _ol_Map_ } from 'ol'
 import type Feature from 'ol/Feature'
-import type { Layer, Vector } from 'ol/layer'
+import type { Layer } from 'ol/layer'
 import type { StyleLike } from 'ol/style/Style'
 import type { Options as DrawOptions } from 'ol/interaction/Draw'
 import Draw from 'ol/interaction/Draw'
@@ -10,6 +10,7 @@ import type { ModifyEvent } from 'ol/interaction/Modify'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Types } from 'ol/ObjectEventType'
+import type VectorLayer from 'ol/layer/Vector'
 import type VectorSource from 'ol/source/Vector'
 import type { Geometry } from 'ol/geom'
 import type { DrawEvent } from './DrawRegular'
@@ -21,7 +22,7 @@ type DrawHoleOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawabort' | 'drawend' | 'drawstart' | 'modifyend' | 'modifystart', Return>;
 
 export interface Options extends DrawOptions {
-  layers?: Vector<VectorSource<Geometry>>[] | ((l: Layer) => boolean);
+  layers?: VectorLayer<VectorSource<Feature<Geometry>>>[] | ((l: Layer) => boolean);
   featureFilter?: Feature[] | Collection<Feature> | ((feature: Feature, layer: Layer) => boolean);
   style?: StyleLike;
 }

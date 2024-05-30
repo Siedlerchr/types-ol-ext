@@ -1,7 +1,8 @@
 import type { Map as _ol_Map_ } from 'ol'
 import type Collection from 'ol/Collection'
 import type Feature from 'ol/Feature'
-import type { Layer, Vector } from 'ol/layer'
+import type { Layer } from 'ol/layer'
+import type VectorLayer from 'ol/layer/Vector'
 import type { Vector as VectorSource } from 'ol/source'
 import { Pointer } from 'ol/interaction'
 import type { StyleLike } from 'ol/style/Style'
@@ -22,7 +23,7 @@ type OffsetOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
 
 export interface Options {
   filter?: (f: Feature, l: Layer) => boolean;
-  layers?: Vector<VectorSource<Geometry>> | Vector<VectorSource<Geometry>>[];
+  layers?: VectorLayer<VectorSource<Feature<Geometry>>> | VectorLayer<VectorSource<Feature<Geometry>>>[];
   features?: Collection<Feature>;
   source?: VectorSource;
   duplicate?: boolean;
@@ -63,8 +64,8 @@ export default class Offset extends Pointer {
 
 export class OffsetStartEvent extends BaseEvent {
   constructor(type: 'offsetstart',
-              feature: Feature,
-              offset: number
+    feature: Feature,
+    offset: number
   );
 
   feature: Feature
@@ -74,10 +75,10 @@ export class OffsetStartEvent extends BaseEvent {
 
 export class OffsettingEvent extends BaseEvent {
   constructor(type: 'offsetting',
-              feature: Feature,
-              offset: number,
-              segment: number[],
-              coordinate: Coordinate
+    feature: Feature,
+    offset: number,
+    segment: number[],
+    coordinate: Coordinate
   );
 
   feature: Feature
@@ -91,8 +92,8 @@ export class OffsettingEvent extends BaseEvent {
 
 export class OffsetEndEvent extends BaseEvent {
   constructor(type: 'offsetend',
-              feature: Feature,
-              coordinate: Coordinate
+    feature: Feature,
+    coordinate: Coordinate
   );
 
   feature: Feature

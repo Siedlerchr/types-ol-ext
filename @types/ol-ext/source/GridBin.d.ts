@@ -6,7 +6,7 @@ import type { Options as VectorSourceOptions } from 'ol/source/Vector'
 import type VectorSource from 'ol/source/Vector'
 import { BinBase } from './BinBase'
 
-export interface Options extends VectorSourceOptions {
+export interface Options extends VectorSourceOptions<Feature> {
   source?: VectorSource;
   size?: number;
   geometryFunction?: (f: Feature) => Point;

@@ -140,7 +140,7 @@ const vectorSource = new VectorSource({
     featureProjection: 'EPSG:3857',
   }),
   attributions: ['&copy; <a href=\'https://data.culture.gouv.fr/explore/dataset/fonds-de-la-guerre-14-18-extrait-de-la-base-memoire\'>'
-  + '<img src=\'https://data.culture.gouv.fr/assets/logo\' height=\'12px\'>data.culture.gouv.fr</a>'],
+    + '<img src=\'https://data.culture.gouv.fr/assets/logo\' height=\'12px\'>data.culture.gouv.fr</a>'],
 })
 
 const vector = new Vector({
@@ -198,7 +198,7 @@ declare global {
     vector: Vector<VectorSource>,
 
     setOptions(glyph: string, form: string, color: string, scolor: string, fcolor: string, border: number,
-               radius: number, fsize: number, offset: boolean, gradient: boolean, shadow: boolean): void,
+      radius: number, fsize: number, offset: boolean, gradient: boolean, shadow: boolean): void,
 
     setFont(g: string | HTMLElement): void,
 

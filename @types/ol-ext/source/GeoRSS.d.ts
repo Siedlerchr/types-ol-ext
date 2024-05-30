@@ -1,7 +1,8 @@
+import type Feature from 'ol/Feature'
 import type { Options as VectorSourceOptions } from 'ol/source/Vector'
 import VectorSource from 'ol/source/Vector'
 
-export interface Options extends VectorSourceOptions {
+export interface Options extends VectorSourceOptions<Feature> {
   url?: string;
 }
 
