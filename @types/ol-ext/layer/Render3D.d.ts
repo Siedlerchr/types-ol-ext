@@ -22,7 +22,7 @@ export default class Render3D {
    *  @param {function|string|Number} param.height a height function (returns height giving a feature) or a popertie name for the height or a fixed value
    */
   constructor(param: {
-    layer: Vector<VectorSource<Geometry>>;
+    layer: Vector<VectorSource<Feature<Geometry>>>;
     style?: Style
     active?: (() => boolean)
     maxResolution?: number;

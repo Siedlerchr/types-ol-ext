@@ -1,8 +1,9 @@
 import type { Options as VectorSourceOptions } from 'ol/source/Vector'
 import VectorSource from 'ol/source/Vector'
 import type { Point } from 'ol/geom'
+import type Feature from 'ol/Feature'
 
-export interface Options extends VectorSourceOptions {
+export interface Options extends VectorSourceOptions<Feature> {
   time?: string | Date;
   step?: number;
 }

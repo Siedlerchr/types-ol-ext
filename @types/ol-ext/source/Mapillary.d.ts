@@ -11,7 +11,7 @@ export default class Mapillary extends VectorSource {
   /**
    * @param {olx.source.Mapillary=} options
    */
-  constructor(options?: VectorSourceOptions);
+  constructor(options?: VectorSourceOptions<Feature>);
 
   /** Decode wiki attributes and choose to add feature to the layer
    * @param {feature} the feature

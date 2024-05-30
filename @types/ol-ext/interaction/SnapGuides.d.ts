@@ -14,7 +14,7 @@ export interface Options {
   pixelTolerance?: number;
   enableInitialGuides?: boolean;
   style?: Style | Style[];
-  vectorClass?: VectorLayer<VectorSource<Geometry>> | VectorImageLayer<VectorSource<Geometry>>;
+  vectorClass?: VectorLayer<VectorSource<Feature<Geometry>>> | VectorImageLayer<VectorSource<Feature<Geometry>>>;
 }
 
 /** Interaction to snap to guidelines

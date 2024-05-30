@@ -47,7 +47,6 @@ function style(select?: boolean) {
         image: new Photo({
           src: f.get('img'),
           radius: select ? 20 : 15,
-          shadow: true,
           stroke: new Stroke({
             width: 4,
             color: select ? '#fff' : '#fafafa',

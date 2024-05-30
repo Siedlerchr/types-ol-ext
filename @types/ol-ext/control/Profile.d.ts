@@ -20,7 +20,7 @@ export interface Options extends ControlOptions {
 }
 
 /**
- * @classdesc OpenLayers 3 Profil Control.
+ * @classdesc OpenLayers 3 Profile Control.
  * Draw a profile of a feature (with a 3D geometry)
  *
  * @constructor
@@ -33,7 +33,7 @@ export interface Options extends ControlOptions {
  * @fires dragend
  * @fires dragcancel
  */
-export default class Profil extends ol_control_Control {
+export default class Profile extends ol_control_Control {
   /**
    * @param {Object=} options
    *  @param {string} options.className

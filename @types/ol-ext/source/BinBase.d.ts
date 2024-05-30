@@ -4,7 +4,7 @@ import type { Polygon, Point } from 'ol/geom'
 import type { Options as VectorOptions } from 'ol/source/Vector'
 import VectorSource from 'ol/source/Vector'
 
-export interface Options extends VectorOptions {
+export interface Options extends VectorOptions<Feature> {
   source?: VectorSource;
   listenChange?: boolean;
   geometryFunction?: (f: Feature) => Point;

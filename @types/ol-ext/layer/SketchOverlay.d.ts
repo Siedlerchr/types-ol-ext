@@ -19,7 +19,7 @@ export interface Options {
  * @fires drawabort
 
  */
-export default class SketchOverlay extends VectorLayer<VectorSource<Geometry>> {
+export default class SketchOverlay extends VectorLayer<VectorSource<Feature<Geometry>>> {
   /**
    * @param {*} options
    *  @param {string} options.type Geometry type, default LineString

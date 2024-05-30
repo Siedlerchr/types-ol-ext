@@ -1,19 +1,20 @@
 import type { EventsKey } from 'ol/events'
 import BaseEvent from 'ol/events/Event'
+import type Feature from 'ol/Feature'
 import type { Geometry } from 'ol/geom'
 import type { ObjectEvent } from 'ol/Object'
 import type { Types } from 'ol/ObjectEventType'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { TileSourceEvent } from 'ol/source/Tile'
 import type { VectorSourceEvent } from 'ol/source/Vector'
-import VectorSource, { Options as VectorSourceOptions } from 'ol/source/Vector'
+import VectorSource from 'ol/source/Vector'
 
 type TileWFSOnSignature<Return> =
   OnSignature<EventTypes, Event, Return>
   &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return>
   &
-  OnSignature<Types | 'addfeature' | 'changefeature' | 'clear' | 'featuresloadend' | 'featuresloaderror' | 'featuresloadstart' | 'removefeature', VectorSourceEvent<Geometry>, Return>
+  OnSignature<Types | 'addfeature' | 'changefeature' | 'clear' | 'featuresloadend' | 'featuresloaderror' | 'featuresloadstart' | 'removefeature', VectorSourceEvent<Feature<Geometry>>, Return>
   &
   OnSignature<Types | 'tileloadend' | 'tileloaderror' | 'tileloadstart', TileSourceEvent, Return>
   &
@@ -65,8 +66,8 @@ export default class TileWFS extends VectorSource {
 
 export class OverloadEvent extends BaseEvent {
   constructor(type: TileWFSEventType,
-              total: number,
-              returned: number
+    total: number,
+    returned: number
   );
 
   total: number
