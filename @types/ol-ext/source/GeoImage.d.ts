@@ -79,7 +79,7 @@ export default class GeoImage extends ImageCanvas {
    * Get the image.
    * @api stable
    */
-  getGeoImage(): void;
+  getGeoImage(): HTMLImageElement;
 
   /**
    * Get image crop Extent.
