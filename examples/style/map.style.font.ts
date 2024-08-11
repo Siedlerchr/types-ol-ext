@@ -1,4 +1,5 @@
-import { Map, View, Feature } from 'ol'
+import type { Feature } from 'ol'
+import { Map, View } from 'ol'
 import { Tile, Vector } from 'ol/layer'
 import { StadiaMaps, Vector as VectorSource } from 'ol/source'
 import { Style, Fill, Stroke } from 'ol/style'
@@ -62,7 +63,7 @@ for (const font in FontSymbol.defs.fonts) {
       const item: HTMLElement = document.createElement('i')
       item.className = `fa ${i}`
       item.dataset.glyph = i
-      item.title = glyph[i].name
+      item.title = glyph[i].name || ''
       item.addEventListener('click', () => {
         setFont(item)
       })

@@ -43,23 +43,24 @@ export interface Options {
 }
 
 export interface Font {
-  font: string,
-  name: string,
-  copyright: string,
-  prefix?: string
+  font: string;
+  name: string;
+  copyright: string;
+  prefix?: string;
 }
 
 export interface Glyph {
-  font: string,
-  char: number,
-  theme: string,
-  name: string,
-  search: string
+  font?: string;
+  char?: number;
+  code?: number;
+  theme?: string;
+  name?: string;
+  search?: string;
 }
 
 export interface FontDefs {
-  fonts: { [key: string]: Font },
-  glyphs: { [key: string]: Glyph }
+  fonts: { [key: string]: Font };
+  glyphs: { [key: string]: Glyph };
 }
 
 /**
