@@ -8,6 +8,7 @@ import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Types } from 'ol/ObjectEventType'
+import type { Size } from 'ol/size'
 
 type DragOverlayOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
@@ -21,22 +22,23 @@ export enum DragEventTypes {
 }
 
 export interface Options {
-  overlay?: Overlay[];
+  overlay?: Overlay | Overlay[];
+  offset?: Size
+  centerOnClick?: boolean
 }
 
 /** Drag an overlay on the map
  * @constructor
- * @extends {interaction.Pointer}
+ * @extends {Pointer}
  * @fires dragstart
  * @fires dragging
  * @fires dragend
-
+ * @param {any} options
+ *  @param {ol.Overlay|Array<ol.Overlay>} options.overlays the overlays to drag
+ *  @param {ol.Size} options.offset overlay offset, default [0,0]
+ *  @param {boolean} options.centerOnClick wheter a click inside the popup should move it to the click coordinates, default false
  */
 export default class DragOverlay extends Pointer {
-  /**
-   * @param {any} options
-   *  @param {Overlay|Array<Overlay} options.overlays the overlays to drag
-   */
   constructor(options?: Options);
 
   /** Add an overlay to the interacton

@@ -1,10 +1,4 @@
-import Source from 'ol/source/Source'
-import TileWMS from 'ol/source/TileWMS'
 import type { Coordinate } from 'ol/coordinate'
-import { Stroke } from 'ol/style'
-import Layer from 'ol/layer/Layer'
-import BaseLayer from 'ol/layer/Base'
-import LayerGroup from 'ol/layer/Group'
 
 declare module 'ol/source/Source' {
   export default interface Source {

@@ -187,6 +187,11 @@ export default class Transform extends Pointer {
    */
   select(feature: Feature | undefined, add: boolean): void;
 
+  /** Update the selection collection.
+  * @param {Collection<Feature>} features the features to transform
+  */
+  setSelection(features: Collection<Feature>): void
+
   /**
    * @param evt Map browser event.
    * @return `true` to start the drag sequence.

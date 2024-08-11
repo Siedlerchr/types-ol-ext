@@ -6,7 +6,7 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "true",
-    "lint": "tsc -p tsconfig.lint.json --pretty && tslint -p tsconfig.lint.json",
+    "lint": "tsc -p tsconfig.lint.json --pretty && eslint --ignore-path .eslintignore --ext .js,.ts",
     "dtslint": "dtslint types",
     "replace-examples": "node scripts/replaceExampleHtmlJsTags.js",
     "copy-examples": "node scripts/copyExampleBackupJsToTs.js",
@@ -33,7 +33,7 @@
     "jspdf": "^2.5.1"
   },
   "devDependencies": {
-    "@definitelytyped/dtslint": "^0.0.165",
+    "@definitelytyped/dtslint": "^0.2.22",
     "@types/fs-extra": "^11.0.4",
     "@types/geojson": "^7946.0.14",
     "@types/glob": "^8.1.0",
@@ -44,17 +44,19 @@
     "@typescript-eslint/typescript-estree": "^6.4.0",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsdoc": "^46.10.1",
+    "eslint-plugin-prettier": "^5.2.1",
     "exports-loader": "^4.0.0",
     "fs-extra": "^11.2.0",
     "jsdoc": "^4.0.3",
     "node-html-parser": "^5.4.2",
-    "ol": "9.1.0",
-    "ol-ext": "^4.0.18",
+    "ol": "9.2.4",
+    "ol-ext": "^4.0.21",
     "ts-loader": "^9.5.1",
-    "tsd": "^0.31.0",
-    "typescript": "^5.4.5",
-    "webpack": "^5.91.0",
+    "tsd": "^0.31.1",
+    "typescript": "^5.5.4",
+    "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4"
   }
 }

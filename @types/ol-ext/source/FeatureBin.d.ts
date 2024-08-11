@@ -2,7 +2,6 @@ import type { Coordinate } from 'ol/coordinate'
 import type Feature from 'ol/Feature'
 import type { Point, Polygon } from 'ol/geom'
 import type VectorSource from 'ol/source/Vector'
-import { Options as VectorSourceOptions } from 'ol/source/Vector'
 import { BinBase } from './BinBase'
 
 export interface Options {
