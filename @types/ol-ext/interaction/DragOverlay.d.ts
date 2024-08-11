@@ -29,7 +29,7 @@ export interface Options {
 
 /** Drag an overlay on the map
  * @constructor
- * @extends {ol_interaction_Pointer}
+ * @extends {Pointer}
  * @fires dragstart
  * @fires dragging
  * @fires dragend
