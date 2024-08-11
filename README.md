@@ -2,7 +2,7 @@
 
 [ol-ext](https://github.com/Viglino/ol-ext) TypeScript declaration. If you encounter any missing typings or wrong, please open an issue!
 
-Version >=3.0.0 is compatible with ol-ext 4.0.x and ol7
+Version >=3.5.x is compatible with ol-ext 4.0.x and ol9
 
 ## Installation
 
