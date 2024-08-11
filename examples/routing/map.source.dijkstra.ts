@@ -22,7 +22,7 @@ let speed: { [char: string]: number } = {
 declare global {
   interface Window {
     map: _ol_Map;
-    nodes: VectorLayer<VectorSource>;
+    nodes: VectorLayer<Feature, VectorSource>
   }
 }
 const { $ } = window

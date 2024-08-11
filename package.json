@@ -6,7 +6,7 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "true",
-    "lint": "tsc -p tsconfig.lint.json --pretty && tslint -p tsconfig.lint.json",
+    "lint": "tsc -p tsconfig.lint.json --pretty && eslint --ignore-path .eslintignore --ext .js,.ts",
     "dtslint": "dtslint types",
     "replace-examples": "node scripts/replaceExampleHtmlJsTags.js",
     "copy-examples": "node scripts/copyExampleBackupJsToTs.js",
