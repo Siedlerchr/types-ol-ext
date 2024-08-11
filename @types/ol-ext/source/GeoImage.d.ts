@@ -6,7 +6,7 @@ import { ImageCanvas } from 'ol/source'
 
 export interface Options {
   url?: string;
-  image?: any; // TODO: image type
+  image?: HTMLImageElement;
   imageCenter?: Coordinate;
   imageScale?: Size | number;
   imageRotate?: number;
@@ -108,4 +108,16 @@ export default class GeoImage extends ImageCanvas {
    * @api stable
    */
   setCrop(image: Extent | number): void;
+
+  /** Get the extent of the source.
+  * @param {Extent} extent If provided, no new extent will be created. Instead, that extent's coordinates will be overwritten.
+  * @return {Extent}
+  */
+  getExtent(opt_extent?: Extent): Extent
+
+  /** Calculate the extent of the source image.
+  * @param {boolean} usemask return the mask extent, default return the image extent
+  * @return {Extent}
+  */
+  calculateExtent(usemask?: boolean): Extent
 }
