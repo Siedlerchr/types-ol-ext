@@ -11,7 +11,7 @@ export interface Options {
   imageScale?: Size | number;
   imageRotate?: number;
   imageCrop?: Extent;
-  imageMask: Coordinate[];
+  imageMask?: Coordinate[];
 }
 
 /** Layer source with georeferencement to place it on a map
