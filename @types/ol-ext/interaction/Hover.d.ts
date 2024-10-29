@@ -27,6 +27,7 @@ export interface Options {
   cursor?: string;
   featureFilter?: (feature: Feature, layer: Layer) => boolean;
   layerFilter?: (feature: Feature) => boolean;
+  layers?: Array<Layer>;
   hitTolerance?: number;
   handleEvent: (p0: MapBrowserEvent<UIEvent>) => boolean;
 }
