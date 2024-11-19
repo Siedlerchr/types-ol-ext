@@ -32,7 +32,7 @@ export interface Options {
 
  * @extends {ol_interaction_Interaction}
  */
-declare class CurrentMap extends Interaction {
+export default class CurrentMap extends Interaction {
   /**
    * @param {*} options
    *  @param {function} condition a function that takes a mapBrowserEvent and returns true if the map must be activated, default always true

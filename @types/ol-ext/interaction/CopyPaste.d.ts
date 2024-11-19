@@ -3,7 +3,7 @@ import type Feature from 'ol/Feature'
 import type { Vector as VectorSource } from 'ol/source'
 import type MapBrowserEvent from 'ol/MapBrowserEvent'
 import BaseEvent from 'ol/events/Event'
-import { CurrentMap } from './CurrentMap'
+import CurrentMap from './CurrentMap'
 
 export enum CopyPasteEventType {
   DELETESTART = 'deletestart',
