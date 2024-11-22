@@ -20,6 +20,7 @@ export interface Options {
   features?: Collection<Feature>;
   filter?: (f: Feature) => boolean;
   tolerance?: number;
+  alignTolerance: number;
 }
 
 /** Interaction splitter: acts as a split feature agent while editing vector features (LineString).
@@ -37,7 +38,8 @@ export class Splitter extends Interaction {
    *  - triggerFeatures {ol_Collection.<ol.Feature>} Any newly created or modified features from this collection will be used to split features on the target source (replace triggerSource).
    *  - filter {function|undefined} a filter that takes a feature and return true if the feature is eligible for splitting, default always split.
    *  - tolerance {function|undefined} Distance between the calculated intersection and a vertex on the source geometry below which the existing vertex will be used for the split. Default is 1e-10.
-   */
+   * -  alignTolerance Tolerance to check allignment. Default is 1e-3.
+
   constructor(options: Options);
 
   /** Calculate intersection on 2 segs

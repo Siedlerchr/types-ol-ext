@@ -92,4 +92,10 @@ export default class SearchGPS extends Search {
    * @return {boolean}
    */
   equalFeatures(f1: any, f2: any): boolean;
+
+  /** Set the input value in the form (for initialisation purpose
+  * @param {Array<number>} [coord] if none get the map center
+  * @api
+  */
+  setInput(coord: number[]): void;
 }
