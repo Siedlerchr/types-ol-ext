@@ -7,6 +7,8 @@ import { GeoJSON } from 'ol/format'
 import type { FeatureLike } from 'ol/Feature'
 import Ordering from 'ol-ext/render/Ordering'
 import { Select } from 'ol/interaction'
+import type VectorLayer from 'ol/layer/Vector'
+import type { Geometry } from 'ol/geom'
 
 import type { Form } from 'ol-ext/style/FontSymbol'
 import FontSymbol from 'ol-ext/style/FontSymbol'
@@ -15,6 +17,7 @@ import Shadow from 'ol-ext/style/Shadow'
 import 'ol-ext/style/FontMakiDef.js'
 import 'ol-ext/style/FontMaki2Def.js'
 import 'ol-ext/style/FontAwesomeDef.js'
+
 
 // Using FontAwesome > 5, set package here
 // FontSymbol.prototype.defs.fonts.FontAwesome.font = "Font Awesome 5 Free";
@@ -196,7 +199,7 @@ map.addInteraction(new Select())
 
 declare global {
   interface Window {
-    vector: Vector<Feature, VectorSource>,
+    vector: VectorLayer<VectorSource<Feature<Geometry>>>
 
     setOptions(glyph: string, form: string, color: string, scolor: string, fcolor: string, border: number,
       radius: number, fsize: number, offset: boolean, gradient: boolean, shadow: boolean): void,

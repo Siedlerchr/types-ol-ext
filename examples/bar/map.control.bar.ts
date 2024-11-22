@@ -14,18 +14,18 @@ const vector = new Vector({ source: new VectorSource() })
 
 // The map
 const map = new Map
-({
-  target: 'map',
-  view: new View
   ({
-    zoom: 14,
-    center: [270701, 6247637],
-  }),
-  layers:
-    [new Tile({ source: new OSM() }),
-      vector,
-    ],
-})
+    target: 'map',
+    view: new View
+      ({
+        zoom: 14,
+        center: [270701, 6247637],
+      }),
+    layers:
+      [new Tile({ source: new OSM() }),
+        vector,
+      ],
+  })
 
 // Main control bar
 const mainbar = new Bar()
@@ -56,10 +56,10 @@ const pedit = new Toggle(
     className: 'edit',
     title: 'Point',
     interaction: new Draw
-    ({
-      type: 'Point',
-      source: (vector.getSource() == null) ? undefined : vector.getSource() as VectorSource,
-    }),
+      ({
+        type: 'Point',
+        source: (vector.getSource() == null) ? undefined : vector.getSource() as VectorSource,
+      }),
     onToggle(active) {
       document.querySelector<HTMLTextAreaElement>('#info')!.textContent = `Edition is ${active ? 'activated' : 'deactivated'}`
     },
