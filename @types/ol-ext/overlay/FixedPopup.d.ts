@@ -1,5 +1,4 @@
 import type { Map as _ol_Map_ } from 'ol'
-import { Overlay } from 'ol'
 
 import type { Pixel } from 'ol/pixel'
 import type { Style } from 'ol/style'
@@ -17,6 +16,7 @@ export interface Options extends OverlayOptions {
   onshow?: () => void;
   offsetBox?: number | number[];
   positioning?: typeof Positioning | any | undefined; // workaround with any for 'auto'
+  hook?: 'map' | 'viewport'
 }
 
 /**
@@ -42,6 +42,7 @@ export default class FixedPopup extends Popup {
    *  @param {Number|Array<number>} options.offsetBox an offset box
    *  @param {ol.OverlayPositioning | string | undefined} options.positioning
    *   the 'auto' positioning var the popup choose its positioning to stay on the map.
+   *  @param {string} options.hook popup is hooked on the 'map' (and move with it) or on the 'viewport', default viewport.
    */
   constructor(options?: Options);
 

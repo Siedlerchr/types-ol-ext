@@ -18,7 +18,7 @@ declare global {
   interface Window {
     $(selector: any, context?: any): any;
 
-    vector: VectorLayer<Feature, VectorSource>
+    vector: VectorLayer<VectorSource<Feature<Geometry>>>
   }
 }
 

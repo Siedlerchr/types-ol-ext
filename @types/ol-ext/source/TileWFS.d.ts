@@ -29,8 +29,9 @@ export enum TileWFSEventType {
 }
 
 export interface Options {
-  version?: WFSVersion;
   typeName?: string;
+  version?: WFSVersion;
+  outputFormat?: string | 'application/json'
   tileZoom?: number;
   featureLimit?: number;
   pagination?: boolean;
@@ -48,13 +49,14 @@ export interface Options {
 export default class TileWFS extends VectorSource {
   /**
    * @param {Object} options
-   *  @param {string} [options.version=1.1.0] WFS version to use. Can be either 1.0.0, 1.1.0 or 2.0.0.
-   *  @param {string} options.typeName WFS type name parameter
-   *  @param {number} options.tileZoom zoom to load the tiles
-   *  @param {number} options.maxFeatures maximum features returned in the WFS
-   *  @param {number} options.featureLimit maximum features in the source before refresh, default Infinity
-   *  @param {boolean} [options.pagination] experimental enable pagination, default no pagination
-   */
+ *  @param {string} options.typeName WFS type name parameter
+ *  @param {string} [options.version=1.1.0] WFS version to use. Can be either 1.0.0, 1.1.0 or 2.0.0.
+ *  @param {string} [options.outputFormat=application/json] WFS outputFormat parameter
+ *  @param {number} [options.tileZoom=14] zoom to load the tiles
+ *  @param {number} [options.maxFeatures] maximum features returned in the WFS
+ *  @param {number} [options.featureLimit=Infinity] maximum features in the source before refresh, default Infinity
+ *  @param {boolean} [options.pagination] experimental enable pagination, default no pagination
+ */
   constructor(options?: Options);
 
   on: TileWFSOnSignature<EventsKey>

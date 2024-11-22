@@ -119,8 +119,7 @@ edit.getInteraction('DrawPoint').on('change:active', e => {
 edit.on('info', e => {
   console.log(e)
   note.show(
-    `<i class="fa fa-info-circle"></i> ${
-      e.features.getLength()
+    `<i class="fa fa-info-circle"></i> ${e.features.getLength()
     } feature(s) selected`,
   )
 })

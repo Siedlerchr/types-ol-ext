@@ -14,16 +14,16 @@ const layers = [new Tile({ source: new OSM() })]
 
 // The map
 const map = new Map
-({
-  target: 'map',
-  view: new View
   ({
-    zoom: 5,
-    center: [166326, 5992663],
-  }),
-  interactions: interaction_defaults({ altShiftDragRotate: false, pinchRotate: false }),
-  layers,
-})
+    target: 'map',
+    view: new View
+      ({
+        zoom: 5,
+        center: [166326, 5992663],
+      }),
+    interactions: interaction_defaults({ altShiftDragRotate: false, pinchRotate: false }),
+    layers,
+  })
 
 // Current selection
 const sLayer = new Vector({

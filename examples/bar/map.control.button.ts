@@ -5,17 +5,17 @@ import Button from 'ol-ext/control/Button'
 
 // The map
 const map = new Map
-({
-  target: 'map',
-  view: new View
   ({
-    zoom: 14,
-    center: [270701, 6247637],
-  }),
-  layers:
-    [new Tile({ source: new OSM() }),
-    ],
-})
+    target: 'map',
+    view: new View
+      ({
+        zoom: 14,
+        center: [270701, 6247637],
+      }),
+    layers:
+      [new Tile({ source: new OSM() }),
+      ],
+  })
 
 console.log('ok')
 // Add a custom push button with onToggle function

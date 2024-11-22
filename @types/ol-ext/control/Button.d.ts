@@ -46,4 +46,17 @@ export default class Button extends ol_control_Control {
    * @returns {Element}
    */
   getButtonElement(): Element
+
+  /**
+ * Test if the control is disabled.
+ * @return {bool}
+ * @api stable
+ */
+  getDisable(): boolean
+
+  /** Disable the control button.
+   * @param {bool} b disable (or enable) the control, default false (enable)
+   * @api stable
+   */
+  setDisable(b: boolean): void
 }

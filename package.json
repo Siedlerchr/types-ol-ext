@@ -1,6 +1,6 @@
 {
   "name": "@siedlerchr/types-ol-ext",
-  "version": "3.5.1",
+  "version": "3.6.0",
   "description": "Type definitions for ol-ext",
   "main": "",
   "types": "index.d.ts",
@@ -30,33 +30,33 @@
   },
   "homepage": "https://github.com/Siedlerchr/types-ol-ext#readme",
   "peerDependencies": {
-    "jspdf": "^2.5.1"
+    "jspdf": "^2.5.2"
   },
   "devDependencies": {
-    "@definitelytyped/dtslint": "^0.2.22",
+    "@definitelytyped/dtslint": "^0.2.27",
     "@types/fs-extra": "^11.0.4",
     "@types/geojson": "^7946.0.14",
     "@types/glob": "^8.1.0",
-    "@types/jquery": "^3.5.30",
+    "@types/jquery": "^3.5.32",
     "@types/webpack": "^5.28.5",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@typescript-eslint/typescript-estree": "^6.4.0",
-    "eslint": "^8.57.0",
+    "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsdoc": "^46.10.1",
     "eslint-plugin-prettier": "^5.2.1",
     "exports-loader": "^4.0.0",
     "fs-extra": "^11.2.0",
-    "jsdoc": "^4.0.3",
+    "jsdoc": "^4.0.4",
     "node-html-parser": "^5.4.2",
-    "ol": "9.2.4",
-    "ol-ext": "^4.0.21",
+    "ol": "10.2.1",
+    "ol-ext": "^4.0.24",
     "ts-loader": "^9.5.1",
-    "tsd": "^0.31.1",
-    "typescript": "^5.5.4",
-    "webpack": "^5.93.0",
+    "tsd": "^0.31.2",
+    "typescript": "^5.7.2",
+    "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4"
   }
 }
