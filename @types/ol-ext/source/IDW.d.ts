@@ -32,19 +32,21 @@ export default class IDW extends ImageCanvas {
    */
   getSource(): VectorSource;
 
-  /** Apply the value to the map RGB. Overwrite this function to set your own colors.
-   * @param {number} v value
-   * @param {Uint8ClampedArray} data RGBA array
-   * @param {number} i index in the RGBA array
-   * @api
-   */
-  setData(v: number, data: Uint8ClampedArray, i: number): void;
-
   /** Get image value at coord (RGBA)
    * @param {l.coordinate} coord
    * @return {Uint8ClampedArray}
    */
   getValue(coord: Coordinate): Uint8ClampedArray;
+
+  /** Set IDW scale
+   * @param {number} scale
+   */
+  setScale(scale: number): void
+
+  /** Set IDW max distance
+   * @param {number} [dist] max distance in proj units
+   */
+  setMaxD(dist: number): void
 
   /** Get color for a value. Return an array of RGBA values.
    * @param {number} v value

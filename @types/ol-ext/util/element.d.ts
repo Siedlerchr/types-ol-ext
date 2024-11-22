@@ -1,4 +1,5 @@
 declare module 'ol-ext/util/element' {
+  import type { Map as _ol_Map_ } from 'ol'
 
   /** Options for creating an HTML element
    * @property {string} [className] - CSS class name(s) for the element
@@ -228,7 +229,13 @@ declare module 'ol-ext/util/element' {
      * @param {Element} element - The element to dispatch the event on
      */
     function dispatchEvent(eventName: string, element: Element): void;
-  }
 
-  export default ol_ext_element;
+    /** Set cursor
+     * @param {Element|ol/Map} elt
+     * @param {string} cursor
+     */
+    function setCursor(elt: Element | _ol_Map_, cursor: string): void
+
+    export default ol_ext_element
+  }
 }
