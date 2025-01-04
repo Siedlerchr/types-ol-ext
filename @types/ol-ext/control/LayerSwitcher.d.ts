@@ -3,7 +3,6 @@ import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 import type { Layer } from 'ol/layer'
 import type LayerGroup from 'ol/layer/Group'
-import type { Extent } from 'ol/extent'
 import BaseEvent from 'ol/events/Event'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
@@ -14,7 +13,7 @@ type LayerSwitcherOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
   OnSignature<Types | 'drawlist' | 'layer:visible' | 'layer:opacity', LayerSwitcherEvent, Return> &
   OnSignature<Types | 'toggle', ToggleEvent, Return> &
-  OnSignature<Types | 'reroder-start' | 'reroder-end', LayerSwitcherReorderEvent, Return> &
+  OnSignature<Types | 'reorder-start' | 'reorder-end', LayerSwitcherReorderEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'drawlist' | 'layer:visible' | 'layer:opacity' | 'toggle' | 'reroder-start' | 'reroder-end', Return>;
 
 export enum LayerSwitcherEventType {
