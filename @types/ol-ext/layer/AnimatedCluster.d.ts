@@ -4,7 +4,7 @@ import type VectorSource from 'ol/source/Vector'
 import type { Geometry } from 'ol/geom'
 import type Feature from 'ol/Feature'
 
-interface ClusterOptions extends Options<VectorSource> {
+interface ClusterOptions extends Options<VectorSource<Feature>> {
   animationDuration?: number;
   easingFunction?: (t: number) => number;
 }
