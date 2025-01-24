@@ -35,8 +35,7 @@ export interface Options extends ControlOptions {
   autocomplete?: (s: string, cback: ([])) => [] | false;
   onselect?: (...params: any[]) => any;
   centerOnSelect?: boolean;
-  zoomOnSelect?: (...params: any[]) => any;
-}
+  zoomOnSelect?: number | boolean;
 
 /**
  * Search Control.
