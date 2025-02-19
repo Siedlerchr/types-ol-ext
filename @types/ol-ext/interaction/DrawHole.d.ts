@@ -12,7 +12,7 @@ import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable
 import type { Types } from 'ol/ObjectEventType'
 import type VectorLayer from 'ol/layer/Vector'
 import type VectorSource from 'ol/source/Vector'
-import type { Geometry } from 'ol/geom'
+import type { Geometry, Polygon } from 'ol/geom'
 import type { DrawEvent } from './DrawRegular'
 
 type DrawHoleOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
@@ -70,9 +70,9 @@ export default class DrawHole extends Draw {
 
   /**
    * Get the current polygon to hole
-   * @return {Feature}
+   * @return {Polygon}
    */
-  getPolygon(): Feature;
+  getPolygon(): Polygon;
 
   on: DrawHoleOnSignature<EventsKey>
 
