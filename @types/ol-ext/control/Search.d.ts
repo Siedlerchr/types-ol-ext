@@ -36,6 +36,7 @@ export interface Options extends ControlOptions {
   onselect?: (...params: any[]) => any;
   centerOnSelect?: boolean;
   zoomOnSelect?: number | boolean;
+  }
 
 /**
  * Search Control.
@@ -156,7 +157,7 @@ export default class Search extends ol_control_Control {
    * @return {Array|false} an array of search solutions or false if the array is send with the cback argument (asnchronous)
    * @api
    */
-  autocomplete(s: string, cback: ([]) => any): any[] | false;
+  autocomplete(s: string, cback: (results: any[]) => void): any[] | false;
 
   /** Test if 2 features are equal
    * @param {any} f1
