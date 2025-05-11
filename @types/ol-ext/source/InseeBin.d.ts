@@ -9,7 +9,7 @@ import { BinBase } from './BinBase'
 
 export interface Options {
   source: VectorSource;
-  Size?: number;
+  size?: number;
   geometryFunction?: (f: Feature) => Point;
   flatAttributes?: (bin: Feature, features: Feature[]) => void;
 }
@@ -23,19 +23,19 @@ export default class InseeBin extends BinBase {
   /**
    * @param {Object} options VectorSourceOptions + grid option
    *  @param {VectorSource} options.source Source
-   *  @param {number} [options.Size] Size of the grid in meter, default 200m
+   *  @param {number} [options.size] size of the grid in meter, default 200m
    *  @param {(f: Feature) => Point} [options.geometryFunction] Function that takes an Feature as argument and returns an Point as feature's center.
    *  @param {(bin: Feature, features: Array<Feature>)} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
    */
   constructor(options?: Options);
 
-  /** Set grid Size
+  /** Set grid size
    * @param {number} size
    */
   setSize(size: number): void;
 
-  /** Get grid Size
-   * @return {number} Size
+  /** Get grid size
+   * @return {number} size
    */
   getSize(): number;
 

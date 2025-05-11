@@ -1,7 +1,7 @@
 import type { Coordinate } from 'ol/coordinate'
 
 export interface Options {
-  Size?: number;
+  size?: number;
   origin?: Coordinate;
   layout?: HexagonLayout;
 }
@@ -22,7 +22,7 @@ export declare type HexagonLayout = 'pointy' | 'flat';
 export default class HexGrid extends Object {
   /**
    * @param {Object} [options]
-   *  @param {number} [options.Size] Size of the exagon in map units, default 80000
+   *  @param {number} [options.size] size of the hexagon in map units, default 80000
    *  @param {Coordinate} [options.origin] orgin of the grid, default [0,0]
    *  @param {HexagonLayout} [options.layout] grid layout, default pointy
    */
@@ -52,13 +52,13 @@ export default class HexGrid extends Object {
    */
   getOrigin(): Coordinate;
 
-  /** Set hexagon Size
-   * @param {number} hexagon Size
+  /** Set hexagon size
+   * @param {number} hexagon size
    */
   setSize(hexagon: number): void;
 
-  /** Get hexagon Size
-   * @return {number} hexagon Size
+  /** Get hexagon size
+   * @return {number} hexagon size
    */
   getSize(): number;
 
