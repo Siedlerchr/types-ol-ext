@@ -39,13 +39,13 @@ export default class HexBin extends BinBase {
    */
   getGridGeomAt(coord: Coordinate): Polygon;
 
-  /**  Set the inner HexGrid Size.
+  /**  Set the inner HexGrid size.
    *  @param {number} newSize
    *  @param {boolean} noreset If true, reset will not be called (It need to be called through)
    */
   setSize(newSize: number, noreset: boolean): void;
 
-  /**  Get the inner HexGrid Size.
+  /**  Get the inner HexGrid size.
    *  @return {number}
    */
   getSize(): number;
