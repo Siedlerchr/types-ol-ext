@@ -3,7 +3,6 @@ import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 import type Event from 'ol/events/Event'
 import type { position } from './control'
-import { V } from 'ol/renderer/webgl/FlowLayer'
 
 export interface Options extends ControlOptions {
   className?: string;
