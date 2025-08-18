@@ -42,14 +42,14 @@ export default class SearchJSON extends Search {
    * @param {string} s search string
    * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field
    */
-  autocomplete(s: string, cback: ([]) => any): any[] | false;
+  autocomplete(s: string, cback: (results: any[]) => any): any[] | false;
 
   /** Send ajax request
    * @param {string} url
    * @param {*} data
    * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field
    */
-  ajax(url: string, data: any, cback: ([]) => any, options: any): void;
+  ajax(url: string, data: any, cback: (a: any[]) => any, options: any): void;
 
   /**
    * @param {string} s the search string

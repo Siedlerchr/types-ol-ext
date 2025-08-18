@@ -14,9 +14,11 @@ export interface Options extends ControlOptions {
   info?: { [key: string]: any };
   width?: number;
   height?: number;
+  units: 'metric' | 'imperial';
   feature?: Feature;
   selectable?: boolean;
   zoomable?: boolean;
+  numberFormat?: string
 }
 
 /**
@@ -43,9 +45,11 @@ export default class Profile extends ol_control_Control {
    *  @param {*} options.info keys/values for i19n
    *  @param {number} [options.width=300]
    *  @param {number} [options.height=150]
+   *  @param {'metric'|'imperial'} [options.units='metric'] output system of measurement Note that input z coords are expected to be in meters in either mode (as determined by GPX, DEM, DSM, etc. standards).
    *  @param {ol.Feature} [options.feature] the feature to draw profil
    *  @param {boolean} [options.selectable=false] enable selection on the profil, default false
    *  @param {boolean} [options.zoomable=false] can zoom in the profil
+   *  @param {string} [options.numberFormat] Convert numbers to a custom locale format, default is not used
    */
   constructor(options?: Options);
 
@@ -109,27 +113,36 @@ export default class Profile extends ol_control_Control {
    * Set the geometry to draw the profil.
    * @param {ol.Feature|ol.geom.Geometry} f the feature.
    * @param {Object=} options
-   *  @param {ol.ProjectionLike} [options.projection] feature projection, default projection of the map
-   *  @param {string} [options.zunit='m'] 'm' or 'km', default m
-   *  @param {string} [options.unit='km'] 'm' or 'km', default km
+   *  @param {('m'|'km'|'ft'|'mi')} [options.zunit='m'] 'm', 'km', 'ft' or 'mi', default 'm' or 'ft' according to the System of measurement
+   *  @param {('m'|'km'|'ft'|'mi')} [options.unit='km'] 'm', 'km', 'ft' or 'mi', default 'km' or 'mi' according to the System of measurement
    *  @param {Number|undefined} [options.zmin=0] default 0
    *  @param {Number|undefined} options.zmax default max Z of the feature
    *  @param {integer|undefined} [options.zDigits=0] number of digits for z graduation, default 0
+   *  @param {integer|undefined} [options.xDigits=1] number of digits for x-axis (distance), default 1
+   *  @param {number} [options.zDigitsHover=2] Decimals number while hovering the profile graph, default 2
+   *  @param {number} [options.xDigitsHover=1] Decimals number while hovering the profile graph, default 1
    *  @param {integer|undefined} [options.zMaxChars] maximum number of chars to be used for z graduation before switching to scientific notation
-   *  @param {Number|undefined} [options.graduation=100] z graduation default 100
+   *  @param {Number|undefined} [options.graduation=100] length of each z graduation step, default 100. If `zSteps` is provided, this is not used
    *  @param {integer|undefined} [options.amplitude] amplitude of the altitude, default zmax-zmin
+   *  @param {integer|undefined} [options.xSteps] number of steps at the x-axis (distance), default 10. If not provided, default is calculated from the distance
+   *  @param {integer|undefined} [options.zSteps] number of steps at the amplitude scale. If not provided, default is calculated from graduation
    * @api stable
    */
   setGeometry(f: Feature | Geometry, options?: {
     projection?: ProjectionLike;
-    zunit?: 'm' | 'km';
-    unit?: 'm' | 'km';
+    zunit?: 'm' | 'km' | 'ft' | 'mi';
+    unit?: 'm' | 'km' | 'ft' | 'mi';
     zmin?: number;
     zmax?: number;
     zDigits?: number;
+    xDigits?: number;
+    zDigitsHover?: number;
+    xDigitsHover?: number;
     zMaxChars?: number;
     graduation?: number;
     amplitude?: number;
+    xSteps?: number;
+    zSteps?: number;
   }): void;
 
   /** Get profil image
