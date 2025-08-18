@@ -44,12 +44,6 @@ export default class SearchJSON extends Search {
    */
   autocomplete(s: string, cback: (results: any[]) => any): any[] | false;
 
-  /**
-   * @param {any} f
-   * @return {Array<any>} an array of features
-   */
-  getFeatures(f: any): any[];
-
   /** Send ajax request
    * @param {string} url
    * @param {*} data
