@@ -3,6 +3,7 @@ import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 import type Event from 'ol/events/Event'
 import type { position } from './control'
+import { V } from 'ol/renderer/webgl/FlowLayer'
 
 export interface Options extends ControlOptions {
   className?: string;
@@ -76,6 +77,11 @@ export default class Bar extends ol_control_Control {
    * @param {_ol_control_} except a control
    */
   deactivateControls(except: ol_control_Control): void;
+
+  /** Remove a control from the bar
+   * @param {ol_control_Control} c control to remove
+   */
+  removeControl(c: ol_control_Control): void;
 
   /** Auto activate/deactivate controls in the bar
    * @param {boolean} b activate/deactivate
