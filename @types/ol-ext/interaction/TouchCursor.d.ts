@@ -8,6 +8,7 @@ import DragOverlay from './DragOverlay'
 export interface Options extends InteractionOptions {
   className?: string;
   coordinate?: Coordinate;
+  anchor?: 'left' | 'center' | 'right';
   buttons?: Button[];
   maxButtons?: number;
 }
@@ -17,16 +18,14 @@ export interface Options extends InteractionOptions {
  * The TouchCursor interaction modifies map browser event coordinate and pixel properties to force pointer on the graphic cursor on the screen to any interaction that them.
  * @constructor
  * @extends {ol_interaction_DragOverlay}
-
+ * @param {Options} options Options
+ *  @param {string} [options.className] cursor class name
+ *  @param {Coordinate} [options.coordinate] position of the cursor
+ *  @param {string} [options.anchor="left"] anchor position (left, center or right)
+ *  @param {Array<*>} [options.buttons] an array of buttons
+ *  @param {number} [options.maxButtons=5] maximum number of buttons (default 5)
  */
 export class TouchCursor extends DragOverlay {
-  /**
-   * @param {olx.interaction.InteractionOptions} options Options
-   *  @param {string} options.className cursor class name
-   *  @param {ol.coordinate} options.coordinate position of the cursor
-   *  @param {Array<*>} options.buttons an array of buttons
-   *  @param {number} options.maxButtons maximum number of buttons (default 5)
-   */
   constructor(options?: Options);
 
   /**
@@ -55,6 +54,12 @@ export class TouchCursor extends DragOverlay {
    * @param {ol.coordinate} coord
    */
   offsetPosition(coord: Coordinate): void;
+
+  /** Set anchor position
+   * @param {string} pos "left", "center" or "right"
+   * @api
+   */
+  setAnchor(pos: 'left' | 'center' | 'right'): void;
 
   /** Get the position of the target
    * @return {ol.coordinate}

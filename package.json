@@ -33,7 +33,7 @@
     "jspdf": "^3.0.1"
   },
   "devDependencies": {
-    "@definitelytyped/dtslint": "^0.2.30",
+    "@definitelytyped/dtslint": "^0.2.33",
     "@types/fs-extra": "^11.0.4",
     "@types/geojson": "^7946.0.16",
     "@types/glob": "^8.1.0",
@@ -44,19 +44,19 @@
     "@typescript-eslint/typescript-estree": "^6.4.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^9.1.2",
     "eslint-plugin-jsdoc": "^46.10.1",
-    "eslint-plugin-prettier": "^5.2.5",
+    "eslint-plugin-prettier": "^5.5.4",
     "exports-loader": "^4.0.0",
-    "fs-extra": "^11.3.0",
+    "fs-extra": "^11.3.1",
     "jsdoc": "^4.0.4",
-    "node-html-parser": "^5.4.2",
-    "ol": "10.2.1",
-    "ol-ext": "^4.0.29",
+    "node-html-parser": "^7.0.1",
+    "ol": "10.6.1",
+    "ol-ext": "^4.0.33",
     "ts-loader": "^9.5.2",
-    "tsd": "^0.31.2",
-    "typescript": "^5.8.2",
-    "webpack": "^5.98.0",
+    "tsd": "^0.33.0",
+    "typescript": "^5.9.2",
+    "webpack": "^5.101.3",
     "webpack-cli": "^5.1.4"
   }
 }

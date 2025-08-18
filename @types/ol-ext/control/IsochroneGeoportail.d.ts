@@ -85,8 +85,9 @@ export default class IsochroneGeoportail extends ol_control_Control {
    * @param  option A number as time (in second) or distance (in meter), depend on method propertie
    * or a string with a unit (s, mn, h for time or km, m)
    * @param iter number of iterations
+   * @param once if true, only one iteration is done, default false
    */
-  search(coord: Coordinate, option: number | string, iter: number): void;
+  search(coord: Coordinate, option: number | string, iter: number, once?: boolean): void;
 
   on: IsochroneGeoportailOnSignature<EventsKey>
 

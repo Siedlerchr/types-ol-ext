@@ -6,6 +6,7 @@ import Button from './Button'
 
 export interface Options extends ControlOptions {
   className?: string;
+  classButton?: string;
   title?: string;
   html?: string;
   interaction?: Interaction;
@@ -14,6 +15,7 @@ export interface Options extends ControlOptions {
   bar?: Bar;
   autoActive?: boolean;
   onToggle?: (active: boolean) => void;
+  attributes?: { [key: string]: string };
 }
 
 /** A simple toggle control
@@ -27,15 +29,17 @@ export interface Options extends ControlOptions {
 export default class Toggle extends Button {
   /**
    * @param {Object=} options Control options.
-   *  @param {String} options.className class of the control
-   *  @param {String} options.title title of the control
-   *  @param {String} options.html html to insert in the control
-   *  @param {interaction} options.interaction interaction associated with the control
-   *  @param {bool} options.active the control is created active, default false
-   *  @param {bool} options.disable the control is created disabled, default false
-   *  @param {contrBar} options.bar a subbar associated with the control (drawn when active if control is nested in a contrBar)
-   *  @param {bool} options.autoActive the control will activate when shown in an contrBar, default false
-   *  @param {function} options.onToggle callback when control is clicked (or use change:active event)
+   *  @param {String} [options.className] class of the control
+   *  @param {String} [options.classButton] class of the button
+   *  @param {String} [options.title] title of the control
+   *  @param {String} [options.html] html to insert in the control
+   *  @param {ol.interaction} [options.interaction] interaction associated with the control
+   *  @param {bool} [options.active] the control is created active, default false
+   *  @param {bool} [options.disable] the control is created disabled, default false
+   *  @param {ol.control.Bar} [options.bar] a subbar associated with the control (drawn when active if control is nested in a ol.control.Bar)
+   *  @param {bool} [options.autoActive] the control will activate when shown in an ol.control.Bar, default false
+   *  @param {function} [options.onToggle] callback when control is clicked (or use change:active event)
+   *  @param {Object} [options.attributes] key value attributes to set on the button element
    */
   constructor(options?: Options);
 

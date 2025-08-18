@@ -10,26 +10,34 @@ export interface Options extends ControlOptions {
   toggleOne?: boolean;
   autoDeactivate?: boolean;
   controls?: ol_control_Control[];
+  attributes?: { [key: string]: string };
 }
 
 /** Control bar for OL3
  * The control bar is a container for other controls. It can be used to create toolbars.
- * Control bars can be nested and combined with contrToggle to handle activate/deactivate.
+ * Control bars can be nested and combined with ol.control.Toggle to handle activate/deactivate.
  *
  * @constructor
- * @extends {contrControl}
+ * @extends {ol_control_Control}
  */
 export default class Bar extends ol_control_Control {
-  /**
-   * @fires control:active
-   * @fires control:adds
-   * @param {Object=} options Control options.
-   *  @param {String} options.className class of the control
-   *  @param {bool} options.group is a group, default false
-   *  @param {bool} options.toggleOne only one toggle control is active at a time, default false
-   *  @param {bool} options.autoDeactivate used with subbar to deactivate all control when top level control deactivate, default false
-   *  @param {Array<Control>} options.controls a list of control to add to the bar
-   */
+/** Control bar for OL3
+ * The control bar is a container for other controls. It can be used to create toolbars.
+ * Control bars can be nested and combined with ol.control.Toggle to handle activate/deactivate.
+ * @class
+ * @constructor
+ * @fires control:active
+ * @fires control:add
+ * @extends ol_control_Control
+ * @param {Object=} options Control options.
+ *  @param {String} [options.id] button id, default generate a unique id
+ *  @param {String} [options.className] class of the control
+ *  @param {boolean} [options.group=false] is a group, default false
+ *  @param {boolean} [options.toggleOne=false] only one toggle control is active at a time, default false
+ *  @param {boolean} [options.autoDeactivate=false] used with subbar to deactivate all control when top level control deactivate, default false
+ *  @param { Array<ol_control_Control> } [options.controls] a list of control to add to the bar
+ *  @param {Object} [options.attributes] key value attributes to set on the button element
+ */
   constructor(options?: Options);
 
   /** Set the control visibility

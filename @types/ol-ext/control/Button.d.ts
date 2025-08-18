@@ -3,10 +3,12 @@ import ol_control_Control from 'ol/control/Control'
 
 export interface Options extends ControlOptions {
   className?: string;
+  classButton?: string;
   title?: string;
   name?: string;
   html?: string | Element;
   handleClick?: (e: Event) => void;
+  attributes?: { [key: string]: string };
 }
 
 /** A simple push button control
@@ -14,14 +16,19 @@ export interface Options extends ControlOptions {
  * @extends {contrControl}
  */
 export default class Button extends ol_control_Control {
-  /**
-   * @param {Object=} options Control options.
-   *  @param {String} options.className class of the control
-   *  @param {String} options.title title of the control
-   *  @param {String} options.name an optional name, default none
-   *  @param {String} options.html html to insert in the control
-   *  @param {function} options.handleClick callback when control is clicked (or use change:active event)
-   */
+/** A simple push button control
+ * @constructor
+ * @extends {ol_control_Control}
+ * @param {Object=} options Control options.
+ *  @param {String} [options.id] button id, default generate a unique id
+ *  @param {String} [options.className] class of the control
+ *  @param {String} [options.classButton] class of the button
+ *  @param {String} [options.title] title of the control
+ *  @param {String} [options.name] an optional name, default none
+ *  @param {String} [options.html] html to insert in the control
+ *  @param {function} [options.handleClick] callback when control is clicked (or use change:active event)
+ *  @param {Object} [options.attributes] key value attributes to set on the button element
+ */
   constructor(options?: Options);
 
   /** Set the control visibility

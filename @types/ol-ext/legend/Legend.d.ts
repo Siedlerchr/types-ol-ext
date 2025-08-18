@@ -5,7 +5,7 @@ import type { Size } from 'ol/size'
 import type Layer from 'ol/layer/Layer'
 import type ol_legend_Item from './Item'
 import type { olLegendItemOptions } from './Item'
-import type BaseObject from 'ol/Object';
+import BaseObject from 'ol/Object';
 
 export interface Options {
   title?: string;

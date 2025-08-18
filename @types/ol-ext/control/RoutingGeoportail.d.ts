@@ -2,6 +2,7 @@ import type { Feature, Map as _ol_Map_ } from 'ol'
 import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 import type { Coordinate } from 'ol/coordinate'
+import type { Vector } from 'ol/source'
 
 export interface Options extends ControlOptions {
   className?: string;
@@ -72,6 +73,36 @@ export default class RoutingGeoportail extends ol_control_Control {
    * @param {function} onerror callback
    */
   ajax(url: string, onsuccess: (...params: any[]) => void, onerror: (...params: any[]) => void): void;
+
+  /** Set the mode (car/pedestrian)
+   * @param {string} mode
+   * @param {boolean} [silent=false] prevent calculating
+   */
+  setMode(mode: 'car' | 'pedestrian', silent?: boolean): void;
+
+  /** Set method (shortest, fastest)
+   * @param {string} method
+   * @param {boolean} [silent=false] prevent calculating
+   */
+  setMethod(method: 'shortest' | 'fastest', silent?: boolean): void;
+
+  /** Add / remove constraint
+   * @param {string} type
+   * @param {string} [value]
+   */
+  setConstraint(type: string, value?: string): void
+
+  /** Add a new button
+   * @param {string} className
+   * @param {string} title
+   * @param {string} info
+   */
+  addButton(className: string, title: string, info?: string): HTMLElement;
+
+  /** Get point source
+   * @return {Vector}
+   */
+  getSource(): Vector;
 
   /**
    *  Abort request
