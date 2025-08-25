@@ -66,7 +66,7 @@ export default class PrintDialog extends ol_control_Control {
    */
   constructor(options?: Options);
 
-  /** Check if the dialog is oprn
+  /** Check if the dialog is open
    * @return {boolean}
    */
   isOpen(): boolean;
@@ -157,9 +157,10 @@ export default class PrintDialog extends ol_control_Control {
   /** Get print control
    * @returns {Print}
    */
-  getrintControl(): Print
+  getPrintControl(): Print
 
   /** Print dialog labels (for customisation) */
+
   _labels: {
     en: {
       title: string;
@@ -178,9 +179,87 @@ export default class PrintDialog extends ol_control_Control {
       copied: string;
       errorMsg: string;
       printBt: string;
+      clipboardFormat: string;
+      jpegFormat: string;
+      pngFormat: string;
+      pdfFormat: string;
+      none: string;
+      small: string;
+      large: string;
       cancel: string;
     };
     fr: {
+      title: string;
+      orientation: string;
+      portrait: string;
+      landscape: string;
+      size: string;
+      custom: string;
+      margin: string;
+      scale: string;
+      legend: string;
+      north: string;
+      mapTitle: string;
+      saveas: string;
+      saveLegend: string;
+      copied: string;
+      errorMsg: string;
+      printBt: string;
+      clipboardFormat: string;
+      jpegFormat: string;
+      pngFormat: string;
+      pdfFormat: string;
+      none: string;
+      small: string;
+      large: string;
+      cancel: string;
+    };
+    de: {
+      title: string;
+      orientation: string;
+      portrait: string;
+      landscape: string;
+      size: string;
+      custom: string;
+      margin: string;
+      scale: string;
+      legend: string;
+      north: string;
+      mapTitle: string;
+      saveas: string;
+      saveLegend: string;
+      copied: string;
+      errorMsg: string;
+      printBt: string;
+      clipboardFormat: string;
+      jpegFormat: string;
+      pngFormat: string;
+      pdfFormat: string;
+      none: string;
+      small: string;
+      large: string;
+      cancel: string;
+    };
+    zh: {
+      title: string;
+      orientation: string;
+      portrait: string;
+      landscape: string;
+      size: string;
+      custom: string;
+      margin: string;
+      scale: string;
+      legend: string;
+      north: string;
+      mapTitle: string;
+      saveas: string;
+      saveLegend: string;
+      copied: string;
+      errorMsg: string;
+      printBt: string;
+      cancel: string;
+    };
+    'pt-br': {
       title: string;
       orientation: string;
       portrait: string;
@@ -209,6 +288,7 @@ export default class PrintDialog extends ol_control_Control {
     A2: number[];
     A3: number[];
     A4: number[];
+    'US Letter': number[];
     A5: number[];
     B4: number[];
     B5: number[];

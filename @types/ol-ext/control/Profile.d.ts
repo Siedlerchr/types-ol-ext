@@ -18,9 +18,29 @@ export interface Options extends ControlOptions {
   feature?: Feature;
   selectable?: boolean;
   zoomable?: boolean;
-  numberFormat?: string
+  numberFormat?: string;
+  skipFirst?: number;
+}
+export interface ProfileInfo {
+  zmin: string;
+  zmax: string;
+  ytitle: string;
+  xtitle: string;
+  time: string;
+  altitude: string;
+  elevation: string;
+  elevgain: string;
+  elevloss: string;
+  maxslope: string;
+  avgslope: string;
 }
 
+export interface ProfileUnit {
+  Meter: 'm';
+  Kilometer: 'km';
+  Foot: 'ft';
+  Mile: 'mi';
+}
 /**
  * @classdesc OpenLayers 3 Profile Control.
  * Draw a profile of a feature (with a 3D geometry)
@@ -36,6 +56,14 @@ export interface Options extends ControlOptions {
  * @fires dragcancel
  */
 export default class Profile extends ol_control_Control {
+  static prototype: {
+    info: ProfileInfo;
+    Unit: ProfileUnit;
+    FOOT_VALUE: number;
+    MILE_VALUE: number;
+    KILOMETER_VALUE: number;
+  }
+
   /**
    * @param {Object=} options
    *  @param {string} options.className
@@ -50,6 +78,7 @@ export default class Profile extends ol_control_Control {
    *  @param {boolean} [options.selectable=false] enable selection on the profil, default false
    *  @param {boolean} [options.zoomable=false] can zoom in the profil
    *  @param {string} [options.numberFormat] Convert numbers to a custom locale format, default is not used
+   *  @param {string} [options.skipFirst] Skip the first/last n points of the profile to avoid GPS spike on start, default 0
    */
   constructor(options?: Options);
 
@@ -130,8 +159,8 @@ export default class Profile extends ol_control_Control {
    */
   setGeometry(f: Feature | Geometry, options?: {
     projection?: ProjectionLike;
-    zunit?: 'm' | 'km' | 'ft' | 'mi';
-    unit?: 'm' | 'km' | 'ft' | 'mi';
+    zunit?: ProfileUnit;
+    unit?: ProfileUnit;
     zmin?: number;
     zmax?: number;
     zDigits?: number;
@@ -151,5 +180,5 @@ export default class Profile extends ol_control_Control {
    * @return {string} requested data uri
    * @api stable
    */
-  getImage(type?: string, encoderOptions?: number): string;
+  getImage(type?: string, encoderOptions?: number): string | HTMLCanvasElement;
 }
