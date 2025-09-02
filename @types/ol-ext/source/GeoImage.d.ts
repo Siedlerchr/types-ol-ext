@@ -12,6 +12,7 @@ export interface Options {
   imageRotate?: number;
   imageCrop?: Extent;
   imageMask?: Coordinate[];
+  crossOrigin?: string;
 }
 
 /** Layer source with georeferencement to place it on a map
