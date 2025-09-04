@@ -52,7 +52,7 @@
     "jsdoc": "^4.0.4",
     "node-html-parser": "^7.0.1",
     "ol": "10.6.1",
-    "ol-ext": "^4.0.34",
+    "ol-ext": "^4.0.35",
     "ts-loader": "^9.5.4",
     "tsd": "^0.33.0",
     "typescript": "^5.9.2",
