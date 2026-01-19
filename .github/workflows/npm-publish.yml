@@ -27,4 +27,6 @@ jobs:
       - run: npm run lint 
       - run: npm run prepare-npm
       - run: npm publish ./npm --access=public --dry-run
-      - run: npm publish ./npm --access=public
+      - run: npm publish ./npm --provenance --access=public
+        env:
+          NPM_CONFIG_PROVENANCE: true
