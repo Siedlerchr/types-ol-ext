@@ -21,12 +21,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          registry-url: https://registry.npmjs.org/
-      - run: sudo npm install -g npm@latest
+          cache: 'npm'
       - run: npm ci
       - run: npm run lint 
       - run: npm run prepare-npm
-      - run: npm publish ./npm --access=public --dry-run
       - run: npm publish ./npm --provenance --access=public
         env:
           NPM_CONFIG_PROVENANCE: true
