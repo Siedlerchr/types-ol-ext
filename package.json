@@ -32,6 +32,11 @@
   "peerDependencies": {
     "jspdf": "^4.0.0"
   },
+  "peerDependenciesMeta": {
+    "jspdf": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@definitelytyped/dtslint": "^0.2.34",
     "@types/fs-extra": "^11.0.4",
