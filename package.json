@@ -52,7 +52,7 @@
     "eslint-config-prettier": "^9.1.2",
     "eslint-plugin-jsdoc": "^46.10.1",
     "eslint-plugin-prettier": "^5.5.5",
-    "exports-loader": "^4.0.0",
+    "exports-loader": "^5.0.0",
     "fs-extra": "^11.3.3",
     "jsdoc": "^4.0.5",
     "node-html-parser": "^7.0.2",
