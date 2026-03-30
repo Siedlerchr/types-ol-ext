@@ -5,6 +5,7 @@ export interface Options {
   url: string,
   title?: string
   img?: HTMLImageElement | HTMLCanvasElement
+  src?: string;
   className?: string;
   width?: number;
 }
