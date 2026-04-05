@@ -3,6 +3,7 @@ import type { Style, Text } from 'ol/style'
 import type { StyleFunction, StyleLike } from 'ol/style/Style'
 import type { Size } from 'ol/size'
 import type Layer from 'ol/layer/Layer'
+import type ol_legend_Image from './Image'
 import type ol_legend_Item from './Item'
 import type { olLegendItemOptions } from './Item'
 import BaseObject from 'ol/Object';
@@ -85,9 +86,9 @@ export default class ol_legend_Legend extends BaseObject {
   setStyle(style: Style | Array<Style> | StyleFunction | undefined): void;
 
   /** Add a new item to the legend
-   * @param {olLegendItemOptions|ol_legend_Item} item
+   * @param {olLegendItemOptions|ol_legend_Item|ol_legend_Image|ol_legend_Legend} item
    */
-  addItem(item: olLegendItemOptions | ol_legend_Item): void;
+  addItem(item: olLegendItemOptions | ol_legend_Item | ol_legend_Image | ol_legend_Legend): void;
 
   /** Get item collection
    * @param {ol_Collection}
