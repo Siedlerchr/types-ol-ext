@@ -1,6 +1,6 @@
 {
   "name": "@siedlerchr/types-ol-ext",
-  "version": "3.6.7",
+  "version": "3.6.8",
   "description": "Type definitions for ol-ext",
   "main": "",
   "types": "index.d.ts",
@@ -38,11 +38,11 @@
     }
   },
   "devDependencies": {
-    "@definitelytyped/dtslint": "^0.2.38",
+    "@definitelytyped/dtslint": "^0.2.40",
     "@types/fs-extra": "^11.0.4",
     "@types/geojson": "^7946.0.16",
     "@types/glob": "^8.1.0",
-    "@types/jquery": "^3.5.33",
+    "@types/jquery": "^3.5.34",
     "@types/webpack": "^5.28.5",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
@@ -53,15 +53,15 @@
     "eslint-plugin-jsdoc": "^46.10.1",
     "eslint-plugin-prettier": "^5.5.5",
     "exports-loader": "^4.0.0",
-    "fs-extra": "^11.3.3",
+    "fs-extra": "^11.3.4",
     "jsdoc": "^4.0.5",
-    "node-html-parser": "^7.0.2",
+    "node-html-parser": "^7.1.0",
     "ol": "10.6.1",
-    "ol-ext": "^4.0.37",
-    "ts-loader": "^9.5.4",
+    "ol-ext": "^4.0.38",
+    "ts-loader": "^9.5.7",
     "tsd": "^0.33.0",
     "typescript": "^5.9.3",
-    "webpack": "^5.105.2",
+    "webpack": "^5.105.4",
     "webpack-cli": "^5.1.4"
   }
 }
