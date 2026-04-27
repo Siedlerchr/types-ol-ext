@@ -27,6 +27,7 @@ export interface Options {
   filter?: (f: Feature, l: Layer) => boolean;
   layers?: Layer[];
   features?: Collection<Feature>;
+  condition?: (event: MapBrowserEvent, features?: Collection<Feature>) => boolean;
   addCondition?: EventsConditionType;
   hitTolerance?: number;
   translateFeature?: boolean;
