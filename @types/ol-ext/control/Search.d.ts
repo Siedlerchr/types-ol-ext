@@ -2,7 +2,7 @@ import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 import type { Feature, Map as _ol_Map_ } from 'ol'
 import type { Coordinate } from 'ol/coordinate'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { ObjectEvent } from 'ol/Object'
 import type { Types } from 'ol/ObjectEventType'
@@ -13,9 +13,7 @@ export type SearchOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'select', SearchEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'select', Return>;
 
-export enum SearchEventType {
-  SELECT = 'select',
-}
+export type SearchEventType = 'select'
 
 export interface Options extends ControlOptions {
   className?: string;
@@ -173,14 +171,12 @@ export default class Search extends ol_control_Control {
   un: SearchOnSignature<void>
 }
 
-export class SearchEvent extends BaseEvent {
-  constructor(type: SearchEventType, search: any, reverse: boolean, coordinate: Coordinate, option?: Options);
-
-  search: any
-
-  reverse: boolean
-
-  coordinate: Coordinate
-
-  options?: Options
+export interface SearchEvent extends BaseEvent {
+  type: SearchEventType;
+  search: any;
+  /** Some search adapters do not include this field. */
+  reverse?: boolean;
+  /** Some search adapters do not provide coordinates. */
+  coordinate?: Coordinate;
+  [key: string]: any;
 }

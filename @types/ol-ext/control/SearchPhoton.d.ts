@@ -1,4 +1,4 @@
-import type Feature from 'ol/Feature'
+import type { Coordinate } from 'ol/coordinate'
 import type { Options as SearchOptions } from './SearchJSON'
 import SearchJSON from './SearchJSON'
 
@@ -13,7 +13,7 @@ export interface Options extends SearchOptions {
   url?: string;
   lang?: string;
   position?: boolean;
-  getTitle?: (f: Feature) => string;
+  getTitle?: (f: any) => string;
 }
 
 /**
@@ -42,4 +42,9 @@ export default class SearchPhoton extends SearchJSON {
    *  @param {function} options.getTitle a function that takes a feature and return the name to display in the index, default return street + name + contry
    */
   constructor(options?: Options);
+
+  /** Get longitude and latitude request data for reverse geocoding. */
+  reverseData(coord: Coordinate): { lon: number; lat: number };
+  /** Reverse geocode a coordinate, optionally receiving the results. */
+  reverseGeocode(coord: Coordinate, callback?: (results: any[]) => void): void;
 }

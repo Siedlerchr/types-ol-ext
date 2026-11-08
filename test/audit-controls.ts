@@ -15,6 +15,8 @@ import WMSCapabilities from '../@types/ol-ext/control/WMSCapabilities'
 import WMTSCapabilities from '../@types/ol-ext/control/WMTSCapabilities'
 import Search from '../@types/ol-ext/control/Search'
 import SearchJSON from '../@types/ol-ext/control/SearchJSON'
+import SearchNominatim from '../@types/ol-ext/control/SearchNominatim'
+import SearchPhoton from '../@types/ol-ext/control/SearchPhoton'
 
 const source = new VectorSource()
 const search = new SearchFeature({ source })
@@ -57,6 +59,13 @@ const history: any[] = textSearch.getHistory()
 const remoteSearch = new SearchJSON({ url: '/search' })
 remoteSearch.autocomplete('Place', results => { void results })
 remoteSearch.ajax('/search', {}, response => { void response })
+remoteSearch.on('select', event => { event.search; event.coordinate?.slice() })
+const nominatim = new SearchNominatim()
+nominatim.on('select', event => { event.coordinate.slice() })
+nominatim.reverseGeocode([0, 0], results => { void results })
+const photon = new SearchPhoton({ getTitle: result => result.properties.name })
+photon.reverseData([0, 0]).lon
+photon.reverseGeocode([0, 0])
 void history
 // @ts-expect-error unsupported operator
 selection.addCondition({ op: '!regexep' })
