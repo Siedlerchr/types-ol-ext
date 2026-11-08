@@ -26,6 +26,9 @@ import Placemark from '../@types/ol-ext/overlay/Placemark'
 import Fixed from '../@types/ol-ext/overlay/Fixed'
 import Slider from '../@types/ol-ext/util/input/Slider'
 import Range from '../@types/ol-ext/util/input/Range'
+import List from '../@types/ol-ext/util/input/List'
+import Width from '../@types/ol-ext/util/input/Width'
+import Size from '../@types/ol-ext/util/input/Size'
 
 const source = new VectorSource()
 const search = new SearchFeature({ source })
@@ -110,6 +113,15 @@ range.setValue2(20)
 range.on('change:value', event => event.value.toFixed())
 void sliderValue
 void rangeValue
+const list = new List({ options: [{ value: 'round', html: 'Round' }] })
+const listValue: string = list.getValue()
+list.on('change:value', event => event.value.toUpperCase())
+const width = new Width()
+width.on('change:value', event => event.value.toFixed())
+new Size().getValue().toFixed()
+void listValue
+// @ts-expect-error a list requires its options array
+new List({})
 void history
 // @ts-expect-error unsupported operator
 selection.addCondition({ op: '!regexep' })
