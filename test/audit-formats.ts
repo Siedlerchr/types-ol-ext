@@ -4,6 +4,8 @@ import Render3D from '../@types/ol-ext/layer/Render3D'
 import Checkbox from '../@types/ol-ext/util/input/Checkbox'
 import Paper from '../@types/ol-ext/filter/Paper'
 import Feature from 'ol/Feature'
+import Dijkstra, { ol_graph_Dijskra } from '../@types/ol-ext/geom/Dijkstra'
+import VectorSource from 'ol/source/Vector'
 
 const grid = new HexGrid({ size: 100, layout: 'flat' })
 const hex: number[] = grid.coord2hex([1, 2])
@@ -25,6 +27,12 @@ void propertyNames
 void geometryEncoding
 const renderer = new Render3D({ active: true, ghost: true, height: 12 })
 const height: number = renderer.getFeatureHeight(new Feature())
+const routing = new Dijkstra({ source: new VectorSource() })
+const route: false | [number[], number[]] = routing.path([0, 0], [1, 1])
+routing.on('finish', event => { event.route; event.distance?.toFixed() })
+const legacyConstructor: typeof Dijkstra = ol_graph_Dijskra
+void route
+void legacyConstructor
 renderer.getActive()
 renderer.animate({ height: 50 })
 new Checkbox().isChecked()

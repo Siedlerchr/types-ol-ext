@@ -47,6 +47,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `util/input/Checkbox`, `Switch`, and `Radio`: the check event contains a boolean `checked` and string `value`; Switch and Radio inherit this behavior. Corrected the Switch class-name option spelling.
 - `util/input/PopupBase` and `Color`: corrected popup positioning and accessibility options, visibility events, color event payloads, optional color setters, and string color IDs. These widgets were not browser-tested in this round.
 - `util/input/Collection`: corrected its BaseObject inheritance, OpenLayers collection argument, selection nullability, generic item types, and item-event payloads. Reordering was not browser-tested.
+- `geom/Dijkstra`: corrected absent-node and path result types, finish/pause event payloads, and the legacy named constructor export. The route example handles the possibly absent distance. Actual route calculation was not browser-tested in this round.
 - `interaction/CurrentMap`, `CopyPaste`, `ModifyFeature`, and `Split`: event payloads are plain dispatched objects, not exported runtime event classes or enums. Declarations expose event interfaces and string types; ModifyFeature events contain coordinates, original DOM events, and feature arrays, while CopyPaste supplies features on paste events.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
