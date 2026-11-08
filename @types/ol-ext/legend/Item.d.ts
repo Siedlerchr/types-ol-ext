@@ -11,7 +11,7 @@ export type olLegendItemOptions = {
   /**
    * row title
    */
-  title: string;
+  title?: string;
   className?: string;
   /**
    * a feature to draw on the legend

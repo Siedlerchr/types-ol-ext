@@ -2,6 +2,7 @@ import Select from '../@types/ol-ext/control/Select'
 import SearchFeature from '../@types/ol-ext/control/SearchFeature'
 import LegendItem from '../@types/ol-ext/legend/Item'
 import Legend from '../@types/ol-ext/legend/Legend'
+import LegendImage from '../@types/ol-ext/legend/Image'
 import Magnify from '../@types/ol-ext/overlay/Magnify'
 import VectorSource from 'ol/source/Vector'
 import Dialog from '../@types/ol-ext/control/Dialog'
@@ -47,6 +48,15 @@ selection.doSelect({ sources: [source], conditions: conditions.conditions })
 new LegendItem({ title: 'Example' }).setWidth(20)
 declare const legend: Legend
 legend.getTitleStyle()
+const sublegend = new Legend({ title: 'Nested' })
+const imageItem = new LegendImage({ src: '/legend.png' })
+const mixedLegend = new Legend({ items: [sublegend, imageItem, { title: 'Feature' }] })
+mixedLegend.getItems().push(imageItem)
+mixedLegend.removeItem(sublegend)
+mixedLegend.on('select', event => { event.item; event.index; event.symbol })
+mixedLegend.on('refresh', event => { event.width; event.height })
+mixedLegend.on('items', event => { event.nb })
+mixedLegend.setLayer(null)
 declare const magnify: Magnify
 magnify.refresh()
 declare const dialog: Dialog

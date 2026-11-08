@@ -2,11 +2,25 @@ import type ol_Collection from 'ol/Collection'
 import type { Style, Text } from 'ol/style'
 import type { StyleFunction, StyleLike } from 'ol/style/Style'
 import type { Size } from 'ol/size'
-import type Layer from 'ol/layer/Layer'
+import type Layer from 'ol/layer/Base'
 import type ol_legend_Image from './Image'
 import type ol_legend_Item from './Item'
 import type { olLegendItemOptions } from './Item'
 import BaseObject from 'ol/Object';
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { OnSignature } from 'ol/Observable'
+
+export type LegendEntry = ol_legend_Item | ol_legend_Image | ol_legend_Legend
+export type LegendEntryOptions = olLegendItemOptions | LegendEntry
+export interface LegendSelectEvent extends BaseEvent {
+  type: 'select';
+  index: number;
+  symbol: boolean;
+  item: LegendEntry;
+}
+export interface LegendRefreshEvent extends BaseEvent { type: 'refresh'; width: number; height: number }
+export interface LegendItemsEvent extends BaseEvent { type: 'items'; nb: number }
 
 export interface Options {
   title?: string;
@@ -17,6 +31,7 @@ export interface Options {
   textStyle?: Text;
   titleStyle?: Text;
   style?: StyleLike;
+  items?: LegendEntryOptions[];
 }
 
 /** Legend class to draw features in a legend element
@@ -30,7 +45,7 @@ export default class ol_legend_Legend extends BaseObject {
    * @param {Canvas|undefined} canvas a canvas to draw in, if none creat one
    * @param {int|undefined} offsetY Y offset to draw in canvas, default 0
    */
-  static getLegendImage(item: olLegendItemOptions, canvas?: HTMLCanvasElement | undefined, row?: number): HTMLCanvasElement;
+  static getLegendImage(item?: olLegendItemOptions, canvas?: HTMLCanvasElement, row?: number): HTMLCanvasElement;
 
   /**
    * @param {*} options
@@ -66,12 +81,7 @@ export default class ol_legend_Legend extends BaseObject {
   /** Set the layer associated with the legend
    * @param {ol.layer.Layer} [layer]
    */
-  setLayer(layer: Layer): void
-
-  /** Set legend size
-   * @param {ol.size} size
-   */
-  set(size: Size): void;
+  setLayer(layer?: Layer | null): void
 
   /** Get legend list element
    * @returns {Element}
@@ -91,17 +101,17 @@ export default class ol_legend_Legend extends BaseObject {
   /** Add a new item to the legend
    * @param {olLegendItemOptions|ol_legend_Item|ol_legend_Image|ol_legend_Legend} item
    */
-  addItem(item: olLegendItemOptions | ol_legend_Item | ol_legend_Image | ol_legend_Legend): void;
+  addItem(item: LegendEntryOptions): void;
 
   /** Get item collection
    * @param {ol_Collection}
    */
-  getItems(): ol_Collection<ol_legend_Item>;
+  getItems(): ol_Collection<LegendEntry>;
 
   /** Remove an item at index
    * @param {ol_legend_Item} item
    */
-  removeItem(item: ol_legend_Item): void;
+  removeItem(item: LegendEntry): void;
 
   /*
   * @param {number} index
@@ -110,7 +120,7 @@ export default class ol_legend_Legend extends BaseObject {
 
   /** Refresh the legend
    */
-  refresh(): void;
+  refresh(silent?: boolean): void;
 
   /** Calculate the legend height
    * @return {number}
@@ -130,15 +140,7 @@ export default class ol_legend_Legend extends BaseObject {
    */
   getLegendImage(item: olLegendItemOptions, canvas?: HTMLCanvasElement, offsetY?: number): HTMLCanvasElement;
 
-  // The following function is already declared in ol/Object.d.ts
-  // but we still have to redeclare it here, otherwise it's being hidden
-  // by set(size: Size), which is declared above.
-  /**
-   * Sets a value.
-   * @param {string} key Key name.
-   * @param {*} value Value.
-   * @param {boolean} [opt_silent] Update without triggering an event.
-   * @api
-   */
-  set(key: string, value: any, opt_silent?: boolean | undefined): void;
+  on: BaseObject['on'] & OnSignature<'select', LegendSelectEvent, EventsKey> & OnSignature<'refresh', LegendRefreshEvent, EventsKey> & OnSignature<'items', LegendItemsEvent, EventsKey>;
+  once: BaseObject['once'] & OnSignature<'select', LegendSelectEvent, EventsKey> & OnSignature<'refresh', LegendRefreshEvent, EventsKey> & OnSignature<'items', LegendItemsEvent, EventsKey>;
+  un: BaseObject['un'] & OnSignature<'select', LegendSelectEvent, void> & OnSignature<'refresh', LegendRefreshEvent, void> & OnSignature<'items', LegendItemsEvent, void>;
 }
