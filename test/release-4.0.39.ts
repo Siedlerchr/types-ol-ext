@@ -3,6 +3,7 @@ import { contours } from 'd3-contour'
 import StrokeImage from '../@types/ol-ext/style/StrokeImage'
 import Icon from 'ol/style/Icon'
 import VectorLayer from 'ol/layer/Vector'
+import type Map from 'ol/Map'
 import defaultStyle from '../@types/ol-ext/style/defaultStyle'
 import Modify from '../@types/ol-ext/interaction/Modify'
 import '../@types/ol-ext/source/Vector'
@@ -20,11 +21,15 @@ source.setData({ x: [[0, 1], [0, 1]], y: [[0, 0], [1, 1]], z: [[1, 2], [3, 4]] }
 source.calculateContours()
 const style = new StrokeImage({ icon: new Icon({ src: 'stroke.png' }), fallbackColor: '#c844c5' })
 new VectorLayer({ source, style })
+declare const map: Map
+new StrokeImage({ icon: new Icon({ src: 'stroke.png' }), isVectorTile: true, map })
 defaultStyle({ color: '#3399cc', fillColor: [255, 255, 255, 0.4] })
 declare const modify: Modify
 modify.getModifiedFeatures()
 void FontSymbol
 // @ts-expect-error an image icon is required
 new StrokeImage({})
+// @ts-expect-error fallback colors are CSS color strings
+new StrokeImage({ icon: new Icon({ src: 'stroke.png' }), fallbackColor: 5 })
 // @ts-expect-error thresholds are a number of levels
 source.thresholds = 'six'

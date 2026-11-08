@@ -16,7 +16,7 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 ## Release-specific APIs
 
 - `source/Contour`: compared with source and upstream example. The real d3-contour factory, grid, thresholds, styling, and data loading are type-checked. Inline and file datasets rendered in Chrome; levels were changed. This does not verify all grid shapes.
-- `style/StrokeImage`: constructor and public fields compared with source; OpenLayers style integration is type-checked. Rendering is not browser-tested.
+- `style/StrokeImage`: constructor and public fields compared with source; OpenLayers vector-layer style integration and vector-tile options are type-checked. The ported upstream example rendered its line and polygon sprite strokes in Chrome, including after changing the pattern and fallback color. Vector-tile rendering was not tested; the release source calls an undefined `checkExtentIntersection` identifier when rendering polygons with both `isVectorTile` and `map` set, which is an upstream runtime limitation.
 
 ## Remaining audit
 
