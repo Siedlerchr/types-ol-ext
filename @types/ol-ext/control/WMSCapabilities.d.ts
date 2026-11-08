@@ -10,7 +10,7 @@ export interface Capabilities {
   map?: string;
   version?: string;
   timeout?: number;
-  onLoad?: () => void;
+  onload?: (capabilities: any) => void;
 }
 
 export interface ReturnCapabilitiesOptions {
@@ -56,6 +56,8 @@ export interface Options extends ControlOptions {
   optional?: string;
   trace?: boolean;
   services?: { [key: string]: string };
+  authentication?: string;
+  onselect?: (layer: TileLayer<TileSource>, options: ReturnCapabilitiesOptions) => void;
 }
 
 /** WMSCapabilities
@@ -92,7 +94,7 @@ export default class WMSCapabilities extends Button {
    * and add its controls associated to this map.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Get the dialog
    * @returns {ol_control_Dialog}
@@ -124,7 +126,7 @@ export default class WMSCapabilities extends Button {
    * @param {string} layername
    * @param {function} [onload] callback function (or listen to 'load' event)
    */
-  loadLayer(url: string, layerName: string, onload: () => void): void;
+  loadLayer(url: string, layerName: string, onload?: (result: { layer: TileLayer<TileSource>; options: ReturnCapabilitiesOptions }) => void): void;
 
   /** Clear form
    */
@@ -133,7 +135,13 @@ export default class WMSCapabilities extends Button {
   /** Display capabilities in the dialog
    * @param {*} caps JSON capabilities
    */
-  showCapabilitis(caps: any): void;
+  showCapabilities(caps: any): void;
+
+  /** Get the service capabilities request parameters. */
+  getRequestParam(options: { version?: string }): { SERVICE: 'WMS' | 'WMTS'; REQUEST: 'GetCapabilities'; VERSION: string };
+
+  /** Display an error, or clear the displayed error when omitted. */
+  showError(event?: { type: string } | null): void;
 
   /** Test url and return true if it is a valid url string
    * @param {string} url
@@ -156,6 +164,7 @@ export default class WMSCapabilities extends Button {
     load: string;
     badUrl: string;
     TileMatrix: string;
+    noLayer: string;
     srs: string;
   }
 

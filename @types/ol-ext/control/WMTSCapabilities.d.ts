@@ -32,7 +32,7 @@ export default class WMTSCapabilities extends WMSCapabilities {
   /** Get Capabilities request parameters
    * @param {*} options
    */
-  getRequestParam(options?: { version?: string }): {
+  getRequestParam(options: { version?: string }): {
     SERVICE: 'WMTS';
     REQUEST: 'GetCapabilities';
     VERSION: string;
@@ -47,6 +47,9 @@ export default class WMTSCapabilities extends WMSCapabilities {
    * @private
    */
   getTileGrid(tileMatrixSet: string, minZoom: number, maxZoom: number, tilePrefix: boolean): WMTSTileGrid
+
+  /** Check whether a tile matrix set is supported. */
+  isSupportedSet(tileMatrix: { TileMatrixSet: string }): boolean;
 
   /** Return a WMTS options for the given capabilities
    * @param {*} caps layer capabilities (read from the capabilities)

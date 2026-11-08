@@ -11,6 +11,8 @@ import Target from '../@types/ol-ext/control/Target'
 import VideoRecorder from '../@types/ol-ext/control/VideoRecorder'
 import RoutingGeoportail from '../@types/ol-ext/control/RoutingGeoportail'
 import SearchCoordinates from '../@types/ol-ext/control/SearchCoordinates'
+import WMSCapabilities from '../@types/ol-ext/control/WMSCapabilities'
+import WMTSCapabilities from '../@types/ol-ext/control/WMTSCapabilities'
 
 const source = new VectorSource()
 const search = new SearchFeature({ source })
@@ -38,5 +40,13 @@ routing.getTimeString(120)
 const coordinates = new SearchCoordinates()
 coordinates.setInput([2, 48])
 coordinates.setInput()
+const wms = new WMSCapabilities({ onselect: layer => layer.getSource() })
+wms.getCapabilities('https://example.com/wms', { onload: capabilities => { void capabilities } })
+wms.loadLayer('https://example.com/wms', 'roads', result => result.layer.getSource())
+wms.showCapabilities({})
+wms.getRequestParam({ version: '1.3.0' })
+const wmts = new WMTSCapabilities()
+wmts.isSupportedSet({ TileMatrixSet: 'PM_0_18' })
+wmts.getRequestParam({})
 // @ts-expect-error unsupported operator
 selection.addCondition({ op: '!regexep' })
