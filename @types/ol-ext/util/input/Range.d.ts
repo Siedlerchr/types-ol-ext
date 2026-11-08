@@ -1,11 +1,13 @@
 import type { Options as BaseOptions } from './Base'
 import Base from './Base'
+import type { EventsKey } from 'ol/events'
+import type { OnSignature } from 'ol/Observable'
+import type { SliderEvent } from './Slider'
 
 export interface Options extends BaseOptions {
-  clasName?: string;
-  input?: Element;
-  input2?: Element;
-  input3?: Element;
+  className?: string;
+  input?: HTMLInputElement;
+  input2?: HTMLInputElement;
   min?: number;
   max?: number;
   step?: number;
@@ -33,11 +35,11 @@ export default class Range extends Base {
 
   /** Set the current value (second input)
    */
-  setValue2(v: any): void;
+  setValue2(v?: string | number): void;
 
   /** Get the current value (second input)
    */
-  getValue2(): any;
+  getValue2(): string | null;
 
   /** Get the current min value
    * @return {number}
@@ -48,4 +50,8 @@ export default class Range extends Base {
    * @return {number}
    */
   getMax(): number;
+
+  on: Base['on'] & OnSignature<'change:value', SliderEvent, EventsKey>;
+  once: Base['once'] & OnSignature<'change:value', SliderEvent, EventsKey>;
+  un: Base['un'] & OnSignature<'change:value', SliderEvent, void>;
 }

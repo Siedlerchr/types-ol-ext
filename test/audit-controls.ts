@@ -24,6 +24,8 @@ import Feature from 'ol/Feature'
 import Tooltip from '../@types/ol-ext/overlay/Tooltip'
 import Placemark from '../@types/ol-ext/overlay/Placemark'
 import Fixed from '../@types/ol-ext/overlay/Fixed'
+import Slider from '../@types/ol-ext/util/input/Slider'
+import Range from '../@types/ol-ext/util/input/Range'
 
 const source = new VectorSource()
 const search = new SearchFeature({ source })
@@ -99,6 +101,15 @@ tooltip.setMap(null)
 new Placemark({ size: 20 }).show(true, 'Here')
 new Fixed().setPosition(undefined, true)
 void tooltipText
+const slider = new Slider({ min: 0, max: 100, hover: false })
+const sliderValue: string = slider.getValue()
+slider.on('change:value', event => event.value.toFixed())
+const range = new Range({ className: 'range', input2: document.createElement('input') })
+const rangeValue: string | null = range.getValue2()
+range.setValue2(20)
+range.on('change:value', event => event.value.toFixed())
+void sliderValue
+void rangeValue
 void history
 // @ts-expect-error unsupported operator
 selection.addCondition({ op: '!regexep' })

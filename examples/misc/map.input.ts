@@ -55,13 +55,13 @@ $('.radio').each((i: number, elem: Element) => {
   window[`radio${i + 1}`] = radio
 })
 
-const slider = new Slider({ input: $('.slider').get(0) })
+const slider = new Slider({ input: document.querySelector<HTMLInputElement>('.slider') ?? undefined })
 slider.on('change:value', e => {
   $('.opacity').css('opacity', e.value / 100)
 })
 slider.setValue(25)
 
-const slide2 = new Slider({ input: $('.slide2').get(0), type: 'size' })
+const slide2 = new Slider({ input: document.querySelector<HTMLInputElement>('.slide2') ?? undefined, type: 'size' })
 slide2.on('change:value', e => {
   $('.fa-map-marker').css('font-size', `${e.value}px`)
 })
@@ -139,10 +139,10 @@ const popup = new PopupBase({
 })
 
 const range = new Range({
-  input: $('.range').get(0),
+  input: document.querySelector<HTMLInputElement>('.range') ?? undefined,
 })
 const range2 = new Range({
-  input: $('.range2').get(0),
-  input2: $('.range2').get(1),
+  input: document.querySelectorAll<HTMLInputElement>('.range2')[0],
+  input2: document.querySelectorAll<HTMLInputElement>('.range2')[1],
   overflow: true,
 })
