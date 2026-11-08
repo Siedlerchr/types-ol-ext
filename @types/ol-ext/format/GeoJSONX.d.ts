@@ -33,7 +33,7 @@ export interface Options {
   blackList?: string[] | ((k: any) => boolean);
   layout?: SupportedLayouts;
   dataProjection?: ProjectionLike;
-  featureProjeciton?: ProjectionLike;
+  featureProjection?: ProjectionLike;
 }
 
 /** Feature format for reading and writing data in the GeoJSONX format.
@@ -58,6 +58,11 @@ export default class GeoJSONX extends GeoJSONWithoutWriteGeometryObject {
   setLayout(layout: SupportedLayouts): void;
 
   getLayout(): SupportedLayouts
+
+  /** Encode a number with the given number of decimal places. */
+  encodeNumber(value: number, decimals?: number): string;
+  /** Decode a number with the given number of decimal places. */
+  decodeNumber(value: string, decimals?: number): number;
 
   /** Encode coordinates
    * @param {ol.coordinate|Array<ol.coordinate>} v

@@ -29,4 +29,6 @@ export default class CheckBox extends Base {
    *  @param {boolean} [options.visible=false] display the input
    */
   constructor(options?: Options);
+  /** Return whether the checkbox is checked. */
+  isChecked(): boolean;
 }
