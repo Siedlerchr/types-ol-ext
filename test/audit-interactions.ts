@@ -6,6 +6,8 @@ import VectorSource from 'ol/source/Vector'
 import Point from 'ol/geom/Point'
 import DropFile from '../@types/ol-ext/interaction/DropFile'
 import GPX from 'ol/format/GPX'
+import Transform from '../@types/ol-ext/interaction/Transform'
+import Feature from 'ol/Feature'
 
 const source = new VectorSource()
 const current = new CurrentMap({ condition: () => true })
@@ -33,5 +35,18 @@ drop.on('addfeatures', event => event.features.forEach(feature => feature.getGeo
 drop.on('loadend', event => { event.file; event.result; event.features })
 // @ts-expect-error the drop zone is an element or document, not a selector
 new DropFile({ zone: '#drop' })
+
+const transform = new Transform({ buffer: 2, layers: [] })
+transform.setSelection([new Feature(new Point([0, 0]))])
+transform.select(null)
+transform.setMap(null)
+transform.on('rotatestart', event => {
+  event.pixel
+  // @ts-expect-error the angle is only provided while rotating
+  event.angle
+})
+transform.on('rotating', event => event.angle.toFixed())
+transform.on('scaleend', event => { event.transformed; event.oldgeoms })
+transform.on('select', event => { event.feature?.getGeometry(); event.pixel?.slice() })
 // @ts-expect-error condition must be a function
 new CurrentMap({ condition: true })
