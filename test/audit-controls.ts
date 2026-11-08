@@ -21,6 +21,9 @@ import Popup from '../@types/ol-ext/overlay/Popup'
 import FixedPopup from '../@types/ol-ext/overlay/FixedPopup'
 import PopupFeature from '../@types/ol-ext/overlay/PopupFeature'
 import Feature from 'ol/Feature'
+import Tooltip from '../@types/ol-ext/overlay/Tooltip'
+import Placemark from '../@types/ol-ext/overlay/Placemark'
+import Fixed from '../@types/ol-ext/overlay/Fixed'
 
 const source = new VectorSource()
 const search = new SearchFeature({ source })
@@ -88,6 +91,14 @@ featurePopup.setTemplate({ attributes: { name: { format: (value, feature) => `${
 featurePopup.show(new Feature())
 featurePopup.on('attribute', event => { event.feature; event.attribute; event.originalEvent })
 featurePopup.on('select', event => { event.feature; event.index })
+const tooltip = new Tooltip({ positioning: 'auto', getHTML: (feature, info) => feature ? String(feature.getId()) : info || '' })
+const tooltipText: string = tooltip.getHTML()
+tooltip.setFeature({ feature: new Feature() })
+tooltip.setInfo(null)
+tooltip.setMap(null)
+new Placemark({ size: 20 }).show(true, 'Here')
+new Fixed().setPosition(undefined, true)
+void tooltipText
 void history
 // @ts-expect-error unsupported operator
 selection.addCondition({ op: '!regexep' })

@@ -1,14 +1,11 @@
-import { Overlay } from 'ol'
-import type { Coordinate } from 'ol/coordinate'
+import Popup from './Popup'
+import type { Options as PopupOptions } from './Popup'
 
-export interface Options {
+export interface Options extends PopupOptions {
   color?: string;
   backgroundColor?: string;
   contentColor?: string;
-  radius?: number;
-  popupClass?: string;
-  onclose?: ((...params: any[]) => any) | undefined;
-  onshow?: ((...params: any[]) => any) | undefined;
+  size?: number;
 }
 
 /**
@@ -27,25 +24,18 @@ export interface Options {
 
  * @api stable
  */
-export default class Placemark extends Overlay {
+export default class Placemark extends Popup {
   /**
    * @param {} options Extend ol/Overlay/Popup options
    *  @param {String} options.color placemark color
    *  @param {String} options.backgroundColor placemark color
    *  @param {String} options.contentColor placemark color
-   *  @param {Number} options.radius placemark radius in pixel
+   *  @param {Number} options.size placemark radius in pixel
    *  @param {String} options.popupClass the a export class of the overlay to style the popup.
    *  @param {function|undefined} options.onclose: callback function when popup is closed
    *  @param {function|undefined} options.onshow callback function when popup is shown
    */
   constructor(options?: Options);
-
-  /**
-   * Set the position and the content of the placemark (hide it before to enable animation).
-   * @param {Coordinate|string} coordinate the coordinate of the popup or the HTML content.
-   * @param {string|undefined} html the HTML content (undefined = previous content).
-   */
-  show(coordinate: Coordinate | string, html?: string | undefined): void;
 
   /**
    * Set the placemark color.

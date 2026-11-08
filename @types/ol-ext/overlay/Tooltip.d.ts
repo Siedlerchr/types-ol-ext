@@ -1,18 +1,14 @@
 import type { Map as _ol_Map_ } from 'ol'
-import { Coordinate } from 'ol/coordinate'
 import type Feature from 'ol/Feature'
-import type Event from 'ol/events/Event'
 import type { Positioning } from 'ol/Overlay'
+import type { Options as PopupOptions } from './Popup'
 import Popup from './Popup'
 
-export interface Options {
-  popupClass?: string;
+export interface Options extends PopupOptions {
   maximumFractionDigits?: number;
   formatLength?: (length: number) => string;
   formatArea?: (area: number) => string;
-  getHTML?: (feature: Feature, info: string) => string;
-  offsetBox?: number | number[];
-  Positioning?: Positioning | string;
+  getHTML?: (feature: Feature | undefined, info: string | undefined) => string;
 }
 
 /** A tooltip element to be displayed over the map and attached on the cursor position.
@@ -39,7 +35,7 @@ export default class Tooltip extends Popup {
    * and add its controls associated to this map.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Get the information to show in the tooltip
    * The area/length will be added if a feature is attached.
@@ -47,7 +43,7 @@ export default class Tooltip extends Popup {
    * @param {string} info the info string
    * @api
    */
-  getHTML(feature?: Feature, info?: string): void;
+  getHTML(feature?: Feature, info?: string): string;
 
   /** Set the Tooltip info
    * If information is not null it will be set with a delay,
@@ -56,7 +52,7 @@ export default class Tooltip extends Popup {
    * ttip.set('info','ok'); ttip.set('info', null); will set null
    * @param {string} what The information to display in the tooltip, default remove information
    */
-  setInfo(what?: string): void;
+  setInfo(what?: string | null): void;
 
   /** Remove the current featue attached to the tip
    * Similar to setFeature() with no argument
@@ -82,7 +78,7 @@ export default class Tooltip extends Popup {
   /** Set a feature associated with the tooltips, measure info on the feature will be added in the tooltip
    * @param {Feature|Event} feature an Feature or an event (object) with a feature property
    */
-  setFeature(feature?: Feature | Event): void;
+  setFeature(feature?: Feature | { feature: Feature }): void;
 
   /**
    * Set a close box to the popup.
