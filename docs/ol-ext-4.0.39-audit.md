@@ -11,7 +11,7 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 - `util/sphere` is a pre-OpenLayers-5 global compatibility shim, not an exported module API; excluded.
 - `utils/Exif2Geojson` and `utils/MapIFrameAPI` default-export functions used by standalone upstream examples, despite the latter marking its constructor internal. Declarations cover their module exports; EXIF requires a global EXIF-JS dependency.
 - `utils/WSynchro` is a standalone global script used by the synchronization example, with no ES exports. `utils/d3` is the bundled D3 7.9.0 UMD distribution, not an ol-ext ES module. Neither is declared as an ol-ext module API.
-- `utils/ExportMap` has a default export but is marked for rewrite and imports `jspdf.js`, which is not the normal jsPDF package entry. Its standalone status and usable module path need further verification before declaring it.
+- `utils/ExportMap` is a legacy standalone script also distributed under `dist/extra`. Its source has a default export and is marked for rewrite, but importing the installed ES module fails with `ERR_MODULE_NOT_FOUND`: it imports `jspdf.js`, while the jsPDF package resolves as `jspdf`. No upstream release example uses this module. Excluded from module declarations because the published module cannot load as installed.
 
 ## Release-specific APIs
 
@@ -48,4 +48,4 @@ The following source comparisons are partial, focused on verified missing or inc
 - `util/input/PopupBase` and `Color`: corrected popup positioning and accessibility options, visibility events, color event payloads, optional color setters, and string color IDs. These widgets were not browser-tested in this round.
 - `interaction/CurrentMap`, `CopyPaste`, `ModifyFeature`, and `Split`: event payloads are plain dispatched objects, not exported runtime event classes or enums. Declarations expose event interfaces and string types; ModifyFeature events contain coordinates, original DOM events, and feature arrays, while CopyPaste supplies features on paste events.
 
-The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording. ExportMap remains unresolved.
+The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
