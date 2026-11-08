@@ -17,6 +17,8 @@ import Search from '../@types/ol-ext/control/Search'
 import SearchJSON from '../@types/ol-ext/control/SearchJSON'
 import SearchNominatim from '../@types/ol-ext/control/SearchNominatim'
 import SearchPhoton from '../@types/ol-ext/control/SearchPhoton'
+import Popup from '../@types/ol-ext/overlay/Popup'
+import FixedPopup from '../@types/ol-ext/overlay/FixedPopup'
 
 const source = new VectorSource()
 const search = new SearchFeature({ source })
@@ -66,6 +68,16 @@ nominatim.reverseGeocode([0, 0], results => { void results })
 const photon = new SearchPhoton({ getTitle: result => result.properties.name })
 photon.reverseData([0, 0]).lon
 photon.reverseGeocode([0, 0])
+const popup = new Popup({ positioning: 'auto', anchor: false, html: 'Hello' })
+popup.show(true, 'Updated')
+const fixed = new FixedPopup({ positioning: 'top-auto', hook: 'map' })
+fixed.setMap(null)
+fixed.setPixelPosition([10, 10])
+fixed.setCoordinate([1, 2])
+fixed.setHook('viewport')
+fixed.setRotation(30)
+fixed.setScale(1.5)
+fixed.getPixelPosition()?.slice()
 void history
 // @ts-expect-error unsupported operator
 selection.addCondition({ op: '!regexep' })
