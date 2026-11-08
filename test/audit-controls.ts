@@ -29,6 +29,8 @@ import Range from '../@types/ol-ext/util/input/Range'
 import List from '../@types/ol-ext/util/input/List'
 import Width from '../@types/ol-ext/util/input/Width'
 import Size from '../@types/ol-ext/util/input/Size'
+import Checkbox from '../@types/ol-ext/util/input/Checkbox'
+import Switch from '../@types/ol-ext/util/input/Switch'
 
 const source = new VectorSource()
 const search = new SearchFeature({ source })
@@ -119,6 +121,8 @@ list.on('change:value', event => event.value.toUpperCase())
 const width = new Width()
 width.on('change:value', event => event.value.toFixed())
 new Size().getValue().toFixed()
+new Checkbox().on('check', event => { event.checked; event.value })
+new Switch({ className: 'toggle' }).on('check', event => { event.checked })
 void listValue
 // @ts-expect-error a list requires its options array
 new List({})
