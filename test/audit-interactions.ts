@@ -8,6 +8,7 @@ import DropFile from '../@types/ol-ext/interaction/DropFile'
 import GPX from 'ol/format/GPX'
 import Transform from '../@types/ol-ext/interaction/Transform'
 import Feature from 'ol/Feature'
+import UndoRedo from '../@types/ol-ext/interaction/UndoRedo'
 
 const source = new VectorSource()
 const current = new CurrentMap({ condition: () => true })
@@ -48,5 +49,14 @@ transform.on('rotatestart', event => {
 transform.on('rotating', event => event.angle.toFixed())
 transform.on('scaleend', event => { event.transformed; event.oldgeoms })
 transform.on('select', event => { event.feature?.getGeometry(); event.pixel?.slice() })
+
+declare const undo: UndoRedo
+undo.define<{ value: number }>('custom', value => { value.value }, value => { value.value })
+undo.push('custom', { value: 1 })
+undo.getStack('redo').forEach(action => { action.type; action.feature?.getGeometry() })
+undo.on('undo', event => { event.action.type })
+undo.on('stack:add', event => { event.action.name })
+undo.on('stack:remove', event => { event.shift; event.abort })
+undo.on('stack:clear', event => { event.type })
 // @ts-expect-error condition must be a function
 new CurrentMap({ condition: true })
