@@ -37,8 +37,12 @@ permalink.getUrlReplace()
 permalink.getInitialPosition()
 declare const story: Storymap
 story.setStory(document.createElement('div'))
+story.on('scrollto', event => { event.coordinate; event.lon; event.zoom })
+story.on('clickimage', event => { event.img; event.title; event.originalEvent })
 declare const swipe: Swipe
 swipe.removeLayers()
+swipe.setMap(null)
+swipe.on('moving', event => { event.position; event.size })
 declare const timeline: Timeline
 timeline.roundDate(new Date(), 'hour')
 void separation

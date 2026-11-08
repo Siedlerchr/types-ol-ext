@@ -3,6 +3,11 @@ import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 import type { Layer } from 'ol/layer'
 import type { Extent } from 'ol/extent'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { OnSignature } from 'ol/Observable'
+import type { Size } from 'ol/size'
+import type { Pixel } from 'ol/pixel'
 
 export interface Options extends ControlOptions {
   layers?: Layer | Layer[];
@@ -10,6 +15,12 @@ export interface Options extends ControlOptions {
   className?: string;
   position?: number;
   orientation?: 'vertical' | 'horizontal';
+}
+
+export interface SwipeMovingEvent extends BaseEvent {
+  type: 'moving';
+  size: Size;
+  position: Pixel;
 }
 
 /**
@@ -34,13 +45,13 @@ export default class Swipe extends ol_control_Control {
    * Set the map instance the control associated with.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Add a layer to clip
    *  @param {layer|Array<layer>} layer to clip
    *  @param right: add layer in the right part of the map, default left.
    */
-  addLayer(layer: Layer | Layer[], right: boolean): void;
+  addLayer(layer: Layer | Layer[], right?: boolean): void;
 
   /** Remove a layer to clip
    *  @param {layer|Array<layer>} layer to clip
@@ -54,4 +65,8 @@ export default class Swipe extends ol_control_Control {
    * @returns {Extent}
    */
   getRectangle(): Extent;
+
+  on: ol_control_Control['on'] & OnSignature<'moving', SwipeMovingEvent, EventsKey>;
+  once: ol_control_Control['once'] & OnSignature<'moving', SwipeMovingEvent, EventsKey>;
+  un: ol_control_Control['un'] & OnSignature<'moving', SwipeMovingEvent, void>;
 }
