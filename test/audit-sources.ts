@@ -20,6 +20,9 @@ import OilPainting from '../@types/ol-ext/source/OilPainting'
 import OSM from 'ol/source/OSM'
 import TileWFS from '../@types/ol-ext/source/TileWFS'
 import Overpass from '../@types/ol-ext/source/Overpass'
+import DBPedia, { ol_style_dbPediaStyleFunction, ol_style_clearDBPediaStyleCache } from '../@types/ol-ext/source/DBPedia'
+import WikiCommons from '../@types/ol-ext/source/WikiCommons'
+import Mapillary from '../@types/ol-ext/source/Mapillary'
 
 const dayNight = new DayNight()
 const separation: number[][] = dayNight.getCoordinates(new Date(), 'line')
@@ -55,6 +58,14 @@ wfs.on('tileloaderror', event => { event.error; event.loaded })
 wfs.on('overload', event => { event.returned; event.total })
 const overpass = new Overpass({ filter: ['building'], attributions: () => 'OpenStreetMap' })
 overpass.clear(true)
+const dbpedia = new DBPedia({ lang: 'en', limit: 25 })
+const query: string = dbpedia.queryFilter()
+dbpedia.readFeature(inputSource.getFeatures()[0], { subject: { type: 'uri', value: 'https://example.com' } }, null)
+ol_style_dbPediaStyleFunction({ glyph: 'fa-star' })
+ol_style_clearDBPediaStyleCache()
+const commons = new WikiCommons({ maxResolution: 50 })
+commons.readFeature(inputSource.getFeatures()[0], { title: 'File:Example.jpg', url: 'https://example.com/example.jpg' })
+new Mapillary({ limit: 10 }).clear(true)
 const hexBins = new HexBin({ source: inputSource, layout: 'flat' })
 hexBins.setSize(100)
 hexBins.setLayout('pointy')
@@ -97,6 +108,7 @@ void triangles
 void maybeBin
 void pixel
 void crop
+void query
 // @ts-expect-error binning requires a source
 new GridBin({})
 // @ts-expect-error binning requires a source
