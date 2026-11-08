@@ -1,4 +1,5 @@
-import type Style, { StyleFunction } from 'ol/style/Style'
+import type Style from 'ol/style/Style'
+import type { StyleFunction } from 'ol/style/Style'
 
 export interface Options {
   /** Show road direction, optionally only below a maximum resolution. */

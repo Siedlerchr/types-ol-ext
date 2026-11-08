@@ -76,7 +76,7 @@ export class Chart extends RegularShape {
    *  @param {number} symbol radius
    *  @param {number} donut ratio
    */
-  setRadius(symbol: number, ratio: number): void;
+  setRadius(symbol: number, ratio?: number): void;
 
   /** Set animation step
    *  @param {false|number} false to stop animation or the step of the animation [0,1]

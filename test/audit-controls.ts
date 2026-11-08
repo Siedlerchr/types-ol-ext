@@ -10,6 +10,7 @@ import MapZone from '../@types/ol-ext/control/MapZone'
 import Target from '../@types/ol-ext/control/Target'
 import VideoRecorder from '../@types/ol-ext/control/VideoRecorder'
 import RoutingGeoportail from '../@types/ol-ext/control/RoutingGeoportail'
+import SearchCoordinates from '../@types/ol-ext/control/SearchCoordinates'
 
 const source = new VectorSource()
 const search = new SearchFeature({ source })
@@ -34,5 +35,8 @@ new VideoRecorder().setTooltip('pause', 'Pause')
 declare const routing: RoutingGeoportail
 routing.getDistanceString(1000)
 routing.getTimeString(120)
+const coordinates = new SearchCoordinates()
+coordinates.setInput([2, 48])
+coordinates.setInput()
 // @ts-expect-error unsupported operator
 selection.addCondition({ op: '!regexep' })

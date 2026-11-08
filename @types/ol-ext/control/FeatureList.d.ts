@@ -60,7 +60,7 @@ export default class FeatureList extends Control {
      * @param {ol_source_Vector|ol_Collection<ol_Feature>|Array<ol_Feature>} source a vector source or a collection of features to list
      */
   setFeatures(
-      source: ol_source_Vector | ol_Collection<ol_Feature> | Array<ol_Feature>
+      source: VectorSource<Feature> | Collection<Feature> | Array<Feature>
    ): void;
 
   /** Sort list by properties
@@ -121,7 +121,7 @@ export default class FeatureList extends Control {
      * @api
      */
   formatProperty(
-      feature: ol_Feature,
+      feature: Feature,
       prop: string
    ): {
       val: '-' | any;
@@ -139,7 +139,7 @@ export default class FeatureList extends Control {
   /** Get the list of columns
         * @param {Array<ol_Feature>} [features] a list of features to retrieve columns (if none, returns columns defined by setColumns)
         */
-  getColumns(features?: Array<ol_Feature>): any[];
+  getColumns(features?: Array<Feature>): any[];
 
   /** Set the list of columns to display
            * @param {Array<string>} columns

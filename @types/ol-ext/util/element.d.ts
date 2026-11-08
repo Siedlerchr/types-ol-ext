@@ -236,6 +236,6 @@ declare module 'ol-ext/util/element' {
      */
     function setCursor(elt: Element | _ol_Map_, cursor: string): void
 
-    export default ol_ext_element
   }
+  export default ol_ext_element
 }
