@@ -2,6 +2,7 @@ import type Collection from 'ol/Collection'
 import type Feature from 'ol/Feature'
 import type { Vector as VectorSource } from 'ol/source'
 import type MapBrowserEvent from 'ol/MapBrowserEvent'
+import type { Condition } from 'ol/events/condition'
 import BaseEvent from 'ol/events/Event'
 import CurrentMap from './CurrentMap'
 
@@ -11,7 +12,8 @@ export enum CopyPasteEventType {
 }
 
 export interface Options {
-  condition?: (e: MapBrowserEvent) => 'copy' | 'paste' | 'cut';
+  condition?: (e: MapBrowserEvent) => 'copy' | 'paste' | 'cut' | false;
+  mapCondition?: Condition;
   features?: Collection<Feature>;
   sources?: VectorSource | VectorSource[];
   destination?: VectorSource;
@@ -38,22 +40,22 @@ export default class CopyPaste extends CurrentMap {
   /** Sources to cut feature from
    * @param { VectorSource | Array<VectorSource> } sources
    */
-  setSources(sources: VectorSource | VectorSource[]): void;
+  setSources(sources?: VectorSource | VectorSource[]): void;
 
   /** Get sources to cut feature from
    * @return { Array<VectorSource> }
    */
-  getSources(): VectorSource[];
+  getSources(): VectorSource[] | null;
 
   /** Source to paste features
    * @param { VectorSource } source
    */
-  setDestination(source: VectorSource): void;
+  setDestination(source?: VectorSource): void;
 
   /** Get source to paste features
    * @param { VectorSource }
    */
-  getDestination(): void;
+  getDestination(): VectorSource | undefined;
 
   /** Get current feature to copy
    * @return {Array<Feature>}

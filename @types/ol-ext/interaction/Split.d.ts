@@ -29,7 +29,7 @@ export interface Options {
   snapDistance?: number;
   cursor?: string;
   filter?: (f: Feature) => boolean;
-  featureStyle?: Style | Style[];
+  featureStyle?: Style | Style[] | false;
   sketchStyle?: Style | Style[];
   tolerance?: number;
 }
@@ -60,7 +60,7 @@ export default class Split extends Interaction {
    * @param {_ol_Map_} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Get sources to split features in
    * @return {Array<VectorSource>}
@@ -70,14 +70,14 @@ export default class Split extends Interaction {
   /** Set sources to split features in
    * @param {VectorSource|Array<VectorSource>} [sources]
    */
-  setSources(sources: VectorSource | VectorSource[]): void
+  setSources(sources?: VectorSource | VectorSource[] | false): void
 
   /** Get nearest coordinate in a list
    * @param {Coordinate} pt the point to find nearest
    * @param {Array<Coordinate>} coords list of coordinates
    * @return {Coordinate} the nearest coordinate in the list
    */
-  getNearestCoord(pt: Coordinate, coords: Coordinate[]): Coordinate;
+  getNearestCoord(pt: Coordinate, coords: Coordinate[]): Coordinate | undefined;
 
   /**
    * @param {MapBrowserEvent} evt Map browser event.

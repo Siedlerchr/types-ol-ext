@@ -19,7 +19,7 @@ export interface KeyEvent {
 }
 
 export interface Options {
-  conditon?: EventsConditionType;
+  condition?: EventsConditionType;
   onKeyDown?: (e: KeyEvent) => void;
   onKeyPress?: (e: KeyEvent) => void;
   onKeyUp?: (e: KeyEvent) => void;
@@ -50,7 +50,7 @@ export default class CurrentMap extends Interaction {
   /** Get the current map
    * @return {ol.Map}
    */
-  getCurrentMap(): any;
+  getCurrentMap(): _ol_Map_ | undefined;
 
   /** Set the current map
    * @param {ol.Map} map

@@ -3,14 +3,13 @@ import type Collection from 'ol/Collection'
 import type { Coordinate } from 'ol/coordinate'
 import type Feature from 'ol/Feature'
 import type { Style } from 'ol/style'
-import { Pointer } from 'ol/interaction'
+import { Interaction } from 'ol/interaction'
 import type MapBrowserEvent from 'ol/MapBrowserEvent'
 import type { Condition as EventsConditionType } from 'ol/events/condition'
 import type { Vector as VectorSource } from 'ol/source'
 import type { EventsKey } from 'ol/events'
 import BaseEvent from 'ol/events/Event'
 import type { ObjectEvent } from 'ol/Object'
-import type { Type } from 'ol/geom/Geometry'
 import type Geometry from 'ol/geom/Geometry'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Types } from 'ol/ObjectEventType'
@@ -31,8 +30,10 @@ export enum ModifyEventType {
 
 export interface Options {
   source?: VectorSource;
+  sources?: VectorSource | VectorSource[];
   features?: Collection<Feature>;
   pixelTolerance?: number;
+  cursor?: string;
   filter?: (feature: Feature) => boolean;
   style?: Style | Style[];
   condition?: EventsConditionType;
@@ -55,7 +56,7 @@ export interface Options {
  * @fires select
 
  */
-export default class ModifyFeature extends Pointer {
+export default class ModifyFeature extends Interaction {
   /**
    * @param {*} options
    *  @param {ol.source.Vector} options.source a source to modify (configured with useSpatialIndex set to true)
@@ -77,7 +78,7 @@ export default class ModifyFeature extends Pointer {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /**
    * Activate or deactivate the interaction + remove the sketch.
@@ -96,7 +97,7 @@ export default class ModifyFeature extends Pointer {
    * @param {ol.geom} geom Geometry
    * @return {*} the nearest point with a coord (projected point), dist (distance to the geom), ring (if Polygon)
    */
-  getNearestCoord(pt: Coordinate, geom: Type): {
+  getNearestCoord(pt: Coordinate, geom: Geometry): {
     coord: Coordinate,
     dist: number,
     ring?: number
@@ -107,7 +108,7 @@ export default class ModifyFeature extends Pointer {
    * @param {geom} geom the geometry concerned
    * @param {Coordinate} coord pointed coordinates
    */
-  getArcs(geom: Type, coord: Coordinate): void;
+  getArcs(geom: Geometry, coord: Coordinate): Record<string, unknown> | false;
 
   /**
    * @param {MapBrowserEvent} evt Map browser event.
