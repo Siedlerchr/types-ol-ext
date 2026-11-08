@@ -18,6 +18,8 @@ import { easeOut } from 'ol/easing'
 import GeoImage from '../@types/ol-ext/source/GeoImage'
 import OilPainting from '../@types/ol-ext/source/OilPainting'
 import OSM from 'ol/source/OSM'
+import TileWFS from '../@types/ol-ext/source/TileWFS'
+import Overpass from '../@types/ol-ext/source/Overpass'
 
 const dayNight = new DayNight()
 const separation: number[][] = dayNight.getCoordinates(new Date(), 'line')
@@ -47,6 +49,12 @@ const crop: number | number[] | undefined = geoImage.getCrop()
 const oil = new OilPainting({ sources: [new OSM()], radius: 4 })
 oil.set('intensity', 12)
 oil.set('custom', 'value')
+const wfs = new TileWFS({ url: 'https://example.com/wfs', typeName: 'roads', maxFeatures: 100 })
+wfs.on('tileloadstart', event => { event.loading; event.loaded })
+wfs.on('tileloaderror', event => { event.error; event.loaded })
+wfs.on('overload', event => { event.returned; event.total })
+const overpass = new Overpass({ filter: ['building'], attributions: () => 'OpenStreetMap' })
+overpass.clear(true)
 const hexBins = new HexBin({ source: inputSource, layout: 'flat' })
 hexBins.setSize(100)
 hexBins.setLayout('pointy')
@@ -103,5 +111,9 @@ new Vector3D({ source: inputSource, style: () => new Style() })
 new GeoImage({ url: 'image.png' })
 // @ts-expect-error raster input sources are required
 new OilPainting()
+// @ts-expect-error TileWFS requires a service URL
+new TileWFS({})
+// @ts-expect-error the Overpass loader reads the filter array
+new Overpass({})
 // @ts-expect-error unsupported rounding unit
 timeline.roundDate(new Date(), 'year')
