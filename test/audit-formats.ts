@@ -16,6 +16,13 @@ const neighbors: number[][] = grid.hex_neighbors(hex)
 const format = new GeoJSONX({ featureProjection: 'EPSG:3857' })
 const encoded: string = format.encodeNumber(42, 2)
 const decoded: number = format.decodeNumber(encoded, 2)
+const compact = format.writeFeaturesObject([new Feature()])
+const featureEncoding = compact.features[0][0]
+const propertyNames: string[] = compact.hashProperties
+const geometryEncoding = format.writeFeatureObject(new Feature())[0]
+void featureEncoding
+void propertyNames
+void geometryEncoding
 const renderer = new Render3D({ active: true, ghost: true, height: 12 })
 const height: number = renderer.getFeatureHeight(new Feature())
 renderer.getActive()
