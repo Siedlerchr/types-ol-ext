@@ -9,6 +9,8 @@ import GPX from 'ol/format/GPX'
 import Transform from '../@types/ol-ext/interaction/Transform'
 import Feature from 'ol/Feature'
 import UndoRedo from '../@types/ol-ext/interaction/UndoRedo'
+import DrawRegular from '../@types/ol-ext/interaction/DrawRegular'
+import DrawHole from '../@types/ol-ext/interaction/DrawHole'
 
 const source = new VectorSource()
 const current = new CurrentMap({ condition: () => true })
@@ -58,5 +60,18 @@ undo.on('undo', event => { event.action.type })
 undo.on('stack:add', event => { event.action.name })
 undo.on('stack:remove', event => { event.shift; event.abort })
 undo.on('stack:clear', event => { event.type })
+const regular = new DrawRegular({ source })
+regular.setMap(null)
+regular.on('drawstart', event => { event.feature.getGeometry(); event.pixel.slice() })
+regular.on('drawing', event => { event.feature; event.startCoordinate; event.square })
+regular.on('drawend', event => { event.feature; event.pixel?.slice() })
+regular.on('drawcancel', event => {
+  const cancelled: null = event.feature
+  void cancelled
+})
+const hole = new DrawHole()
+hole.on('drawstart', event => event.feature.getGeometry())
+// @ts-expect-error DrawRegular dispatches drawcancel, not drawabort
+regular.on('drawabort', () => {})
 // @ts-expect-error condition must be a function
 new CurrentMap({ condition: true })

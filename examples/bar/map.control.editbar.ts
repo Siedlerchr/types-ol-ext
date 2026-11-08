@@ -99,9 +99,9 @@ edit.getInteraction('DrawPoint').on('change:active', e => {
   tooltip.setFeature()
   tooltip.setInfo(e.oldValue ? '' : 'Click polygon to start drawing hole...')
 });
-(edit.getInteraction('DrawHole') as DrawHole).on('drawend', e => {
+(edit.getInteraction('DrawHole') as DrawHole).on('drawend', () => {
   tooltip.setFeature()
-  tooltip.setInfo(e.oldValue ? '' : 'Click polygon to start drawing hole...')
+  tooltip.setInfo('Click polygon to start drawing hole...')
 });
 (edit.getInteraction('DrawRegular') as DrawRegular).on('drawstart', e => {
   tooltip.setFeature(e.feature)
@@ -111,9 +111,9 @@ edit.getInteraction('DrawPoint').on('change:active', e => {
   tooltip.setFeature()
   tooltip.setInfo(e.oldValue ? '' : 'Click map to start drawing shape...')
 });
-(edit.getInteraction('DrawRegular') as DrawRegular).on('drawend', e => {
+(edit.getInteraction('DrawRegular') as DrawRegular).on('drawend', () => {
   tooltip.setFeature()
-  tooltip.setInfo(e.oldValue ? '' : 'Click map to start drawing shape...')
+  tooltip.setInfo('Click map to start drawing shape...')
 })
 
 edit.on('info', e => {

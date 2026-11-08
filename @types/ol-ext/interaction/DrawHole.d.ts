@@ -2,7 +2,7 @@ import type { Map as _ol_Map_ } from 'ol'
 import type Feature from 'ol/Feature'
 import type { Layer } from 'ol/layer'
 import type { StyleLike } from 'ol/style/Style'
-import type { Options as DrawOptions } from 'ol/interaction/Draw'
+import type { Options as DrawOptions, DrawEvent } from 'ol/interaction/Draw'
 import Draw from 'ol/interaction/Draw'
 import type Collection from 'ol/Collection'
 import type { EventsKey } from 'ol/events'
@@ -13,7 +13,6 @@ import type { Types } from 'ol/ObjectEventType'
 import type VectorLayer from 'ol/layer/Vector'
 import type VectorSource from 'ol/source/Vector'
 import type { Geometry, Polygon } from 'ol/geom'
-import type { DrawEvent } from './DrawRegular'
 
 type DrawHoleOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
