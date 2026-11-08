@@ -60,7 +60,7 @@ export default class SearchGPS extends Search {
    *  @param {boolean} search to start a search
    *  @api
    */
-  setInput(value: string, search: boolean): void;
+  setInput(value: string, search?: boolean): void;
 
   /** A ligne has been clicked in the menu > dispatch event
    *  @param {any} f the feature, as passed in the autocomplete

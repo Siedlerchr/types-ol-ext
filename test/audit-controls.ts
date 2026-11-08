@@ -13,6 +13,8 @@ import RoutingGeoportail from '../@types/ol-ext/control/RoutingGeoportail'
 import SearchCoordinates from '../@types/ol-ext/control/SearchCoordinates'
 import WMSCapabilities from '../@types/ol-ext/control/WMSCapabilities'
 import WMTSCapabilities from '../@types/ol-ext/control/WMTSCapabilities'
+import Search from '../@types/ol-ext/control/Search'
+import SearchJSON from '../@types/ol-ext/control/SearchJSON'
 
 const source = new VectorSource()
 const search = new SearchFeature({ source })
@@ -48,5 +50,13 @@ wms.getRequestParam({ version: '1.3.0' })
 const wmts = new WMTSCapabilities()
 wmts.isSupportedSet({ TileMatrixSet: 'PM_0_18' })
 wmts.getRequestParam({})
+const textSearch = new Search({ autocomplete: (_query, callback) => { callback([{ name: 'Place' }]) } })
+textSearch.setInput('Place')
+textSearch.select({ name: 'Place' })
+const history: any[] = textSearch.getHistory()
+const remoteSearch = new SearchJSON({ url: '/search' })
+remoteSearch.autocomplete('Place', results => { void results })
+remoteSearch.ajax('/search', {}, response => { void response })
+void history
 // @ts-expect-error unsupported operator
 selection.addCondition({ op: '!regexep' })

@@ -31,8 +31,8 @@ export interface Options extends ControlOptions {
   minLength?: number;
   maxItems?: number;
   maxHistory?: number;
-  getTitle?: (f: Feature) => string;
-  autocomplete?: (s: string, cback: ([])) => [] | false;
+  getTitle?: (f: any) => string;
+  autocomplete?: (s: string, cback: (results: any[]) => void) => any[] | false | void;
   onselect?: (...params: any[]) => any;
   centerOnSelect?: boolean;
   zoomOnSelect?: number | boolean;
@@ -99,7 +99,7 @@ export default class Search extends ol_control_Control {
    *  @return {string} the text to be displayed in the index, default f.name
    *  @api
    */
-  getTitle(f: Feature): string;
+  getTitle(f: any): string;
 
   /** Returns title as text
    *  @param {any} f feature to be displayed
@@ -122,7 +122,7 @@ export default class Search extends ol_control_Control {
    *  @param {boolean} search to start a search
    *  @api
    */
-  setInput(value: string, search: boolean): void;
+  setInput(value: string, search?: boolean): void;
 
   /** A line has been clicked in the menu > dispatch event
    * @param {any} f the feature, as passed in the autocomplete
@@ -131,7 +131,7 @@ export default class Search extends ol_control_Control {
    * @param {*} options options passed to the event
    *  @api
    */
-  select(f: Feature, reverse: boolean, coord: Coordinate, options?: any): void
+  select(f: any, reverse?: boolean, coord?: Coordinate, options?: any): void
 
   /** Save history (in the localstorage)
    */
@@ -149,7 +149,7 @@ export default class Search extends ol_control_Control {
   /**
    * Get history table
    */
-  getHistory(): [] | any;
+  getHistory(): any[];
 
   /** Autocomplete function
    * @param {string} s search string
@@ -157,7 +157,7 @@ export default class Search extends ol_control_Control {
    * @return {Array|false} an array of search solutions or false if the array is send with the cback argument (asnchronous)
    * @api
    */
-  autocomplete(s: string, cback: (results: any[]) => void): any[] | false;
+  autocomplete(s: string, cback: (results: any[]) => void): any[] | false | void;
 
   /** Test if 2 features are equal
    * @param {any} f1

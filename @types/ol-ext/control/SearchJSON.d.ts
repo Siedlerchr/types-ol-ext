@@ -1,7 +1,5 @@
-import type { Feature } from 'ol'
 import type { Coordinate } from 'ol/coordinate'
 import type { EventsKey } from 'ol/events'
-import type { Geometry } from 'ol/geom'
 import type { Options as SearchOptions, SearchOnSignature } from './Search'
 import Search from './Search'
 
@@ -42,14 +40,14 @@ export default class SearchJSON extends Search {
    * @param {string} s search string
    * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field
    */
-  autocomplete(s: string, cback: (results: any[]) => any): any[] | false;
+  autocomplete(s: string, cback: (results: any[]) => void): void;
 
   /** Send ajax request
    * @param {string} url
    * @param {*} data
    * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field
    */
-  ajax(url: string, data: any, cback: (a: any[]) => any, options: any): void;
+  ajax(url: string, data: any, cback: (response: any, error?: string) => void, options?: any): void;
 
   /**
    * @param {string} s the search string
@@ -77,7 +75,7 @@ export default class SearchJSON extends Search {
    *  @return {string} the text to be displayed in the index, default f.name
    *  @api
    */
-  getTitle(f: Feature<Geometry>): string;
+  getTitle(f: any): string;
 
   /** Force search to refresh
    */
@@ -88,7 +86,7 @@ export default class SearchJSON extends Search {
    *  @param {boolean} search to start a search
    *  @api
    */
-  setInput(value: string, search: boolean): void;
+  setInput(value: string, search?: boolean): void;
 
   /** A ligne has been clicked in the menu > dispatch event
    * @param {any} f the feature, as passed in the autocomplete
@@ -97,7 +95,7 @@ export default class SearchJSON extends Search {
    * @param {*} options options passed to the event
    *  @api
    */
-  select(f: Feature, reverse: boolean, coord: Coordinate, options?: any): void
+  select(f: any, reverse?: boolean, coord?: Coordinate, options?: any): void
 
   /** Save history (in the localstorage)
    */
@@ -115,7 +113,7 @@ export default class SearchJSON extends Search {
   /**
    * Get history table
    */
-  getHistory(): void;
+  getHistory(): any[];
 
   /** Test if 2 features are equal
    * @param {any} f1

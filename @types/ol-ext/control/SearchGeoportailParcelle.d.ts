@@ -80,7 +80,7 @@ export default class SearchGeoportailParcelle extends SearchJSON {
    * @param {string} s search string
    * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field
    */
-  autocomplete(s: string, cback: (...params: any[]) => any): any[] | false;
+  autocomplete(s: string, cback: (results: any[]) => void): void;
 
   /** Send an ajax request (GET)
    * @param {string} url
@@ -126,7 +126,7 @@ export default class SearchGeoportailParcelle extends SearchJSON {
    *  @param {boolean} search to start a search
    *  @api
    */
-  setInput(value: string, search: boolean): void;
+  setInput(value: string, search?: boolean): void;
 
   /** A ligne has been clicked in the menu > dispatch event
    *  @param {any} f the feature, as passed in the autocomplete
@@ -155,7 +155,7 @@ export default class SearchGeoportailParcelle extends SearchJSON {
   /**
    * Get history table
    */
-  getHistory(): void;
+  getHistory(): any[];
 
   /** Test if 2 features are equal
    * @param {any} f1
