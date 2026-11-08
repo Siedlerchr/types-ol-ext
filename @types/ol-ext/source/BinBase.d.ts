@@ -1,6 +1,6 @@
 import type { Coordinate } from 'ol/coordinate'
 import type Feature from 'ol/Feature'
-import type { Polygon } from 'ol/geom'
+import type { Geometry } from 'ol/geom'
 import type { Options as VectorOptions } from 'ol/source/Vector'
 import VectorSource from 'ol/source/Vector'
 
@@ -12,12 +12,11 @@ export interface Options extends VectorOptions<Feature> {
 }
 
 /** Abstract base class; normally only used for creating subclasses. Bin collector for data
- /** Abstract base class; normally only used for creating subclasses. Bin collector for data
  * @constructor
  * @extends {ol.source.Vector}
 
  */
-export class BinBase extends VectorSource {
+export default class BinBase extends VectorSource {
   /**
    * @param {Object} options ol_source_VectorOptions + grid option
    *  @param {ol.source.Vector} options.source Source
@@ -37,10 +36,10 @@ export class BinBase extends VectorSource {
   /** Get the grid geometry at the coord
    * @param {Coordinate} coord
    * @param {Object} attributes add key/value to this object to add properties to the grid feature
-   * @returns {Polygon}
+   * @returns The bin geometry, or null or undefined when no geometry is available.
    * @api
    */
-  getGridGeomAt(coord: Coordinate, attributes?: { [key: string]: any }): Polygon;
+  getGridGeomAt(coord: Coordinate, attributes: { [key: string]: any }): Geometry | null | undefined;
 
   /** Get the bean at a coord
    * @param {Coordinate} coord
@@ -71,5 +70,3 @@ export class BinBase extends VectorSource {
   getSource(): VectorSource;
 
 }
-
-export default BinBase

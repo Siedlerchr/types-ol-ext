@@ -4,7 +4,7 @@ import type { Polygon } from 'ol/geom'
 import type { ProjectionLike } from 'ol/proj'
 import type { Options as VectorSourceOptions } from 'ol/source/Vector'
 import type VectorSource from 'ol/source/Vector'
-import { BinBase } from './BinBase'
+import BinBase from './BinBase'
 
 export interface Options extends VectorSourceOptions<Feature> {
   source: VectorSource;

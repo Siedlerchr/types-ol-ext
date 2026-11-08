@@ -10,6 +10,11 @@ import type Feature from 'ol/Feature'
 import VectorSource from 'ol/source/Vector'
 import HexBin from '../@types/ol-ext/source/HexBin'
 import IDW from '../@types/ol-ext/source/IDW'
+import FeatureBin from '../@types/ol-ext/source/FeatureBin'
+import InseeBin from '../@types/ol-ext/source/InseeBin'
+import Vector3D from '../@types/ol-ext/source/Vector3D'
+import Style from 'ol/style/Style'
+import { easeOut } from 'ol/easing'
 
 const dayNight = new DayNight()
 const separation: number[][] = dayNight.getCoordinates(new Date(), 'line')
@@ -20,6 +25,17 @@ const inputSource = new VectorSource()
 const bins = new GridBin({ source: inputSource, circle: true, gridProjection: 'EPSG:3857', geometryFunction: () => [1, 2] })
 bins.setCircle(false)
 const maybeBin: Feature | null = bins.getBinAt([0, 0])
+const featureBins = new FeatureBin({ source: inputSource, geometryFunction: () => [0, 0], listenChange: false })
+featureBins.setFeatures([inputSource.getFeatures()[0]])
+featureBins.setFeatures()
+featureBins.getGridGeomAt([0, 0], {})?.getType()
+const inseeBins = new InseeBin({ source: inputSource, geometryFunction: () => [0, 0] })
+inseeBins.getGridExtent()
+inseeBins.clear(true)
+const vector3d = new Vector3D({ source: inputSource, style: new Style() })
+vector3d.setStyle()
+vector3d.animate({ easing: easeOut })
+vector3d.animate()
 const hexBins = new HexBin({ source: inputSource, layout: 'flat' })
 hexBins.setSize(100)
 hexBins.setLayout('pointy')
@@ -63,5 +79,13 @@ void maybeBin
 void pixel
 // @ts-expect-error binning requires a source
 new GridBin({})
+// @ts-expect-error binning requires a source
+new FeatureBin({})
+// @ts-expect-error FeatureBin consumes an array, not a single feature
+featureBins.setFeatures(inputSource.getFeatures()[0])
+// @ts-expect-error INSEE binning requires a source
+new InseeBin()
+// @ts-expect-error Vector3D accepts a single Style, not a style function
+new Vector3D({ source: inputSource, style: () => new Style() })
 // @ts-expect-error unsupported rounding unit
 timeline.roundDate(new Date(), 'year')

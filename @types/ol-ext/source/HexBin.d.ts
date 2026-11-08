@@ -4,7 +4,7 @@ import type { Polygon } from 'ol/geom'
 import type { Options as VectorSourceOptions } from 'ol/source/Vector'
 import type VectorSource from 'ol/source/Vector'
 import type { HexagonLayout } from '../render/HexGrid'
-import { BinBase } from './BinBase'
+import BinBase from './BinBase'
 
 export interface Options extends VectorSourceOptions<Feature> {
   source: VectorSource;
