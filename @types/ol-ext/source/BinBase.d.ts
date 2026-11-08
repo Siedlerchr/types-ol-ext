@@ -1,13 +1,13 @@
 import type { Coordinate } from 'ol/coordinate'
 import type Feature from 'ol/Feature'
-import type { Polygon, Point } from 'ol/geom'
+import type { Polygon } from 'ol/geom'
 import type { Options as VectorOptions } from 'ol/source/Vector'
 import VectorSource from 'ol/source/Vector'
 
 export interface Options extends VectorOptions<Feature> {
-  source?: VectorSource;
+  source: VectorSource;
   listenChange?: boolean;
-  geometryFunction?: (f: Feature) => Point;
+  geometryFunction?: (f: Feature) => Coordinate;
   flatAttributes?: (bin: Feature, features: Feature[]) => void;
 }
 
@@ -22,17 +22,17 @@ export class BinBase extends VectorSource {
    * @param {Object} options ol_source_VectorOptions + grid option
    *  @param {ol.source.Vector} options.source Source
    *  @param {boolean} options.listenChange listen changes (move) on source features to recalculate the bin, default true
-   *  @param {fucntion} [options.geometryFunction] Function that takes an ol.Feature as argument and returns an ol.geom.Point as feature's center.
+   *  @param {function} [options.geometryFunction] Function that returns the feature's center coordinate.
    *  @param {function} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /**
    * Get the bin that contains a feature
    * @param {Feature} f the feature
    * @return {Feature} the bin or null it doesn't exit
    */
-  getBin(f: Feature | null): Feature;
+  getBin(f: Feature): Feature | null;
 
   /** Get the grid geometry at the coord
    * @param {Coordinate} coord
@@ -40,14 +40,14 @@ export class BinBase extends VectorSource {
    * @returns {Polygon}
    * @api
    */
-  getGridGeomAt(coord: Coordinate, attributes: { [key: string]: any }): Polygon;
+  getGridGeomAt(coord: Coordinate, attributes?: { [key: string]: any }): Polygon;
 
   /** Get the bean at a coord
    * @param {Coordinate} coord
    * @param {boolean} create true to create if doesn't exit
    * @return {Feature} the bin or null it doesn't exit
    */
-  getBinAt(coord: Coordinate, create: boolean): Feature;
+  getBinAt(coord: Coordinate, create?: boolean): Feature | null;
 
   /** Clear all bins and generate a new one.
    */
@@ -70,9 +70,6 @@ export class BinBase extends VectorSource {
    */
   getSource(): VectorSource;
 
-  /** Overwrite Vector clear to fire clearstart / clearend event
-   */
-  clear(): void;
 }
 
 export default BinBase

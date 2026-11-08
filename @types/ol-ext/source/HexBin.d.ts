@@ -1,17 +1,18 @@
 import type { Coordinate } from 'ol/coordinate'
 import type Feature from 'ol/Feature'
-import type { Point, Polygon } from 'ol/geom'
+import type { Polygon } from 'ol/geom'
 import type { Options as VectorSourceOptions } from 'ol/source/Vector'
 import type VectorSource from 'ol/source/Vector'
-import type HexagonLayout from '../render/HexGrid'
+import type { HexagonLayout } from '../render/HexGrid'
 import { BinBase } from './BinBase'
 
 export interface Options extends VectorSourceOptions<Feature> {
-  source?: VectorSource;
+  source: VectorSource;
   size?: number;
   origin?: Coordinate;
   layout?: HexagonLayout;
-  geometryFunction?: (f: Feature) => Point;
+  listenChange?: boolean;
+  geometryFunction?: (f: Feature) => Coordinate;
   flatAttributes?: (bin: Feature, features: Feature[]) => void;
 }
 
@@ -27,10 +28,10 @@ export default class HexBin extends BinBase {
    *  @param {number} [options.size] size of the hexagon in map units, default 80000
    *  @param {ol.coordinate} [options.origin] origin of the grid, default [0,0]
    *  @param {HexagonLayout} [options.layout] grid layout, default pointy
-   *  @param {function} [options.geometryFunction] Function that takes an ol.Feature as argument and returns an ol.geom.Point as feature's center.
+   *  @param {function} [options.geometryFunction] Function that returns the feature's center coordinate.
    *  @param {function} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /** Get the hexagon geometry at the coord
    * @param {Coordinate} coord
@@ -43,7 +44,7 @@ export default class HexBin extends BinBase {
    *  @param {number} newSize
    *  @param {boolean} noreset If true, reset will not be called (It need to be called through)
    */
-  setSize(newSize: number, noreset: boolean): void;
+  setSize(newSize: number, noreset?: boolean): void;
 
   /**  Get the inner HexGrid size.
    *  @return {number}
@@ -54,7 +55,7 @@ export default class HexBin extends BinBase {
    *  @param {import('../render/HexGrid').HexagonLayout} newLayout
    *  @param {boolean} noreset If true, reset will not be called (It need to be called through)
    */
-  setLayout(newLayout: HexagonLayout, noreset: boolean): void;
+  setLayout(newLayout: HexagonLayout, noreset?: boolean): void;
 
   /**  Get the inner HexGrid layout.
    */
@@ -64,7 +65,7 @@ export default class HexBin extends BinBase {
    *  @param {Coordinate} newLayout
    *  @param {boolean} noreset If true, reset will not be called (It need to be called through)
    */
-  setOrigin(newLayout: Coordinate, noreset: boolean): void;
+  setOrigin(newLayout: Coordinate, noreset?: boolean): void;
 
   /**  Get the inner HexGrid origin.
    *  @return {Coordinate}
@@ -77,7 +78,4 @@ export default class HexBin extends BinBase {
    */
   getHexFeatures(): Feature[];
 
-  /** Overwrite Vector clear to fire clearstart / clearend event
-   */
-  clear(): void;
 }

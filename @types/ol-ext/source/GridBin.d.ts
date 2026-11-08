@@ -1,17 +1,18 @@
 import type { Feature } from 'ol'
 import type { Coordinate } from 'ol/coordinate'
-import type { Point, Polygon } from 'ol/geom'
+import type { Polygon } from 'ol/geom'
 import type { ProjectionLike } from 'ol/proj'
 import type { Options as VectorSourceOptions } from 'ol/source/Vector'
 import type VectorSource from 'ol/source/Vector'
 import { BinBase } from './BinBase'
 
 export interface Options extends VectorSourceOptions<Feature> {
-  source?: VectorSource;
+  source: VectorSource;
   size?: number;
   circle?: boolean;
   gridProjection?: ProjectionLike;
-  geometryFunction?: (f: Feature) => Point;
+  listenChange?: boolean;
+  geometryFunction?: (f: Feature) => Coordinate;
   flatAttributes?: (bin: Feature, features: Feature[]) => void;
 }
 
@@ -25,10 +26,10 @@ export default class GridBin extends BinBase {
    * @param {Object} options ol_source_VectorOptions + grid option
    *  @param {ol.source.Vector} options.source Source
    *  @param {number} [options.size] size of the grid in meter, default 200m
-   *  @param {function} [options.geometryFunction] Function that takes an ol.Feature as argument and returns an ol.geom.Point as feature's center.
+   *  @param {function} [options.geometryFunction] Function that returns the feature's center coordinate.
    *  @param {function} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /** Set grid projection
    * @param {ProjectionLike} proj
@@ -50,7 +51,4 @@ export default class GridBin extends BinBase {
    */
   getGridGeomAt(coord: Coordinate): Polygon;
 
-  /** Overwrite Vector clear to fire clearstart / clearend event
-   */
-  clear(): void;
 }
