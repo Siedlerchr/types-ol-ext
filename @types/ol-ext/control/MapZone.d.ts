@@ -63,6 +63,9 @@ export declare class MapZone extends ol_control_Control {
    */
   getCollapsed(): boolean
 
+  /** Collapse or expand the control. */
+  setCollapsed(collapsed: boolean): void
+
   /** Get associated maps
    * @return {Array<_ol_Map_>}
    */

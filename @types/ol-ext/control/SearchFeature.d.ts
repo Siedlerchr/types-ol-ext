@@ -1,11 +1,12 @@
 import type Feature from 'ol/Feature'
+import type VectorSource from 'ol/source/Vector'
 import type { Options as SearchOptions } from './Search'
 import Search from './Search'
 
 export interface Options extends SearchOptions {
   className?: string;
   title?: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   typing?: number;
   minLength?: number;
@@ -13,7 +14,8 @@ export interface Options extends SearchOptions {
   property?: string;
   getTitle?: (f: Feature) => string;
   getSearchString?: (f: Feature) => string;
-  sort: (f1: Feature, f2: Feature) => number;
+  source?: VectorSource;
+  sort?: (f1: Feature, f2: Feature) => number;
 }
 
 /**
@@ -40,6 +42,13 @@ export default class SearchFeature extends Search {
    *  @param {function | undefined} options.getSearchString a function that take a feature and return a text to be used as search string, default geTitle() is used as search string
    */
   constructor(options?: Options);
+
+  /** Return the string used to search a feature. */
+  getSearchString(feature: Feature): string | undefined;
+  /** Get the source searched by the control. */
+  getSource(): VectorSource | undefined;
+  /** Set the source searched by the control. */
+  setSource(source: VectorSource): void;
 
   /** Set function to sort autocomplete results
    * @param {function} sort a sort function that takes 2 features and returns 0, -1 or 1

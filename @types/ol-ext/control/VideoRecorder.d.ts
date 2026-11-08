@@ -29,6 +29,9 @@ export default class VideoRecorder extends ol_control_Control {
    */
   constructor(options?: Options);
 
+  /** Set the title of a start, stop, pause, or resume button. */
+  setTooltip(button: 'start' | 'stop' | 'pause' | 'resume', title: string): void;
+
   /**
    * Remove the control from its current map and attach it to the new map.
    * Subclasses may set up event handlers to get notified about changes to

@@ -60,6 +60,9 @@ export default class ol_legend_Legend extends BaseObject {
    */
   getTextStyle(): Text;
 
+  /** Get the title text style. */
+  getTitleStyle(): Text;
+
   /** Set the layer associated with the legend
    * @param {ol.layer.Layer} [layer]
    */

@@ -104,6 +104,11 @@ export default class RoutingGeoportail extends ol_control_Control {
    */
   getSource(): Vector;
 
+  /** Format a duration in seconds. */
+  getTimeString(seconds: number): string;
+  /** Format a distance in meters. */
+  getDistanceString(distance: number): string;
+
   /**
    *  Abort request
    */

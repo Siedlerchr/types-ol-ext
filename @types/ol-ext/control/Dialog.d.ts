@@ -83,6 +83,9 @@ export default class Dialog extends ol_control_Control {
 
   getContentElement(): Element;
 
+  /** Get form inputs, textareas, and selects keyed by their class names. */
+  getInputs(): Record<string, HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>;
+
   /** Set progress
    * @param {number|boolean} val the progress value or false to hide the progressBar
    * @param {number} max

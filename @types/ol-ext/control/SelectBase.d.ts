@@ -16,7 +16,7 @@ import type { Vector as VectorSource } from 'ol/source'
  'regexp': '≃',
  '!regexp': '≄'
  */
-export type operators = '=' | '!=' | '<' | '>' | '<=' | '>=' | '>' | 'contain' | '!contain' | 'regexp' | '!regexep'
+export type operators = '=' | '!=' | '<' | '>' | '<=' | '>=' | 'contain' | '!contain' | 'regexp' | '!regexp'
 
 export interface condition {
   attr: string;
@@ -94,6 +94,8 @@ export default class SelectBase extends ol_control_Control {
    * @fires select
    */
   doSelect(options?: {
+    sources?: VectorSource[];
+    features?: Feature[];
     useCase?: boolean;
     matchAll?: boolean;
     conditions?: condition[];

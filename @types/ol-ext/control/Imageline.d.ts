@@ -19,13 +19,14 @@ type ImageLineOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
 
 export interface Options extends ControlOptions {
   className?: string;
-  source?: VectorSource;
+  source?: VectorSource | VectorSource[];
   layers?: VectorLayer<VectorSource<Feature<Geometry>>>[];
-  getImage?: (f: Feature) => string;
+  getImage?: (f: Feature) => string | false;
   getTitle?: (f: Feature) => string;
   collapsed?: boolean;
   collapsible?: boolean;
   maxFeatures?: number;
+  useExtent?: boolean;
   hover?: boolean;
   linkColor?: string | boolean;
 }
@@ -53,6 +54,9 @@ export default class Imageline extends ol_control_Control {
    *  @param {string|boolean} options.linkColor link color or false if no link, default false
    */
   constructor(options?: Options);
+
+  /** Set the layers used to find images. */
+  setLayers(layers: VectorLayer<VectorSource<Feature<Geometry>>>[]): void;
 
   /**
    * Remove the control from its current map and attach it to the new map.

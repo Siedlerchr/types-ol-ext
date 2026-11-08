@@ -5,8 +5,9 @@ import type { Options as ControlOptions } from 'ol/control/Control'
 import CanvasBase from './CanvasBase'
 
 export interface Options extends ControlOptions {
-  style: Style | Style[]; // not compatible with CanvasBase
-  composite: string; // In globalCompositeOperation in TS is also string
+  style?: Style | Style[];
+  composite?: string;
+  visible?: boolean;
 }
 
 /** contrTarget draw a target at the center of the map.
@@ -20,12 +21,15 @@ export default class Target extends CanvasBase {
    *  @param {Style|Array<Style>} options.style
    *  @param {string} options.composite composite operation = difference|multiply|xor|screen|overlay|darken|lighter|lighten|...
    */
-  constructor(options: Options);
+  constructor(options?: Options);
+
+  /** Set the target style. */
+  setStyle(style: Style | Style[]): void;
 
   /** Set the control visibility
    * @paraam {boolean} b
    */
-  setVisible(): void;
+  setVisible(visible: boolean): void;
 
   /** Get the control visibility
    * @return {boolean} b
