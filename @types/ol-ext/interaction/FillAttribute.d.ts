@@ -46,7 +46,9 @@ export default class FillAttribute extends Select {
    */
   setActive(active: boolean): void;
 
+  /** Define the interaction's CSS cursor. */
   setCursor(cursor: string): void;
+  /** Get the interaction cursor. */
   getCursor(): string;
 
   /** Set attributes

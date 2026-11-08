@@ -120,6 +120,7 @@ export default class ModifyFeature extends Pointer {
    */
   getModifiedFeatures(): Feature[];
 
+  /** Get the current feature to modify. */
   getCurrentFeature(): Feature | null | undefined;
 
   /** Removes the vertex currently being pointed.

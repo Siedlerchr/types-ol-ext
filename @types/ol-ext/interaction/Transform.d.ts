@@ -205,6 +205,9 @@ export default class Transform extends Pointer {
    */
   getFeatures(): Collection<Feature>;
 
+  /** Set the point radius used to calculate handles on points. A function may
+   * return a radius or a [radiusX, radiusY] pair for a feature.
+   */
   setPointRadius(pointRadius?: number | number[] | ((feature: Feature) => number | number[])): void;
 
   /**

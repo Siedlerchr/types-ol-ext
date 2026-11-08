@@ -32,7 +32,9 @@ export default class Clip extends Pointer {
    */
   setRadius(radius: number): void;
 
+  /** Get clip radius. */
   getRadius(): number;
+  /** Get position of the clip. */
   getPosition(): Coordinate | null;
 
   /** Add a layer to clip
@@ -50,7 +52,7 @@ export default class Clip extends Pointer {
   removeLayer(layer: Layer | Layer[]): void;
 
   /** Set position of the clip
-   *  @param {Pixel|MapBrowserEvent}
+   *  @param coordinate Position in map coordinates.
    */
   setPosition(coordinate: Coordinate): void;
 

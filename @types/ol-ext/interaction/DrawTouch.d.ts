@@ -57,6 +57,7 @@ export interface Options {
    */
   getGeometryType(): Type;
 
+  /** Set geometry type. */
   setGeometryType(type: Type): void;
 
   /** Start drawing and add the sketch feature to the target layer.

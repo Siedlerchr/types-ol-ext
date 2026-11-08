@@ -46,12 +46,12 @@ export default class Profile extends Style {
    */
   getFill(): Fill;
 
-  /** Set z scale
-   * @param {number}
-   */
+  /** Set the vertex size. Use 0 to disable vertex rendering. */
   setVertexSize(size: number): void;
+  /** Get the vertex size. */
   getVertexSize(): number;
 
+  /** Set z scale. */
   setScale(sc: number): void;
 
   /** Get z scale

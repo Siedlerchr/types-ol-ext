@@ -45,9 +45,13 @@ export default class UndoRedo extends Interaction {
   /** Get the number of actions including nested blocks. */
   size(type?: string): number;
 
+  /** Set undo stack maximum length. */
   setMaxLength(length: number): void;
+  /** Set undo stack maximum size. */
   setMaxSize(size: number): void;
+  /** Get the first-level undo stack, or the redo stack when type is 'redo'. */
   getStack(type?: string): any[];
+  /** Abort the last operation, removing it from the stack without redoing it. */
   abort(): void;
 
   /** Add a new custom undo/redo

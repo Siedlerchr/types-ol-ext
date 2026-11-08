@@ -82,7 +82,9 @@ export default class FlowLine extends Style {
    */
   setArrowColor(color: ColorLike): void;
 
+  /** Get offset at the start (0) or end (1). */
   getOffset(where: number): number;
+  /** Add an offset at the start (0) or end (1). */
   setOffset(width: number, where: number): void;
 
   getArrow(): number;

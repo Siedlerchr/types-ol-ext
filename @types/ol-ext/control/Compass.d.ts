@@ -41,7 +41,9 @@ export default class Compass extends CanvasBase {
    */
   getCanvas(): HTMLCanvasElement;
 
+  /** Get control visibility. */
   getVisible(): boolean;
+  /** Set control visibility. */
   setVisible(visible: boolean): void;
 
   /** Set Style
