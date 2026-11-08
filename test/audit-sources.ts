@@ -15,6 +15,9 @@ import InseeBin from '../@types/ol-ext/source/InseeBin'
 import Vector3D from '../@types/ol-ext/source/Vector3D'
 import Style from 'ol/style/Style'
 import { easeOut } from 'ol/easing'
+import GeoImage from '../@types/ol-ext/source/GeoImage'
+import OilPainting from '../@types/ol-ext/source/OilPainting'
+import OSM from 'ol/source/OSM'
 
 const dayNight = new DayNight()
 const separation: number[][] = dayNight.getCoordinates(new Date(), 'line')
@@ -36,6 +39,14 @@ const vector3d = new Vector3D({ source: inputSource, style: new Style() })
 vector3d.setStyle()
 vector3d.animate({ easing: easeOut })
 vector3d.animate()
+const geoImage = new GeoImage({ url: 'image.png', imageCenter: [0, 0], imageScale: 1, imageCrop: 10, projection: 'EPSG:3857' })
+geoImage.setMask([[0, 0], [1, 0], [1, 1], [0, 0]])
+geoImage.getMask()?.forEach(coordinate => coordinate.slice())
+geoImage.setCrop()
+const crop: number | number[] | undefined = geoImage.getCrop()
+const oil = new OilPainting({ sources: [new OSM()], radius: 4 })
+oil.set('intensity', 12)
+oil.set('custom', 'value')
 const hexBins = new HexBin({ source: inputSource, layout: 'flat' })
 hexBins.setSize(100)
 hexBins.setLayout('pointy')
@@ -77,6 +88,7 @@ void nodes
 void triangles
 void maybeBin
 void pixel
+void crop
 // @ts-expect-error binning requires a source
 new GridBin({})
 // @ts-expect-error binning requires a source
@@ -87,5 +99,9 @@ featureBins.setFeatures(inputSource.getFeatures()[0])
 new InseeBin()
 // @ts-expect-error Vector3D accepts a single Style, not a style function
 new Vector3D({ source: inputSource, style: () => new Style() })
+// @ts-expect-error a georeferenced image requires its center and scale
+new GeoImage({ url: 'image.png' })
+// @ts-expect-error raster input sources are required
+new OilPainting()
 // @ts-expect-error unsupported rounding unit
 timeline.roundDate(new Date(), 'year')
