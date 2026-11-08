@@ -31,6 +31,9 @@ const nodes: Feature[] = delaunay.getNodesAt([0, 0])
 const triangles: Feature[] = delaunay.getTrianglesAt([0, 0])
 new Simplificator().setFeatures([])
 new Simplificator().simplifyVisvalingam({ ratio: 0.5, keepEnds: true })
+const simplificator = new Simplificator()
+simplificator.setFeatures([]).forEach(edge => edge.getGeometry()?.getCoordinates())
+simplificator.getFeatures().forEach(result => { result.feature; result.contour; result.geom })
 declare const permalink: Permalink
 permalink.getUrlParams().example = 'value'
 permalink.getUrlReplace()
