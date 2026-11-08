@@ -45,6 +45,13 @@ swipe.setMap(null)
 swipe.on('moving', event => { event.position; event.size })
 declare const timeline: Timeline
 timeline.roundDate(new Date(), 'hour')
+timeline.getDate()
+timeline.getDate('start', 'day')
+timeline.setFeatures([])
+timeline.addButton({ title: 'Reset', handleClick: event => { event.preventDefault() } })
+timeline.on('select', event => event.feature.getId())
+timeline.on('scroll', event => event.dateStart.getTime())
+timeline.on('collapse', event => { void event.collapsed })
 void separation
 void both
 void nodes
