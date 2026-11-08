@@ -1,5 +1,5 @@
 import type { FeatureAnimationEvent, Options } from './FeatureAnimation'
-import { FeatureAnimation } from './FeatureAnimation'
+import FeatureAnimation from './FeatureAnimation'
 
 /** Do nothing for a given duration
  * @constructor

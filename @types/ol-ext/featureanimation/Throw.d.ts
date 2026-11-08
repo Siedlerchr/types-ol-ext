@@ -1,5 +1,5 @@
 import type { FeatureAnimationEvent, Options as FeatureAnimationOption } from './FeatureAnimation'
-import { FeatureAnimation } from './FeatureAnimation'
+import FeatureAnimation from './FeatureAnimation'
 
 export interface Options extends FeatureAnimationOption {
   side?: 'left' | 'right';

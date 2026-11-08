@@ -1,5 +1,5 @@
 import type { FeatureAnimationEvent, Options as FeatureAnimationOption } from './FeatureAnimation'
-import { FeatureAnimation } from './FeatureAnimation'
+import FeatureAnimation from './FeatureAnimation'
 
 export interface Options extends FeatureAnimationOption {
   zoomOut?: boolean;
@@ -22,3 +22,7 @@ export default class Zoom extends FeatureAnimation {
    */
   animate(e: FeatureAnimationEvent): boolean;
 }
+
+/** Zoom animation that shrinks the feature out. */
+export class ol_featureAnimation_ZoomOut extends Zoom {}
+export { Zoom as ol_featureAnimation_Zoom }

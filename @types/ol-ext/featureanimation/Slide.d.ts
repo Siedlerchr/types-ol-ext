@@ -1,8 +1,9 @@
 import type { FeatureAnimationEvent, Options as FeatureAnimationOptions } from './FeatureAnimation'
-import { FeatureAnimation } from './FeatureAnimation'
+import FeatureAnimation from './FeatureAnimation'
 
 export interface Options extends FeatureAnimationOptions {
   speed?: number;
+  side?: 'left' | 'right';
 }
 
 /** Slice animation: feature enter from left

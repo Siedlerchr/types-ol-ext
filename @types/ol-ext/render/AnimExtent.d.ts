@@ -1,8 +1,6 @@
 import type { Coordinate } from 'ol/coordinate'
 import type { ProjectionLike } from 'ol/proj'
 import type { Stroke } from 'ol/style'
-import type Feature from 'ol/Feature'
-import type { FeatureAnimation, animationControler } from '../featureanimation/FeatureAnimation'
 
 declare module 'ol/Map' {
   export interface Options {
@@ -21,34 +19,4 @@ declare module 'ol/Map' {
    *    @param {style.Stroke} options.style stroke style, default 2px red
    */
   function animExtent(point: Coordinate, options?: Options): void;
-}
-
-declare module 'ol/layer' {
-  /** An animation controller object an object to control animation with start, stop and isPlaying function.
-   * To be used with {@link olx.Map#animateFeature} or {@link layer.Vector#animateFeature}
-   * @typedef {Object} animationControler
-   * @property {function} start - start animation.
-   * @property {function} stop - stop animation option arguments can be passed in animationend event.
-   * @property {function} isPlaying - return true if animation is playing.
-   */
-  type animationController = {
-    start: (...params: any[]) => any;
-    stop: (...params: any[]) => any;
-    isPlaying: (...params: any[]) => any;
-  };
-
-  interface Vector<VectorSourceType> {
-    /** Animate feature on a vector layer
-     * @fires animationstart, animationend
-     * @param {ol.Feature} feature Feature to animate
-     * @param {featureAnimation|Array<featureAnimation>} fanim the animation to play
-     * @param {boolean} useFilter use the filters of the layer
-     * @return {animationControler} an object to control animation with start, stop and isPlaying function
-     */
-    animateFeature(
-      feature: Feature,
-      fanim: FeatureAnimation | FeatureAnimation[],
-      useFilter?: boolean
-    ): animationControler;
-  }
 }
