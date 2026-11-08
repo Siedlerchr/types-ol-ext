@@ -32,6 +32,8 @@ import Size from '../@types/ol-ext/util/input/Size'
 import Checkbox from '../@types/ol-ext/util/input/Checkbox'
 import Switch from '../@types/ol-ext/util/input/Switch'
 import ColorInput from '../@types/ol-ext/util/input/Color'
+import CollectionInput from '../@types/ol-ext/util/input/Collection'
+import Collection from 'ol/Collection'
 
 const source = new VectorSource()
 const search = new SearchFeature({ source })
@@ -130,6 +132,14 @@ colorInput.getColorFromID(colorId)
 colorInput.addPaletteColor('#ff0000')
 colorInput.on('color', event => event.color.slice())
 colorInput.on('collapse', event => { void event.visible })
+const items = new Collection([{ title: 'One' }])
+const collectionInput = new CollectionInput({ collection: items, getTitle: item => item.title })
+collectionInput.setCollection(items)
+collectionInput.on('item:select', event => event.item?.title)
+collectionInput.getSelect()?.title
+collectionInput.setCollection(null)
+// @ts-expect-error this input needs an OpenLayers collection, not another input widget
+collectionInput.setCollection(collectionInput)
 void listValue
 // @ts-expect-error a list requires its options array
 new List({})
