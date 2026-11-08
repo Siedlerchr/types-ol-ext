@@ -19,6 +19,8 @@ import SearchNominatim from '../@types/ol-ext/control/SearchNominatim'
 import SearchPhoton from '../@types/ol-ext/control/SearchPhoton'
 import Popup from '../@types/ol-ext/overlay/Popup'
 import FixedPopup from '../@types/ol-ext/overlay/FixedPopup'
+import PopupFeature from '../@types/ol-ext/overlay/PopupFeature'
+import Feature from 'ol/Feature'
 
 const source = new VectorSource()
 const search = new SearchFeature({ source })
@@ -78,6 +80,14 @@ fixed.setHook('viewport')
 fixed.setRotation(30)
 fixed.setScale(1.5)
 fixed.getPixelPosition()?.slice()
+const featurePopup = new PopupFeature({ template: (feature, index, count) => ({
+  title: `${feature.get('name')} ${index}/${count}`,
+  attributes: ['name'],
+}) })
+featurePopup.setTemplate({ attributes: { name: { format: (value, feature) => `${feature.getId()}: ${value}` } } })
+featurePopup.show(new Feature())
+featurePopup.on('attribute', event => { event.feature; event.attribute; event.originalEvent })
+featurePopup.on('select', event => { event.feature; event.index })
 void history
 // @ts-expect-error unsupported operator
 selection.addCondition({ op: '!regexep' })

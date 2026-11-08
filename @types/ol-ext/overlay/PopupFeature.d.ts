@@ -3,6 +3,10 @@ import type Feature from 'ol/Feature'
 import { Overlay } from 'ol'
 import type { Select } from 'ol/interaction'
 import type { Positioning } from 'ol/Overlay'
+import type { Options as PopupOptions } from './Popup'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { OnSignature } from 'ol/Observable'
 
 /** Template attributes for popup
  * @typedef {Object} TemplateAttributes
@@ -14,7 +18,7 @@ import type { Positioning } from 'ol/Overlay'
  */
 export declare type TemplateAttributes = {
   title?: string;
-  format?: (val: any, feature?: Feature) => any;
+  format?: (val: any, feature: Feature) => any;
   before?: string;
   after?: string;
   visible?: boolean | ((feature: Feature, val: any) => boolean);
@@ -27,24 +31,29 @@ export declare type TemplateAttributes = {
  */
 export declare type Template = {
   title?: string | ((feature: Feature) => string);
-  attributes?: {
-    [key: string]: TemplateAttributes;
-  };
+  attributes?: string[] | { [key: string]: TemplateAttributes | string | boolean };
 };
 
-export interface Options {
-  popupClass?: string;
-  closeBox?: boolean;
-  onclose?: ((...params: any[]) => any);
-  onshow?: ((...params: any[]) => any);
-  offsetBox?: number | number[];
-  positioning?: Positioning | string;
-  template?: Template | ((f: Feature) => Template);
+export type TemplateFactory = (feature: Feature, index: number, count: number) => Template
+export interface Options extends PopupOptions {
+  template?: Template | TemplateFactory;
   select?: Select;
   keepSelection?: boolean;
   canFix?: boolean;
   showImage?: boolean;
   maxChar?: number;
+}
+
+export interface PopupFeatureSelectEvent extends BaseEvent {
+  type: 'select';
+  feature: Feature;
+  index: number;
+}
+export interface PopupFeatureAttributeEvent extends BaseEvent {
+  type: 'attribute';
+  feature: Feature;
+  attribute: string;
+  originalEvent: MouseEvent;
 }
 
 /**
@@ -79,14 +88,15 @@ export default class PopupFeature extends Overlay { // we cannot use extends Pop
   /** Set the template
    * @param {Template} [template] A template with a list of properties to use in the popup, default use all features properties
    */
-  setTemplate(template?: Template): void;
+  setTemplate(template?: Template | TemplateFactory): void;
 
   /** Show the popup on the map
    * @param {ol.coordinate|undefined} coordinate Position of the popup
    * @param {Feature|Array<Feature>} features The features on the popup
    * @param {Feature} current The current feature if keepSelection = true, otherwise get the first feature
    */
-  show(coordinate?: Coordinate, features?: Feature | Feature[], current?: Feature): void;
+  show(features: Feature | Feature[]): void;
+  show(coordinate: Coordinate | undefined, features: Feature | Feature[], current?: Feature): void;
 
   /** Fix the popup
    * @param {boolean} fix
@@ -144,6 +154,10 @@ export default class PopupFeature extends Overlay { // we cannot use extends Pop
    * @api stable
    */
   hide(): void;
+
+  on: Overlay['on'] & OnSignature<'select', PopupFeatureSelectEvent, EventsKey> & OnSignature<'attribute', PopupFeatureAttributeEvent, EventsKey>;
+  once: Overlay['once'] & OnSignature<'select', PopupFeatureSelectEvent, EventsKey> & OnSignature<'attribute', PopupFeatureAttributeEvent, EventsKey>;
+  un: Overlay['un'] & OnSignature<'select', PopupFeatureSelectEvent, void> & OnSignature<'attribute', PopupFeatureAttributeEvent, void>;
 }
 
 /** Get a function to use as format to get local string for an attribute
