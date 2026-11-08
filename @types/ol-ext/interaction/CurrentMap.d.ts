@@ -1,7 +1,7 @@
 import { Interaction } from 'ol/interaction'
 import type { Condition as EventsConditionType } from 'ol/events/condition'
 import type { Map as _ol_Map_ } from 'ol'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
@@ -64,11 +64,7 @@ export default class CurrentMap extends Interaction {
   un: CurrentMapOnSignature<void>
 }
 
-export class FocusEvent extends BaseEvent {
-  constructor(
-    type: 'focus',
-    map: _ol_Map_
-  );
-
-  map: _ol_Map_
+export interface FocusEvent extends BaseEvent {
+  type: 'focus';
+  map: _ol_Map_;
 }

@@ -6,7 +6,7 @@ import type { Style } from 'ol/style'
 import { Interaction } from 'ol/interaction'
 import type MapBrowserEvent from 'ol/MapBrowserEvent'
 import type VectorSource from 'ol/source/Vector'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
@@ -17,11 +17,7 @@ type SplitOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'beforesplit' | 'aftersplit', SplitEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'beforesplit' | 'aftersplit', Return>
 
-export enum SplitEventType {
-  BEFORESPLIT = 'beforesplit',
-  AFTERSPLIT = 'aftersplit'
-
-}
+export type SplitEventType = 'beforesplit' | 'aftersplit'
 
 export interface Options {
   sources?: VectorSource | VectorSource[];
@@ -97,13 +93,8 @@ export default class Split extends Interaction {
   un: SplitOnSignature<void>
 }
 
-export class SplitEvent extends BaseEvent {
-  constructor(type: SplitEventType,
-              original: Feature,
-              toSplit: Feature[]
-  );
-
-  original: Feature
-
-  features: Feature[]
+export interface SplitEvent extends BaseEvent {
+  type: SplitEventType;
+  original: Feature;
+  features: Feature[];
 }

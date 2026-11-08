@@ -12,13 +12,16 @@ const clipboard = new CopyPaste({ mapCondition: () => true, condition: () => fal
 clipboard.getDestination()?.getFeatures()
 clipboard.getSources()?.forEach(item => item.getFeatures())
 clipboard.setSources()
+clipboard.on('paste', event => { event.features; event.time })
 const modify = new ModifyFeature({ sources: [source], cursor: 'pointer' })
 modify.setMap(null)
+modify.on('modifying', event => { event.coordinate; event.originalEvent; event.features })
 const closest = modify.getNearestCoord([0, 0], new Point([0, 0]))
 if (closest) closest.coord
 const split = new Split({ featureStyle: false })
 split.setMap(null)
 split.setSources()
+split.on('beforesplit', event => { event.original; event.features })
 const nearest: number[] | undefined = split.getNearestCoord([0, 0], [])
 void nearest
 // @ts-expect-error condition must be a function

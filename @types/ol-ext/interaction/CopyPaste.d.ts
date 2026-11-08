@@ -3,12 +3,17 @@ import type Feature from 'ol/Feature'
 import type { Vector as VectorSource } from 'ol/source'
 import type MapBrowserEvent from 'ol/MapBrowserEvent'
 import type { Condition } from 'ol/events/condition'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { OnSignature } from 'ol/Observable'
 import CurrentMap from './CurrentMap'
 
-export enum CopyPasteEventType {
-  DELETESTART = 'deletestart',
-  DELETEEND = 'deleteend'
+export type CopyPasteEventType = 'copy' | 'cut' | 'paste'
+export interface CopyPasteEvent extends BaseEvent {
+  type: CopyPasteEventType;
+  time: number;
+  /** Present on paste events. */
+  features?: Feature[] | Collection<Feature>;
 }
 
 export interface Options {
@@ -85,16 +90,7 @@ export default class CopyPaste extends CurrentMap {
     destination?: VectorSource;
     silent?: boolean;
   }): void
-}
-
-export class CopyPasteEvent extends BaseEvent {
-  constructor(
-    type: CopyPasteEventType,
-    features: Feature[] | Collection<Feature>,
-    time: number
-  );
-
-  features: Feature[] | Collection<Feature>
-
-  time: number
+  on: CurrentMap['on'] & OnSignature<CopyPasteEventType, CopyPasteEvent, EventsKey>;
+  once: CurrentMap['once'] & OnSignature<CopyPasteEventType, CopyPasteEvent, EventsKey>;
+  un: CurrentMap['un'] & OnSignature<CopyPasteEventType, CopyPasteEvent, void>;
 }

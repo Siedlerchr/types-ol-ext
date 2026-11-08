@@ -8,7 +8,7 @@ import type MapBrowserEvent from 'ol/MapBrowserEvent'
 import type { Condition as EventsConditionType } from 'ol/events/condition'
 import type { Vector as VectorSource } from 'ol/source'
 import type { EventsKey } from 'ol/events'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { ObjectEvent } from 'ol/Object'
 import type Geometry from 'ol/geom/Geometry'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
@@ -19,14 +19,8 @@ type ModifyFeatureOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'modifyend' | 'modifystart' | 'modifying', ModifyEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'modifyend' | 'modifystart' | 'modifying', Return>;
 
-export enum ModifyingEventType {
-  MODIFYING = 'modifying'
-}
-
-export enum ModifyEventType {
-  MODIFYSTART = 'modifystart',
-  MODIFYEND = 'modifyend'
-}
+export type ModifyingEventType = 'modifying'
+export type ModifyEventType = 'modifystart' | 'modifyend'
 
 export interface Options {
   source?: VectorSource;
@@ -135,20 +129,9 @@ export default class ModifyFeature extends Interaction {
   un: ModifyFeatureOnSignature<void>
 }
 
-export class ModifyEvent extends BaseEvent {
-  constructor(
-    type: ModifyEventType | ModifyingEventType,
-    features: Collection<Feature<Geometry>>,
-    MapBrowserEvent: MapBrowserEvent
-  );
-
-  /**
-   * The features being modified.
-   */
-  features: Feature<Geometry>[]
-
-  /**
-   * Associated {@link module:ol/MapBrowserEvent}.
-   */
-  mapBrowserEvent: MapBrowserEvent
+export interface ModifyEvent extends BaseEvent {
+  type: ModifyEventType | ModifyingEventType;
+  features: Feature<Geometry>[];
+  coordinate: Coordinate;
+  originalEvent: UIEvent;
 }
