@@ -81,7 +81,10 @@ export default class Delauny extends VectorSource {
 
   /** Get triangles at a point
    */
-  getTrianglesAt(coord: Coordinate): number[];
+  getTrianglesAt(coord: Coordinate): Feature[];
+
+  /** Get nodes at a coordinate. */
+  getNodesAt(coord: Coordinate): Feature[];
 
   /** Get Voronoi
    * @param {boolean} border include border, default false

@@ -47,6 +47,9 @@ export default class Swipe extends ol_control_Control {
    */
   removeLayer(layer: Layer | Layer[]): void;
 
+  /** Remove all clipped layers. */
+  removeLayers(): void;
+
   /** Get visible rectangle
    * @returns {Extent}
    */

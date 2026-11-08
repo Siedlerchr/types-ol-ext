@@ -138,4 +138,7 @@ export default class Timeline extends ol_control_Control {
    * @return {Date}
    */
   getEndDate(): Date;
+
+  /** Round a date to the specified minute, hour, day, or month. */
+  roundDate(date: Date, stick?: 'mn' | 'hour' | 'day' | 'month'): Date;
 }

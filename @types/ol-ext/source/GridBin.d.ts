@@ -9,6 +9,8 @@ import { BinBase } from './BinBase'
 export interface Options extends VectorSourceOptions<Feature> {
   source?: VectorSource;
   size?: number;
+  circle?: boolean;
+  gridProjection?: ProjectionLike;
   geometryFunction?: (f: Feature) => Point;
   flatAttributes?: (bin: Feature, features: Feature[]) => void;
 }
@@ -26,7 +28,7 @@ export default class GridBin extends BinBase {
    *  @param {function} [options.geometryFunction] Function that takes an ol.Feature as argument and returns an ol.geom.Point as feature's center.
    *  @param {function} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
    */
-  constructor(options: Options);
+  constructor(options?: Options);
 
   /** Set grid projection
    * @param {ProjectionLike} proj
@@ -37,6 +39,9 @@ export default class GridBin extends BinBase {
    * @param {number} size
    */
   setSize(siue: number): void;
+
+  /** Set whether grid bins use a circle shape. */
+  setCircle(circle: boolean): void;
 
   /** Get the grid geometry at the coord
    * @param {Coordinate} coord

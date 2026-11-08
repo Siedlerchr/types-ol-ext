@@ -37,6 +37,9 @@ export default class Permalink extends ol_control_Control {
    */
   constructor(options?: Options);
 
+  /** Get the initial position supplied by the URL, or false if none was found. */
+  getInitialPosition(): false | { lon: string | number; lat?: string | number; z?: string; r?: string };
+
   /**
    * Set the map instance the control associated with.
    * @param {Map} map The map instance.
@@ -68,6 +71,9 @@ export default class Permalink extends ol_control_Control {
    */
   setUrlParam(key: string, value?: string): void;
 
+  /** Get the mutable object of URL parameters. */
+  getUrlParams(): Record<string, string>;
+
   /**
    * Get a parameter url.
    * @param {string} key the key parameter
@@ -95,4 +101,6 @@ export default class Permalink extends ol_control_Control {
    *  @param {bool}
    */
   setUrlReplace(replace: boolean): void;
+  /** Check whether URL replacement is enabled. */
+  getUrlReplace(): boolean;
 }

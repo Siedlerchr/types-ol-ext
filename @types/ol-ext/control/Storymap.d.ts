@@ -26,6 +26,9 @@ export default class Storymap extends ol_control_Control {
    */
   constructor(options?: Options);
 
+  /** Replace the story content with HTML or an element. */
+  setStory(html: string | Element): void;
+
   /** Scroll to a chapter
    * @param {string} name Name of the chapter to scroll to
    */

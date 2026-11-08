@@ -14,7 +14,7 @@ export default class Simplificator extends ol_Object {
      * @param {Array<Feature>} features
      * @param {number} [round] round features
      */
-  setFeatures(features: Feature[], round: number): void;
+  setFeatures(features: Feature[], round?: number): void;
 
   /** Get the simplified features
     * @returns {Array<Feature>}
@@ -25,4 +25,7 @@ export default class Simplificator extends ol_Object {
    * @param {number} tolerance
    */
   simplify(tolerance: number): void
+
+  /** Simplify edges using the Visvalingam algorithm. */
+  simplifyVisvalingam(options: { area?: number; dist?: number; ratio?: number; minPoints?: number; keepEnds?: boolean }): void
 }

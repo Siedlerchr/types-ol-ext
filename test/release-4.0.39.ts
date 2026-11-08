@@ -4,7 +4,6 @@ import StrokeImage from '../@types/ol-ext/style/StrokeImage'
 import Icon from 'ol/style/Icon'
 import VectorLayer from 'ol/layer/Vector'
 import defaultStyle from '../@types/ol-ext/style/defaultStyle'
-import getMapCanvas from '../@types/ol-ext/util/getMapCanvas'
 import Modify from '../@types/ol-ext/interaction/Modify'
 import '../@types/ol-ext/source/Vector'
 import '../@types/ol-ext/style/FontMaki2Def'
@@ -22,7 +21,6 @@ source.calculateContours()
 const style = new StrokeImage({ icon: new Icon({ src: 'stroke.png' }), fallbackColor: '#c844c5' })
 new VectorLayer({ source, style })
 defaultStyle({ color: '#3399cc', fillColor: [255, 255, 255, 0.4] })
-getMapCanvas(null)?.getContext('2d')
 declare const modify: Modify
 modify.getModifiedFeatures()
 void FontSymbol
