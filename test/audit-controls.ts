@@ -31,6 +31,7 @@ import Width from '../@types/ol-ext/util/input/Width'
 import Size from '../@types/ol-ext/util/input/Size'
 import Checkbox from '../@types/ol-ext/util/input/Checkbox'
 import Switch from '../@types/ol-ext/util/input/Switch'
+import ColorInput from '../@types/ol-ext/util/input/Color'
 
 const source = new VectorSource()
 const search = new SearchFeature({ source })
@@ -123,6 +124,12 @@ width.on('change:value', event => event.value.toFixed())
 new Size().getValue().toFixed()
 new Checkbox().on('check', event => { event.checked; event.value })
 new Switch({ className: 'toggle' }).on('check', event => { event.checked })
+const colorInput = new ColorInput({ position: 'static', ariaLabel: 'Color' })
+const colorId: string = colorInput.getColorID('#ff0000')
+colorInput.getColorFromID(colorId)
+colorInput.addPaletteColor('#ff0000')
+colorInput.on('color', event => event.color.slice())
+colorInput.on('collapse', event => { void event.visible })
 void listValue
 // @ts-expect-error a list requires its options array
 new List({})

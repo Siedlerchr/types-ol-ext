@@ -1,5 +1,5 @@
-import type { ColorLike } from 'ol/colorlike'
-import BaseEvent from 'ol/events/Event'
+import type { Color as OlColor } from 'ol/color'
+import type BaseEvent from 'ol/events/Event'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Types } from 'ol/ObjectEventType'
 import type { ObjectEvent } from 'ol/Object'
@@ -12,19 +12,19 @@ type ColorOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'color', ColorEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change' | 'error' | 'propertychange' | 'color', Return>;
 
-export enum ColorType {
-  COLOR = 'color',
-}
+export type ColorType = 'color'
+export type ColorValue = string | OlColor
 
 export interface Options extends PopupBaseOptions {
   className?: string;
-  color?: ColorLike;
+  color?: ColorValue;
   input?: Element;
   parent?: Element;
   hastab?: boolean;
   paletteLabel?: string;
   pickerLabel?: string;
-  position?: 'popup' | 'fixed' | 'inline';
+  eyeDropperLabel?: string;
+  position?: 'popup' | 'fixed' | 'static' | 'inline';
   opacity?: boolean;
   autoClose?: boolean;
   hidden?: boolean;
@@ -59,7 +59,7 @@ export default class Color extends PopupBase {
    * @param {string} title
    * @param {boolean} select
    */
-  addPaletteColor(color: ColorLike, title: string, select: boolean): void;
+  addPaletteColor(color: ColorValue, title?: string, select?: boolean): void;
 
   /** Show palette or picker tab
    * @param {string} what palette or picker
@@ -74,7 +74,7 @@ export default class Color extends PopupBase {
   /** Set Color
    * @param { Array<number> }
    */
-  setColor(color: string | number[]): void;
+  setColor(color?: ColorValue): void;
 
   /** Get current color
    * @param {boolean} [opacity=true]
@@ -100,25 +100,24 @@ export default class Color extends PopupBase {
 
   /** Convert color to id
    * @param {ol.colorLike} Color
-   * @returns {number}
+   * @returns {string}
    */
-  getColorID(color: ColorLike): number;
+  getColorID(color: ColorValue): string;
 
   /** Convert color to id
-   * @param {number} id
+   * @param {string} id
    * @returns {Array<number>} Color
    */
-  getColorFromID(id: number): number[];
+  getColorFromID(id: string): number[];
 
-  on: ColorOnSignature<EventsKey>
+  on: PopupBase['on'] & ColorOnSignature<EventsKey>
 
-  once: ColorOnSignature<EventsKey>
+  once: PopupBase['once'] & ColorOnSignature<EventsKey>
 
-  un: ColorOnSignature<void>
+  un: PopupBase['un'] & ColorOnSignature<void>
 }
 
-export class ColorEvent extends BaseEvent {
-  constructor(type: ColorType, color: string | number[]);
-
-  color: string | number[]
+export interface ColorEvent extends BaseEvent {
+  type: ColorType;
+  color: number[];
 }
