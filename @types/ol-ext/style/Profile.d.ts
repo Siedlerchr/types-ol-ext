@@ -49,6 +49,9 @@ export default class Profile extends Style {
   /** Set z scale
    * @param {number}
    */
+  setVertexSize(size: number): void;
+  getVertexSize(): number;
+
   setScale(sc: number): void;
 
   /** Get z scale

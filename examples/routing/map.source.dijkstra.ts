@@ -56,9 +56,9 @@ const map = new Map({
 })
 
 // The vector graph
-const graph = new VectorSource({
+const graph = new VectorSource<Feature<Geometry>>({
   url: '../data/ROUTE120.geojson',
-  format: new GeoJSON(),
+  format: new GeoJSON<Feature<Geometry>>(),
 })
 const listenerKey = graph.on('change', () => {
   if (graph.getState() === 'ready') {

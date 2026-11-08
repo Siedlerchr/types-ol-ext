@@ -44,7 +44,7 @@ export default class Flashlight extends Pointer {
   }): void;
 
   /** Set position of the flashlight
-   *  @param {Pixel|MapBrowserEvent<UIEvent>}
+   *  @param {Pixel|MapBrowserEvent}
    */
-  setPosition(e: Pixel | MapBrowserEvent<UIEvent>): void;
+  setPosition(e: Pixel | MapBrowserEvent): void;
 }

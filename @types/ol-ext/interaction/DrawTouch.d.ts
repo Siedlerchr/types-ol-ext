@@ -57,6 +57,8 @@ export interface Options {
    */
   getGeometryType(): Type;
 
+  setGeometryType(type: Type): void;
+
   /** Start drawing and add the sketch feature to the target layer.
    * The interaction.Draw.EventType.DRAWEND event is dispatched before inserting the feature.
    */

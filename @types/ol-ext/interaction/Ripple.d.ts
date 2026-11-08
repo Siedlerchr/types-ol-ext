@@ -33,7 +33,7 @@ export default class Ripple extends Pointer {
   rains(interval: number): void;
 
   /** Disturb water at specified point
-   *  @param {Pixel|MapBrowserEvent<UIEvent>}
+   *  @param {Pixel|MapBrowserEvent}
    */
-  rainDrop(e: Pixel | MapBrowserEvent<UIEvent>): void;
+  rainDrop(e: Pixel | MapBrowserEvent): void;
 }

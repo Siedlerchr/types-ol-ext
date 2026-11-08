@@ -197,13 +197,15 @@ export default class Transform extends Pointer {
    * @param evt Map browser event.
    * @return `true` to start the drag sequence.
    */
-  handleDownEvent_(evt: MapBrowserEvent<UIEvent>): boolean;
+  handleDownEvent_(evt: MapBrowserEvent): boolean;
 
   /**
    * Get features to transform
    * @return
    */
   getFeatures(): Collection<Feature>;
+
+  setPointRadius(pointRadius?: number | number[] | ((feature: Feature) => number | number[])): void;
 
   /**
    * Get the rotation center
@@ -220,18 +222,18 @@ export default class Transform extends Pointer {
   /**
    * @param evt Map browser event.
    */
-  handleDragEvent_(evt: MapBrowserEvent<UIEvent>): void;
+  handleDragEvent_(evt: MapBrowserEvent): void;
 
   /**
    * @param evt Event.
    */
-  handleMoveEvent_(evt: MapBrowserEvent<UIEvent>): void;
+  handleMoveEvent_(evt: MapBrowserEvent): void;
 
   /**
    * @param evt Map browser event.
    * @return `false` to stop the drag sequence.
    */
-  handleUpEvent_(evt: MapBrowserEvent<UIEvent>): boolean;
+  handleUpEvent_(evt: MapBrowserEvent): boolean;
 
   on: TransformOnSignature<EventsKey>
 

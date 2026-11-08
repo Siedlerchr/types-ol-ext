@@ -80,15 +80,15 @@ export default class Split extends Interaction {
   getNearestCoord(pt: Coordinate, coords: Coordinate[]): Coordinate;
 
   /**
-   * @param {MapBrowserEvent<UIEvent>} evt Map browser event.
+   * @param {MapBrowserEvent} evt Map browser event.
    * @return {boolean} `true` to start the drag sequence.
    */
-  handleDownEvent(evt: MapBrowserEvent<UIEvent>): boolean;
+  handleDownEvent(evt: MapBrowserEvent): boolean;
 
   /**
-   * @param {MapBrowserEvent<UIEvent>} evt Event.
+   * @param {MapBrowserEvent} evt Event.
    */
-  handleMoveEvent(evt: MapBrowserEvent<UIEvent>): void;
+  handleMoveEvent(evt: MapBrowserEvent): void;
 
   on: SplitOnSignature<EventsKey>
 

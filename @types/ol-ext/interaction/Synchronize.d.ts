@@ -38,7 +38,7 @@ export default class Synchronize extends Interaction {
   /** Cursor move > tells other maps to show the cursor
    * @param {event} e "move" event
    */
-  handleMove_(e: MapBrowserEvent<UIEvent>): void;
+  handleMove_(e: MapBrowserEvent): void;
 
   /** Cursor out of map > tells other maps to hide the cursor
    * @param {event} e "mouseOut" event

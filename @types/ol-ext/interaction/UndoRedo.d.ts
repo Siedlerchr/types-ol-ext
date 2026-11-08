@@ -37,7 +37,18 @@ export default class UndoRedo extends Interaction {
    * @param {function} redoFn function called when redoing
    * @api
    */
-  define(action: string, undoFn: (e: UndoRedoEvent) => void, redoFn: (e: UndoRedoEvent) => void): void; // TOOD unsure about the event type
+  define<T = any>(action: string, undoFn: (prop: T) => void, redoFn: (prop: T) => void): void;
+
+  /** Get the number of top-level undo or redo actions. */
+  length(type?: string): number;
+
+  /** Get the number of actions including nested blocks. */
+  size(type?: string): number;
+
+  setMaxLength(length: number): void;
+  setMaxSize(size: number): void;
+  getStack(type?: string): any[];
+  abort(): void;
 
   /** Add a new custom undo/redo
    * @param {string} action the action key name
@@ -64,7 +75,7 @@ export default class UndoRedo extends Interaction {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** A feature is added / removed
    */
@@ -73,7 +84,7 @@ export default class UndoRedo extends Interaction {
   /** Start an undo block
    * @api
    */
-  blockStart(): void;
+  blockStart(name?: string): void;
 
   /** End an undo block
    * @api

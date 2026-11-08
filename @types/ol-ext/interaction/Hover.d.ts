@@ -29,7 +29,7 @@ export interface Options {
   layerFilter?: (feature: Feature) => boolean;
   layers?: Array<Layer>;
   hitTolerance?: number;
-  handleEvent: (p0: MapBrowserEvent<UIEvent>) => boolean;
+  handleEvent: (p0: MapBrowserEvent) => boolean;
 }
 
 /** Interaction hover do to something when hovering a feature

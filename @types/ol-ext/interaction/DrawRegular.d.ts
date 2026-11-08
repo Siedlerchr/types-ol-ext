@@ -124,7 +124,7 @@ export default class DrawRegular extends Interaction {
   /**
    * @param {MapBrowserEvent} evt Map browser event.
    */
-  handleEvent_(evt: MapBrowserEvent<UIEvent>): void;
+  handleEvent_(evt: MapBrowserEvent): void;
 
   /** Stop drawing.
    */
@@ -133,19 +133,19 @@ export default class DrawRegular extends Interaction {
   /**
    * @param {MapBrowserEvent} evt Event.
    */
-  handleMoveEvent_(evt: MapBrowserEvent<UIEvent>): void;
+  handleMoveEvent_(evt: MapBrowserEvent): void;
 
   /** Start an new draw
    * @param {MapBrowserEvent} evt Map browser event.
    * @return {boolean} `false` to stop the drag sequence.
    */
-  start_(evt: MapBrowserEvent<UIEvent>): boolean;
+  start_(evt: MapBrowserEvent): boolean;
 
   /** End drawing
    * @param {MapBrowserEvent} evt Map browser event.
    * @return {boolean} `false` to stop the drag sequence.
    */
-  end_(evt: MapBrowserEvent<UIEvent>): boolean;
+  end_(evt: MapBrowserEvent): boolean;
 
   on: DrawRegularOnSignature<EventsKey>
 

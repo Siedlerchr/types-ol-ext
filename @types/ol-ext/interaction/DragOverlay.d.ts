@@ -62,14 +62,14 @@ export class DragEvent extends BaseEvent {
   constructor(
     type: DragEventTypes,
     overlay: Overlay,
-    originalEvent: MapBrowserEvent<UIEvent>,
+    originalEvent: MapBrowserEvent,
     frameState: FrameState,
     coordinate: Coordinate
   );
 
   overlay: Overlay
 
-  originalEvent: MapBrowserEvent<UIEvent>
+  originalEvent: MapBrowserEvent
 
   frameState: FrameState
 

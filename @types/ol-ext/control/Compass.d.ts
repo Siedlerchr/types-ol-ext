@@ -41,6 +41,9 @@ export default class Compass extends CanvasBase {
    */
   getCanvas(): HTMLCanvasElement;
 
+  getVisible(): boolean;
+  setVisible(visible: boolean): void;
+
   /** Set Style
    * @api
    */

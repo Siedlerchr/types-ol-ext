@@ -62,6 +62,8 @@ export default class Bar extends ol_control_Control {
    */
   getControls(): ol_control_Control[];
 
+  getActiveControls(): ol_control_Control[];
+
   /** Set tool bar position
    *  @param {top|left|bottom|right} pos
    */

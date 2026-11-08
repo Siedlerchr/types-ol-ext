@@ -110,15 +110,17 @@ export default class ModifyFeature extends Pointer {
   getArcs(geom: Type, coord: Coordinate): void;
 
   /**
-   * @param {MapBrowserEvent<UIEvent>} evt Map browser event.
+   * @param {MapBrowserEvent} evt Map browser event.
    * @return {boolean} `true` to start the drag sequence.
    */
-  handleDownEvent(evt: MapBrowserEvent<UIEvent>): boolean;
+  handleDownEvent(evt: MapBrowserEvent): boolean;
 
   /** Get modified features
    * @return {Array<Feature>} list of modified features
    */
   getModifiedFeatures(): Feature[];
+
+  getCurrentFeature(): Feature | null | undefined;
 
   /** Removes the vertex currently being pointed.
    */
@@ -135,7 +137,7 @@ export class ModifyEvent extends BaseEvent {
   constructor(
     type: ModifyEventType | ModifyingEventType,
     features: Collection<Feature<Geometry>>,
-    MapBrowserEvent: MapBrowserEvent<UIEvent>
+    MapBrowserEvent: MapBrowserEvent
   );
 
   /**
@@ -146,5 +148,5 @@ export class ModifyEvent extends BaseEvent {
   /**
    * Associated {@link module:ol/MapBrowserEvent}.
    */
-  mapBrowserEvent: MapBrowserEvent<UIEvent>
+  mapBrowserEvent: MapBrowserEvent
 }

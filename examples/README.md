@@ -1,5 +1,25 @@
 # Build and debug TypeScript ol-ext examples
 
+## Run TypeScript examples in a browser
+
+Install the root dependencies with `npm ci` and clone `ol-ext` into the repository
+root with its `v4.0.39` tag available locally. Python 3, Git, and `tar` are also required.
+Then run:
+
+```bash
+npm run serve-examples
+```
+
+Open one of the URLs printed by the command, for example
+<http://localhost:8765/examples/layer/map.source.contour.html>. Some examples
+require network access for maps or other external resources. Set `PORT` to use
+a different port, or `OL_EXT_TAG` to select another locally available upstream
+tag. Press Ctrl+C to stop. The command builds all ported TypeScript examples
+and serves copies of the upstream HTML and assets from a temporary directory;
+the upstream checkout remains untouched. It uses the locally installed ol-ext
+implementation. Examples without a corresponding HTML file or identifiable
+main script are reported and skipped.
+
 ## Setup environment
 
 1. Clone this [types-ol-ext](https://github.com/Siedlerchr/types-ol-ext) git repository and install dependencies.

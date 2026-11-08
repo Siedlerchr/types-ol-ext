@@ -46,6 +46,9 @@ export default class FillAttribute extends Select {
    */
   setActive(active: boolean): void;
 
+  setCursor(cursor: string): void;
+  getCursor(): string;
+
   /** Set attributes
    * @param {*} properties The properties as key/value
    */
