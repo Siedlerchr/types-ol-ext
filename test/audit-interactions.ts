@@ -19,6 +19,9 @@ import Ripple from '../@types/ol-ext/interaction/Ripple'
 import Delete from '../@types/ol-ext/interaction/Delete'
 import DragOverlay from '../@types/ol-ext/interaction/DragOverlay'
 import FillAttribute from '../@types/ol-ext/interaction/FillAttribute'
+import Blob from '../@types/ol-ext/interaction/Blob'
+import Offset from '../@types/ol-ext/interaction/Offset'
+import Splitter from '../@types/ol-ext/interaction/Splitter'
 import VectorLayer from 'ol/layer/Vector'
 
 const source = new VectorSource()
@@ -51,6 +54,17 @@ dragOverlay.on('dragging', event => { event.overlay.getPosition(); event.origina
 new DragOverlay()
 const fill = new FillAttribute({ cursor: false }, { name: 'test' })
 fill.on('setattributeend', event => { event.features.forEach(feature => feature.getGeometry()); event.properties.name })
+new Blob({ radius: 20 })
+const offset = new Offset()
+offset.setMap(null)
+offset.on('offsetting', event => { event.segment[0].slice(); event.segment[1].slice() })
+offset.on('modifystart', event => event.features[0].getGeometry())
+const splitter = new Splitter({ source, alignTolerance: 0.1 })
+splitter.intersectSegs([[0, 0], [1, 1]], [[0, 1], [1, 0]])
+splitter.on('beforesplit', event => event.feaure.getGeometry())
+splitter.on('aftersplit', event => event.featureAdded.forEach(feature => feature.getGeometry()))
+// @ts-expect-error a source array is not handled by the release implementation
+new Splitter({ source: [source] })
 const current = new CurrentMap({ condition: () => true })
 current.getCurrentMap()?.getView()
 const clipboard = new CopyPaste({ mapCondition: () => true, condition: () => false, destination: source })

@@ -1,9 +1,7 @@
-import type { Layer } from 'ol/layer'
+import type { Options as ClipOptions } from './Clip'
 import Clip from './Clip'
 
-export interface Options {
-  radius?: number;
-  layers?: Layer | Layer[];
+export interface Options extends ClipOptions {
   stiffness?: number;
   damping?: number;
   mass?: number;
@@ -18,7 +16,7 @@ export interface Options {
  * @extends {ol_interaction_Clip}
 
  */
-export class Blob extends Clip {
+export default class Blob extends Clip {
   /**
    * @param {*} options blob  options
    *  @param {number} options.radius radius of the clip, default 100
