@@ -16,11 +16,13 @@ import WMSCapabilities from '../@types/ol-ext/control/WMSCapabilities'
 import WMTSCapabilities from '../@types/ol-ext/control/WMTSCapabilities'
 import Search from '../@types/ol-ext/control/Search'
 import SearchJSON from '../@types/ol-ext/control/SearchJSON'
+import SearchWikipedia from '../@types/ol-ext/control/SearchWikipedia'
 import SearchNominatim from '../@types/ol-ext/control/SearchNominatim'
 import SearchPhoton from '../@types/ol-ext/control/SearchPhoton'
 import SearchGPS from '../@types/ol-ext/control/SearchGPS'
 import SearchGeoportailParcelle from '../@types/ol-ext/control/SearchGeoportailParcelle'
 import SearchGeoportail from '../@types/ol-ext/control/SearchGeoportail'
+import SearchWikipedia from '../@types/ol-ext/control/SearchWikipedia'
 import Popup from '../@types/ol-ext/overlay/Popup'
 import FixedPopup from '../@types/ol-ext/overlay/FixedPopup'
 import PopupFeature from '../@types/ol-ext/overlay/PopupFeature'
@@ -118,6 +120,12 @@ photon.equalFeatures(new Feature(), new Feature())
 photon.reverseData([0, 0]).lon
 photon.reverseGeocode([0, 0])
 const gps = new SearchGPS({ labelGPS: 'Locate' })
+const wikipedia = new SearchWikipedia({ getTitle: result => result.title })
+wikipedia.setLang('de')
+wikipedia.handleResponse(['Paris', ['Paris'], ['City'], ['https://en.wikipedia.org/wiki/Paris']])[0].uri
+wikipedia.on('select', event => { event.search.url; event.coordinate?.slice() })
+// @ts-expect-error autocomplete entries require a URI
+wikipedia.select({ title: 'Paris', desc: 'City' })
 gps.setInput([2, 48])
 gps.setInput()
 gps.autocomplete('2,48')[0].gps.slice()
@@ -201,3 +209,13 @@ new List({})
 void history
 // @ts-expect-error unsupported operator
 selection.addCondition({ op: '!regexep' })
+
+const wikipedia = new SearchWikipedia({ lang: 'de' })
+wikipedia.setLang('en')
+const wikiResults = wikipedia.handleResponse(['map', ['Map'], ['Description'], ['https://en.wikipedia.org/wiki/Map']])
+const wikiTitle: HTMLElement = wikipedia.getTitle(wikiResults[0])
+wikipedia.select(wikiResults[0])
+wikipedia.on('select', event => { event.search.url; event.search.img; event.search.lon })
+// @ts-expect-error autocomplete results contain a uri, not the selected page URL
+wikipedia.select({ title: 'Map', desc: '', url: 'https://example.org' })
+void wikiTitle

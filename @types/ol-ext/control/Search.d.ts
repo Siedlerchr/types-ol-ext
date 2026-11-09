@@ -15,7 +15,7 @@ export type SearchOnSignature<Return, Result = any> = OnSignature<EventTypes, Ev
 
 export type SearchEventType = 'select'
 
-export interface Options<Result = any> extends ControlOptions {
+export interface Options<Result = any, Title = string> extends ControlOptions {
   className?: string;
   title?: string;
   label?: string;
@@ -29,7 +29,7 @@ export interface Options<Result = any> extends ControlOptions {
   minLength?: number;
   maxItems?: number;
   maxHistory?: number;
-  getTitle?: (f: Result) => string;
+  getTitle?: (f: Result) => Title;
   autocomplete?: (s: string, cback: (results: Result[]) => void) => Result[] | false | void;
   onselect?: (...params: any[]) => any;
   centerOnSelect?: boolean;
@@ -47,7 +47,7 @@ export interface Options<Result = any> extends ControlOptions {
  * @fires select
  * @fires change:input
  */
-export default class Search<Result = any, Input = string> extends ol_control_Control {
+export default class Search<Result = any, Input = string, Title = string, Selection = Result> extends ol_control_Control {
   /**
    * @param {Object=} options
    *  @param {string} options.className control class name
@@ -69,7 +69,7 @@ export default class Search<Result = any, Input = string> extends ol_control_Con
    *  @param {boolean} options.centerOnSelect center map on search, default false
    *  @param {number|boolean} options.zoomOnSelect center map on search and zoom to value if zoom < value, default false
    */
-  constructor(options?: Options<Result>);
+  constructor(options?: Options<Result, Title>);
 
   /**
    * Remove the control from its current map and attach it to the new map.
@@ -97,7 +97,7 @@ export default class Search<Result = any, Input = string> extends ol_control_Con
    *  @return {string} the text to be displayed in the index, default f.name
    *  @api
    */
-  getTitle(f: Result): string;
+  getTitle(f: Result): Title;
 
   /** Returns title as text
    *  @param {any} f feature to be displayed
@@ -164,11 +164,11 @@ export default class Search<Result = any, Input = string> extends ol_control_Con
    */
   equalFeatures(f1: Result, f2: Result): boolean;
 
-  on: SearchOnSignature<EventsKey, Result>
+  on: SearchOnSignature<EventsKey, Selection>
 
-  once: SearchOnSignature<EventsKey, Result>
+  once: SearchOnSignature<EventsKey, Selection>
 
-  un: SearchOnSignature<void, Result>
+  un: SearchOnSignature<void, Selection>
 }
 
 export interface SearchEvent<Result = any> extends BaseEvent {

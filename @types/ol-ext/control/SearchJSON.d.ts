@@ -3,7 +3,7 @@ import type { EventsKey } from 'ol/events'
 import type { Options as SearchOptions, SearchOnSignature } from './Search'
 import Search from './Search'
 
-export interface Options<Result = any, Response = any> extends SearchOptions<Result> {
+export interface Options<Result = any, Response = any, Title = string> extends SearchOptions<Result, Title> {
   handleResponse?: ((response: Response) => Result[]);
   url?: string;
   authentication?: string;
@@ -18,7 +18,7 @@ export interface Options<Result = any, Response = any> extends SearchOptions<Res
  * @fires select
 
  */
-export default class SearchJSON<Result = any, Response = any> extends Search<Result> {
+export default class SearchJSON<Result = any, Response = any, Title = string, Selection = Result> extends Search<Result, string, Title, Selection> {
   /**
    * @param {any} options extend ol.control.Search options
    *  @param {string} options.className control class name
@@ -34,7 +34,7 @@ export default class SearchJSON<Result = any, Response = any> extends Search<Res
    *  @param {string|undefined} options.url Url of the search api
    *  @param {string | undefined} options.authentication: basic authentication for the search API as btoa("login:pwd")
    */
-  constructor(options?: Options<Result, Response>);
+  constructor(options?: Options<Result, Response, Title>);
 
   /** Autocomplete function (ajax request to the server)
    * @param {string} s search string
@@ -75,7 +75,7 @@ export default class SearchJSON<Result = any, Response = any> extends Search<Res
    *  @return {string} the text to be displayed in the index, default f.name
    *  @api
    */
-  getTitle(f: Result): string;
+  getTitle(f: Result): Title;
 
   /** Force search to refresh
    */
@@ -122,9 +122,9 @@ export default class SearchJSON<Result = any, Response = any> extends Search<Res
    */
   equalFeatures(f1: Result, f2: Result): boolean;
 
-  on: SearchOnSignature<EventsKey, Result>
+  on: SearchOnSignature<EventsKey, Selection>
 
-  once: SearchOnSignature<EventsKey, Result>
+  once: SearchOnSignature<EventsKey, Selection>
 
-  un: SearchOnSignature<void, Result>
+  un: SearchOnSignature<void, Selection>
 }
