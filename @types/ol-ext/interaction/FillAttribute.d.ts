@@ -1,7 +1,7 @@
 import type Feature from 'ol/Feature'
 import { Select } from 'ol/interaction'
 import type { Options as SelectOptions, SelectEvent } from 'ol/interaction/Select'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
@@ -13,10 +13,7 @@ type FillAttributeOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'setattributestart' | 'setattributeend', AttributeEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'select' | 'setattributestart' | 'setattributeend', Return>;
 
-export enum AttributeEventType {
-  SETATTRIBUTESTART = 'setattributestart',
-  SETATTRIBUTEEND = 'setattributeend'
-}
+export type AttributeEventType = 'setattributestart' | 'setattributeend'
 
 export interface Options extends SelectOptions {
   active?: boolean;
@@ -39,7 +36,7 @@ export default class FillAttribute extends Select {
    *  @param {boolean|string} options.cursor interaction cursor if false use default, default use a paint bucket cursor
    * @param {*} properties The properties as key/value
    */
-  constructor(options: Options, properties: { [key: string]: any });
+  constructor(options?: Options, properties?: Record<string, unknown>);
 
   /** Activate the interaction
    * @param {boolean} active
@@ -49,35 +46,35 @@ export default class FillAttribute extends Select {
   /** Define the interaction's CSS cursor. */
   setCursor(cursor: string): void;
   /** Get the interaction cursor. */
-  getCursor(): string;
+  getCursor(): string | boolean | undefined;
 
   /** Set attributes
    * @param {*} properties The properties as key/value
    */
-  setAttributes(properties: { [key: string]: any }): void;
+  setAttributes(properties: Record<string, unknown>): void;
 
   /** Set an attribute
    * @param {string} key
    * @param {*} val
    */
-  setAttribute(key: string, val: any): void;
+  setAttribute(key: string, val: unknown): void;
 
   /** get attributes
    * @return {*} The properties as key/value
    */
-  getAttributes(): any;
+  getAttributes(): Record<string, unknown> | undefined;
 
   /** Get an attribute
    * @param {string} key
    * @return {*} val
    */
-  getAttribute(key: string): any;
+  getAttribute(key: string): unknown;
 
   /** Fill feature attributes
    * @param {Array<Feature>} features The features to modify
    * @param {*} properties The properties as key/value
    */
-  fill(features: Feature[], properties: { [key: string]: any }): void;
+  fill(features: Feature[], properties: Record<string, unknown>): void;
 
   on: FillAttributeOnSignature<EventsKey>
 
@@ -86,10 +83,8 @@ export default class FillAttribute extends Select {
   un: FillAttributeOnSignature<void>
 }
 
-export class AttributeEvent extends BaseEvent {
-  constructor(type: AttributeEventType,
-              properties: { [key: string]: any }
-  );
-
-  properties: { [key: string]: any }
+export interface AttributeEvent extends BaseEvent {
+  type: AttributeEventType;
+  features: Feature[];
+  properties: Record<string, unknown>;
 }

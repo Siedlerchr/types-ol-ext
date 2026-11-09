@@ -16,6 +16,9 @@ import LongTouch from '../@types/ol-ext/interaction/LongTouch'
 import Clip from '../@types/ol-ext/interaction/Clip'
 import Flashlight from '../@types/ol-ext/interaction/Flashlight'
 import Ripple from '../@types/ol-ext/interaction/Ripple'
+import Delete from '../@types/ol-ext/interaction/Delete'
+import DragOverlay from '../@types/ol-ext/interaction/DragOverlay'
+import FillAttribute from '../@types/ol-ext/interaction/FillAttribute'
 import VectorLayer from 'ol/layer/Vector'
 
 const source = new VectorSource()
@@ -39,6 +42,15 @@ ripple.setMap(null)
 ripple.rains()
 // @ts-expect-error a ripple needs a layer to register its render handler
 new Ripple()
+const deletion = new Delete()
+deletion.on('deletestart', event => { event.features.forEach(feature => feature.getGeometry()) })
+deletion.on('deleteend', event => { event.features.map(feature => feature.getGeometry()) })
+const dragOverlay = new DragOverlay({ overlays: [] })
+dragOverlay.on('dragging', event => { event.overlay.getPosition(); event.originalEvent.clientX })
+// @ts-expect-error the constructor accesses the overlays option
+new DragOverlay()
+const fill = new FillAttribute({ cursor: false }, { name: 'test' })
+fill.on('setattributeend', event => { event.features.forEach(feature => feature.getGeometry()); event.properties.name })
 const current = new CurrentMap({ condition: () => true })
 current.getCurrentMap()?.getView()
 const clipboard = new CopyPaste({ mapCondition: () => true, condition: () => false, destination: source })

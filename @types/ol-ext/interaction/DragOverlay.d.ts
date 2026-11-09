@@ -1,7 +1,6 @@
 import type { Overlay } from 'ol'
 import { Pointer } from 'ol/interaction'
-import BaseEvent from 'ol/events/Event'
-import type MapBrowserEvent from 'ol/MapBrowserEvent'
+import type BaseEvent from 'ol/events/Event'
 import type { FrameState } from 'ol/Map'
 import type { Coordinate } from 'ol/coordinate'
 import type { EventsKey } from 'ol/events'
@@ -15,14 +14,10 @@ type DragOverlayOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'dragstart' | 'dragging' | 'dragend', DragEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'dragstart' | 'dragging' | 'dragend', Return>;
 
-export enum DragEventTypes {
-  DRAGSTART = 'dragstart',
-  DRAGGING = 'dragging',
-  DRAGEND = 'dragend'
-}
+export type DragEventTypes = 'dragstart' | 'dragging' | 'dragend'
 
 export interface Options {
-  overlay?: Overlay | Overlay[];
+  overlays: Overlay | Overlay[];
   offset?: Size
   centerOnClick?: boolean
 }
@@ -39,7 +34,7 @@ export interface Options {
  *  @param {boolean} options.centerOnClick wheter a click inside the popup should move it to the click coordinates, default false
  */
 export default class DragOverlay extends Pointer {
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /** Add an overlay to the interacton
    * @param {Overlay} ov
@@ -58,18 +53,11 @@ export default class DragOverlay extends Pointer {
   un: DragOverlayOnSignature<void>
 }
 
-export class DragEvent extends BaseEvent {
-  constructor(
-    type: DragEventTypes,
-    overlay: Overlay,
-    originalEvent: MapBrowserEvent,
-    frameState: FrameState,
-    coordinate: Coordinate
-  );
-
+export interface DragEvent extends BaseEvent {
+  type: DragEventTypes;
   overlay: Overlay
 
-  originalEvent: MapBrowserEvent
+  originalEvent: PointerEvent
 
   frameState: FrameState
 
