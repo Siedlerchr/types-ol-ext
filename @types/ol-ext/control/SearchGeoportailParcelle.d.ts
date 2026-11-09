@@ -1,33 +1,65 @@
-import type { Feature } from 'ol'
-import type { Options as SearchJsonOptions } from './SearchJSON'
-import SearchJSON from './SearchJSON'
+import type { Coordinate } from 'ol/coordinate'
+import type { EventsKey } from 'ol/events'
+import type BaseEvent from 'ol/events/Event'
+import type { OnSignature, CombinedOnSignature } from 'ol/Observable'
+import type { SearchOnSignature } from './Search'
+import type { Options as GeoportailOptions } from './SearchGeoportail'
+import SearchGeoportail from './SearchGeoportail'
 
-export interface Options extends SearchJsonOptions {
+export interface Options extends GeoportailOptions {
   className?: string;
   apiKey?: string;
   target?: HTMLElement | string
   authentication?: string;
   label?: string;
   placeholder?: string;
-  prefixPlaceholder?: string,
-  sectionPlaceholder?: string,
-  numberPlaceholder?: string,
-  arrondPlaceholder?: string,
+  prefixLabel?: string;
+  sectionLabel?: string;
+  numberLabel?: string;
+  arrondLabel?: string;
   typing?: number;
   minLength?: number;
   maxItems?: number;
   pageSize?: number;
 }
 
+export interface Parcel {
+  lon: number;
+  lat: number;
+  Commune?: string;
+  CommuneAbsorbee?: string;
+  Section?: string;
+  Numero?: string;
+  [key: string]: unknown;
+}
+
+export interface ParcelEvent extends BaseEvent {
+  type: 'parcelle';
+  search: Parcel;
+  coordinate: Coordinate;
+}
+
+export interface CommuneEvent extends BaseEvent {
+  type: 'commune';
+  search: unknown;
+  coordinate?: Coordinate;
+}
+
+type ParcelOnSignature<Return> = SearchOnSignature<Return> &
+  OnSignature<'parcelle', ParcelEvent, Return> &
+  OnSignature<'commune', CommuneEvent, Return> &
+  CombinedOnSignature<'parcelle' | 'commune', Return>
+
 /**
  * Search places using the French National Base Address (BAN) API.
  *
  * @constructor
- * @extends {ol.control.SearchJSON}
- * @fires select
+ * @extends {ol.control.SearchGeoportail}
+ * @fires commune
+ * @fires parcelle
 
  * @see {@link https://geoservices.ign.fr/documentation/geoservices/geocodage.html} */
-export default class SearchGeoportailParcelle extends SearchJSON {
+export default class SearchGeoportailParcelle extends SearchGeoportail {
   /**
    * @param {string} options.className control class name
    * @param {boolean | undefined} [options.apiKey] the service api key.
@@ -35,10 +67,10 @@ export default class SearchGeoportailParcelle extends SearchJSON {
    * @param {Element | string | undefined} options.target Specify a target if you want the control to be rendered outside of the map's viewport.
    * @param {string | undefined} options.label Text label to use for the search button, default "search"
    * @param {string | undefined} options.placeholder placeholder for city input, default "Choisissez une commune..."
-   * @param {string | undefined} options.prefixPlaceholder placeholder for prefix input, default "Préfixe"
-   * @param {string | undefined} options.sectionPlaceholder placeholder for section input, default "Section"
-   * @param {string | undefined} options.numberPlaceholder placeholder for number input, default "Numéro"
-   * @param {string | undefined} options.arrondPlaceholder placeholder for arrondissement, default "Arrond."
+   * @param {string | undefined} options.prefixLabel label for prefix input, default "Préfixe"
+   * @param {string | undefined} options.sectionLabel label for section input, default "Section"
+   * @param {string | undefined} options.numberLabel label for number input, default "Numéro"
+   * @param {string | undefined} options.arrondLabel label for arrondissement, default "Arrond."
    * @param {number | undefined} options.typing a delay on each typing to start searching (ms), default 500.
    * @param {integer | undefined} options.minLength minimum length to start searching, default 3
    * @param {integer | undefined} options.maxItems maximum number of items to display in the autocomplete list, default 10
@@ -54,7 +86,7 @@ export default class SearchGeoportailParcelle extends SearchJSON {
    *  @param {string} p.Numero
    * @param {boolean} search start a search
    */
-  setParcelle(p?: {
+  setParcelle(p: {
     Commune?: string;
     CommuneAbsorbee?: string;
     Section?: string;
@@ -67,100 +99,22 @@ export default class SearchGeoportailParcelle extends SearchJSON {
   activateParcelle(b: boolean): void;
 
   /** Send search request for a parcelle number
-   * @param {string} search search parcelle number
+   * @param {string} commune Commune code.
+   * @param {string} olcode Old municipality code.
+   * @param {string} prefix District prefix.
+   * @param {string} section Parcel section.
+   * @param {string} numero Parcel number.
    * @param {function} success callback function called on success
-   * @param {function} error callback function called on error
    */
-  searchParcelle(search: string, sucess: (sucess: {
-    lon: number;
-    lat: number;
-  }[]) => any): void /* , error */
+  searchParcelle(commune: string, olcode: string, prefix: string, section: string, numero: string, success: (parcels: Parcel[]) => void): void;
 
-  /** Autocomplete function (ajax request to the server)
-   * @param {string} s search string
-   * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field
-   */
-  autocomplete(s: string, cback: (results: any[]) => void): void;
+  /** Get a commune or parcel input field. */
+  getInputField(what?: 'commune' | 'arrond' | 'prefix' | 'section' | 'numero'): HTMLInputElement;
 
-  /** Send an ajax request (GET)
-   * @param {string} url
-   * @param {function} onsuccess callback
-   * @param {function} onerror callback
-   */
-  ajax(url: string, onsuccess: (...params: any[]) => any, onerror: (...params: any[]) => any): void;
+  /** Clear the parcel list. */
+  clearParcelList(): void;
 
-  /**
-   * @param {string} s the search string
-   * @return {Object} request data (as key:value)
-   * @api
-   */
-  requestData(s: string): { [key: string]: any };
-
-  /**
-   * Handle server response to pass the features array to the display list
-   * @param {any} response server response
-   * @return {Array<any>} an array of feature
-   * @api
-   */
-  handleResponse(response: any): any[];
-
-  /** Get the input field
-   *  @return {Element}
-   *  @api
-   */
-  getInputField(): Element;
-
-  /** Returns the text to be displayed in the menu
-   *  @param {any} f feature to be displayed
-   *  @return {string} the text to be displayed in the index, default f.name
-   *  @api
-   */
-  getTitle(f: Feature): string;
-
-  /** Force search to refresh
-   */
-  search(): void;
-
-  /** Set the input value in the form (for initialisation purpose)
-   *  @param {string} value
-   *  @param {boolean} search to start a search
-   *  @api
-   */
-  setInput(value: string, search?: boolean): void;
-
-  /** A ligne has been clicked in the menu > dispatch event
-   *  @param {any} f the feature, as passed in the autocomplete
-   *  @api
-   */
-  select(f: any): void;
-
-  /** Save history (in the localstorage)
-   */
-  saveHistory(): void;
-
-  /** Restore history (from the localstorage)
-   */
-  restoreHistory(): void;
-
-  /**
-   * Remove previous history
-   */
-  clearHistory(): void;
-
-  /**
-   * Clear the parcel list
-   */
-  clearParcelList(): void
-
-  /**
-   * Get history table
-   */
-  getHistory(): any[];
-
-  /** Test if 2 features are equal
-   * @param {any} f1
-   * @param {any} f2
-   * @return {boolean}
-   */
-  equalFeatures(f1: any, f2: any): boolean;
+  on: ParcelOnSignature<EventsKey>
+  once: ParcelOnSignature<EventsKey>
+  un: ParcelOnSignature<void>
 }

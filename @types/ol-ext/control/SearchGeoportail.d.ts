@@ -50,13 +50,6 @@ export default class SearchGeoportail extends SearchJSON {
  */
   constructor(options?: Options);
 
-  /** Send an ajax request (GET)
-   * @param {string} url
-   * @param {function} onsuccess callback
-   * @param {function} onerror callback
-   */
-  ajax(url: string, onsuccess: (...params: any[]) => any, onerror: (...params: any[]) => any): void;
-
   /**
    * @param {string} s the search string
    * @return {Object} request data (as key:value)

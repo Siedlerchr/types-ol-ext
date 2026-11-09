@@ -19,6 +19,7 @@ import SearchJSON from '../@types/ol-ext/control/SearchJSON'
 import SearchNominatim from '../@types/ol-ext/control/SearchNominatim'
 import SearchPhoton from '../@types/ol-ext/control/SearchPhoton'
 import SearchGPS from '../@types/ol-ext/control/SearchGPS'
+import SearchGeoportailParcelle from '../@types/ol-ext/control/SearchGeoportailParcelle'
 import Popup from '../@types/ol-ext/overlay/Popup'
 import FixedPopup from '../@types/ol-ext/overlay/FixedPopup'
 import PopupFeature from '../@types/ol-ext/overlay/PopupFeature'
@@ -120,6 +121,14 @@ gps.setInput([2, 48])
 gps.setInput()
 gps.autocomplete('2,48')[0].gps.slice()
 gps.on('select', event => event.search.coordinate.slice())
+const parcelSearch = new SearchGeoportailParcelle({ prefixLabel: 'Prefix' })
+parcelSearch.setParcelle({ Section: 'AB', Numero: '12' })
+parcelSearch.getInputField('numero').value = '12'
+parcelSearch.searchParcelle('75056', '', '000', 'AB', '12', parcels => parcels.forEach(parcel => parcel.lon.toFixed()))
+parcelSearch.on('parcelle', event => { event.search.lat; event.coordinate.slice() })
+parcelSearch.on('commune', event => { void event.search })
+// @ts-expect-error parcel fields require an object
+parcelSearch.setParcelle()
 // @ts-expect-error GPS search input is a coordinate
 gps.setInput('2,48')
 const popup = new Popup({ positioning: 'auto', anchor: false, html: 'Hello' })
