@@ -1,4 +1,3 @@
-import type { Layer } from 'ol/layer'
 import { Pointer } from 'ol/interaction'
 import type Map from 'ol/Map'
 import type { Pixel } from 'ol/pixel'
@@ -33,20 +32,6 @@ export default class ClipMap extends Pointer {
   getRadius(): number;
   /** Get position of the clip. */
   getPosition(): Coordinate | null;
-
-  /** Add a layer to clip
-   *  @param {layer|Array<layer>} layer to clip
-   */
-  addLayer(layer: Layer | Layer[]): void;
-
-  /** Remove all layers
-   */
-  removeLayers(): void;
-
-  /** Remove a layer to clip
-   *  @param {layer|Array<layer>} layer to clip
-   */
-  removeLayer(layer: Layer | Layer[]): void;
 
   /** Set position of the clip
    *  @param coordinate Position in map coordinates.

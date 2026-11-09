@@ -34,6 +34,11 @@ import CenterTouch from '../@types/ol-ext/interaction/CenterTouch'
 import TouchCompass from '../@types/ol-ext/interaction/TouchCompass'
 import DrawTouch from '../@types/ol-ext/interaction/DrawTouch'
 import ModifyTouch from '../@types/ol-ext/interaction/ModifyTouch'
+import ClipMap from '../@types/ol-ext/interaction/ClipMap'
+import FocusMap from '../@types/ol-ext/interaction/FocusMap'
+import Synchronize from '../@types/ol-ext/interaction/Synchronize'
+import type { SynchronizedMap } from '../@types/ol-ext/interaction/Synchronize'
+import TinkerBell from '../@types/ol-ext/interaction/TinkerBell'
 import VectorLayer from 'ol/layer/Vector'
 
 const source = new VectorSource()
@@ -122,6 +127,18 @@ const removed: void = modifyTouch.removePoint()
 void removed
 // @ts-expect-error ModifyTouch requires a source or feature collection
 new ModifyTouch({})
+const clipMap = new ClipMap()
+clipMap.getPixelPosition().slice()
+// @ts-expect-error ClipMap clips the map viewport and does not manage layers
+clipMap.addLayer(new VectorLayer({ source }))
+new FocusMap().setMap(null)
+const synchronize = new Synchronize({ active: false })
+synchronize.setMap(null)
+synchronize.syncMaps()
+declare const synchronizedMap: SynchronizedMap
+synchronizedMap.showTarget([0, 0])
+synchronizedMap.hideTarget()
+new TinkerBell({ color: 'white' })
 const current = new CurrentMap({ condition: () => true })
 current.getCurrentMap()?.getView()
 const clipboard = new CopyPaste({ mapCondition: () => true, condition: () => false, destination: source })

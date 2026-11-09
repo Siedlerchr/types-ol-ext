@@ -1,9 +1,16 @@
-import type { Map as _ol_Map_, MapBrowserEvent } from 'ol'
+import type { Map as _ol_Map_ } from 'ol'
+import type { Coordinate } from 'ol/coordinate'
 import { Interaction } from 'ol/interaction'
-import type Event from 'ol/events/Event'
+
+/** Map methods installed by importing the synchronize interaction. */
+export type SynchronizedMap = _ol_Map_ & {
+  showTarget(coordinate?: Coordinate): void;
+  hideTarget(): void;
+}
 
 export interface Options {
-  maps: _ol_Map_[];
+  maps?: _ol_Map_[];
+  active?: boolean;
 }
 
 /** Interaction synchronize
@@ -24,7 +31,7 @@ export default class Synchronize extends Interaction {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Auto activate/deactivate controls in the bar
    * @param {boolean} b activate/deactivate
@@ -33,15 +40,5 @@ export default class Synchronize extends Interaction {
 
   /** Synchronize the maps
    */
-  syncMaps(e: any): void;
-
-  /** Cursor move > tells other maps to show the cursor
-   * @param {event} e "move" event
-   */
-  handleMove_(e: MapBrowserEvent): void;
-
-  /** Cursor out of map > tells other maps to hide the cursor
-   * @param {event} e "mouseOut" event
-   */
-  handleMouseOut_(e: Event): void;
+  syncMaps(): void;
 }
