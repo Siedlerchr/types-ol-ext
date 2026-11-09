@@ -20,9 +20,10 @@ import SearchWikipedia from '../@types/ol-ext/control/SearchWikipedia'
 import SearchNominatim from '../@types/ol-ext/control/SearchNominatim'
 import SearchPhoton from '../@types/ol-ext/control/SearchPhoton'
 import SearchGPS from '../@types/ol-ext/control/SearchGPS'
+import SearchDFCI from '../@types/ol-ext/control/SearchDFCI'
+import { ol_coordinate_toDFCI, ol_coordinate_fromDFCI, ol_coordinate_validDFCICoord } from '../@types/ol-ext/geom/DFCI'
 import SearchGeoportailParcelle from '../@types/ol-ext/control/SearchGeoportailParcelle'
 import SearchGeoportail from '../@types/ol-ext/control/SearchGeoportail'
-import SearchWikipedia from '../@types/ol-ext/control/SearchWikipedia'
 import Popup from '../@types/ol-ext/overlay/Popup'
 import FixedPopup from '../@types/ol-ext/overlay/FixedPopup'
 import PopupFeature from '../@types/ol-ext/overlay/PopupFeature'
@@ -87,7 +88,7 @@ new VideoRecorder().setTooltip('pause', 'Pause')
 declare const routing: RoutingGeoportail
 routing.getDistanceString(1000)
 routing.getTimeString(120)
-const coordinates = new SearchCoordinates()
+const coordinates = new SearchCoordinates({ labelGPS: 'Locate' })
 coordinates.setInput([2, 48])
 coordinates.setInput()
 const wms = new WMSCapabilities({ onselect: layer => layer.getSource() })
@@ -120,6 +121,17 @@ photon.equalFeatures(new Feature(), new Feature())
 photon.reverseData([0, 0]).lon
 photon.reverseGeocode([0, 0])
 const gps = new SearchGPS({ labelGPS: 'Locate' })
+coordinates.on('select', event => event.search.coordinate.slice())
+coordinates.autocomplete('2,48')[0].gps.slice()
+coordinates.setInput()
+const dfci = new SearchDFCI({ getTitle: result => result.name })
+dfci.on('select', event => event.search.coordinate.slice())
+dfci.autocomplete('AB')[0].name.toUpperCase()
+ol_coordinate_toDFCI([0, 1600000])
+ol_coordinate_fromDFCI('AB')
+ol_coordinate_validDFCICoord([0, 1600000])
+// @ts-expect-error coordinate searches return coordinate objects
+dfci.select(new Feature())
 const wikipedia = new SearchWikipedia({ getTitle: result => result.title })
 wikipedia.setLang('de')
 wikipedia.handleResponse(['Paris', ['Paris'], ['City'], ['https://en.wikipedia.org/wiki/Paris']])[0].uri
@@ -210,12 +222,12 @@ void history
 // @ts-expect-error unsupported operator
 selection.addCondition({ op: '!regexep' })
 
-const wikipedia = new SearchWikipedia({ lang: 'de' })
-wikipedia.setLang('en')
-const wikiResults = wikipedia.handleResponse(['map', ['Map'], ['Description'], ['https://en.wikipedia.org/wiki/Map']])
-const wikiTitle: HTMLElement = wikipedia.getTitle(wikiResults[0])
-wikipedia.select(wikiResults[0])
-wikipedia.on('select', event => { event.search.url; event.search.img; event.search.lon })
+const wikipediaExample = new SearchWikipedia({ lang: 'de' })
+wikipediaExample.setLang('en')
+const wikiResults = wikipediaExample.handleResponse(['map', ['Map'], ['Description'], ['https://en.wikipediaExample.org/wiki/Map']])
+const wikiTitle: string | HTMLElement = wikipediaExample.getTitle(wikiResults[0])
+wikipediaExample.select(wikiResults[0])
+wikipediaExample.on('select', event => { event.search.url; event.search.img; event.search.lon })
 // @ts-expect-error autocomplete results contain a uri, not the selected page URL
-wikipedia.select({ title: 'Map', desc: '', url: 'https://example.org' })
+wikipediaExample.select({ title: 'Map', desc: '', url: 'https://example.org' })
 void wikiTitle
