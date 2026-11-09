@@ -8,9 +8,9 @@ import type { ObjectEvent } from 'ol/Object'
 import type { Types } from 'ol/ObjectEventType'
 import type { EventsKey } from 'ol/events'
 
-export type SearchOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+export type SearchOnSignature<Return, Result = any> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'select', SearchEvent, Return> &
+  OnSignature<Types | 'select', SearchEvent<Result>, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'select', Return>;
 
 export type SearchEventType = 'select'
@@ -171,9 +171,9 @@ export default class Search extends ol_control_Control {
   un: SearchOnSignature<void>
 }
 
-export interface SearchEvent extends BaseEvent {
+export interface SearchEvent<Result = any> extends BaseEvent {
   type: SearchEventType;
-  search: any;
+  search: Result;
   /** Some search adapters do not include this field. */
   reverse?: boolean;
   /** Some search adapters do not provide coordinates. */

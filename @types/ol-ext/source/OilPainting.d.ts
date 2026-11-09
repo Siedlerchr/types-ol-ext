@@ -24,5 +24,5 @@ export default class OilPainting extends RasterSource {
 
   /** Set value and force change
    */
-  set(key: string, val: any): void;
+  set(key: string, val: unknown): void;
 }

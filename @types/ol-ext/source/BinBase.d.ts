@@ -39,7 +39,7 @@ export default class BinBase extends VectorSource {
    * @returns The bin geometry, or null or undefined when no geometry is available.
    * @api
    */
-  getGridGeomAt(coord: Coordinate, attributes: { [key: string]: any }): Geometry | null | undefined;
+  getGridGeomAt(coord: Coordinate, attributes: Record<string, unknown>): Geometry | null | undefined;
 
   /** Get the bean at a coord
    * @param {Coordinate} coord

@@ -38,6 +38,10 @@ import Collection from 'ol/Collection'
 
 const source = new VectorSource()
 const search = new SearchFeature({ source })
+search.on('select', event => event.search.getGeometry())
+search.getHistory().forEach(feature => feature.getGeometry())
+// @ts-expect-error feature search selects OpenLayers features
+search.select({ name: 'not a feature' })
 search.setSource(source)
 const selection = new Select({ selectLabel: 'Find', source })
 selection.addCondition({ attr: 'name', op: '!regexp', val: 'test' })

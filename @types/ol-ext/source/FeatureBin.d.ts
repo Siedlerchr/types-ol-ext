@@ -40,5 +40,5 @@ export default class FeatureBin extends BinBase {
    * @returns The matching collector's geometry, or null if no feature matches.
    * @api
    */
-  getGridGeomAt(coord: Coordinate, attributes: { [key: string]: any }): Geometry | null | undefined;
+  getGridGeomAt(coord: Coordinate, attributes: Record<string, unknown>): Geometry | null | undefined;
 }
