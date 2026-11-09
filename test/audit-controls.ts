@@ -20,6 +20,7 @@ import SearchNominatim from '../@types/ol-ext/control/SearchNominatim'
 import SearchPhoton from '../@types/ol-ext/control/SearchPhoton'
 import SearchGPS from '../@types/ol-ext/control/SearchGPS'
 import SearchGeoportailParcelle from '../@types/ol-ext/control/SearchGeoportailParcelle'
+import SearchGeoportail from '../@types/ol-ext/control/SearchGeoportail'
 import Popup from '../@types/ol-ext/overlay/Popup'
 import FixedPopup from '../@types/ol-ext/overlay/FixedPopup'
 import PopupFeature from '../@types/ol-ext/overlay/PopupFeature'
@@ -122,6 +123,12 @@ gps.setInput()
 gps.autocomplete('2,48')[0].gps.slice()
 gps.on('select', event => event.search.coordinate.slice())
 const parcelSearch = new SearchGeoportailParcelle({ prefixLabel: 'Prefix' })
+const geoportailSearch = new SearchGeoportail({ version: 2, position: true, bbox: [0, 0, 1, 1] })
+geoportailSearch.on('select', event => event.search.fulltext.toUpperCase())
+geoportailSearch.searchCommune({ fulltext: 'Paris', x: 2, y: 48 }, results => results[0].fulltext)
+geoportailSearch.handleResponse({ results: [{ fulltext: 'Paris' }] })[0].fulltext
+// @ts-expect-error Geoportail completion results contain display text
+geoportailSearch.select({ x: 2, y: 48 })
 parcelSearch.setParcelle({ Section: 'AB', Numero: '12' })
 parcelSearch.getInputField('numero').value = '12'
 parcelSearch.searchParcelle('75056', '', '000', 'AB', '12', parcels => parcels.forEach(parcel => parcel.lon.toFixed()))

@@ -3,7 +3,7 @@ import type { EventsKey } from 'ol/events'
 import type BaseEvent from 'ol/events/Event'
 import type { OnSignature, CombinedOnSignature } from 'ol/Observable'
 import type { SearchOnSignature } from './Search'
-import type { Options as GeoportailOptions } from './SearchGeoportail'
+import type { Options as GeoportailOptions, GeoportailResult } from './SearchGeoportail'
 import SearchGeoportail from './SearchGeoportail'
 
 export interface Options extends GeoportailOptions {
@@ -41,11 +41,11 @@ export interface ParcelEvent extends BaseEvent {
 
 export interface CommuneEvent extends BaseEvent {
   type: 'commune';
-  search: unknown;
+  search: GeoportailResult;
   coordinate?: Coordinate;
 }
 
-type ParcelOnSignature<Return> = SearchOnSignature<Return> &
+type ParcelOnSignature<Return> = SearchOnSignature<Return, GeoportailResult> &
   OnSignature<'parcelle', ParcelEvent, Return> &
   OnSignature<'commune', CommuneEvent, Return> &
   CombinedOnSignature<'parcelle' | 'commune', Return>
