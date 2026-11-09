@@ -33,6 +33,7 @@ import TouchCursorSelect from '../@types/ol-ext/interaction/TouchCursorSelect'
 import CenterTouch from '../@types/ol-ext/interaction/CenterTouch'
 import TouchCompass from '../@types/ol-ext/interaction/TouchCompass'
 import DrawTouch from '../@types/ol-ext/interaction/DrawTouch'
+import ModifyTouch from '../@types/ol-ext/interaction/ModifyTouch'
 import VectorLayer from 'ol/layer/Vector'
 
 const source = new VectorSource()
@@ -111,6 +112,16 @@ void drawingType
 drawTouch.on('drawend', event => { event.valid; event.feature.getGeometry() })
 // @ts-expect-error DrawTouch has no startDrawing method
 drawTouch.startDrawing()
+const modifyTouch = new ModifyTouch({ source, usePopup: false })
+modifyTouch.setMap(null)
+modifyTouch.showDeleteBt({ type: 'show', feature: new Feature(), coordinate: [0, 0] })
+modifyTouch.showDeleteBt({ type: 'hide', modifying: true })
+modifyTouch.on('showpopup', event => { event.feature.getGeometry(); event.coordinate.slice() })
+modifyTouch.on('hidepopup', event => { event.modifying })
+const removed: void = modifyTouch.removePoint()
+void removed
+// @ts-expect-error ModifyTouch requires a source or feature collection
+new ModifyTouch({})
 const current = new CurrentMap({ condition: () => true })
 current.getCurrentMap()?.getView()
 const clipboard = new CopyPaste({ mapCondition: () => true, condition: () => false, destination: source })
