@@ -47,7 +47,7 @@ export interface Options<Result = any> extends ControlOptions {
  * @fires select
  * @fires change:input
  */
-export default class Search<Result = any> extends ol_control_Control {
+export default class Search<Result = any, Input = string> extends ol_control_Control {
   /**
    * @param {Object=} options
    *  @param {string} options.className control class name
@@ -120,7 +120,7 @@ export default class Search<Result = any> extends ol_control_Control {
    *  @param {boolean} search to start a search
    *  @api
    */
-  setInput(value: string, search?: boolean): void;
+  setInput(value: Input, search?: boolean): void;
 
   /** A line has been clicked in the menu > dispatch event
    * @param {any} f the feature, as passed in the autocomplete

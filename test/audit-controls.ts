@@ -18,6 +18,7 @@ import Search from '../@types/ol-ext/control/Search'
 import SearchJSON from '../@types/ol-ext/control/SearchJSON'
 import SearchNominatim from '../@types/ol-ext/control/SearchNominatim'
 import SearchPhoton from '../@types/ol-ext/control/SearchPhoton'
+import SearchGPS from '../@types/ol-ext/control/SearchGPS'
 import Popup from '../@types/ol-ext/overlay/Popup'
 import FixedPopup from '../@types/ol-ext/overlay/FixedPopup'
 import PopupFeature from '../@types/ol-ext/overlay/PopupFeature'
@@ -114,6 +115,13 @@ photon.equalFeatures(photonResult, photonResult)
 photon.equalFeatures(new Feature(), new Feature())
 photon.reverseData([0, 0]).lon
 photon.reverseGeocode([0, 0])
+const gps = new SearchGPS({ labelGPS: 'Locate' })
+gps.setInput([2, 48])
+gps.setInput()
+gps.autocomplete('2,48')[0].gps.slice()
+gps.on('select', event => event.search.coordinate.slice())
+// @ts-expect-error GPS search input is a coordinate
+gps.setInput('2,48')
 const popup = new Popup({ positioning: 'auto', anchor: false, html: 'Hello' })
 popup.show(true, 'Updated')
 const fixed = new FixedPopup({ positioning: 'top-auto', hook: 'map' })
