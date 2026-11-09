@@ -3,6 +3,10 @@ import Point from 'ol/geom/Point'
 import VectorLayer from 'ol/layer/Vector'
 import VectorSource from 'ol/source/Vector'
 import FeatureAnimation from '../@types/ol-ext/featureanimation/FeatureAnimation'
+import Blink from '../@types/ol-ext/featureanimation/Blink'
+import Fade from '../@types/ol-ext/featureanimation/Fade'
+import Throw from '../@types/ol-ext/featureanimation/Throw'
+import Null from '../@types/ol-ext/featureanimation/Null'
 import type { AnimatedMap } from '../@types/ol-ext/featureanimation/FeatureAnimation'
 import Bounce from '../@types/ol-ext/featureanimation/Bounce'
 import Path from '../@types/ol-ext/featureanimation/Path'
@@ -12,6 +16,12 @@ import { FeatureAnimation as NamedAnimation } from '../@types/ol-ext/featureanim
 
 const feature = new Feature(new Point([0, 0]))
 const animation = new Bounce({ duration: 500 })
+new Blink({ nb: 3 })
+new Fade({ speed: 2 })
+new Throw({ speed: 2, side: 'left' })
+new Null()
+// @ts-expect-error Blink reads its options immediately
+new Blink()
 animation.on('animating', event => { event.feature; event.elapsed; event.style })
 animation.on('drawing', event => { event.style; event.time })
 animation.on('animationend', event => { event.feature })

@@ -6,6 +6,7 @@ import FeatureAnimation from './FeatureAnimation'
  * @extends {featureAnimation}
  */
 export default class Null extends FeatureAnimation {
+  constructor();
   /** Function to perform manipulations onpostcompose.
    * This function is called with an featureAnimationEvent argument.
    * The function will be overridden by the child implementation.

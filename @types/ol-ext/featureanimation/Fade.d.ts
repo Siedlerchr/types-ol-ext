@@ -13,7 +13,7 @@ export default class Fade extends FeatureAnimation {
   /**
    * @param {ol_featureAnimationOptions} options
    */
-  constructor(options?: FeatureAnimationOptions);
+  constructor(options?: Options);
 
   /** Animate
    * @param {featureAnimationEvent} e

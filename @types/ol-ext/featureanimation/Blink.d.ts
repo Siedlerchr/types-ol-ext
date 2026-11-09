@@ -15,7 +15,7 @@ export default class Blink extends FeatureAnimation {
    * @param {ol_featureAnimationOptions} options
    *  @param {Number} options.nb number of blink, default 10
    */
-  constructor(options?: Options)
+  constructor(options: Options)
 
   /** Animate
    * @param {FeatureAnimationEvent} e
