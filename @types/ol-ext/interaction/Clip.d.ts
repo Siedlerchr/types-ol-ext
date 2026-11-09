@@ -1,9 +1,8 @@
-import type { Layer } from 'ol/layer'
+import type BaseLayer from 'ol/layer/Base'
 import { Pointer } from 'ol/interaction'
 import type Map from 'ol/Map'
 import type { Pixel } from 'ol/pixel'
 import type { Coordinate } from 'ol/coordinate'
-import type BaseLayer from 'ol/layer/Base'
 
 export interface Options {
   radius?: number;
@@ -40,7 +39,7 @@ export default class Clip extends Pointer {
   /** Add a layer to clip
    *  @param {layer|Array<layer>} layer to clip
    */
-  addLayer(layer: Layer | Layer[]): void;
+  addLayer(layer: BaseLayer | BaseLayer[]): void;
 
   /** Remove all layers
    */
@@ -49,7 +48,7 @@ export default class Clip extends Pointer {
   /** Remove a layer to clip
    *  @param {layer|Array<layer>} layer to clip
    */
-  removeLayer(layer: Layer | Layer[]): void;
+  removeLayer(layer: BaseLayer | BaseLayer[]): void;
 
   /** Set position of the clip
    *  @param coordinate Position in map coordinates.
@@ -64,7 +63,7 @@ export default class Clip extends Pointer {
   /** Get position of the clip
    * @returns {Pixel} pixel
    */
-  getPixelPosition(): Pixel;
+  getPixelPosition(): Pixel | false;
 
   /**
    * Activate or deactivate the interaction.

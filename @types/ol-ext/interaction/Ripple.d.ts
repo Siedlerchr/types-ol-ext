@@ -4,7 +4,7 @@ import type { Pixel } from 'ol/pixel'
 import type { Layer } from 'ol/layer'
 
 export interface Options {
-  layer?: Layer;
+  layer: Layer;
   radius?: number;
   interval?: number;
 }
@@ -21,16 +21,12 @@ export default class Ripple extends Pointer {
    *  @param {number} options.radius raindrop radius
    *  @param {number} options.interval raindrop interval (in ms), default 1000
    */
-  constructor(options?: Options);
-
-  /** Set the map > start postcompose
-   */
-  setMap(): void;
+  constructor(options: Options);
 
   /** Generate random rain drop
    *  @param {number} interval
    */
-  rains(interval: number): void;
+  rains(interval?: number): void;
 
   /** Disturb water at specified point
    *  @param {Pixel|MapBrowserEvent}

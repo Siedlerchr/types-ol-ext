@@ -5,8 +5,8 @@ import type { Pixel } from 'ol/pixel'
 import type { Map as _ol_Map_ } from 'ol'
 
 export interface Options {
-  color?: Color;
-  fill?: Color;
+  color?: Color | string;
+  fill?: Color | string;
   radius?: number;
 }
 
@@ -26,7 +26,7 @@ export default class Flashlight extends Pointer {
 
   /** Set the map > start postcompose
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Set flashlight radius
    *  @param {number} radius
@@ -38,9 +38,9 @@ export default class Flashlight extends Pointer {
    *    - color {Color} light color, default transparent
    *    - fill {Color} fill color, default rgba(0,0,0,0.8)
    */
-  setColor(options?: {
-    color?: Color;
-    fill?: Color;
+  setColor(options: {
+    color?: Color | string;
+    fill?: Color | string;
   }): void;
 
   /** Set position of the flashlight

@@ -13,6 +13,10 @@ import DrawRegular from '../@types/ol-ext/interaction/DrawRegular'
 import DrawHole from '../@types/ol-ext/interaction/DrawHole'
 import Hover from '../@types/ol-ext/interaction/Hover'
 import LongTouch from '../@types/ol-ext/interaction/LongTouch'
+import Clip from '../@types/ol-ext/interaction/Clip'
+import Flashlight from '../@types/ol-ext/interaction/Flashlight'
+import Ripple from '../@types/ol-ext/interaction/Ripple'
+import VectorLayer from 'ol/layer/Vector'
 
 const source = new VectorSource()
 const hover = new Hover({ layerFilter: layer => layer.getVisible() })
@@ -24,6 +28,17 @@ hover.on('leave', event => {
   event.feature
 })
 new LongTouch({ handleLongTouchEvent: event => { event.coordinate.slice(); event.originalEvent.clientX; event.map?.getView() } })
+const clipped = new Clip()
+const clipPixel: number[] | false = clipped.getPixelPosition()
+void clipPixel
+const flashlight = new Flashlight({ color: 'red' })
+flashlight.setMap(null)
+flashlight.setColor({ fill: 'black' })
+const ripple = new Ripple({ layer: new VectorLayer({ source }) })
+ripple.setMap(null)
+ripple.rains()
+// @ts-expect-error a ripple needs a layer to register its render handler
+new Ripple()
 const current = new CurrentMap({ condition: () => true })
 current.getCurrentMap()?.getView()
 const clipboard = new CopyPaste({ mapCondition: () => true, condition: () => false, destination: source })
