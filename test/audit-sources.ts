@@ -23,6 +23,8 @@ import Overpass from '../@types/ol-ext/source/Overpass'
 import DBPedia, { ol_style_dbPediaStyleFunction, ol_style_clearDBPediaStyleCache } from '../@types/ol-ext/source/DBPedia'
 import WikiCommons from '../@types/ol-ext/source/WikiCommons'
 import Mapillary from '../@types/ol-ext/source/Mapillary'
+import Geoportail from '../@types/ol-ext/source/Geoportail'
+import GeoRSS from '../@types/ol-ext/source/GeoRSS'
 
 const dayNight = new DayNight()
 const separation: number[][] = dayNight.getCoordinates(new Date(), 'line')
@@ -66,6 +68,18 @@ ol_style_clearDBPediaStyleCache()
 const commons = new WikiCommons({ maxResolution: 50 })
 commons.readFeature(inputSource.getFeatures()[0], { title: 'File:Example.jpg', url: 'https://example.com/example.jpg' })
 new Mapillary({ limit: 10 }).clear(true)
+const geoportail = new Geoportail('ORTHOIMAGERY.ORTHOPHOTOS', { maxZoom: 18, key: 'key' })
+new Geoportail({ layer: 'ORTHOIMAGERY.ORTHOPHOTOS' })
+geoportail.setGPPKey('key')
+geoportail.getFeatureInfoUrl([0, 0], 100)
+geoportail.getFeatureInfo([0, 0], 100, { callback: response => { void response } })
+Geoportail.getServiceURL()
+Geoportail.defaultAttribution.toUpperCase()
+new GeoRSS({ url: 'https://example.com/feed.xml' })
+// @ts-expect-error Geoportail requires a layer
+new Geoportail({})
+// @ts-expect-error GeoRSS needs a feed URL
+new GeoRSS()
 const hexBins = new HexBin({ source: inputSource, layout: 'flat' })
 hexBins.setSize(100)
 hexBins.setLayout('pointy')
