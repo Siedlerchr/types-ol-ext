@@ -22,6 +22,10 @@ import FillAttribute from '../@types/ol-ext/interaction/FillAttribute'
 import Blob from '../@types/ol-ext/interaction/Blob'
 import Offset from '../@types/ol-ext/interaction/Offset'
 import Splitter from '../@types/ol-ext/interaction/Splitter'
+import SelectCluster from '../@types/ol-ext/interaction/SelectCluster'
+import SnapGuides from '../@types/ol-ext/interaction/SnapGuides'
+import SnapLayerPixel from '../@types/ol-ext/interaction/SnapLayerPixel'
+import VectorImageLayer from 'ol/layer/VectorImage'
 import VectorLayer from 'ol/layer/Vector'
 
 const source = new VectorSource()
@@ -65,6 +69,14 @@ splitter.on('beforesplit', event => event.feaure.getGeometry())
 splitter.on('aftersplit', event => event.featureAdded.forEach(feature => feature.getGeometry()))
 // @ts-expect-error a source array is not handled by the release implementation
 new Splitter({ source: [source] })
+const selectCluster = new SelectCluster({ circleMaxObjects: 8, wrapX: false })
+selectCluster.setMap(null)
+const snapGuides = new SnapGuides({ vectorClass: VectorImageLayer })
+snapGuides.setMap(null)
+snapGuides.addGuide([[0, 0], [1, 1]]).forEach(feature => feature.getGeometry())
+new SnapLayerPixel({ layer: new VectorLayer({ source }) })
+// @ts-expect-error a pixel snap interaction requires a layer
+new SnapLayerPixel()
 const current = new CurrentMap({ condition: () => true })
 current.getCurrentMap()?.getView()
 const clipboard = new CopyPaste({ mapCondition: () => true, condition: () => false, destination: source })

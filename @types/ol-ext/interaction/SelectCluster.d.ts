@@ -3,9 +3,8 @@ import type Feature from 'ol/Feature'
 import type VectorLayer from 'ol/layer/Vector'
 import type { StyleLike } from 'ol/style/Style'
 import { Select } from 'ol/interaction'
-import type { Coordinate } from 'ol/coordinate'
 import type { Extent } from 'ol/extent'
-import type { Options as SelectOptions } from 'ol/interaction/Select'
+import type { Options as SelectOptions, SelectEvent } from 'ol/interaction/Select'
 import type VectorSource from 'ol/source/Vector'
 import type { Geometry } from 'ol/geom'
 
@@ -14,11 +13,12 @@ export interface Options extends SelectOptions {
   selectCluster?: boolean;
   pointRadius?: number;
   spiral?: boolean;
-  circleMaxObject?: number;
+  circleMaxObjects?: number;
   maxObjects?: number;
   animate?: boolean;
   animationDuration?: number;
   autoClose?: boolean;
+  wrapX?: boolean;
 }
 
 /**
@@ -56,7 +56,7 @@ export default class SelectCluster extends Select {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /**
    * Clear the selection, close the cluster and remove revealed features
@@ -75,7 +75,7 @@ export default class SelectCluster extends Select {
    * @param {Feature} a cluster feature ie. a feature with a 'features' attribute.
    * @api stable
    */
-  selectCluster(a: Feature): void;
+  selectCluster(a: Feature | SelectEvent): void;
 
   /** Helper function to get the extent of a cluster
    * @param {ol.feature} feature
@@ -83,9 +83,4 @@ export default class SelectCluster extends Select {
    */
   getClusterExtent(feature: Feature): Extent | null
 
-  /**
-   * Animate the cluster and spread out the features
-   * @param {Array<Coordinate>} the center of the cluster
-   */
-  animateCluster_(center: Coordinate[], feature: Feature): void;
 }
