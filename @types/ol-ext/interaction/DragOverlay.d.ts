@@ -9,9 +9,9 @@ import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable
 import type { Types } from 'ol/ObjectEventType'
 import type { Size } from 'ol/size'
 
-type DragOverlayOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+export type DragOverlayOnSignature<Return, DraggedEvent extends BaseEvent = DragEvent> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'dragstart' | 'dragging' | 'dragend', DragEvent, Return> &
+  OnSignature<Types | 'dragstart' | 'dragging' | 'dragend', DraggedEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'dragstart' | 'dragging' | 'dragend', Return>;
 
 export type DragEventTypes = 'dragstart' | 'dragging' | 'dragend'
@@ -33,7 +33,7 @@ export interface Options {
  *  @param {ol.Size} options.offset overlay offset, default [0,0]
  *  @param {boolean} options.centerOnClick wheter a click inside the popup should move it to the click coordinates, default false
  */
-export default class DragOverlay extends Pointer {
+export default class DragOverlay<DraggedEvent extends BaseEvent = DragEvent> extends Pointer {
   constructor(options: Options);
 
   /** Add an overlay to the interacton
@@ -46,11 +46,11 @@ export default class DragOverlay extends Pointer {
    */
   removeOverlay(ov: Overlay): void;
 
-  on: DragOverlayOnSignature<EventsKey>
+  on: DragOverlayOnSignature<EventsKey, DraggedEvent>
 
-  once: DragOverlayOnSignature<EventsKey>
+  once: DragOverlayOnSignature<EventsKey, DraggedEvent>
 
-  un: DragOverlayOnSignature<void>
+  un: DragOverlayOnSignature<void, DraggedEvent>
 }
 
 export interface DragEvent extends BaseEvent {

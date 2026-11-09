@@ -26,6 +26,10 @@ import SelectCluster from '../@types/ol-ext/interaction/SelectCluster'
 import SnapGuides from '../@types/ol-ext/interaction/SnapGuides'
 import SnapLayerPixel from '../@types/ol-ext/interaction/SnapLayerPixel'
 import VectorImageLayer from 'ol/layer/VectorImage'
+import TouchCursor from '../@types/ol-ext/interaction/TouchCursor'
+import TouchCursorDraw from '../@types/ol-ext/interaction/TouchCursorDraw'
+import TouchCursorModify from '../@types/ol-ext/interaction/TouchCursorModify'
+import TouchCursorSelect from '../@types/ol-ext/interaction/TouchCursorSelect'
 import VectorLayer from 'ol/layer/Vector'
 
 const source = new VectorSource()
@@ -77,6 +81,22 @@ snapGuides.addGuide([[0, 0], [1, 1]]).forEach(feature => feature.getGeometry())
 new SnapLayerPixel({ layer: new VectorLayer({ source }) })
 // @ts-expect-error a pixel snap interaction requires a layer
 new SnapLayerPixel()
+const cursor = new TouchCursor({ buttons: [{ html: 'Move', click: event => event.preventDefault() }] })
+cursor.setMap(null)
+cursor.setPosition()
+cursor.getPosition()?.slice()
+cursor.getButtonElement(0)?.classList.add('active')
+cursor.on('click', event => event.pixel.slice())
+cursor.on('dragging', event => {
+  if ('pixel' in event) event.pixel.slice()
+  else event.overlay.getPosition()
+})
+const cursorDraw = new TouchCursorDraw({ anchor: 'center' })
+cursorDraw.on('drawend', event => { event.feature.getGeometry(); event.valid })
+const cursorModify = new TouchCursorModify()
+cursorModify.setActive(true)
+const cursorSelect = new TouchCursorSelect({ hitTolerance: 3 })
+cursorSelect.on('select', event => event.selected.forEach(feature => feature.getGeometry()))
 const current = new CurrentMap({ condition: () => true })
 current.getCurrentMap()?.getView()
 const clipboard = new CopyPaste({ mapCondition: () => true, condition: () => false, destination: source })
