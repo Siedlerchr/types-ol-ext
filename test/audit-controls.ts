@@ -37,6 +37,16 @@ import CollectionInput from '../@types/ol-ext/util/input/Collection'
 import Collection from 'ol/Collection'
 
 const source = new VectorSource()
+type Place = { name: string; id: number }
+const places = new Search<Place>({ getTitle: place => place.name, autocomplete: () => [{ name: 'Paris', id: 1 }] })
+places.on('select', event => { const id: number = event.search.id; void id })
+places.getHistory().forEach(place => place.name.toUpperCase())
+// @ts-expect-error search results must match the declared shape
+places.select({ name: 'Paris' })
+const jsonPlaces = new SearchJSON<Place, { places: Place[] }>({ handleResponse: response => response.places })
+jsonPlaces.handleResponse({ places: [{ name: 'Paris', id: 1 }] })[0].id
+// @ts-expect-error the response must have the declared shape
+jsonPlaces.handleResponse({ results: [] })
 const search = new SearchFeature({ source })
 search.on('select', event => event.search.getGeometry())
 search.getHistory().forEach(feature => feature.getGeometry())

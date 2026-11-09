@@ -4,7 +4,7 @@ import type { EventsKey } from 'ol/events'
 import type { Options as SearchOptions, SearchOnSignature } from './Search'
 import Search from './Search'
 
-export interface Options extends SearchOptions {
+export interface Options extends SearchOptions<Feature> {
   className?: string;
   title?: string;
   label?: string;
@@ -27,7 +27,7 @@ export interface Options extends SearchOptions {
  * @fires select
 
  */
-export default class SearchFeature extends Search {
+export default class SearchFeature extends Search<Feature> {
   /**
    * @param {Object=} Control options.
    *  @param {string} options.className control class name
