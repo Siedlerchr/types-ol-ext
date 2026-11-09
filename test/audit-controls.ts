@@ -104,7 +104,11 @@ remoteSearch.on('select', event => { event.search; event.coordinate?.slice() })
 const nominatim = new SearchNominatim()
 nominatim.on('select', event => { event.coordinate.slice() })
 nominatim.reverseGeocode([0, 0], results => { void results })
-const photon = new SearchPhoton({ getTitle: result => result.properties.name })
+const photon = new SearchPhoton({ getTitle: result => result.properties.name || '' })
+const photonResult = { type: 'Feature' as const, geometry: { type: 'Point' as const, coordinates: [2, 48] }, properties: { name: 'Paris' } }
+photon.equalFeatures(photonResult, photonResult)
+// @ts-expect-error Photon compares GeoJSON results, not OpenLayers features
+photon.equalFeatures(new Feature(), new Feature())
 photon.reverseData([0, 0]).lon
 photon.reverseGeocode([0, 0])
 const popup = new Popup({ positioning: 'auto', anchor: false, html: 'Hello' })

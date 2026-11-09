@@ -1,19 +1,32 @@
 import type { Coordinate } from 'ol/coordinate'
+import type { Feature, FeatureCollection, Point } from 'geojson'
 import type { Options as SearchOptions } from './SearchJSON'
 import SearchJSON from './SearchJSON'
 
-export interface Options extends SearchOptions {
+export interface PhotonProperties {
+  housenumber?: string;
+  street?: string;
+  name?: string;
+  label?: string;
+  postcode?: string;
+  city?: string;
+  country?: string;
+  [key: string]: unknown;
+}
+
+export type PhotonResult = Feature<Point, PhotonProperties>
+export type PhotonResponse = FeatureCollection<Point, PhotonProperties>
+
+export interface Options extends SearchOptions<PhotonResult, PhotonResponse> {
   className?: string;
   label?: string;
   placeholder?: string;
   typing?: number;
   minLength?: number;
   maxItems?: number;
-  handleResponse?: ((response: any) => any[]);
   url?: string;
   lang?: string;
   position?: boolean;
-  getTitle?: (f: any) => string;
 }
 
 /**
@@ -24,7 +37,7 @@ export interface Options extends SearchOptions {
  * @fires select
 
  */
-export default class SearchPhoton extends SearchJSON {
+export default class SearchPhoton extends SearchJSON<PhotonResult, PhotonResponse> {
   /**
    * @param {Object=} Control options.
    *  @param {string} options.className control class name
@@ -46,5 +59,5 @@ export default class SearchPhoton extends SearchJSON {
   /** Get longitude and latitude request data for reverse geocoding. */
   reverseData(coord: Coordinate): { lon: number; lat: number };
   /** Reverse geocode a coordinate, optionally receiving the results. */
-  reverseGeocode(coord: Coordinate, callback?: (results: any[]) => void): void;
+  reverseGeocode(coord: Coordinate, callback?: (results: PhotonResult[]) => void): void;
 }
