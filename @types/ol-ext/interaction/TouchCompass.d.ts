@@ -8,7 +8,7 @@ export interface Delta {
 
 export interface Options {
   onDrag?: (delta: Delta, pos: MapBrowserEvent) => void; // TODO not sure
-  Size?: number;
+  size?: number;
   alpha?: number;
 }
 
@@ -20,15 +20,15 @@ export default class TouchCompass extends Pointer {
   /**
    * @param {olx.interaction.TouchCompass} options
    *  - onDrag {function|undefined} Function handling "drag" events. It provides a dpixel and a traction (in projection) vector form the center of the compas
-   *  - Size {Number} Size of the compass in px, default 80
+   *  - size {Number} Size of the compass in px, default 80
    *  - alpha {Number} opacity of the compass, default 0.5
    */
   constructor(options?: Options);
 
-  /** Compass Image as a JS Image object
+  /** Compass image as a canvas.
    * @api
    */
-  compass: HTMLImageElement // not sure
+  compass: HTMLCanvasElement
 
   /**
    * Remove the interaction from its current map, if any,  and attach it to a new
@@ -36,7 +36,7 @@ export default class TouchCompass extends Pointer {
    * @param {_ol_Map_} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /**
    * Activate or deactivate the interaction.

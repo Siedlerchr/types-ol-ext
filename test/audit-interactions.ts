@@ -30,6 +30,9 @@ import TouchCursor from '../@types/ol-ext/interaction/TouchCursor'
 import TouchCursorDraw from '../@types/ol-ext/interaction/TouchCursorDraw'
 import TouchCursorModify from '../@types/ol-ext/interaction/TouchCursorModify'
 import TouchCursorSelect from '../@types/ol-ext/interaction/TouchCursorSelect'
+import CenterTouch from '../@types/ol-ext/interaction/CenterTouch'
+import TouchCompass from '../@types/ol-ext/interaction/TouchCompass'
+import DrawTouch from '../@types/ol-ext/interaction/DrawTouch'
 import VectorLayer from 'ol/layer/Vector'
 
 const source = new VectorSource()
@@ -97,6 +100,17 @@ const cursorModify = new TouchCursorModify()
 cursorModify.setActive(true)
 const cursorSelect = new TouchCursorSelect({ hitTolerance: 3 })
 cursorSelect.on('select', event => event.selected.forEach(feature => feature.getGeometry()))
+new CenterTouch({ handleEvent: event => !!event.pixel }).setMap(null)
+const compass = new TouchCompass({ size: 80 })
+const compassCanvas: HTMLCanvasElement = compass.compass
+void compassCanvas
+compass.setMap(null)
+const drawTouch = new DrawTouch({ type: 'Circle' })
+const drawingType: string = drawTouch.setGeometryType('Polygon')
+void drawingType
+drawTouch.on('drawend', event => { event.valid; event.feature.getGeometry() })
+// @ts-expect-error DrawTouch has no startDrawing method
+drawTouch.startDrawing()
 const current = new CurrentMap({ condition: () => true })
 current.getCurrentMap()?.getView()
 const clipboard = new CopyPaste({ mapCondition: () => true, condition: () => false, destination: source })
