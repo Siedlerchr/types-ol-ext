@@ -11,8 +11,19 @@ import Feature from 'ol/Feature'
 import UndoRedo from '../@types/ol-ext/interaction/UndoRedo'
 import DrawRegular from '../@types/ol-ext/interaction/DrawRegular'
 import DrawHole from '../@types/ol-ext/interaction/DrawHole'
+import Hover from '../@types/ol-ext/interaction/Hover'
+import LongTouch from '../@types/ol-ext/interaction/LongTouch'
 
 const source = new VectorSource()
+const hover = new Hover({ layerFilter: layer => layer.getVisible() })
+hover.setMap(null)
+hover.setFeatureFilter()
+hover.on('enter', event => { event.feature.getGeometry(); event.originalEvent.clientX; event.dragging })
+hover.on('leave', event => {
+  // @ts-expect-error leave events do not carry a feature
+  event.feature
+})
+new LongTouch({ handleLongTouchEvent: event => { event.coordinate.slice(); event.originalEvent.clientX; event.map?.getView() } })
 const current = new CurrentMap({ condition: () => true })
 current.getCurrentMap()?.getView()
 const clipboard = new CopyPaste({ mapCondition: () => true, condition: () => false, destination: source })

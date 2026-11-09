@@ -1,12 +1,11 @@
 import type { Map as _ol_Map_, MapBrowserEvent } from 'ol'
 import { Interaction } from 'ol/interaction'
 import type Event from 'ol/events/Event'
-import type Feature from 'ol/Feature'
+import type { FeatureLike } from 'ol/Feature'
 import type { Layer } from 'ol/layer'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { Pixel } from 'ol/pixel'
 import type { Coordinate } from 'ol/coordinate'
-import type { Geometry } from 'ol/geom'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
@@ -14,22 +13,19 @@ import type { Types } from 'ol/ObjectEventType'
 
 type HoverOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'hover' | 'enter' | 'leave', HoverEvent, Return> &
+  OnSignature<'hover' | 'enter', HoverFeatureEvent, Return> &
+  OnSignature<'leave', HoverLeaveEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'hover' | 'enter' | 'leave', Return>;
 
-export enum HoverEventType {
-  HOVER = 'hover',
-  ENTER = 'enter',
-  LEAVE = 'leave'
-}
+export type HoverEventType = 'hover' | 'enter' | 'leave'
 
 export interface Options {
   cursor?: string;
-  featureFilter?: (feature: Feature, layer: Layer) => boolean;
-  layerFilter?: (feature: Feature) => boolean;
+  featureFilter?: (feature: FeatureLike, layer: Layer | null) => boolean;
+  layerFilter?: (layer: Layer) => boolean;
   layers?: Array<Layer>;
   hitTolerance?: number;
-  handleEvent: (p0: MapBrowserEvent) => boolean;
+  handleEvent?: (event: MapBrowserEvent) => boolean;
 }
 
 /** Interaction hover do to something when hovering a feature
@@ -56,7 +52,7 @@ export default class Hover extends Interaction {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /**
    * Set cursor on hover
@@ -68,12 +64,12 @@ export default class Hover extends Interaction {
   /** Feature filter to get only one feature
    * @param {function} filter a function with two arguments, the feature and the layer of the feature. Return true to select the feature
    */
-  setFeatureFilter(filter: (feature: Feature, layer: Layer) => boolean): void;
+  setFeatureFilter(filter?: (feature: FeatureLike, layer: Layer | null) => boolean): void;
 
   /** Feature filter to get only one feature
    * @param {function} filter a function with one argument, the layer to test. Return true to test the layer
    */
-  setLayerFilter(filter: (layer: Layer) => boolean): void;
+  setLayerFilter(filter?: (layer: Layer) => boolean): void;
 
   /** Activate / deactivate interaction
    * @param {boolean} b
@@ -87,27 +83,21 @@ export default class Hover extends Interaction {
   un: HoverOnSignature<void>
 }
 
-export class HoverEvent extends BaseEvent {
-  constructor(
-    type: HoverEventType,
-    feature: Feature<Geometry>,
-    layer: Layer,
-    coordinate: Coordinate,
-    pixel: Pixel,
-    map: _ol_Map_,
-    originalEvent: BaseEvent,
-    dragging: any // TODO
-  );
+export interface HoverEvent extends BaseEvent {
+  type: HoverEventType;
+  coordinate: Coordinate;
+  pixel: Pixel;
+  map: _ol_Map_;
+  originalEvent: PointerEvent;
+  dragging: boolean;
+}
 
-  layer: Layer
+export interface HoverFeatureEvent extends HoverEvent {
+  type: 'hover' | 'enter';
+  feature: FeatureLike;
+  layer: Layer | null;
+}
 
-  coordinate: Coordinate
-
-  pixel: Pixel
-
-  map: _ol_Map_
-
-  originalEvent: BaseEvent
-
-  dragging: any // TODO
+export interface HoverLeaveEvent extends HoverEvent {
+  type: 'leave';
 }
