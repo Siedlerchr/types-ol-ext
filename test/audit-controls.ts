@@ -102,8 +102,11 @@ remoteSearch.autocomplete('Place', results => { void results })
 remoteSearch.ajax('/search', {}, response => { void response })
 remoteSearch.on('select', event => { event.search; event.coordinate?.slice() })
 const nominatim = new SearchNominatim()
-nominatim.on('select', event => { event.coordinate.slice() })
-nominatim.reverseGeocode([0, 0], results => { void results })
+nominatim.on('select', event => { event.coordinate.slice(); event.search.display_name.toUpperCase() })
+nominatim.reverseGeocode([0, 0], results => { results.forEach(result => { if ('error' in result) void result.error }) })
+nominatim.select({ display_name: 'Paris', lon: '2.35', lat: '48.86' })
+// @ts-expect-error a Nominatim result needs coordinates
+nominatim.select({ display_name: 'Paris' })
 const photon = new SearchPhoton({ getTitle: result => result.properties.name || '' })
 const photonResult = { type: 'Feature' as const, geometry: { type: 'Point' as const, coordinates: [2, 48] }, properties: { name: 'Paris' } }
 photon.equalFeatures(photonResult, photonResult)
