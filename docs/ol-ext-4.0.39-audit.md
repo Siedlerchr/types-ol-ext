@@ -90,4 +90,6 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `control/Button` and `Toggle`: checked constructor forwarding, optional subbar and interaction, nullable map detachment, and active/disable events. Button supports element content and may return null for disabled state when configured as a text button. Toggle reads `autoActivate`; the documented `autoActive` is ignored. Type tests cover the corrected declarations; button interaction was not browser-tested.
 
+- `control/GeolocationBar` and `GeolocationButton`: declared the bar options forwarded to GeolocationDraw, nullable map detachment, and the button’s position event (which can omit its coordinate). Removed redundant inherited bar declarations that narrowed base signatures. Type tests cover these changes; geolocation and browser behavior were not exercised.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

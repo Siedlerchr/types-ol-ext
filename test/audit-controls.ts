@@ -1,3 +1,4 @@
+import GeolocationButton from '../@types/ol-ext/control/GeolocationButton'
 import Button from '../@types/ol-ext/control/Button'
 import Toggle from '../@types/ol-ext/control/Toggle'
 import Bar from '../@types/ol-ext/control/Bar'
@@ -273,3 +274,10 @@ const requiredSubBar: Bar = auditToggle.getSubBar()
 // @ts-expect-error A toggle may not have an interaction.
 const requiredInteraction: import('ol/interaction/Interaction').default = auditToggle.getInteraction()
 void [requiredSubBar, requiredInteraction]
+
+const geoBar = new GeolocationBar({ source: new VectorSource(), zoom: 15, minZoom: 10, tolerance: 5, followTrack: 'auto', minAccuracy: 100, position: 'left-top' })
+geoBar.setMap(null)
+geoBar.deactivateControls()
+const geoButton = new GeolocationButton({ delay: 1000 })
+geoButton.on('position', event => { const coordinate: import('ol/coordinate').Coordinate | undefined = event.coordinate; void coordinate })
+geoButton.on('change:active', event => { void event.active })
