@@ -109,4 +109,6 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `control/Globe`: corrected optional alignment and show argument, string positions, and map detachment. When a target is supplied upstream does not create the pointer, but `setCenter` dereferences it; globe interaction was not browser-tested. Type checks cover corrected signatures.
 
+- `control/Overview`: corrected optional projection, layers and alignment, supported layer collections and groups, elastic pan option, string positions, and nullable map detachment. The elastic easing helper is local and `setView` is private. Type tests cover the corrected API; overview interaction was not browser-tested.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

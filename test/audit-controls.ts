@@ -1,3 +1,4 @@
+import Overview from '../@types/ol-ext/control/Overview'
 import Globe from '../@types/ol-ext/control/Globe'
 import Disable from '../@types/ol-ext/control/Disable'
 import Cloud from '../@types/ol-ext/control/Cloud'
@@ -379,3 +380,11 @@ const globe = new Globe({ follow: true, align: 'top-right' })
 globe.setMap(null)
 globe.show()
 globe.setPosition('bottom-left')
+
+const overview = new Overview({ align: 'top-right', elasticPan: true })
+overview.setMap(null)
+overview.setPosition('bottom-left')
+const overviewMap: import('ol/Map').default = overview.getOverviewMap()
+// @ts-expect-error The easing helper is local to the constructor.
+overview.elasticFn(2, 0.3)
+void overviewMap
