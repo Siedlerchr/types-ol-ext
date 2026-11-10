@@ -6,7 +6,7 @@ import type { Options as DrawOptions, DrawEvent } from 'ol/interaction/Draw'
 import Draw from 'ol/interaction/Draw'
 import type Collection from 'ol/Collection'
 import type { EventsKey } from 'ol/events'
-import type { ModifyEvent } from 'ol/interaction/Modify'
+import type BaseEvent from 'ol/events/Event'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Types } from 'ol/ObjectEventType'
@@ -16,11 +16,13 @@ import type { Geometry, Polygon } from 'ol/geom'
 
 type DrawHoleOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'drawabort' | 'drawend' | 'drawstart', DrawEvent, Return> &
-  OnSignature<Types | 'modifyend' | 'modifystart', ModifyEvent, Return> &
+  OnSignature<'drawabort' | 'drawstart', DrawEvent, Return> &
+  OnSignature<'drawend', DrawHoleEndEvent, Return> &
+  OnSignature<'modifyend' | 'modifystart', DrawHoleModifyEvent, Return> &
+  OnSignature<'drawabort' | 'drawend' | 'drawstart', DrawEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawabort' | 'drawend' | 'drawstart' | 'modifyend' | 'modifystart', Return>;
 
-export interface Options extends DrawOptions {
+export interface Options extends Omit<DrawOptions, 'type'> {
   layers?: VectorLayer<VectorSource<Feature<Geometry>>>[] | ((l: Layer) => boolean);
   featureFilter?: Feature[] | Collection<Feature> | ((feature: Feature, layer: Layer) => boolean);
   style?: StyleLike;
@@ -52,7 +54,7 @@ export default class DrawHole extends Draw {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /**
    * Activate/deactivate the interaction
@@ -71,11 +73,22 @@ export default class DrawHole extends Draw {
    * Get the current polygon to hole
    * @return {Polygon}
    */
-  getPolygon(): Polygon;
+  getPolygon(): Polygon | undefined;
 
   on: DrawHoleOnSignature<EventsKey>
 
   once: DrawHoleOnSignature<EventsKey>
 
   un: DrawHoleOnSignature<void>
+}
+
+/** The selected polygon feature and the drawn hole. */
+export interface DrawHoleEndEvent extends DrawEvent {
+  hole: Feature<Polygon>;
+}
+
+/** Modification events are plain objects with the affected feature array. */
+export interface DrawHoleModifyEvent extends BaseEvent {
+  type: 'modifystart' | 'modifyend';
+  features: Feature[];
 }

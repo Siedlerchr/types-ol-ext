@@ -207,6 +207,11 @@ regular.on('drawcancel', event => {
 })
 const hole = new DrawHole()
 hole.on('drawstart', event => event.feature.getGeometry())
+hole.on('drawend', event => { event.hole.getGeometry(); event.feature.getGeometry() })
+hole.on('modifyend', event => event.features[0].getGeometry())
+hole.setMap(null)
+hole.getPolygon()?.getCoordinates()
+new DrawHole({ layers: [] })
 // @ts-expect-error DrawRegular dispatches drawcancel, not drawabort
 regular.on('drawabort', () => {})
 // @ts-expect-error condition must be a function
