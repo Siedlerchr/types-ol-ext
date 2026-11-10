@@ -32,6 +32,9 @@ import { getAdjacent } from '../@types/ol-ext/geom/geohash'
 import { ol_geom_GPAltiCode, ol_coordinate_GPAltiCode } from '../@types/ol-ext/geom/GPAltiCode'
 import scribbleFill from '../@types/ol-ext/geom/Scribble'
 import '../@types/ol-ext/geom/LineStringSplitAt'
+import cspline from '../@types/ol-ext/render/Cspline'
+import InseeGrid from '../@types/ol-ext/render/InseeGrid'
+import type { PulseMap } from '../@types/ol-ext/render/Pulse'
 import Geoportail from '../@types/ol-ext/source/Geoportail'
 import GeoRSS from '../@types/ol-ext/source/GeoRSS'
 
@@ -49,6 +52,14 @@ ol_coordinate_GPAltiCode([[0, 0], [1, 1]], { success: points => points[0].slice(
 // @ts-expect-error point geocoding callbacks receive a point geometry
 ol_geom_GPAltiCode(new Point([0, 0]), { success: (line: LineString) => line.getLength() })
 const lineGeometry = new LineString([[0, 0], [2, 2]])
+cspline([[0, 0], [1, 1]], { resolution: 1, normalize: true })
+lineGeometry.cspline({ pointsPerSeg: 4 }).getType()
+const inseeGrid = new InseeGrid({ size: 200 })
+inseeGrid.getExtent().slice()
+inseeGrid.getGridAtCoordinate([0, 0]).getCoordinates()
+InseeGrid.extent.slice()
+declare const pulseMap: PulseMap
+pulseMap.pulse([0, 0], { amplitude: 0.5 })
 lineGeometry.splitAt([1, 1]).forEach(line => line.getCoordinates())
 lineGeometry.splitAt()
 scribbleFill(new Polygon([]), { interval: 5 })?.getType()
