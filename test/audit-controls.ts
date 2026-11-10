@@ -1,3 +1,5 @@
+import Gauge from '../@types/ol-ext/control/Gauge'
+import ProgressBar from '../@types/ol-ext/control/ProgressBar'
 import GridReference from '../@types/ol-ext/control/GridReference'
 import Graticule from '../@types/ol-ext/control/Graticule'
 import Compass from '../@types/ol-ext/control/Compass'
@@ -331,3 +333,12 @@ gridReference.on('select', event => { const feature: Feature = event.feature; vo
 // @ts-expect-error An unattached grid may not have a reference.
 const requiredReference: string = gridReference.getReference([1, 1])
 void [gridReferenceValue, verticalIndex, requiredReference]
+
+const gauge = new Gauge()
+gauge.setTitle()
+const gaugeValue: number | undefined = gauge.val()
+const setGaugeValue: number = gauge.val(42)
+// @ts-expect-error A gauge can have no initial value.
+const requiredGaugeValue: number = gauge.val()
+new ProgressBar().setLayers()
+void [gaugeValue, setGaugeValue, requiredGaugeValue]

@@ -99,4 +99,6 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `control/Graticule` and `GridReference`: corrected precision and stroke options, scalar formatter input, grid reference nullability, numeric vertical index and plain selection event. GridReference dereferences its source in `setMap` even when none was provided; attaching without a source throws upstream. Type tests exercise corrected signatures; rendering was not browser-tested.
 
+- `control/Gauge` and `ProgressBar`: Gauge has no initial value unless one is provided, and its setter returns the supplied value; ProgressBar can clear its layer listeners without an argument. Type tests cover both. Upstream ProgressBar assumes each supplied layer has a source; tile loading was not browser-tested.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

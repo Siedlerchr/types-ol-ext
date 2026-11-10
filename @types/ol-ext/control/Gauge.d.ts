@@ -26,11 +26,12 @@ export default class Gauge extends ol_control_Control {
   /** Set the control title
    * @param {string} title
    */
-  setTitle(title: string): void;
+  setTitle(title?: string): void;
 
   /** Set/get the gauge value
    * @param {number|undefined} v the value or undefined to get it
    * @return {number} the value
    */
-  val(v: number | undefined): number;
+  val(v: number): number;
+  val(v?: undefined): number | undefined;
 }

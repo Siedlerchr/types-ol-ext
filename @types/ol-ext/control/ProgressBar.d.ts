@@ -34,5 +34,5 @@ export default class ProgressBar extends Control {
   /** Use a list of tile layer to shown tile load
    * @param {ol_layer_Layer|Array<ol_layer_Layer>} layers a layer or a list of layer
    */
-  setLayers(layers: Layer | Layer[]): void;
+  setLayers(layers?: Layer | Layer[]): void;
 }
