@@ -39,6 +39,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/LayerPopup` and `LayerSwitcherImage`: their initial drawing adds `ol-layer-hidden` when `testLayerVisibility` returns true, opposite to the base switcher’s view-change handler. `control/LayerSwitcher` reads `onextent` rather than `onExtent`; keyboard reordering emits `reorder-end` without a group. These observations are from source and have not been browser-reproduced.
 
+- `control/LayerShop`: its constructor overwrites the supplied `selection` and `noScroll` options with true. This is a source observation; UI behavior was not browser-tested.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -139,5 +141,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `control/FeatureList`: corrected selection and scrolling return values, optional feature reset, sort state and columns, button callback, and row/collapse/resize/sort event payloads. Its `setMap` dereferences the supplied map and accumulates size listeners, so detaching is broken upstream. Type tests cover corrected APIs; table and pointer behavior were not browser-tested.
 
 - `control/LayerSwitcher`, `LayerPopup`, and `LayerSwitcherImage`: corrected options, base-layer and group inputs, nullable selection and detachment, opacity setter, and plain event payloads including keyboard and reorder events. Variant list rendering overrides were checked. Type tests cover signatures; layer interactions were not browser-tested.
+
+- `control/LayerShop`: checked the inherited switcher API, control bars and map lifecycle. Replaced the untyped map argument with map or null; type tests cover detachment and bar methods. UI behavior was not browser-tested.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

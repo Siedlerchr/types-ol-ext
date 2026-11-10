@@ -1,3 +1,4 @@
+import LayerShop from '../@types/ol-ext/control/LayerShop'
 import LayerSwitcher from '../@types/ol-ext/control/LayerSwitcher'
 import LayerPopup from '../@types/ol-ext/control/LayerPopup'
 import LayerSwitcherImage from '../@types/ol-ext/control/LayerSwitcherImage'
@@ -437,3 +438,11 @@ layerSwitcher.on('layer:keydown', event => { void event.originalEvent.key })
 new LayerPopup().drawList(document.createElement('ul'), [])
 new LayerSwitcherImage().drawList(document.createElement('ul'), [])
 void selectedLayer
+
+const layerShop = new LayerShop()
+layerShop.setMap(null)
+const layerShopBar: Element = layerShop.getBarElement('bottom')
+layerShop.addControl(new Button(), 'top')
+// @ts-expect-error Map must be an OpenLayers map or null.
+layerShop.setMap('map')
+void layerShopBar
