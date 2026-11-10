@@ -1,3 +1,5 @@
+import Status from '../@types/ol-ext/control/Status'
+import Notification from '../@types/ol-ext/control/Notification'
 import Gauge from '../@types/ol-ext/control/Gauge'
 import ProgressBar from '../@types/ol-ext/control/ProgressBar'
 import GridReference from '../@types/ol-ext/control/GridReference'
@@ -342,3 +344,11 @@ const setGaugeValue: number = gauge.val(42)
 const requiredGaugeValue: number = gauge.val()
 new ProgressBar().setLayers()
 void [gaugeValue, setGaugeValue, requiredGaugeValue]
+
+const statusControl = new Status({ status: { count: 1 }, position: 'center' })
+statusControl.status()
+statusControl.show()
+statusControl.setPosition('center')
+new Notification().show(null, 500)
+// @ts-expect-error Status visibility must be boolean.
+new Status({ visible: 'yes' })

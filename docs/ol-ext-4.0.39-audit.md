@@ -101,4 +101,6 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `control/Gauge` and `ProgressBar`: Gauge has no initial value unless one is provided, and its setter returns the supplied value; ProgressBar can clear its layer listeners without an argument. Type tests cover both. Upstream ProgressBar assumes each supplied layer has a source; tile loading was not browser-tested.
 
+- `control/Status` and `Notification`: corrected Status options, supported object content, center position, optional show/content arguments, and Notification’s null content. Status `isShown()` returns true when its inline display is none in this release; Notification does not dispatch the documented visibility event. Type tests cover signatures; timed visibility and DOM behavior were not browser-tested.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
