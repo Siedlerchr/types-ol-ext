@@ -97,4 +97,6 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `control/Target`, `Compass`, and `CenterPosition`: checked public methods and constructor handling. Target stores an array even when given one style; its inherited style component helpers expect a single Style and are incompatible with that array. Compass reads `rotateWithView`, accepts an omitted image, and inherits the base style setter; CenterPosition also accepts a default style. Type checks cover the corrected API; canvas rendering was not browser-tested.
 
+- `control/Graticule` and `GridReference`: corrected precision and stroke options, scalar formatter input, grid reference nullability, numeric vertical index and plain selection event. GridReference dereferences its source in `setMap` even when none was provided; attaching without a source throws upstream. Type tests exercise corrected signatures; rendering was not browser-tested.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

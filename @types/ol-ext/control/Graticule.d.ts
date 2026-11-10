@@ -2,8 +2,6 @@ import type { Map } from 'ol'
 import type { Fill, Stroke, Style } from 'ol/style'
 import type { Options as ControlOptions } from 'ol/control/Control'
 import type { ProjectionLike } from 'ol/proj'
-import type { Coordinate } from 'ol/coordinate'
-import type { position } from './control'
 import CanvasBase from './CanvasBase'
 
 export interface Options extends ControlOptions {
@@ -14,10 +12,11 @@ export interface Options extends ControlOptions {
   stepCoord?: number;
   spacing?: number;
   intervals?: number[];
-  precison?: number;
+  precision?: number;
+  stroke?: boolean;
   borderWidth?: number;
   margin?: number;
-  formatCoord?: (coordinate: Coordinate, position: position) => string;
+  formatCoord?: (coordinate: number, position: 'top' | 'bottom' | 'left' | 'right') => string | number;
 }
 
 /** Draw a graticule on the map.
@@ -42,6 +41,8 @@ export default class Graticule extends CanvasBase {
    *  @param {number} options.formatCoord a function that takes a coordinate and a position and return the formated coordinate
    */
   constructor(options?: Options);
+
+  formatCoord: NonNullable<Options['formatCoord']>;
 
   /**
    * Remove the control from its current map and attach it to the new map.

@@ -1,3 +1,5 @@
+import GridReference from '../@types/ol-ext/control/GridReference'
+import Graticule from '../@types/ol-ext/control/Graticule'
 import Compass from '../@types/ol-ext/control/Compass'
 import CenterPosition from '../@types/ol-ext/control/CenterPosition'
 import Style from 'ol/style/Style'
@@ -314,3 +316,18 @@ compass.setStyle(new Style())
 const targetStyles: Array<Style | undefined> = new Target().getStyle()
 new CenterPosition().setStyle()
 void targetStyles
+
+const graticule = new Graticule({ precision: 0.1, stroke: false, formatCoord: (coordinate, position) => `${position}: ${coordinate.toFixed(1)}` })
+const formattedCoordinate: string | number = graticule.formatCoord(1, 'top')
+// @ts-expect-error The formatter receives a scalar, not a coordinate array.
+graticule.formatCoord([1, 2], 'top')
+void formattedCoordinate
+
+const gridReference = new GridReference({ extent: [0, 0, 10, 10], size: [2, 2], source: new VectorSource(), className: 'grid' })
+const gridReferenceValue: string | undefined = gridReference.getReference([1, 1])
+const verticalIndex: number = gridReference.getVIndex(0)
+gridReference.setStyle(new Style())
+gridReference.on('select', event => { const feature: Feature = event.feature; void feature })
+// @ts-expect-error An unattached grid may not have a reference.
+const requiredReference: string = gridReference.getReference([1, 1])
+void [gridReferenceValue, verticalIndex, requiredReference]

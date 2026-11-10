@@ -2,29 +2,28 @@ import type { Map as _ol_Map_ } from 'ol'
 import type Collection from 'ol/Collection'
 import type { Coordinate } from 'ol/coordinate'
 import type Feature from 'ol/Feature'
-import type { Style, Stroke, Fill } from 'ol/style'
+import type { Style } from 'ol/style'
 import type { Extent } from 'ol/extent'
 import type { Size } from 'ol/size'
 import type { Vector as VectorSource } from 'ol/source'
 import type { EventsKey } from 'ol/events'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Types } from 'ol/ObjectEventType'
 import CanvasBase from './CanvasBase'
 import type { Options as CanvasOptions } from './CanvasBase'
 
-type GridReferenceOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+type GridReferenceOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
   OnSignature<Types | 'select', GridReferenceSelectEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'select', Return>;
 
-export enum GridReferenceEventType {
-  SELECT = 'select',
-}
+export type GridReferenceEventType = 'select'
 
 export interface Options extends CanvasOptions {
   style?: Style;
+  className?: string;
   maxResolution?: number;
   extent?: Extent;
   size?: Size;
@@ -96,7 +95,7 @@ export default class GridReference extends CanvasBase {
    * @returns {string}
    * @api
    */
-  getVIndex(index: number): string;
+  getVIndex(index: number): number;
 
   /** Get horizontal index (A,B,C...)
    * @param {number} index
@@ -105,7 +104,7 @@ export default class GridReference extends CanvasBase {
    */
   getHIndex(index: number): string;
 
-  getReference(coords: Coordinate): string;
+  getReference(coords: Coordinate): string | undefined;
 
   /**
    * Remove the control from its current map and attach it to the new map.
@@ -116,45 +115,6 @@ export default class GridReference extends CanvasBase {
    */
   setMap(map: _ol_Map_ | null): void;
 
-  /** Get canvas overlay
-   */
-  getCanvas(map: _ol_Map_ | null): HTMLCanvasElement | null;
-
-  /** Set Style
-   * @api
-   */
-  setStyle(): void;
-
-  /** Get style
-   * @api
-   */
-  getStyle(): Style;
-
-  /** Get stroke
-   * @api
-   */
-  getStroke(): Stroke;
-
-  /** Get fill
-   * @api
-   */
-  getFill(): Fill;
-
-  /** Get stroke
-   * @api
-   */
-  getTextStroke(): Stroke;
-
-  /** Get text fill
-   * @api
-   */
-  getTextFill(): Fill;
-
-  /** Get text font
-   * @api
-   */
-  getTextFont(): string;
-
   on: GridReferenceOnSignature<EventsKey>
 
   once: GridReferenceOnSignature<EventsKey>
@@ -162,8 +122,7 @@ export default class GridReference extends CanvasBase {
   un: GridReferenceOnSignature<void>
 }
 
-export class GridReferenceSelectEvent extends BaseEvent {
-  constructor(type: GridReferenceEventType, feature: Feature);
-
-  feature: Feature
+export interface GridReferenceSelectEvent extends BaseEvent {
+  type: GridReferenceEventType;
+  feature: Feature;
 }
