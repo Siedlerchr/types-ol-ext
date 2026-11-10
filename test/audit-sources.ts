@@ -26,6 +26,10 @@ import Mapillary from '../@types/ol-ext/source/Mapillary'
 import { ol_coordinate_findSegment, ol_coordinate_getGeomCenter, ol_coordinate_splitH, ol_coordinate_sampleAt, ol_geom_createFromType, extentIntersection } from '../@types/ol-ext/geom/GeomUtils'
 import LineString from 'ol/geom/LineString'
 import Polygon from 'ol/geom/Polygon'
+import Point from 'ol/geom/Point'
+import convexHull from '../@types/ol-ext/geom/ConvexHull'
+import { getAdjacent } from '../@types/ol-ext/geom/geohash'
+import { ol_geom_GPAltiCode, ol_coordinate_GPAltiCode } from '../@types/ol-ext/geom/GPAltiCode'
 import Geoportail from '../@types/ol-ext/source/Geoportail'
 import GeoRSS from '../@types/ol-ext/source/GeoRSS'
 
@@ -35,6 +39,13 @@ const both: number[][][] = dayNight.getCoordinates(undefined, 'daynight')
 dayNight.getSunPosition(new Date())
 DayNight.getNightLat(0, new Date())
 const inputSource = new VectorSource()
+convexHull([[0, 0], [1, 1], [1, 0]])[0].slice()
+new Point([0, 0]).convexHull()
+getAdjacent('u09', 'n')
+ol_geom_GPAltiCode(new Point([0, 0]), { success: point => point.getCoordinates() })
+ol_coordinate_GPAltiCode([[0, 0], [1, 1]], { success: points => points[0].slice(), sampling: 2 })
+// @ts-expect-error point geocoding callbacks receive a point geometry
+ol_geom_GPAltiCode(new Point([0, 0]), { success: (line: LineString) => line.getLength() })
 const lineGeometry = new LineString([[0, 0], [2, 2]])
 lineGeometry.sampleAt(1).getCoordinates()
 ol_coordinate_getGeomCenter(lineGeometry).slice()

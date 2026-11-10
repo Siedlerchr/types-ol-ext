@@ -1,13 +1,15 @@
 import type { ProjectionLike } from 'ol/proj'
-import type { Geometry } from 'ol/geom'
+import type { Point, LineString } from 'ol/geom'
 import type { Coordinate } from 'ol/coordinate'
+import type { AjaxEvent } from '../util/Ajax'
 
-export interface Options {
+export interface Options<Result = Point | LineString> {
   projection?: ProjectionLike;
   sampling?: number;
   samplingDist?: number;
-  success?: (result: Geometry) => void;
-  error?: (error: any) => void;
+  minZ?: number;
+  success?: (result: Result) => void;
+  error?: (error: AjaxEvent) => void;
 }
 
 /** French Geoportail alti coding
@@ -20,7 +22,8 @@ export interface Options {
  *  @param {string} options.success a function that takes the resulting XYZ geometry
  *  @param {string} options.error
  */
-export function ol_geom_GPAltiCode(geom: Geometry, options: Options): void;
+export function ol_geom_GPAltiCode(geom: Point, options?: Options<Point>): void;
+export function ol_geom_GPAltiCode(geom: LineString, options?: Options<LineString>): void;
 
 /** Calculate elevation on coordinates or on a set of coordinates
  * @param {ol.coordinate|Array<ol.coordinate>} coord coordinate or an array of coordinates
@@ -29,8 +32,5 @@ export function ol_geom_GPAltiCode(geom: Geometry, options: Options): void;
  *  @param {string} options.success a function that takes the resulting XYZ coordinates
  *  @param {string} options.error
  */
-export function ol_coordinate_GPAltiCode(coord: Coordinate | Coordinate[], options: {
-  projection?: ProjectionLike,
-  success?: (g: Coordinate) => void,
-  error?: (e: any) => void
-}): void;
+export function ol_coordinate_GPAltiCode(coord: Coordinate, options?: Omit<Options<Coordinate>, 'minZ'>): void;
+export function ol_coordinate_GPAltiCode(coord: Coordinate[], options?: Omit<Options<Coordinate[]>, 'minZ'>): void;
