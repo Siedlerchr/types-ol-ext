@@ -159,6 +159,8 @@ clipboard.on('paste', event => { event.features; event.time })
 const modify = new ModifyFeature({ sources: [source], cursor: 'pointer' })
 modify.setMap(null)
 modify.on('modifying', event => { event.coordinate; event.originalEvent; event.features })
+modify.on('modifystart', event => event.coordinate?.slice())
+modify.on('select', event => { event.selected.forEach(feature => feature.getGeometry()); event.deselected[0]?.getGeometry() })
 const closest = modify.getNearestCoord([0, 0], new Point([0, 0]))
 if (closest) closest.coord
 const split = new Split({ featureStyle: false })

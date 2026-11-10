@@ -16,8 +16,10 @@ import type { Types } from 'ol/ObjectEventType'
 
 type ModifyFeatureOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'modifyend' | 'modifystart' | 'modifying', ModifyEvent, Return> &
-  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'modifyend' | 'modifystart' | 'modifying', Return>;
+  OnSignature<'modifyend' | 'modifystart', ModifyEvent, Return> &
+  OnSignature<'modifying', ModifyingEvent, Return> &
+  OnSignature<'select', ModifySelectEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'modifyend' | 'modifystart' | 'modifying' | 'select', Return>;
 
 export type ModifyingEventType = 'modifying'
 export type ModifyEventType = 'modifystart' | 'modifyend'
@@ -132,6 +134,20 @@ export default class ModifyFeature extends Interaction {
 export interface ModifyEvent extends BaseEvent {
   type: ModifyEventType | ModifyingEventType;
   features: Feature<Geometry>[];
+  /** Absent when modification is initiated by removePoint(). */
+  coordinate: Coordinate | undefined;
+  originalEvent: UIEvent | undefined;
+}
+
+export interface ModifyingEvent extends ModifyEvent {
+  type: 'modifying';
   coordinate: Coordinate;
   originalEvent: UIEvent;
+}
+
+export interface ModifySelectEvent extends BaseEvent {
+  type: 'select';
+  selected: Feature[];
+  /** The previous selection can be null when a feature is selected for the first time. */
+  deselected: (Feature | null | undefined)[];
 }
