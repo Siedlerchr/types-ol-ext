@@ -92,4 +92,7 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `control/GeolocationBar` and `GeolocationButton`: declared the bar options forwarded to GeolocationDraw, nullable map detachment, and the button’s position event (which can omit its coordinate). Removed redundant inherited bar declarations that narrowed base signatures. Type tests cover these changes; geolocation and browser behavior were not exercised.
 
+- `control/TextButton`: inherits Button behavior and accepts element content; removed narrower inherited setter declarations. Its text button is a div, so the inherited `getDisable` returns null and `setDisable` dereferences a missing button in this release. Type checks cover inherited behavior.
+- `control/CanvasBase`, `CanvasTitle`, `CanvasAttribution`, and `CanvasScaleLine`: corrected title getter, title options, canvas nullability, optional base style and map detachment. Repeated inherited canvas signatures on related subclasses were aligned. Target wraps a missing style in an array, which cannot be rendered as a style; its full API remains to be reviewed. Canvas rendering was not browser-tested.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

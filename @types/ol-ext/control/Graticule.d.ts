@@ -50,11 +50,11 @@ export default class Graticule extends CanvasBase {
    * @param {_ol_Map_} map Map.
    * @api stable
    */
-  setMap(map: Map): void;
+  setMap(map: Map | null): void;
 
   /** Get canvas overlay
    */
-  getCanvas(): HTMLCanvasElement;
+  getCanvas(map: Map | null): HTMLCanvasElement | null;
 
   /** Set Style
    * @api

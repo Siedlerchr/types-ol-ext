@@ -1,3 +1,7 @@
+import CanvasTitle from '../@types/ol-ext/control/CanvasTitle'
+import CanvasAttribution from '../@types/ol-ext/control/CanvasAttribution'
+import CanvasScaleLine from '../@types/ol-ext/control/CanvasScaleLine'
+import TextButton from '../@types/ol-ext/control/TextButton'
 import GeolocationButton from '../@types/ol-ext/control/GeolocationButton'
 import Button from '../@types/ol-ext/control/Button'
 import Toggle from '../@types/ol-ext/control/Toggle'
@@ -281,3 +285,22 @@ geoBar.deactivateControls()
 const geoButton = new GeolocationButton({ delay: 1000 })
 geoButton.on('position', event => { const coordinate: import('ol/coordinate').Coordinate | undefined = event.coordinate; void coordinate })
 geoButton.on('change:active', event => { void event.active })
+
+const textButton = new TextButton({ html: document.createElement('span') })
+textButton.setHtml(document.createElement('span'))
+const textDisabled: boolean | null = textButton.getDisable()
+void textDisabled
+
+const canvasTitle = new CanvasTitle({ title: 'Map', visible: false, className: 'title' })
+const canvasTitleText: string = canvasTitle.getTitle()
+canvasTitle.setStyle()
+canvasTitle.setMap(null)
+const canvasOverlay: HTMLCanvasElement | null = canvasTitle.getCanvas(null)
+new CanvasAttribution().setMap(null)
+new CanvasScaleLine().setMap(null)
+void [canvasTitleText, canvasOverlay]
+// @ts-expect-error The title getter does not take an argument.
+canvasTitle.getTitle('unexpected')
+// @ts-expect-error A canvas may be absent.
+const requiredCanvas: HTMLCanvasElement = canvasTitle.getCanvas(null)
+void requiredCanvas

@@ -24,7 +24,7 @@ export default class Target extends CanvasBase {
   constructor(options?: Options);
 
   /** Set the target style. */
-  setStyle(style: Style | Style[]): void;
+  setStyle(style?: Style | Style[]): void;
 
   /** Set the control visibility
    * @paraam {boolean} b
@@ -43,5 +43,5 @@ export default class Target extends CanvasBase {
    * @param {_ol_Map_} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 }
