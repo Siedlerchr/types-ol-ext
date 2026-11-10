@@ -6,6 +6,7 @@ export interface Options extends ControlOptions {
   className?: string;
   ppi?: number;
   editable?: boolean;
+  typing?: number;
 }
 
 /**
@@ -14,8 +15,6 @@ export interface Options extends ControlOptions {
  *
  * @constructor
  * @extends {ol_control_Control}
- * @fires select
- * @fires change:input
  */
 export default class Scale extends ol_control_Control {
   /**
@@ -33,11 +32,11 @@ export default class Scale extends ol_control_Control {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Display the scale
    */
-  getScale(): number
+  getScale(): number | undefined
 
   /** Format the scale 1/d
    * @param {Number} d
@@ -48,5 +47,5 @@ export default class Scale extends ol_control_Control {
   /** Set the current scale (will change the scale of the map)
    * @param {Number} value the scale factor
    */
-  setScale(value: number): void
+  setScale(value: number | string | Event): void
 }

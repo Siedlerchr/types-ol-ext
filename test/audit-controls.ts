@@ -1,3 +1,4 @@
+import Scale from '../@types/ol-ext/control/Scale'
 import Status from '../@types/ol-ext/control/Status'
 import Notification from '../@types/ol-ext/control/Notification'
 import Gauge from '../@types/ol-ext/control/Gauge'
@@ -352,3 +353,12 @@ statusControl.setPosition('center')
 new Notification().show(null, 500)
 // @ts-expect-error Status visibility must be boolean.
 new Status({ visible: 'yes' })
+
+const scaleControl = new Scale({ ppi: 96, editable: true, typing: 300 })
+scaleControl.setMap(null)
+const currentScale: number | undefined = scaleControl.getScale()
+scaleControl.setScale('10000')
+scaleControl.setScale(new Event('change'))
+// @ts-expect-error A scale is unavailable without a map.
+const requiredScale: number = scaleControl.getScale()
+void [currentScale, requiredScale]

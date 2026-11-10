@@ -103,4 +103,6 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `control/Status` and `Notification`: corrected Status options, supported object content, center position, optional show/content arguments, and Notification’s null content. Status `isShown()` returns true when its inline display is none in this release; Notification does not dispatch the documented visibility event. Type tests cover signatures; timed visibility and DOM behavior were not browser-tested.
 
+- `control/Scale`: corrected nullable map detachment, absent scale without a map, and string or input-event scale setting. `typing` is read but has no effect, and the documented select and change:input events are not dispatched. Type tests cover the signatures; interactive scale changes were not browser-tested.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
