@@ -2,7 +2,7 @@
 
 Updated 2026-11-09. Plan: `.scratch/to-plan/ol-ext-declaration-audit.md`; durable module decisions: `docs/ol-ext-4.0.39-audit.md`.
 
-- Branch `audit/ol-ext-4.0.39`, draft PR https://github.com/Siedlerchr/types-ol-ext/pull/212. This checkpoint follows `aac5951` (ModifyTouch) and includes the map interaction round.
+- Branch `audit/ol-ext-4.0.39`, draft PR https://github.com/Siedlerchr/types-ol-ext/pull/212. This checkpoint follows `3dc29e8` (map interactions) and includes the GeolocationDraw round.
 - User directs using OpenLayers 10.11.0, ignoring the README's former compatibility statement; preserve `.scratch/` and `.codegraph/`. Commit and push each verified audit round, then continue. IntelliJ formatter instruction applies only to JabRef.
 - Completed source, interaction, overlay, legend, animation and search corrections are recorded in the audit document. Contour, StrokeImage and animation examples have been exercised in Chrome. Tests include full example compilation, `npm run lint`, and per-round `git diff --check`.
 - Recent search work added generic Search/SearchJSON result types and specialized Feature, Photon/BAN, Nominatim, GPS, Geoportail, parcel, Wikipedia, coordinate and DFCI types. Parcel lookup was checked with a mocked request; Geoportail, Wikipedia and coordinate hooks were checked in Node. Animation constructor options and exports were also reviewed. `npm test` and `npm run lint` passed for this checkpoint.

@@ -39,6 +39,7 @@ import FocusMap from '../@types/ol-ext/interaction/FocusMap'
 import Synchronize from '../@types/ol-ext/interaction/Synchronize'
 import type { SynchronizedMap } from '../@types/ol-ext/interaction/Synchronize'
 import TinkerBell from '../@types/ol-ext/interaction/TinkerBell'
+import GeolocationDraw from '../@types/ol-ext/interaction/GeolocationDraw'
 import VectorLayer from 'ol/layer/Vector'
 
 const source = new VectorSource()
@@ -139,6 +140,15 @@ declare const synchronizedMap: SynchronizedMap
 synchronizedMap.showTarget([0, 0])
 synchronizedMap.hideTarget()
 new TinkerBell({ color: 'white' })
+const geolocationDraw = new GeolocationDraw({ followTrack: 'visible' })
+geolocationDraw.setMap(null)
+geolocationDraw.simulate(false)
+geolocationDraw.pause()
+geolocationDraw.on('drawend', event => event.feature.getGeometry())
+geolocationDraw.on('tracking', event => event.geolocation?.getPosition())
+geolocationDraw.on('follow', event => { const following: boolean = event.following; void following })
+// @ts-expect-error the event is named follow
+geolocationDraw.on('following', () => {})
 const current = new CurrentMap({ condition: () => true })
 current.getCurrentMap()?.getView()
 const clipboard = new CopyPaste({ mapCondition: () => true, condition: () => false, destination: source })
