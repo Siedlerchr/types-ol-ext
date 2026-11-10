@@ -3,6 +3,7 @@ import ol_control_Control from 'ol/control/Control'
 
 export interface Options extends ControlOptions {
   class?: string;
+  className?: string;
   html?: string;
   on?: boolean;
   toggleFn?: (...params: any[]) => void; // TODO seems not to be used in the original code
@@ -33,5 +34,5 @@ export default class Disable extends ol_control_Control {
    * @param {boolean} b, default false
    * @api stable
    */
-  disableMap(b: boolean): void;
+  disableMap(b?: boolean): void;
 }

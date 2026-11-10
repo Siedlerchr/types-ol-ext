@@ -105,4 +105,6 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `control/Scale`: corrected nullable map detachment, absent scale without a map, and string or input-event scale setting. `typing` is read but has no effect, and the documented select and change:input events are not dispatched. Type tests cover the signatures; interactive scale changes were not browser-tested.
 
+- `control/Disable` and `Cloud`: declared the actual class name, wind and image options, wind state, map detachment, and wind setter. Disable checks `ol-disable` in `isOn` but toggles `ol-enable` in `disableMap`; custom class names also suppress the default classes because of upstream operator precedence. Cloud ignores its documented hue and saturation options. Type tests cover the declarations; rendering and pointer blocking were not browser-tested.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

@@ -1,3 +1,5 @@
+import Disable from '../@types/ol-ext/control/Disable'
+import Cloud from '../@types/ol-ext/control/Cloud'
 import Scale from '../@types/ol-ext/control/Scale'
 import Status from '../@types/ol-ext/control/Status'
 import Notification from '../@types/ol-ext/control/Notification'
@@ -362,3 +364,12 @@ scaleControl.setScale(new Event('change'))
 // @ts-expect-error A scale is unavailable without a map.
 const requiredScale: number = scaleControl.getScale()
 void [currentScale, requiredScale]
+
+const disableControl = new Disable({ className: 'disabled' })
+disableControl.disableMap()
+const cloud = new Cloud({ img: new Image(), bird: new Image(), density: 0.5, windAngle: 1, windSpeed: 2 })
+cloud.setMap(null)
+cloud.setWind()
+cloud.setWind({ windSpeed: 2 })
+const windSpeed: number = cloud.wind.speed
+void windSpeed
