@@ -111,4 +111,6 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `control/Overview`: corrected optional projection, layers and alignment, supported layer collections and groups, elastic pan option, string positions, and nullable map detachment. The elastic easing helper is local and `setView` is private. Type tests cover the corrected API; overview interaction was not browser-tested.
 
+- `control/SwipeMap`: corrected scalar position, typed constructor, nullable map detachment, missing rectangle on unsized maps, and moving event payload. The upstream rectangle getter dereferences the map and therefore throws when unattached. Type tests and example compilation cover the declarations; pointer interactions were not browser-tested.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

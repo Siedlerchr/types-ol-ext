@@ -1,3 +1,4 @@
+import SwipeMap from '../@types/ol-ext/control/SwipeMap'
 import Overview from '../@types/ol-ext/control/Overview'
 import Globe from '../@types/ol-ext/control/Globe'
 import Disable from '../@types/ol-ext/control/Disable'
@@ -388,3 +389,11 @@ const overviewMap: import('ol/Map').default = overview.getOverviewMap()
 // @ts-expect-error The easing helper is local to the constructor.
 overview.elasticFn(2, 0.3)
 void overviewMap
+
+const swipeMap = new SwipeMap({ position: 0.5, orientation: 'horizontal' })
+swipeMap.setMap(null)
+const swipeRectangle: import('ol/extent').Extent | undefined = swipeMap.getRectangle()
+swipeMap.on('moving', event => { const position: number[] = event.position; const size: import('ol/size').Size = event.size; void [position, size] })
+// @ts-expect-error Position is a scalar fraction.
+new SwipeMap({ position: [0.5, 0] })
+void swipeRectangle
