@@ -9,7 +9,7 @@ import type { ObjectEvent } from 'ol/Object'
 import type { Geometry } from 'ol/geom'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Types } from 'ol/ObjectEventType'
-import Bar from './Bar'
+import Bar, { type BarOnSignature } from './Bar'
 import type { position } from './control'
 import type Delete from '../interaction/Delete'
 import type ModifyFeature from '../interaction/ModifyFeature'
@@ -18,7 +18,7 @@ import type Transform from '../interaction/Transform'
 import type Split from '../interaction/Split'
 import type Offset from '../interaction/Offset'
 
-type EditBarOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+type EditBarOnSignature<Return> = BarOnSignature<Return> & OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
   OnSignature<Types | 'info', InfoEvent, Return> &
   CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'info', Return>;
@@ -129,7 +129,7 @@ export default class EditBar extends Bar {
    * @param {string} name of the control to search
    * @return {contrControl}
    */
-  getControlsByName(name: string): ol_control_Control;
+  getControlsByName(name: string): ol_control_Control[];
 
   on: EditBarOnSignature<EventsKey>
 

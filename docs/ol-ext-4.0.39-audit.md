@@ -86,4 +86,6 @@ The following source comparisons are partial, focused on verified missing or inc
 - `interaction/CurrentMap`, `CopyPaste`, `ModifyFeature`, and `Split`: event payloads are plain dispatched objects, not exported runtime event classes or enums. Declarations expose event interfaces and string types; ModifyFeature events contain coordinates, original DOM events, and feature arrays, while CopyPaste supplies features on paste events.
 - `interaction/ModifyFeature`: selection is a public event with selected and potentially null previous features. Programmatic `removePoint()` can dispatch modification events without a coordinate or original DOM event; pointer-driven `modifying` events include both. Closest-feature and pointer handlers are internal.
 
+- `control/Bar`: corrected the ID option, nullable map, position strings, optional deactivation exception, array-valued name lookup, and control event payloads. EditBar and GeolocationBar inherit the array lookup; the activation handler is private. The declaration tests cover these signatures, including inherited use. Browser interaction was not exercised in this round.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

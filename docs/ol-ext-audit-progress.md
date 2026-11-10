@@ -1,13 +1,13 @@
 # ol-ext 4.0.39 audit progress
 
-Updated 2026-11-09. Plan: `.scratch/to-plan/ol-ext-declaration-audit.md`; durable module decisions: `docs/ol-ext-4.0.39-audit.md`.
+Updated 2026-11-10. Plan: `.scratch/to-plan/ol-ext-declaration-audit.md`; durable module decisions: `docs/ol-ext-4.0.39-audit.md`.
 
-- Branch `audit/ol-ext-4.0.39`, draft PR https://github.com/Siedlerchr/types-ol-ext/pull/212. This checkpoint follows `55b6dbb` (scribble and line splitting) and includes the spline, INSEE grid and pulse round.
+- Branch `audit/ol-ext-4.0.39`, draft PR https://github.com/Siedlerchr/types-ol-ext/pull/212. This checkpoint includes the Bar control declaration round.
 - User directs using OpenLayers 10.11.0, ignoring the README's former compatibility statement; preserve `.scratch/` and `.codegraph/`. Commit and push each verified audit round, then continue. IntelliJ formatter instruction applies only to JabRef.
 - Update `docs/audit-status.mk` after each completed and verified round. Run `make -f docs/audit-status.mk audit-status` for the checkpoint, `make -f docs/audit-status.mk audit-plan` for the seven plan steps, and `make -f docs/audit-status.mk audit-verify` for the automated checks.
 - Completed source, interaction, overlay, legend, animation and search corrections are recorded in the audit document. Contour, StrokeImage and animation examples have been exercised in Chrome. Tests include full example compilation, `npm run lint`, and per-round `git diff --check`.
 - Recent search work added generic Search/SearchJSON result types and specialized Feature, Photon/BAN, Nominatim, GPS, Geoportail, parcel, Wikipedia, coordinate and DFCI types. Parcel lookup was checked with a mocked request; Geoportail, Wikipedia and coordinate hooks were checked in Node. Animation constructor options and exports were also reviewed. `npm test` and `npm run lint` passed for this checkpoint.
-- Current next step: continue the remaining search adapters and other module groups listed below, using the checked-out release implementation to distinguish public hooks from private helpers.
+- Current next step: continue the remaining control and other module groups listed below, using the checked-out release implementation to distinguish public hooks from private helpers.
 - Remaining: the broad existing-declaration audit is explicitly incomplete, including other search adapters, controls, interactions, source/geometry, rendering/style, formats, overlay, legend and input modules. Check exports, public vs private members, signatures, nullability, events and examples, and record each classification. Do not infer completeness from method-name comparison alone.
 - Runtime limitations recorded in audit: `proj4` is not installed for InseeBin/DFCI; upstream Geoportail's `setGPPKey` can lead to undefined feature-info URLs; VectorTile StrokeImage has an upstream missing identifier; ExportMap has a broken jsPDF import. Live services and many browser interactions are not yet tested.
 - A clean `npm ci` in an isolated directory succeeded and installed TypeScript 5.9.3 and OpenLayers 10.11.0. Final integrated checks after completing module work: `npm test` (includes full unsuppressed examples check), `npm run lint`, and `git diff --check`; review coverage and exclusions. Do not change package release version without following the project release process.

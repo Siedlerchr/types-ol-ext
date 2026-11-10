@@ -1,3 +1,6 @@
+import Bar from '../@types/ol-ext/control/Bar'
+import EditBar from '../@types/ol-ext/control/EditBar'
+import GeolocationBar from '../@types/ol-ext/control/GeolocationBar'
 import Select from '../@types/ol-ext/control/Select'
 import SearchFeature from '../@types/ol-ext/control/SearchFeature'
 import LegendItem from '../@types/ol-ext/legend/Item'
@@ -231,3 +234,23 @@ wikipediaExample.on('select', event => { event.search.url; event.search.img; eve
 // @ts-expect-error autocomplete results contain a uri, not the selected page URL
 wikipediaExample.select({ title: 'Map', desc: '', url: 'https://example.org' })
 void wikiTitle
+
+const auditBar = new Bar({ id: 'tools' })
+auditBar.setMap(null)
+auditBar.setPosition('left-top')
+auditBar.deactivateControls()
+const namedControls: import('ol/control/Control').default[] = auditBar.getControlsByName('draw')
+auditBar.on('control:active', event => {
+  const active: boolean = event.active
+  const control: import('ol/control/Control').default = event.control
+  void [active, control]
+})
+void namedControls
+
+declare const editBar: EditBar
+declare const geolocationBar: GeolocationBar
+const inheritedControls: import('ol/control/Control').default[][] = [editBar.getControlsByName('draw'), geolocationBar.getControlsByName('draw')]
+editBar.on('control:add', event => { void event.control })
+// @ts-expect-error Lookup returns an array, not a control.
+const singleControl: import('ol/control/Control').default = auditBar.getControlsByName('draw')
+void [inheritedControls, singleControl]

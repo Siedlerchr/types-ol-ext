@@ -1,10 +1,25 @@
 import type { Map as _ol_Map_ } from 'ol'
 import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
-import type Event from 'ol/events/Event'
-import type { position } from './control'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
+
+export type BarEventType = 'control:active' | 'control:add'
+export interface BarEvent extends BaseEvent {
+  type: BarEventType;
+  control: ol_control_Control;
+  active: boolean;
+}
+export type BarOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<BarEventType, BarEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | BarEventType, Return>
 
 export interface Options extends ControlOptions {
+  id?: string;
   className?: string;
   group?: boolean;
   toggleOne?: boolean;
@@ -40,6 +55,10 @@ export default class Bar extends ol_control_Control {
  */
   constructor(options?: Options);
 
+  on: BarOnSignature<EventsKey>;
+  once: BarOnSignature<EventsKey>;
+  un: BarOnSignature<void>;
+
   /** Set the control visibility
    * @param {boolean} b
    */
@@ -55,7 +74,7 @@ export default class Bar extends ol_control_Control {
    * and add its controls associated to this map.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Get controls in the panel
    *  @return {Array<ol_control_Control>}
@@ -68,7 +87,7 @@ export default class Bar extends ol_control_Control {
   /** Set tool bar position
    *  @param {top|left|bottom|right} pos
    */
-  setPosition(pos: position): void;
+  setPosition(pos: string): void;
 
   /** Add a control to the bar
    *  @param {_ol_control_} c control to add
@@ -78,7 +97,7 @@ export default class Bar extends ol_control_Control {
   /** Deativate all controls in a bar
    * @param {_ol_control_} except a control
    */
-  deactivateControls(except: ol_control_Control): void;
+  deactivateControls(except?: ol_control_Control): void;
 
   /** Remove a control from the bar
    * @param {ol_control_Control} c control to remove
@@ -90,14 +109,9 @@ export default class Bar extends ol_control_Control {
    */
   setActive(b: boolean): void;
 
-  /** Post-process an activated/deactivated control
-   *  @param {Event} e :an object with a target {ol_control_Control} and active flag {boolean}
-   */
-  onActivateControl_(e: Event): void;
-
   /**
    * @param {string} name of the control to search
    * @return {ol_control_Control}
    */
-  getControlsByName(name: string): ol_control_Control;
+  getControlsByName(name: string): ol_control_Control[];
 }

@@ -85,5 +85,5 @@ export default class GeolocationBar extends Bar {
    * @param {string} name of the control to search
    * @return {contrControl}
    */
-  getControlsByName(name: string): ol_control_Control;
+  getControlsByName(name: string): ol_control_Control[];
 }
