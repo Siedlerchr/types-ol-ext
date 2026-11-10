@@ -1,3 +1,4 @@
+import GeoBookmark from '../@types/ol-ext/control/GeoBookmark'
 import SwipeMap from '../@types/ol-ext/control/SwipeMap'
 import Overview from '../@types/ol-ext/control/Overview'
 import Globe from '../@types/ol-ext/control/Globe'
@@ -397,3 +398,11 @@ swipeMap.on('moving', event => { const position: number[] = event.position; cons
 // @ts-expect-error Position is a scalar fraction.
 new SwipeMap({ position: [0.5, 0] })
 void swipeRectangle
+
+const bookmark = new GeoBookmark({ title: 'Places', marks: { place: { pos: [1, 2] } } })
+bookmark.setBookmarks()
+bookmark.addBookmark('place', { position: [1, 2], rotation: 1 })
+bookmark.on('select', event => { const position: number[] = event.bookmark.pos; void position })
+bookmark.on('remove', event => { const name: string = event.name; void name })
+// @ts-expect-error Removal events do not contain a bookmark.
+bookmark.on('remove', event => { void event.bookmark })
