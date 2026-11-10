@@ -148,4 +148,6 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `control/RoutingZDSR`: no corresponding module exists in the release. The similarly named DSR implementation is a standalone global example script; removed the declaration that implied an importable module. A negative type check verifies the module is absent.
 
+- `control/Overlay`: corrected optional content and show arguments, image display options, and visibility event payload. A coordinate passed to `show` requires an attached map. Type tests cover the corrected API; animation and visibility timing were not browser-tested.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

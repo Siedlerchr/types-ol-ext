@@ -1,3 +1,4 @@
+import OverlayControl from '../@types/ol-ext/control/Overlay'
 // @ts-expect-error RoutingZDSR is not an ol-ext module in the audited release.
 import RoutingZDSR from '../@types/ol-ext/control/RoutingZDSR'
 import LayerShop from '../@types/ol-ext/control/LayerShop'
@@ -450,3 +451,8 @@ layerShop.setMap('map')
 void layerShopBar
 
 void RoutingZDSR
+
+const overlayControl = new OverlayControl({ closeBox: true })
+overlayControl.show()
+overlayControl.showImage('image.png', { title: 'Image', coordinate: [1, 2] })
+overlayControl.on('change:visible', event => { const visible: boolean = event.visible; const element: HTMLElement = event.element; void [visible, element] })
