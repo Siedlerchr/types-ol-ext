@@ -3,14 +3,15 @@ import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 import type { Coordinate } from 'ol/coordinate'
 import type Feature from 'ol/Feature'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Types } from 'ol/ObjectEventType'
 
-type IsochroneGeoportailOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
-  OnSignature<Types | 'change' | 'error' | 'propertychange' | 'isochrone', ObjectEvent, Return> &
+type IsochroneGeoportailOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
+  OnSignature<Types | 'change' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'isochrone', IsoChroneEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'isochrone', Return>;
 
 export interface Options extends ControlOptions {
@@ -24,7 +25,9 @@ export interface Options extends ControlOptions {
   minLength?: number;
   maxItems?: number;
   maxHistory?: number;
-  getTitle: (f: Feature) => string;
+  getTitle?: (f: Feature) => string;
+  auth?: string;
+  method?: 'time' | 'distance';
   autocomplete?: (s: string, ...params: any[]) => any; // TODO: not sure about the syntax
   exclusions?: string;
 }
@@ -63,7 +66,7 @@ export default class IsochroneGeoportail extends ol_control_Control {
    * and add its controls associated to this map.
    * @param map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Set the travel method
    * @param method The method (time or distance)
@@ -73,12 +76,12 @@ export default class IsochroneGeoportail extends ol_control_Control {
   /** Set mode
    * @param mode The mode: 'car' or 'pedestrian', default 'car'
    */
-  setMode(mode?: 'car' | 'pedestrian'): void;
+  setMode(mode: 'car' | 'pedestrian'): void;
 
   /** Set direction
    * @param  direction The direction: 'direct' or 'reverse', default direct
    */
-  setDirection(direction?: 'direct' | 'reverse'): void;
+  setDirection(direction: 'direct' | 'reverse'): void;
 
   /** Calculate an isochrone
    * @param  coord
@@ -87,7 +90,7 @@ export default class IsochroneGeoportail extends ol_control_Control {
    * @param iter number of iterations
    * @param once if true, only one iteration is done, default false
    */
-  search(coord: Coordinate, option: number | string, iter: number, once?: boolean): void;
+  search(coord: Coordinate, option: number | string, iter?: number, once?: boolean): void;
 
   on: IsochroneGeoportailOnSignature<EventsKey>
 
@@ -96,10 +99,8 @@ export default class IsochroneGeoportail extends ol_control_Control {
   un: IsochroneGeoportailOnSignature<void>
 }
 
-export class IsoChroneEvent extends BaseEvent {
-  constructor(type: 'isochrone');
-
-  feature: Feature
-
-  iteration: number
+export interface IsoChroneEvent extends BaseEvent {
+  type: 'isochrone';
+  feature: Feature;
+  iteration: number;
 }

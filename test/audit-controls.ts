@@ -1,3 +1,4 @@
+import IsochroneGeoportail from '../@types/ol-ext/control/IsochroneGeoportail'
 import OverlayControl from '../@types/ol-ext/control/Overlay'
 // @ts-expect-error RoutingZDSR is not an ol-ext module in the audited release.
 import RoutingZDSR from '../@types/ol-ext/control/RoutingZDSR'
@@ -456,3 +457,10 @@ const overlayControl = new OverlayControl({ closeBox: true })
 overlayControl.show()
 overlayControl.showImage('image.png', { title: 'Image', coordinate: [1, 2] })
 overlayControl.on('change:visible', event => { const visible: boolean = event.visible; const element: HTMLElement = event.element; void [visible, element] })
+
+const isochrone = new IsochroneGeoportail({ auth: 'token', method: 'distance' })
+isochrone.setMap(null)
+isochrone.search([0, 0], '5km')
+isochrone.on('isochrone', event => { const iteration: number = event.iteration; const feature: Feature = event.feature; void [iteration, feature] })
+// @ts-expect-error A mode is required by the implementation.
+isochrone.setMode()
