@@ -1,3 +1,5 @@
+// @ts-expect-error RoutingZDSR is not an ol-ext module in the audited release.
+import RoutingZDSR from '../@types/ol-ext/control/RoutingZDSR'
 import LayerShop from '../@types/ol-ext/control/LayerShop'
 import LayerSwitcher from '../@types/ol-ext/control/LayerSwitcher'
 import LayerPopup from '../@types/ol-ext/control/LayerPopup'
@@ -446,3 +448,5 @@ layerShop.addControl(new Button(), 'top')
 // @ts-expect-error Map must be an OpenLayers map or null.
 layerShop.setMap('map')
 void layerShopBar
+
+void RoutingZDSR

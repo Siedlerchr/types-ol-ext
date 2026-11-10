@@ -41,6 +41,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/LayerShop`: its constructor overwrites the supplied `selection` and `noScroll` options with true. This is a source observation; UI behavior was not browser-tested.
 
+- `examples/routing/RoutingDSR.js`: its error event is spelled `errror`. This standalone example script is not an exported ol-ext module; the observation is from source.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -143,5 +145,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `control/LayerSwitcher`, `LayerPopup`, and `LayerSwitcherImage`: corrected options, base-layer and group inputs, nullable selection and detachment, opacity setter, and plain event payloads including keyboard and reorder events. Variant list rendering overrides were checked. Type tests cover signatures; layer interactions were not browser-tested.
 
 - `control/LayerShop`: checked the inherited switcher API, control bars and map lifecycle. Replaced the untyped map argument with map or null; type tests cover detachment and bar methods. UI behavior was not browser-tested.
+
+- `control/RoutingZDSR`: no corresponding module exists in the release. The similarly named DSR implementation is a standalone global example script; removed the declaration that implied an importable module. A negative type check verifies the module is absent.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
