@@ -1,3 +1,4 @@
+import Globe from '../@types/ol-ext/control/Globe'
 import Disable from '../@types/ol-ext/control/Disable'
 import Cloud from '../@types/ol-ext/control/Cloud'
 import Scale from '../@types/ol-ext/control/Scale'
@@ -373,3 +374,8 @@ cloud.setWind()
 cloud.setWind({ windSpeed: 2 })
 const windSpeed: number = cloud.wind.speed
 void windSpeed
+
+const globe = new Globe({ follow: true, align: 'top-right' })
+globe.setMap(null)
+globe.show()
+globe.setPosition('bottom-left')
