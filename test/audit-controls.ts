@@ -1,3 +1,6 @@
+import LayerSwitcher from '../@types/ol-ext/control/LayerSwitcher'
+import LayerPopup from '../@types/ol-ext/control/LayerPopup'
+import LayerSwitcherImage from '../@types/ol-ext/control/LayerSwitcherImage'
 import FeatureList from '../@types/ol-ext/control/FeatureList'
 import GeoBookmark from '../@types/ol-ext/control/GeoBookmark'
 import SwipeMap from '../@types/ol-ext/control/SwipeMap'
@@ -422,3 +425,15 @@ featureList.on('sort', event => { const prop: string | undefined = event.propert
 // @ts-expect-error A selection may be absent.
 const requiredFeature: Feature = featureList.getSelection()
 void [selectedFeature, featureRow, sortState, columns, requiredFeature]
+
+const layerSwitcher = new LayerSwitcher({ selection: true, counter: true, minibar: true, switcherClass: 'layers', onextent: layer => { void layer.getVisible() } })
+layerSwitcher.setMap(null)
+layerSwitcher.selectLayer()
+const selectedLayer: import('ol/layer/Base').default | undefined = layerSwitcher.getSelection()
+layerSwitcher.on('drawlist', event => { void [event.layer, event.li] })
+layerSwitcher.on('toggle', event => { void event.collapsed })
+layerSwitcher.on('reorder-end', event => { void event.group })
+layerSwitcher.on('layer:keydown', event => { void event.originalEvent.key })
+new LayerPopup().drawList(document.createElement('ul'), [])
+new LayerSwitcherImage().drawList(document.createElement('ul'), [])
+void selectedLayer
