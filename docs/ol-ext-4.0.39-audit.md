@@ -18,6 +18,25 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 - `source/Contour`: compared with source and upstream example. The real d3-contour factory, grid, thresholds, styling, and data loading are type-checked. Inline and file datasets rendered in Chrome; levels were changed. This does not verify all grid shapes.
 - `style/StrokeImage`: constructor and public fields compared with source; OpenLayers vector-layer style integration and vector-tile options are type-checked. The ported upstream example rendered its line and polygon sprite strokes in Chrome, including after changing the pattern and fallback color. Vector-tile rendering was not tested; the release source calls an undefined `checkExtentIntersection` identifier when rendering polygons with both `isVectorTile` and `map` set, which is an upstream runtime limitation.
 
+## Upstream JavaScript findings for reporting
+
+These observations concern the checked-out `v4.0.39` implementation. Unless noted as runtime-verified, they are source observations and should be reproduced before filing an issue. The detailed audit entries below retain their validation context.
+
+- `utils/ExportMap`: imports `jspdf.js`, which fails to resolve against the installed jsPDF package (import failure reproduced).
+- `style/StrokeImage`: vector-tile polygon rendering references an undefined `checkExtentIntersection`; this rendering path was not exercised.
+- `geom/ConvexHull`: the geometry helper discards concatenated coordinates for multi-geometries. `geom/GPAltiCode` does not forward `minZ` from its coordinate wrapper.
+- `geom/Simplificator`: its `visvalingam` dependency uses an extensionless import that prevented the Node runtime check.
+- `interaction/Ripple`: the documented `interval` constructor option is not read. `interaction/Splitter`: the before-split field is spelled `feaure`; documented `triggerSource` and filter options are ignored, and source arrays are not handled.
+- `interaction/Delete`: an empty feature array causes a call to its nonexistent `getLength` method (runtime-verified). `interaction/TouchCursor` drawing subclasses do not forward several documented constructor options to the sketch.
+- `interaction/TinkerBell`: a differently capitalized `getMapcanvas.js` import fails on case-sensitive filesystems; detachment dereferences the new map before its null check.
+- `source/Mapillary`: the unfinished loader does not add features. `source/Geoportail`: a Node check returned an undefined feature-info URL after `setGPPKey` where the same lookup previously returned a URL.
+- `control/Toggle`: reads `autoActivate` instead of documented `autoActive`. `control/TextButton`: inherited `getDisable` returns null and `setDisable` dereferences a missing button because the control uses a div.
+- `control/Target`: stores styles as an array, while inherited style-component helpers expect a single Style; calling its setter without a style leaves an undefined array entry.
+- `control/GridReference`: `setMap` dereferences its source even when no source was supplied. `control/FeatureList`: `setMap` dereferences a null map and accumulates size listeners.
+- `control/Status`: `isShown` returns true when inline display is `none`. `control/Notification` and `control/Scale` document events that their implementations do not dispatch; Scale's `typing` option has no effect.
+- `control/Disable`: `isOn` checks `ol-disable` while `disableMap` toggles `ol-enable`; a custom class name suppresses the default classes due to operator precedence. `control/Cloud` ignores documented hue and saturation options.
+- `control/Globe`: supplying a target skips pointer creation, but `setCenter` dereferences that pointer. `control/SwipeMap`: `getRectangle` dereferences the map when unattached.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
