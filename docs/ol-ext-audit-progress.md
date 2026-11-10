@@ -2,7 +2,7 @@
 
 Updated 2026-11-09. Plan: `.scratch/to-plan/ol-ext-declaration-audit.md`; durable module decisions: `docs/ol-ext-4.0.39-audit.md`.
 
-- Branch `audit/ol-ext-4.0.39`, draft PR https://github.com/Siedlerchr/types-ol-ext/pull/212. This checkpoint follows `c2f9420` (GeomUtils) and includes the convex hull, altitude and geohash round.
+- Branch `audit/ol-ext-4.0.39`, draft PR https://github.com/Siedlerchr/types-ol-ext/pull/212. This checkpoint follows `04705af` (Makefile plan) and includes the scribble and line splitting round.
 - User directs using OpenLayers 10.11.0, ignoring the README's former compatibility statement; preserve `.scratch/` and `.codegraph/`. Commit and push each verified audit round, then continue. IntelliJ formatter instruction applies only to JabRef.
 - Update `docs/audit-status.mk` after each completed and verified round. Run `make -f docs/audit-status.mk audit-status` for the checkpoint, `make -f docs/audit-status.mk audit-plan` for the seven plan steps, and `make -f docs/audit-status.mk audit-verify` for the automated checks.
 - Completed source, interaction, overlay, legend, animation and search corrections are recorded in the audit document. Contour, StrokeImage and animation examples have been exercised in Chrome. Tests include full example compilation, `npm run lint`, and per-round `git diff --check`.

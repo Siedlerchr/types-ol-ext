@@ -30,6 +30,8 @@ import Point from 'ol/geom/Point'
 import convexHull from '../@types/ol-ext/geom/ConvexHull'
 import { getAdjacent } from '../@types/ol-ext/geom/geohash'
 import { ol_geom_GPAltiCode, ol_coordinate_GPAltiCode } from '../@types/ol-ext/geom/GPAltiCode'
+import scribbleFill from '../@types/ol-ext/geom/Scribble'
+import '../@types/ol-ext/geom/LineStringSplitAt'
 import Geoportail from '../@types/ol-ext/source/Geoportail'
 import GeoRSS from '../@types/ol-ext/source/GeoRSS'
 
@@ -47,6 +49,11 @@ ol_coordinate_GPAltiCode([[0, 0], [1, 1]], { success: points => points[0].slice(
 // @ts-expect-error point geocoding callbacks receive a point geometry
 ol_geom_GPAltiCode(new Point([0, 0]), { success: (line: LineString) => line.getLength() })
 const lineGeometry = new LineString([[0, 0], [2, 2]])
+lineGeometry.splitAt([1, 1]).forEach(line => line.getCoordinates())
+lineGeometry.splitAt()
+scribbleFill(new Polygon([]), { interval: 5 })?.getType()
+// @ts-expect-error scribble fill requires its line interval
+scribbleFill(new Polygon([]), {})
 lineGeometry.sampleAt(1).getCoordinates()
 ol_coordinate_getGeomCenter(lineGeometry).slice()
 ol_coordinate_findSegment([0, 0], lineGeometry.getCoordinates()).segment?.[0].slice()
