@@ -12,7 +12,7 @@ export interface Options extends GeolocationDrawOptions {
 export default class GeolocationButton extends Toggle {
   constructor(options?: Options)
 
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   getInteraction(): GeolocationDraw
 }

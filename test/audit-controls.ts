@@ -1,3 +1,5 @@
+import Button from '../@types/ol-ext/control/Button'
+import Toggle from '../@types/ol-ext/control/Toggle'
 import Bar from '../@types/ol-ext/control/Bar'
 import EditBar from '../@types/ol-ext/control/EditBar'
 import GeolocationBar from '../@types/ol-ext/control/GeolocationBar'
@@ -254,3 +256,20 @@ editBar.on('control:add', event => { void event.control })
 // @ts-expect-error Lookup returns an array, not a control.
 const singleControl: import('ol/control/Control').default = auditBar.getControlsByName('draw')
 void [inheritedControls, singleControl]
+
+const auditButton = new Button({ id: 'button', html: document.createElement('span') })
+auditButton.setHtml(document.createElement('span'))
+const disabled: boolean | null = auditButton.getDisable()
+const auditToggle = new Toggle({ id: 'toggle', autoActivate: true, html: document.createElement('span'), toggleFn: active => { void active } })
+auditToggle.setMap(null)
+auditToggle.setSubBar()
+const subBar: Bar | undefined = auditToggle.getSubBar()
+const interaction: import('ol/interaction/Interaction').default | undefined = auditToggle.getInteraction()
+auditToggle.on('change:active', event => { const active: boolean = event.active; void active })
+auditToggle.on('change:disable', event => { const value: boolean = event.disable; void value })
+void [disabled, subBar, interaction]
+// @ts-expect-error A toggle may not have a subbar.
+const requiredSubBar: Bar = auditToggle.getSubBar()
+// @ts-expect-error A toggle may not have an interaction.
+const requiredInteraction: import('ol/interaction/Interaction').default = auditToggle.getInteraction()
+void [requiredSubBar, requiredInteraction]

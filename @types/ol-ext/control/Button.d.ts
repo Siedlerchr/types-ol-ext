@@ -2,6 +2,7 @@ import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 
 export interface Options extends ControlOptions {
+  id?: string;
   className?: string;
   classButton?: string;
   title?: string;
@@ -46,7 +47,7 @@ export default class Button extends ol_control_Control {
    * Set the button html
    * @param {string} html
    */
-  setHtml(html: string): void;
+  setHtml(html: string | Element): void;
 
   /**
    * Get the button element
@@ -59,7 +60,7 @@ export default class Button extends ol_control_Control {
  * @return {bool}
  * @api stable
  */
-  getDisable(): boolean
+  getDisable(): boolean | null
 
   /** Disable the control button.
    * @param {bool} b disable (or enable) the control, default false (enable)
