@@ -1,3 +1,4 @@
+import FeatureList from '../@types/ol-ext/control/FeatureList'
 import GeoBookmark from '../@types/ol-ext/control/GeoBookmark'
 import SwipeMap from '../@types/ol-ext/control/SwipeMap'
 import Overview from '../@types/ol-ext/control/Overview'
@@ -406,3 +407,18 @@ bookmark.on('select', event => { const position: number[] = event.bookmark.pos; 
 bookmark.on('remove', event => { const name: string = event.name; void name })
 // @ts-expect-error Removal events do not contain a bookmark.
 bookmark.on('remove', event => { void event.bookmark })
+
+const featureList = new FeatureList()
+featureList.setFeatures()
+const selectedFeature: Feature | null = featureList.getSelection()
+const featureRow: false | { feature: Feature; tr: HTMLTableRowElement } = featureList.scrollTo('select')
+const sortState: Record<string, boolean> = featureList.getSort()
+const columns: string[] = featureList.getColumns()
+featureList.addButton({ click: event => { void event.clientX } })
+featureList.on('select', event => { void [event.feature, event.row, event.originalEvent] })
+featureList.on('collapse', event => { void event.collapsed })
+featureList.on('resize', event => { void event.height })
+featureList.on('sort', event => { const prop: string | undefined = event.property; void prop })
+// @ts-expect-error A selection may be absent.
+const requiredFeature: Feature = featureList.getSelection()
+void [selectedFeature, featureRow, sortState, columns, requiredFeature]

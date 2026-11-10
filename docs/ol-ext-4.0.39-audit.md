@@ -115,4 +115,6 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `control/GeoBookmark`: corrected selection versus add/remove event payloads, optional stored zoom, constructor title, optional bookmark reset, and the object-form add method. Events are plain dispatched objects and occur on UI actions; programmatic add/remove does not dispatch them. Type tests cover corrected signatures; storage and UI interaction were not browser-tested.
 
+- `control/FeatureList`: corrected selection and scrolling return values, optional feature reset, sort state and columns, button callback, and row/collapse/resize/sort event payloads. Its `setMap` dereferences the supplied map and accumulates size listeners, so detaching is broken upstream. Type tests cover corrected APIs; table and pointer behavior were not browser-tested.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

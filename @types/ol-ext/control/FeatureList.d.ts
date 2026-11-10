@@ -2,6 +2,30 @@ import type { Collection, Feature } from 'ol'
 import Control from 'ol/control/Control'
 import type { Options as ControlOptions } from 'ol/control/Control'
 import type VectorSource from 'ol/source/Vector'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
+
+export interface FeatureListRowEvent extends BaseEvent {
+  type: 'select' | 'dblclick';
+  feature: Feature;
+  property: string;
+  row: HTMLTableRowElement;
+  col: HTMLTableCellElement;
+  originalEvent: MouseEvent;
+}
+export interface FeatureListCollapseEvent extends BaseEvent { type: 'collapse'; collapsed: boolean }
+export interface FeatureListResizeEvent extends BaseEvent { type: 'resize'; height: number }
+export interface FeatureListSortEvent extends BaseEvent { type: 'sort'; property?: string; sort?: 'up' | 'down' }
+export type FeatureListOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'select' | 'dblclick', FeatureListRowEvent, Return> &
+  OnSignature<'collapse', FeatureListCollapseEvent, Return> &
+  OnSignature<'resize', FeatureListResizeEvent, Return> &
+  OnSignature<'sort', FeatureListSortEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'select' | 'dblclick' | 'collapse' | 'resize' | 'sort', Return>
 
 export interface Options extends ControlOptions {
    title?: string
@@ -15,7 +39,7 @@ export interface ButtonOptions {
   className?: string,
   title?: string,
   html?: string
-  click?: () => void
+  click?: (event: MouseEvent) => void
 }
 
 /** Feature list control
@@ -38,6 +62,10 @@ export interface ButtonOptions {
 export default class FeatureList extends Control {
   constructor(options?: Options);
 
+  on: FeatureListOnSignature<EventsKey>;
+  once: FeatureListOnSignature<EventsKey>;
+  un: FeatureListOnSignature<void>;
+
   /** Scroll resize at botton
      * @param {boolean} b
      */
@@ -46,7 +74,7 @@ export default class FeatureList extends Control {
   /** Scroll to an element / feature
            * @param {Feature|'select'} feature a featue or `select` to scroll at the selected row
            */
-  scrollTo(feature: Feature | 'select'): any;
+  scrollTo(feature: Feature | 'select'): false | { feature: Feature; tr: HTMLTableRowElement };
 
   /** Collapse the table
   * @param {boolean} [b] if no parameters toggle it
@@ -60,7 +88,7 @@ export default class FeatureList extends Control {
      * @param {ol_source_Vector|ol_Collection<ol_Feature>|Array<ol_Feature>} source a vector source or a collection of features to list
      */
   setFeatures(
-      source: VectorSource<Feature> | Collection<Feature> | Array<Feature>
+      source?: VectorSource<Feature> | Collection<Feature> | Array<Feature>
    ): void;
 
   /** Sort list by properties
@@ -72,7 +100,7 @@ export default class FeatureList extends Control {
   /** Get sorted properties list
   * @return Object
   */
-  getSort(): object
+  getSort(): Record<string, boolean>
 
   /** Reset all sorts */
   resetSort(): void;
@@ -139,7 +167,7 @@ export default class FeatureList extends Control {
   /** Get the list of columns
         * @param {Array<ol_Feature>} [features] a list of features to retrieve columns (if none, returns columns defined by setColumns)
         */
-  getColumns(features?: Array<Feature>): any[];
+  getColumns(features?: Array<Feature>): string[];
 
   /** Set the list of columns to display
            * @param {Array<string>} columns
@@ -154,7 +182,7 @@ export default class FeatureList extends Control {
   /** Get the current selection in the list
            * @returns {Feature}
            */
-  getSelection(): Feature;
+  getSelection(): Feature | null;
 
   /** Select a feature in the list
            * @param {Feature} [feature] if none remove selection
@@ -170,5 +198,5 @@ export default class FeatureList extends Control {
            *  @param {function} click on click function
            * @returns {Element}
            */
-  addButton(options?: ButtonOptions): Element;
+  addButton(options: ButtonOptions): HTMLButtonElement;
 }
