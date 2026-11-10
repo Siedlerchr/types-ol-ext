@@ -23,6 +23,9 @@ import Overpass from '../@types/ol-ext/source/Overpass'
 import DBPedia, { ol_style_dbPediaStyleFunction, ol_style_clearDBPediaStyleCache } from '../@types/ol-ext/source/DBPedia'
 import WikiCommons from '../@types/ol-ext/source/WikiCommons'
 import Mapillary from '../@types/ol-ext/source/Mapillary'
+import { ol_coordinate_findSegment, ol_coordinate_getGeomCenter, ol_coordinate_splitH, ol_coordinate_sampleAt, ol_geom_createFromType, extentIntersection } from '../@types/ol-ext/geom/GeomUtils'
+import LineString from 'ol/geom/LineString'
+import Polygon from 'ol/geom/Polygon'
 import Geoportail from '../@types/ol-ext/source/Geoportail'
 import GeoRSS from '../@types/ol-ext/source/GeoRSS'
 
@@ -32,6 +35,14 @@ const both: number[][][] = dayNight.getCoordinates(undefined, 'daynight')
 dayNight.getSunPosition(new Date())
 DayNight.getNightLat(0, new Date())
 const inputSource = new VectorSource()
+const lineGeometry = new LineString([[0, 0], [2, 2]])
+lineGeometry.sampleAt(1).getCoordinates()
+ol_coordinate_getGeomCenter(lineGeometry).slice()
+ol_coordinate_findSegment([0, 0], lineGeometry.getCoordinates()).segment?.[0].slice()
+ol_coordinate_splitH([[0, 0], [1, 2], [2, 0]], 1, 0)[0][0].pt.slice()
+ol_coordinate_sampleAt([0, 0], [2, 0], 1).length
+ol_geom_createFromType('Point', [0, 0])?.getType()
+extentIntersection([0, 0, 1, 1], new Polygon([])).getCoordinates()
 const bins = new GridBin({ source: inputSource, circle: true, gridProjection: 'EPSG:3857', geometryFunction: () => [1, 2] })
 bins.setCircle(false)
 const maybeBin: Feature | null = bins.getBinAt([0, 0])
