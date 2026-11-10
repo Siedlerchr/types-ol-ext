@@ -1,5 +1,5 @@
 import type { Map as _ol_Map_ } from 'ol'
-import type { Stroke, Style, Fill } from 'ol/style'
+import type { Stroke, Style } from 'ol/style'
 import type { Options as ControlOptions } from 'ol/control/Control'
 import CanvasBase from './CanvasBase'
 
@@ -7,7 +7,8 @@ export interface Options extends ControlOptions {
   className?: string;
   image?: HTMLImageElement | string;
   src?: string;
-  rotateVithView?: boolean;
+  rotateWithView?: boolean;
+  visible?: boolean;
   style?: Stroke | Style; // incompatible with CanvasBaseOptions, so we extends control options
 }
 
@@ -46,43 +47,8 @@ export default class Compass extends CanvasBase {
   /** Set control visibility. */
   setVisible(visible: boolean): void;
 
-  /** Set Style
-   * @api
-   */
-  setStyle(): void;
-
-  /** Get style
-   * @api
-   */
-  getStyle(): Style;
-
-  /** Get stroke
-   * @api
-   */
-  getStroke(): Stroke;
-
-  /** Get fill
-   * @api
-   */
-  getFill(): Fill;
-
-  /** Get stroke
-   * @api
-   */
-  getTextStroke(): Stroke;
-
-  /** Get text fill
-   * @api
-   */
-  getTextFill(): Fill;
-
-  /** Get text font
-   * @api
-   */
-  getTextFont(): string;
-
   /** Set compass image
    * @param {Image|string} [img=default] the image or an url or 'compact' or 'default'
    */
-  setImage(img: HTMLImageElement | string | 'compact' | 'default'): void
+  setImage(img?: HTMLImageElement | string): void
 }

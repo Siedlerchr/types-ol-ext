@@ -34,7 +34,7 @@ export default class CenterPosition extends CanvasBase {
    * Change the control style
    * @param {Style} style
    */
-  setStyle(style: Style): void;
+  setStyle(style?: Style): void;
 
   /**
    * Draw on canvas

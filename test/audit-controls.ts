@@ -1,3 +1,6 @@
+import Compass from '../@types/ol-ext/control/Compass'
+import CenterPosition from '../@types/ol-ext/control/CenterPosition'
+import Style from 'ol/style/Style'
 import CanvasTitle from '../@types/ol-ext/control/CanvasTitle'
 import CanvasAttribution from '../@types/ol-ext/control/CanvasAttribution'
 import CanvasScaleLine from '../@types/ol-ext/control/CanvasScaleLine'
@@ -304,3 +307,10 @@ canvasTitle.getTitle('unexpected')
 // @ts-expect-error A canvas may be absent.
 const requiredCanvas: HTMLCanvasElement = canvasTitle.getCanvas(null)
 void requiredCanvas
+
+const compass = new Compass({ rotateWithView: false, visible: true })
+compass.setImage()
+compass.setStyle(new Style())
+const targetStyles: Array<Style | undefined> = new Target().getStyle()
+new CenterPosition().setStyle()
+void targetStyles

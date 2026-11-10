@@ -7,7 +7,7 @@ export interface Options extends ControlOptions {
   style?: Style;
 }
 
-export default class CanvasBase extends ol_control_Control {
+export default class CanvasBase<StyleValue = Style> extends ol_control_Control {
   constructor(options?: Options);
 
   /**
@@ -31,7 +31,7 @@ export default class CanvasBase extends ol_control_Control {
   /** Get style
    * @api
    */
-  getStyle(): Style;
+  getStyle(): StyleValue;
 
   /** Get stroke
    * @api

@@ -15,7 +15,7 @@ export interface Options extends ControlOptions {
  * @extends {contrCanvasBase}
 
  */
-export default class Target extends CanvasBase {
+export default class Target extends CanvasBase<Array<Style | undefined>> {
   /**
    * @param {Object} options
    *  @param {Style|Array<Style>} options.style
