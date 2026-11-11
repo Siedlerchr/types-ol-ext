@@ -1,3 +1,4 @@
+import Storymap from '../@types/ol-ext/control/Storymap'
 import Permalink from '../@types/ol-ext/control/Permalink'
 import LegendControl from '../@types/ol-ext/control/Legend'
 import SelectCheck from '../@types/ol-ext/control/SelectCheck'
@@ -556,3 +557,11 @@ const permalink = new Permalink({ className: 'link', refreshDelay: 100 })
 permalink.setMap(null)
 const matchingLayer: import('ol/layer/Base').default | false = permalink.getLayerByLink('base', [])
 void matchingLayer
+
+const storymap = new Storymap({ html: '<div class="chapter"></div>' })
+storymap.setChapter('intro')
+storymap.setStory(document.createElement('div'))
+const storyContent: HTMLDivElement = storymap.content
+storymap.on('scrollto', event => { void [event.coordinate, event.lon, event.zoom] })
+storymap.on('clickimage', event => { void [event.img, event.originalEvent, event.coordinate] })
+void storyContent

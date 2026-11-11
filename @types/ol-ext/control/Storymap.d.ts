@@ -48,6 +48,8 @@ export default class Storymap extends ol_control_Control {
    */
   constructor(options: Options);
 
+  content: HTMLDivElement;
+
   /** Replace the story content with HTML or an element. */
   setStory(html: string | Element): void;
 

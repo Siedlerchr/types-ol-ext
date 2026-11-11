@@ -63,6 +63,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/Permalink`: position restoration checks both projected coordinates for truthiness, so centers on either zero axis are skipped. `getLayerByLink` without layers dereferences undefined if unattached, and zero `fixed` or `refreshDelay` values fall back to defaults. These are source observations; browser URL behavior was not exercised in this round.
 
+- `control/Storymap`: the initial asynchronous chapter callback dereferences the first chapter and map without checking either exists; repeated `setStory` calls attach additional scroll listeners. The documented string target is treated as an element. These are source observations; story interaction was not browser-tested.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -191,5 +193,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `control/EditBar`: corrected map detachment, optional interaction lookup, draw options, interaction labels and DrawHole option, and the plain info event. Removed repeated inherited declarations that narrowed Bar signatures. Type tests and the example check cover the changes; editing interaction was not browser-tested.
 
 - `control/Permalink`: checked public URL, layer and map methods; added class name and refresh delay options, base-layer lookup and nullable detachment. Type tests cover the corrected signatures; browser URL behavior was not exercised in this round.
+
+- `control/Storymap`: reviewed chapter, content and scroll/image event APIs; declared its public content element and added type checks. Story interaction was not browser-tested.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
