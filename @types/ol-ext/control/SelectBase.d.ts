@@ -3,6 +3,17 @@ import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 import type Feature from 'ol/Feature'
 import type { Vector as VectorSource } from 'ol/source'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
+
+export interface SelectBaseEvent extends BaseEvent { type: 'select'; features: Feature[] }
+export type SelectBaseOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'select', SelectBaseEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'select', Return>
 
 /**
  *  '=': '=',
@@ -21,7 +32,7 @@ export type operators = '=' | '!=' | '<' | '>' | '<=' | '>=' | 'contain' | '!con
 export interface condition {
   attr: string;
   op: operators;
-  val: string;
+  val: unknown;
 }
 
 export interface Options extends ControlOptions {
@@ -55,25 +66,29 @@ export default class SelectBase extends ol_control_Control {
    */
   constructor(options?: Options);
 
+  on: SelectBaseOnSignature<EventsKey>;
+  once: SelectBaseOnSignature<EventsKey>;
+  un: SelectBaseOnSignature<void>;
+
   /** Set the current sources
    * @param {VectorSource|Array<VectorSource>|undefined} source
    */
-  setSources(source: VectorSource | VectorSource[] | undefined): void;
+  setSources(source?: VectorSource | VectorSource[]): void;
 
   /** Set feature collection to search in
    * @param {Collection<Feature>} features
    */
-  setFeatures(features: Collection<Feature>): void;
+  setFeatures(features?: Collection<Feature>): void;
 
   /** Get feature collection to search in
    * @return {Collection<Feature>}
    */
-  getFeatures(): Collection<Feature>;
+  getFeatures(): Collection<Feature> | null | undefined;
 
   /** List of operators / translation
    * @api
    */
-  operationsList: any // TODO
+  operationsList: Record<operators, string>
   /** Escape string for regexp
    * @param {string} search
    * @return {string}

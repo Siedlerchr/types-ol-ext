@@ -1,3 +1,4 @@
+import SelectBase from '../@types/ol-ext/control/SelectBase'
 import Profile from '../@types/ol-ext/control/Profile'
 import PrintDialog from '../@types/ol-ext/control/PrintDialog'
 import PrintDialog2x from '../@types/ol-ext/control/PrintDialog2x'
@@ -505,3 +506,11 @@ profile.on('change:geometry', event => { void event.geometry })
 // @ts-expect-error Units are strings rather than the unit lookup object.
 profile.setGeometry(new Feature(), { unit: { Meter: 'm' } })
 void [shownPoint, profileCanvas]
+
+const attributeSelect = new SelectBase()
+attributeSelect.setFeatures()
+attributeSelect.setSources()
+const searchFeatures: import('ol/Collection').default<Feature> | null | undefined = attributeSelect.getFeatures()
+attributeSelect.doSelect({ conditions: [{ attr: 'count', op: '>', val: 5 }] })
+attributeSelect.on('select', event => { const features: Feature[] = event.features; void features })
+void searchFeatures
