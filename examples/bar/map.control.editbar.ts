@@ -54,7 +54,7 @@ map.addOverlay(tooltip);
     tooltip.setInfo('Drag points on features to edit...')
   } else tooltip.setInfo()
 })
-edit.getInteraction('Select').on('change:active', () => {
+edit.getInteraction('Select')!.on('change:active', () => {
   tooltip.setInfo('')
 });
 (edit.getInteraction('ModifySelect') as ModifyFeature).on('modifystart', e => {
@@ -63,7 +63,7 @@ edit.getInteraction('Select').on('change:active', () => {
 (edit.getInteraction('ModifySelect') as ModifyFeature).on('modifyend', () => {
   tooltip.setFeature()
 })
-edit.getInteraction('DrawPoint').on('change:active', e => {
+edit.getInteraction('DrawPoint')!.on('change:active', e => {
   tooltip.setInfo(e.oldValue ? '' : 'Click map to place a point...')
 });
 (edit.getInteraction('DrawLine') as Draw).on('change:active', e => {

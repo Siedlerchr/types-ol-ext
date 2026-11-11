@@ -186,4 +186,6 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `control/Legend`: corrected the required legend, collapse return and forwarded selection/items plus collapse events. Type tests cover the signatures; canvas and UI behavior were not browser-tested.
 
+- `control/EditBar`: corrected map detachment, optional interaction lookup, draw options, interaction labels and DrawHole option, and the plain info event. Removed repeated inherited declarations that narrowed Bar signatures. Type tests and the example check cover the changes; editing interaction was not browser-tested.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

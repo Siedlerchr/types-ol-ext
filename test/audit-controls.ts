@@ -541,3 +541,12 @@ legendControl.on('items', event => { const count: number = event.nb; void count 
 legendControl.on('change:collapse', event => { void event.collapsed })
 // @ts-expect-error The constructor dereferences its legend.
 new LegendControl()
+
+const auditEditBar = new EditBar({ target: document.body, drawOptions: false, interactions: { DrawHole: false, UndoDraw: 'undo', FinishDraw: 'finish', Info: 'Information' } })
+auditEditBar.setMap(null)
+auditEditBar.deactivateControls()
+const optionalEditInteraction: import('ol/interaction/Interaction').default | undefined = auditEditBar.getInteraction('missing')
+auditEditBar.on('info', event => { void event.features.getLength() })
+// @ts-expect-error An interaction may be disabled or unknown.
+const requiredEditInteraction: import('ol/interaction/Interaction').default = auditEditBar.getInteraction('missing')
+void [optionalEditInteraction, requiredEditInteraction]
