@@ -59,6 +59,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/Select`: `doSelect` uses `||` to default `useCase` and `matchAll`, so explicit false cannot override checked UI options. `addCondition` replaces falsy values such as numeric zero with an empty string, and documented `selectLabel` is not read. These are source observations; UI interaction was not browser-tested.
 
+- `control/Legend`: `collapse` is documented as returning a boolean but returns undefined; constructing without `legend` dereferences undefined despite the optional options object in the source. These are source observations; UI behavior was not browser-tested.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -181,5 +183,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `control/SelectCheck`, `SelectCondition`, `SelectFulltext`, `SelectPopup`, and `SelectMulti`: corrected optional callbacks, boolean selection defaults, value-list options, labels, condition clearing, map detachment and the required multi-control list. Type tests cover signatures; selection UI was not browser-tested.
 
 - `control/Select`: reviewed constructor and public condition methods against the implementation. Existing type tests cover condition creation, retrieval, formatting and invalid operators; its inherited event and selection types were corrected in the SelectBase round. UI behavior was not browser-tested.
+
+- `control/Legend`: corrected the required legend, collapse return and forwarded selection/items plus collapse events. Type tests cover the signatures; canvas and UI behavior were not browser-tested.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

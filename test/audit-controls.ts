@@ -1,3 +1,4 @@
+import LegendControl from '../@types/ol-ext/control/Legend'
 import SelectCheck from '../@types/ol-ext/control/SelectCheck'
 import SelectCondition from '../@types/ol-ext/control/SelectCondition'
 import SelectFulltext from '../@types/ol-ext/control/SelectFulltext'
@@ -532,3 +533,11 @@ const multiSelect = new SelectMulti({ controls: [checkSelect, popupSelect, fullt
 multiSelect.setMap(null)
 // @ts-expect-error SelectMulti requires its controls array.
 new SelectMulti()
+
+const legendControl = new LegendControl({ legend: mixedLegend })
+legendControl.collapse()
+legendControl.on('select', event => { void event.item })
+legendControl.on('items', event => { const count: number = event.nb; void count })
+legendControl.on('change:collapse', event => { void event.collapsed })
+// @ts-expect-error The constructor dereferences its legend.
+new LegendControl()
