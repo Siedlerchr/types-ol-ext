@@ -49,6 +49,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/Print`: `quality: 0` falls back to the configured quality; the canvas compositor calls `save()` before skipping a layer with opacity `0`, without a matching `restore()` for that iteration. Arbitrary print options are merged over event fields and can overwrite them. These are source observations; printing was not browser-tested in this round.
 
+- `control/PrintDialog`: `print({ margin: 0 })` does not apply the margin because the option is tested for truthiness; `setScale` accepts a ratio string but computes its displayed value with numeric division, yielding NaN for values such as `1/1000`. The documented `value` print option is read as `scale`. These are source observations; dialog interaction was not browser-tested.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -161,5 +163,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `control/RoutingGeoportail`: corrected map detachment, documented constructor options, boolean constraints, XHR callbacks, and routing, step, error and lifecycle event signatures. Type tests cover these declarations; live routing and UI were not tested.
 
 - `control/Print`: corrected partial print options, arbitrary metadata, optional fast-print options, and plain print/printing/error event payloads. Type tests cover the signatures; rendering and clipboard behavior were not browser-tested.
+
+- `control/PrintDialog` and `PrintDialog2x`: corrected options including the jsPDF constructor, named or custom sizes, scale option, event types, optional map detachment and second map. Type tests cover these signatures; printing and the dialog UI were not browser-tested.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

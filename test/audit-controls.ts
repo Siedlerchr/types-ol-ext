@@ -1,3 +1,5 @@
+import PrintDialog from '../@types/ol-ext/control/PrintDialog'
+import PrintDialog2x from '../@types/ol-ext/control/PrintDialog2x'
 import Print from '../@types/ol-ext/control/Print'
 import IsochroneGeoportail from '../@types/ol-ext/control/IsochroneGeoportail'
 import OverlayControl from '../@types/ol-ext/control/Overlay'
@@ -480,3 +482,14 @@ printControl.copyMap({}, copied => { void copied })
 printControl.fastPrint(undefined, canvas => { void canvas.width })
 printControl.on('print', event => { void [event.canvas, event.image, event.print.size] })
 printControl.on('error', event => { void event.canvas })
+
+const printDialog = new PrintDialog({ pdf: false, save: false, targetDialog: document.body })
+printDialog.setMap(null)
+printDialog.setSize()
+const paper: import('ol/size').Size | string | undefined = printDialog.getSize()
+printDialog.print({ scale: '1/1000' })
+printDialog.on('show', event => { void [event.dialog, event.page, event.userElement] })
+const twoMapDialog = new PrintDialog2x()
+twoMapDialog.setMap2(null)
+const secondMap: import('ol/Map').default | null | undefined = twoMapDialog.getMap2()
+void [paper, secondMap]

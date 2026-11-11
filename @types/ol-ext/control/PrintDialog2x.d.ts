@@ -32,17 +32,17 @@ export default class PrintDialog2x extends PrintDialog {
    *  @param {function} [options.saveAs] a function to save the image as blob
    *  @param {*} [options.jsPDF] jsPDF object to save map as pdf
    */
-  constructor(options: PrintOptions)
+  constructor(options?: PrintOptions & { map2?: _ol_Map_ })
 
   /** Set the second map to print
   * @param {ol.Map} map
   * @API
   */
-  setMap2(map: _ol_Map_): void
+  setMap2(map: _ol_Map_ | null): void
 
   /** Set the second map to print
   * @returns {ol.Map}
   * @API
   */
-  getMap2(): _ol_Map_
+  getMap2(): _ol_Map_ | null | undefined
 }
