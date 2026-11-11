@@ -1,3 +1,4 @@
+import Profile from '../@types/ol-ext/control/Profile'
 import PrintDialog from '../@types/ol-ext/control/PrintDialog'
 import PrintDialog2x from '../@types/ol-ext/control/PrintDialog2x'
 import Print from '../@types/ol-ext/control/Print'
@@ -493,3 +494,14 @@ const twoMapDialog = new PrintDialog2x()
 twoMapDialog.setMap2(null)
 const secondMap: import('ol/Map').default | null | undefined = twoMapDialog.getMap2()
 void [paper, secondMap]
+
+const profile = new Profile({ units: 'metric' })
+profile.setGeometry(new Feature(), { unit: 'km', zunit: 'm', projection: 'EPSG:4326' })
+const shownPoint: import('ol/coordinate').Coordinate | null = profile.showAt()
+const profileCanvas: HTMLCanvasElement = profile.getImage('canvas')
+profile.on('over', event => { const time: string = event.time; void [time, event.coord] })
+profile.on('show', event => { void event.show })
+profile.on('change:geometry', event => { void event.geometry })
+// @ts-expect-error Units are strings rather than the unit lookup object.
+profile.setGeometry(new Feature(), { unit: { Meter: 'm' } })
+void [shownPoint, profileCanvas]
