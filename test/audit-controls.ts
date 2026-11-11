@@ -595,3 +595,13 @@ imageLine.on('collapse', event => { void event.collapsed })
 // @ts-expect-error The constructor dereferences its options.
 new Imageline()
 void imageGroups
+
+const dialogAudit = new Dialog({ buttons: { ok: 'OK' } })
+dialogAudit.show({ autoclose: 100, hideOnBack: true, closeBox: false, max: 100, progress: 10, onButton: (button, inputs) => { void [button, inputs] } })
+dialogAudit.setContent('Hello')
+dialogAudit.setProgress(false)
+dialogAudit.setProgress(5, 10)
+dialogAudit.setTitle()
+dialogAudit.on('button', event => { void [event.button, event.inputs] })
+const closeResult: void = dialogAudit.close()
+void closeResult

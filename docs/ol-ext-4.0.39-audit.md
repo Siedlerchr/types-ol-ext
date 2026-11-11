@@ -75,6 +75,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/Imageline`: the initial collapsed class is concatenated without a separating space. `getFeatures` returns arrays grouped by source, and its `maxFeatures` check counts source arrays rather than individual features. The constructor also dereferences omitted options. These are source observations; UI behavior was not browser-tested.
 
+- `control/Dialog`: `close()` is documented as returning a boolean but returns undefined. Its title documentation permits an Element although `setTitle` assigns it to `innerText`. These are source observations; dialog UI was not browser-tested.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -215,5 +217,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `control/MapZone`: corrected the `zones` option, optional control options and select/collapse event payloads. Type tests cover the signatures; map interaction was not browser-tested.
 
 - `control/Imageline`: corrected required options, map detachment, grouped feature return and plain select/collapse events. Type tests cover these signatures; image scrolling and rendering were not browser-tested.
+
+- `control/Dialog`: corrected show/content options, progress arguments, title and close signatures, and plain button and lifecycle events. Type tests cover these APIs; dialog UI was not browser-tested.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

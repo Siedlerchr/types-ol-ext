@@ -1,6 +1,18 @@
 import type { Map } from 'ol'
 import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
+
+export type DialogInputs = Record<string, HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+export interface DialogButtonEvent extends BaseEvent { type: 'button'; button: string; inputs: DialogInputs }
+export type DialogOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'button', DialogButtonEvent, Return> & OnSignature<'show' | 'hide' | 'cancel', BaseEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'button' | 'show' | 'hide' | 'cancel', Return>
 
 export interface Options extends ControlOptions {
   className?: string;
@@ -12,24 +24,20 @@ export interface Options extends ControlOptions {
   hideOnClick?: boolean;
   hideOnBack?: boolean;
   closeOnSubmit?: boolean;
-}
-
-export interface ShowOptions {
-  content?: Element | string;
-  title?: string;
-  buttons?: { [key: string]: any };
-  onButton?: (button: string, inputs: { [key: string]: any }) => void;
+  buttons?: Record<string, string>;
 }
 
 export interface ContentOptions {
   content?: Element | string;
   title?: string;
   className?: string;
+  closeBox?: boolean;
   max?: number;
-  progress?: number;
-  buttons?: { [key: string]: any };
-  onButton?: (button: string, inputs: { [key: string]: any }) => void;
+  progress?: number | false;
+  buttons?: Record<string, string>;
+  onButton?: (button: string, inputs: DialogInputs) => void;
 }
+export interface ShowOptions extends ContentOptions { autoclose?: number; hideOnBack?: boolean }
 
 /**
  * @classdesc
@@ -51,6 +59,10 @@ export default class Dialog extends ol_control_Control {
    *  @param {boolean} options.closeOnSubmit Prevent closing the dialog on submit
    */
   constructor(options?: Options);
+
+  on: DialogOnSignature<EventsKey>;
+  once: DialogOnSignature<EventsKey>;
+  un: DialogOnSignature<void>;
 
   /** Show a new dialog
    * @param { * | Element | string } options options or a content to show
@@ -79,24 +91,24 @@ export default class Dialog extends ol_control_Control {
    *  @param {Object} options.buttons a key/value list of button to show
    *  @param {function} [options.onButton] a function that takes the button id and a list of input by className
    */
-  setContent(options?: ContentOptions): void;
+  setContent(options?: ContentOptions | string): void;
 
   getContentElement(): Element;
 
   /** Get form inputs, textareas, and selects keyed by their class names. */
-  getInputs(): Record<string, HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>;
+  getInputs(): DialogInputs;
 
   /** Set progress
    * @param {number|boolean} val the progress value or false to hide the progressBar
    * @param {number} max
    * @param {string|Element} message
    */
-  setProgress(val: number, max: number, message: string | Element): void;
+  setProgress(val: number | false, max?: number, message?: string | Element): void;
 
   /** Set the dialog title
    * @param {Element | String} content dialog content
    */
-  setTitle(title: Element | string): void
+  setTitle(title?: string): void
 
   /** Set the dialog content
    * @param {Element | String} content dialog content
@@ -114,5 +126,5 @@ export default class Dialog extends ol_control_Control {
    * @method Dialog.close
    * @return {boolean} true if a dialog is closed
    */
-  close(): boolean
+  close(): void
 }
