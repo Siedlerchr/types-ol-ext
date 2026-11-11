@@ -1,3 +1,5 @@
+import Swipe from '../@types/ol-ext/control/Swipe'
+import TileLayer from 'ol/layer/Tile'
 import Storymap from '../@types/ol-ext/control/Storymap'
 import Permalink from '../@types/ol-ext/control/Permalink'
 import LegendControl from '../@types/ol-ext/control/Legend'
@@ -565,3 +567,10 @@ const storyContent: HTMLDivElement = storymap.content
 storymap.on('scrollto', event => { void [event.coordinate, event.lon, event.zoom] })
 storymap.on('clickimage', event => { void [event.img, event.originalEvent, event.coordinate] })
 void storyContent
+
+const swipeControl = new Swipe({ layers: new TileLayer(), position: 0.5 })
+swipeControl.addLayer(new TileLayer(), true)
+swipeControl.removeLayers()
+const clippedLayers: Array<{ layer: import('ol/layer').Layer; right?: boolean }> = swipeControl.layers
+swipeControl.on('moving', event => { void [event.position, event.size] })
+void clippedLayers

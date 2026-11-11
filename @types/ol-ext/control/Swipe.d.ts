@@ -41,6 +41,8 @@ export default class Swipe extends ol_control_Control {
    */
   constructor(options?: Options);
 
+  layers: Array<{ layer: Layer; right?: boolean }>;
+
   /**
    * Set the map instance the control associated with.
    * @param {_ol_Map_} map The map instance.
