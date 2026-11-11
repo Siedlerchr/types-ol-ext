@@ -71,6 +71,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/VideoRecorder`: constructor frame-rate and bitrate options are ignored in favor of fixed defaults, and string `videoTarget` values other than `DIALOG` are not resolved to elements. The generated blob is labeled `video/mp4` regardless of the recorder output type. These are source observations; media recording was not browser-tested.
 
+- `control/MapZone`: the documented `zone` option is actually a required `zones` array; missing it throws. A zone without its own layer also requires a control-level layer or factory, despite the optional-looking constructor documentation. These are source observations; map interaction was not browser-tested.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -207,5 +209,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `control/Timeline`: completed a further public-method comparison and allowed feature clearing without an argument. Existing type tests cover events, dates and controls, with a check added for clearing; date rendering was not browser-tested.
 
 - `control/VideoRecorder`: reviewed recording controls and corrected map detachment, button tips and start/stop/error event payloads. Type tests cover signatures; actual media recording was not browser-tested.
+
+- `control/MapZone`: corrected the `zones` option, optional control options and select/collapse event payloads. Type tests cover the signatures; map interaction was not browser-tested.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

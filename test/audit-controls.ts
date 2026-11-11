@@ -132,7 +132,7 @@ magnify.refresh()
 declare const dialog: Dialog
 dialog.getInputs().name.focus()
 new Imageline({ source: [source], useExtent: true, getImage: () => false }).setLayers([])
-new MapZone().setCollapsed(true)
+new MapZone({ zones: [] }).setCollapsed(true)
 new Target().setVisible(true)
 new VideoRecorder().setTooltip('pause', 'Pause')
 declare const routing: RoutingGeoportail
@@ -580,3 +580,9 @@ recorder.setMap(null)
 recorder.on('start', event => { void event.canvas.width })
 recorder.on('stop', event => { const url: string = event.videoURL; void url })
 recorder.on('error', event => { const error: unknown = event.error; void error })
+
+const mapZone = new MapZone({ zones: [], centerOnClick: false })
+mapZone.on('select', event => { void [event.zone, event.index, event.coordinate, event.extent] })
+mapZone.on('change:collapse', event => { void event.collapsed })
+// @ts-expect-error The zones array is read unconditionally.
+new MapZone()
