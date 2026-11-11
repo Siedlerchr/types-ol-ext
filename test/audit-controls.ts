@@ -586,3 +586,12 @@ mapZone.on('select', event => { void [event.zone, event.index, event.coordinate,
 mapZone.on('change:collapse', event => { void event.collapsed })
 // @ts-expect-error The zones array is read unconditionally.
 new MapZone()
+
+const imageLine = new Imageline({ collapsed: true, collapsible: true })
+imageLine.setMap(null)
+const imageGroups: Feature[][] = imageLine.getFeatures()
+imageLine.on('select', event => { void event.feature })
+imageLine.on('collapse', event => { void event.collapsed })
+// @ts-expect-error The constructor dereferences its options.
+new Imageline()
+void imageGroups
