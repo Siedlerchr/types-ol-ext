@@ -1,3 +1,4 @@
+import Permalink from '../@types/ol-ext/control/Permalink'
 import LegendControl from '../@types/ol-ext/control/Legend'
 import SelectCheck from '../@types/ol-ext/control/SelectCheck'
 import SelectCondition from '../@types/ol-ext/control/SelectCondition'
@@ -550,3 +551,8 @@ auditEditBar.on('info', event => { void event.features.getLength() })
 // @ts-expect-error An interaction may be disabled or unknown.
 const requiredEditInteraction: import('ol/interaction/Interaction').default = auditEditBar.getInteraction('missing')
 void [optionalEditInteraction, requiredEditInteraction]
+
+const permalink = new Permalink({ className: 'link', refreshDelay: 100 })
+permalink.setMap(null)
+const matchingLayer: import('ol/layer/Base').default | false = permalink.getLayerByLink('base', [])
+void matchingLayer
