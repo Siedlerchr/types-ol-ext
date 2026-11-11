@@ -1,3 +1,4 @@
+import Print from '../@types/ol-ext/control/Print'
 import IsochroneGeoportail from '../@types/ol-ext/control/IsochroneGeoportail'
 import OverlayControl from '../@types/ol-ext/control/Overlay'
 // @ts-expect-error RoutingZDSR is not an ol-ext module in the audited release.
@@ -472,3 +473,10 @@ routingAudit.on('routing', event => { const distance: number = event.distance; c
 routingAudit.on('step:hover', event => { void [event.index, event.feature, event.hover] })
 routingAudit.on('error', event => { void [event.status, event.statusText] })
 routingAudit.ajax('/route', request => { void request.responseText })
+
+const printControl = new Print()
+printControl.print({ format: 'a4', quality: 0.8, custom: 'data' })
+printControl.copyMap({}, copied => { void copied })
+printControl.fastPrint(undefined, canvas => { void canvas.width })
+printControl.on('print', event => { void [event.canvas, event.image, event.print.size] })
+printControl.on('error', event => { void event.canvas })

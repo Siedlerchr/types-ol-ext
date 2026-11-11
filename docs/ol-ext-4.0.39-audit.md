@@ -47,6 +47,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/RoutingGeoportail`: pointer enter and leave both emit `hover: false`; service response errors emit `errror`, and the caller then passes the undefined result to `listRouting`. Constraint request generation includes keys regardless of their stored boolean value. Segment-joining compares a point to itself, so the condition is always false. These are source observations; live routing was not exercised.
 
+- `control/Print`: `quality: 0` falls back to the configured quality; the canvas compositor calls `save()` before skipping a layer with opacity `0`, without a matching `restore()` for that iteration. Arbitrary print options are merged over event fields and can overwrite them. These are source observations; printing was not browser-tested in this round.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -157,5 +159,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `control/IsochroneGeoportail`: corrected optional iteration, map detachment, required mode and direction, constructor auth/method options, and the plain isochrone event payload. Type tests cover the signatures; live service requests were not made.
 
 - `control/RoutingGeoportail`: corrected map detachment, documented constructor options, boolean constraints, XHR callbacks, and routing, step, error and lifecycle event signatures. Type tests cover these declarations; live routing and UI were not tested.
+
+- `control/Print`: corrected partial print options, arbitrary metadata, optional fast-print options, and plain print/printing/error event payloads. Type tests cover the signatures; rendering and clipboard behavior were not browser-tested.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
