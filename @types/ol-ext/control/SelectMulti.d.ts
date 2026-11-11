@@ -6,7 +6,7 @@ import SelectBase from './SelectBase'
 export interface Options extends SelectOptions {
   className?: string;
   source?: VectorSource | VectorSource[];
-  controls?: SelectBase[];
+  controls: SelectBase[];
 }
 
 /**
@@ -26,13 +26,13 @@ export default class SelectMulti extends SelectBase {
    *  @param {Vector | Array<Vector>} options.source the source to search in
    *  @param {Array<contrSelectBase>} options.controls an array of controls
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /**
    * Set the map instance the control associated with.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Add a new control
    * @param {contrSelectBase} c

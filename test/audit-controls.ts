@@ -1,3 +1,8 @@
+import SelectCheck from '../@types/ol-ext/control/SelectCheck'
+import SelectCondition from '../@types/ol-ext/control/SelectCondition'
+import SelectFulltext from '../@types/ol-ext/control/SelectFulltext'
+import SelectPopup from '../@types/ol-ext/control/SelectPopup'
+import SelectMulti from '../@types/ol-ext/control/SelectMulti'
 import SelectBase from '../@types/ol-ext/control/SelectBase'
 import Profile from '../@types/ol-ext/control/Profile'
 import PrintDialog from '../@types/ol-ext/control/PrintDialog'
@@ -514,3 +519,16 @@ const searchFeatures: import('ol/Collection').default<Feature> | null | undefine
 attributeSelect.doSelect({ conditions: [{ attr: 'count', op: '>', val: 5 }] })
 attributeSelect.on('select', event => { const features: Feature[] = event.features; void features })
 void searchFeatures
+
+const checkSelect = new SelectCheck({ values: ['one', 'two'], selectAll: true, type: 'checkbox' })
+checkSelect.setValues({ values: { one: 'One' }, sort: true })
+checkSelect.setMap(null)
+const popupSelect = new SelectPopup({ label: 'Type', selectAll: false })
+popupSelect.setValues({ values: ['one'] })
+popupSelect.setValues()
+new SelectCondition().setCondition()
+const fulltextSelect = new SelectFulltext({ label: 'Search', placeHolder: 'Text' })
+const multiSelect = new SelectMulti({ controls: [checkSelect, popupSelect, fulltextSelect] })
+multiSelect.setMap(null)
+// @ts-expect-error SelectMulti requires its controls array.
+new SelectMulti()

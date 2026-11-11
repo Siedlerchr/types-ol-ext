@@ -6,6 +6,8 @@ export interface Options extends SelectOptions {
   className?: string;
   source?: VectorSource | VectorSource[];
   property?: string;
+  label?: string;
+  placeHolder?: string;
   onchoice?: () => void;
 }
 

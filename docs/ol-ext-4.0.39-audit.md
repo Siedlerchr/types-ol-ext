@@ -55,6 +55,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/SelectBase`: the constructor assigns the return of `setFeatures` (which returns undefined) over the collection it just stored, discarding the initial collection. When a collection is subsequently set, selection against an explicit separate feature array can remove items at corresponding indices from that collection. These are source observations; selection UI was not browser-tested.
 
+- `control/SelectMulti`: constructing without `controls` calls `forEach` on undefined; map detachment calls misspelled `remveControl`. `control/SelectCheck`: if no values are found, `setValues` returns before initializing `_checks`, so `doSelect` can throw; later empty value sets leave existing checks in place. These are source observations; UI interactions were not browser-tested.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -173,5 +175,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `control/Profile`: corrected optional unit system, geometry unit strings, nullable display lookup, the inconsistent time lookup result, canvas image overload and plain pointer/show/zoom/geometry events. Type tests cover signatures; graph behavior was not browser-tested.
 
 - `control/SelectBase`: corrected nullable/undefined feature collection, optional clearing, condition value types, operations map and plain selection event. Type checks cover these APIs; subclasses remain to be audited.
+
+- `control/SelectCheck`, `SelectCondition`, `SelectFulltext`, `SelectPopup`, and `SelectMulti`: corrected optional callbacks, boolean selection defaults, value-list options, labels, condition clearing, map detachment and the required multi-control list. Type tests cover signatures; selection UI was not browser-tested.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
