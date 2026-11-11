@@ -107,7 +107,7 @@ export default class Timeline extends ol_control_Control {
    * @param {Array<Features>|VectorSource} features An array of features or a vector source
    * @param {number} zoom zoom to draw the line default 1
    */
-  setFeatures(features: Feature[] | VectorSource, zoom?: number): void;
+  setFeatures(features?: Feature[] | VectorSource, zoom?: number): void;
 
   /**
    * Get features

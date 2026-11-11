@@ -67,6 +67,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/Swipe`: `removeLayer` and `removeLayers` leave entries in place when the control is unattached; constructor position zero is replaced by 0.5. The rectangle getter also assumes an attached map with a size. These are source observations; swipe rendering was not browser-tested.
 
+- `control/Timeline`: month rounding advances the month before setting the day to one; dates at the end of a long month can overflow the following shorter month. This is a source observation; date rendering was not browser-tested.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -199,5 +201,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `control/Storymap`: reviewed chapter, content and scroll/image event APIs; declared its public content element and added type checks. Story interaction was not browser-tested.
 
 - `control/Swipe`: checked public layer, map and moving-event APIs and declared the public layer entries. Type checks cover these signatures; swipe rendering was not browser-tested.
+
+- `control/Timeline`: completed a further public-method comparison and allowed feature clearing without an argument. Existing type tests cover events, dates and controls, with a check added for clearing; date rendering was not browser-tested.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
