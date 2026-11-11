@@ -464,3 +464,11 @@ isochrone.search([0, 0], '5km')
 isochrone.on('isochrone', event => { const iteration: number = event.iteration; const feature: Feature = event.feature; void [iteration, feature] })
 // @ts-expect-error A mode is required by the implementation.
 isochrone.setMode()
+
+const routingAudit = new RoutingGeoportail({ lang: 'en', search: { apiKey: 'key' }, constraints: { tunnel: 'tunnels' }, mode: 'car' })
+routingAudit.setMap(null)
+routingAudit.setConstraint('tunnel', false)
+routingAudit.on('routing', event => { const distance: number = event.distance; const features: Feature[] = event.features; void [distance, features] })
+routingAudit.on('step:hover', event => { void [event.index, event.feature, event.hover] })
+routingAudit.on('error', event => { void [event.status, event.statusText] })
+routingAudit.ajax('/route', request => { void request.responseText })
