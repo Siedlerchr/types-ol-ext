@@ -574,3 +574,9 @@ swipeControl.removeLayers()
 const clippedLayers: Array<{ layer: import('ol/layer').Layer; right?: boolean }> = swipeControl.layers
 swipeControl.on('moving', event => { void [event.position, event.size] })
 void clippedLayers
+
+const recorder = new VideoRecorder({ framerate: 24, videoBitsPerSecond: 1000000 })
+recorder.setMap(null)
+recorder.on('start', event => { void event.canvas.width })
+recorder.on('stop', event => { const url: string = event.videoURL; void url })
+recorder.on('error', event => { const error: unknown = event.error; void error })
