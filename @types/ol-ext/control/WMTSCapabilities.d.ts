@@ -11,7 +11,7 @@ import type { Options } from './WMSCapabilities'
  * @extends {WMSCapabilities}
 
  */
-export default class WMTSCapabilities extends WMSCapabilities {
+export default class WMTSCapabilities extends WMSCapabilities<any> {
   /**
    * @param {*} options
    *  @param {string|Element} [options.target] the target to set the dialog, use document.body to have fullwindow dialog

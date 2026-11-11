@@ -77,6 +77,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/Dialog`: `close()` is documented as returning a boolean but returns undefined. Its title documentation permits an Element although `setTitle` assigns it to `innerText`. These are source observations; dialog UI was not browser-tested.
 
+- `control/WMSCapabilities`: the network-error handler checks whether the callback is a function but evaluates `false` instead of calling it. The `onselect` adapter also runs for a load-error event and receives undefined layer/options. These are source observations; service requests were not exercised.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -219,5 +221,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `control/Imageline`: corrected required options, map detachment, grouped feature return and plain select/collapse events. Type tests cover these signatures; image scrolling and rendering were not browser-tested.
 
 - `control/Dialog`: corrected show/content options, progress arguments, title and close signatures, and plain button and lifecycle events. Type tests cover these APIs; dialog UI was not browser-tested.
+
+- `control/WMSCapabilities`: corrected WMS result field names and legend/extent shapes, constructor labels and plain capabilities/load events, including failure payloads. WMTS inherits a generic event result because its option shape differs and still needs detailed review. Type tests cover WMS signatures; live requests were not made.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
