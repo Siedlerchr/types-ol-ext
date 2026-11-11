@@ -608,3 +608,12 @@ void closeResult
 
 wms.on('capabilities', event => { void event.capabilities })
 wms.on('load', event => { if (event.layer && event.options) { const projection: string = event.options.source.projection; const legends: string[] = event.options.data.legend; void [projection, legends] } })
+
+const wmtsAudit = new WMTSCapabilities()
+const supportedMatrices: string[] = wmtsAudit.supportedSets
+const wmtsResult = wmtsAudit.getOptionsFromCap({}, {})
+if (wmtsResult) { const matrix: string = wmtsResult.source.matrixSet; void matrix }
+wmtsAudit.on('load', event => { if (event.options) { void event.options.source.matrixSet } })
+// @ts-expect-error Unsupported matrix sets can return no result.
+const requiredWmts: import('../@types/ol-ext/control/WMTSCapabilities').WMTSResult = wmtsResult
+void [requiredWmts, supportedMatrices]

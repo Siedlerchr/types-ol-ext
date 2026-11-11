@@ -80,7 +80,7 @@ export interface Options extends ControlOptions {
  * @fires capabilities
  * @extends {ol_control_Button}
  */
-export default class WMSCapabilities<Result = ReturnCapabilitiesOptions> extends Button {
+export default class WMSCapabilities<Result = ReturnCapabilitiesOptions, Created = TileLayer<TileSource>> extends Button {
   /**
    * @param {*} options
    *  @param {string|Element} [options.target] the target to set the dialog, use document.body to have fullwindow dialog
@@ -105,7 +105,7 @@ export default class WMSCapabilities<Result = ReturnCapabilitiesOptions> extends
   /** Create a new layer using options received by getOptionsFromCap method
    * @param {*} options
    */
-  getLayerFromOptions(options: ReturnCapabilitiesOptions): TileLayer<TileSource>;
+  getLayerFromOptions(options: Result): Created;
 
   /**
    * Set the map instance the control is associated with
@@ -144,7 +144,7 @@ export default class WMSCapabilities<Result = ReturnCapabilitiesOptions> extends
    * @param {string} layername
    * @param {function} [onload] callback function (or listen to 'load' event)
    */
-  loadLayer(url: string, layerName: string, onload?: (result: { layer: TileLayer<TileSource>; options: ReturnCapabilitiesOptions }) => void): void;
+  loadLayer(url: string, layerName: string, onload?: (result: { layer: TileLayer<TileSource>; options: Result }) => void): void;
 
   /** Clear form
    */
@@ -173,7 +173,7 @@ export default class WMSCapabilities<Result = ReturnCapabilitiesOptions> extends
    * @param {*} parent capabilities
    * @return {*} options
    */
-  getOptionsFromCap(caps: any, parent: any): ReturnCapabilitiesOptions;
+  getOptionsFromCap(caps: any, parent: any): Result;
 
   /** Error list: a key/value list of error to display in the dialog
    * Overwrite it to handle internationalization

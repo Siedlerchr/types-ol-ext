@@ -79,6 +79,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/WMSCapabilities`: the network-error handler checks whether the callback is a function but evaluates `false` instead of calling it. The `onselect` adapter also runs for a load-error event and receives undefined layer/options. These are source observations; service requests were not exercised.
 
+- `control/WMTSCapabilities`: option extraction dereferences `caps.Attribution.Title` without checking for attribution, while its parser sets attribution on the parent collection. The parser also assumes service-provider and layer arrays exist. These are source observations; WMTS service responses were not exercised.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -222,6 +224,8 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `control/Dialog`: corrected show/content options, progress arguments, title and close signatures, and plain button and lifecycle events. Type tests cover these APIs; dialog UI was not browser-tested.
 
-- `control/WMSCapabilities`: corrected WMS result field names and legend/extent shapes, constructor labels and plain capabilities/load events, including failure payloads. WMTS inherits a generic event result because its option shape differs and still needs detailed review. Type tests cover WMS signatures; live requests were not made.
+- `control/WMSCapabilities`: corrected WMS result field names and legend/extent shapes, constructor labels and plain capabilities/load events, including failure payloads. WMTS uses its own result type as recorded below. Type tests cover WMS signatures; live requests were not made.
+
+- `control/WMTSCapabilities`: declared its distinct result and unsupported-matrix undefined result, layer factory nullability, inherited typed load events and supported-set list. Type tests cover these signatures; live capabilities requests were not made.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

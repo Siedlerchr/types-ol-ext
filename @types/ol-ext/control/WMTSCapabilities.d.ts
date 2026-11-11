@@ -1,6 +1,13 @@
 import type TileLayer from 'ol/layer/Tile'
 import type TileSource from 'ol/source/Tile'
 import type WMTSTileGrid from 'ol/tilegrid/WMTS'
+import type { Extent } from 'ol/extent'
+
+export interface WMTSResult {
+  layer: { title: string; extent: Extent | undefined; abstract: unknown; maxResolution: number | undefined };
+  source: { url: string; layer: string; matrixSet: string; format: string; projection: string; tilePrefix?: boolean; minZoom: number; maxZoom: number; style: string; attributions: string | string[]; crossOrigin: string | null; wrapX: boolean };
+  data: { title: string; abstract: unknown; legend?: string[] };
+}
 import WMSCapabilities from './WMSCapabilities'
 import type { Options } from './WMSCapabilities'
 
@@ -11,7 +18,7 @@ import type { Options } from './WMSCapabilities'
  * @extends {WMSCapabilities}
 
  */
-export default class WMTSCapabilities extends WMSCapabilities<any> {
+export default class WMTSCapabilities extends WMSCapabilities<WMTSResult | undefined, TileLayer<TileSource> | undefined> {
   /**
    * @param {*} options
    *  @param {string|Element} [options.target] the target to set the dialog, use document.body to have fullwindow dialog
@@ -28,6 +35,8 @@ export default class WMTSCapabilities extends WMSCapabilities<any> {
    *  @param {*} [options.services] a key/url object of services for quick access in a menu
    */
   constructor(options?: Options);
+
+  supportedSets: string[];
 
   /** Get Capabilities request parameters
    * @param {*} options
@@ -56,10 +65,10 @@ export default class WMTSCapabilities extends WMSCapabilities<any> {
    * @param {*} parent capabilities
    * @return {*} options
    */
-  getOptionsFromCap(caps: any, parent: any): any;
+  getOptionsFromCap(caps: any, parent: any): WMTSResult | undefined;
 
   /** Create a new layer using options received by getOptionsFromCap method
    * @param {*} options
    */
-  getLayerFromOptions(options: any): TileLayer<TileSource>;
+  getLayerFromOptions(options: WMTSResult | undefined): TileLayer<TileSource> | undefined;
 }
