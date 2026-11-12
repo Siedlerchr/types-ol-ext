@@ -28,7 +28,7 @@ import LineString from 'ol/geom/LineString'
 import Polygon from 'ol/geom/Polygon'
 import Point from 'ol/geom/Point'
 import convexHull from '../@types/ol-ext/geom/ConvexHull'
-import { getAdjacent } from '../@types/ol-ext/geom/geohash'
+import { getAdjacent, fromLonLat, toLonLat, getExtent, getNeighbours } from '../@types/ol-ext/geom/geohash'
 import { ol_geom_GPAltiCode, ol_coordinate_GPAltiCode } from '../@types/ol-ext/geom/GPAltiCode'
 import scribbleFill from '../@types/ol-ext/geom/Scribble'
 import '../@types/ol-ext/geom/LineStringSplitAt'
@@ -196,3 +196,9 @@ new TileWFS({})
 new Overpass({})
 // @ts-expect-error unsupported rounding unit
 timeline.roundDate(new Date(), 'year')
+
+const hash = fromLonLat([2, 48], 6)
+const hashCenter: number[] = toLonLat(hash)
+const hashExtent: import('ol/extent').Extent | false = getExtent(hash)
+const hashNeighbors = getNeighbours(hash)
+void [hashCenter, hashExtent, hashNeighbors.n]
