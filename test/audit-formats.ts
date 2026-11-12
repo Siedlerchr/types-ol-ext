@@ -1,3 +1,4 @@
+import { setMapScale, greatCircleTrack, computeDestinationPoint } from '../@types/ol-ext/geom/sphere'
 import GeoRSS from '../@types/ol-ext/format/GeoRSS'
 import HexGrid from '../@types/ol-ext/render/HexGrid'
 import GeoJSONX from '../@types/ol-ext/format/GeoJSONX'
@@ -57,3 +58,8 @@ const rssFeatures: Feature[] = geoRSS.readFeatures('<rss/>', { dataProjection: '
 // @ts-expect-error readFeature expects an element, not XML text.
 geoRSS.readFeature('<item/>')
 void [rssFeature, rssFeatures]
+
+const scaleResult: number | undefined = setMapScale(null, 0)
+const destinationPoint: [number, number] = computeDestinationPoint([0, 0], 1000, 0)
+const greatCircle: number[][] = greatCircleTrack([0, 0], [1, 1])
+void [scaleResult, destinationPoint, greatCircle]

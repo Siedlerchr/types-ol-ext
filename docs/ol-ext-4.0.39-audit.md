@@ -97,6 +97,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `format/GeoRSS`: `readFeatures` treats a single Node as an indexed collection and returns no features, while `readFeature` does not parse its documented string input. A Node check with a stub node reproduced the empty result and successfully read the same node via `readFeature`; XML parsing in a browser was not tested.
 
+- `geom/sphere`: a Node check crossing east from longitude 179° returned approximately 0° rather than -179° because longitude normalization multiplies by 540. A great-circle track from 179° to -179° mutated the supplied destination to 181°. A negative track distance also makes the loop nonterminating (source observation; not executed).
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -259,5 +261,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `format/GeoJSONX` and `GeoJSONP`: reviewed encoding methods and added GeoJSONP type checks. Point feature round trips passed in Node; line encoding exposed the issue above. Other geometry shapes and extended properties still need runtime checks.
 
 - `format/GeoRSS`: corrected the projection option spelling and element input to `readFeature`. Type checks cover both methods; a Node check verified point decoding and exposed the single-node collection issue above.
+
+- `geom/sphere`: exported the missing `setMapScale` declaration and corrected its absent-result case. Type tests cover exports; Node checks reproduced antimeridian normalization and input mutation issues above.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
