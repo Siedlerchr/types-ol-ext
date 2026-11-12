@@ -83,6 +83,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `source/Delaunay`: Node checks reproduced a NaN circumcircle for `[[0,0],[1,0],[0,1]]`, a reported intersection for disjoint segments `[[0,0],[1,0]]` and `[[2,-1],[2,1]]`, and a Voronoi exception for a node with no triangles. Construction also deletes `source` from the caller’s options object. The checks used the checkout’s installed OpenLayers dependency.
 
+- `source/DayNight`: a Node check of `getCoordinates("2024-06-21T12:00:00Z", "daynight")` with step 90 showed that the returned day polygon largely duplicates the night polygon, with only its first coordinate altered and the ring no longer closed. The constructor also overwrites the caller’s `strategy` option, and a negative step would not advance the longitude loop toward termination (source observations).
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -231,5 +233,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `control/WMTSCapabilities`: declared its distinct result and unsupported-matrix undefined result, layer factory nullability, inherited typed load events and supported-set list. Type tests cover these signatures; live capabilities requests were not made.
 
 - `source/Delaunay`: corrected the Voronoi result to polygon features and the optional border argument; `_addTriangle` returns a polygon feature and mutates its coordinate array. Type checks cover these signatures; separate Node checks exposed edge cases documented above.
+
+- `source/DayNight`: reviewed constructor, public solar and coordinate methods against source. Existing type checks cover line and day/night results; a Node check exposed the day polygon issue recorded above.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
