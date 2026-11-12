@@ -107,6 +107,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `geom/geohash`: a Node check showed default precision is 12, invalid `!` decodes to NaN coordinates, and empty-hash neighbour lookup throws. Source inspection shows precision inference reads `.lat` and `.lon` from a coordinate array, so it cannot match the input.
 
+- `geom/LineStringSplitAt`: a Node check with a horizontal segment and a point 0.001 units away did not split with tolerance 0.01; axis-aligned branches use exact equality. Splitting at an existing vertex succeeded.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -279,5 +281,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `geom/ConvexHull`: checked the default export and geometry augmentation; existing type checks cover both. Node checks confirmed the singleton and multi-geometry issues listed above.
 
 - `geom/geohash`: reviewed encode, decode, extent and neighbour exports. Expanded type checks and ran Node checks for input edge cases documented above.
+
+- `geom/LineStringSplitAt`: reviewed the side-effect-only module and LineString augmentation. Existing type checks cover single and omitted points; Node checks covered vertex splitting and the tolerance issue above.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
