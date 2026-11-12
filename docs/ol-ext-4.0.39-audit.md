@@ -85,6 +85,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `source/DayNight`: a Node check of `getCoordinates("2024-06-21T12:00:00Z", "daynight")` with step 90 showed that the returned day polygon largely duplicates the night polygon, with only its first coordinate altered and the ring no longer closed. The constructor also overwrites the caller’s `strategy` option, and a negative step would not advance the longitude loop toward termination (source observations).
 
+- `source/IDW`: `getValue` calls a transform created only during rendering, so an earlier call throws. The documented `lib` option is ignored; worker helpers are instead read from `useWorker` when it is an object. Constructor options are mutated by replacing `canvasFunction`. These are source observations; worker rendering was not exercised.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -235,5 +237,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `source/Delaunay`: corrected the Voronoi result to polygon features and the optional border argument; `_addTriangle` returns a polygon feature and mutates its coordinate array. Type checks cover these signatures; separate Node checks exposed edge cases documented above.
 
 - `source/DayNight`: reviewed constructor, public solar and coordinate methods against source. Existing type checks cover line and day/night results; a Node check exposed the day polygon issue recorded above.
+
+- `source/IDW`: reviewed public source, color and value methods and added worker helper and draw-event types. Type checks cover the signatures; canvas and worker rendering were not exercised.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
