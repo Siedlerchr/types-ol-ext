@@ -91,6 +91,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `source/GeoRSS`: construction overwrites the caller’s loader option (verified in Node); its Ajax error handler only logs an error and the loader does not invoke OpenLayers success/failure callbacks. The network failure behavior is a source observation; no live request was made.
 
+- `source/Vector3D`: when no text style is supplied, `setStyle` puts a Fill in the Text slot; later rendering calls `getFill()` on it. A Node construction check confirmed the default object is Fill and lacks that method. Rendering itself was not exercised.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -247,5 +249,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `source/GridBin` and `HexBin`: reviewed geometry and grid configuration methods against the release. Expanded HexBin type checks; a Node check verified GridBin defaults. Bin rendering was not browser-tested.
 
 - `source/GeoRSS`: checked its constructor and inherited vector-source API. Existing type checks cover its required feed URL; a Node check verified construction and loader mutation. No live feed request was made.
+
+- `source/Vector3D`: reviewed constructor and public height, style and animation APIs against the release. Existing type tests cover these signatures; a Node construction check identified the default-style issue above.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
