@@ -1,3 +1,4 @@
+import GeoRSS from '../@types/ol-ext/format/GeoRSS'
 import HexGrid from '../@types/ol-ext/render/HexGrid'
 import GeoJSONX from '../@types/ol-ext/format/GeoJSONX'
 import GeoJSONP from '../@types/ol-ext/format/GeoJSONP'
@@ -49,3 +50,10 @@ const polylineFormat = new GeoJSONP({ decimals: 6 })
 const polylineEncoded: import('../@types/ol-ext/format/GeoJSONX').EncodedCoordinates = polylineFormat.encodeCoordinates([[1, 2], [3, 4]])
 const polylineDecoded: import('../@types/ol-ext/format/GeoJSONX').CoordinateTree | null = polylineFormat.decodeCoordinates(polylineEncoded)
 void polylineDecoded
+
+const geoRSS = new GeoRSS({ featureProjection: 'EPSG:3857' })
+const rssFeature: Feature | null = geoRSS.readFeature(document.createElement('item'))
+const rssFeatures: Feature[] = geoRSS.readFeatures('<rss/>', { dataProjection: 'EPSG:4326' })
+// @ts-expect-error readFeature expects an element, not XML text.
+geoRSS.readFeature('<item/>')
+void [rssFeature, rssFeatures]

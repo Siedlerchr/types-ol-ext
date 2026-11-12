@@ -95,6 +95,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `format/GeoJSONX`: a Node check of `encodeCoordinates([[1,2],[3,4]])` followed by `decodeCoordinates` without a decimal argument returned NaN coordinates. The constructor also ignores custom arrays supplied as `deleteNullProperties` and uses its fixed defaults instead (source observation). Point feature round trips passed in both GeoJSONX and GeoJSONP.
 
+- `format/GeoRSS`: `readFeatures` treats a single Node as an indexed collection and returns no features, while `readFeature` does not parse its documented string input. A Node check with a stub node reproduced the empty result and successfully read the same node via `readFeature`; XML parsing in a browser was not tested.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -255,5 +257,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `source/Vector3D`: reviewed constructor and public height, style and animation APIs against the release. Existing type tests cover these signatures; a Node construction check identified the default-style issue above.
 
 - `format/GeoJSONX` and `GeoJSONP`: reviewed encoding methods and added GeoJSONP type checks. Point feature round trips passed in Node; line encoding exposed the issue above. Other geometry shapes and extended properties still need runtime checks.
+
+- `format/GeoRSS`: corrected the projection option spelling and element input to `readFeature`. Type checks cover both methods; a Node check verified point decoding and exposed the single-node collection issue above.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
