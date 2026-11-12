@@ -121,6 +121,13 @@ new Geoportail({})
 // @ts-expect-error GeoRSS needs a feed URL
 new GeoRSS()
 const hexBins = new HexBin({ source: inputSource, layout: 'flat' })
+hexBins.setSize(200, true)
+hexBins.setLayout('pointy')
+hexBins.setOrigin([0, 0])
+const hexSize: number = hexBins.getSize()
+const hexOrigin: number[] = hexBins.getOrigin()
+const hexFeatures: import('ol/Feature').default[] = hexBins.getHexFeatures()
+void [hexSize, hexOrigin, hexFeatures]
 hexBins.setSize(100)
 hexBins.setLayout('pointy')
 const idw = new IDW({ source: inputSource, maxD: 100, getColor: () => [0, 0, 0, 255], useWorker: { helper: (value: number) => value } })

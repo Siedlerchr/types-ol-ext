@@ -87,6 +87,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `source/IDW`: `getValue` calls a transform created only during rendering, so an earlier call throws. The documented `lib` option is ignored; worker helpers are instead read from `useWorker` when it is an object. Constructor options are mutated by replacing `canvasFunction`. These are source observations; worker rendering was not exercised.
 
+- `source/GridBin`: the documentation states a 200-metre default grid size, but a Node check found size 1 with an EPSG:4326 grid projection; size is applied in the grid projection’s units.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -239,5 +241,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `source/DayNight`: reviewed constructor, public solar and coordinate methods against source. Existing type checks cover line and day/night results; a Node check exposed the day polygon issue recorded above.
 
 - `source/IDW`: reviewed public source, color and value methods and added worker helper and draw-event types. Type checks cover the signatures; canvas and worker rendering were not exercised.
+
+- `source/GridBin` and `HexBin`: reviewed geometry and grid configuration methods against the release. Expanded HexBin type checks; a Node check verified GridBin defaults. Bin rendering was not browser-tested.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
