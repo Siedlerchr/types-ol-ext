@@ -89,6 +89,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `source/GridBin`: the documentation states a 200-metre default grid size, but a Node check found size 1 with an EPSG:4326 grid projection; size is applied in the grid projection’s units.
 
+- `source/GeoRSS`: construction overwrites the caller’s loader option (verified in Node); its Ajax error handler only logs an error and the loader does not invoke OpenLayers success/failure callbacks. The network failure behavior is a source observation; no live request was made.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -243,5 +245,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `source/IDW`: reviewed public source, color and value methods and added worker helper and draw-event types. Type checks cover the signatures; canvas and worker rendering were not exercised.
 
 - `source/GridBin` and `HexBin`: reviewed geometry and grid configuration methods against the release. Expanded HexBin type checks; a Node check verified GridBin defaults. Bin rendering was not browser-tested.
+
+- `source/GeoRSS`: checked its constructor and inherited vector-source API. Existing type checks cover its required feed URL; a Node check verified construction and loader mutation. No live feed request was made.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
