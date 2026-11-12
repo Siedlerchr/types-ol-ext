@@ -101,6 +101,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `geom/GeomUtils`: Node checks showed `ol_coordinate_findSegment` always reports index 1 for a found segment, including the third segment, and matches points on the infinite extension beyond an endpoint. Sampling a nonzero segment with distance zero produces an infinite loop (source observation; not executed).
 
+- `geom/visvalingam`: the ES module uses an extensionless `GeomUtils` import, which prevented direct Node import in this checkout. The implementation reads an omitted options argument, discards dimensions beyond XY, and uses randomness to break area ties (source observations).
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -267,5 +269,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `geom/sphere`: exported the missing `setMapScale` declaration and corrected its absent-result case. Type tests cover exports; Node checks reproduced antimeridian normalization and input mutation issues above.
 
 - `geom/GeomUtils`: compared exported coordinate and geometry helpers and prototype extensions with the release. Existing type checks cover representative helpers and sampling; Node checks exposed the segment-finding issues above.
+
+- `geom/visvalingam`: corrected its default LineString export, prototype augmentation, required options and boolean `keepEnds`. Type tests cover the declared module shape; direct Node execution remains blocked by the extensionless upstream import.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

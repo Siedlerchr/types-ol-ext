@@ -1,3 +1,4 @@
+import VisvalingamLineString from '../@types/ol-ext/geom/visvalingam'
 import { setMapScale, greatCircleTrack, computeDestinationPoint } from '../@types/ol-ext/geom/sphere'
 import GeoRSS from '../@types/ol-ext/format/GeoRSS'
 import HexGrid from '../@types/ol-ext/render/HexGrid'
@@ -63,3 +64,9 @@ const scaleResult: number | undefined = setMapScale(null, 0)
 const destinationPoint: [number, number] = computeDestinationPoint([0, 0], 1000, 0)
 const greatCircle: number[][] = greatCircleTrack([0, 0], [1, 1])
 void [scaleResult, destinationPoint, greatCircle]
+
+const simplifiedLine = new VisvalingamLineString([[0, 0], [1, 1], [2, 0]]).simplifyVisvalingam({ keepEnds: true, ratio: 0.8 })
+const lineCoordinates: number[][] = simplifiedLine.getCoordinates()
+// @ts-expect-error The implementation reads options without a default.
+new VisvalingamLineString([]).simplifyVisvalingam()
+void lineCoordinates
