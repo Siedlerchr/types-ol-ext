@@ -93,6 +93,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `source/Vector3D`: when no text style is supplied, `setStyle` puts a Fill in the Text slot; later rendering calls `getFill()` on it. A Node construction check confirmed the default object is Fill and lacks that method. Rendering itself was not exercised.
 
+- `format/GeoJSONX`: a Node check of `encodeCoordinates([[1,2],[3,4]])` followed by `decodeCoordinates` without a decimal argument returned NaN coordinates. The constructor also ignores custom arrays supplied as `deleteNullProperties` and uses its fixed defaults instead (source observation). Point feature round trips passed in both GeoJSONX and GeoJSONP.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -251,5 +253,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `source/GeoRSS`: checked its constructor and inherited vector-source API. Existing type checks cover its required feed URL; a Node check verified construction and loader mutation. No live feed request was made.
 
 - `source/Vector3D`: reviewed constructor and public height, style and animation APIs against the release. Existing type tests cover these signatures; a Node construction check identified the default-style issue above.
+
+- `format/GeoJSONX` and `GeoJSONP`: reviewed encoding methods and added GeoJSONP type checks. Point feature round trips passed in Node; line encoding exposed the issue above. Other geometry shapes and extended properties still need runtime checks.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

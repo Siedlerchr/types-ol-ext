@@ -1,5 +1,6 @@
 import HexGrid from '../@types/ol-ext/render/HexGrid'
 import GeoJSONX from '../@types/ol-ext/format/GeoJSONX'
+import GeoJSONP from '../@types/ol-ext/format/GeoJSONP'
 import Render3D from '../@types/ol-ext/layer/Render3D'
 import Checkbox from '../@types/ol-ext/util/input/Checkbox'
 import Paper from '../@types/ol-ext/filter/Paper'
@@ -43,3 +44,8 @@ void decoded
 void height
 // @ts-expect-error direction must be numeric
 grid.hex_neighbors(hex, 'north')
+
+const polylineFormat = new GeoJSONP({ decimals: 6 })
+const polylineEncoded: import('../@types/ol-ext/format/GeoJSONX').EncodedCoordinates = polylineFormat.encodeCoordinates([[1, 2], [3, 4]])
+const polylineDecoded: import('../@types/ol-ext/format/GeoJSONX').CoordinateTree | null = polylineFormat.decodeCoordinates(polylineEncoded)
+void polylineDecoded
