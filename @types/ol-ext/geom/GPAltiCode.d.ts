@@ -22,7 +22,7 @@ export interface Options<Result = Point | LineString> {
  *  @param {string} options.success a function that takes the resulting XYZ geometry
  *  @param {string} options.error
  */
-export function ol_geom_GPAltiCode(geom: Point, options?: Options<Point>): void;
+export function ol_geom_GPAltiCode(geom: Point, options?: Omit<Options<Point>, 'samplingDist'>): void;
 export function ol_geom_GPAltiCode(geom: LineString, options?: Options<LineString>): void;
 
 /** Calculate elevation on coordinates or on a set of coordinates
@@ -32,5 +32,5 @@ export function ol_geom_GPAltiCode(geom: LineString, options?: Options<LineStrin
  *  @param {string} options.success a function that takes the resulting XYZ coordinates
  *  @param {string} options.error
  */
-export function ol_coordinate_GPAltiCode(coord: Coordinate, options?: Omit<Options<Coordinate>, 'minZ'>): void;
+export function ol_coordinate_GPAltiCode(coord: Coordinate, options?: Omit<Options<Coordinate>, 'minZ' | 'samplingDist'>): void;
 export function ol_coordinate_GPAltiCode(coord: Coordinate[], options?: Omit<Options<Coordinate[]>, 'minZ'>): void;

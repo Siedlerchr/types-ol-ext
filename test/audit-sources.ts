@@ -202,3 +202,6 @@ const hashCenter: number[] = toLonLat(hash)
 const hashExtent: import('ol/extent').Extent | false = getExtent(hash)
 const hashNeighbors = getNeighbours(hash)
 void [hashCenter, hashExtent, hashNeighbors.n]
+
+// @ts-expect-error Point geometries have no length for distance sampling.
+ol_geom_GPAltiCode(new Point([0, 0]), { samplingDist: 100 })

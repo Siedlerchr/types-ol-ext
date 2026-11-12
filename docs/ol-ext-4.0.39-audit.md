@@ -109,6 +109,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `geom/LineStringSplitAt`: a Node check with a horizontal segment and a point 0.001 units away did not split with tolerance 0.01; axis-aligned branches use exact equality. Splitting at an existing vertex succeeded.
 
+- `geom/GPAltiCode`: a Node check reproduced a `getLength` TypeError when `samplingDist` is used with a point. A mocked point elevation request otherwise returned the expected XYZ coordinate. The coordinate wrapper does not forward `minZ` (source observation).
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -283,5 +285,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `geom/geohash`: reviewed encode, decode, extent and neighbour exports. Expanded type checks and ran Node checks for input edge cases documented above.
 
 - `geom/LineStringSplitAt`: reviewed the side-effect-only module and LineString augmentation. Existing type checks cover single and omitted points; Node checks covered vertex splitting and the tolerance issue above.
+
+- `geom/GPAltiCode`: reviewed point and line overloads and excluded distance sampling from the point overload. Type tests cover callbacks and invalid point sampling; a mocked Node request checked point results. Live service requests were not made.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
