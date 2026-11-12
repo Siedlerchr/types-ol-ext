@@ -99,6 +99,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `geom/sphere`: a Node check crossing east from longitude 179° returned approximately 0° rather than -179° because longitude normalization multiplies by 540. A great-circle track from 179° to -179° mutated the supplied destination to 181°. A negative track distance also makes the loop nonterminating (source observation; not executed).
 
+- `geom/GeomUtils`: Node checks showed `ol_coordinate_findSegment` always reports index 1 for a found segment, including the third segment, and matches points on the infinite extension beyond an endpoint. Sampling a nonzero segment with distance zero produces an infinite loop (source observation; not executed).
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -263,5 +265,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `format/GeoRSS`: corrected the projection option spelling and element input to `readFeature`. Type checks cover both methods; a Node check verified point decoding and exposed the single-node collection issue above.
 
 - `geom/sphere`: exported the missing `setMapScale` declaration and corrected its absent-result case. Type tests cover exports; Node checks reproduced antimeridian normalization and input mutation issues above.
+
+- `geom/GeomUtils`: compared exported coordinate and geometry helpers and prototype extensions with the release. Existing type checks cover representative helpers and sampling; Node checks exposed the segment-finding issues above.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
