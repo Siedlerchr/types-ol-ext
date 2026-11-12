@@ -81,6 +81,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/WMTSCapabilities`: option extraction dereferences `caps.Attribution.Title` without checking for attribution, while its parser sets attribution on the parent collection. The parser also assumes service-provider and layer arrays exist. These are source observations; WMTS service responses were not exercised.
 
+- `source/Delaunay`: Node checks reproduced a NaN circumcircle for `[[0,0],[1,0],[0,1]]`, a reported intersection for disjoint segments `[[0,0],[1,0]]` and `[[2,-1],[2,1]]`, and a Voronoi exception for a node with no triangles. Construction also deletes `source` from the caller’s options object. The checks used the checkout’s installed OpenLayers dependency.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -227,5 +229,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `control/WMSCapabilities`: corrected WMS result field names and legend/extent shapes, constructor labels and plain capabilities/load events, including failure payloads. WMTS uses its own result type as recorded below. Type tests cover WMS signatures; live requests were not made.
 
 - `control/WMTSCapabilities`: declared its distinct result and unsupported-matrix undefined result, layer factory nullability, inherited typed load events and supported-set list. Type tests cover these signatures; live capabilities requests were not made.
+
+- `source/Delaunay`: corrected the Voronoi result to polygon features and the optional border argument; `_addTriangle` returns a polygon feature and mutates its coordinate array. Type checks cover these signatures; separate Node checks exposed edge cases documented above.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

@@ -127,6 +127,9 @@ const idw = new IDW({ source: inputSource, maxD: 100, getColor: () => [0, 0, 0, 
 idw.setMaxD()
 const pixel: Uint8ClampedArray | null = idw.getValue([0, 0])
 declare const delaunay: Delaunay
+const voronoiFeatures: import('ol/Feature').default<import('ol/geom/Polygon').default>[] = delaunay.calculateVoronoi()
+const triangleFeature: import('ol/Feature').default<import('ol/geom/Polygon').default> = delaunay._addTriangle([[0, 0], [1, 0], [0, 1]])
+void [voronoiFeatures, triangleFeature]
 const nodes: Feature[] = delaunay.getNodesAt([0, 0])
 const triangles: Feature[] = delaunay.getTrianglesAt([0, 0])
 new Simplificator().setFeatures([])

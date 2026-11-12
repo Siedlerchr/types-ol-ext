@@ -33,7 +33,7 @@ export default class Delauny extends VectorSource {
   /** Add a new triangle in the source
    * @param {Array<ol/coordinates>} pts
    */
-  _addTriangle(pts: Coordinate[]): void;
+  _addTriangle(pts: Coordinate[]): Feature<Polygon>;
 
   /** Get nodes
    */
@@ -91,5 +91,5 @@ export default class Delauny extends VectorSource {
    * @param {boolean} border include border, default false
    * @return { Array< ol.geom.Polygon > }
    */
-  calculateVoronoi(border: boolean): Polygon[];
+  calculateVoronoi(border?: boolean): Feature<Polygon>[];
 }
