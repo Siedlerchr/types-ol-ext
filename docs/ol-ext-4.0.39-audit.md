@@ -103,6 +103,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `geom/visvalingam`: the ES module uses an extensionless `GeomUtils` import, which prevented direct Node import in this checkout. The implementation reads an omitted options argument, discards dimensions beyond XY, and uses randomness to break area ties (source observations).
 
+- `geom/ConvexHull`: Node checks returned an empty hull for a single point and for a nonempty MultiLineString. The multi-geometry helper ignores `concat` return values; a MultiPoint comparison produced the expected three vertices.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -271,5 +273,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `geom/GeomUtils`: compared exported coordinate and geometry helpers and prototype extensions with the release. Existing type checks cover representative helpers and sampling; Node checks exposed the segment-finding issues above.
 
 - `geom/visvalingam`: corrected its default LineString export, prototype augmentation, required options and boolean `keepEnds`. Type tests cover the declared module shape; direct Node execution remains blocked by the extensionless upstream import.
+
+- `geom/ConvexHull`: checked the default export and geometry augmentation; existing type checks cover both. Node checks confirmed the singleton and multi-geometry issues listed above.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
