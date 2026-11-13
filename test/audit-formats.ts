@@ -1,4 +1,7 @@
 import ordering from '../@types/ol-ext/render/Ordering'
+import '../@types/ol-ext/render/AnimExtent'
+import '../@types/ol-ext/render/Markup'
+import Map from 'ol/Map'
 import Chart from '../@types/ol-ext/style/Chart'
 import FontSymbol from '../@types/ol-ext/style/FontSymbol'
 import Shadow from '../@types/ol-ext/style/Shadow'
@@ -23,6 +26,16 @@ import Paper from '../@types/ol-ext/filter/Paper'
 import Feature from 'ol/Feature'
 import Dijkstra, { ol_graph_Dijskra } from '../@types/ol-ext/geom/Dijkstra'
 import VectorSource from 'ol/source/Vector'
+
+declare const mapWithAnimatedExtent: Map
+mapWithAnimatedExtent.animExtent([0, 0, 10, 10])
+mapWithAnimatedExtent.animExtent([0, 0, 10, 10], { duration: 500, style: new Stroke({ color: 'red' }) })
+// @ts-expect-error duration is measured in milliseconds.
+mapWithAnimatedExtent.animExtent([0, 0, 10, 10], { duration: '500' })
+mapWithAnimatedExtent.markup([1, 2]).stop()
+mapWithAnimatedExtent.markup([1, 2], { style: [new Style()] }).stop()
+// @ts-expect-error a coordinate is an array of numbers, not an array of coordinates.
+mapWithAnimatedExtent.markup([[1, 2]])
 
 const grid = new HexGrid({ size: 100, layout: 'flat' })
 const hex: number[] = grid.coord2hex([1, 2])
