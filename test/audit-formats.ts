@@ -1,3 +1,4 @@
+import ProfileStyle from '../@types/ol-ext/style/Profile'
 import '../@types/ol-ext/style/SetTextPath'
 import { Vector as VectorLayer } from 'ol/layer'
 import Style from 'ol/style/Style'
@@ -97,3 +98,11 @@ textPathLayer.setTextPathStyle([new Style()], 100)
 textPathLayer.setTextPathStyle(null)
 declare const textPathContext: CanvasRenderingContext2D
 textPathContext.textPath('road', [0, 0, 10, 10])
+
+const profileStyle = new ProfileStyle({ zIndex: 2, vertexSize: 3, geometry: 'geometry' })
+profileStyle.setStroke()
+profileStyle.setFill(null)
+profileStyle.setScale()
+profileStyle.setVertexSize()
+const vertexSize: number = profileStyle.getVertexSize()
+void vertexSize
