@@ -27,6 +27,18 @@ import Paper from '../@types/ol-ext/filter/Paper'
 import Feature from 'ol/Feature'
 import Dijkstra, { ol_graph_Dijskra } from '../@types/ol-ext/geom/Dijkstra'
 import VectorSource from 'ol/source/Vector'
+import AnimatedCanvas from '../@types/ol-ext/overlay/AnimatedCanvas'
+import Particle from '../@types/ol-ext/particule/Base'
+
+const animatedCanvas = new AnimatedCanvas({
+  animate: false,
+  createParticule: (overlay, particleCoordinate) => new Particle({ overlay, coordinate: particleCoordinate }),
+})
+const particles: Particle[] = animatedCanvas.getParticules()
+animatedCanvas.draw()
+animatedCanvas.setMap(null)
+animatedCanvas.testExit(new Particle({ coordinate: [1, 2] }))
+void particles
 
 declare const mapWithAnimatedExtent: Map
 mapWithAnimatedExtent.animExtent([0, 0, 10, 10])
