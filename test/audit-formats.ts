@@ -1,6 +1,7 @@
 import ordering from '../@types/ol-ext/render/Ordering'
 import '../@types/ol-ext/render/AnimExtent'
 import '../@types/ol-ext/render/Markup'
+import '../@types/ol-ext/render/Pulse'
 import Map from 'ol/Map'
 import Chart from '../@types/ol-ext/style/Chart'
 import FontSymbol from '../@types/ol-ext/style/FontSymbol'
@@ -34,6 +35,7 @@ mapWithAnimatedExtent.animExtent([0, 0, 10, 10], { duration: 500, style: new Str
 mapWithAnimatedExtent.animExtent([0, 0, 10, 10], { duration: '500' })
 mapWithAnimatedExtent.markup([1, 2]).stop()
 mapWithAnimatedExtent.markup([1, 2], { style: [new Style()] }).stop()
+mapWithAnimatedExtent.pulse([1, 2], { amplitude: 0.5 })
 // @ts-expect-error a coordinate is an array of numbers, not an array of coordinates.
 mapWithAnimatedExtent.markup([[1, 2]])
 

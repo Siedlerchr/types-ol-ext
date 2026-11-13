@@ -15,3 +15,10 @@ export interface PulseOptions {
 
 /** Map method installed by importing this module. @deprecated Use animateFeature instead. */
 export type PulseMap = Map & { pulse(coordinate: Coordinate, options?: PulseOptions): void }
+
+declare module 'ol/Map' {
+  export default interface Map {
+    /** @deprecated Use animateFeature instead. */
+    pulse(coordinate: Coordinate, options?: PulseOptions): void;
+  }
+}
