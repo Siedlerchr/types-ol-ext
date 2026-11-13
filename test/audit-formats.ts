@@ -1,3 +1,4 @@
+import Shadow from '../@types/ol-ext/style/Shadow'
 import FlowLine from '../@types/ol-ext/style/FlowLine'
 import ProfileStyle from '../@types/ol-ext/style/Profile'
 import '../@types/ol-ext/style/SetTextPath'
@@ -114,3 +115,11 @@ flow.setColor()
 const startOffset: number = flow.getOffset(0)
 const arbitraryOffset: number | undefined = flow.getOffset(5)
 void [startOffset, arbitraryOffset]
+
+const shadow = new Shadow({ radius: 10, displacement: [4, 5], declutterMode: 'declutter' })
+const shadowImage: HTMLCanvasElement | OffscreenCanvas = shadow.getImage()
+const shadowClone: Shadow = shadow.clone()
+void [shadowImage, shadowClone]
+
+// @ts-expect-error The OpenLayers 10 style does not expose getChecksum.
+shadow.getChecksum()

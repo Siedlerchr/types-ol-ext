@@ -68,8 +68,6 @@ export default class Photo extends RegularShape {
    */
   getImage(pixelRatio?: number): HTMLCanvasElement | OffscreenCanvas
 
-  getChecksum(): string;
-
   /** Returns the photo image
    * @returns {HTMLImageElement}
    */

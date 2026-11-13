@@ -5,7 +5,7 @@ export interface Options {
   fill?: Fill;
   radius?: number;
   blur?: number;
-  declutterMode?: 'obstacle' | 'none' | undefined
+  declutterMode?: 'declutter' | 'obstacle' | 'none' | undefined
   displacement?: number[];
   offsetX?: number;
   offsetY?: number;
@@ -39,8 +39,5 @@ export default class Shadow extends RegularShape {
    */
   clone(): Shadow;
 
-  /**
-   * @inheritDoc
-   */
-  getChecksum(): string;
+  getImage(pixelRatio?: number): HTMLCanvasElement | OffscreenCanvas;
 }

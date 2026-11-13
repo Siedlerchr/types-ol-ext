@@ -137,6 +137,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `style/FlowLine`: a Node check confirmed omitted arrow and offset options produce NaN rather than the documented zero defaults. A `square` line cap is also silently changed to `butt` (source observation). Rendering was not tested.
 
+- `style/Shadow`: a Node check showed that cloning a shadow with displacement `[4, 5]` yields displacement `[0, 0]`. Constructor-derived legacy offsets are assigned after the base constructor and do not update its displacement (source observation).
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -331,5 +333,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `style/Profile`: corrected geometry, z-index and vertex options and default-reset setter arguments. Type tests cover the signatures; a Node check verified the defaults and issues above.
 
 - `style/FlowLine`: corrected arrow-color spelling, optional line cap, inherited style options, reset setters and arbitrary offset lookup. Type tests cover the signatures; Node checked default values, while rendering was not tested.
+
+- `style/Shadow`: corrected declutter and image signatures and removed an obsolete checksum method from Shadow and Photo. Type tests cover these signatures; Node reproduced clone displacement loss. Browser rendering was not repeated.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
