@@ -34,6 +34,8 @@ import CloudParticle from '../@types/ol-ext/particule/Cloud'
 import RainParticle from '../@types/ol-ext/particule/Rain'
 import RainDropParticle from '../@types/ol-ext/particule/RainDrop'
 import SnowParticle from '../@types/ol-ext/particule/Snow'
+import Mask from '../@types/ol-ext/filter/Mask'
+import Crop from '../@types/ol-ext/filter/Crop'
 
 const animatedCanvas = new AnimatedCanvas({
   animate: false,
@@ -49,8 +51,14 @@ new CloudParticle({ coordinate: [2, 3] })
 new RainParticle()
 new RainDropParticle()
 new SnowParticle()
+const mask = new Mask({ active: false })
+mask.setFillColor()
+mask.setShadowColor()
+new Crop({ fill: new Fill({ color: 'red' }), active: false })
 
 declare const mapWithAnimatedExtent: Map
+mapWithAnimatedExtent.addFilter(mask)
+mapWithAnimatedExtent.removeFilter()
 mapWithAnimatedExtent.animExtent([0, 0, 10, 10])
 mapWithAnimatedExtent.animExtent([0, 0, 10, 10], { duration: 500, style: new Stroke({ color: 'red' }) })
 // @ts-expect-error duration is measured in milliseconds.
