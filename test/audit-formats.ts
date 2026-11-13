@@ -29,6 +29,11 @@ import Dijkstra, { ol_graph_Dijskra } from '../@types/ol-ext/geom/Dijkstra'
 import VectorSource from 'ol/source/Vector'
 import AnimatedCanvas from '../@types/ol-ext/overlay/AnimatedCanvas'
 import Particle from '../@types/ol-ext/particule/Base'
+import Bird from '../@types/ol-ext/particule/Bird'
+import CloudParticle from '../@types/ol-ext/particule/Cloud'
+import RainParticle from '../@types/ol-ext/particule/Rain'
+import RainDropParticle from '../@types/ol-ext/particule/RainDrop'
+import SnowParticle from '../@types/ol-ext/particule/Snow'
 
 const animatedCanvas = new AnimatedCanvas({
   animate: false,
@@ -39,6 +44,11 @@ animatedCanvas.draw()
 animatedCanvas.setMap(null)
 animatedCanvas.testExit(new Particle({ coordinate: [1, 2] }))
 void particles
+new Bird({ src: '/bird.png', coordinate: [2, 3] })
+new CloudParticle({ coordinate: [2, 3] })
+new RainParticle()
+new RainDropParticle()
+new SnowParticle()
 
 declare const mapWithAnimatedExtent: Map
 mapWithAnimatedExtent.animExtent([0, 0, 10, 10])
