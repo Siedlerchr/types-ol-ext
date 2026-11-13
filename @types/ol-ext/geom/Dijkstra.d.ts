@@ -16,7 +16,7 @@ export interface Options {
   epsilon?: number;
 }
 
-type DijkstraOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+type DijkstraOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
   OnSignature<Types | 'finish', DijkstraFinishEvent, Return> &
   OnSignature<Types | 'pause', DijkstraPauseEvent, Return> &

@@ -123,6 +123,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `geom/Scribble`: a Node check found a one-polygon MultiPolygon returns two copies of its scribble because the merge appends the first result to itself. The `angle` default also replaces zero, and nonpositive intervals can make the scan loop nonterminating (source observations; the latter was not executed).
 
+- `geom/Dijkstra`: the reverse-edge check compares X twice instead of comparing both X and Y, potentially connecting an edge at the wrong endpoint. A Node check confirmed `path` throws when the source has no edges because the closest feature is null. The endpoint condition is a source observation; a full route was not exercised.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -303,5 +305,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `geom/DFCI`: reviewed exported conversion and validation signatures; existing type checks cover them. Direct runtime import remains blocked by missing `proj4`; standalone regex checks revealed the validation issue above.
 
 - `geom/Scribble`: reviewed the default function and polygon prototype extensions. Existing type checks cover the APIs; a Node comparison reproduced duplicate MultiPolygon output.
+
+- `geom/Dijkstra`: reviewed public path, node and event APIs and corrected the base event type. Existing type tests cover path and finish events; an empty-source Node check reproduced the failure above.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
