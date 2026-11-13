@@ -127,6 +127,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `geom/Simplificator`: despite the getter name, `getFeatures` replaces the geometries of the original input features. `setFeatures` starts named console timers without ending them, which can produce repeated-timer warnings. These are source observations; direct execution of the audited release is blocked by the extensionless Visvalingam import.
 
+- `style/FillPattern` and `StrokePattern`: a Node check with a stub canvas confirmed `clone()` returns base Fill and Stroke instances, respectively, without `getImage`, despite documentation claiming pattern instances.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -311,5 +313,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `geom/Dijkstra`: reviewed public path, node and event APIs and corrected the base event type. Existing type tests cover path and finish events; an empty-source Node check reproduced the failure above.
 
 - `geom/Simplificator`: reviewed public edge, reconstruction and simplification methods. Existing type checks cover the returned records and simplification options; direct runtime execution remains blocked by the release import issue noted above.
+
+- `style/FillPattern` and `StrokePattern`: corrected clone returns, pattern repetition options, optional pattern definitions, opacity spelling and inherited stroke options. Type tests and a stub-canvas Node check cover these behaviors; browser rendering was not tested.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

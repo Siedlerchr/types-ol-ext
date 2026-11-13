@@ -1,3 +1,6 @@
+import FillPattern from '../@types/ol-ext/style/FillPattern'
+import StrokePattern from '../@types/ol-ext/style/StrokePattern'
+import { Fill, Stroke } from 'ol/style'
 import VisvalingamLineString from '../@types/ol-ext/geom/visvalingam'
 import { setMapScale, greatCircleTrack, computeDestinationPoint } from '../@types/ol-ext/geom/sphere'
 import GeoRSS from '../@types/ol-ext/format/GeoRSS'
@@ -70,3 +73,12 @@ const lineCoordinates: number[][] = simplifiedLine.getCoordinates()
 // @ts-expect-error The implementation reads options without a default.
 new VisvalingamLineString([]).simplifyVisvalingam()
 void lineCoordinates
+
+FillPattern.addPattern('custom', { repeat: [[1, 2]] })
+const fillPattern = new FillPattern()
+const strokePattern = new StrokePattern({ opacity: 0.5, width: 3 })
+const clonedFill: Fill = fillPattern.clone()
+const clonedStroke: Stroke = strokePattern.clone()
+// @ts-expect-error A cloned fill is the base style and has no pattern image method.
+fillPattern.clone().getImage()
+void [clonedFill, clonedStroke]

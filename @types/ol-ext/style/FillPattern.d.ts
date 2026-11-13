@@ -9,6 +9,7 @@ export interface FillPatternOptions {
   height?: number;
   circles?: number[][];
   lines?: number[][];
+  repeat?: number[][];
   stroke?: number;
   fill?: boolean;
   char?: string;
@@ -60,7 +61,7 @@ export default class FillPattern extends Fill {
    * Clones the style.
    * @return {style.FillPattern}
    */
-  clone(): FillPattern;
+  clone(): Fill;
 
   /** Get canvas used as pattern
    *  @return {canvas}
@@ -80,7 +81,7 @@ export default class FillPattern extends Fill {
    *  @param {char} [option.char]
    *  @param {string} [font="10px Arial"]
    */
-  static addPattern(title: string, options: FillPatternOptions): void;
+  static addPattern(title: string, options?: FillPatternOptions): void;
 
   /** Patterns definitions
    * @see pattern generator http://www.imagico.de/map/jsdotpattern.php
