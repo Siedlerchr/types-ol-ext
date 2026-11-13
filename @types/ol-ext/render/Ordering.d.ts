@@ -18,10 +18,7 @@ export interface ZIndexOptions {
  *  @param {function} options.equalFn ordering function for equal values
  * @return ordering function (f0,f1)
  */
-declare function zIndex(options: {
-  attribute: string;
-  equalFn: (...params: any[]) => any;
-}): any;
+declare function zIndex(options?: ZIndexOptions): (f0: FeatureLike, f1: FeatureLike) => number;
 
 interface Ordering {
   yOrdering: typeof yOrdering;

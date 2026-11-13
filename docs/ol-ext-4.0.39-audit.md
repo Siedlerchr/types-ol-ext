@@ -344,4 +344,6 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `style/Chart`: corrected required options, displacement and image signatures, scale/donut options, declutter mode and its default-only export; removed an obsolete checksum declaration. Type tests and Node checks cover the API and issues above; browser rendering was not tested.
 
+- `render/Ordering`: corrected optional z-index comparator options and the comparator return type. Type checks cover both ordering factories; a Node check verified descending order and equal values.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

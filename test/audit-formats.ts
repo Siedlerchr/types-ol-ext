@@ -1,3 +1,4 @@
+import ordering from '../@types/ol-ext/render/Ordering'
 import Chart from '../@types/ol-ext/style/Chart'
 import FontSymbol from '../@types/ol-ext/style/FontSymbol'
 import Shadow from '../@types/ol-ext/style/Shadow'
@@ -140,3 +141,7 @@ new Chart()
 // @ts-expect-error OpenLayers 10 does not supply the legacy checksum method.
 chart.getChecksum()
 void chartImage
+
+const orderByIndex: (a: import('ol/Feature').FeatureLike, b: import('ol/Feature').FeatureLike) => number = ordering.zIndex()
+const orderWithTie = ordering.zIndex({ attribute: 'rank', equalFn: ordering.yOrdering() })
+void [orderByIndex, orderWithTie]
