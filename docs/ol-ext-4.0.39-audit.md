@@ -137,6 +137,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `render/Cspline`: a Node check returned an empty array for the horizontal line `[[0, 0], [4, 0]]`, while a diagonal produced points. The implementation discards any computed point whose X or Y is zero. `render/Pulse` also multiplies array-valued image scales as numbers and replaces an explicit zero amplitude with one (source observations; rendering was not tested).
 
+- `style/geoportailStyle`: Node checks showed land-cover styles share a cache by code across factories, so a later opacity of 0.8 reused a style created with opacity 0.2; an unknown code threw while looking up its color. Building fill also copies the green channel into blue: an industrial building's fill was `[51, 102, 102, 0.5]` while its stroke was `[51, 102, 153, 1]`.
+
 - `style/Profile`: a Node check confirmed the default fill color is the malformed string `rgba(255,255,255,.3` and setting scale to zero restores 0.2. Rendering was not exercised.
 
 - `style/FlowLine`: a Node check confirmed omitted arrow and offset options produce NaN rather than the documented zero defaults. A `square` line cap is also silently changed to `butt` (source observation). Rendering was not tested.
@@ -353,5 +355,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `render/AnimExtent` and `Markup`: corrected the side-effect map prototype augmentations, extent/coordinate arguments, optional options and the markup listener's `stop` method. Type checks cover map calls and listener cleanup; runtime limitations are recorded above.
 
 - `render/Pulse` and `Cspline`: added the direct map prototype augmentation for Pulse and checked spline behavior against the release. Type tests cover Pulse through a normal Map; a Node check exposed the spline issue above.
+
+- `style/defaultStyle` and `geoportailStyle`: reviewed both factory exports, options and land-cover color definitions. Expanded type checks for returned styles and the color table; Node checks exposed Geoportail styling issues above.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

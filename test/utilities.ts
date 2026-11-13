@@ -1,6 +1,9 @@
 import TileSource from 'ol/source/XYZ'
 import { grayscale, pixelTransform, seaLevelMap, transparent, elevationMap, getElevationFromPixel, getPixelFromElevation } from '../@types/ol-ext/util/imagesLoader'
 import geoportailStyle from '../@types/ol-ext/style/geoportailStyle'
+import defaultStyle from '../@types/ol-ext/style/defaultStyle'
+import type Style from 'ol/style/Style'
+import type { StyleFunction } from 'ol/style/Style'
 import exif2geojson from '../@types/ol-ext/utils/Exif2Geojson'
 import Ajax from '../@types/ol-ext/util/Ajax'
 import MapIFrameAPI from '../@types/ol-ext/utils/MapIFrameAPI'
@@ -12,6 +15,10 @@ transparent(['#fff', '#000'])
 elevationMap(height => getPixelFromElevation(height))
 const elevation: number = getElevationFromPixel([1, 2, 3, 255])
 geoportailStyle('BDTOPO_V3:batiment', { symbol: true })
+const editingStyles: Style[] = defaultStyle(true)
+const wfsStyles: Style[] | StyleFunction = geoportailStyle('LANDCOVER2018', { opacity: 0.5 })
+const landCoverColor: number[] = geoportailStyle.clcColors['111'].color
+void [editingStyles, wfsStyles, landCoverColor]
 exif2geojson([], { onLoad: collection => collection.features.forEach(feature => feature.geometry.coordinates) })
 declare const files: FileList
 exif2geojson(files)
