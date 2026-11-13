@@ -125,6 +125,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `geom/Dijkstra`: the reverse-edge check compares X twice instead of comparing both X and Y, potentially connecting an edge at the wrong endpoint. A Node check confirmed `path` throws when the source has no edges because the closest feature is null. The endpoint condition is a source observation; a full route was not exercised.
 
+- `geom/Simplificator`: despite the getter name, `getFeatures` replaces the geometries of the original input features. `setFeatures` starts named console timers without ending them, which can produce repeated-timer warnings. These are source observations; direct execution of the audited release is blocked by the extensionless Visvalingam import.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -307,5 +309,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `geom/Scribble`: reviewed the default function and polygon prototype extensions. Existing type checks cover the APIs; a Node comparison reproduced duplicate MultiPolygon output.
 
 - `geom/Dijkstra`: reviewed public path, node and event APIs and corrected the base event type. Existing type tests cover path and finish events; an empty-source Node check reproduced the failure above.
+
+- `geom/Simplificator`: reviewed public edge, reconstruction and simplification methods. Existing type checks cover the returned records and simplification options; direct runtime execution remains blocked by the release import issue noted above.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
