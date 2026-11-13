@@ -129,6 +129,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `style/FillPattern` and `StrokePattern`: a Node check with a stub canvas confirmed `clone()` returns base Fill and Stroke instances, respectively, without `getImage`, despite documentation claiming pattern instances.
 
+- `style/Photo`: `folio` construction increases the supplied stroke width, and cloning reuses that stroke and increases it again. This is a source observation; clone rendering was not tested in this round.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -315,5 +317,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `geom/Simplificator`: reviewed public edge, reconstruction and simplification methods. Existing type checks cover the returned records and simplification options; direct runtime execution remains blocked by the release import issue noted above.
 
 - `style/FillPattern` and `StrokePattern`: corrected clone returns, pattern repetition options, optional pattern definitions, opacity spelling and inherited stroke options. Type tests and a stub-canvas Node check cover these behaviors; browser rendering was not tested.
+
+- `style/Photo`: corrected fill, opacity, rotation and declutter options and the optional pixel-ratio image signature. OpenLayers 10.11 may return a cached ImageBitmap at runtime even though its RegularShape declaration only permits canvas types; the Photo declaration follows the base type for override compatibility. Type checks cover the options; browser rendering was not repeated.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

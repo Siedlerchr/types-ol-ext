@@ -1,3 +1,4 @@
+import Photo from '../@types/ol-ext/style/Photo'
 import FillPattern from '../@types/ol-ext/style/FillPattern'
 import StrokePattern from '../@types/ol-ext/style/StrokePattern'
 import { Fill, Stroke } from 'ol/style'
@@ -82,3 +83,8 @@ const clonedStroke: Stroke = strokePattern.clone()
 // @ts-expect-error A cloned fill is the base style and has no pattern image method.
 fillPattern.clone().getImage()
 void [clonedFill, clonedStroke]
+
+const photo = new Photo({ radius: 12, fill: new Fill(), opacity: 0.5, rotation: 1, declutterMode: 'declutter' })
+const photoImage: HTMLCanvasElement | OffscreenCanvas = photo.getImage()
+const photoClone: Photo = photo.clone()
+void [photoImage, photoClone]
