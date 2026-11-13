@@ -1,3 +1,6 @@
+import '../@types/ol-ext/style/SetTextPath'
+import { Vector as VectorLayer } from 'ol/layer'
+import Style from 'ol/style/Style'
 import Photo from '../@types/ol-ext/style/Photo'
 import FillPattern from '../@types/ol-ext/style/FillPattern'
 import StrokePattern from '../@types/ol-ext/style/StrokePattern'
@@ -88,3 +91,9 @@ const photo = new Photo({ radius: 12, fill: new Fill(), opacity: 0.5, rotation: 
 const photoImage: HTMLCanvasElement | OffscreenCanvas = photo.getImage()
 const photoClone: Photo = photo.clone()
 void [photoImage, photoClone]
+
+const textPathLayer = new VectorLayer({ source: new VectorSource() })
+textPathLayer.setTextPathStyle([new Style()], 100)
+textPathLayer.setTextPathStyle(null)
+declare const textPathContext: CanvasRenderingContext2D
+textPathContext.textPath('road', [0, 0, 10, 10])

@@ -131,6 +131,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `style/Photo`: `folio` construction increases the supplied stroke width, and cloning reuses that stroke and increases it again. This is a source observation; clone rendering was not tested in this round.
 
+- `style/SetTextPath`: a single Style is accepted but the drawing loop treats it as an array, so it draws no styles; clearing an installed style calls `this.unByKey`, which is not an OpenLayers layer method. The local TextPath constructor is not exported. These are source observations; browser drawing was not repeated.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -319,5 +321,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `style/FillPattern` and `StrokePattern`: corrected clone returns, pattern repetition options, optional pattern definitions, opacity spelling and inherited stroke options. Type tests and a stub-canvas Node check cover these behaviors; browser rendering was not tested.
 
 - `style/Photo`: corrected fill, opacity, rotation and declutter options and the optional pixel-ratio image signature. OpenLayers 10.11 may return a cached ImageBitmap at runtime even though its RegularShape declaration only permits canvas types; the Photo declaration follows the base type for override compatibility. Type checks cover the options; browser rendering was not repeated.
+
+- `style/SetTextPath`: replaced an invented default class declaration with its actual side-effect vector-layer and canvas context augmentations. Type checks cover these signatures; the vector augmentation follows the named `ol/layer` import form used by this project. Browser drawing was not repeated.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
