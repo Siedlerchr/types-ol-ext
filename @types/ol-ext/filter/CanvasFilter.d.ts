@@ -1,51 +1,54 @@
-import type SVGFilter from './SVGFilter'
+import type SVGFilter from '../util/SVGFilter'
+import type { Pixel } from 'ol/pixel'
+import Base from './Base'
+import type { Options as BaseOptions } from './Base'
 
-export interface CanvasFilterOptions {
+export interface CanvasFilterOptions extends BaseOptions {
   /**
    * Takes an IRI pointing to an SVG filter element
    */
-  url: string | SVGFilter;
+  url?: string;
   /**
    * Gaussian blur value in px
    */
-  blur: number;
+  blur?: number;
   /**
    * linear multiplier to the drawing, under 100: darkens the image, over 100 brightens it
    */
-  brightness: number;
+  brightness?: number;
   /**
    * Adjusts the contrast, under 0: black, 100 no change
    */
-  contrast: number;
+  contrast?: number;
   /**
    * Applies a drop shadow effect, pixel offset
    */
-  shadow: any;
+  shadow?: Pixel;
   /**
    * Blur radius
    */
-  shadowBlur: number;
-  shadowColor: number;
+  shadowBlur?: number;
+  shadowColor?: string;
   /**
    * 0: unchanged, 100: completely grayscale
    */
-  grayscale: number;
+  grayscale?: number;
   /**
    * Hue rotation angle in deg
    */
-  hueRotate: number;
+  hueRotate?: number;
   /**
    * Inverts the drawing, 0: unchanged, 100: invert
    */
-  invert: number;
+  invert?: number;
   /**
    * Saturates the drawing, 0: unsaturated, 100: unchanged
    */
-  saturate: number;
+  saturate?: number;
   /**
    * Converts the drawing to sepia, 0: sepia, 100: unchanged
    */
-  sepia: number;
+  sepia?: number;
 }
 
 /** @typedef {Object} CanvasFilterOptions
@@ -69,7 +72,7 @@ export interface CanvasFilterOptions {
  * @requires ol.filter
  * @extends {ol_filter_Base}
  */
-export default class CanvasFilter {
+export default class CanvasFilter extends Base {
   /**
    * @param {CanvasFilterOptions} options
    */

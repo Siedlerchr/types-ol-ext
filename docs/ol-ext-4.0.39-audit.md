@@ -378,4 +378,6 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `filter/Colorize`, `Composite` and `CSS`: corrected Colorize's reversed value/color signatures, presets and alpha option; Composite requires an options object and permits resetting its operation. CSS uses base layers. Type tests and Node checks cover these APIs; rendering was not tested.
 
+- `filter/CanvasFilter` and `filter/SVGFilter`: corrected base inheritance, optional canvas options, shadow types and the SVG definition module used by their methods. Type tests cover definitions and options; a Node check verified ID registration and removal using a stub. Canvas rendering was not tested.
+
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

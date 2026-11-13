@@ -39,6 +39,9 @@ import Crop from '../@types/ol-ext/filter/Crop'
 import Colorize from '../@types/ol-ext/filter/Colorize'
 import Composite from '../@types/ol-ext/filter/Composite'
 import CSSFilter from '../@types/ol-ext/filter/CSS'
+import CanvasFilter from '../@types/ol-ext/filter/CanvasFilter'
+import SVGCanvasFilter from '../@types/ol-ext/filter/SVGFilter'
+import SVGDefinition from '../@types/ol-ext/util/SVGFilter'
 
 const animatedCanvas = new AnimatedCanvas({
   animate: false,
@@ -64,6 +67,10 @@ colorize.setColor('#00ff00')
 colorize.setFilter({ preserveAlpha: true, active: false })
 new Composite({ active: false }).setOperation()
 new CSSFilter({ active: false, blend: 'multiply' })
+declare const svgDefinition: SVGDefinition
+const canvasFilter = new CanvasFilter({ blur: 2, shadow: [1, 2], shadowColor: '#000' })
+canvasFilter.addSVGFilter(svgDefinition)
+new SVGCanvasFilter([svgDefinition]).removeSVGFilter(svgDefinition)
 // @ts-expect-error Composite reads its options object during construction.
 new Composite()
 
