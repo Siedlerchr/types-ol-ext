@@ -36,6 +36,9 @@ import RainDropParticle from '../@types/ol-ext/particule/RainDrop'
 import SnowParticle from '../@types/ol-ext/particule/Snow'
 import Mask from '../@types/ol-ext/filter/Mask'
 import Crop from '../@types/ol-ext/filter/Crop'
+import Colorize from '../@types/ol-ext/filter/Colorize'
+import Composite from '../@types/ol-ext/filter/Composite'
+import CSSFilter from '../@types/ol-ext/filter/CSS'
 
 const animatedCanvas = new AnimatedCanvas({
   animate: false,
@@ -55,6 +58,14 @@ const mask = new Mask({ active: false })
 mask.setFillColor()
 mask.setShadowColor()
 new Crop({ fill: new Fill({ color: 'red' }), active: false })
+const colorize = new Colorize('sepia')
+colorize.setValue(0.25)
+colorize.setColor('#00ff00')
+colorize.setFilter({ preserveAlpha: true, active: false })
+new Composite({ active: false }).setOperation()
+new CSSFilter({ active: false, blend: 'multiply' })
+// @ts-expect-error Composite reads its options object during construction.
+new Composite()
 
 declare const mapWithAnimatedExtent: Map
 mapWithAnimatedExtent.addFilter(mask)

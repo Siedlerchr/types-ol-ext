@@ -147,6 +147,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `filter/Base` and `Mask`: a Node check showed removing all three filters without an argument leaves one behind, because removal mutates the array during iteration. Constructing a mask with a feature that has no geometry throws when checking its geometry type. Rendering was not tested.
 
+- `filter/Colorize`: a Node check confirmed an explicit constructor value of zero becomes one, although `setValue(0)` is accepted. Unrecognized composite operations are replaced with `color` by the implementation (source observation). Rendering was not tested.
+
 - `style/Profile`: a Node check confirmed the default fill color is the malformed string `rgba(255,255,255,.3` and setting scale to zero restores 0.2. Rendering was not exercised.
 
 - `style/FlowLine`: a Node check confirmed omitted arrow and offset options produce NaN rather than the documented zero defaults. A `square` line cap is also silently changed to `butt` (source observation). Rendering was not tested.
@@ -373,5 +375,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `particule/Bird`, `Cloud`, `Rain`, `RainDrop` and `Snow`: reviewed constructor and drawing/update APIs, and added Bird's image source option. Type checks cover construction; canvas behavior was not browser-tested.
 
 - `filter/Base`, `Mask` and `Crop`: corrected base-layer augmentation, optional remove-all argument, inherited activation/fill options and color reset setters. Type checks cover those calls; Node checks exposed the runtime issues above.
+
+- `filter/Colorize`, `Composite` and `CSS`: corrected Colorize's reversed value/color signatures, presets and alpha option; Composite requires an options object and permits resetting its operation. CSS uses base layers. Type tests and Node checks cover these APIs; rendering was not tested.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
