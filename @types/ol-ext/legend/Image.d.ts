@@ -2,7 +2,7 @@ import ol_Object from 'ol/Object'
 import type { Size } from 'ol/size'
 
 export interface Options {
-  url: string,
+  url?: string,
   title?: string
   img?: HTMLImageElement | HTMLCanvasElement
   src?: string;

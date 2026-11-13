@@ -3,9 +3,9 @@ import type { Vector as VectorSource } from 'ol/source'
 import type { StyleLike } from 'ol/style/Style'
 import { Interaction } from 'ol/interaction'
 import type { Coordinate } from 'ol/coordinate'
-import type { Geometry, LineString, Polygon } from 'ol/geom'
-import { Type } from 'ol/geom/Geometry'
-import BaseEvent from 'ol/events/Event'
+import type { LineString, Polygon } from 'ol/geom'
+import type Collection from 'ol/Collection'
+import type BaseEvent from 'ol/events/Event'
 import type Feature from 'ol/Feature'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
@@ -14,14 +14,12 @@ import type { Types } from 'ol/ObjectEventType'
 
 type GeolocationDrawOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'drawing' | 'tracking', GeolocationDrawEvent, Return> &
-  OnSignature<Types | 'following', FollowingEvent, Return> &
-  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawing' | 'tracking' | 'following', Return>;
+  OnSignature<'drawing' | 'tracking', GeolocationDrawEvent, Return> &
+  OnSignature<'drawstart' | 'drawend', GeolocationLifecycleEvent, Return> &
+  OnSignature<'follow', FollowingEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawing' | 'tracking' | 'drawstart' | 'drawend' | 'follow', Return>;
 
-export enum GeolocationDrawEventType {
-  DRAWING = 'drawing',
-  TRACKING = 'tracking'
-}
+export type GeolocationDrawEventType = 'drawing' | 'tracking'
 
 export interface Attributes {
   heading?: boolean;
@@ -32,6 +30,7 @@ export interface Attributes {
 
 export interface GeolocationDrawOptions {
   source?: VectorSource;
+  features?: Collection<Feature>;
   type?: 'Point' | 'LineString' | 'Polygon';
   minAccuracy?: number;
   condition?: ((loc: _ol_Geolocation) => boolean);
@@ -71,7 +70,7 @@ export default class GeolocationDraw extends Interaction {
    * @param {ol.geom.Geometry} geo
    * @param {number} tolerance
    */
-  simplify3D(geo: Geometry, tolerance: number): Polygon | LineString
+  simplify3D(geo: LineString | Polygon, tolerance: number): Polygon | LineString
 
   /** Simulate a track and override current geolocation
    * @param {Array<ol.coordinate>|boolean} track a list of point or false to stop
@@ -80,7 +79,7 @@ export default class GeolocationDraw extends Interaction {
    *  @param {number} accuracy gps accuracy, default 10
    *  @param {boolean} repeat repeat track, default true
    */
-  simulate(track: Coordinate[], options?: {
+  simulate(track: Coordinate[] | false, options?: {
     delay?: number;
     accuracy?: number;
     repeat?: boolean;
@@ -92,7 +91,7 @@ export default class GeolocationDraw extends Interaction {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Activate or deactivate the interaction.
    * @param {boolean} active
@@ -114,7 +113,7 @@ export default class GeolocationDraw extends Interaction {
   /** Pause drawing
    * @param {boolean} b
    */
-  pause(b: boolean): void;
+  pause(b?: boolean): void;
 
   /** Is paused
    * @return {boolean} b
@@ -150,23 +149,19 @@ export default class GeolocationDraw extends Interaction {
   un: GeolocationDrawOnSignature<void>
 }
 
-export class GeolocationDrawEvent extends BaseEvent {
-  constructor(
-    type: GeolocationDrawEventType,
-    feature: Feature,
-    loc: _ol_Geolocation
-  );
-
-  feature: Feature
-
-  loc: _ol_Geolocation
+export interface GeolocationDrawEvent extends BaseEvent {
+  type: GeolocationDrawEventType;
+  feature: Feature;
+  /** Undefined during track simulation. */
+  geolocation: _ol_Geolocation | undefined;
 }
 
-export class FollowingEvent extends BaseEvent {
-  constructor(
-    type: 'follow',
-    following: boolean
-  );
+export interface GeolocationLifecycleEvent extends BaseEvent {
+  type: 'drawstart' | 'drawend';
+  feature: Feature;
+}
 
-  following: boolean
+export interface FollowingEvent extends BaseEvent {
+  type: 'follow';
+  following: boolean;
 }

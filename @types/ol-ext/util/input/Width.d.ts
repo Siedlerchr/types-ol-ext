@@ -1,5 +1,5 @@
 import type { EventsKey } from 'ol/events'
-import BaseEvent from 'ol/events/Event'
+import type { ListEvent } from './List'
 import type { ObjectEvent } from 'ol/Object'
 import type { Types } from 'ol/ObjectEventType'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
@@ -11,11 +11,9 @@ type WidthOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change:value', WidthEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'change:value', Return>;
 
-export enum WidthType {
-  CHANGE_VALUE = 'change:value',
-}
+export type WidthType = 'change:value'
 
-export interface Options extends ListOptions {
+export interface Options extends Omit<ListOptions, 'options'> {
   className?: string;
   input?: Element;
   parent?: Element;
@@ -27,7 +25,7 @@ export interface Options extends ListOptions {
  * @extends {ol_ext_input_List}
 
  */
-export default class Width extends List {
+export default class Width extends List<number> {
   /**
    * @param {*} options
    *  @param {string} [options.className]
@@ -49,8 +47,4 @@ export default class Width extends List {
   un: WidthOnSignature<void>
 }
 
-export class WidthEvent extends BaseEvent {
-  constructor(type: WidthType, value: number);
-
-  value: number
-}
+export type WidthEvent = ListEvent<number>

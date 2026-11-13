@@ -1,13 +1,21 @@
 import type { ProjectionLike } from 'ol/proj'
+import type { Coordinate } from 'ol/coordinate'
+import type Geolocation from 'ol/Geolocation'
 import type { Options as SearchOptions } from './Search'
 import Search from './Search'
 
-export interface Options extends SearchOptions {
+export interface CoordinateResult {
+  gps: Coordinate;
+  coordinate: Coordinate;
+  name: string;
+}
+
+export interface Options extends SearchOptions<CoordinateResult> {
     projection?: ProjectionLike;
     className?: string;
-    target?: Element | string;
+    target?: HTMLElement | string;
     label?: string;
-    labelGps?: string;
+    labelGPS?: string;
     labelCenter?: string;
     typing?: number;
     minLength?: number;
@@ -33,14 +41,19 @@ export interface Options extends SearchOptions {
  *  @param {integer} [options.maxItems=10] maximum number of items to display in the autocomplete list, default 10
  *  @param {integer} [options.digit=3] number of digit in coords
  */
-export default class SearchCoordinates extends Search {
+export default class SearchCoordinates extends Search<CoordinateResult, Coordinate | undefined> {
   constructor(options?: Options);
 
   /** Set the input value in the form (for initialisation purpose)
     * @param {Array<number>} [coord] if none get the map center
     * @api
     */
-  setInput(coord: number[]): void;
+  setInput(coord?: Coordinate): void;
+
+  /** Autocomplete function returning coordinates in the control and map projections. */
+  autocomplete(s: string): CoordinateResult[];
+
+  geolocation: Geolocation;
 
   /** Get the control projection
    * @returns {ProjectionLike}

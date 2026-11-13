@@ -1,14 +1,31 @@
 import type { Options as SearchJSONOptions } from './SearchJSON'
 import SearchJSON from './SearchJSON'
 
-export interface Options extends SearchJSONOptions {
+export interface WikipediaResult {
+  title: string;
+  desc: string;
+  uri: string;
+}
+
+export type WikipediaResponse = [string, string[], string[], string[]]
+
+export interface WikipediaSelection {
+  title: string;
+  desc: string;
+  url: string;
+  img?: string;
+  pageid: number;
+  lon?: number;
+  lat?: number;
+}
+
+export interface Options extends SearchJSONOptions<WikipediaResult, WikipediaResponse, string | HTMLElement> {
   className?: string;
   label?: string;
   placeholder?: string;
   typing?: number;
   minLength?: number;
   maxItems?: number;
-  handleResponse?: ((response: any) => any[]);
   lang?: string;
 }
 
@@ -21,7 +38,7 @@ export interface Options extends SearchJSONOptions {
  * @fires select
 
  */
-export default class SearchWikipedia extends SearchJSON {
+export default class SearchWikipedia extends SearchJSON<WikipediaResult, WikipediaResponse, string | HTMLElement, WikipediaSelection> {
   /**
    * @param {Object=} Control options.
    *  @param {string} options.className control class name
@@ -36,4 +53,12 @@ export default class SearchWikipedia extends SearchJSON {
    *  @param {string|undefined} options.lang API language, default none
    */
   constructor(options?: Options);
+
+  setLang(lang: string): void;
+  getTitle(result: WikipediaResult): HTMLElement;
+  requestData(search: string): { action: string; search: string; lang: string; format: string; origin: string; limit: number };
+  handleResponse(response: WikipediaResponse): WikipediaResult[];
+
+  /** Set the current language as an ISO language code. */
+  setLang(lang: string): void;
 }

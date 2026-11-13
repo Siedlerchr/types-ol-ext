@@ -2,7 +2,7 @@ import type { Options as CheckBoxOptions } from './Checkbox'
 import CheckBox from './Checkbox'
 
 export interface Options extends CheckBoxOptions {
-  clasName?: string;
+  className?: string;
   input?: Element;
   parent?: Element;
 }

@@ -8,7 +8,7 @@ import { Interaction } from 'ol/interaction'
 import type MapBrowserEvent from 'ol/MapBrowserEvent'
 import type { Condition as EventsConditionType } from 'ol/events/condition'
 import type { EventsKey } from 'ol/events'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { ObjectEvent } from 'ol/Object'
 import type { Pixel } from 'ol/pixel'
 import type { Coordinate } from 'ol/coordinate'
@@ -17,8 +17,11 @@ import type { Types } from 'ol/ObjectEventType'
 
 type DrawRegularOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'drawabort' | 'drawend' | 'drawstart' | 'drawing', DrawEvent, Return> &
-  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawabort' | 'drawend' | 'drawstart' | 'drawing', Return>;
+  OnSignature<'drawstart', DrawStartEvent, Return> &
+  OnSignature<'drawing', DrawingEvent, Return> &
+  OnSignature<'drawend', DrawEndEvent, Return> &
+  OnSignature<'drawcancel', DrawCancelEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawcancel' | 'drawend' | 'drawstart' | 'drawing', Return>;
 
 export interface Options {
   source?: VectorSource;
@@ -63,7 +66,7 @@ export default class DrawRegular extends Interaction {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /**
    * Activate/deactivate the interaction
@@ -110,21 +113,21 @@ export default class DrawRegular extends Interaction {
   /** Get geom of the current drawing
    * @return {Polygon | Point}
    */
-  getGeom_(): Polygon | Point;
+  getGeom_(): Polygon | Point | false;
 
   /** Draw sketch
    * @return {Feature} The feature being drawn.
    */
-  drawSketch_(): Feature;
+  drawSketch_(event?: MapBrowserEvent): Feature | undefined;
 
   /** Draw sketch (Point)
    */
-  drawPoint_(): void;
+  drawPoint_(coordinate: Coordinate, noClear?: boolean): void;
 
   /**
    * @param {MapBrowserEvent} evt Map browser event.
    */
-  handleEvent_(evt: MapBrowserEvent<UIEvent>): void;
+  handleEvent_(evt: MapBrowserEvent): boolean;
 
   /** Stop drawing.
    */
@@ -133,19 +136,19 @@ export default class DrawRegular extends Interaction {
   /**
    * @param {MapBrowserEvent} evt Event.
    */
-  handleMoveEvent_(evt: MapBrowserEvent<UIEvent>): void;
+  handleMoveEvent_(evt: MapBrowserEvent): void;
 
   /** Start an new draw
    * @param {MapBrowserEvent} evt Map browser event.
    * @return {boolean} `false` to stop the drag sequence.
    */
-  start_(evt: MapBrowserEvent<UIEvent>): boolean;
+  start_(evt: MapBrowserEvent): void;
 
   /** End drawing
    * @param {MapBrowserEvent} evt Map browser event.
    * @return {boolean} `false` to stop the drag sequence.
    */
-  end_(evt: MapBrowserEvent<UIEvent>): boolean;
+  end_(evt: MapBrowserEvent): void;
 
   on: DrawRegularOnSignature<EventsKey>
 
@@ -154,28 +157,41 @@ export default class DrawRegular extends Interaction {
   un: DrawRegularOnSignature<void>
 }
 
-declare enum DrawEventType {
-  DRAWSTART = 'drawstart',
-  DRAWEND = 'drawend',
-  DRAWCANCEL = 'drawcancel',
-  DRAWING = 'drawing',
+export type DrawEventType = 'drawstart' | 'drawing' | 'drawend' | 'drawcancel'
+
+/** Base fields shared by regular drawing events. */
+export interface DrawEvent extends BaseEvent {
+  type: DrawEventType;
+  feature: Feature<Geometry> | null;
+  pixel: Pixel | undefined;
+  coordinate: Coordinate;
 }
 
-export class DrawEvent extends BaseEvent {
-  constructor(type: DrawEventType, feature: Feature<Geometry>);
+export interface DrawStartEvent extends DrawEvent {
+  type: 'drawstart';
+  feature: Feature<Geometry>;
+  pixel: Pixel;
+}
 
-  /**
-   * The feature being drawn.
-   */
-  feature: Feature<Geometry>
+export interface DrawingEvent extends DrawEvent {
+  type: 'drawing';
+  feature: Feature<Geometry>;
+  pixel: Pixel;
+  startCoordinate: Coordinate;
+  square: boolean;
+  centered: boolean;
+}
 
-  pixel: Pixel
+export interface DrawEndEvent extends DrawEvent {
+  type: 'drawend';
+  feature: Feature<Geometry>;
+  square: boolean;
+  centered: boolean;
+}
 
-  coordinate: Coordinate
-
-  square?: boolean
-
-  centered?: boolean
-
-  oldValue?: string
+export interface DrawCancelEvent extends DrawEvent {
+  type: 'drawcancel';
+  feature: null;
+  square: boolean;
+  centered: boolean;
 }

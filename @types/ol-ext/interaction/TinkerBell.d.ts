@@ -1,9 +1,10 @@
 import { Pointer } from 'ol/interaction'
 import type { Color } from 'ol/color'
 import type { Map as _ol_Map_ } from 'ol'
+import type MapBrowserEvent from 'ol/MapBrowserEvent'
 
 export interface Options {
-  color?: Color;
+  color?: Color | string;
 }
 
 /**
@@ -19,9 +20,8 @@ export default class TinkerBell extends Pointer {
 
   /** Set the map > start postcompose
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
-  /** Postcompose function
-   */
-  postcompose_(): void;
+  /** Update the sparkle position from a map browser event. */
+  onMove(event: MapBrowserEvent): void;
 }

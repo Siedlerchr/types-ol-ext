@@ -5,7 +5,7 @@ export interface Options {
   /** interval beetween lines */
   interval: number;
   /** hatch angle in radian, default PI/2 */
-  angle: number;
+  angle?: number;
 }
 
 declare module 'ol/geom/MultiPolygon' {
@@ -40,7 +40,4 @@ declare module 'ol/geom/Polygon' {
  *  @param {Number} options.angle hatch angle in radian, default PI/2
  * @return {Geometry} the resulting MultiLineString geometry or initial geometry
  */
-export default function ol_geom_scribbleFill(geom: Geometry, options?: {
-  interval?: number;
-  angle?: number;
-}): Geometry
+export default function ol_geom_scribbleFill(geom: Geometry, options: Options): Geometry | null

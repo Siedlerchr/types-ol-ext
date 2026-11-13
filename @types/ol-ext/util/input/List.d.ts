@@ -1,27 +1,33 @@
 import type { EventsKey } from 'ol/events'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { ObjectEvent } from 'ol/Object'
 import type { Types } from 'ol/ObjectEventType'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Options as BaseOptions } from './Base'
 import Base from './Base'
 
-type ListOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+type ListOnSignature<Return, Value extends string | number> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'change:value', ListEvent, Return> &
+  OnSignature<Types | 'change:value', ListEvent<Value>, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'change:value', Return>;
 
-export enum ListType {
-  CHANGE_VALUE = 'change:value',
+export type ListType = 'change:value'
+
+export interface ListOption {
+  value: string | number;
+  html?: string | Element;
+  title?: string;
 }
 
 export interface Options extends BaseOptions {
   className?: string;
-  options?: any[];
+  options: ListOption[];
   input?: Element;
   parent?: Element;
   fixed?: boolean;
   align?: 'left' | 'right' | 'middle';
+  hover?: boolean;
+  hideOnClick?: boolean;
 }
 
 /** Checkbox input
@@ -29,7 +35,7 @@ export interface Options extends BaseOptions {
  * @extends {ol_ext_input_Base}
 
  */
-export default class List extends Base {
+export default class List<Value extends string | number = string> extends Base {
   /**
    * @param {*} options
    *  @param {string} [options.className]
@@ -39,26 +45,25 @@ export default class List extends Base {
    *  @param {boolean} [options.fixed=false] don't use a popup, default use a popup
    *  @param {string} [options.align=left] align popup left/right/middle
    */
-  constructor(options: any);
+  constructor(options: Options);
 
-  element: HTMLElement | Text
+  element: HTMLDivElement
 
-  popup: HTMLElement | Text
+  popup: HTMLUListElement
 
   /** Get the current value
-   * @returns {number}
+   * @returns The current input value.
    */
-  getValue(): number;
+  getValue(): Value;
 
-  on: ListOnSignature<EventsKey>
+  on: ListOnSignature<EventsKey, Value>
 
-  once: ListOnSignature<EventsKey>
+  once: ListOnSignature<EventsKey, Value>
 
-  un: ListOnSignature<void>
+  un: ListOnSignature<void, Value>
 }
 
-export class ListEvent extends BaseEvent {
-  constructor(type: ListType, value: number);
-
-  value: number
+export interface ListEvent<Value extends string | number = string> extends BaseEvent {
+  type: ListType;
+  value: Value;
 }

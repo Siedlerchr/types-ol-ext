@@ -1,32 +1,78 @@
-import type { Map as _ol_Map_ } from 'ol'
-import type Collection from 'ol/Collection'
-import type Feature from 'ol/Feature'
-import type { Layer } from 'ol/layer'
-import type { Fill, Stroke, Style } from 'ol/style'
-import { Pointer } from 'ol/interaction'
-import type MapBrowserEvent from 'ol/MapBrowserEvent'
-import type { Condition as EventsConditionType } from 'ol/events/condition'
-import type { Coordinate } from 'ol/coordinate'
-import BaseEvent from 'ol/events/Event'
-import type { Geometry } from 'ol/geom'
-import type { Pixel } from 'ol/pixel'
-import type { EventsKey } from 'ol/events'
-import type { ObjectEvent } from 'ol/Object'
-import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
-import type { Types } from 'ol/ObjectEventType'
+import type {
+  Map as _ol_Map_
+} from 'ol'
+import type Collection
+  from 'ol/Collection'
+import type Feature
+  from 'ol/Feature'
+import type {
+  Layer
+} from 'ol/layer'
+import type {
+  Fill,
+  Stroke,
+  Style
+} from 'ol/style'
+import {
+  Pointer
+} from 'ol/interaction'
+import type MapBrowserEvent
+  from 'ol/MapBrowserEvent'
+import type {
+  Condition as EventsConditionType
+} from 'ol/events/condition'
+import type Select
+  from 'ol/interaction/Select'
+import type {
+  Coordinate
+} from 'ol/coordinate'
+import type BaseEvent
+  from 'ol/events/Event'
+import type {
+  Geometry
+} from 'ol/geom'
+import type {
+  Pixel
+} from 'ol/pixel'
+import type {
+  EventsKey
+} from 'ol/events'
+import type {
+  ObjectEvent
+} from 'ol/Object'
+import type {
+  CombinedOnSignature,
+  EventTypes,
+  OnSignature
+} from 'ol/Observable'
+import type {
+  Types
+} from 'ol/ObjectEventType'
 
-type TransformOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
-  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'rotatestart' | 'rotating' | 'rotateend', RotateEvent, Return> &
-  OnSignature<Types | 'scalestart' | 'scaling' | 'scaleend', ScaleEvent, Return> &
-  OnSignature<Types | 'translatestart' | 'translating' | 'translateend', TranslateEvent, Return> &
-  OnSignature<Types | 'select', SelectEvent, Return> &
+type TransformOnSignature<Return> =
+  OnSignature<EventTypes, Event, Return>
+  &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return>
+  &
+  OnSignature<'rotatestart' | 'scalestart' | 'translatestart', TransformStartEvent, Return>
+  &
+  OnSignature<'rotating', RotateEvent, Return>
+  &
+  OnSignature<'scaling', ScaleEvent, Return>
+  &
+  OnSignature<'translating', TranslateEvent, Return>
+  &
+  OnSignature<'rotateend' | 'scaleend' | 'translateend', TransformEndEvent, Return>
+  &
+  OnSignature<'select', SelectEvent, Return>
+  &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'rotatestart' | 'rotating' | 'rotateend' | 'scalestart' | 'scaling' | 'scaleend' | 'translatestart' | 'translating' | 'translateend' | 'select', Return>
 
 export interface Options {
   filter?: (f: Feature, l: Layer) => boolean;
-  layers?: Layer[];
+  layers?: Layer | Layer[];
   features?: Collection<Feature>;
+  select?: Select;
   condition?: (event: MapBrowserEvent, features?: Collection<Feature>) => boolean;
   addCondition?: EventsConditionType;
   hitTolerance?: number;
@@ -42,27 +88,23 @@ export interface Options {
   modifyCenter?: EventsConditionType;
   enableRotatedTransform?: boolean;
   keepRectangle?: boolean;
+  buffer?: number;
   style?: any;
   pointRadius?: number | number[] | ((f: Feature) => number | number[]);
 }
 
-export enum RotateEventType {
-  ROTATESTART = 'rotatestart',
-  ROTATING = 'rotating',
-  ROTATEEND = 'rotateend',
-}
-
-export enum ScaleEventType {
-  SCALESTART = 'scalestart',
-  SCALING = 'scaling',
-  SCALEEND = 'scaleend',
-}
-
-export enum TranslateEventType {
-  TRANSLATESTART = 'translatestart',
-  TRANSLATING = 'translating',
-  TRANSLATEEND = 'translateend',
-}
+export type RotateEventType =
+  'rotatestart'
+  | 'rotating'
+  | 'rotateend';
+export type ScaleEventType =
+  'scalestart'
+  | 'scaling'
+  | 'scaleend';
+export type TranslateEventType =
+  'translatestart'
+  | 'translating'
+  | 'translateend';
 
 export type SelectEventType = 'select';
 /**
@@ -143,7 +185,7 @@ export default class Transform extends Pointer {
    * @param map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /**
    * Activate/deactivate interaction
@@ -186,24 +228,29 @@ export default class Transform extends Pointer {
    * @param feature the feature to transform
    * @param add true to add the feature to the selection, default false
    */
-  select(feature: Feature | undefined, add: boolean): void;
+  select(feature?: Feature | null, add?: boolean): void;
 
   /** Update the selection collection.
-  * @param {Collection<Feature>} features the features to transform
-  */
-  setSelection(features: Collection<Feature>): void
+   * @param {Collection<Feature>} features the features to transform
+   */
+  setSelection(features: Collection<Feature> | Feature[]): void
 
   /**
    * @param evt Map browser event.
    * @return `true` to start the drag sequence.
    */
-  handleDownEvent_(evt: MapBrowserEvent<UIEvent>): boolean;
+  handleDownEvent_(evt: MapBrowserEvent): boolean;
 
   /**
    * Get features to transform
    * @return
    */
   getFeatures(): Collection<Feature>;
+
+  /** Set the point radius used to calculate handles on points. A function may
+   * return a radius or a [radiusX, radiusY] pair for a feature.
+   */
+  setPointRadius(pointRadius?: number | number[] | ((feature: Feature) => number | number[])): void;
 
   /**
    * Get the rotation center
@@ -220,18 +267,18 @@ export default class Transform extends Pointer {
   /**
    * @param evt Map browser event.
    */
-  handleDragEvent_(evt: MapBrowserEvent<UIEvent>): void;
+  handleDragEvent_(evt: MapBrowserEvent): void;
 
   /**
    * @param evt Event.
    */
-  handleMoveEvent_(evt: MapBrowserEvent<UIEvent>): void;
+  handleMoveEvent_(evt: MapBrowserEvent): void;
 
   /**
    * @param evt Map browser event.
    * @return `false` to stop the drag sequence.
    */
-  handleUpEvent_(evt: MapBrowserEvent<UIEvent>): boolean;
+  handleUpEvent_(evt: MapBrowserEvent): boolean;
 
   on: TransformOnSignature<EventsKey>
 
@@ -240,81 +287,56 @@ export default class Transform extends Pointer {
   un: TransformOnSignature<void>
 }
 
-export class RotateEvent extends BaseEvent {
-  constructor(
-    type: RotateEventType,
-    feature: Feature<Geometry>,
-    features: Collection<Feature<Geometry>>,
-    angle: number,
-    pixel: Pixel,
-    coordinate: Coordinate
-  );
-
-  feature: Feature<Geometry>
-
-  features: Collection<Feature<Geometry>>
-
-  angle: number
-
-  pixel: Pixel
-
-  coordinate: Coordinate
+/** Common fields for transform events. */
+export interface TransformEvent extends BaseEvent {
+  feature: Feature<Geometry>;
+  features: Collection<Feature<Geometry>>;
 }
 
-export class ScaleEvent extends BaseEvent {
-  constructor(
-    type: ScaleEventType,
-    feature: Feature<Geometry>,
-    features: Collection<Feature<Geometry>>,
-    scale: [number, number],
-    pixel: Pixel,
-    coordinate: Coordinate
-  );
-
-  feature: Feature<Geometry>
-
-  features: Collection<Feature<Geometry>>
-
-  scale: [number, number]
-
-  pixel: Pixel
-
-  coordinate: Coordinate
+/** A transform has started at the given pixel and coordinate. */
+export interface TransformStartEvent extends TransformEvent {
+  type: 'rotatestart' | 'scalestart' | 'translatestart';
+  pixel: Pixel;
+  coordinate: Coordinate;
 }
 
-export class TranslateEvent extends BaseEvent {
-  constructor(
-    type: string,
-    feature: Feature<Geometry>,
-    features: Collection<Feature<Geometry>>,
-    delta: [number, number],
-    pixel: Pixel,
-    coordinate: Coordinate
-  );
-
-  feature: Feature<Geometry>
-
-  features: Collection<Feature<Geometry>>
-
-  delta: [number, number]
-
-  pixel: Pixel
-
-  coordinate: Coordinate
+/** A feature is being rotated. */
+export interface RotateEvent extends TransformEvent {
+  type: 'rotating';
+  angle: number;
+  pixel: Pixel;
+  coordinate: Coordinate;
 }
 
-export class SelectEvent extends BaseEvent {
-  constructor(
-    type: SelectEventType,
-    feature: Feature<Geometry>,
-    features: Collection<Feature<Geometry>>
-  )
+/** A feature is being scaled. */
+export interface ScaleEvent extends TransformEvent {
+  type: 'scaling';
+  scale: [number, number];
+  pixel: Pixel;
+  coordinate: Coordinate;
+}
 
-  feature: Feature<Geometry>
+/** A feature is being translated. */
+export interface TranslateEvent extends TransformEvent {
+  type: 'translating';
+  delta: [number, number];
+  pixel: Pixel;
+  coordinate: Coordinate;
+}
 
-  features: Collection<Feature<Geometry>>
+/** A transform has ended, with the original geometries and whether they changed. */
+export interface TransformEndEvent extends TransformEvent {
+  type: 'rotateend' | 'scaleend' | 'translateend';
+  oldgeom: Geometry | undefined;
+  oldgeoms: Geometry[];
+  transformed: boolean;
+}
 
-  pixel: Pixel
-
-  coordinate: Coordinate
+/** Selection may change programmatically, without a pointer event or selected feature. */
+export interface SelectEvent extends BaseEvent {
+  type: SelectEventType;
+  feature?: Feature<Geometry> | null;
+  features: Collection<Feature<Geometry>>;
+  pixel?: Pixel;
+  coordinate?: Coordinate;
 }

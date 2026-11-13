@@ -1,12 +1,10 @@
-import type { Feature } from 'ol'
 import type { Coordinate } from 'ol/coordinate'
 import type { EventsKey } from 'ol/events'
-import type { Geometry } from 'ol/geom'
 import type { Options as SearchOptions, SearchOnSignature } from './Search'
 import Search from './Search'
 
-export interface Options extends SearchOptions {
-  handleResponse?: ((response: any) => any[]);
+export interface Options<Result = any, Response = any, Title = string> extends SearchOptions<Result, Title> {
+  handleResponse?: ((response: Response) => Result[]);
   url?: string;
   authentication?: string;
 }
@@ -20,7 +18,7 @@ export interface Options extends SearchOptions {
  * @fires select
 
  */
-export default class SearchJSON extends Search {
+export default class SearchJSON<Result = any, Response = any, Title = string, Selection = Result> extends Search<Result, string, Title, Selection> {
   /**
    * @param {any} options extend ol.control.Search options
    *  @param {string} options.className control class name
@@ -36,20 +34,20 @@ export default class SearchJSON extends Search {
    *  @param {string|undefined} options.url Url of the search api
    *  @param {string | undefined} options.authentication: basic authentication for the search API as btoa("login:pwd")
    */
-  constructor(options?: Options);
+  constructor(options?: Options<Result, Response, Title>);
 
   /** Autocomplete function (ajax request to the server)
    * @param {string} s search string
    * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field
    */
-  autocomplete(s: string, cback: (results: any[]) => any): any[] | false;
+  autocomplete(s: string, cback: (results: Result[]) => void): void;
 
   /** Send ajax request
    * @param {string} url
    * @param {*} data
    * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field
    */
-  ajax(url: string, data: any, cback: (a: any[]) => any, options: any): void;
+  ajax(url: string, data: any, cback: (response: any, error?: string) => void, options?: any): void;
 
   /**
    * @param {string} s the search string
@@ -64,7 +62,7 @@ export default class SearchJSON extends Search {
    * @return {Array<any>} an array of feature
    * @api
    */
-  handleResponse(response: any): any[];
+  handleResponse(response: Response): Result[];
 
   /** Get the input field
    *  @return {Element}
@@ -77,7 +75,7 @@ export default class SearchJSON extends Search {
    *  @return {string} the text to be displayed in the index, default f.name
    *  @api
    */
-  getTitle(f: Feature<Geometry>): string;
+  getTitle(f: Result): Title;
 
   /** Force search to refresh
    */
@@ -88,7 +86,7 @@ export default class SearchJSON extends Search {
    *  @param {boolean} search to start a search
    *  @api
    */
-  setInput(value: string, search: boolean): void;
+  setInput(value: string, search?: boolean): void;
 
   /** A ligne has been clicked in the menu > dispatch event
    * @param {any} f the feature, as passed in the autocomplete
@@ -97,7 +95,7 @@ export default class SearchJSON extends Search {
    * @param {*} options options passed to the event
    *  @api
    */
-  select(f: Feature, reverse: boolean, coord: Coordinate, options?: any): void
+  select(f: Result, reverse?: boolean, coord?: Coordinate, options?: any): void
 
   /** Save history (in the localstorage)
    */
@@ -115,18 +113,18 @@ export default class SearchJSON extends Search {
   /**
    * Get history table
    */
-  getHistory(): void;
+  getHistory(): Result[];
 
   /** Test if 2 features are equal
    * @param {any} f1
    * @param {any} f2
    * @return {boolean}
    */
-  equalFeatures(f1: any, f2: any): boolean;
+  equalFeatures(f1: Result, f2: Result): boolean;
 
-  on: SearchOnSignature<EventsKey>
+  on: SearchOnSignature<EventsKey, Selection>
 
-  once: SearchOnSignature<EventsKey>
+  once: SearchOnSignature<EventsKey, Selection>
 
-  un: SearchOnSignature<void>
+  un: SearchOnSignature<void, Selection>
 }

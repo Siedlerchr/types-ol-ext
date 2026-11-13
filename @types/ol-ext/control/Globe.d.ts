@@ -8,7 +8,7 @@ import type BaseLayer from 'ol/layer/Base'
 
 export interface Options extends ControlOptions {
   follow?: boolean;
-  align: 'top' | 'bottom-left' | 'right';
+  align?: string;
   layers?: BaseLayer[] | Collection<BaseLayer> | LayerGroup;
   style?: Style | Style[];
 }
@@ -34,7 +34,7 @@ export default class Globe extends ol_control_Control {
    * Set the map instance the control associated with.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Set the globe center with the map center
    */
@@ -47,12 +47,12 @@ export default class Globe extends ol_control_Control {
 
   /** Show/hide the globe
    */
-  show(b: boolean): void;
+  show(b?: boolean): void;
 
   /** Set position on the map
    *  @param {top|bottom-left|right}  align
    */
-  setPosition(align: 'top' | 'bottom-left' | 'right'): void;
+  setPosition(align: string): void;
 
   /** Set the globe center
    * @param {Coordinate} center the point to center to

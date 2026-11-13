@@ -1,12 +1,12 @@
 import VectorLayer from 'ol/layer/Vector'
-import type { Options } from 'ol/layer/BaseVector'
+import type { Options } from 'ol/layer/Vector'
 import type VectorSource from 'ol/source/Vector'
 import type { Geometry } from 'ol/geom'
 import type Feature from 'ol/Feature'
 
 interface ClusterOptions extends Options<VectorSource<Feature>> {
   animationDuration?: number;
-  easingFunction?: (t: number) => number;
+  animationMethod?: (t: number) => number;
 }
 
 /**

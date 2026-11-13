@@ -1,5 +1,5 @@
 import type { EventsKey } from 'ol/events'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { ObjectEvent } from 'ol/Object'
 import type { Types } from 'ol/ObjectEventType'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
@@ -11,13 +11,11 @@ type SliderOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change:value', SliderEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'change:value', Return>;
 
-export enum SliderType {
-  CHANGE_VALUE = 'change:value',
-}
+export type SliderType = 'change:value'
 
 export interface Options extends BaseOptions {
   className?: string;
-  input?: Element;
+  input?: HTMLInputElement;
   parent?: Element;
   align?: 'left' | 'right' | 'middle';
   type?: string;
@@ -28,6 +26,7 @@ export interface Options extends BaseOptions {
   before?: string | Element;
   after?: string | Element;
   fixed?: boolean;
+  hover?: boolean;
 }
 
 /** Checkbox input
@@ -51,16 +50,16 @@ export default class Slider extends Base {
    *  @param {string|Element} [options.after] an element to add after the slider
    *  @param {boolean} [options.fixed=false] no pupop
    */
-  constructor(options: any);
+  constructor(options?: Options);
 
-  element: HTMLElement | Text
+  element: HTMLDivElement
 
-  slider: HTMLElement | Text
+  slider: HTMLDivElement
 
   /** Get the current value
-   * @returns {number}
+   * @returns {string}
    */
-  getValue(): number;
+  getValue(): string;
 
   on: SliderOnSignature<EventsKey>
 
@@ -69,8 +68,7 @@ export default class Slider extends Base {
   un: SliderOnSignature<void>
 }
 
-export class SliderEvent extends BaseEvent {
-  constructor(type: SliderType, value: number);
-
-  value: number
+export interface SliderEvent extends BaseEvent {
+  type: SliderType;
+  value: number;
 }

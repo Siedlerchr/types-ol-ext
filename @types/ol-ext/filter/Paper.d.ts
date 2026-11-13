@@ -8,6 +8,7 @@ export interface Options {
 }
 
 /** Paper filter
+ * @deprecated Use a canvas filter instead.
  * @constructor
  * @extends {ol_filter_Base}
 
@@ -19,6 +20,9 @@ export default class Paper extends Base {
    *  @param {number} [options.scale=1]
    */
   constructor(options?: Options);
+
+  /** Set filter light, from 0 (darker) to 100 (lighter). */
+  setLight(light: number): void;
 
   /** Draw the feature into canvas
    */

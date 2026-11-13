@@ -1,8 +1,21 @@
 import { Interaction } from 'ol/interaction'
-import type MapBrowserEvent from 'ol/MapBrowserEvent'
+import type Map from 'ol/Map'
+import type { FrameState } from 'ol/Map'
+import type { Pixel } from 'ol/pixel'
+import type { Coordinate } from 'ol/coordinate'
+
+/** Event sent to the callback and dispatched on the map after a long touch. */
+export interface LongTouchEvent {
+  type: 'longtouch';
+  originalEvent: PointerEvent;
+  frameState: FrameState | null;
+  pixel: Pixel;
+  coordinate: Coordinate;
+  map: Map | null;
+}
 
 export interface Options {
-  handleLongTouchEvent?: (evt: MapBrowserEvent<UIEvent>) => void;
+  handleLongTouchEvent?: (evt: LongTouchEvent) => void;
   pixelTolerance?: number;
   delay?: number;
 }

@@ -1,5 +1,5 @@
 import type { FeatureAnimationEvent, Options as FeatureAnimationOptions } from './FeatureAnimation'
-import { FeatureAnimation } from './FeatureAnimation'
+import FeatureAnimation from './FeatureAnimation'
 
 export interface Options extends FeatureAnimationOptions {
   speed?: number;
@@ -13,7 +13,7 @@ export default class Fade extends FeatureAnimation {
   /**
    * @param {ol_featureAnimationOptions} options
    */
-  constructor(options?: FeatureAnimationOptions);
+  constructor(options?: Options);
 
   /** Animate
    * @param {featureAnimationEvent} e

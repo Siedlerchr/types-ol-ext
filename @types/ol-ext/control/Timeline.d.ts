@@ -3,17 +3,25 @@ import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 import type Feature from 'ol/Feature'
 import type { Vector as VectorSource } from 'ol/source'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { OnSignature } from 'ol/Observable'
 
 export type position = 'start' | 'end' | 'middle';
+export type DateRounding = 'mn' | 'hour' | 'day' | 'month';
+
+export interface TimelineSelectEvent extends BaseEvent { type: 'select'; feature: Feature }
+export interface TimelineScrollEvent extends BaseEvent { type: 'scroll'; date: Date; dateStart: Date; dateEnd: Date }
+export interface TimelineCollapseEvent extends BaseEvent { type: 'collapse'; collapsed: boolean }
 
 export interface Options extends ControlOptions {
   className?: string;
   features?: Feature[];
   source?: VectorSource;
-  interval?: number;
-  maxWidth?: string;
-  minDate?: string;
-  maxDate?: string;
+  interval?: number | string;
+  maxWidth?: number | string;
+  minDate?: number | string | Date;
+  maxDate?: number | string | Date;
   minZoom?: number;
   maxZoom?: number;
   zoomButton?: boolean;
@@ -22,6 +30,7 @@ export interface Options extends ControlOptions {
   endFeatureDate?: (f: Feature) => any;
   graduation?: 'day' | 'month';
   scrollTimeout?: number;
+  zoom?: number;
 }
 
 /** Timeline control
@@ -52,14 +61,14 @@ export default class Timeline extends ol_control_Control {
    *  @param {String} options.graduation day|month to show month or day graduation, default show only years
    *  @param {number} options.scrollTimeout time in milliseconds to get a scroll event, default 15ms
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /**
    * Set the map instance the control is associated with
    * and add interaction attached to it to this map.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Add a button on the timeline
    * @param {*} button
@@ -68,11 +77,11 @@ export default class Timeline extends ol_control_Control {
    *  @param {Element|string} button.html Content of the element
    *  @param {function} button.click a function called when the button is clicked
    */
-  addButton(button?: {
+  addButton(button: {
     className?: string;
     title?: string;
-    html: Element | string;
-    click: (e: Event) => void;
+    html?: Element | string;
+    handleClick?: (e: Event) => void;
   }): void;
 
   /** Set an interval
@@ -98,7 +107,7 @@ export default class Timeline extends ol_control_Control {
    * @param {Array<Features>|VectorSource} features An array of features or a vector source
    * @param {number} zoom zoom to draw the line default 1
    */
-  setFeatures(features: Feature[] | VectorSource, zoom: number): void;
+  setFeatures(features?: Feature[] | VectorSource, zoom?: number): void;
 
   /**
    * Get features
@@ -127,7 +136,7 @@ export default class Timeline extends ol_control_Control {
    * @param {string} position start, end or middle, default middle
    * @return {Date}
    */
-  getDate(position: position): Date;
+  getDate(position?: position | DateRounding, stick?: DateRounding): Date;
 
   /** Get the start date of the control
    * @return {Date}
@@ -138,4 +147,11 @@ export default class Timeline extends ol_control_Control {
    * @return {Date}
    */
   getEndDate(): Date;
+
+  /** Round a date to the specified minute, hour, day, or month. */
+  roundDate(date: Date, stick?: DateRounding): Date;
+
+  on: ol_control_Control['on'] & OnSignature<'select', TimelineSelectEvent, EventsKey> & OnSignature<'scroll', TimelineScrollEvent, EventsKey> & OnSignature<'collapse', TimelineCollapseEvent, EventsKey>;
+  once: ol_control_Control['once'] & OnSignature<'select', TimelineSelectEvent, EventsKey> & OnSignature<'scroll', TimelineScrollEvent, EventsKey> & OnSignature<'collapse', TimelineCollapseEvent, EventsKey>;
+  un: ol_control_Control['un'] & OnSignature<'select', TimelineSelectEvent, void> & OnSignature<'scroll', TimelineScrollEvent, void> & OnSignature<'collapse', TimelineCollapseEvent, void>;
 }

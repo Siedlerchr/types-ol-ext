@@ -1,10 +1,23 @@
 import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 import type { Coordinate } from 'ol/coordinate'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
+
+export interface OverlayVisibilityEvent extends BaseEvent {
+  type: 'change:visible'; visible: boolean; element: HTMLElement;
+}
+export type OverlayOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'change:visible', OverlayVisibilityEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'change:visible', Return>
 
 export interface Options extends ControlOptions {
   className?: string;
-  content: string | Element;
+  content?: string | Element;
   hideOnClick?: boolean;
   closeBox?: boolean;
 }
@@ -26,6 +39,10 @@ export default class Overlay extends ol_control_Control {
    */
   constructor(options?: Options);
 
+  on: OverlayOnSignature<EventsKey>;
+  once: OverlayOnSignature<EventsKey>;
+  un: OverlayOnSignature<void>;
+
   /** Set the content of the overlay
    * @param {string|Element} html the html to display in the control
    */
@@ -35,7 +52,9 @@ export default class Overlay extends ol_control_Control {
    * @param {string|Element} html the html to display in the control
    * @param {Coordinate} coord coordinate of the top left corner of the control to start from
    */
-  show(html: string | Element, coord: Coordinate): void;
+  show(html?: string | Element, coord?: Coordinate): void;
+
+  showImage(src: string, options?: { title?: string; coordinate?: Coordinate }): void;
 
   /** Set the control visibility hidden
    */

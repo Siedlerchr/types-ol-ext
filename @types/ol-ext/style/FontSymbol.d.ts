@@ -30,7 +30,7 @@ export interface Options {
   radius?: number;
   rotation?: number;
   rotateWithView?: boolean;
-  declutterMode?: 'obstacle' | 'none' | undefined
+  declutterMode?: 'declutter' | 'obstacle' | 'none' | undefined
   scale?: number;
   opacity?: number;
   fontSize?: number;
@@ -52,7 +52,7 @@ export interface Font {
 
 export interface Glyph {
   font?: string;
-  char?: number;
+  char?: string | number;
   code?: number;
   theme?: string;
   name?: string;
@@ -165,7 +165,7 @@ export default class FontSymbol extends RegularShape {
    * @return {Font}
    * @api
    */
-  getFontInfo(): Font;
+  getFontInfo(glyph: Glyph): Font | undefined;
 
   getChecksum(): string;
 }

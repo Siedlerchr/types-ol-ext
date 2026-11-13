@@ -5,6 +5,23 @@ import type { Geometry } from 'ol/geom'
 import type { Style } from 'ol/style'
 import type { Coordinate } from 'ol/coordinate'
 import type { ProjectionLike } from 'ol/proj'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
+
+export type ProfilePoint = [number, number, string, Coordinate]
+export interface ProfilePointerEvent extends BaseEvent { type: 'over' | 'click' | 'dragstart' | 'dragging' | 'dragend'; index: number; coord: Coordinate; time: string; distance: number; click?: boolean }
+export interface ProfileShowEvent extends BaseEvent { type: 'show'; show: boolean }
+export interface ProfileZoomEvent extends BaseEvent { type: 'zoom'; geometry?: Geometry; start?: number; end?: number }
+export interface ProfileGeometryEvent extends BaseEvent { type: 'change:geometry'; geometry: Geometry }
+export type ProfileOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'over' | 'click' | 'dragstart' | 'dragging' | 'dragend', ProfilePointerEvent, Return> &
+  OnSignature<'show', ProfileShowEvent, Return> & OnSignature<'zoom', ProfileZoomEvent, Return> &
+  OnSignature<'change:geometry', ProfileGeometryEvent, Return> & OnSignature<'out' | 'dragcancel', BaseEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'over' | 'click' | 'dragstart' | 'dragging' | 'dragend' | 'show' | 'zoom' | 'change:geometry' | 'out' | 'dragcancel', Return>
 
 export interface Options extends ControlOptions {
   className?: string;
@@ -14,7 +31,7 @@ export interface Options extends ControlOptions {
   info?: { [key: string]: any };
   width?: number;
   height?: number;
-  units: 'metric' | 'imperial';
+  units?: 'metric' | 'imperial';
   feature?: Feature;
   selectable?: boolean;
   zoomable?: boolean;
@@ -82,6 +99,10 @@ export default class Profile extends ol_control_Control {
    */
   constructor(options?: Options);
 
+  on: ProfileOnSignature<EventsKey>;
+  once: ProfileOnSignature<EventsKey>;
+  un: ProfileOnSignature<void>;
+
   /** Show popup info
    * @param {string} info to display as a popup
    * @api stable
@@ -97,20 +118,20 @@ export default class Profile extends ol_control_Control {
    * @param { Coordinate|number } where a coordinate or a distance from begining, if none it will hide the point
    * @return {Coordinate} current point
    */
-  showAt(where: Coordinate | number): Coordinate;
+  showAt(where?: Coordinate | number): Coordinate | null;
 
   /** Show point at a time on the profil
    * @param { Date|number } time a Date or a DateTime (in s) to show the profile on, if none it will hide the point
    * @param { boolean } delta true if time is a delta from the start, default false
    * @return { Coordinate } current point
    */
-  showAtTime(time?: Date | number, delta?: boolean): Coordinate;
+  showAtTime(time?: Date | number, delta?: boolean): Coordinate | null;
 
   /** Get the point at a given time on the profil
    * @param { number } time time at which to show the point
    * @return { Coordinate } current point
    */
-  pointAtTime(time: number): Coordinate;
+  pointAtTime(time: number): Coordinate | ProfilePoint;
 
   /** Show panels
    * @api stable
@@ -159,8 +180,8 @@ export default class Profile extends ol_control_Control {
    */
   setGeometry(f: Feature | Geometry, options?: {
     projection?: ProjectionLike;
-    zunit?: ProfileUnit;
-    unit?: ProfileUnit;
+    zunit?: ProfileUnit[keyof ProfileUnit];
+    unit?: ProfileUnit[keyof ProfileUnit];
     zmin?: number;
     zmax?: number;
     zDigits?: number;
@@ -180,5 +201,6 @@ export default class Profile extends ol_control_Control {
    * @return {string} requested data uri
    * @api stable
    */
+  getImage(type: 'canvas', encoderOptions?: number): HTMLCanvasElement;
   getImage(type?: string, encoderOptions?: number): string | HTMLCanvasElement;
 }

@@ -1,10 +1,23 @@
 import type ol_legend_Legend from '../legend/Legend'
+import type { LegendSelectEvent, LegendItemsEvent } from '../legend/Legend'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
+
+export interface LegendCollapseEvent extends BaseEvent { type: 'change:collapse'; collapsed: boolean }
+export type LegendControlOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'select', LegendSelectEvent, Return> & OnSignature<'items', LegendItemsEvent, Return> &
+  OnSignature<'change:collapse', LegendCollapseEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'select' | 'items' | 'change:collapse', Return>
 import type { Options as CanvasOptions } from './CanvasBase'
 import CanvasBase from './CanvasBase'
 
 export interface Options extends CanvasOptions {
   className?: string;
-  legend?: ol_legend_Legend;
+  legend: ol_legend_Legend;
   title?: string;
   emptyTitle?: string
   collapsed?: boolean;
@@ -27,7 +40,11 @@ export default class Legend extends CanvasBase {
    *  @param {boolean | undefined} options.collapsible Specify if legend can be collapsed, default true.
    *  @param {Element | string | undefined} options.target Specify a target if you want the control to be rendered outside of the map's viewport.
    */
-  constructor(options?: Options);
+  constructor(options: Options);
+
+  on: LegendControlOnSignature<EventsKey>;
+  once: LegendControlOnSignature<EventsKey>;
+  un: LegendControlOnSignature<void>;
 
   /** Draw control on canvas
    * @param {boolean} b draw on canvas.
@@ -54,7 +71,7 @@ export default class Legend extends CanvasBase {
   /** Show/hide control
    *
    */
-  collapse(b: boolean): boolean;
+  collapse(b?: boolean): void;
 
   /** Is control collapsed
    * @returns {boolean}

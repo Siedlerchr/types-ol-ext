@@ -1,6 +1,6 @@
 import type { Coordinate } from 'ol/coordinate'
 import type { Options as OverlayOptions } from 'ol/Overlay'
-import Overlay from '../control/Overlay'
+import Overlay from 'ol/Overlay'
 
 /**
  * @classdesc
@@ -26,7 +26,7 @@ export default class Fixed extends Overlay {
    * @param {ol.coordinate} position
    * @param {boolean} force true to change the position, default false
    */
-  setPosition(position: Coordinate, force?: boolean): void;
+  setPosition(position: Coordinate | undefined, force?: boolean): void;
 
   /** Update position according the pixel position
    */

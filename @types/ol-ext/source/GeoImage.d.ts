@@ -1,18 +1,21 @@
 import type { Coordinate } from 'ol/coordinate'
 import type { Extent } from 'ol/extent'
-import type { LineString } from 'ol/geom'
 import type { Size } from 'ol/size'
+import type { AttributionLike } from 'ol/source/Source'
+import type { ProjectionLike } from 'ol/proj'
 import { ImageCanvas } from 'ol/source'
 
 export interface Options {
   url?: string;
   image?: HTMLImageElement;
-  imageCenter?: Coordinate;
-  imageScale?: Size | number;
+  imageCenter: Coordinate;
+  imageScale: Size | number;
   imageRotate?: number;
-  imageCrop?: Extent;
+  imageCrop?: Extent | number;
   imageMask?: Coordinate[];
-  crossOrigin?: string;
+  crossOrigin?: string | null;
+  attributions?: AttributionLike;
+  projection?: ProjectionLike;
 }
 
 /** Layer source with georeferencement to place it on a map
@@ -23,7 +26,7 @@ export default class GeoImage extends ImageCanvas {
   /**
    * @param {Options} options
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /** calculate image at extent / resolution
    * @param {ol/extent/Extent} extent
@@ -84,34 +87,34 @@ export default class GeoImage extends ImageCanvas {
 
   /**
    * Get image crop Extent.
-   * @return {Extent} image crop Extent.
+   * @return {Extent|number|undefined} Before the image loads, returns the supplied crop.
    * @api stable
    */
-  getCrop(): Extent;
+  getCrop(): Extent | number | undefined;
 
   /**
    * Set image mask.
-   * @param {LineString} coords of the mask
+   * @param {Coordinate[]} coords of the mask
    * @api stable
    */
-  setMask(coords: LineString): void;
+  setMask(coords?: Coordinate[]): void;
 
   /**
    * Get image mask.
-   * @return {LineString} coords of the mask
+   * @return {Coordinate[]} coords of the mask
    * @api stable
    */
-  getMask(): LineString;
+  getMask(): Coordinate[] | undefined;
 
   /**
    * Set image crop Extent.
    * @param {Extent|Number} image crop Extent or a number to crop from original Size.
    * @api stable
    */
-  setCrop(image: Extent | number): void;
+  setCrop(image?: Extent | number): void;
 
   /** Get the extent of the source.
-  * @param {Extent} extent If provided, no new extent will be created. Instead, that extent's coordinates will be overwritten.
+  * @param {Extent} extent If provided, its coordinates will be overwritten with the calculated extent.
   * @return {Extent}
   */
   getExtent(opt_extent?: Extent): Extent

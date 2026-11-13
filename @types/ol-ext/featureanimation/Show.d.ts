@@ -1,5 +1,5 @@
 import type { Options, FeatureAnimationEvent } from './FeatureAnimation'
-import { FeatureAnimation } from './FeatureAnimation'
+import FeatureAnimation from './FeatureAnimation'
 
 /** Show an object for a given duration
  * @constructor

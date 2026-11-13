@@ -1,5 +1,4 @@
-import { Map as _ol_Map_ } from 'ol'
-import type { Layer } from 'ol/layer'
+import type Layer from 'ol/layer/Base'
 import type { Options } from './LayerSwitcher'
 import LayerSwitcher from './LayerSwitcher'
 

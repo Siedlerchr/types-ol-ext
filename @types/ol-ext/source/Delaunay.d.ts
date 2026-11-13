@@ -5,7 +5,8 @@ import type Feature from 'ol/Feature'
 import type Polygon from 'ol/geom/Polygon'
 
 export interface Options extends VectorSourceOptions<Feature> {
-  source?: VectorSource;
+  source: VectorSource;
+  epsilon?: number;
 }
 
 export interface CircumCirlce {
@@ -22,17 +23,17 @@ export default class Delauny extends VectorSource {
    * @param {*} options extend ol/source/Vector options
    *  @param {ol/source/Vector} options.source the source that contains the points
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /** Clear source (and points)
    * @param {boolean} opt_fast
    */
-  clear(opt_fast: boolean): void;
+  clear(opt_fast?: boolean): void;
 
   /** Add a new triangle in the source
    * @param {Array<ol/coordinates>} pts
    */
-  _addTriangle(pts: Coordinate[]): void;
+  _addTriangle(pts: Coordinate[]): Feature<Polygon>;
 
   /** Get nodes
    */
@@ -81,11 +82,14 @@ export default class Delauny extends VectorSource {
 
   /** Get triangles at a point
    */
-  getTrianglesAt(coord: Coordinate): number[];
+  getTrianglesAt(coord: Coordinate): Feature[];
+
+  /** Get nodes at a coordinate. */
+  getNodesAt(coord: Coordinate): Feature[];
 
   /** Get Voronoi
    * @param {boolean} border include border, default false
    * @return { Array< ol.geom.Polygon > }
    */
-  calculateVoronoi(border: boolean): Polygon[];
+  calculateVoronoi(border?: boolean): Feature<Polygon>[];
 }

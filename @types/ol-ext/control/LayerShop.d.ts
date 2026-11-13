@@ -1,4 +1,5 @@
 import type Control from 'ol/control/Control'
+import type { Map } from 'ol'
 import type { Options } from './LayerSwitcher'
 import LayerSwitcher from './LayerSwitcher'
 
@@ -42,7 +43,7 @@ export default class LayerShop extends LayerSwitcher {
   /** Set the map instance the control is associated with.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: any): void;
+  setMap(map: Map | null): void;
 
   /** Get the bar element (to add new element in it)
    * @param {string} [position='top'] bar position bottom or top, default top

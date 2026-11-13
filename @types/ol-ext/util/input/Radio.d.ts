@@ -7,7 +7,7 @@ export interface Options extends CheckBoxOptions {
   parent?: Element;
 }
 
-/** Switch input
+/** Radio input
  * @constructor
  * @extends {ol_ext_input_Checkbox}
  * @fires check

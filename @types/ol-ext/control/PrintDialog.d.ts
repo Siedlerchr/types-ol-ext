@@ -6,7 +6,10 @@ import ol_control_Control from 'ol/control/Control'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { ObjectEvent } from 'ol/Object'
 import type { Types } from 'ol/ObjectEventType'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type Dialog from './Dialog'
+import type { PrintEvent, PrintErrorEvent, PrintOptions as MapPrintOptions } from './Print'
 import type Print from './Print'
 
 export interface Options extends ControlOptions {
@@ -19,20 +22,23 @@ export interface Options extends ControlOptions {
   openWindow?: boolean;
   copy?: boolean;
   print?: boolean;
-  pdf?: true;
+  pdf?: boolean;
+  save?: boolean;
+  title?: string;
+  targetDialog?: HTMLElement | string;
   saveAs?: (blob: Blob, name: string) => void;
-  northImage?: 'default' | 'compact';
-  jsPDF?: jsPDF;
+  northImage?: string;
+  jsPDF?: typeof jsPDF;
 }
 
-type PrintOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
-  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'printing', PrintingEvent, Return> &
-  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'printing', Return>;
-
-export enum PrintEventType {
-  PRINT = 'printing'
-}
+export type PrintDialogPrintEvent = Omit<PrintEvent, 'quality'> & { quality?: number }
+export interface PrintDialogShowEvent extends BaseEvent { type: 'show'; userElement: Element; dialog: Dialog; page: Element }
+export type PrintDialogOnSignature<Return> = OnSignature<'error', PrintErrorEvent, Return> &
+  OnSignature<EventTypes, BaseEvent, Return> & OnSignature<Types | 'change' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'show', PrintDialogShowEvent, Return> & OnSignature<'print', PrintDialogPrintEvent, Return> &
+  OnSignature<'printing', BaseEvent & MapPrintOptions, Return> &
+  OnSignature<'hide' | 'dialog:refresh', BaseEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'propertychange' | 'show' | 'hide' | 'print' | 'printing' | 'dialog:refresh', Return>
 
 export type PaperSize = 'A0' | 'A1' | 'A2' | 'A3' | 'A4' | 'US Letter' | 'A5' | 'B4' | 'B5';
 /** Print control to get an image of the map
@@ -65,6 +71,10 @@ export default class PrintDialog extends ol_control_Control {
    *  @param {*} [options.jsPDF] jsPDF object to save map as pdf
    */
   constructor(options?: Options);
+
+  on: PrintDialogOnSignature<EventsKey>;
+  once: PrintDialogOnSignature<EventsKey>;
+  un: PrintDialogOnSignature<void>;
 
   /** Check if the dialog is open
    * @return {boolean}
@@ -99,12 +109,12 @@ export default class PrintDialog extends ol_control_Control {
   /** Get print size
    *
    */
-  getSize(): Size;
+  getSize(): Size | string | undefined;
 
   /** Set map print size
    * @param  size map size as ol/size or A4, etc.
    */
-  setSize(size: Size | PaperSize): void;
+  setSize(size?: Size | string): void;
 
   /** Get dialog content element
    * @return {Element}
@@ -128,7 +138,7 @@ export default class PrintDialog extends ol_control_Control {
    * @param {ol.Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Set the current scale (will change the scale of the map)
    * @param {number|string} value the scale factor or a scale string as 1/xxx
@@ -149,8 +159,8 @@ export default class PrintDialog extends ol_control_Control {
    */
   print(options?: {
     size?: Size | string;
-    value: number | string;
-    orientation: 'landscape' | 'portrait';
+    scale?: number | string;
+    orientation?: 'landscape' | 'portrait';
     margin?: number
   }): void;
 
@@ -340,24 +350,4 @@ export default class PrintDialog extends ol_control_Control {
   }
 }
 
-export class PrintingEvent extends BaseEvent {
-  constructor(type: PrintEventType);
-
-  type: string
-
-  imageType: string
-
-  quality: number
-
-  immediate: boolean
-
-  size?: boolean | undefined
-
-  format?: boolean | undefined
-
-  orient?: boolean | undefined
-
-  margin?: boolean | undefined
-
-  any: any
-}
+export type PrintingEvent = BaseEvent & MapPrintOptions

@@ -1,12 +1,12 @@
 import type Feature from 'ol/Feature'
 import type { LineString } from 'ol/geom'
 import type { FeatureAnimationEvent, Options as FeatureAnimationOptions } from './FeatureAnimation'
-import { FeatureAnimation } from './FeatureAnimation'
+import FeatureAnimation from './FeatureAnimation'
 
 export interface Options extends FeatureAnimationOptions {
   speed?: number;
   rotate?: number | boolean;
-  path?: LineString | Feature;
+  path: LineString | Feature<LineString>;
   duration?: number;
 }
 
@@ -23,7 +23,7 @@ export default class Path extends FeatureAnimation {
    *  @param {LineString|Feature} options.path the path to follow
    *  @param {Number} options.duration duration of the animation in ms
    */
-  constructor(options?: Options)
+  constructor(options: Options)
 
   /** Animate
    * @param {FeatureAnimationEvent} e

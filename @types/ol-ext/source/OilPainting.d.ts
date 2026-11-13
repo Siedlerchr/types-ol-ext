@@ -10,7 +10,7 @@ export interface Options extends RasterSourceOptions {
  * Original idea:  Santhosh G https://www.codeproject.com/Articles/471994/OilPaintEffect
  * JS implementation: Loktar (https://github.com/loktar00) https://codepen.io/loktar00/full/Fhzot/
  * @constructor
- * @extends {ol.source.Vector}
+ * @extends {ol.source.Raster}
 
  */
 export default class OilPainting extends RasterSource {
@@ -20,9 +20,9 @@ export default class OilPainting extends RasterSource {
    *  @param {number} radius default 4
    *  @param {number} intensity default 25
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /** Set value and force change
    */
-  set(key: 'intensity' | 'radius', val: any): any;
+  set(key: string, val: unknown): void;
 }

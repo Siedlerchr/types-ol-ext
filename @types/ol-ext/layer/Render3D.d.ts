@@ -3,6 +3,7 @@ import type { Vector } from 'ol/layer'
 import type VectorSource from 'ol/source/Vector'
 import type { Style } from 'ol/style'
 import type Feature from 'ol/Feature'
+import BaseObject from 'ol/Object'
 
 /**
  *
@@ -10,7 +11,7 @@ import type Feature from 'ol/Feature'
  *  3D vector layer rendering
  * @constructor
  */
-export default class Render3D {
+export default class Render3D extends BaseObject {
   /**
    * @param {Object} param
    *  @param {ol.layer.Vector} param.layer the layer to display in 3D
@@ -21,10 +22,11 @@ export default class Render3D {
    *  @param {number} param.defaultHeight default height if none is return by a propertie
    *  @param {function|string|Number} param.height a height function (returns height giving a feature) or a popertie name for the height or a fixed value
    */
-  constructor(param: {
-    layer: Vector<VectorSource<Feature<Geometry>>>;
+  constructor(param?: {
+    layer?: Vector<VectorSource<Feature<Geometry>>>;
     style?: Style
-    active?: (() => boolean)
+    active?: boolean | (() => boolean)
+    ghost?: boolean;
     maxResolution?: number;
     defaultHeight?: number;
     height?: ((...params: any[]) => any) | string | number;
@@ -47,9 +49,12 @@ export default class Render3D {
    */
   setActive(active: boolean | (() => boolean)): void;
 
+  /** Get whether the renderer is active. */
+  getActive(): boolean;
+
   /** Set layer to render 3D
    */
-  setLayer(): void;
+  setLayer(layer: Vector<VectorSource<Feature<Geometry>>>): void;
 
   /** Create a function that return height of a feature
    *  @param {function|string|number} h a height function or a popertie name or a fixed value
@@ -64,10 +69,10 @@ export default class Render3D {
    *  @param {ol.easing} param.easing an ol easing function
    *  @api
    */
-  animate(options: {
-    height: ((f: Feature) => number) | string | number;
-    duration: number;
-    easing: ((p0: number) => number);
+  animate(options?: {
+    height?: ((f: Feature) => number) | string | number;
+    duration?: number;
+    easing?: ((p0: number) => number);
   }): void;
 
   /** Check if animation is on
@@ -78,5 +83,5 @@ export default class Render3D {
   /** Get feature height
    * @param {Feature} f
    */
-  getFeatureHeight(f: Feature): void;
+  getFeatureHeight(f: Feature): number;
 }

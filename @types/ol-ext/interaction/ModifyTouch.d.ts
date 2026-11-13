@@ -1,33 +1,39 @@
-import type { Map as _ol_Map_ } from 'ol'
 import { Modify } from 'ol/interaction'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
+import type Map from 'ol/Map'
 import type Feature from 'ol/Feature'
+import type Collection from 'ol/Collection'
+import type VectorSource from 'ol/source/Vector'
 import type { Coordinate } from 'ol/coordinate'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
-import type { ModifyEvent } from 'ol/interaction/Modify'
+import type { ModifyEvent, Options as ModifyOptions } from 'ol/interaction/Modify'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Types } from 'ol/ObjectEventType'
-import type Positioning from 'ol/Overlay'
+import type { Positioning } from 'ol/Overlay'
+
+/** ModifyTouch overrides removePoint without returning the OpenLayers boolean. */
+declare const ModifyTouchBase: new (options: ModifyOptions) => Omit<Modify, 'removePoint' | 'setMap'>
 
 type ModifyTouchOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
   OnSignature<Types | 'modifyend' | 'modifystart' | 'modifying', ModifyEvent, Return> &
-  OnSignature<Types | 'showpopup' | 'hidepopup', PopupEvent, Return> &
+  OnSignature<'showpopup', ShowPopupEvent, Return> &
+  OnSignature<'hidepopup', HidePopupEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'modifyend' | 'modifystart' | 'modifying' | 'showpopup' | 'hidepopup', Return>
 
-export enum PopupEventType {
-  SHOWPOPUP = 'showpopup',
-  HIDEPOPUP = 'hidepopup'
-}
+export type PopupEventType = 'showpopup' | 'hidepopup'
 
-export interface Options {
+export type Options = ModifyOptions & ({ source: VectorSource } | { features: Collection<Feature> }) & {
   title?: string;
   className?: string;
   positioning?: Positioning;
   offsetBox?: number | number[];
   usePopup?: boolean;
 }
+
+export type PopupRequest = { type: 'show'; feature: Feature; coordinate: Coordinate } |
+  { type: 'hide'; modifying?: boolean }
 
 /** Modify interaction with a popup to delet a point on touch device
  * @constructor
@@ -36,7 +42,7 @@ export interface Options {
  * @extends {ol.interaction.Modify}
 
  */
-export default class ModifyTouch extends Modify {
+export default class ModifyTouch extends ModifyTouchBase {
   /**
    * @param {olx.interaction.ModifyOptions} options
    * @param {String|undefined} options.title title to display, default "remove point"
@@ -45,32 +51,22 @@ export default class ModifyTouch extends Modify {
    * @param {Number|Array<number>|undefined} options.offsetBox offset box for the popup
    * @param {Boolean|undefined} options.usePopup use a popup, default true
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
-  /**
-   * Remove the interaction from its current map, if any,  and attach it to a new
-   * map, if any. Pass `null` to just remove the interaction from the current map.
-   * @param {Map} map Map.
-   * @api stable
-   */
-  setMap(map: _ol_Map_): void;
-
-  /** Activate the interaction and remove popup
-   * @param {Boolean} b
-   */
-  setActive(b: boolean): void;
+  /** Attach to a map, or detach when passed null. */
+  setMap(map: Map | null): void;
 
   /**
    * Remove the current point
    */
-  removePoint(): boolean;
+  removePoint(): void;
 
   /**
    * Show the delete button (menu)
    * @param {Event} e
    * @api stable
    */
-  showDeleteBt(e: PopupEvent): void;
+  showDeleteBt(e: PopupRequest): void;
 
   /**
    * Change the popup content
@@ -91,12 +87,17 @@ export default class ModifyTouch extends Modify {
   un: ModifyTouchOnSignature<void>
 }
 
-export class PopupEvent extends BaseEvent {
-  constructor(
-    type: PopupEventType
-  );
+export interface PopupEvent extends BaseEvent {
+  type: PopupEventType;
+}
 
-  feature?: Feature
+export interface ShowPopupEvent extends PopupEvent {
+  type: 'showpopup';
+  feature: Feature;
+  coordinate: Coordinate;
+}
 
-  coordinate?: Coordinate
+export interface HidePopupEvent extends PopupEvent {
+  type: 'hidepopup';
+  modifying?: boolean;
 }

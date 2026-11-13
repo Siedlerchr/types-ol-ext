@@ -6,10 +6,37 @@ import type { Feature, Map as _ol_Map_ } from 'ol'
 import type { StyleLike } from 'ol/style/Style'
 import type { Type } from 'ol/geom/Geometry'
 import type Button from '../control/Button'
-import { TouchCursor } from './TouchCursor'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { OnSignature, CombinedOnSignature } from 'ol/Observable'
+import type { TouchCursorOnSignature } from './TouchCursor'
+import TouchCursor from './TouchCursor'
+
+export interface CursorDrawEvent extends BaseEvent {
+  type: 'drawstart' | 'drawabort';
+  feature: Feature;
+}
+
+export interface CursorDrawEndEvent extends BaseEvent {
+  type: 'drawend';
+  feature: Feature;
+  valid: boolean;
+}
+
+export interface CursorTypeEvent extends BaseEvent {
+  type: 'change:type';
+  oldValue: string;
+}
+
+type CursorDrawOnSignature<Return> = TouchCursorOnSignature<Return> &
+  OnSignature<'drawstart' | 'drawabort', CursorDrawEvent, Return> &
+  OnSignature<'drawend', CursorDrawEndEvent, Return> &
+  OnSignature<'change:type', CursorTypeEvent, Return> &
+  CombinedOnSignature<'drawstart' | 'drawabort' | 'drawend' | 'change:type', Return>
 
 export interface Options extends InteractionOptions {
   className?: string;
+  anchor?: 'left' | 'center' | 'right';
   coordinate?: Coordinate;
   buttons?: Button[];
   maxButtons?: number;
@@ -60,7 +87,7 @@ export default class TouchCursorDraw extends TouchCursor {
    * @param {_ol_Map_} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /**
    * Activate or deactivate the interaction.
@@ -80,4 +107,8 @@ export default class TouchCursorDraw extends TouchCursor {
   /** Get geometry type
    */
   getType(): string;
+
+  on: CursorDrawOnSignature<EventsKey>
+  once: CursorDrawOnSignature<EventsKey>
+  un: CursorDrawOnSignature<void>
 }

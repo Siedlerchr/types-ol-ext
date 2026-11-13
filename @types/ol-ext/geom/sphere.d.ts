@@ -57,4 +57,4 @@ export function getMapScale(map: _ol_Map_, dpi?: number): number
  * @param {number} [dpi=96] dpi, default 96
  * @return {number} scale factor
  */
-declare function setMapScale(map: _ol_Map_, scale: number | string, dpi?: number): number;
+export function setMapScale(map: _ol_Map_ | null, scale: number | string, dpi?: number): number | undefined;

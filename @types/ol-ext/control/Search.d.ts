@@ -1,23 +1,21 @@
 import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
-import type { Feature, Map as _ol_Map_ } from 'ol'
+import type { Map as _ol_Map_ } from 'ol'
 import type { Coordinate } from 'ol/coordinate'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { ObjectEvent } from 'ol/Object'
 import type { Types } from 'ol/ObjectEventType'
 import type { EventsKey } from 'ol/events'
 
-export type SearchOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+export type SearchOnSignature<Return, Result = any> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'select', SearchEvent, Return> &
+  OnSignature<Types | 'select', SearchEvent<Result>, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'select', Return>;
 
-export enum SearchEventType {
-  SELECT = 'select',
-}
+export type SearchEventType = 'select'
 
-export interface Options extends ControlOptions {
+export interface Options<Result = any, Title = string> extends ControlOptions {
   className?: string;
   title?: string;
   label?: string;
@@ -31,8 +29,8 @@ export interface Options extends ControlOptions {
   minLength?: number;
   maxItems?: number;
   maxHistory?: number;
-  getTitle?: (f: Feature) => string;
-  autocomplete?: (s: string, cback: ([])) => [] | false;
+  getTitle?: (f: Result) => Title;
+  autocomplete?: (s: string, cback: (results: Result[]) => void) => Result[] | false | void;
   onselect?: (...params: any[]) => any;
   centerOnSelect?: boolean;
   zoomOnSelect?: number | boolean;
@@ -49,7 +47,7 @@ export interface Options extends ControlOptions {
  * @fires select
  * @fires change:input
  */
-export default class Search extends ol_control_Control {
+export default class Search<Result = any, Input = string, Title = string, Selection = Result> extends ol_control_Control {
   /**
    * @param {Object=} options
    *  @param {string} options.className control class name
@@ -71,7 +69,7 @@ export default class Search extends ol_control_Control {
    *  @param {boolean} options.centerOnSelect center map on search, default false
    *  @param {number|boolean} options.zoomOnSelect center map on search and zoom to value if zoom < value, default false
    */
-  constructor(options?: Options);
+  constructor(options?: Options<Result, Title>);
 
   /**
    * Remove the control from its current map and attach it to the new map.
@@ -99,7 +97,7 @@ export default class Search extends ol_control_Control {
    *  @return {string} the text to be displayed in the index, default f.name
    *  @api
    */
-  getTitle(f: Feature): string;
+  getTitle(f: Result): Title;
 
   /** Returns title as text
    *  @param {any} f feature to be displayed
@@ -122,7 +120,7 @@ export default class Search extends ol_control_Control {
    *  @param {boolean} search to start a search
    *  @api
    */
-  setInput(value: string, search: boolean): void;
+  setInput(value: Input, search?: boolean): void;
 
   /** A line has been clicked in the menu > dispatch event
    * @param {any} f the feature, as passed in the autocomplete
@@ -131,7 +129,7 @@ export default class Search extends ol_control_Control {
    * @param {*} options options passed to the event
    *  @api
    */
-  select(f: Feature, reverse: boolean, coord: Coordinate, options?: any): void
+  select(f: Result, reverse?: boolean, coord?: Coordinate, options?: any): void
 
   /** Save history (in the localstorage)
    */
@@ -149,7 +147,7 @@ export default class Search extends ol_control_Control {
   /**
    * Get history table
    */
-  getHistory(): [] | any;
+  getHistory(): Result[];
 
   /** Autocomplete function
    * @param {string} s search string
@@ -157,30 +155,28 @@ export default class Search extends ol_control_Control {
    * @return {Array|false} an array of search solutions or false if the array is send with the cback argument (asnchronous)
    * @api
    */
-  autocomplete(s: string, cback: (results: any[]) => void): any[] | false;
+  autocomplete(s: string, cback: (results: Result[]) => void): Result[] | false | void;
 
   /** Test if 2 features are equal
    * @param {any} f1
    * @param {any} f2
    * @return {boolean}
    */
-  equalFeatures(f1: Feature, f2: Feature): boolean;
+  equalFeatures(f1: Result, f2: Result): boolean;
 
-  on: SearchOnSignature<EventsKey>
+  on: SearchOnSignature<EventsKey, Selection>
 
-  once: SearchOnSignature<EventsKey>
+  once: SearchOnSignature<EventsKey, Selection>
 
-  un: SearchOnSignature<void>
+  un: SearchOnSignature<void, Selection>
 }
 
-export class SearchEvent extends BaseEvent {
-  constructor(type: SearchEventType, search: any, reverse: boolean, coordinate: Coordinate, option?: Options);
-
-  search: any
-
-  reverse: boolean
-
-  coordinate: Coordinate
-
-  options?: Options
+export interface SearchEvent<Result = any> extends BaseEvent {
+  type: SearchEventType;
+  search: Result;
+  /** Some search adapters do not include this field. */
+  reverse?: boolean;
+  /** Some search adapters do not provide coordinates. */
+  coordinate?: Coordinate;
+  [key: string]: any;
 }

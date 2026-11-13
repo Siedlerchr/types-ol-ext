@@ -2,16 +2,23 @@ import type Collection from 'ol/Collection'
 import type Feature from 'ol/Feature'
 import type { Vector as VectorSource } from 'ol/source'
 import type MapBrowserEvent from 'ol/MapBrowserEvent'
-import BaseEvent from 'ol/events/Event'
+import type { Condition } from 'ol/events/condition'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { OnSignature } from 'ol/Observable'
 import CurrentMap from './CurrentMap'
 
-export enum CopyPasteEventType {
-  DELETESTART = 'deletestart',
-  DELETEEND = 'deleteend'
+export type CopyPasteEventType = 'copy' | 'cut' | 'paste'
+export interface CopyPasteEvent extends BaseEvent {
+  type: CopyPasteEventType;
+  time: number;
+  /** Present on paste events. */
+  features?: Feature[] | Collection<Feature>;
 }
 
 export interface Options {
-  condition?: (e: MapBrowserEvent<UIEvent>) => 'copy' | 'paste' | 'cut';
+  condition?: (e: MapBrowserEvent) => 'copy' | 'paste' | 'cut' | false;
+  mapCondition?: Condition;
   features?: Collection<Feature>;
   sources?: VectorSource | VectorSource[];
   destination?: VectorSource;
@@ -38,22 +45,22 @@ export default class CopyPaste extends CurrentMap {
   /** Sources to cut feature from
    * @param { VectorSource | Array<VectorSource> } sources
    */
-  setSources(sources: VectorSource | VectorSource[]): void;
+  setSources(sources?: VectorSource | VectorSource[]): void;
 
   /** Get sources to cut feature from
    * @return { Array<VectorSource> }
    */
-  getSources(): VectorSource[];
+  getSources(): VectorSource[] | null;
 
   /** Source to paste features
    * @param { VectorSource } source
    */
-  setDestination(source: VectorSource): void;
+  setDestination(source?: VectorSource): void;
 
   /** Get source to paste features
    * @param { VectorSource }
    */
-  getDestination(): void;
+  getDestination(): VectorSource | undefined;
 
   /** Get current feature to copy
    * @return {Array<Feature>}
@@ -83,16 +90,7 @@ export default class CopyPaste extends CurrentMap {
     destination?: VectorSource;
     silent?: boolean;
   }): void
-}
-
-export class CopyPasteEvent extends BaseEvent {
-  constructor(
-    type: CopyPasteEventType,
-    features: Feature[] | Collection<Feature>,
-    time: number
-  );
-
-  features: Feature[] | Collection<Feature>
-
-  time: number
+  on: CurrentMap['on'] & OnSignature<CopyPasteEventType, CopyPasteEvent, EventsKey>;
+  once: CurrentMap['once'] & OnSignature<CopyPasteEventType, CopyPasteEvent, EventsKey>;
+  un: CurrentMap['un'] & OnSignature<CopyPasteEventType, CopyPasteEvent, void>;
 }

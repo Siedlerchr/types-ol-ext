@@ -9,7 +9,18 @@ import VectorLayer from 'ol/layer/Vector'
 import { LineString, Point, Polygon } from 'ol/geom'
 import type { Coordinate } from 'ol/coordinate'
 import 'ol-ext/render/AnimExtent'
-import featureAnimation from 'ol-ext/featureanimation/FeatureAnimation'
+import type { Options as AnimationOptions } from 'ol-ext/featureanimation/FeatureAnimation'
+import FeatureAnimation from 'ol-ext/featureanimation/FeatureAnimation'
+import Drop from 'ol-ext/featureanimation/Drop'
+import Slide from 'ol-ext/featureanimation/Slide'
+import Throw from 'ol-ext/featureanimation/Throw'
+import Fade from 'ol-ext/featureanimation/Fade'
+import Zoom, { ol_featureAnimation_ZoomOut as ZoomOut } from 'ol-ext/featureanimation/Zoom'
+import Show from 'ol-ext/featureanimation/Show'
+import Teleport from 'ol-ext/featureanimation/Teleport'
+import Null from 'ol-ext/featureanimation/Null'
+import Bounce from 'ol-ext/featureanimation/Bounce'
+import Shake from 'ol-ext/featureanimation/Shake'
 
 declare global {
   interface Window {
@@ -19,6 +30,20 @@ declare global {
   }
 }
 const { $ } = window
+
+const animations: Record<string, (options: AnimationOptions, otherSide: boolean) => FeatureAnimation> = {
+  Drop: (options, otherSide) => new Drop({ ...options, side: otherSide ? 'bottom' : 'top' }),
+  Slide: (options, otherSide) => new Slide({ ...options, side: otherSide ? 'right' : 'left' }),
+  Throw: (options, otherSide) => new Throw({ ...options, side: otherSide ? 'right' : 'left' }),
+  Fade: options => new Fade(options),
+  Zoom: options => new Zoom(options),
+  ZoomOut: options => new ZoomOut(options),
+  Show: options => new Show(options),
+  Teleport: options => new Teleport(options),
+  Null: () => new Null(),
+  Bounce: options => new Bounce(options),
+  Shake: options => new Shake(options),
+}
 
 // Layers
 const layer = new Geoportail('ORTHOIMAGERY.ORTHOPHOTOS')
@@ -125,16 +150,15 @@ function addFeatureAt(p: Coordinate) {
 
   vector.getSource()?.addFeature(f)
   vector.animateFeature(f, [
-    new featureAnimation[$('#anim').val()]({
+    animations[$('#anim').val()]({
       speed: Number($('#speed').val()),
       duration: Number(1000 - Number($('#speed').val()) * 300),
-      side: $('#side').prop('checked'),
-    }),
-    new featureAnimation[$('#anim2').val()]({
+    }, $('#side').prop('checked')),
+    animations[$('#anim2').val()]({
       speed: Number($('#speed').val()),
       duration: Number(1000 - Number($('#speed').val()) * 300),
       horizontal: /Slide/.test($('#anim').text()),
-    }),
+    }, false),
   ])
 }
 
@@ -170,12 +194,11 @@ map.on('singleclick', evt => {
     vector.getSource()?.removeFeature(f)
     // Show animation
     vector.animateFeature(f, [
-      new featureAnimation[$('#anim').val()]({
+      animations[$('#anim').val()]({
         speed: Number($('#speed').val()),
         duration: Number(1000 - Number($('#speed').val()) * 300),
-        side: $('#side').prop('checked'),
         revers: true,
-      }),
+      }, $('#side').prop('checked')),
     ])
   } else {
     addFeatureAt(evt.coordinate)

@@ -1,11 +1,11 @@
 import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 
-export type position = 'top' | 'left' | 'bottom' | 'right';
+export type position = 'top' | 'left' | 'bottom' | 'right' | 'center';
 
 export interface Options extends ControlOptions {
   className?: string;
-  status?: string;
+  status?: string | Element | Record<string, unknown>;
   position?: position;
   visible?: boolean;
 }
@@ -23,7 +23,7 @@ export default class Status extends ol_control_Control {
    *  @param {string} options.position position of the status 'top', 'left', 'bottom' or 'right', default top
    *  @param {boolean} options.visible default true
    */
-  constructor(options: any);
+  constructor(options?: Options);
 
   /** Set visiblitity
    * @param {boolean} visible
@@ -33,7 +33,7 @@ export default class Status extends ol_control_Control {
   /** Show status on the map
    * @param {string|Element} html status text or DOM element
    */
-  status(html: string | Element): void;
+  status(html?: string | Element | Record<string, unknown>): void;
 
   /** Set status position
    * @param {string} position position of the status 'top', 'left', 'bottom' or 'right', default top
@@ -43,7 +43,7 @@ export default class Status extends ol_control_Control {
   /** Show the status
    * @param {boolean} show show or hide the control, default true
    */
-  show(show: boolean): void;
+  show(show?: boolean): void;
 
   /** Hide the status
    */
@@ -53,7 +53,7 @@ export default class Status extends ol_control_Control {
    */
   toggle(): void;
 
-  /** Is status visible
+  /** Returns true when the element display is none in this release.
    */
   isShown(): boolean;
 }

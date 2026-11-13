@@ -2,17 +2,29 @@ import type { Map as _ol_Map_ } from 'ol'
 import type { Coordinate } from 'ol/coordinate'
 import type { Vector as VectorSource } from 'ol/source'
 import type { Style } from 'ol/style'
-import type { Type } from 'ol/geom/Geometry'
+import type { EventsKey } from 'ol/events'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { CursorDrawEvent, CursorDrawEndEvent } from './TouchCursorDraw'
 import CenterTouch from './CenterTouch'
+
+export type DrawingType = 'Point' | 'LineString' | 'Polygon' | 'Circle'
+type DrawTouchOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+  OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'drawstart' | 'drawabort', CursorDrawEvent, Return> &
+  OnSignature<'drawend', CursorDrawEndEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'drawstart' | 'drawabort' | 'drawend', Return>
 
 export interface Options {
   source?: VectorSource;
-  type: 'Point' | 'LineString' | 'Polygon';
+  type?: DrawingType;
   tap?: boolean;
   style?: Style | Style[];
   sketchStyle?: Style | Style[];
   targetStyle?: Style | Style[];
   composite?: string;
+  active?: boolean;
 }
 
 /** Interaction DrawTouch : pointer is deferred to the center of the viewport and a target is drawn to materialize this point
@@ -42,12 +54,7 @@ export interface Options {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
-
-  /** Start drawing and add the sketch feature to the target layer.
-   * The interaction.Draw.EventType.DRAWSTART event is dispatched before inserting the feature.
-   */
-  startDrawing(): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Set geometry type
    * @param {ol.geom.GeometryType} type
@@ -55,7 +62,10 @@ export interface Options {
   /** Get geometry type
    * @return {GeometryType}
    */
-  getGeometryType(): Type;
+  getGeometryType(): DrawingType;
+
+  /** Set geometry type. */
+  setGeometryType(type: DrawingType): DrawingType;
 
   /** Start drawing and add the sketch feature to the target layer.
    * The interaction.Draw.EventType.DRAWEND event is dispatched before inserting the feature.
@@ -82,4 +92,8 @@ export interface Options {
    * @return {Coordinate}
    */
   getPosition(): Coordinate;
+
+  on: DrawTouchOnSignature<EventsKey>
+  once: DrawTouchOnSignature<EventsKey>
+  un: DrawTouchOnSignature<void>
 }

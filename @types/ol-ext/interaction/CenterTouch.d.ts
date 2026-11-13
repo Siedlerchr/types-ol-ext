@@ -1,6 +1,7 @@
 import type { Map as _ol_Map_ } from 'ol'
 import type { Coordinate } from 'ol/coordinate'
 import type { Style } from 'ol/style'
+import type MapBrowserEvent from 'ol/MapBrowserEvent'
 import { Interaction } from 'ol/interaction'
 
 /** User actions that change the state of the map. Some are similar to controls,
@@ -12,6 +13,7 @@ import { Interaction } from 'ol/interaction'
 export interface Options {
   targetStyle?: Style | Style[];
   composite?: string;
+  handleEvent?: (event: MapBrowserEvent) => boolean;
 }
 
 /** Handles coordinates on the center of the viewport.
@@ -35,7 +37,7 @@ export default class CenterTouch extends Interaction {
    * @param {_ol_Map_} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /**
    * Activate or deactivate the interaction.

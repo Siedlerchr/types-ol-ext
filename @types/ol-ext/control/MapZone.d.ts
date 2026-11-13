@@ -6,6 +6,19 @@ import type { Extent } from 'ol/extent'
 import type { Layer } from 'ol/layer'
 import type { ProjectionLike } from 'ol/proj'
 import type { Map as _ol_Map_ } from 'ol'
+import type { Coordinate } from 'ol/coordinate'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
+
+export interface MapZoneSelectEvent extends BaseEvent { type: 'select'; zone: Zone; index: number; coordinate: Coordinate; extent: Extent }
+export interface MapZoneCollapseEvent extends BaseEvent { type: 'change:collapse'; collapsed: boolean }
+export type MapZoneOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'select', MapZoneSelectEvent, Return> & OnSignature<'change:collapse', MapZoneCollapseEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'select' | 'change:collapse', Return>
 
 export type Zone = {
   title?: string;
@@ -16,11 +29,11 @@ export type Zone = {
 }
 
 export interface Options extends ControlOptions {
-  className: string;
-  layer: Layer | ((zone: Zone) => Layer);
-  projection: ProjectionLike;
-  zone: Zone[];
-  centerOnClick: boolean;
+  className?: string;
+  layer?: Layer | ((zone: Zone) => Layer);
+  projection?: ProjectionLike;
+  zones: Zone[];
+  centerOnClick?: boolean;
 }
 
 /** A control to jump from one zone to another.
@@ -37,7 +50,11 @@ export declare class MapZone extends ol_control_Control {
    *  @param {ProjectionLike} options.projection projection of the control, Default is EPSG:3857 (Spherical Mercator).
    *  @param {bolean} options.centerOnClick center on click when a zone is clicked (or listen to 'select' event to do something), default true
    */
-  constructor(options?: Options);
+  constructor(options: Options);
+
+  on: MapZoneOnSignature<EventsKey>;
+  once: MapZoneOnSignature<EventsKey>;
+  un: MapZoneOnSignature<void>;
 
   /** Set the control visibility
    * @param {boolean} b
@@ -62,6 +79,9 @@ export declare class MapZone extends ol_control_Control {
    * @return {boolean}
    */
   getCollapsed(): boolean
+
+  /** Collapse or expand the control. */
+  setCollapsed(collapsed: boolean): void
 
   /** Get associated maps
    * @return {Array<_ol_Map_>}

@@ -4,7 +4,7 @@ import type { Geometry, LineString } from 'ol/geom'
 import type { ObjectEvent } from 'ol/Object'
 import ol_Object from 'ol/Object'
 import type VectorSource from 'ol/source/Vector'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { EventsKey } from 'ol/events'
 import type { Types } from 'ol/ObjectEventType'
@@ -16,12 +16,15 @@ export interface Options {
   epsilon?: number;
 }
 
-type DijkstraOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+type DijkstraOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
   OnSignature<Types | 'finish', DijkstraFinishEvent, Return> &
   OnSignature<Types | 'pause', DijkstraPauseEvent, Return> &
   OnSignature<Types | 'start' | 'calculating', BaseEvent, Return> &
-  CombinedOnSignature<Types | EventTypes, Return>;
+  CombinedOnSignature<Types | EventTypes | 'finish' | 'pause' | 'start' | 'calculating', Return>;
+
+/** Legacy graph namespace exported by the module. */
+export const ol_graph: Record<string, never>;
 
 /**
  * @classdesc
@@ -93,14 +96,14 @@ export default class Dijskra extends ol_Object {
    * @param {Coordinate} coord
    * @return {Feature} the node
    */
-  getNode(coord: Coordinate): Feature;
+  getNode(coord: Coordinate): Feature | undefined;
 
   /** Calculate a path beetween 2 points
    * @param {Coordinate} start
    * @param {Coordinate} end
    * @return {boolean|Array<Coordinate>} false if don't start (still running) or start and end nodes
    */
-  path(start: Coordinate, end: Coordinate): boolean | Coordinate[];
+  path(start: Coordinate, end: Coordinate): false | [Coordinate, Coordinate];
 
   /** Restart after pause
    */
@@ -123,24 +126,18 @@ export default class Dijskra extends ol_Object {
   un: DijkstraOnSignature<void>
 }
 
-export class DijkstraFinishEvent extends BaseEvent {
-  constructor(type: 'finish',
-              route: Feature<Geometry>[],
-              wDistance: number,
-              distance: number
-  )
-
-  route: Feature<Geometry>[]
-
-  wDistance: number
-
-  distance: number
+export interface DijkstraFinishEvent extends BaseEvent {
+  type: 'finish';
+  route: Feature<Geometry>[];
+  wDistance: number;
+  /** May be undefined when start and end resolve to the same node. */
+  distance: number | undefined;
 }
 
-export class DijkstraPauseEvent extends BaseEvent {
-  constructor(type: 'pause',
-              overflow: boolean
-  )
-
-  overflow: boolean
+export interface DijkstraPauseEvent extends BaseEvent {
+  type: 'pause';
+  overflow: boolean;
 }
+
+/** Legacy misspelling retained by the upstream module. */
+export { Dijskra as ol_graph_Dijskra }

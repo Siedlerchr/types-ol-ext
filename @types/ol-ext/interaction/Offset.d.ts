@@ -6,7 +6,7 @@ import type VectorLayer from 'ol/layer/Vector'
 import type { Vector as VectorSource } from 'ol/source'
 import { Pointer } from 'ol/interaction'
 import type { StyleLike } from 'ol/style/Style'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { Coordinate } from 'ol/coordinate'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
@@ -16,10 +16,11 @@ import type { Geometry } from 'ol/geom'
 
 type OffsetOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'offsetstart', OffsetStartEvent, Return> &
-  OnSignature<Types | 'offsetting', OffsettingEvent, Return> &
-  OnSignature<Types | 'offsetend', OffsetEndEvent, Return> &
-  CombinedOnSignature<EventTypes | Types | 'change' | 'change:active' | 'error' | 'propertychange' | 'offsetstart' | 'offsetting' | 'offsetend', Return>
+  OnSignature<'offsetstart', OffsetStartEvent, Return> &
+  OnSignature<'offsetting', OffsettingEvent, Return> &
+  OnSignature<'offsetend', OffsetEndEvent, Return> &
+  OnSignature<'modifystart', OffsetModifyStartEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'change:active' | 'error' | 'propertychange' | 'offsetstart' | 'offsetting' | 'offsetend' | 'modifystart', Return>
 
 export interface Options {
   filter?: (f: Feature, l: Layer) => boolean;
@@ -53,7 +54,7 @@ export default class Offset extends Pointer {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   on: OffsetOnSignature<EventsKey>
 
@@ -62,41 +63,32 @@ export default class Offset extends Pointer {
   un: OffsetOnSignature<void>
 }
 
-export class OffsetStartEvent extends BaseEvent {
-  constructor(type: 'offsetstart',
-    feature: Feature,
-    offset: number
-  );
-
+export interface OffsetStartEvent extends BaseEvent {
+  type: 'offsetstart';
   feature: Feature
 
   offset: number
 }
 
-export class OffsettingEvent extends BaseEvent {
-  constructor(type: 'offsetting',
-    feature: Feature,
-    offset: number,
-    segment: number[],
-    coordinate: Coordinate
-  );
-
+export interface OffsettingEvent extends BaseEvent {
+  type: 'offsetting';
   feature: Feature
 
   offset: number
 
-  segment: number[]
+  segment: [Coordinate, Coordinate]
 
   coordinate: Coordinate
 }
 
-export class OffsetEndEvent extends BaseEvent {
-  constructor(type: 'offsetend',
-    feature: Feature,
-    coordinate: Coordinate
-  );
-
+export interface OffsetEndEvent extends BaseEvent {
+  type: 'offsetend';
   feature: Feature
 
   coordinate: Coordinate
+}
+
+export interface OffsetModifyStartEvent extends BaseEvent {
+  type: 'modifystart';
+  features: Feature[];
 }

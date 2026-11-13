@@ -38,7 +38,7 @@ declare function ol_geohash_getExtent(geohash: string): Extent | false;
  * @param   {string} direction direction as char : N/S/E/W.
  * @returns {string|false}
  */
-declare function ol_geohash_getAdjacent(geohash: string, direction: 'N' | 'S' | 'E' | 'W'): string | false;
+declare function ol_geohash_getAdjacent(geohash: string, direction: 'N' | 'S' | 'E' | 'W' | 'n' | 's' | 'e' | 'w'): string | false;
 
 /** Returns all 8 adjacent cells to specified geohash.
  * @param   {string} geohash Geohash neighbours are required of.

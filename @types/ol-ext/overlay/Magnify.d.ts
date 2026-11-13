@@ -28,6 +28,9 @@ export default class Magnify extends Overlay {
    */
   getMagMap(): _ol_Map_;
 
+  /** Refresh the magnifier view. */
+  refresh(): void;
+
   /** Magnify is active
    *  @return {boolean}
    */

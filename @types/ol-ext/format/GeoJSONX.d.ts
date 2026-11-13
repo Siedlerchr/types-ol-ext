@@ -4,23 +4,27 @@ import type { Coordinate } from 'ol/coordinate'
 import type { Feature } from 'ol'
 import type { WriteOptions } from 'ol/format/Feature'
 import type { Geometry } from 'ol/geom'
-import type { Feature as geojson_Feature, FeatureCollection } from 'geojson'
 
 export declare type GeoJSONWithoutWriteGeometryObject = new (entries?: ReadonlyArray<ol_format_GeoJSON> | null)
-  => { [P in Exclude<keyof ol_format_GeoJSON, 'writeGeometryObject'>]: ol_format_GeoJSON[P] };
+  => { [P in Exclude<keyof ol_format_GeoJSON, 'writeGeometryObject' | 'writeFeatureObject' | 'writeFeaturesObject'>]: ol_format_GeoJSON[P] };
 
 // TODO fix redeclare
 // eslint-disable-next-line no-redeclare
 declare const GeoJSONWithoutWriteGeometryObject: GeoJSONWithoutWriteGeometryObject
 
-export interface GeoJSONXFeature extends geojson_Feature {
-  decimals: number;
-  hashProperties: any[];
-}
+/** A compact coordinate string or nested array of coordinate strings. */
+export type EncodedCoordinates = string | EncodedCoordinates[]
+export type CoordinateTree = Coordinate | CoordinateTree[]
+/** A compact geometry, with a numeric geometry type for non-points. */
+export type GeoJSONXGeometry = string | [number, EncodedCoordinates]
+/** A compact feature: geometry, property index/value pairs, and optional foreign members. */
+export type GeoJSONXFeature = [GeoJSONXGeometry, unknown[]?, Record<string, unknown>?]
 
-export interface GeoJSONXFeatureCollection extends FeatureCollection {
+export interface GeoJSONXFeatureCollection {
+  type: 'FeatureCollection';
+  features: GeoJSONXFeature[];
   decimals: number;
-  hashProperties: any[];
+  hashProperties: string[];
 }
 
 export type SupportedLayouts = 'XY' | 'XYZ' | 'XYZM';
@@ -33,7 +37,7 @@ export interface Options {
   blackList?: string[] | ((k: any) => boolean);
   layout?: SupportedLayouts;
   dataProjection?: ProjectionLike;
-  featureProjeciton?: ProjectionLike;
+  featureProjection?: ProjectionLike;
 }
 
 /** Feature format for reading and writing data in the GeoJSONX format.
@@ -59,19 +63,24 @@ export default class GeoJSONX extends GeoJSONWithoutWriteGeometryObject {
 
   getLayout(): SupportedLayouts
 
+  /** Encode a number with the given number of decimal places. */
+  encodeNumber(value: number, decimals?: number): string;
+  /** Decode a number with the given number of decimal places. */
+  decodeNumber(value: string, decimals?: number): number;
+
   /** Encode coordinates
    * @param {ol.coordinate|Array<ol.coordinate>} v
    * @return {string|Array<string>}
    * @api
    */
-  encodeCoordinates(v: Coordinate | Coordinate[], decimal?: number): string | string[];
+  encodeCoordinates(v: CoordinateTree, decimal?: number): EncodedCoordinates;
 
   /** Decode coordinates
    * @param {string|Array<string>}
    * @return {ol.coordinate|Array<ol.coordinate>} v
    * @api
    */
-  decodeCoordinates(v: string | string[], decimal?: number): Coordinate | Coordinate[];
+  decodeCoordinates(v: EncodedCoordinates, decimal?: number): CoordinateTree | null;
 
   /**
    * Encode a feature as a GeoJSONX Feature object.
@@ -88,5 +97,5 @@ export default class GeoJSONX extends GeoJSONWithoutWriteGeometryObject {
    * Encode a geometry as a GeoJSONX object.
    *
    */
-  writeGeometryObject(geometry: Geometry, opt_options?: WriteOptions): string | string[]
+  writeGeometryObject(geometry: Geometry, opt_options?: WriteOptions): GeoJSONXGeometry
 }

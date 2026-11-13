@@ -1,9 +1,11 @@
 import type { Map as _ol_Map_ } from 'ol'
 import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
-import type { Layer } from 'ol/layer'
+import type Layer from 'ol/layer/Base'
 
 export interface Options extends ControlOptions {
+  className?: string;
+  refreshDelay?: number;
   urlReplace?: boolean;
   localStorage?: boolean | 'position';
   geohash?: boolean;
@@ -37,11 +39,14 @@ export default class Permalink extends ol_control_Control {
    */
   constructor(options?: Options);
 
+  /** Get the initial position supplied by the URL, or false if none was found. */
+  getInitialPosition(): false | { lon: string | number; lat?: string | number; z?: string; r?: string };
+
   /**
    * Set the map instance the control associated with.
    * @param {Map} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Get layer given a permalink name (permalink propertie in the layer)
    *  @param {string} the permalink to search for
@@ -67,6 +72,9 @@ export default class Permalink extends ol_control_Control {
    * @api stable
    */
   setUrlParam(key: string, value?: string): void;
+
+  /** Get the mutable object of URL parameters. */
+  getUrlParams(): Record<string, string>;
 
   /**
    * Get a parameter url.
@@ -95,4 +103,6 @@ export default class Permalink extends ol_control_Control {
    *  @param {bool}
    */
   setUrlReplace(replace: boolean): void;
+  /** Check whether URL replacement is enabled. */
+  getUrlReplace(): boolean;
 }
