@@ -18,6 +18,14 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 - `source/Contour`: compared with source and upstream example. The real d3-contour factory, grid, thresholds, styling, and data loading are type-checked. Inline and file datasets rendered in Chrome; levels were changed. This does not verify all grid shapes.
 - `style/StrokeImage`: constructor and public fields compared with source; OpenLayers vector-layer style integration and vector-tile options are type-checked. The ported upstream example rendered its line and polygon sprite strokes in Chrome, including after changing the pattern and fallback color. Vector-tile rendering was not tested; the release source calls an undefined `checkExtentIntersection` identifier when rendering polygons with both `isVectorTile` and `map` set, which is an upstream runtime limitation.
 
+## Upstream fix validation (2026-11-13)
+
+[Upstream PR #1194](https://github.com/Viglino/ol-ext/pull/1194) is open at `fc9108e0`. It fixes import casing/extensions, jsPDF and MapLibre package imports, Maplibre's element-helper import, and Maplibre/TextPath inheritance from modern OpenLayers classes. The compatibility helper remains exported; no source classes on the PR branch still use it. Release 4.0.39 observations below remain applicable to that release.
+
+- Chrome with OpenLayers 10.11.0 and MapLibre GL 6.18.0 rendered a local style URL and GeoJSON polygon; a WebGL pixel read matched `[255, 85, 0, 255]`. Center, zoom, rotation and opacity synchronized. The test bundle explicitly configured the MapLibre worker URL.
+- TextPath defaults, custom options and inherited Text methods passed. The actual gulpfile transformation preserved `ol.style.TextPath`; transformed code constructed and drew canvas text in Chrome. Maplibre's `mapboxgl.Map` global reference is retained. The complete minified distribution and full legacy example UI were not tested.
+- ExportMap with jsPDF 4.2.1 generated a 4,700-byte PDF containing an image through controlled canvas compose events. Actual OpenLayers map export still fails because map compose events provide no context for the legacy handler. PDF runtime compatibility is not fixed by this PR.
+
 ## Upstream JavaScript findings for reporting
 
 These observations concern the checked-out `v4.0.39` implementation. Unless noted as runtime-verified, they are source observations and should be reproduced before filing an issue. The detailed audit entries below retain their validation context.

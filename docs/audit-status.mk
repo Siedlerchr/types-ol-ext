@@ -2,7 +2,7 @@
 # The detailed module decisions and remaining work live in the linked records.
 AUDIT_UPSTREAM := ol-ext 4.0.39
 AUDIT_OPENLAYERS := 10.11.0
-AUDIT_LAST_ROUND := scribble geometry
+AUDIT_LAST_ROUND := upstream import and inheritance browser checks
 # This file is updated and committed with each completed round.
 AUDIT_LAST_COMMIT := $(shell git log -1 --format=%h -- docs/audit-status.mk)
 AUDIT_STATE := in progress
