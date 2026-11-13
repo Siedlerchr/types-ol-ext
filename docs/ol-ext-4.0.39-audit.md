@@ -135,6 +135,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `style/Profile`: a Node check confirmed the default fill color is the malformed string `rgba(255,255,255,.3` and setting scale to zero restores 0.2. Rendering was not exercised.
 
+- `style/FlowLine`: a Node check confirmed omitted arrow and offset options produce NaN rather than the documented zero defaults. A `square` line cap is also silently changed to `butt` (source observation). Rendering was not tested.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -327,5 +329,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `style/SetTextPath`: replaced an invented default class declaration with its actual side-effect vector-layer and canvas context augmentations. Type checks cover these signatures; the vector augmentation follows the named `ol/layer` import form used by this project. Browser drawing was not repeated.
 
 - `style/Profile`: corrected geometry, z-index and vertex options and default-reset setter arguments. Type tests cover the signatures; a Node check verified the defaults and issues above.
+
+- `style/FlowLine`: corrected arrow-color spelling, optional line cap, inherited style options, reset setters and arbitrary offset lookup. Type tests cover the signatures; Node checked default values, while rendering was not tested.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

@@ -1,3 +1,4 @@
+import FlowLine from '../@types/ol-ext/style/FlowLine'
 import ProfileStyle from '../@types/ol-ext/style/Profile'
 import '../@types/ol-ext/style/SetTextPath'
 import { Vector as VectorLayer } from 'ol/layer'
@@ -106,3 +107,10 @@ profileStyle.setScale()
 profileStyle.setVertexSize()
 const vertexSize: number = profileStyle.getVertexSize()
 void vertexSize
+
+const flow = new FlowLine({ arrowColor: 'red', zIndex: 1 })
+flow.setLineCap()
+flow.setColor()
+const startOffset: number = flow.getOffset(0)
+const arbitraryOffset: number | undefined = flow.getOffset(5)
+void [startOffset, arbitraryOffset]
