@@ -113,6 +113,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `geom/DFCI`: validation character classes include `|`, `^`, and commas as literal allowed characters. Node checks of the expressions confirmed that `|` passes the first-letter test and `,` passes the digit test. Direct module import failed because `proj4` is not installed, so end-to-end DFCI validation was not run.
 
+- `geom/Scribble`: a Node check found a one-polygon MultiPolygon returns two copies of its scribble because the merge appends the first result to itself. The `angle` default also replaces zero, and nonpositive intervals can make the scan loop nonterminating (source observations; the latter was not executed).
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -291,5 +293,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `geom/GPAltiCode`: reviewed point and line overloads and excluded distance sampling from the point overload. Type tests cover callbacks and invalid point sampling; a mocked Node request checked point results. Live service requests were not made.
 
 - `geom/DFCI`: reviewed exported conversion and validation signatures; existing type checks cover them. Direct runtime import remains blocked by missing `proj4`; standalone regex checks revealed the validation issue above.
+
+- `geom/Scribble`: reviewed the default function and polygon prototype extensions. Existing type checks cover the APIs; a Node comparison reproduced duplicate MultiPolygon output.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
