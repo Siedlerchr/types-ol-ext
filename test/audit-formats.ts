@@ -1,3 +1,4 @@
+import FontSymbol from '../@types/ol-ext/style/FontSymbol'
 import Shadow from '../@types/ol-ext/style/Shadow'
 import FlowLine from '../@types/ol-ext/style/FlowLine'
 import ProfileStyle from '../@types/ol-ext/style/Profile'
@@ -123,3 +124,10 @@ void [shadowImage, shadowClone]
 
 // @ts-expect-error The OpenLayers 10 style does not expose getChecksum.
 shadow.getChecksum()
+
+const fontSymbol = new FontSymbol({ radius: 10, text: 'A', declutterMode: 'declutter' })
+const glyphInfo = fontSymbol.getTextGlyph('A', 'sans-serif')
+const fontInfo: import('../@types/ol-ext/style/FontSymbol').Font | undefined = fontSymbol.getFontInfo(glyphInfo)
+// @ts-expect-error A glyph is required to select a font.
+fontSymbol.getFontInfo()
+void fontInfo

@@ -139,6 +139,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `style/Shadow`: a Node check showed that cloning a shadow with displacement `[4, 5]` yields displacement `[0, 0]`. Constructor-derived legacy offsets are assigned after the base constructor and do not update its displacement (source observation).
 
+- `style/FontSymbol`: `getChecksum` calls `getChecksum` on Fill and Stroke, methods absent in OpenLayers 10.11 (verified in Node); it also dereferences omitted fill/stroke values. Direct FontSymbol construction was not exercised in Node because it requires a canvas document.
+
 ## Remaining audit
 
 The following source comparisons are partial, focused on verified missing or incorrect members:
@@ -335,5 +337,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `style/FlowLine`: corrected arrow-color spelling, optional line cap, inherited style options, reset setters and arbitrary offset lookup. Type tests cover the signatures; Node checked default values, while rendering was not tested.
 
 - `style/Shadow`: corrected declutter and image signatures and removed an obsolete checksum method from Shadow and Photo. Type tests cover these signatures; Node reproduced clone displacement loss. Browser rendering was not repeated.
+
+- `style/FontSymbol`: corrected glyph character and font lookup signatures and declutter options. Its `getFill` and `getStroke` declarations still need a compatible representation for omitted values without conflicting with OpenLayers base signatures. Type checks cover the corrected signatures; rendering was not repeated.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
