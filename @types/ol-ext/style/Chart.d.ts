@@ -10,12 +10,14 @@ export interface Options {
   data: number[];
   radius?: number;
   rotation?: number;
-  declutterMode?: 'obstacle' | 'none' | undefined
+  declutterMode?: 'declutter' | 'obstacle' | 'none' | undefined
   snapToPixel?: boolean;
   stroke?: Stroke;
   colors?: string | Color[] | string[];
   rotateWithView?: boolean;
-  displacement?: number;
+  displacement?: number[];
+  scale?: number;
+  donutRatio?: number;
   offsetX?: number;
   offsetY?: number;
   animation?: number;
@@ -35,7 +37,7 @@ export interface Options {
  * @extends {RegularShape}
  * @api
  */
-export class Chart extends RegularShape {
+declare class Chart extends RegularShape {
   /**
    * @param {} options
    *  @param {String} options.type Chart type: pie,pie3D, donut or bar
@@ -51,7 +53,7 @@ export class Chart extends RegularShape {
    *  @param {number} options.animation step in an animation sequence [0,1]
    *  @param {number} options.max maximum value for bar chart
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /**
    * Clones the style.
@@ -83,13 +85,10 @@ export class Chart extends RegularShape {
    */
   setAnimation(step: false | number): void;
 
-  /**
-   * @inheritDoc
-   */
-  getChecksum(): string;
+  getImage(pixelRatio?: number): HTMLCanvasElement | OffscreenCanvas;
 }
 
-export declare namespace Chart {
+declare namespace Chart {
   export namespace colors {
     const classic: string[]
     const dark: string[]

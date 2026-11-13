@@ -1,3 +1,4 @@
+import Chart from '../@types/ol-ext/style/Chart'
 import FontSymbol from '../@types/ol-ext/style/FontSymbol'
 import Shadow from '../@types/ol-ext/style/Shadow'
 import FlowLine from '../@types/ol-ext/style/FlowLine'
@@ -131,3 +132,11 @@ const fontInfo: import('../@types/ol-ext/style/FontSymbol').Font | undefined = f
 // @ts-expect-error A glyph is required to select a font.
 fontSymbol.getFontInfo()
 void fontInfo
+
+const chart = new Chart({ type: 'donut', data: [1, 2], radius: 20, displacement: [4, 5], scale: 2, donutRatio: 0.4, declutterMode: 'declutter' })
+const chartImage: HTMLCanvasElement | OffscreenCanvas = chart.getImage()
+// @ts-expect-error The constructor dereferences its options.
+new Chart()
+// @ts-expect-error OpenLayers 10 does not supply the legacy checksum method.
+chart.getChecksum()
+void chartImage
