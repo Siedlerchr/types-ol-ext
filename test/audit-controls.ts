@@ -632,3 +632,9 @@ function profilePointerAudit(profile: import('../@types/ol-ext/control/Profile')
   profile.onMove(event)
 }
 void profilePointerAudit
+
+function requestOptionsAudit(search: import('../@types/ol-ext/control/SearchJSON').default): void {
+  search.autocomplete('example')
+  search.ajax('/api', { q: 'example' }, undefined, { dataType: 'TEXT', abort: false })
+}
+void requestOptionsAudit

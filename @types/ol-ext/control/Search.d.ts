@@ -20,6 +20,8 @@ export interface Options<Result = any, Title = string> extends ControlOptions {
   title?: string;
   label?: string;
   reverseTitle?: string;
+  /** Attribution HTML displayed beneath search results. */
+  copy?: string;
   placeholder?: string;
   reverse?: boolean;
   inputLabel?: string;

@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `control/SearchJSON`: two concurrent `ajax` calls share a single callback field. If the first response arrives after the second call, it invokes the second callback; a Node stub reproduced that sequence with `abort: false`. On errors the autocomplete wrapper still passes `false` to `handleResponse`, so adapters such as Photon can deliver undefined instead of a result array (source inspection; network behavior was not tested).
+
 - `control/GeolocationButton`: explicitly passing `zoom: 0` or `delay: 0` is replaced with 16 or 3000 ms respectively, because both are defaulted with `||`. The constructor also modifies the caller’s options by setting `followTrack`, `zoom` and `className`. These are source observations; geolocation and timer behavior were not browser-tested.
 
 - `interaction/FillAttribute`: constructing without the optional properties argument and then calling `getAttribute("name")` or `setAttribute("name", value)` throws because the internal attributes object is undefined. Both calls were reproduced in Node using `cursor: false`; setting attributes first avoids the failure. Pointer interaction was not tested.
@@ -520,3 +522,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `legend/Legend.getLegendImage`: rechecked canvas rendering options and documented the accepted line height, pixel ratio, image-load callback and release spelling `heigth` for the static height override. Type checks cover the options; the height spelling issue is recorded above. Canvas rendering was not tested.
 
 - `control/GeolocationButton`: rechecked the inherited GeolocationDraw options and constructor forwarding. Added TSDoc for button-specific fields; the zero-value and caller-options mutation issues are recorded above. Existing type tests cover configuration; geolocation was not browser-tested.
+
+- `control/Search` and `SearchJSON`: rechecked attribution and AJAX helper options. Added the `copy` attribution option, documented request data type, and corrected optional callback signatures. Type checks cover requests; a Node stub reproduced the shared-callback issue above. Live services were not tested.

@@ -1,7 +1,14 @@
 import type { Coordinate } from 'ol/coordinate'
 import type { EventsKey } from 'ol/events'
+import type { SendOptions } from '../util/Ajax'
 import type { Options as SearchOptions, SearchOnSignature } from './Search'
 import Search from './Search'
+
+/** Request options accepted by the search AJAX helper. */
+export interface SearchRequestOptions extends SendOptions {
+  /** Expected response type; defaults to JSON. */
+  dataType?: string;
+}
 
 export interface Options<Result = any, Response = any, Title = string> extends SearchOptions<Result, Title> {
   handleResponse?: ((response: Response) => Result[]);
@@ -40,14 +47,14 @@ export default class SearchJSON<Result = any, Response = any, Title = string, Se
    * @param {string} s search string
    * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field
    */
-  autocomplete(s: string, cback: (results: Result[]) => void): void;
+  autocomplete(s: string, cback?: (results: Result[]) => void): void;
 
   /** Send ajax request
    * @param {string} url
    * @param {*} data
    * @param {function} cback a callback function that takes an array of {name, feature} to display in the autocomplete field
    */
-  ajax(url: string, data: any, cback: (response: any, error?: string) => void, options?: any): void;
+  ajax(url: string, data: Record<string, unknown> | undefined, cback?: (response: Response | false, error?: string) => void, options?: SearchRequestOptions): void;
 
   /**
    * @param {string} s the search string
