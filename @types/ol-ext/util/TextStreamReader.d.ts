@@ -1,5 +1,5 @@
 export interface Options {
-  file?: File;
+  file: File;
   chunkSize?: number;
 }
 
@@ -14,7 +14,7 @@ export default class TextStreamReader {
    *  @param {File} [options.file]
    *  @param {number} [options.chunkSize=1E6]
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /** Set file to read
    * @param {File} file
@@ -28,7 +28,7 @@ export default class TextStreamReader {
   /** Set reader chunk size
    * @param {number} [chunkSize=1E6]
    */
-  setChunkSize(s: any): void;
+  setChunkSize(s?: number): void;
 
   /** Get progress
    * @return {number} progress [0,1]
@@ -39,7 +39,7 @@ export default class TextStreamReader {
    * @param {function} getLine a function that gets the current line as argument. Return false to stop reading
    * @param {function} [progress] a function that gets the progress on each chunk (beetween 0,1) and a boolean set to true on end
    */
-  readLines(getLine: (line: string) => void, progress?: (arg0: number, arg1: boolean) => void): void;
+  readLines(getLine: (line: string) => boolean | void, progress?: (arg0: number, arg1: boolean) => void): void;
 
   /** Read a set of line chunk from the stream
    * @param {function} getLines a function that gets lines read as an Array<String>.

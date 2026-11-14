@@ -1,3 +1,5 @@
+import TextStreamReader from '../@types/ol-ext/util/TextStreamReader'
+import SVGOperation from '../@types/ol-ext/util/SVGOperation'
 import SketchOverlay from '../@types/ol-ext/layer/SketchOverlay'
 import '../@types/ol-ext/layer/GetPreview'
 import Clip from '../@types/ol-ext/filter/Clip'
@@ -239,3 +241,12 @@ const sketch = new SketchOverlay()
 const sketchPosition: number[] | undefined = sketch.getPosition()
 const sketchResult = sketch.finishDrawing(true)
 void [sketchPosition, sketchResult]
+
+function streamAudit(file: File): void {
+  const reader = new TextStreamReader({ file })
+  reader.setChunkSize()
+  reader.readLines(line => line === 'stop' ? false : undefined)
+  const operation = new SVGOperation({ feoperation: 'feBlend', operations: ['feOffset'] })
+  operation.appendChild({ feoperation: 'feGaussianBlur', stdDeviation: 2 })
+}
+void streamAudit

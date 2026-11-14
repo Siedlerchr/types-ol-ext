@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `util/TextStreamReader`: construction without a file throws despite the documented optional file. Its end condition uses `file.size - 1`, so a one-byte file never starts reading and reports NaN progress. Reproduced with a FileReader stub; actual asynchronous file reading was not tested.
+
 - `layer/SketchOverlay`: `startDrawing` documents `coordinates`, `feature` and `atstart` but only reads `type`; a Node check confirmed coordinates are ignored. `addPoint` compares coordinate arrays by identity rather than value.
 - `layer/GetPreview`: the Tile implementation calls the tile URL function with the projection in the pixel-ratio argument position and omits the projection argument. The layer preview projection path dereferences its source before checking it exists. These are source findings; tile rendering was not tested.
 
@@ -399,3 +401,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `filter/Clip` and `Paper`: corrected Clip extent spelling and inherited activation, and Paper forwarded SVG options; removed Paper members absent from the implementation. Type checks cover constructor options and the light setter. Clip path checks and upstream limitations are recorded above; browser rendering was not tested.
 
 - `layer/SketchOverlay` and `GetPreview`: reviewed constructors, prototype augmentations and public drawing and preview methods. Corrected optional sketch styles, position and finish return values, feature type, optional source preview inputs and layer projection argument. Type checks cover sketch construction and returns; a Node check covered ignored drawing coordinates. Browser rendering and preview requests were not tested.
+
+- `util/TextStreamReader` and `SVGOperation`: checked constructor and public methods against the release. Corrected the required reader file, optional chunk size and stop callback, plus SVG operation inheritance, static namespace and nested operation inputs. Type checks cover these APIs; browser SVG and file reading were not tested.
