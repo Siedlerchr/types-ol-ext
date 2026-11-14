@@ -529,3 +529,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `control/Search` and `SearchJSON`: rechecked attribution and AJAX helper options. Added the `copy` attribution option, documented request data type, and corrected optional callback signatures. Type checks cover requests; a Node stub reproduced the shared-callback issue above. Live services were not tested.
 
 - `featureanimation/Shake` and `control/CanvasScaleLine`: rechecked constructor options and inherited behavior, and added TSDoc to Shake options. A Node check confirmed Shake zero-value defaults; CanvasScaleLine option mutation was identified in source. Rendering was not tested.
+
+- `layer/Geoportail`: checked layer metadata options against construction and added TSDoc and declarations for title, name, description and queryability. Type checks cover custom metadata; live layer requests were not tested.

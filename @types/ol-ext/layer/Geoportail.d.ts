@@ -14,6 +14,14 @@ export interface Options extends TileLayerOptions<GeoportailSource> {
   key?: string;
   /** Projection used for the layer extent. */
   projection?: ProjectionLike;
+  /** Display title for the layer. */
+  title?: string;
+  /** Layer name exposed as an observable property. */
+  name?: string;
+  /** Description exposed as an observable property. */
+  desc?: string;
+  /** Whether the layer supports feature-info queries. */
+  queryable?: boolean;
   /** Whether the layer is a base layer. */
   baseLayer?: boolean;
 }

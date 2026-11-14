@@ -220,7 +220,7 @@ const geoImageLayer = new GeoImageLayer({ source: geoImage })
 const geoImageExtent: number[] = geoImageLayer.getExtent()
 void geoImageExtent
 
-new GeoportailLayer({ layer: 'ORTHOIMAGERY.ORTHOPHOTOS', gppKey: 'gpf' })
+new GeoportailLayer({ layer: 'ORTHOIMAGERY.ORTHOPHOTOS', gppKey: 'gpf', title: 'Imagery', queryable: true })
 GeoportailLayer.getCapabilities().then((capabilities, themes) => { void [capabilities, themes] })
 const registeredKey: string | undefined = GeoportailLayer.isRegistered('example')
 void registeredKey
