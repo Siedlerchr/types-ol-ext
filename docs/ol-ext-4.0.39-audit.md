@@ -28,6 +28,9 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `render/Pulse`: the `radius` option is assigned to a local value that is never used, so changing it has no effect on the pulse. A style without an image also causes the animation callback to dereference null, and zero duration is replaced by 3000 ms. These are source observations; rendering was not tested.
+- `layer/Geoportail`: `queryable: false` is replaced by the capability’s value because the constructor checks it with `!options.queryable`; a caller cannot disable queryability when the capability says true. This is a source observation; live layer behavior was not tested.
+
 - `featureanimation/Shake`: constructing with `amplitude: 0` or `bounce: 0` uses 40 or 6 instead, because both values are defaulted with `||`. A Node check reproduced both; rendering was not tested.
 - `control/CanvasScaleLine`: its constructor overwrites `options.bar` with false, so requesting `bar: true` cannot produce the inherited ScaleLine bar; it also mutates the caller’s options. This is a source observation; canvas rendering was not tested.
 
@@ -531,3 +534,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `featureanimation/Shake` and `control/CanvasScaleLine`: rechecked constructor options and inherited behavior, and added TSDoc to Shake options. A Node check confirmed Shake zero-value defaults; CanvasScaleLine option mutation was identified in source. Rendering was not tested.
 
 - `layer/Geoportail`: checked layer metadata options against construction and added TSDoc and declarations for title, name, description and queryability. Type checks cover custom metadata; live layer requests were not tested.
+
+- `render/Pulse` and `layer/Geoportail`: reviewed option-use candidates and recorded the ineffective pulse radius and false queryability override above. Both findings are source observations; rendering and live queries were not tested.
