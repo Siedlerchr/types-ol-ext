@@ -1,4 +1,5 @@
 import Base from './Base'
+import type { Options as BaseOptions } from './Base'
 
 /** @typedef {Object} FilterTextureOptions
  *  @property {Image | undefined} img Image object for the texture
@@ -8,12 +9,12 @@ import Base from './Base'
  *  @property {boolean} rotate Whether to rotate the texture with the view (may cause animation lags on mobile or slow devices). Default is true.
  *  @property {null | string | undefined} crossOrigin The crossOrigin attribute for loaded images.
  */
-export declare type FilterTextureOptions = {
+export type FilterTextureOptions = BaseOptions & {
   img?: HTMLImageElement | undefined;
   src?: string;
   scale?: number;
   opacity?: number;
-  rotate?: boolean;
+  rotateWithView?: boolean;
   crossOrigin?: null | string | undefined;
 };
 
@@ -26,7 +27,7 @@ export default class Texture extends Base {
   /**
    * @param {FilterTextureOptions} options
    */
-  constructor(options: FilterTextureOptions);
+  constructor(options?: FilterTextureOptions);
 
   /** Set texture
    * @param {FilterTextureOptions} [options]
@@ -37,7 +38,7 @@ export default class Texture extends Base {
    *  @param {number} offsetX x offset
    *  @param {number} offsetY y offset
    */
-  getPattern(offsetX: number, offsetY: number): any;
+  getPattern(offsetX: number, offsetY: number): CanvasPattern | null;
 
   /** Activate / deactivate filter
    *  @param {boolean} b

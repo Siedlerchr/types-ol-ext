@@ -151,6 +151,8 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `filter/Fold` and `PencilSketch`: a Node check showed zero margin and zero intensity are replaced with defaults of 8 and 0.8, respectively. Rendering was not tested.
 
+- `filter/Texture`: a Node check with an unloaded image showed `getPattern` throws before the texture is ready. The canvas dimensions are assigned twice, overwriting the values calculated using `scale`, and its drawing-time scaling is commented out (source observation). Rendering was not tested.
+
 - `style/Profile`: a Node check confirmed the default fill color is the malformed string `rgba(255,255,255,.3` and setting scale to zero restores 0.2. Rendering was not exercised.
 
 - `style/FlowLine`: a Node check confirmed omitted arrow and offset options produce NaN rather than the documented zero defaults. A `square` line cap is also silently changed to `butt` (source observation). Rendering was not tested.
@@ -383,5 +385,7 @@ The following source comparisons are partial, focused on verified missing or inc
 - `filter/CanvasFilter` and `filter/SVGFilter`: corrected base inheritance, optional canvas options, shadow types and the SVG definition module used by their methods. Type tests cover definitions and options; a Node check verified ID registration and removal using a stub. Canvas rendering was not tested.
 
 - `filter/Fold`, `PencilSketch`, `Pointillism`, `Halftone` and `Lego`: corrected constructor options, inherited activation, reset arguments and pattern return type. Type checks cover the APIs; Node checked Fold and PencilSketch defaults, while canvas rendering was not tested.
+
+- `filter/Texture` and `TextureImage`: corrected optional options, rotation spelling, pattern return and the texture image table's default export. Type checks cover both modules; a Node check exposed the unloaded-image behavior above.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.

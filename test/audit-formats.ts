@@ -47,6 +47,8 @@ import PencilSketch from '../@types/ol-ext/filter/PencilSketch'
 import Pointillism from '../@types/ol-ext/filter/Pointillism'
 import Halftone from '../@types/ol-ext/filter/Halftone'
 import Lego from '../@types/ol-ext/filter/Lego'
+import Texture from '../@types/ol-ext/filter/Texture'
+import textureImages from '../@types/ol-ext/filter/TextureImage'
 
 const animatedCanvas = new AnimatedCanvas({
   animate: false,
@@ -82,6 +84,11 @@ new Pointillism({ saturate: 2 })
 new Halftone({ channel: 'r', color: '#000' }).setSize()
 const legoPattern: CanvasPattern | 'transparent' | null = new Lego().getPattern(0, 0)
 void legoPattern
+const texture = new Texture({ src: 'notebook', rotateWithView: false })
+texture.setFilter()
+const texturePattern: CanvasPattern | null = texture.getPattern(0, 0)
+const notebookTexture: string = textureImages.notebook
+void [texturePattern, notebookTexture]
 // @ts-expect-error Composite reads its options object during construction.
 new Composite()
 
