@@ -1,7 +1,10 @@
 import BaseObject from 'ol/Object'
 
+/** Attributes and nested primitives for an SVG filter operation. */
 export interface OperationAttributes {
+  /** SVG filter primitive tag name. */
   feoperation: string;
+  /** Child filter operations. */
   operations?: Array<SVGOperation | OperationAttributes | string>;
   [attribute: string]: unknown;
 }
@@ -38,5 +41,6 @@ export default class SVGOperation extends BaseObject {
    */
   appendChild(operation: SVGOperation | OperationAttributes | string | Array<SVGOperation | OperationAttributes | string>): void;
 
+  /** Optional namespace override used when creating elements. */
   static NS: string | undefined
 }

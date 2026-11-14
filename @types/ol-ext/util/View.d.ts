@@ -39,20 +39,30 @@ export interface viewTourDestinations {
   anchor?: Coordinate;
 }
 
+/** A tour destination as x, y, optional zoom and animation type. */
 export type Destination = [number, number, number?, ('flyTo' | 'flightTo' | 'moveTo')?]
+/** A destination object or coordinate tuple. */
 export type TourDestination = viewTourDestinations | Destination
 
+/** Options for a view tour. */
 export interface Options {
+  /** Delay between destinations in milliseconds. */
   delay?: number;
+  /** Default animation type for destinations without one. */
   type?: 'flyTo' | 'flightTo' | 'moveTo';
+  /** Default easing function. */
   easing?: (t: number) => number;
+  /** Called when the tour finishes or is interrupted. */
   done?: (completed: boolean) => void;
+  /** Called with the next index and the destination list. */
   step?: (index: number, destinations: TourDestination[]) => void;
 }
 
 declare module 'ol/View' {
   export default interface View {
+    /** Animate the view to a destination. */
     flyTo(options?: viewTourDestinations, done?: (completed: boolean) => void): void;
+    /** Animate through a sequence of destinations. */
     takeTour(destinations: TourDestination[], options?: Options): void;
   }
 }

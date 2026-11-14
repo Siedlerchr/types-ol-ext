@@ -2,7 +2,9 @@ import BaseObject from 'ol/Object'
 import type ol_ext_SVGOperation from './SVGOperation'
 import type { OperationAttributes } from './SVGOperation'
 
+/** A filter operation instance, descriptor, or primitive tag name. */
 export type Operation = ol_ext_SVGOperation | OperationAttributes | string
+/** One or more filter operations. */
 export type Operations = Operation | Operation[]
 
 export interface Options {
@@ -48,6 +50,7 @@ export default class SVGFilter extends BaseObject {
    */
   luminanceToAlpha(options?: { gamma?: number }): void;
 
+  /** Draw an image through the filter into a new canvas. */
   applyTo(img: HTMLImageElement | HTMLCanvasElement | ImageBitmap): HTMLCanvasElement;
 
   NS: string
