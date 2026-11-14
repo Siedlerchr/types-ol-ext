@@ -22,6 +22,22 @@ export interface LegendSelectEvent extends BaseEvent {
 export interface LegendRefreshEvent extends BaseEvent { type: 'refresh'; width: number; height: number }
 export interface LegendItemsEvent extends BaseEvent { type: 'items'; nb: number }
 
+/** Options for rendering a legend symbol to a canvas. */
+export interface LegendItemImageOptions extends olLegendItemOptions {
+  /** Override the output row height. */
+  lineHeight?: number;
+}
+
+/** Options supported by the static symbol renderer. */
+export interface LegendImageOptions extends LegendItemImageOptions {
+  /** Pixel ratio used when creating and drawing the canvas. */
+  pixelratio?: number;
+  /** Called when an image used by the symbol finishes loading. */
+  onload?: () => void;
+  /** Height override read by the static renderer under this spelling. */
+  heigth?: number;
+}
+
 export interface Options {
   title?: string;
   maxWidth?: number;
@@ -45,7 +61,7 @@ export default class ol_legend_Legend extends BaseObject {
    * @param {Canvas|undefined} canvas a canvas to draw in, if none creat one
    * @param {int|undefined} offsetY Y offset to draw in canvas, default 0
    */
-  static getLegendImage(item?: olLegendItemOptions, canvas?: HTMLCanvasElement, row?: number): HTMLCanvasElement;
+  static getLegendImage(item?: LegendImageOptions, canvas?: HTMLCanvasElement, row?: number): HTMLCanvasElement;
 
   /**
    * @param {*} options
@@ -138,7 +154,7 @@ export default class ol_legend_Legend extends BaseObject {
    * @param {int|undefined} offsetY Y offset to draw in canvas, default 0
    * @return {CanvasElement}
    */
-  getLegendImage(item?: olLegendItemOptions, canvas?: HTMLCanvasElement, offsetY?: number): HTMLCanvasElement;
+  getLegendImage(item?: LegendItemImageOptions, canvas?: HTMLCanvasElement, offsetY?: number): HTMLCanvasElement;
 
   on: BaseObject['on'] & OnSignature<'select', LegendSelectEvent, EventsKey> & OnSignature<'refresh', LegendRefreshEvent, EventsKey> & OnSignature<'items', LegendItemsEvent, EventsKey>;
   once: BaseObject['once'] & OnSignature<'select', LegendSelectEvent, EventsKey> & OnSignature<'refresh', LegendRefreshEvent, EventsKey> & OnSignature<'items', LegendItemsEvent, EventsKey>;

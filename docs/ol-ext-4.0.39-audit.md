@@ -514,3 +514,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `interaction/Transform`: rechecked constructor selection options and public selection, style, center and radius methods. Clarified add/remove behavior and optional center with TSDoc; event and type checks remain in the earlier round. A Node check reproduced the unattached and default-selection behavior above; interactive transforms were not tested.
 
 - `interaction/FillAttribute`: rechecked inherited Select options and the attribute access methods. Documented the required initialization before individual attribute access. A Node check reproduced the missing-attributes failures above; selection interaction was not tested.
+
+- `legend/Legend.getLegendImage`: rechecked canvas rendering options and documented the accepted line height, pixel ratio, image-load callback and release spelling `heigth` for the static height override. Type checks cover the options; the height spelling issue is recorded above. Canvas rendering was not tested.
