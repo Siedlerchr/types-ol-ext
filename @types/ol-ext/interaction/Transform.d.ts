@@ -224,9 +224,9 @@ export default class Transform extends Pointer {
   drawSketch_(draw: boolean): void;
 
   /**
-   * Select a feature to transform
-   * @param feature the feature to transform
-   * @param add true to add the feature to the selection, default false
+   * Add or remove a feature from the selection; omit the feature to clear it.
+   * @param feature - Feature to add or remove.
+   * @param add - Add when true; otherwise remove the feature.
    */
   select(feature?: Feature | null, add?: boolean): void;
 
@@ -262,7 +262,7 @@ export default class Transform extends Pointer {
    * Set the rotation center
    * @param c the center point, default center on the objet
    */
-  setCenter(c: Coordinate | undefined): void;
+  setCenter(c?: Coordinate): void;
 
   /**
    * @param evt Map browser event.
