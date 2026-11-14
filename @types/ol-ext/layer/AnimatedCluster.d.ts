@@ -4,8 +4,11 @@ import type VectorSource from 'ol/source/Vector'
 import type { Geometry } from 'ol/geom'
 import type Feature from 'ol/Feature'
 
-interface ClusterOptions extends Options<VectorSource<Feature>> {
+/** Vector-layer options with cluster animation configuration. */
+export interface ClusterOptions extends Options<VectorSource<Feature>> {
+  /** Animation duration in milliseconds; zero disables animation. */
   animationDuration?: number;
+  /** Easing function for cluster motion. */
   animationMethod?: (t: number) => number;
 }
 
@@ -26,5 +29,5 @@ export default class AnimatedCluster extends VectorLayer<VectorSource<Feature<Ge
   /** Set the cluster source
   * @param {ol_source_Vector} source
   */
-  setSource(source: VectorSource): void
+  setSource(source: VectorSource | null): void
 }

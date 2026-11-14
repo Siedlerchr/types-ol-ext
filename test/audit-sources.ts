@@ -1,3 +1,4 @@
+import AnimatedClusterLayer from '../@types/ol-ext/layer/AnimatedCluster'
 import MaplibreLayer from '../@types/ol-ext/layer/Maplibre'
 import GeoportailLayer from '../@types/ol-ext/layer/Geoportail'
 import GeoImageLayer from '../@types/ol-ext/layer/GeoImage'
@@ -220,3 +221,6 @@ void registeredKey
 
 const maplibreLayer = new MaplibreLayer({ style: 'https://example.com/style.json' })
 maplibreLayer.setStyle({ version: 8, sources: {}, layers: [] })
+
+const clusterLayer = new AnimatedClusterLayer({ animationDuration: 0 })
+clusterLayer.setSource(null)

@@ -462,3 +462,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `layer/Geoportail`: reviewed constructor overloads, inherited tile API, capability registry and callback-based loaders. Removed invented source methods and a nonexistent named capability export, corrected key spelling and registration return, and documented the actual callback object. Type checks cover construction and callbacks; Node verified missing arguments and registration returns. Live service requests were not tested.
 
 - `layer/Maplibre`: compared constructor, style hooks and inheritance with release source and added the style option with TSDoc. Type checks cover style configuration. The release import and inheritance failures and browser follow-up are recorded above; `getStyle` was not runtime-tested.
+
+- `layer/AnimatedCluster`: reviewed constructor, source replacement and render hooks. Corrected nullable source detachment and documented/exported animation options; cluster tracking and render hooks are private. Type checks and a Node check cover zero duration and detachment. Cluster rendering was not tested in this round.
