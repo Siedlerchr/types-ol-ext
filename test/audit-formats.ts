@@ -1,3 +1,4 @@
+import inherits, { ol_ext_inherits } from '../@types/ol-ext/util/ext'
 import AuditedView from '../@types/ol-ext/util/View'
 import WorkerHelper from '../@types/ol-ext/util/Worker'
 import TextStreamReader from '../@types/ol-ext/util/TextStreamReader'
@@ -257,3 +258,7 @@ const tourView = new AuditedView()
 tourView.flyTo({ zoom: 3 })
 tourView.takeTour([[1, 2, 3, 'moveTo'], { zoom: 4 }], { delay: 100, step: (index, destinations) => { void [index, destinations] } })
 new WorkerHelper(event => event, { onMessage: value => { void value }, lib: { double: (n: number) => n * 2 } })
+
+svgDefinition.addOperation([{ feoperation: 'feGaussianBlur', stdDeviation: 2 }, 'feOffset'])
+svgDefinition.luminanceToAlpha()
+void [inherits, ol_ext_inherits]

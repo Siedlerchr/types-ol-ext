@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `util/ext` accesses `window` at module load, so it cannot be imported in a non-browser environment without a stub (source inspection). Its inheritance helper replaces the child prototype, losing existing prototype members; it is unsuitable for native ES classes as recorded in the import fix validation.
+
 - `util/View.flyTo` uses truthiness for zoom, zoomAt and duration, so zero values are replaced with defaults. A Node check verified all three. `takeTour` similarly replaces a zero delay and invokes the step callback once after the final destination (source inspection).
 - `util/Worker` calls `onMessage` unconditionally although the constructor documents it as optional, and does not revoke its generated object URL. Function source rewriting also assumes function syntax and may fail for arrow functions (source inspection; worker execution not tested).
 
@@ -416,3 +418,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `util/input/Base`: checked constructor, inherited observable API, value methods and element accessor; `_listenDrag` is private. Corrected the optional value argument. A stub-input Node check verified change dispatch and value retention when omitted; browser focus and drag behavior were not tested. The base return type retains `string | number` to accommodate its numeric subclasses.
 
 - `util/View` and `Worker`: reviewed exports, view prototype extension, tour tuple and callbacks, worker lifecycle and library option. Corrected the View instance augmentation, tuple and tour options, and worker library and callback input types. Type checks cover the APIs; a Node check verified zero-value behavior. Browser animation and worker execution were not tested.
+
+- `util/SVGFilter` and `ext`: compared module exports and public methods. Corrected SVGFilter BaseObject inheritance, operation descriptors, optional arguments and canvas result; replaced the unrelated ext namespace declaration with the actual named and default inheritance exports. Type checks cover operation arrays and imports; browser SVG rendering was not tested.
