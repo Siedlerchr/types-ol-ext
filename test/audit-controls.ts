@@ -626,3 +626,8 @@ void [requiredWmts, supportedMatrices]
 const baseInput = new InputBase()
 baseInput.setValue()
 baseInput.setValue(4)
+
+function profilePointerAudit(profile: import('../@types/ol-ext/control/Profile').default, event: MouseEvent): void {
+  profile.onMove(event)
+}
+void profilePointerAudit

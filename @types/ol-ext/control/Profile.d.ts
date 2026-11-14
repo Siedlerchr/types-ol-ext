@@ -133,6 +133,9 @@ export default class Profile extends ol_control_Control {
    */
   pointAtTime(time: number): Coordinate | ProfilePoint;
 
+  /** Handle a pointer or touch event over the profile canvas. */
+  onMove(event: MouseEvent | TouchEvent): void;
+
   /** Show panels
    * @api stable
    */
