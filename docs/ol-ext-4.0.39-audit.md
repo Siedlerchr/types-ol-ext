@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `layer/Maplibre`: the 4.0.39 module cannot be imported as installed because it imports `maplibre-gl.js` and a nonexistent named element export; its legacy constructor also calls the OpenLayers class without `new`. These are addressed in upstream PR #1194 as recorded above. Independently, `getStyle` dereferences the map before initial rendering and calls `get("style")` on the MapLibre map; those paths were identified in source and not exercised in the browser follow-up. The constructor overwrites a supplied `render` option.
+
 - `layer/Geoportail`: calling the constructor without arguments throws while reading `layer`, despite optional-looking documentation; a Node check reproduced it. `isRegistered` returns the capability key string (or undefined), not the documented boolean. The capability loaders return callback-registration objects rather than Promises: registering a callback after completion does not replay the result, and repeated registrations replace the earlier callback (source inspection). Layer and tile option objects are also mutated during construction. Live capability requests were not tested.
 
 - `layer/GeoImage.getExtent`: calling it before assigning a source throws on null; passing an ordinary OpenLayers ImageStatic source also throws because that source has no `getExtent` method. Both were reproduced in Node. The layer requires a compatible source even though the constructor accepts generic image-layer options.
@@ -458,3 +460,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `layer/GeoImage`: reviewed its constructor and overridden extent method. Restricted the declared source to GeoImage and documented that it is needed by `getExtent`. Type checks cover a compatible source; Node reproduced missing and incompatible source failures above.
 
 - `layer/Geoportail`: reviewed constructor overloads, inherited tile API, capability registry and callback-based loaders. Removed invented source methods and a nonexistent named capability export, corrected key spelling and registration return, and documented the actual callback object. Type checks cover construction and callbacks; Node verified missing arguments and registration returns. Live service requests were not tested.
+
+- `layer/Maplibre`: compared constructor, style hooks and inheritance with release source and added the style option with TSDoc. Type checks cover style configuration. The release import and inheritance failures and browser follow-up are recorded above; `getStyle` was not runtime-tested.

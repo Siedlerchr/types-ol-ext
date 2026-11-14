@@ -1,3 +1,4 @@
+import MaplibreLayer from '../@types/ol-ext/layer/Maplibre'
 import GeoportailLayer from '../@types/ol-ext/layer/Geoportail'
 import GeoImageLayer from '../@types/ol-ext/layer/GeoImage'
 import DayNight from '../@types/ol-ext/source/DayNight'
@@ -216,3 +217,6 @@ new GeoportailLayer({ layer: 'ORTHOIMAGERY.ORTHOPHOTOS', gppKey: 'gpf' })
 GeoportailLayer.getCapabilities().then((capabilities, themes) => { void [capabilities, themes] })
 const registeredKey: string | undefined = GeoportailLayer.isRegistered('example')
 void registeredKey
+
+const maplibreLayer = new MaplibreLayer({ style: 'https://example.com/style.json' })
+maplibreLayer.setStyle({ version: 8, sources: {}, layers: [] })
