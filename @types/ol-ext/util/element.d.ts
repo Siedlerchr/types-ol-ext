@@ -111,6 +111,10 @@ declare module 'ol-ext/util/element' {
      * @param {CreateElementOptions} [options] - Options for creating the element
      * @returns {Element|Text} - The created element or text node
      */
+    function create(tagName: 'TEXT', options?: CreateElementOptions): Text;
+    /** Create an element for a known uppercase HTML tag. */
+    function create<K extends Uppercase<keyof HTMLElementTagNameMap>>(tagName: K, options?: CreateElementOptions): HTMLElementTagNameMap[Lowercase<K>];
+    /** Create an element or a text node for a dynamic tag. */
     function create(tagName: string, options?: CreateElementOptions): Element | Text;
 
     /** Create a switch input element

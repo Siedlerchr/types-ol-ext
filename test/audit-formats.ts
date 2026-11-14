@@ -1,3 +1,4 @@
+import domElement from 'ol-ext/util/element'
 import { toHSL, fromHSL, toHSV, fromHSV, toHexa } from '../@types/ol-ext/util/color'
 import Laplacian from '../@types/ol-ext/util/SVGFilter/Laplacian'
 import Sobel from '../@types/ol-ext/util/SVGFilter/Sobel'
@@ -277,3 +278,7 @@ new PaperSVG({ light: 20 }).setLight(0)
 
 const colorValues = [toHSL('#ff0000', 10), fromHSL([0, 100, 50], 10), toHSV('#ff0000'), fromHSV([0, 100, 100]), toHexa([255, 0, 0, 1])]
 void colorValues
+
+const elementNode: HTMLDivElement = domElement.create('DIV')
+const textNode: Text = domElement.create('TEXT', { html: 'text' })
+void [elementNode, textNode]

@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `util/element.positionRect` computes `right` from `top` instead of `left`; a Node stub with left 30, top 10 and width 20 returned right 30 instead of 50. `createCheck` does not forward its documented click and change callbacks, and `removeListener` cannot remove listeners installed with capture enabled (source inspection).
+
 - `util/color`: `toHexa` documents string inputs but indexes them as numeric components, producing an invalid result for `#ff0000`. `fromHSV` yields NaN components for negative hues. Both were reproduced in Node; out-of-range input handling beyond these cases was not evaluated.
 
 - `util/ext` accesses `window` at module load, so it cannot be imported in a non-browser environment without a stub (source inspection). Its inheritance helper replaces the child prototype, losing existing prototype members; it is unsuitable for native ES classes as recorded in the import fix validation.
@@ -426,3 +428,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `util/SVGFilter/Laplacian`, `Sobel`, `Prewitt`, `Roberts` and `Paper`: reviewed constructors and inherited methods. Corrected Laplacian neighbour spelling and boolean flags, IDs and supported gamma options. Type checks cover constructors; the Paper zero-light issue is recorded above. SVG rendering was not tested.
 
 - `util/color`: reviewed all five named conversions and alpha propagation, added the missing HSV and hexadecimal exports and optional rounding arguments, and documented the public functions. Type checks cover exports; Node checks exposed the upstream input issues above.
+
+- `util/element`: compared its DOM helper exports, return shapes and options; added tag-specific creation overloads with TSDoc. A Node stub verified the position rectangle issue above. DOM interaction and scrolling were not browser-tested.
