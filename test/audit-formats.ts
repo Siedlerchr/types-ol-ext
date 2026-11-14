@@ -1,3 +1,8 @@
+import Laplacian from '../@types/ol-ext/util/SVGFilter/Laplacian'
+import Sobel from '../@types/ol-ext/util/SVGFilter/Sobel'
+import Prewitt from '../@types/ol-ext/util/SVGFilter/Prewitt'
+import Roberts from '../@types/ol-ext/util/SVGFilter/Roberts'
+import PaperSVG from '../@types/ol-ext/util/SVGFilter/Paper'
 import inherits, { ol_ext_inherits } from '../@types/ol-ext/util/ext'
 import AuditedView from '../@types/ol-ext/util/View'
 import WorkerHelper from '../@types/ol-ext/util/Worker'
@@ -262,3 +267,9 @@ new WorkerHelper(event => event, { onMessage: value => { void value }, lib: { do
 svgDefinition.addOperation([{ feoperation: 'feGaussianBlur', stdDeviation: 2 }, 'feOffset'])
 svgDefinition.luminanceToAlpha()
 void [inherits, ol_ext_inherits]
+
+new Laplacian({ id: 'laplacian', neighbours: 4, alpha: true, gamma: 2 })
+new Sobel({ id: 'sobel', alpha: true, gamma: 2 })
+new Prewitt({ id: 'prewitt' })
+new Roberts({ id: 'roberts' })
+new PaperSVG({ light: 20 }).setLight(0)

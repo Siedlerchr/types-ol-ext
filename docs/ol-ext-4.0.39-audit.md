@@ -420,3 +420,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `util/View` and `Worker`: reviewed exports, view prototype extension, tour tuple and callbacks, worker lifecycle and library option. Corrected the View instance augmentation, tuple and tour options, and worker library and callback input types. Type checks cover the APIs; a Node check verified zero-value behavior. Browser animation and worker execution were not tested.
 
 - `util/SVGFilter` and `ext`: compared module exports and public methods. Corrected SVGFilter BaseObject inheritance, operation descriptors, optional arguments and canvas result; replaced the unrelated ext namespace declaration with the actual named and default inheritance exports. Type checks cover operation arrays and imports; browser SVG rendering was not tested.
+
+- `util/SVGFilter/Laplacian`, `Sobel`, `Prewitt`, `Roberts` and `Paper`: reviewed constructors and inherited methods. Corrected Laplacian neighbour spelling and boolean flags, IDs and supported gamma options. Type checks cover constructors; the Paper zero-light issue is recorded above. SVG rendering was not tested.

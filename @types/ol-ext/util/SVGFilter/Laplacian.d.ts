@@ -1,9 +1,11 @@
 import SVGFilter from '../SVGFilter'
 
 export interface Options {
-  neighbors?: number;
-  grayscale?: number;
-  alpha?: number;
+  id?: string;
+  neighbours?: number;
+  grayscale?: boolean;
+  alpha?: boolean;
+  gamma?: number;
 }
 
 /** A simple filter to detect edges on images
