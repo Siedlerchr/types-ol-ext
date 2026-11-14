@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `layer/GeoImage.getExtent`: calling it before assigning a source throws on null; passing an ordinary OpenLayers ImageStatic source also throws because that source has no `getExtent` method. Both were reproduced in Node. The layer requires a compatible source even though the constructor accepts generic image-layer options.
+
 - `control/SearchBAN` and `SearchPhoton`: calling `requestData` with `position: true` before attaching the control to a map throws on `getView`; reproduced using an unattached stub. SearchBAN also replaces a supplied `typing: 0` with 500 ms and overwrites a supplied attribution string (source inspection). No live service request was made.
 
 - `util/imagesLoader.transparent`: passing a single color string as documented throws while parsing an undefined color; a Node check reproduced this with `transparent("red")`. For a two-color range whose first red channel is greater than the second, the lower red bound uses the first color instead of the computed minimum, so colors in the intended range are not made transparent (source inspection; tile rendering not tested).
@@ -450,3 +452,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `util/imagesLoader`: checked public loader factories and terrain-RGB conversion exports against source; private BIL and shaded-relief helpers remain excluded as recorded above. Clarified that transparent expects an array in this release. Node checked elevation round-trip and the single-color failure; tile and network loading were not tested.
 
 - `control/SearchBAN`: compared its SearchPhoton inheritance, constructor, title, selection and request hooks with the release. Existing declarations cover the subclass; added TSDoc for BAN-specific filters. A Node stub reproduced the unattached-position failure above; live searches were not tested.
+
+- `layer/GeoImage`: reviewed its constructor and overridden extent method. Restricted the declared source to GeoImage and documented that it is needed by `getExtent`. Type checks cover a compatible source; Node reproduced missing and incompatible source failures above.

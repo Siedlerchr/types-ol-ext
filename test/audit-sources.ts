@@ -1,3 +1,4 @@
+import GeoImageLayer from '../@types/ol-ext/layer/GeoImage'
 import DayNight from '../@types/ol-ext/source/DayNight'
 import GridBin from '../@types/ol-ext/source/GridBin'
 import Delaunay from '../@types/ol-ext/source/Delaunay'
@@ -205,3 +206,7 @@ void [hashCenter, hashExtent, hashNeighbors.n]
 
 // @ts-expect-error Point geometries have no length for distance sampling.
 ol_geom_GPAltiCode(new Point([0, 0]), { samplingDist: 100 })
+
+const geoImageLayer = new GeoImageLayer({ source: geoImage })
+const geoImageExtent: number[] = geoImageLayer.getExtent()
+void geoImageExtent
