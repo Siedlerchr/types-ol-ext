@@ -6,7 +6,7 @@ import type { LoadFunction } from 'ol/Tile'
 export function pixelTransform(setPixel: (pixels: Uint8ClampedArray, index: number, size: Size) => void): LoadFunction
 /** Create a grayscale tile loader. */
 export function grayscale(): LoadFunction
-/** Create a tile loader that turns a color or color range transparent. */
+/** Create a tile loader that turns one color or a two-color range transparent. Pass colors inside an array. */
 export function transparent(colors: [string | Color, (string | Color)?]): LoadFunction
 export interface SeaLevelOptions {
   /** Fill color. */

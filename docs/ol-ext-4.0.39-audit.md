@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `util/imagesLoader.transparent`: passing a single color string as documented throws while parsing an undefined color; a Node check reproduced this with `transparent("red")`. For a two-color range whose first red channel is greater than the second, the lower red bound uses the first color instead of the computed minimum, so colors in the intended range are not made transparent (source inspection; tile rendering not tested).
+
 - `utils/Exif2Geojson`: passing an empty image list never calls `onLoad`, so consumers waiting for the resulting empty collection remain pending. For a photo whose `GPSAltitudeRef` indicates below sea level, the converter ignores the reference and returns a positive altitude (10 instead of -10 in a stub-EXIF check). Both were reproduced in Node with a stub; actual EXIF-JS and image loading were not tested.
 
 - `utils/MapIFrameAPI`: a message with the expected API id and key from an unrelated origin invokes a registered callback even when a specific `targetOrigin` was configured. The listener checks neither `event.origin` nor `event.source`; a window stub reproduced delivery of spoofed data. The ready handshake and response listeners also lack those checks (source inspection). Browser cross-window messaging was not tested.
@@ -442,3 +444,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `utils/MapIFrameAPI`: checked the parent bridge, ready handshake, callback overload and listener registration. Declared and documented the callback-only call form. Type checks cover it; a window stub reproduced the origin-check issue above. Browser messaging was not tested.
 
 - `utils/Exif2Geojson`: reviewed the default function, options and callback shape; added TSDoc clarifying asynchronous delivery and the global dependency. Existing types cover the API. Node stub checks exposed the empty-list and altitude-reference issues above; real image metadata was not tested.
+
+- `util/imagesLoader`: checked public loader factories and terrain-RGB conversion exports against source; private BIL and shaded-relief helpers remain excluded as recorded above. Clarified that transparent expects an array in this release. Node checked elevation round-trip and the single-color failure; tile and network loading were not tested.
