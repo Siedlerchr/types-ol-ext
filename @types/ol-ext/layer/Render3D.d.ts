@@ -5,6 +5,13 @@ import type { Style } from 'ol/style'
 import type Feature from 'ol/Feature'
 import BaseObject from 'ol/Object'
 
+declare module 'ol/layer' {
+  interface Vector<VectorSourceType> {
+    /** Attach a 3D renderer to this vector layer. */
+    setRender3D(renderer: Render3D): void;
+  }
+}
+
 /**
  *
  * @classdesc

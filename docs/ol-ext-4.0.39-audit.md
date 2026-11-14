@@ -496,3 +496,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `style/FontSymbol`: reviewed its image override separately from inherited RegularShape methods and declared the optional pixel ratio with TSDoc. The return type follows OpenLayers for override compatibility; missing fill/stroke nullability remains a documented declaration limitation. Type checks cover the no-argument call; browser font rendering was not tested.
 
 - `control/Profile.onMove`: reviewed the documented canvas pointer handler and declared it with TSDoc; type checks cover mouse input. The point-selection issue found in source is recorded above; pointer interaction was not browser-tested.
+
+- `layer/Render3D`: the module also installs `setRender3D` on vector layers. Added its prototype augmentation and TSDoc; the type check covers the project’s named `ol/layer` import form. The renderer attachment was not browser-tested.

@@ -1,3 +1,4 @@
+import { Vector as RenderVectorLayer } from 'ol/layer'
 import PerspectiveMap from '../@types/ol-ext/map/PerspectiveMap'
 import Render3D from '../@types/ol-ext/layer/Render3D'
 import AnimatedClusterLayer from '../@types/ol-ext/layer/AnimatedCluster'
@@ -238,3 +239,6 @@ function perspectiveAudit(target: HTMLElement): void {
   map.getPixelScreenFromCoordinate([0, 0])
 }
 void perspectiveAudit
+
+const renderVector = new RenderVectorLayer()
+renderVector.setRender3D(renderer3d)
