@@ -63,9 +63,9 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 - `util/View.flyTo` uses truthiness for zoom, zoomAt and duration, so zero values are replaced with defaults. A Node check verified all three. `takeTour` similarly replaces a zero delay and invokes the step callback once after the final destination (source inspection).
 - `util/Worker` calls `onMessage` unconditionally although the constructor documents it as optional, and does not revoke its generated object URL. Function source rewriting also assumes function syntax and may fail for arrow functions (source inspection; worker execution not tested).
 
-- `legend/Item`: `setHeight` writes `heigth`, while layout reads `height`; a Node check showed setting height leaves the original height unchanged. `legend/Legend.getLegendImage` also reads `heigth` for its static size override.
-- `legend/Image`: canvas images have no `naturalWidth`, so the documented canvas input reports zero width and height; reproduced with a canvas-shaped stub.
-- `legend/Legend`: its removal listener loops with `i < listeners` instead of `i < listeners.length`, leaving item change listeners attached after removal (source inspection; DOM behavior not tested).
+- `legend/Item`: `setHeight` writes `heigth`, while layout reads `height`; `legend/Legend.getLegendImage` also reads `heigth` for its static size override. A Chrome example reproduced both and verified the fixes in [upstream PR #1195](https://github.com/Viglino/ol-ext/pull/1195).
+- `legend/Image`: canvas images have no `naturalWidth`, so the documented canvas input reports zero width and height and is not drawn. A Chrome example reproduced the sizing issue and verified sizing and rendering with [upstream PR #1195](https://github.com/Viglino/ol-ext/pull/1195).
+- `legend/Legend`: its removal listener loops with `i < listeners` instead of `i < listeners.length`, leaving item change listeners attached after removal. A Chrome example reproduced the unwanted refresh and verified the fix in [upstream PR #1195](https://github.com/Viglino/ol-ext/pull/1195).
 
 - `util/TextStreamReader`: construction without a file throws despite the documented optional file. Its end condition uses `file.size - 1`, so a one-byte file never starts reading and reports NaN progress. Reproduced with a FileReader stub; actual asynchronous file reading was not tested.
 
@@ -114,7 +114,7 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `control/Select`: `doSelect` uses `||` to default `useCase` and `matchAll`, so explicit false cannot override checked UI options. `addCondition` replaces falsy values such as numeric zero with an empty string, and documented `selectLabel` is not read. These are source observations; UI interaction was not browser-tested.
 
-- `control/Legend`: `collapse` is documented as returning a boolean but returns undefined; constructing without `legend` dereferences undefined despite the optional options object in the source. These are source observations; UI behavior was not browser-tested.
+- `control/Legend`: `collapse` is documented as returning a boolean but returns undefined; [upstream PR #1195](https://github.com/Viglino/ol-ext/pull/1195) corrects the documentation. Constructing without `legend` throws; the legend is documented as required. A Chrome example verified expansion with a supplied legend.
 
 - `control/Permalink`: position restoration checks both projected coordinates for truthiness, so centers on either zero axis are skipped. `getLayerByLink` without layers dereferences undefined if unattached, and zero `fixed` or `refreshDelay` values fall back to defaults. These are source observations; browser URL behavior was not exercised in this round.
 
@@ -484,3 +484,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `source/Vector3D`: revisited height conversion and animation methods, confirmed `getHfn` and render helpers are private, and documented the height type. Allowed resetting `setHeight` to its default. Node stub checks exposed the zero-value behavior above; rendering was not tested.
 
 - `util/Ajax`: rechecked constructor, static helpers, request options and event payloads against source. Clarified parameter encoding in TSDoc; existing declarations cover public methods. A mocked XMLHttpRequest reproduced the URL and concurrent-request issues above; no live network requests were made.
+
+- `style/FontAwesomeDef`, `FontAwesome5Def`, `FontMakiDef` and `FontMaki2Def`: checked registration side effects and exports. Added TSDoc to the re-export declarations; Maki 2 is side-effect-only. Node verified representative glyph registration, shared FontSymbol exports and the empty Maki 2 export list; font rendering was not tested.
