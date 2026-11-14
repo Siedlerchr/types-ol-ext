@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `layer/Render3D`: `animate` without an attached layer throws when requesting a redraw. After that call, `getFeatureHeight` returns NaN before the first render initializes its interpolation ratio. With `height: "height"` and `defaultHeight: 5`, a feature height of 0 returns 5 because the property is tested for truthiness. A Node check reproduced all three; animation rendering was not tested.
+
 - `layer/Maplibre`: the 4.0.39 module cannot be imported as installed because it imports `maplibre-gl.js` and a nonexistent named element export; its legacy constructor also calls the OpenLayers class without `new`. These are addressed in upstream PR #1194 as recorded above. Independently, `getStyle` dereferences the map before initial rendering and calls `get("style")` on the MapLibre map; those paths were identified in source and not exercised in the browser follow-up. The constructor overwrites a supplied `render` option.
 
 - `layer/Geoportail`: calling the constructor without arguments throws while reading `layer`, despite optional-looking documentation; a Node check reproduced it. `isRegistered` returns the capability key string (or undefined), not the documented boolean. The capability loaders return callback-registration objects rather than Promises: registering a callback after completion does not replay the result, and repeated registrations replace the earlier callback (source inspection). Layer and tile option objects are also mutated during construction. Live capability requests were not tested.
@@ -464,3 +466,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `layer/Maplibre`: compared constructor, style hooks and inheritance with release source and added the style option with TSDoc. Type checks cover style configuration. The release import and inheritance failures and browser follow-up are recorded above; `getStyle` was not runtime-tested.
 
 - `layer/AnimatedCluster`: reviewed constructor, source replacement and render hooks. Corrected nullable source detachment and documented/exported animation options; cluster tracking and render hooks are private. Type checks and a Node check cover zero duration and detachment. Cluster rendering was not tested in this round.
+
+- `layer/Render3D`: rechecked constructor, style, activation, layer and height methods; rendering helpers are private. Corrected optional style reset and default height-function argument with TSDoc. Type checks and Node checks cover these APIs and findings above; rendering was not tested.

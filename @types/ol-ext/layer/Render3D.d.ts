@@ -33,10 +33,10 @@ export default class Render3D extends BaseObject {
   });
 
   /**
-   * Set style associated with the renderer
+   * Set the style associated with the renderer, or restore a default style.
    * @param {Style} s
    */
-  setStyle(s: Style): void;
+  setStyle(s?: Style): void;
 
   /**
    * Get style associated with the renderer
@@ -60,7 +60,7 @@ export default class Render3D extends BaseObject {
    *  @param {function|string|number} h a height function or a popertie name or a fixed value
    *  @return {function} function(f) return height of the feature f
    */
-  getHfn(h: ((f: Feature) => number) | string | number): (f: Feature) => number
+  getHfn(h?: ((f: Feature) => number) | string | number): (f: Feature) => number
 
   /** Animate rendering
    * @param {olx.render3D.animateOptions}

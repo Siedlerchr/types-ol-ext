@@ -1,3 +1,4 @@
+import Render3D from '../@types/ol-ext/layer/Render3D'
 import AnimatedClusterLayer from '../@types/ol-ext/layer/AnimatedCluster'
 import MaplibreLayer from '../@types/ol-ext/layer/Maplibre'
 import GeoportailLayer from '../@types/ol-ext/layer/Geoportail'
@@ -224,3 +225,7 @@ maplibreLayer.setStyle({ version: 8, sources: {}, layers: [] })
 
 const clusterLayer = new AnimatedClusterLayer({ animationDuration: 0 })
 clusterLayer.setSource(null)
+
+const renderer3d = new Render3D()
+renderer3d.setStyle()
+renderer3d.getHfn()
