@@ -504,3 +504,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `source/Vector`: rechecked the side-effect clear override. Added TSDoc and an intersection type for its `clearstart` and `clearend` event listeners; OpenLayers exposes `on` as a property that cannot be widened by module augmentation. Type checks cover both events; a Node check using the checkout’s OpenLayers instance verified their order around `clear`. This helper type must be applied to sources after importing the side effect, and the extension applies to the OpenLayers instance imported by the module.
 
 - `interaction/Modify`: reviewed its default re-export and side-effect prototype extension. Added TSDoc and augmentation for the named `ol/interaction` import form, with a type check. A Node stub reproduced the missing-window failure above; browser dragging was not tested.
+
+- `filter/Base`: the release also exports an empty `ol_filter` namespace object. Declared this named export with TSDoc and a type check. The public filter methods and upstream remove-all issue are recorded in the earlier filter round.

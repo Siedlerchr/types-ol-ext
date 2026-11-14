@@ -1,3 +1,4 @@
+import { ol_filter } from '../@types/ol-ext/filter/Base'
 import MapIFrameAPI from '../@types/ol-ext/utils/MapIFrameAPI'
 import IFrameAPI from '../@types/ol-ext/utils/IFrameAPI'
 import domElement from 'ol-ext/util/element'
@@ -295,3 +296,5 @@ function checkFrameCall(bridge: MapIFrameAPI): void {
   bridge.call('getAPI', result => { void result })
 }
 void checkFrameCall
+
+void ol_filter

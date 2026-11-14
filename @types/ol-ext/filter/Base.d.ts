@@ -38,6 +38,9 @@ declare module 'ol/layer/Base' {
   }
 }
 
+/** Empty filter namespace exported by the release. */
+export const ol_filter: Record<string, unknown>
+
 /** Filters are effects that render over a map or a layer.
  * Use the map methods to add or remove filter on a map
  * ({@link Map#addFilter}, {@link Map#removeFilter}, {@link Map#getFilters}).
