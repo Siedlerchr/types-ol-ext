@@ -1,3 +1,4 @@
+import MapIFrameAPI from '../@types/ol-ext/utils/MapIFrameAPI'
 import IFrameAPI from '../@types/ol-ext/utils/IFrameAPI'
 import domElement from 'ol-ext/util/element'
 import { toHSL, fromHSL, toHSV, fromHSV, toHexa } from '../@types/ol-ext/util/color'
@@ -288,3 +289,8 @@ const iframeAPI = new IFrameAPI('https://example.com')
 iframeAPI.setAPI({ echo: (value: string) => value })
 iframeAPI.postMessage('echo', { value: 1 })
 iframeAPI.addListener('update', function (this: { value: number }) { void this.value })
+
+function checkFrameCall(bridge: MapIFrameAPI): void {
+  bridge.call('getAPI', result => { void result })
+}
+void checkFrameCall

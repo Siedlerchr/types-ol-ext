@@ -12,6 +12,8 @@ export default class MapIFrameAPI {
   constructor(win: Window, id: number, targetOrigin: string);
   /** Obtain the iframe API once the embedded map is ready. */
   static ready(iframe: string | HTMLIFrameElement, ready: (api: IFrameAPI) => void, targetOrigin?: string): void;
+  /** Call an iframe method with a response callback and no data argument. */
+  call(key: string, callback: (data: any) => void): void;
   /** Call an iframe API method, optionally receiving its response. */
   call(key: string, data?: any, callback?: (data: any) => void): void;
   /** Register a listener for messages from the iframe. */
