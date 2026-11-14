@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `overlay/FixedPopup`: constructing without an options object throws while assigning `anchor`. A supplied `anchor: true` is overwritten with false, and zero `minScale` or `maxScale` is replaced with the default. The constructor also changes the caller’s positioning and class name. These are source observations; popup UI was not tested.
+
 - `interaction/CenterTouch.getPosition`: before a position has been recorded, calling it without an attached map throws while reading map size; a Node stub reproduced the failure. `interaction/DrawTouch` overwrites any supplied CenterTouch `handleEvent` callback with its own handler and mutates the options object (source inspection). Touch interactions were not browser-tested.
 
 - `interaction/SelectCluster`: supplying a `layers` array causes the constructor to append its internal overlay to the caller’s array. A Node check showed a one-layer input becoming two layers; repeated reuse accumulates overlays. The constructor also replaces the supplied filter and layer function in its options object (source inspection). Pointer behavior was not tested.
@@ -549,3 +551,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `interaction/SelectCluster` and `control/Toggle`: rechecked inherited selection and button options. Added TSDoc to cluster settings; a Node check reproduced mutation of the caller’s layers array, and source inspection identified the ignored toggle click handler. Pointer and UI behavior were not tested.
 
 - `interaction/CenterTouch` and `DrawTouch`: rechecked inherited event-handler options and position initialization. The public types reflect the available constructors; the unattached-position failure and overwritten callback are recorded above. Touch interaction was not tested in a browser.
+
+- `overlay/FixedPopup`: rechecked constructor forwarding and corrected the required options object; added TSDoc and a negative type check. Source inspection identified the option overrides above; browser popup behavior was not tested.

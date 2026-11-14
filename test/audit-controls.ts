@@ -217,6 +217,8 @@ gps.setInput('2,48')
 const popup = new Popup({ positioning: 'auto', anchor: false, html: 'Hello' })
 popup.show(true, 'Updated')
 const fixed = new FixedPopup({ positioning: 'top-auto', hook: 'map' })
+// @ts-expect-error The release constructor dereferences its options.
+new FixedPopup()
 fixed.setMap(null)
 fixed.setPixelPosition([10, 10])
 fixed.setCoordinate([1, 2])

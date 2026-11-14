@@ -7,10 +7,14 @@ import type { Positioning } from 'ol/Overlay'
 import type { Options as PopupOptions } from './Popup'
 import Popup from './Popup'
 
+/** Options for a popup fixed to the map or viewport. */
 export interface Options extends PopupOptions {
   style?: Style;
+  /** Minimum popup scale. */
   minScale?: number;
+  /** Maximum popup scale. */
   maxScale?: number;
+  /** Whether the popup follows the map or viewport. */
   hook?: 'map' | 'viewport'
 }
 
@@ -39,7 +43,7 @@ export default class FixedPopup extends Popup {
    *   the 'auto' positioning var the popup choose its positioning to stay on the map.
    *  @param {string} options.hook popup is hooked on the 'map' (and move with it) or on the 'viewport', default viewport.
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /**
    * Set the map instance the control is associated with
