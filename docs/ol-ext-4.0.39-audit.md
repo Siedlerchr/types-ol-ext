@@ -28,6 +28,9 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `layer/SketchOverlay`: `startDrawing` documents `coordinates`, `feature` and `atstart` but only reads `type`; a Node check confirmed coordinates are ignored. `addPoint` compares coordinate arrays by identity rather than value.
+- `layer/GetPreview`: the Tile implementation calls the tile URL function with the projection in the pixel-ratio argument position and omits the projection argument. The layer preview projection path dereferences its source before checking it exists. These are source findings; tile rendering was not tested.
+
 - `filter/Clip`: when coordinates are supplied without an extent, the constructor computes a bounding extent and writes it to the caller’s options after storing `[0, 0, 1, 1]` on the filter. An empty coordinates array throws during clipping. Both behaviors were reproduced in Node; rendering was not tested.
 - `filter/Paper`: the SVG filter constructor uses `options.light || 50`, so an explicit zero is replaced with 50; `setLight(0)` can set it afterward. This follows from source inspection; SVG rendering was not tested.
 
@@ -394,3 +397,5 @@ The following source comparisons are partial, focused on verified missing or inc
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
 
 - `filter/Clip` and `Paper`: corrected Clip extent spelling and inherited activation, and Paper forwarded SVG options; removed Paper members absent from the implementation. Type checks cover constructor options and the light setter. Clip path checks and upstream limitations are recorded above; browser rendering was not tested.
+
+- `layer/SketchOverlay` and `GetPreview`: reviewed constructors, prototype augmentations and public drawing and preview methods. Corrected optional sketch styles, position and finish return values, feature type, optional source preview inputs and layer projection argument. Type checks cover sketch construction and returns; a Node check covered ignored drawing coordinates. Browser rendering and preview requests were not tested.

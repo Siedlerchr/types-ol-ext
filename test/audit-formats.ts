@@ -1,3 +1,5 @@
+import SketchOverlay from '../@types/ol-ext/layer/SketchOverlay'
+import '../@types/ol-ext/layer/GetPreview'
 import Clip from '../@types/ol-ext/filter/Clip'
 import ordering from '../@types/ol-ext/render/Ordering'
 import '../@types/ol-ext/render/AnimExtent'
@@ -232,3 +234,8 @@ const clip = new Clip({ active: false, extent: [0, 0, 10, 10], coords: [[0, 0], 
 const paperOptions = new Paper({ id: 'paper', light: 0, scale: 2 })
 paperOptions.setLight(50)
 void clip
+
+const sketch = new SketchOverlay()
+const sketchPosition: number[] | undefined = sketch.getPosition()
+const sketchResult = sketch.finishDrawing(true)
+void [sketchPosition, sketchResult]

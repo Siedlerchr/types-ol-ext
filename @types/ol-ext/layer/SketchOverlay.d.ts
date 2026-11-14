@@ -7,7 +7,7 @@ import type { Style } from 'ol/style'
 
 export interface Options {
   type?: string;
-  style: Style | Style[];
+  style?: Style | Style[];
   sketchStyle?: Style | Style[];
 }
 
@@ -26,7 +26,7 @@ export default class SketchOverlay extends VectorLayer<VectorSource<Feature<Geom
    *  @param {ol_style_Style|Array<ol_style_Style>} options.style Drawing style
    *  @param {ol_style_Style|Array<ol_style_Style>} options.sketchStyle Sketch style
    */
-  constructor(options: any);
+  constructor(options?: Options);
 
   /** Set geometry type
    * @param {string} type Geometry type
@@ -66,7 +66,7 @@ export default class SketchOverlay extends VectorLayer<VectorSource<Feature<Geom
   /** Finish drawing
    * @return {Feature} the drawed feature
    */
-  finishDrawing(valid?: boolean): Feature;
+  finishDrawing(valid?: boolean): Feature<Geometry> | false;
 
   /** Abort drawing
    */
@@ -80,7 +80,7 @@ export default class SketchOverlay extends VectorLayer<VectorSource<Feature<Geom
   /** Get current position
    * @return {ol.coordinate}
    */
-  getPosition(): Coordinate;
+  getPosition(): Coordinate | undefined;
 
   /** Draw/refresh link
    */
@@ -88,7 +88,7 @@ export default class SketchOverlay extends VectorLayer<VectorSource<Feature<Geom
 
   /** Get current feature
    */
-  getFeature(): any;
+  getFeature(): Feature<Geometry>;
 
   /** Draw/refresh sketch
    */
