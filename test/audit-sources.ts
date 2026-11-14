@@ -1,3 +1,5 @@
+import '../@types/ol-ext/interaction/Modify'
+import { Modify as ExtendedModify } from 'ol/interaction'
 import type { ClearEventVectorSource } from '../@types/ol-ext/source/Vector'
 import { Vector as RenderVectorLayer } from 'ol/layer'
 import PerspectiveMap from '../@types/ol-ext/map/PerspectiveMap'
@@ -249,3 +251,8 @@ function clearEvents(source: ClearEventVectorSource): void {
   source.on('clearend', event => { void event.type })
 }
 void clearEvents
+
+function modifiedFeatures(modify: ExtendedModify): void {
+  modify.getModifiedFeatures()
+}
+void modifiedFeatures

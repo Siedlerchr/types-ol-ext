@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `interaction/Modify.getModifiedFeatures`: when at least one drag segment is present in a non-browser environment, the method evaluates the undeclared `window` identifier and throws `ReferenceError`. This was reproduced using a drag-segment stub. It also depends on OpenLayers private `dragSegments_` internals; browser interactions were not tested.
+
 - `control/Profile.onMove`: while scanning profile points, the previous-point variable stays at the first entry. For pointer positions on later segments, the nearest-point comparison can therefore select the first entry instead of the adjacent previous point; it also resets the selected index to zero. This is a source observation; graph interaction was not browser-tested.
 
 - `featureanimation/Path.animate`: when a path has a single coordinate and an animation event arrives with nonzero `time`, interpolation dereferences an undefined previous point and throws. A Node check reproduced this with a one-point LineString; canvas rendering was not exercised.
@@ -500,3 +502,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `layer/Render3D`: the module also installs `setRender3D` on vector layers. Added its prototype augmentation and TSDoc; the type check covers the project’s named `ol/layer` import form. The renderer attachment was not browser-tested.
 
 - `source/Vector`: rechecked the side-effect clear override. Added TSDoc and an intersection type for its `clearstart` and `clearend` event listeners; OpenLayers exposes `on` as a property that cannot be widened by module augmentation. Type checks cover both events; a Node check using the checkout’s OpenLayers instance verified their order around `clear`. This helper type must be applied to sources after importing the side effect, and the extension applies to the OpenLayers instance imported by the module.
+
+- `interaction/Modify`: reviewed its default re-export and side-effect prototype extension. Added TSDoc and augmentation for the named `ol/interaction` import form, with a type check. A Node stub reproduced the missing-window failure above; browser dragging was not tested.
