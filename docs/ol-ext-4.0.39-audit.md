@@ -28,6 +28,9 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `interaction/SelectCluster`: supplying a `layers` array causes the constructor to append its internal overlay to the caller’s array. A Node check showed a one-layer input becoming two layers; repeated reuse accumulates overlays. The constructor also replaces the supplied filter and layer function in its options object (source inspection). Pointer behavior was not tested.
+- `control/Toggle`: a `handleClick` callback inherited from Button options is overwritten by the constructor; it will not run when the toggle is clicked. This is a source observation; the button UI was not tested.
+
 - `control/SearchGeoportail`: selecting a result with numeric coordinates `{ x: 0, y: 0 }` takes the missing-coordinate commune-lookup branch instead of dispatching the position; reproduced with a Node stub. Its constructor also overwrites supplied `url` and `copy` options with service defaults (source inspection). Live geocoding was not tested.
 
 - `render/Pulse`: the `radius` option is assigned to a local value that is never used, so changing it has no effect on the pulse. A style without an image also causes the animation callback to dereference null, and zero duration is replaced by 3000 ms. These are source observations; rendering was not tested.
@@ -540,3 +543,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `render/Pulse` and `layer/Geoportail`: reviewed option-use candidates and recorded the ineffective pulse radius and false queryability override above. Both findings are source observations; rendering and live queries were not tested.
 
 - `control/SearchGeoportail`: rechecked inherited request options and selection branching. Existing types cover the public options; a Node stub reproduced the zero-coordinate issue above. Live geocoding was not tested.
+
+- `interaction/SelectCluster` and `control/Toggle`: rechecked inherited selection and button options. Added TSDoc to cluster settings; a Node check reproduced mutation of the caller’s layers array, and source inspection identified the ignored toggle click handler. Pointer and UI behavior were not tested.

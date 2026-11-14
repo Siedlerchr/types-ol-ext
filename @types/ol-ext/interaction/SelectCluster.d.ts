@@ -8,7 +8,9 @@ import type { Options as SelectOptions, SelectEvent } from 'ol/interaction/Selec
 import type VectorSource from 'ol/source/Vector'
 import type { Geometry } from 'ol/geom'
 
+/** Selection options and cluster expansion settings. */
 export interface Options extends SelectOptions {
+  /** Style for the individual features revealed from a cluster. */
   featureStyle?: StyleLike;
   selectCluster?: boolean;
   pointRadius?: number;
@@ -17,6 +19,7 @@ export interface Options extends SelectOptions {
   maxObjects?: number;
   animate?: boolean;
   animationDuration?: number;
+  /** Close previously expanded clusters when selecting another. */
   autoClose?: boolean;
   wrapX?: boolean;
 }
