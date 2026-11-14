@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `util/color`: `toHexa` documents string inputs but indexes them as numeric components, producing an invalid result for `#ff0000`. `fromHSV` yields NaN components for negative hues. Both were reproduced in Node; out-of-range input handling beyond these cases was not evaluated.
+
 - `util/ext` accesses `window` at module load, so it cannot be imported in a non-browser environment without a stub (source inspection). Its inheritance helper replaces the child prototype, losing existing prototype members; it is unsuitable for native ES classes as recorded in the import fix validation.
 
 - `util/View.flyTo` uses truthiness for zoom, zoomAt and duration, so zero values are replaced with defaults. A Node check verified all three. `takeTour` similarly replaces a zero delay and invokes the step callback once after the final destination (source inspection).
@@ -422,3 +424,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `util/SVGFilter` and `ext`: compared module exports and public methods. Corrected SVGFilter BaseObject inheritance, operation descriptors, optional arguments and canvas result; replaced the unrelated ext namespace declaration with the actual named and default inheritance exports. Type checks cover operation arrays and imports; browser SVG rendering was not tested.
 
 - `util/SVGFilter/Laplacian`, `Sobel`, `Prewitt`, `Roberts` and `Paper`: reviewed constructors and inherited methods. Corrected Laplacian neighbour spelling and boolean flags, IDs and supported gamma options. Type checks cover constructors; the Paper zero-light issue is recorded above. SVG rendering was not tested.
+
+- `util/color`: reviewed all five named conversions and alpha propagation, added the missing HSV and hexadecimal exports and optional rounding arguments, and documented the public functions. Type checks cover exports; Node checks exposed the upstream input issues above.

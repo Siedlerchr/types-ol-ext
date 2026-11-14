@@ -1,3 +1,4 @@
+import { toHSL, fromHSL, toHSV, fromHSV, toHexa } from '../@types/ol-ext/util/color'
 import Laplacian from '../@types/ol-ext/util/SVGFilter/Laplacian'
 import Sobel from '../@types/ol-ext/util/SVGFilter/Sobel'
 import Prewitt from '../@types/ol-ext/util/SVGFilter/Prewitt'
@@ -273,3 +274,6 @@ new Sobel({ id: 'sobel', alpha: true, gamma: 2 })
 new Prewitt({ id: 'prewitt' })
 new Roberts({ id: 'roberts' })
 new PaperSVG({ light: 20 }).setLight(0)
+
+const colorValues = [toHSL('#ff0000', 10), fromHSL([0, 100, 50], 10), toHSV('#ff0000'), fromHSV([0, 100, 100]), toHexa([255, 0, 0, 1])]
+void colorValues
