@@ -12,8 +12,11 @@ export interface Options extends SearchOptions {
   maxItems?: number;
   url?: string;
   position?: boolean;
+  /** Restrict results to an INSEE commune code. */
   citycode?: string;
+  /** Restrict results to a postal code. */
   postcode?: string;
+  /** Restrict results to house numbers or streets. */
   type?: 'housenumber' | 'street';
 }
 

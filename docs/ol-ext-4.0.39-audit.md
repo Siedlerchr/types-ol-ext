@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `control/SearchBAN` and `SearchPhoton`: calling `requestData` with `position: true` before attaching the control to a map throws on `getView`; reproduced using an unattached stub. SearchBAN also replaces a supplied `typing: 0` with 500 ms and overwrites a supplied attribution string (source inspection). No live service request was made.
+
 - `util/imagesLoader.transparent`: passing a single color string as documented throws while parsing an undefined color; a Node check reproduced this with `transparent("red")`. For a two-color range whose first red channel is greater than the second, the lower red bound uses the first color instead of the computed minimum, so colors in the intended range are not made transparent (source inspection; tile rendering not tested).
 
 - `utils/Exif2Geojson`: passing an empty image list never calls `onLoad`, so consumers waiting for the resulting empty collection remain pending. For a photo whose `GPSAltitudeRef` indicates below sea level, the converter ignores the reference and returns a positive altitude (10 instead of -10 in a stub-EXIF check). Both were reproduced in Node with a stub; actual EXIF-JS and image loading were not tested.
@@ -446,3 +448,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `utils/Exif2Geojson`: reviewed the default function, options and callback shape; added TSDoc clarifying asynchronous delivery and the global dependency. Existing types cover the API. Node stub checks exposed the empty-list and altitude-reference issues above; real image metadata was not tested.
 
 - `util/imagesLoader`: checked public loader factories and terrain-RGB conversion exports against source; private BIL and shaded-relief helpers remain excluded as recorded above. Clarified that transparent expects an array in this release. Node checked elevation round-trip and the single-color failure; tile and network loading were not tested.
+
+- `control/SearchBAN`: compared its SearchPhoton inheritance, constructor, title, selection and request hooks with the release. Existing declarations cover the subclass; added TSDoc for BAN-specific filters. A Node stub reproduced the unattached-position failure above; live searches were not tested.
