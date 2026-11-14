@@ -1,3 +1,4 @@
+import IFrameAPI from '../@types/ol-ext/utils/IFrameAPI'
 import domElement from 'ol-ext/util/element'
 import { toHSL, fromHSL, toHSV, fromHSV, toHexa } from '../@types/ol-ext/util/color'
 import Laplacian from '../@types/ol-ext/util/SVGFilter/Laplacian'
@@ -282,3 +283,8 @@ void colorValues
 const elementNode: HTMLDivElement = domElement.create('DIV')
 const textNode: Text = domElement.create('TEXT', { html: 'text' })
 void [elementNode, textNode]
+
+const iframeAPI = new IFrameAPI('https://example.com')
+iframeAPI.setAPI({ echo: (value: string) => value })
+iframeAPI.postMessage('echo', { value: 1 })
+iframeAPI.addListener('update', function (this: { value: number }) { void this.value })

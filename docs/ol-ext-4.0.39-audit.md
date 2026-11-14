@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `utils/IFrameAPI`: with `targetOrigin` set to an allowed origin, a message from a different origin still invokes a registered listener because incoming `event.origin` and `event.source` are not checked. The listener receives the data as `this` and no positional argument, so callbacks expecting a data argument receive `undefined`. `setAPI({ ready: handler })` registers the reserved `ready` name because its reserved-name regex tests the whole object instead of each key. All three behaviors were reproduced with a window stub; cross-window browser behavior was not tested.
+
 - `util/element.positionRect` computes `right` from `top` instead of `left`; a Node stub with left 30, top 10 and width 20 returned right 30 instead of 50. `createCheck` does not forward its documented click and change callbacks, and `removeListener` cannot remove listeners installed with capture enabled (source inspection).
 
 - `util/color`: `toHexa` documents string inputs but indexes them as numeric components, producing an invalid result for `#ff0000`. `fromHSV` yields NaN components for negative hues. Both were reproduced in Node; out-of-range input handling beyond these cases was not evaluated.
@@ -430,3 +432,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `util/color`: reviewed all five named conversions and alpha propagation, added the missing HSV and hexadecimal exports and optional rounding arguments, and documented the public functions. Type checks cover exports; Node checks exposed the upstream input issues above.
 
 - `util/element`: compared its DOM helper exports, return shapes and options; added tag-specific creation overloads with TSDoc. A Node stub verified the position rectangle issue above. DOM interaction and scrolling were not browser-tested.
+
+- `utils/IFrameAPI`: reviewed iframe messaging, local properties, listener and registration methods. Corrected API registration to accept a handler record and message data to accept structured values, and documented the listener binding. Type checks cover these calls; stub checks exposed the upstream issues above. Browser cross-window messaging was not tested.
