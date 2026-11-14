@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `map/PerspectiveMap`: omitting the documented default angle sends NaN to the animation; reproduced with an animation-frame stub. The constructor dereferences `options.target` and its DOM element without checking either, so omitted or invalid targets throw. Animation frames are requested without storing their IDs, so the cancellation in `setPerspective` cannot cancel a previous animation (source inspection; browser animation was not tested).
+
 - `layer/Render3D`: `animate` without an attached layer throws when requesting a redraw. After that call, `getFeatureHeight` returns NaN before the first render initializes its interpolation ratio. With `height: "height"` and `defaultHeight: 5`, a feature height of 0 returns 5 because the property is tested for truthiness. A Node check reproduced all three; animation rendering was not tested.
 
 - `layer/Maplibre`: the 4.0.39 module cannot be imported as installed because it imports `maplibre-gl.js` and a nonexistent named element export; its legacy constructor also calls the OpenLayers class without `new`. These are addressed in upstream PR #1194 as recorded above. Independently, `getStyle` dereferences the map before initial rendering and calls `get("style")` on the MapLibre map; those paths were identified in source and not exercised in the browser follow-up. The constructor overwrites a supplied `render` option.
@@ -468,3 +470,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `layer/AnimatedCluster`: reviewed constructor, source replacement and render hooks. Corrected nullable source detachment and documented/exported animation options; cluster tracking and render hooks are private. Type checks and a Node check cover zero duration and detachment. Cluster rendering was not tested in this round.
 
 - `layer/Render3D`: rechecked constructor, style, activation, layer and height methods; rendering helpers are private. Corrected optional style reset and default height-function argument with TSDoc. Type checks and Node checks cover these APIs and findings above; rendering was not tested.
+
+- `map/PerspectiveMap`: reviewed target setup, perspective animation, matrix and coordinate helpers and the overlay side effect. Corrected required target and angle, optional matrix recomputation, and coordinate/pixel types with TSDoc. Type checks cover the API; a stub check reproduced the omitted-angle issue above. Browser perspective and overlay behavior were not tested.

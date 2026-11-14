@@ -1,3 +1,4 @@
+import PerspectiveMap from '../@types/ol-ext/map/PerspectiveMap'
 import Render3D from '../@types/ol-ext/layer/Render3D'
 import AnimatedClusterLayer from '../@types/ol-ext/layer/AnimatedCluster'
 import MaplibreLayer from '../@types/ol-ext/layer/Maplibre'
@@ -229,3 +230,11 @@ clusterLayer.setSource(null)
 const renderer3d = new Render3D()
 renderer3d.setStyle()
 renderer3d.getHfn()
+
+function perspectiveAudit(target: HTMLElement): void {
+  const map = new PerspectiveMap({ target })
+  map.setPerspective(15, { duration: 0 })
+  map.getMatrix3D()
+  map.getPixelScreenFromCoordinate([0, 0])
+}
+void perspectiveAudit
