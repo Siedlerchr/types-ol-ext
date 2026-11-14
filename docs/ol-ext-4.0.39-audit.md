@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `util/Ajax.send`: adding `{x: 2}` to a URL already containing `?existing=1` produces `?existing=1?x=2` rather than using `&`. If a second request starts with `abort: false`, completion of the first clears the shared current-request reference; a third default request then fails to abort the still-running second request. Both were reproduced with an XMLHttpRequest stub. Parameter names are not encoded (source inspection); no live request was made.
+
 - `source/Vector3D`: when height is a feature property and defaultHeight is 5, a feature property value of 0 produces height 5. Calling `animate({ duration: 0 })` sets a duration of 1000 ms. Both truthiness defaults were verified by invoking the methods with Node stubs; canvas rendering was not tested.
 
 - `overlay/Magnify`: `setMap(null)` calls `getViewport` on null after detaching, so removing the overlay throws. Attaching adds a freshly bound mousemove callback but detaching removes the unbound method, leaving the listener installed; repeated attachment adds more listeners. A `zoomOffset` of 0 is replaced with 1, and omitted constructor options are dereferenced. These are source observations; map interaction was not browser-tested.
@@ -480,3 +482,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `overlay/Magnify`: checked constructor options, map attachment, public refresh and active methods. Replaced generic overlay options with its actual map/layer/projection options and corrected the active setter return, with TSDoc. Type checks cover configuration and return; upstream detachment and listener issues are recorded above. Browser interaction was not tested.
 
 - `source/Vector3D`: revisited height conversion and animation methods, confirmed `getHfn` and render helpers are private, and documented the height type. Allowed resetting `setHeight` to its default. Node stub checks exposed the zero-value behavior above; rendering was not tested.
+
+- `util/Ajax`: rechecked constructor, static helpers, request options and event payloads against source. Clarified parameter encoding in TSDoc; existing declarations cover public methods. A mocked XMLHttpRequest reproduced the URL and concurrent-request issues above; no live network requests were made.

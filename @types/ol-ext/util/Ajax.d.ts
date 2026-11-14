@@ -13,7 +13,7 @@ export interface Options {
 export interface SendOptions {
   /** Abort the previous request; defaults to true. */
   abort?: boolean;
-  /** Encode the URL and parameter values; defaults to true. */
+  /** Encode the URL and parameter values (but not parameter names); defaults to true. */
   encode?: boolean;
   /** Request timeout in milliseconds. */
   timeout?: number;
