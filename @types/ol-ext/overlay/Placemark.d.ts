@@ -1,10 +1,12 @@
 import Popup from './Popup'
 import type { Options as PopupOptions } from './Popup'
 
+/** Options for a placemark popup. */
 export interface Options extends PopupOptions {
   color?: string;
   backgroundColor?: string;
   contentColor?: string;
+  /** Placemark radius in pixels. */
   size?: number;
 }
 
