@@ -42,6 +42,11 @@ import CSSFilter from '../@types/ol-ext/filter/CSS'
 import CanvasFilter from '../@types/ol-ext/filter/CanvasFilter'
 import SVGCanvasFilter from '../@types/ol-ext/filter/SVGFilter'
 import SVGDefinition from '../@types/ol-ext/util/SVGFilter'
+import Fold from '../@types/ol-ext/filter/Fold'
+import PencilSketch from '../@types/ol-ext/filter/PencilSketch'
+import Pointillism from '../@types/ol-ext/filter/Pointillism'
+import Halftone from '../@types/ol-ext/filter/Halftone'
+import Lego from '../@types/ol-ext/filter/Lego'
 
 const animatedCanvas = new AnimatedCanvas({
   animate: false,
@@ -71,6 +76,12 @@ declare const svgDefinition: SVGDefinition
 const canvasFilter = new CanvasFilter({ blur: 2, shadow: [1, 2], shadowColor: '#000' })
 canvasFilter.addSVGFilter(svgDefinition)
 new SVGCanvasFilter([svgDefinition]).removeSVGFilter(svgDefinition)
+new Fold({ fold: [2, 3], fsize: 6, active: false })
+new PencilSketch({ intensity: 0.5 })
+new Pointillism({ saturate: 2 })
+new Halftone({ channel: 'r', color: '#000' }).setSize()
+const legoPattern: CanvasPattern | 'transparent' | null = new Lego().getPattern(0, 0)
+void legoPattern
 // @ts-expect-error Composite reads its options object during construction.
 new Composite()
 

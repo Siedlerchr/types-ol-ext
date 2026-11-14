@@ -1,6 +1,7 @@
 import Base from './Base'
+import type { Options as BaseOptions } from './Base'
 
-export type FilterPointillismOptions = {
+export type FilterPointillismOptions = BaseOptions & {
   /**
    * saturation, default 2
    */
