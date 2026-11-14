@@ -1,53 +1,20 @@
-import type {
-  Map as _ol_Map_
-} from 'ol'
-import type Collection
-  from 'ol/Collection'
-import type Feature
-  from 'ol/Feature'
-import type {
-  Layer
-} from 'ol/layer'
-import type {
-  Fill,
-  Stroke,
-  Style
-} from 'ol/style'
-import {
-  Pointer
-} from 'ol/interaction'
-import type MapBrowserEvent
-  from 'ol/MapBrowserEvent'
-import type {
-  Condition as EventsConditionType
-} from 'ol/events/condition'
-import type Select
-  from 'ol/interaction/Select'
-import type {
-  Coordinate
-} from 'ol/coordinate'
-import type BaseEvent
-  from 'ol/events/Event'
-import type {
-  Geometry
-} from 'ol/geom'
-import type {
-  Pixel
-} from 'ol/pixel'
-import type {
-  EventsKey
-} from 'ol/events'
-import type {
-  ObjectEvent
-} from 'ol/Object'
-import type {
-  CombinedOnSignature,
-  EventTypes,
-  OnSignature
-} from 'ol/Observable'
-import type {
-  Types
-} from 'ol/ObjectEventType'
+import type { Map as _ol_Map_ } from 'ol'
+import type Collection from 'ol/Collection'
+import type Feature from 'ol/Feature'
+import type { Layer } from 'ol/layer'
+import type { Fill, Stroke, Style } from 'ol/style'
+import { Pointer } from 'ol/interaction'
+import type MapBrowserEvent from 'ol/MapBrowserEvent'
+import type { Condition as EventsConditionType } from 'ol/events/condition'
+import type Select from 'ol/interaction/Select'
+import type { Coordinate } from 'ol/coordinate'
+import type BaseEvent from 'ol/events/Event'
+import type { Geometry } from 'ol/geom'
+import type { Pixel } from 'ol/pixel'
+import type { EventsKey } from 'ol/events'
+import type { ObjectEvent } from 'ol/Object'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { Types } from 'ol/ObjectEventType'
 
 type TransformOnSignature<Return> =
   OnSignature<EventTypes, Event, Return>
