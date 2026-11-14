@@ -53,7 +53,7 @@ export default class FillAttribute extends Select {
    */
   setAttributes(properties: Record<string, unknown>): void;
 
-  /** Set an attribute
+  /** Set an attribute. Attributes must first be supplied or set with `setAttributes`.
    * @param {string} key
    * @param {*} val
    */
@@ -64,7 +64,7 @@ export default class FillAttribute extends Select {
    */
   getAttributes(): Record<string, unknown> | undefined;
 
-  /** Get an attribute
+  /** Get an attribute. Attributes must first be supplied or set with `setAttributes`.
    * @param {string} key
    * @return {*} val
    */

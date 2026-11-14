@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `interaction/FillAttribute`: constructing without the optional properties argument and then calling `getAttribute("name")` or `setAttribute("name", value)` throws because the internal attributes object is undefined. Both calls were reproduced in Node using `cursor: false`; setting attributes first avoids the failure. Pointer interaction was not tested.
+
 - `interaction/Transform.select`: calling `select(feature)` with the default `add` argument removes rather than selects the feature; a Node check showed an empty selection afterward. Calling `select(feature, true)` before attaching the interaction adds the feature and then throws while accessing the absent map view. Deactivating a synchronized select interaction also extends the selection and pushes the same features again (source observation); browser interaction was not tested.
 
 - `interaction/Modify.getModifiedFeatures`: when at least one drag segment is present in a non-browser environment, the method evaluates the undeclared `window` identifier and throws `ReferenceError`. This was reproduced using a drag-segment stub. It also depends on OpenLayers private `dragSegments_` internals; browser interactions were not tested.
@@ -510,3 +512,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `filter/Base`: the release also exports an empty `ol_filter` namespace object. Declared this named export with TSDoc and a type check. The public filter methods and upstream remove-all issue are recorded in the earlier filter round.
 
 - `interaction/Transform`: rechecked constructor selection options and public selection, style, center and radius methods. Clarified add/remove behavior and optional center with TSDoc; event and type checks remain in the earlier round. A Node check reproduced the unattached and default-selection behavior above; interactive transforms were not tested.
+
+- `interaction/FillAttribute`: rechecked inherited Select options and the attribute access methods. Documented the required initialization before individual attribute access. A Node check reproduced the missing-attributes failures above; selection interaction was not tested.
