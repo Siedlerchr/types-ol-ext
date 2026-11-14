@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `layer/Geoportail`: calling the constructor without arguments throws while reading `layer`, despite optional-looking documentation; a Node check reproduced it. `isRegistered` returns the capability key string (or undefined), not the documented boolean. The capability loaders return callback-registration objects rather than Promises: registering a callback after completion does not replay the result, and repeated registrations replace the earlier callback (source inspection). Layer and tile option objects are also mutated during construction. Live capability requests were not tested.
+
 - `layer/GeoImage.getExtent`: calling it before assigning a source throws on null; passing an ordinary OpenLayers ImageStatic source also throws because that source has no `getExtent` method. Both were reproduced in Node. The layer requires a compatible source even though the constructor accepts generic image-layer options.
 
 - `control/SearchBAN` and `SearchPhoton`: calling `requestData` with `position: true` before attaching the control to a map throws on `getView`; reproduced using an unattached stub. SearchBAN also replaces a supplied `typing: 0` with 500 ms and overwrites a supplied attribution string (source inspection). No live service request was made.
@@ -454,3 +456,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `control/SearchBAN`: compared its SearchPhoton inheritance, constructor, title, selection and request hooks with the release. Existing declarations cover the subclass; added TSDoc for BAN-specific filters. A Node stub reproduced the unattached-position failure above; live searches were not tested.
 
 - `layer/GeoImage`: reviewed its constructor and overridden extent method. Restricted the declared source to GeoImage and documented that it is needed by `getExtent`. Type checks cover a compatible source; Node reproduced missing and incompatible source failures above.
+
+- `layer/Geoportail`: reviewed constructor overloads, inherited tile API, capability registry and callback-based loaders. Removed invented source methods and a nonexistent named capability export, corrected key spelling and registration return, and documented the actual callback object. Type checks cover construction and callbacks; Node verified missing arguments and registration returns. Live service requests were not tested.

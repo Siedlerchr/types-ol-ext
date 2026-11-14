@@ -1,3 +1,4 @@
+import GeoportailLayer from '../@types/ol-ext/layer/Geoportail'
 import GeoImageLayer from '../@types/ol-ext/layer/GeoImage'
 import DayNight from '../@types/ol-ext/source/DayNight'
 import GridBin from '../@types/ol-ext/source/GridBin'
@@ -210,3 +211,8 @@ ol_geom_GPAltiCode(new Point([0, 0]), { samplingDist: 100 })
 const geoImageLayer = new GeoImageLayer({ source: geoImage })
 const geoImageExtent: number[] = geoImageLayer.getExtent()
 void geoImageExtent
+
+new GeoportailLayer({ layer: 'ORTHOIMAGERY.ORTHOPHOTOS', gppKey: 'gpf' })
+GeoportailLayer.getCapabilities().then((capabilities, themes) => { void [capabilities, themes] })
+const registeredKey: string | undefined = GeoportailLayer.isRegistered('example')
+void registeredKey
