@@ -3,9 +3,13 @@ import type { LineString } from 'ol/geom'
 import type { FeatureAnimationEvent, Options as FeatureAnimationOptions } from './FeatureAnimation'
 import FeatureAnimation from './FeatureAnimation'
 
+/** Options for animating a feature along a line. */
 export interface Options extends FeatureAnimationOptions {
+  /** Speed used to derive duration; zero uses the configured duration. */
   speed?: number;
+  /** Whether to rotate the symbol, or its initial rotation in radians. */
   rotate?: number | boolean;
+  /** Line or line feature to follow. */
   path: LineString | Feature<LineString>;
   duration?: number;
 }

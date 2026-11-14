@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `featureanimation/Path.animate`: when a path has a single coordinate and an animation event arrives with nonzero `time`, interpolation dereferences an undefined previous point and throws. A Node check reproduced this with a one-point LineString; canvas rendering was not exercised.
+
 - `util/Ajax.send`: adding `{x: 2}` to a URL already containing `?existing=1` produces `?existing=1?x=2` rather than using `&`. If a second request starts with `abort: false`, completion of the first clears the shared current-request reference; a third default request then fails to abort the still-running second request. Both were reproduced with an XMLHttpRequest stub. Parameter names are not encoded (source inspection); no live request was made.
 
 - `source/Vector3D`: when height is a feature property and defaultHeight is 5, a feature property value of 0 produces height 5. Calling `animate({ duration: 0 })` sets a duration of 1000 ms. Both truthiness defaults were verified by invoking the methods with Node stubs; canvas rendering was not tested.
@@ -486,3 +488,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `util/Ajax`: rechecked constructor, static helpers, request options and event payloads against source. Clarified parameter encoding in TSDoc; existing declarations cover public methods. A mocked XMLHttpRequest reproduced the URL and concurrent-request issues above; no live network requests were made.
 
 - `style/FontAwesomeDef`, `FontAwesome5Def`, `FontMakiDef` and `FontMaki2Def`: checked registration side effects and exports. Added TSDoc to the re-export declarations; Maki 2 is side-effect-only. Node verified representative glyph registration, shared FontSymbol exports and the empty Maki 2 export list; font rendering was not tested.
+
+- `featureanimation/Path`: rechecked the constructor and animation override, including zero-length paths, and added TSDoc to the option fields. The required path and inherited animation declarations are covered by existing type tests. A Node check reproduced the single-point failure above; rendering was not tested.
