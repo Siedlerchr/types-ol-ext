@@ -1,3 +1,5 @@
+import AuditedView from '../@types/ol-ext/util/View'
+import WorkerHelper from '../@types/ol-ext/util/Worker'
 import TextStreamReader from '../@types/ol-ext/util/TextStreamReader'
 import SVGOperation from '../@types/ol-ext/util/SVGOperation'
 import SketchOverlay from '../@types/ol-ext/layer/SketchOverlay'
@@ -250,3 +252,8 @@ function streamAudit(file: File): void {
   operation.appendChild({ feoperation: 'feGaussianBlur', stdDeviation: 2 })
 }
 void streamAudit
+
+const tourView = new AuditedView()
+tourView.flyTo({ zoom: 3 })
+tourView.takeTour([[1, 2, 3, 'moveTo'], { zoom: 4 }], { delay: 100, step: (index, destinations) => { void [index, destinations] } })
+new WorkerHelper(event => event, { onMessage: value => { void value }, lib: { double: (n: number) => n * 2 } })

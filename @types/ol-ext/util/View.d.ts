@@ -8,7 +8,7 @@ export interface viewTourDestinations {
   /**
    * animation type (flyTo, moveTo), default flyTo
    */
-  type?: 'flyTo' | 'moveTo';
+  type?: 'flyTo' | 'flightTo' | 'moveTo';
   /**
    * animation duration
    */
@@ -39,35 +39,22 @@ export interface viewTourDestinations {
   anchor?: Coordinate;
 }
 
-export type Destination = {
-  x: number,
-  y: number,
-  zoo: number,
-  destinationType: 'flyTo' | 'moveTo'
-}
+export type Destination = [number, number, number?, ('flyTo' | 'flightTo' | 'moveTo')?]
+export type TourDestination = viewTourDestinations | Destination
 
 export interface Options {
+  delay?: number;
+  type?: 'flyTo' | 'flightTo' | 'moveTo';
   easing?: (t: number) => number;
-  done?: (callback: boolean) => void;
-  step?: (callback: number) => void;
+  done?: (completed: boolean) => void;
+  step?: (index: number, destinations: TourDestination[]) => void;
 }
 
 declare module 'ol/View' {
-
-  /** FlyTo animation
-   * @param {viewTourDestinations} options
-   * @param {function} done callback function called at the end of an animation, called with true if the animation completed
-   */
-  export function flyTo(options?: viewTourDestinations, done?: (callback: boolean) => void): void;
-
-  /** Start a tour on the map
-   * @param {Array<viewTourDestinations>|Array<Array>} destinations an array of destinations or an array of [x,y,zoom,destinationType]
-   * @param {Object} options
-   *  @param {number} [options.delay=750] delay between 2 destination
-   *  @param {string} [options.type] animation type (flyTo, moveTo) to use if not defined in destinations
-   *  @param {function} [options.easing] easing function used during the animation if not defined in destinations
-   *  @param {function} [options.done] callback function called at the end of an animation, called with true if the tour completed
-   *  @param {function} [options.step] callback function called when a destination is reached with the step index as param
-   */
-  export function takeTour(destinations: viewTourDestinations[] | Destination[], options?: Options): void
+  export default interface View {
+    flyTo(options?: viewTourDestinations, done?: (completed: boolean) => void): void;
+    takeTour(destinations: TourDestination[], options?: Options): void;
+  }
 }
+
+export default ol_View
