@@ -409,3 +409,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `util/TextStreamReader` and `SVGOperation`: checked constructor and public methods against the release. Corrected the required reader file, optional chunk size and stop callback, plus SVG operation inheritance, static namespace and nested operation inputs. Type checks cover these APIs; browser SVG and file reading were not tested.
 
 - `legend/Item`, `Image` and `Legend`: rechecked each public method and classified the drawing helpers as private. Corrected the item element return and optional instance image options. Type checks cover the image call; Node checks and source findings are recorded above. Legend DOM and rendering were not tested in this round.
+
+- `util/input/Base`: checked constructor, inherited observable API, value methods and element accessor; `_listenDrag` is private. Corrected the optional value argument. A stub-input Node check verified change dispatch and value retention when omitted; browser focus and drag behavior were not tested. The base return type retains `string | number` to accommodate its numeric subclasses.

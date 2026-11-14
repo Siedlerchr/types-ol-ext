@@ -1,3 +1,4 @@
+import InputBase from '../@types/ol-ext/util/input/Base'
 import Swipe from '../@types/ol-ext/control/Swipe'
 import TileLayer from 'ol/layer/Tile'
 import Storymap from '../@types/ol-ext/control/Storymap'
@@ -618,3 +619,7 @@ wmtsAudit.on('load', event => { if (event.options) { void event.options.source.m
 // @ts-expect-error Unsupported matrix sets can return no result.
 const requiredWmts: import('../@types/ol-ext/control/WMTSCapabilities').WMTSResult = wmtsResult
 void [requiredWmts, supportedMatrices]
+
+const baseInput = new InputBase()
+baseInput.setValue()
+baseInput.setValue(4)

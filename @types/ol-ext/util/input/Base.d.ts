@@ -36,7 +36,7 @@ export default class Base extends Object {
 
   /** Set the current value
    */
-  setValue(v: any): void;
+  setValue(v?: string | number): void;
 
   /** Get the current getValue
    * @returns {string}
