@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `source/Vector3D`: when height is a feature property and defaultHeight is 5, a feature property value of 0 produces height 5. Calling `animate({ duration: 0 })` sets a duration of 1000 ms. Both truthiness defaults were verified by invoking the methods with Node stubs; canvas rendering was not tested.
+
 - `overlay/Magnify`: `setMap(null)` calls `getViewport` on null after detaching, so removing the overlay throws. Attaching adds a freshly bound mousemove callback but detaching removes the unbound method, leaving the listener installed; repeated attachment adds more listeners. A `zoomOffset` of 0 is replaced with 1, and omitted constructor options are dereferenced. These are source observations; map interaction was not browser-tested.
 
 - `map/PerspectiveMap`: omitting the documented default angle sends NaN to the animation; reproduced with an animation-frame stub. The constructor dereferences `options.target` and its DOM element without checking either, so omitted or invalid targets throw. Animation frames are requested without storing their IDs, so the cancellation in `setPerspective` cannot cancel a previous animation (source inspection; browser animation was not tested).
@@ -476,3 +478,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `map/PerspectiveMap`: reviewed target setup, perspective animation, matrix and coordinate helpers and the overlay side effect. Corrected required target and angle, optional matrix recomputation, and coordinate/pixel types with TSDoc. Type checks cover the API; a stub check reproduced the omitted-angle issue above. Browser perspective and overlay behavior were not tested.
 
 - `overlay/Magnify`: checked constructor options, map attachment, public refresh and active methods. Replaced generic overlay options with its actual map/layer/projection options and corrected the active setter return, with TSDoc. Type checks cover configuration and return; upstream detachment and listener issues are recorded above. Browser interaction was not tested.
+
+- `source/Vector3D`: revisited height conversion and animation methods, confirmed `getHfn` and render helpers are private, and documented the height type. Allowed resetting `setHeight` to its default. Node stub checks exposed the zero-value behavior above; rendering was not tested.

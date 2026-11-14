@@ -4,6 +4,7 @@ import type { Style } from 'ol/style'
 import type VectorSource from 'ol/source/Vector'
 import type ImageSource from 'ol/source/Image'
 
+/** Options for rendering a vector source as extruded features. */
 export interface Options {
   source: VectorSource;
   style?: Style;
@@ -13,6 +14,7 @@ export interface Options {
   center?: number[];
 }
 
+/** A fixed height, feature property name, or feature height function. */
 export type Height = ((f: Feature) => number) | string | number;
 /**
  *
@@ -37,7 +39,7 @@ export default class Vector3D extends ImageLayer<ImageSource> {
    * Set the height function for the layer
    * @param {function|string|Number} height a height function (returns height giving a feature) or a popertie name or a fixed value
    */
-  setHeight(height: Height): void;
+  setHeight(height?: Height): void;
 
   /**
    * Set style associated with the layer
