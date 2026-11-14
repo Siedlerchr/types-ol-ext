@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `control/SearchGeoportail`: selecting a result with numeric coordinates `{ x: 0, y: 0 }` takes the missing-coordinate commune-lookup branch instead of dispatching the position; reproduced with a Node stub. Its constructor also overwrites supplied `url` and `copy` options with service defaults (source inspection). Live geocoding was not tested.
+
 - `render/Pulse`: the `radius` option is assigned to a local value that is never used, so changing it has no effect on the pulse. A style without an image also causes the animation callback to dereference null, and zero duration is replaced by 3000 ms. These are source observations; rendering was not tested.
 - `layer/Geoportail`: `queryable: false` is replaced by the capability’s value because the constructor checks it with `!options.queryable`; a caller cannot disable queryability when the capability says true. This is a source observation; live layer behavior was not tested.
 
@@ -536,3 +538,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `layer/Geoportail`: checked layer metadata options against construction and added TSDoc and declarations for title, name, description and queryability. Type checks cover custom metadata; live layer requests were not tested.
 
 - `render/Pulse` and `layer/Geoportail`: reviewed option-use candidates and recorded the ineffective pulse radius and false queryability override above. Both findings are source observations; rendering and live queries were not tested.
+
+- `control/SearchGeoportail`: rechecked inherited request options and selection branching. Existing types cover the public options; a Node stub reproduced the zero-coordinate issue above. Live geocoding was not tested.
