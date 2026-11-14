@@ -13,9 +13,13 @@ export interface PositionEvent extends BaseEvent {
 }
 export type GeolocationButtonOnSignature<Return> = ToggleOnSignature<Return> & OnSignature<'position', PositionEvent, Return>
 
+/** Options for the button and its geolocation interaction. */
 export interface Options extends GeolocationDrawOptions {
+  /** CSS class added to the button. */
   className?: string;
+  /** Button tooltip. */
   title?: string;
+  /** Delay in milliseconds before tracking stops. */
   delay?: number;
 }
 
