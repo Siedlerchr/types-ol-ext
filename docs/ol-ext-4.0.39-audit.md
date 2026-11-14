@@ -28,6 +28,9 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `overlay/Tooltip`: `maximumFractionDigits: 0` is replaced with 2 by the constructor’s truthiness default, so requesting whole-number measurements initially has no effect. The constructor also changes the supplied popup options. This is a source observation; tooltip UI was not tested.
+- `source/OilPainting`: construction replaces the supplied options object’s `operation` and `operationType` fields with its own raster operation and `image` mode; zero constructor intensity is replaced with 25. These are source observations; raster rendering was not tested.
+
 - `overlay/Placemark`: any supplied popup positioning is overwritten with `bottom-center`, and the constructor replaces `setPositioning` with a no-op. Later positioning calls therefore have no effect. This is a source observation; placemark rendering was not tested.
 
 - `overlay/FixedPopup`: constructing without an options object throws while assigning `anchor`. A supplied `anchor: true` is overwritten with false, and zero `minScale` or `maxScale` is replaced with the default. The constructor also changes the caller’s positioning and class name. These are source observations; popup UI was not tested.
@@ -557,3 +560,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `overlay/FixedPopup`: rechecked constructor forwarding and corrected the required options object; added TSDoc and a negative type check. Source inspection identified the option overrides above; browser popup behavior was not tested.
 
 - `overlay/Placemark`: rechecked inherited popup options and positioning override, and added option TSDoc. Its forced positioning is recorded above; browser rendering was not tested.
+
+- `overlay/Tooltip` and `source/OilPainting`: rechecked constructor forwarding and added TSDoc for tooltip precision. Source inspection identified the overwritten options and zero-value defaults above; UI and raster rendering were not tested.

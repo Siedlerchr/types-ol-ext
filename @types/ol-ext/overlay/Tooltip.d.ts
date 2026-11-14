@@ -4,7 +4,9 @@ import type { Positioning } from 'ol/Overlay'
 import type { Options as PopupOptions } from './Popup'
 import Popup from './Popup'
 
+/** Popup and formatting options for a map tooltip. */
 export interface Options extends PopupOptions {
+  /** Maximum number of fractional digits used for measurements. */
   maximumFractionDigits?: number;
   formatLength?: (length: number) => string;
   formatArea?: (area: number) => string;
