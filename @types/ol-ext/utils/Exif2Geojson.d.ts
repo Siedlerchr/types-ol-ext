@@ -12,5 +12,8 @@ export interface Options {
   /** Called with the resulting GeoJSON collection. */
   onLoad?: (geojson: FeatureCollection<Point>) => void;
 }
-/** Convert images or files with GPS EXIF tags to GeoJSON. Requires global EXIF-JS. */
+/**
+ * Convert images or files with GPS EXIF tags to a GeoJSON feature collection.
+ * Requires the global EXIF-JS library; results arrive through `options.onLoad`.
+ */
 export default function exif2geojson(images: ArrayLike<HTMLImageElement | File>, options?: Options): void
