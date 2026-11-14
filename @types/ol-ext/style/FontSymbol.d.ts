@@ -123,6 +123,9 @@ export default class FontSymbol extends RegularShape {
    */
   clone(): FontSymbol;
 
+  /** Render or retrieve the symbol image, using a pixel ratio of one by default. */
+  getImage(pixelRatio?: number): HTMLCanvasElement | OffscreenCanvas;
+
   /**
    * Get the fill style for the symb
    * @return {Fill} Fill style.

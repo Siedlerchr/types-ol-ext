@@ -226,6 +226,7 @@ void [shadowImage, shadowClone]
 shadow.getChecksum()
 
 const fontSymbol = new FontSymbol({ radius: 10, text: 'A', declutterMode: 'declutter' })
+fontSymbol.getImage()
 const glyphInfo = fontSymbol.getTextGlyph('A', 'sans-serif')
 const fontInfo: import('../@types/ol-ext/style/FontSymbol').Font | undefined = fontSymbol.getFontInfo(glyphInfo)
 // @ts-expect-error A glyph is required to select a font.

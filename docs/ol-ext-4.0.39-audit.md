@@ -490,3 +490,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `style/FontAwesomeDef`, `FontAwesome5Def`, `FontMakiDef` and `FontMaki2Def`: checked registration side effects and exports. Added TSDoc to the re-export declarations; Maki 2 is side-effect-only. Node verified representative glyph registration, shared FontSymbol exports and the empty Maki 2 export list; font rendering was not tested.
 
 - `featureanimation/Path`: rechecked the constructor and animation override, including zero-length paths, and added TSDoc to the option fields. The required path and inherited animation declarations are covered by existing type tests. A Node check reproduced the single-point failure above; rendering was not tested.
+
+- `style/FontSymbol`: reviewed its image override separately from inherited RegularShape methods and declared the optional pixel ratio with TSDoc. The return type follows OpenLayers for override compatibility; missing fill/stroke nullability remains a documented declaration limitation. Type checks cover the no-argument call; browser font rendering was not tested.
