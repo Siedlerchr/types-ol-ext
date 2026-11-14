@@ -2,19 +2,19 @@
 # The detailed module decisions and remaining work live in the linked records.
 AUDIT_UPSTREAM := ol-ext 4.0.39
 AUDIT_OPENLAYERS := 10.11.0
-AUDIT_LAST_ROUND := tooltip and raster options
+AUDIT_LAST_ROUND := final integrated audit
 # This file is updated and committed with each completed round.
 AUDIT_LAST_COMMIT := $(shell git log -1 --format=%h -- docs/audit-status.mk)
-AUDIT_STATE := in progress
+AUDIT_STATE := complete
 
 # A completed step records the current evidence, not a release approval.
 BASELINE_STATE := complete
 MISSING_MODULES_STATE := classified
-EXISTING_DECLARATIONS_STATE := in progress
+EXISTING_DECLARATIONS_STATE := complete with documented limits
 RELEASE_APIS_STATE := verified with documented limits
-EXAMPLES_AND_TESTS_STATE := in progress
+EXAMPLES_AND_TESTS_STATE := complete with documented limits
 PACKAGE_AND_CI_STATE := configured
-FINAL_CHECK_STATE := pending full audit
+FINAL_CHECK_STATE := complete
 
 .PHONY: audit-status audit-plan audit-baseline audit-missing-modules \
 	audit-existing-declarations audit-release-apis audit-examples \

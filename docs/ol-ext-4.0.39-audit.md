@@ -244,9 +244,9 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `style/Chart`: Node checks confirmed omitted options throw, `setRadius` does not change the donut ratio, and cloning loses ratio, displacement and animation state. Source also ignores the declared `rotateWithView` option. Browser rendering was not tested.
 
-## Remaining audit
+## Module decisions and review history
 
-The following source comparisons are partial, focused on verified missing or incorrect members:
+The first entries record initially focused comparisons; later entries document subsequent module reviews and corrections. Runtime checks and their limits are stated separately.
 
 - `control/Permalink`, `Storymap`, `Swipe`, and `Timeline`: added public URL, content, layer removal, and date-rounding methods. Swipe's render and pointer handlers are marked private upstream and were not added.
 - `source/DayNight`: corrected `getCoordinates` to return coordinate arrays and added the sun and night-latitude methods; solar calculation helpers are private. `source/Delaunay`: triangle and node lookup return features and the source option is required. `source/BinBase`, `GridBin`, and `HexBin`: corrected the required source, geometry callback coordinate, bin nullability, and inherited `clear`; GridBin exposes circle and projection options and HexBin accepts optional reset flags. This corrects an earlier audit change that incorrectly made GridBin's source optional. `geom/Simplificator`: added Visvalingam options and corrected the optional rounding argument.
@@ -469,7 +469,7 @@ The following source comparisons are partial, focused on verified missing or inc
 
 - `filter/Texture` and `TextureImage`: corrected optional options, rotation spelling, pattern return and the texture image table's default export. Type checks cover both modules; a Node check exposed the unloaded-image behavior above.
 
-The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
+The declaration inventory was reconciled against the release and the module decisions above. Internal helpers and intentionally excluded modules are identified in this record. Browser interactions, live services and some optional dependencies were not exhaustively exercised; the findings above distinguish runtime checks from source observations.
 
 - `filter/Clip` and `Paper`: corrected Clip extent spelling and inherited activation, and Paper forwarded SVG options; removed Paper members absent from the implementation. Type checks cover constructor options and the light setter. Clip path checks and upstream limitations are recorded above; browser rendering was not tested.
 
@@ -562,3 +562,11 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `overlay/Placemark`: rechecked inherited popup options and positioning override, and added option TSDoc. Its forced positioning is recorded above; browser rendering was not tested.
 
 - `overlay/Tooltip` and `source/OilPainting`: rechecked constructor forwarding and added TSDoc for tooltip precision. Source inspection identified the overwritten options and zero-value defaults above; UI and raster rendering were not tested.
+
+## Final audit checkpoint
+
+The module review and integrated type checks are complete for ol-ext 4.0.39 with OpenLayers 10.11.0. The recorded findings describe upstream behavior, not fixes in the release. A named-export and prototype candidate review supplemented the module-specific comparisons; it was not used as a substitute for them. `control/control.d.ts` is a type-only position alias, not a release JavaScript module.
+
+Known declaration limits remain: FontSymbol can return undefined for an omitted fill or stroke, but its declared getters follow the OpenLayers base signatures for override compatibility; some vector-layer prototype augmentations cover the named `ol/layer` import form, and vector clear events require the documented intersection type. Image-style return types follow OpenLayers where cached ImageBitmap behavior is wider. The side-effect modules affect the OpenLayers copy they import.
+
+The release import failures, absent `proj4`, untested live services, browser interactions and rendering paths remain as described above. These limits do not imply that every runtime path was validated. The project release version was not changed.
