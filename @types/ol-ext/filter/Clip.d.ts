@@ -1,10 +1,10 @@
 import type { Coordinate } from 'ol/coordinate'
 import type { Extent } from 'ol/extent'
-import Base from './Base'
+import Base, { Options as BaseOptions } from './Base'
 
-export interface Options {
+export interface Options extends BaseOptions {
   coords?: Coordinate[];
-  Extent?: Extent;
+  extent?: Extent;
   units?: string;
   keepAspectRatio?: boolean;
   color?: string;
@@ -20,7 +20,7 @@ export default class Clip extends Base {
   /**
    * @param {Object} [options]
    *  @param {Array<Coordinate>} [options.coords]
-   *  @param {Extent} [options.Extent]
+   *  @param {Extent} [options.extent]
    *  @param {string} [options.units] coords units percent (%) or pixel (px)
    *  @param {boolean} [options.keepAspectRatio] keep aspect ratio
    *  @param {string} [options.color] backgroundcolor

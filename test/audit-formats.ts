@@ -1,3 +1,4 @@
+import Clip from '../@types/ol-ext/filter/Clip'
 import ordering from '../@types/ol-ext/render/Ordering'
 import '../@types/ol-ext/render/AnimExtent'
 import '../@types/ol-ext/render/Markup'
@@ -226,3 +227,8 @@ void chartImage
 const orderByIndex: (a: import('ol/Feature').FeatureLike, b: import('ol/Feature').FeatureLike) => number = ordering.zIndex()
 const orderWithTie = ordering.zIndex({ attribute: 'rank', equalFn: ordering.yOrdering() })
 void [orderByIndex, orderWithTie]
+
+const clip = new Clip({ active: false, extent: [0, 0, 10, 10], coords: [[0, 0], [10, 10]] })
+const paperOptions = new Paper({ id: 'paper', light: 0, scale: 2 })
+paperOptions.setLight(50)
+void clip

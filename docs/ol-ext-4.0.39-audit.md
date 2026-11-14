@@ -28,6 +28,9 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `filter/Clip`: when coordinates are supplied without an extent, the constructor computes a bounding extent and writes it to the caller’s options after storing `[0, 0, 1, 1]` on the filter. An empty coordinates array throws during clipping. Both behaviors were reproduced in Node; rendering was not tested.
+- `filter/Paper`: the SVG filter constructor uses `options.light || 50`, so an explicit zero is replaced with 50; `setLight(0)` can set it afterward. This follows from source inspection; SVG rendering was not tested.
+
 These observations concern the checked-out `v4.0.39` implementation. Unless noted as runtime-verified, they are source observations and should be reproduced before filing an issue. The detailed audit entries below retain their validation context.
 
 - `utils/ExportMap`: imports `jspdf.js`, which fails to resolve against the installed jsPDF package (import failure reproduced).
@@ -389,3 +392,5 @@ The following source comparisons are partial, focused on verified missing or inc
 - `filter/Texture` and `TextureImage`: corrected optional options, rotation spelling, pattern return and the texture image table's default export. Type checks cover both modules; a Node check exposed the unloaded-image behavior above.
 
 The broad comparison of existing declarations across controls, interactions, sources, geometry, rendering, formats, overlays, legends, and input controls is incomplete. Inherited and private member decisions still need module-by-module recording.
+
+- `filter/Clip` and `Paper`: corrected Clip extent spelling and inherited activation, and Paper forwarded SVG options; removed Paper members absent from the implementation. Type checks cover constructor options and the light setter. Clip path checks and upstream limitations are recorded above; browser rendering was not tested.
