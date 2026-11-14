@@ -1,3 +1,4 @@
+import type { ClearEventVectorSource } from '../@types/ol-ext/source/Vector'
 import { Vector as RenderVectorLayer } from 'ol/layer'
 import PerspectiveMap from '../@types/ol-ext/map/PerspectiveMap'
 import Render3D from '../@types/ol-ext/layer/Render3D'
@@ -242,3 +243,9 @@ void perspectiveAudit
 
 const renderVector = new RenderVectorLayer()
 renderVector.setRender3D(renderer3d)
+
+function clearEvents(source: ClearEventVectorSource): void {
+  source.on('clearstart', event => { void event.type })
+  source.on('clearend', event => { void event.type })
+}
+void clearEvents

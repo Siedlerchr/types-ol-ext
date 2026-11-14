@@ -498,3 +498,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `control/Profile.onMove`: reviewed the documented canvas pointer handler and declared it with TSDoc; type checks cover mouse input. The point-selection issue found in source is recorded above; pointer interaction was not browser-tested.
 
 - `layer/Render3D`: the module also installs `setRender3D` on vector layers. Added its prototype augmentation and TSDoc; the type check covers the project’s named `ol/layer` import form. The renderer attachment was not browser-tested.
+
+- `source/Vector`: rechecked the side-effect clear override. Added TSDoc and an intersection type for its `clearstart` and `clearend` event listeners; OpenLayers exposes `on` as a property that cannot be widened by module augmentation. Type checks cover both events; a Node check using the checkout’s OpenLayers instance verified their order around `clear`. This helper type must be applied to sources after importing the side effect, and the extension applies to the OpenLayers instance imported by the module.
