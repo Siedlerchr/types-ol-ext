@@ -138,7 +138,7 @@ export default class ol_legend_Legend extends BaseObject {
    * @param {int|undefined} offsetY Y offset to draw in canvas, default 0
    * @return {CanvasElement}
    */
-  getLegendImage(item: olLegendItemOptions, canvas?: HTMLCanvasElement, offsetY?: number): HTMLCanvasElement;
+  getLegendImage(item?: olLegendItemOptions, canvas?: HTMLCanvasElement, offsetY?: number): HTMLCanvasElement;
 
   on: BaseObject['on'] & OnSignature<'select', LegendSelectEvent, EventsKey> & OnSignature<'refresh', LegendRefreshEvent, EventsKey> & OnSignature<'items', LegendItemsEvent, EventsKey>;
   once: BaseObject['once'] & OnSignature<'select', LegendSelectEvent, EventsKey> & OnSignature<'refresh', LegendRefreshEvent, EventsKey> & OnSignature<'items', LegendItemsEvent, EventsKey>;

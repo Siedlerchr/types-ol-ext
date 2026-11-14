@@ -83,5 +83,5 @@ export default class LegendItem extends BaseObject {
    * @param {ol.size} size symbol size
    * @param {function} onclick
    */
-  getElement(size: Size, onclick: (callback: boolean) => void): HTMLElement | Text;
+  getElement(size: Size, onclick: (callback: boolean) => void): HTMLElement;
 }

@@ -118,6 +118,7 @@ selection.doSelect({ sources: [source], conditions: conditions.conditions })
 new LegendItem({ title: 'Example' }).setWidth(20)
 declare const legend: Legend
 legend.getTitleStyle()
+legend.getLegendImage()
 const sublegend = new Legend({ title: 'Nested' })
 const imageItem = new LegendImage({ src: '/legend.png' })
 const mixedLegend = new Legend({ items: [sublegend, imageItem, { title: 'Feature' }] })

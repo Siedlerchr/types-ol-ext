@@ -28,6 +28,10 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `legend/Item`: `setHeight` writes `heigth`, while layout reads `height`; a Node check showed setting height leaves the original height unchanged. `legend/Legend.getLegendImage` also reads `heigth` for its static size override.
+- `legend/Image`: canvas images have no `naturalWidth`, so the documented canvas input reports zero width and height; reproduced with a canvas-shaped stub.
+- `legend/Legend`: its removal listener loops with `i < listeners` instead of `i < listeners.length`, leaving item change listeners attached after removal (source inspection; DOM behavior not tested).
+
 - `util/TextStreamReader`: construction without a file throws despite the documented optional file. Its end condition uses `file.size - 1`, so a one-byte file never starts reading and reports NaN progress. Reproduced with a FileReader stub; actual asynchronous file reading was not tested.
 
 - `layer/SketchOverlay`: `startDrawing` documents `coordinates`, `feature` and `atstart` but only reads `type`; a Node check confirmed coordinates are ignored. `addPoint` compares coordinate arrays by identity rather than value.
@@ -403,3 +407,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `layer/SketchOverlay` and `GetPreview`: reviewed constructors, prototype augmentations and public drawing and preview methods. Corrected optional sketch styles, position and finish return values, feature type, optional source preview inputs and layer projection argument. Type checks cover sketch construction and returns; a Node check covered ignored drawing coordinates. Browser rendering and preview requests were not tested.
 
 - `util/TextStreamReader` and `SVGOperation`: checked constructor and public methods against the release. Corrected the required reader file, optional chunk size and stop callback, plus SVG operation inheritance, static namespace and nested operation inputs. Type checks cover these APIs; browser SVG and file reading were not tested.
+
+- `legend/Item`, `Image` and `Legend`: rechecked each public method and classified the drawing helpers as private. Corrected the item element return and optional instance image options. Type checks cover the image call; Node checks and source findings are recorded above. Legend DOM and rendering were not tested in this round.
