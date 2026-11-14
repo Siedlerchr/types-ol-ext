@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `overlay/Magnify`: `setMap(null)` calls `getViewport` on null after detaching, so removing the overlay throws. Attaching adds a freshly bound mousemove callback but detaching removes the unbound method, leaving the listener installed; repeated attachment adds more listeners. A `zoomOffset` of 0 is replaced with 1, and omitted constructor options are dereferenced. These are source observations; map interaction was not browser-tested.
+
 - `map/PerspectiveMap`: omitting the documented default angle sends NaN to the animation; reproduced with an animation-frame stub. The constructor dereferences `options.target` and its DOM element without checking either, so omitted or invalid targets throw. Animation frames are requested without storing their IDs, so the cancellation in `setPerspective` cannot cancel a previous animation (source inspection; browser animation was not tested).
 
 - `layer/Render3D`: `animate` without an attached layer throws when requesting a redraw. After that call, `getFeatureHeight` returns NaN before the first render initializes its interpolation ratio. With `height: "height"` and `defaultHeight: 5`, a feature height of 0 returns 5 because the property is tested for truthiness. A Node check reproduced all three; animation rendering was not tested.
@@ -472,3 +474,5 @@ The broad comparison of existing declarations across controls, interactions, sou
 - `layer/Render3D`: rechecked constructor, style, activation, layer and height methods; rendering helpers are private. Corrected optional style reset and default height-function argument with TSDoc. Type checks and Node checks cover these APIs and findings above; rendering was not tested.
 
 - `map/PerspectiveMap`: reviewed target setup, perspective animation, matrix and coordinate helpers and the overlay side effect. Corrected required target and angle, optional matrix recomputation, and coordinate/pixel types with TSDoc. Type checks cover the API; a stub check reproduced the omitted-angle issue above. Browser perspective and overlay behavior were not tested.
+
+- `overlay/Magnify`: checked constructor options, map attachment, public refresh and active methods. Replaced generic overlay options with its actual map/layer/projection options and corrected the active setter return, with TSDoc. Type checks cover configuration and return; upstream detachment and listener issues are recorded above. Browser interaction was not tested.

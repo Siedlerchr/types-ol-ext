@@ -129,6 +129,9 @@ mixedLegend.on('select', event => { event.item; event.index; event.symbol })
 mixedLegend.on('refresh', event => { event.width; event.height })
 mixedLegend.on('items', event => { event.nb })
 mixedLegend.setLayer(null)
+const configuredMagnifier = new Magnify({ zoomOffset: 2, projection: 'EPSG:3857' })
+const magnifierActive: boolean = configuredMagnifier.setActive(true)
+void magnifierActive
 declare const magnify: Magnify
 magnify.refresh()
 declare const dialog: Dialog
