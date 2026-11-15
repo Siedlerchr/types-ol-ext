@@ -7,6 +7,10 @@ AUDIT_LAST_ROUND := final integrated audit
 AUDIT_LAST_COMMIT := $(shell git log -1 --format=%h -- docs/audit-status.mk)
 AUDIT_STATE := complete
 
+# Porting the remaining upstream examples is a separate follow-up to the audit.
+EXAMPLE_PORTS_STATE := in progress
+EXAMPLE_PORTS_LAST_ROUND := status and cloud controls
+
 # A completed step records the current evidence, not a release approval.
 BASELINE_STATE := complete
 MISSING_MODULES_STATE := classified
@@ -18,11 +22,12 @@ FINAL_CHECK_STATE := complete
 
 .PHONY: audit-status audit-plan audit-baseline audit-missing-modules \
 	audit-existing-declarations audit-release-apis audit-examples \
-	audit-package-ci audit-final-check audit-verify
+	audit-package-ci audit-final-check audit-verify example-ports-status
 
 audit-status:
 	@printf 'Upstream: %s\nOpenLayers: %s\nState: %s\nLast round: %s (%s)\n\n' '$(AUDIT_UPSTREAM)' '$(AUDIT_OPENLAYERS)' '$(AUDIT_STATE)' '$(AUDIT_LAST_ROUND)' '$(AUDIT_LAST_COMMIT)'
 	@cat docs/ol-ext-audit-progress.md
+	@printf '\nExample ports: %s (last round: %s)\n' '$(EXAMPLE_PORTS_STATE)' '$(EXAMPLE_PORTS_LAST_ROUND)'
 
 # Each target describes a step in .scratch/to-plan/ol-ext-declaration-audit.md.
 audit-plan: audit-baseline audit-missing-modules audit-existing-declarations \
@@ -54,3 +59,8 @@ audit-verify:
 	npm test
 	npm run lint
 	git diff --check
+
+# Lists unmatched upstream HTML pages; some may be support or standalone pages.
+example-ports-status:
+	@printf 'Example ports: %s\nLast round: %s\n\n' '$(EXAMPLE_PORTS_STATE)' '$(EXAMPLE_PORTS_LAST_ROUND)'
+	@python3 scripts/example-inventory.py
