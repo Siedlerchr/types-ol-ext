@@ -9,7 +9,7 @@ AUDIT_STATE := complete
 
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := toggle and permalink examples
+EXAMPLE_PORTS_LAST_ROUND := hover and nested bar examples
 EXAMPLE_LOAD_CHECK := 48 pages checked; interaction testing incomplete
 
 # A completed step records the current evidence, not a release approval.
