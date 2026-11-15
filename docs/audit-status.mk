@@ -9,7 +9,7 @@ AUDIT_STATE := complete
 
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := status and cloud controls
+EXAMPLE_PORTS_LAST_ROUND := Geoportail search examples
 
 # A completed step records the current evidence, not a release approval.
 BASELINE_STATE := complete
