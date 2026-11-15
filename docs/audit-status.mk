@@ -9,7 +9,8 @@ AUDIT_STATE := complete
 
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := Geoportail search examples
+EXAMPLE_PORTS_LAST_ROUND := toggle and permalink examples
+EXAMPLE_LOAD_CHECK := 48 pages checked; interaction testing incomplete
 
 # A completed step records the current evidence, not a release approval.
 BASELINE_STATE := complete
@@ -22,7 +23,7 @@ FINAL_CHECK_STATE := complete
 
 .PHONY: audit-status audit-plan audit-baseline audit-missing-modules \
 	audit-existing-declarations audit-release-apis audit-examples \
-	audit-package-ci audit-final-check audit-verify example-ports-status
+	audit-package-ci audit-final-check audit-verify example-ports-status example-load-check
 
 audit-status:
 	@printf 'Upstream: %s\nOpenLayers: %s\nState: %s\nLast round: %s (%s)\n\n' '$(AUDIT_UPSTREAM)' '$(AUDIT_OPENLAYERS)' '$(AUDIT_STATE)' '$(AUDIT_LAST_ROUND)' '$(AUDIT_LAST_COMMIT)'
@@ -64,3 +65,8 @@ audit-verify:
 example-ports-status:
 	@printf 'Example ports: %s\nLast round: %s\n\n' '$(EXAMPLE_PORTS_STATE)' '$(EXAMPLE_PORTS_LAST_ROUND)'
 	@python3 scripts/example-inventory.py
+
+# Start the example server first and pass the IDE-provided browser CLI path.
+example-load-check:
+	@test -n "$(CHROME_DEVTOOLS)" || (printf 'Set CHROME_DEVTOOLS to the Chrome DevTools CLI path.\n' && exit 1)
+	@python3 scripts/check-example-loads.py "$(CHROME_DEVTOOLS)"

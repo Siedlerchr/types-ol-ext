@@ -20,6 +20,14 @@ the upstream checkout remains untouched. It uses the locally installed ol-ext
 implementation. Examples without a corresponding HTML file or identifiable
 main script are reported and skipped.
 
+## Check example page loads
+
+With the example server running, obtain the Chrome DevTools CLI path from the
+IDE and run `python3 scripts/check-example-loads.py "<cli-path>"`. Use
+`--match <text>` to check a subset. The script checks page navigation and console
+errors; inspect external resource failures separately and test interactions as
+needed. It creates and closes its own browser page.
+
 ## Setup environment
 
 1. Clone this [types-ol-ext](https://github.com/Siedlerchr/types-ol-ext) git repository and install dependencies.

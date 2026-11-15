@@ -28,6 +28,9 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `examples/control/map.control.status.html`: the release HTML loads `/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,Object.assign`. The local example server has no such file, and Chrome reported HTTP 404 for that exact path. This was reproduced against the release HTML; behavior on other hosts was not tested. The local port skips this legacy polyfill for current browsers.
+- `style/StrokeImage`: bundling the 4.0.39 module with OpenLayers 10.11 produces three webpack warnings for runtime imports of a default export from `ol/extent`, `Coordinate` from `ol/coordinate.js`, and `State` from `ol/render.js`; these exports do not exist in the installed OpenLayers runtime. The bundle completed; the warnings were reproduced by `npm run serve-examples`.
+
 - `overlay/Tooltip`: `maximumFractionDigits: 0` is replaced with 2 by the constructor’s truthiness default, so requesting whole-number measurements initially has no effect. The constructor also changes the supplied popup options. This is a source observation; tooltip UI was not tested.
 - `source/OilPainting`: construction replaces the supplied options object’s `operation` and `operationType` fields with its own raster operation and `image` mode; zero constructor intensity is replaced with 25. These are source observations; raster rendering was not tested.
 
@@ -572,3 +575,5 @@ Known declaration limits remain: FontSymbol can return undefined for an omitted 
 The release import failures, absent `proj4`, untested live services, browser interactions and rendering paths remain as described above. These limits do not imply that every runtime path was validated. The project release version was not changed.
 
 - Subsequent example porting exposed two additional declaration details: `interaction/Flashlight.setPosition(false)` hides the light, and `control/Scale.setScale()` refreshes the display without changing the view. Both are used by upstream example controls.
+
+- Example load check (2026-11-15): 48 served TypeScript examples were opened in Chrome and checked for console errors after navigation. The first pass found the status polyfill 404 above and three local HTML rewrite issues: legacy TextureImage, Cloud and font-definition scripts expected the removed global `ol`. The local server now omits those duplicate scripts because the module bundles supply them; all four pages passed the same load check afterward. This is a page-load check, not full interaction or live-service validation.
