@@ -82,6 +82,14 @@ main script are reported and skipped.
 
 ## Port original JavaScript examples to TypeScript
 
+Run `python3 scripts/example-inventory.py` to list upstream HTML files without a
+matching TypeScript port and count inline scripts recognized by the local server.
+This inventory includes support and standalone pages, so each entry still needs
+review. The legacy `replace-examples` and `copy-examples` commands modify the
+upstream checkout or overwrite existing ports; use the temporary server above
+for normal development.
+
+
 1. Check still unported example in `./ol-ext/examples/**/*.html` which has `ol-ext` code.
 
    ```html

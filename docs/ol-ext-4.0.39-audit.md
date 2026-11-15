@@ -570,3 +570,5 @@ The module review and integrated type checks are complete for ol-ext 4.0.39 with
 Known declaration limits remain: FontSymbol can return undefined for an omitted fill or stroke, but its declared getters follow the OpenLayers base signatures for override compatibility; some vector-layer prototype augmentations cover the named `ol/layer` import form, and vector clear events require the documented intersection type. Image-style return types follow OpenLayers where cached ImageBitmap behavior is wider. The side-effect modules affect the OpenLayers copy they import.
 
 The release import failures, absent `proj4`, untested live services, browser interactions and rendering paths remain as described above. These limits do not imply that every runtime path was validated. The project release version was not changed.
+
+- Subsequent example porting exposed two additional declaration details: `interaction/Flashlight.setPosition(false)` hides the light, and `control/Scale.setScale()` refreshes the display without changing the view. Both are used by upstream example controls.

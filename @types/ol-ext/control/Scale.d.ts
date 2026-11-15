@@ -47,5 +47,5 @@ export default class Scale extends ol_control_Control {
   /** Set the current scale (will change the scale of the map)
    * @param {Number} value the scale factor
    */
-  setScale(value: number | string | Event): void
+  setScale(value?: number | string | Event): void
 }

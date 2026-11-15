@@ -218,3 +218,8 @@ new DrawHole({ layers: [] })
 regular.on('drawabort', () => {})
 // @ts-expect-error condition must be a function
 new CurrentMap({ condition: true })
+
+function hideFlashlight(flashlight: import('../@types/ol-ext/interaction/Flashlight').default): void {
+  flashlight.setPosition(false)
+}
+void hideFlashlight

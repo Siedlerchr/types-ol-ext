@@ -43,8 +43,6 @@ export default class Flashlight extends Pointer {
     fill?: Color | string;
   }): void;
 
-  /** Set position of the flashlight
-   *  @param {Pixel|MapBrowserEvent}
-   */
-  setPosition(e: Pixel | MapBrowserEvent): void;
+  /** Set the flashlight position, or pass false to hide it. */
+  setPosition(e: Pixel | MapBrowserEvent | false): void;
 }

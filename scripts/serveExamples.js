@@ -27,6 +27,8 @@ for (const example of examples) {
   html = html.replace(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi, (whole, attrs, body) => {
     if (/\bsrc\s*=/.test(attrs)) {
       if (/openlayers\.org\/.*ol\.js|cdn\.jsdelivr\.net\/npm\/ol@[^/]+\/dist\/ol\.js|\.\.\/\.\.\/dist\/ol-ext\.js/i.test(attrs)) return ''
+      // The TypeScript Font Awesome example imports its definitions as modules.
+      if (relative === 'examples/style/map.fontawesome.5.html' && /\.\.\/\.\.\/dist\/extra\/FontAwesome(?:5)?Def\.js/i.test(attrs)) return ''
       return whole
     }
     if (/ol\.Map|ol\.ext/.test(body)) {
