@@ -28,6 +28,8 @@ Comparisons use upstream tag `v4.0.39`. This is a working audit record, not a cl
 
 ## Upstream JavaScript findings for reporting
 
+- `examples/control/map.control.swipe.html`: on 2026-11-16, its `GEOGRAPHICALNAMES.NAMES` WMTS layer returned HTTP 404 for the visible zoom-12 tiles from `data.geopf.fr`. The example bundle and GeoJSON loaded, and other map layers returned 200. This is an observed live-service failure; its cause and persistence were not established.
+
 - `examples/control/map.control.status.html`: the release HTML loads `/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,Object.assign`. The local example server has no such file, and Chrome reported HTTP 404 for that exact path. This was reproduced against the release HTML; behavior on other hosts was not tested. The local port skips this legacy polyfill for current browsers.
 - `style/StrokeImage`: bundling the 4.0.39 module with OpenLayers 10.11 produces three webpack warnings for runtime imports of a default export from `ol/extent`, `Coordinate` from `ol/coordinate.js`, and `State` from `ol/render.js`; these exports do not exist in the installed OpenLayers runtime. The bundle completed; the warnings were reproduced by `npm run serve-examples`.
 
