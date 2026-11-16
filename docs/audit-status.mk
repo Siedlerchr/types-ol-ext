@@ -9,8 +9,8 @@ AUDIT_STATE := complete
 
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := geolocation button, placemark and offset examples
-EXAMPLE_LOAD_CHECK := 53 pages checked; interaction testing incomplete
+EXAMPLE_PORTS_LAST_ROUND := progress bar and day-night examples
+EXAMPLE_LOAD_CHECK := 55 pages checked; interaction testing incomplete
 
 # A completed step records the current evidence, not a release approval.
 BASELINE_STATE := complete
