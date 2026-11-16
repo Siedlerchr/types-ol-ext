@@ -10,7 +10,7 @@ AUDIT_STATE := complete
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 EXAMPLE_PORTS_STATE := in progress
 EXAMPLE_PORTS_LAST_ROUND := collection input example
-EXAMPLE_LOAD_CHECK := 59 pages checked; swipe label tiles returned 404
+EXAMPLE_LOAD_CHECK := swipe checked at zoom 13; interaction coverage incomplete
 
 # A completed step records the current evidence, not a release approval.
 BASELINE_STATE := complete
