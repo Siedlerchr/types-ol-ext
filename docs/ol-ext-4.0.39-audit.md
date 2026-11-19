@@ -597,3 +597,5 @@ The release import failures, untested live services, browser interactions and re
 - The coordinate-search example now installs `proj4` as a development dependency and registers its example projections. The page loaded and selecting Lambert-93 produced no console errors in Chrome; coordinate searches and the other projections have not been verified interactively.
 
 - `examples/control/map.switcher2.html`: the geology legend is requested over HTTP even though the WMS tile URL uses HTTPS. Browsers can block that image as mixed content when the example is served over HTTPS. The port requests the legend over HTTPS; the HTTPS URL returned HTTP 200 with an `image/png` content type during the check, although the switcher interaction was not tested.
+
+- `examples/control/map.switcher.filter.html`: the filter input is passed directly to `RegExp`, so an incomplete expression such as `[` raises a `SyntaxError` on keyup. The port retains the previous filter until the expression is valid; this is based on source inspection and the port has only been load-tested.
