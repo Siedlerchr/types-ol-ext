@@ -9,8 +9,8 @@ AUDIT_STATE := complete
 
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := synchronize and WebGL swipe examples
-EXAMPLE_LOAD_CHECK := swipe checked at zoom 13; interaction coverage incomplete
+EXAMPLE_PORTS_LAST_ROUND := GeoJSON drop and globe examples
+EXAMPLE_LOAD_CHECK := GeoJSON drop and globe pages load; interaction coverage incomplete
 
 # A completed step records the current evidence, not a release approval.
 BASELINE_STATE := complete
