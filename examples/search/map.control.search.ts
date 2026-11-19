@@ -20,8 +20,13 @@ const positions: Place[] = [
 ];
 const search = new Search<Place>({ getTitle: place => place.name,
   autocomplete: value => {
-    const expression = new RegExp(value.replace('*', '') || '.*', 'i');
-    return positions.filter(place => expression.test(place.name));
+    try {
+      const expression = new RegExp(value.replace('*', '') || '.*', 'i');
+      return positions.filter(place => expression.test(place.name));
+    } catch (error) {
+      if (error instanceof SyntaxError) return [];
+      throw error;
+    }
   } });
 map.addControl(search);
 search.on('select', event => map.getView().animate({ center: event.search.pos, zoom: 6, easing: easeOut }));
