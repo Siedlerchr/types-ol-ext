@@ -593,3 +593,5 @@ The release import failures, absent `proj4`, untested live services, browser int
 - Declaration limitation found while porting `examples/control/map.control.select.html`: `GeoJSONX` extends OpenLayers `GeoJSON` at runtime, but its declaration's mapped base type drops protected members, so TypeScript rejects it as a `VectorSource` format. The example uses a cast to `GeoJSON`; this is a limitation of this repository's declarations, not an upstream runtime finding.
 
 - `examples/search/map.control.search.html`: the autocomplete callback constructs a regular expression directly from the user's text. An incomplete expression such as `[` throws a `SyntaxError` while typing instead of returning suggestions. The port returns an empty result for invalid expressions and continues to support valid regular expressions; entering `[` in the port produced no console error in Chrome.
+
+- The coordinate-search example now installs `proj4` as a development dependency and registers its example projections. The page loaded and selecting Lambert-93 produced no console errors in Chrome; coordinate searches and the other projections have not been verified interactively.
