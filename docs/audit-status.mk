@@ -9,8 +9,8 @@ AUDIT_STATE := complete
 
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := cluster convex-hull example
-EXAMPLE_LOAD_CHECK := cluster convex-hull page loads; hover and rendering untested
+EXAMPLE_PORTS_LAST_ROUND := cluster convex-hull and Geoportail profile examples
+EXAMPLE_LOAD_CHECK := latest two pages load; hover, profile interactions, and live elevation service untested
 
 # A completed step records the current evidence, not a release approval.
 BASELINE_STATE := complete
