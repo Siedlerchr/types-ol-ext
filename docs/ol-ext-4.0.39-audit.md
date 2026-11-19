@@ -595,3 +595,5 @@ The release import failures, untested live services, browser interactions and re
 - `examples/search/map.control.search.html`: the autocomplete callback constructs a regular expression directly from the user's text. An incomplete expression such as `[` throws a `SyntaxError` while typing instead of returning suggestions. The port returns an empty result for invalid expressions and continues to support valid regular expressions; entering `[` in the port produced no console error in Chrome.
 
 - The coordinate-search example now installs `proj4` as a development dependency and registers its example projections. The page loaded and selecting Lambert-93 produced no console errors in Chrome; coordinate searches and the other projections have not been verified interactively.
+
+- `examples/control/map.switcher2.html`: the geology legend is requested over HTTP even though the WMS tile URL uses HTTPS. Browsers can block that image as mixed content when the example is served over HTTPS. The port requests the legend over HTTPS; the HTTPS URL returned HTTP 200 with an `image/png` content type during the check, although the switcher interaction was not tested.
