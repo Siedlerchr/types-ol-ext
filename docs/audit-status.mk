@@ -9,8 +9,8 @@ AUDIT_STATE := complete
 
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := colorize and canvas filter examples
-EXAMPLE_LOAD_CHECK := colorize and canvas filter pages load; filter interaction and rendering untested
+EXAMPLE_PORTS_LAST_ROUND := colorize, canvas, and CSS filter examples
+EXAMPLE_LOAD_CHECK := latest three filter pages load; filter interaction and rendering untested
 
 # A completed step records the current evidence, not a release approval.
 BASELINE_STATE := complete
