@@ -1,8 +1,9 @@
 import type { FeatureAnimationEvent, Options as FeatureAnimationOption } from './FeatureAnimation'
-import { FeatureAnimation } from './FeatureAnimation'
+import FeatureAnimation from './FeatureAnimation'
 
 export interface Options extends FeatureAnimationOption {
   side?: 'left' | 'right';
+  speed?: number;
 }
 
 /** Slice animation: feature enter from left
@@ -14,6 +15,7 @@ export default class Throw extends FeatureAnimation {
   /**
    * @param {featureAnimationThrowOptions} options
    *  @param {left|right} options.side side of the animation, default left
+   *  @param {number} options.speed speed of the feature, default 0
    */
   constructor(options?: Options)
 

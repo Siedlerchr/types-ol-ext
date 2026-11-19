@@ -1,19 +1,21 @@
-import type { Map as _ol_Map_ } from 'ol'
+import type { Collection, Map as _ol_Map_ } from 'ol'
 import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
-import type { Layer } from 'ol/layer'
+import type BaseLayer from 'ol/layer/Base'
+import type LayerGroup from 'ol/layer/Group'
 import type { ProjectionLike } from 'ol/proj'
 import type { Style } from 'ol/style'
 
 export interface Options extends ControlOptions {
-  projection: ProjectionLike;
+  projection?: ProjectionLike;
   minZoom?: number;
   maxZoom?: number;
   rotation?: boolean;
-  align: 'top' | 'bottom-left' | 'right';
-  layers: Layer[];
+  align?: string;
+  layers?: BaseLayer[] | Collection<BaseLayer> | LayerGroup;
   style?: Style | Style[];
   panAnimation?: boolean | 'elastic';
+  elasticPan?: boolean;
 }
 
 /**
@@ -40,27 +42,6 @@ export default class Overview extends ol_control_Control {
    */
   constructor(options?: Options);
 
-  /** Elastic bounce
-   *  @param {number} bounce number of bounce
-   *  @param {Number} amplitude amplitude of the bounce [0,1]
-   *  @return {Number}
-   * /
-   var bounceFn = function (bounce, amplitude){
-        var a = (2*bounce+1) * Math.PI/2;
-        var b = amplitude>0 ? -1/amplitude : -100;
-        var c = - Math.cos(a) * Math.pow(2, b);
-        return function(t) {
-          t = 1-Math.cos(t*Math.PI/2);
-          return 1 + Math.abs( Math.cos(a*t) ) * Math.pow(2, b*t) + c*t;
-        }
-      }
-   /** Elastic bounce
-   *  @param {number} bounce number of bounce
-   *  @param {Number} amplitude amplitude of the bounce [0,1]
-   *  @return {Number}
-   */
-  elasticFn(bounce: number, amplitude: number): number;
-
   /** Get overview map
    *  @return {Map}
    */
@@ -73,11 +54,11 @@ export default class Overview extends ol_control_Control {
   /** Set overview map position
    *  @param {top|bottom-left|right}
    */
-  setPosition(align: 'top' | 'bottom-left' | 'right'): void;
+  setPosition(align: string): void;
 
   /**
    * Set the map instance the control associated with.
    * @param {Map} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 }

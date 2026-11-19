@@ -1,7 +1,10 @@
 import Base from './Base'
+import type { Options as BaseOptions } from './Base'
+import type { Color } from 'ol/color'
 
-export interface Options {
-  img?: string;
+export interface Options extends BaseOptions {
+  channel?: 'r' | 'g' | 'b';
+  color?: Color | string;
   size?: number;
   crossOrigin?: null | string | undefined;
 }
@@ -24,7 +27,7 @@ export default class Halftone extends Base {
   /** Set the current size
    *  @param {number} width the pattern width, default 30
    */
-  setSize(size: number): void;
+  setSize(size?: number): void;
 
   /** Postcompose operation
    */

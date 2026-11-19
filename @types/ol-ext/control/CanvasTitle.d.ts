@@ -1,10 +1,11 @@
-import type { Map as _ol_Map_ } from 'ol'
-import type { Style, Stroke, Fill } from 'ol/style'
+import type { Style } from 'ol/style'
 import type { Options as CanvasOptions } from './CanvasBase'
 import CanvasBase from './CanvasBase'
 
 export interface Options extends CanvasOptions {
   title?: string;
+  className?: string;
+  visible?: boolean;
 }
 
 /**
@@ -25,7 +26,7 @@ export default class CanvasTitle extends CanvasBase {
    * Change the control style
    * @param {Style} style
    */
-  setStyle(style: Style): void;
+  setStyle(style?: Style): void;
 
   /**
    * Set the map title
@@ -39,7 +40,7 @@ export default class CanvasTitle extends CanvasBase {
    * @param {string} map title.
    * @api stable
    */
-  getTitle(map: string): void;
+  getTitle(): string;
 
   /**
    * Set control visibility
@@ -55,46 +56,4 @@ export default class CanvasTitle extends CanvasBase {
    */
   getVisible(): boolean;
 
-  /**
-   * Remove the control from its current map and attach it to the new map.
-   * Subclasses may set up event handlers to get notified about changes to
-   * the map here.
-   * @param {_ol_Map_} map Map.
-   * @api stable
-   */
-  setMap(map: _ol_Map_): void;
-
-  /** Get canvas overlay
-   */
-  getCanvas(): HTMLCanvasElement;
-
-  /** Get style
-   * @api
-   */
-  getStyle(): Style;
-
-  /** Get stroke
-   * @api
-   */
-  getStroke(): Stroke;
-
-  /** Get fill
-   * @api
-   */
-  getFill(): Fill;
-
-  /** Get stroke
-   * @api
-   */
-  getTextStroke(): Stroke;
-
-  /** Get text fill
-   * @api
-   */
-  getTextFill(): Fill;
-
-  /** Get text font
-   * @api
-   */
-  getTextFont(): string;
 }

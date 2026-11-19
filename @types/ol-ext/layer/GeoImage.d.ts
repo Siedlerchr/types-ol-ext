@@ -1,5 +1,5 @@
 import ImageLayer from 'ol/layer/Image'
-import type ImageSource from 'ol/source/Image'
+import type GeoImageSource from '../source/GeoImage'
 import type { Extent } from 'ol/extent'
 import type { Options } from 'ol/layer/BaseImage'
 /**
@@ -8,11 +8,11 @@ import type { Options } from 'ol/layer/BaseImage'
  * @extends {ol.layer.Image}
  * @api
  */
-export default class GeolImageLayer extends ImageLayer<ImageSource> {
+export default class GeolImageLayer extends ImageLayer<GeoImageSource> {
   /**
-   * @param {Object=} options Layer Image options.
+   * @param options - Image-layer options. A GeoImage source is needed by `getExtent`.
    */
-  constructor(options?: Options<ImageSource>);
+  constructor(options?: Options<GeoImageSource>);
 
   /**
    * Return the {@link module:ol/extent~Extent extent} of the source associated with the layer.

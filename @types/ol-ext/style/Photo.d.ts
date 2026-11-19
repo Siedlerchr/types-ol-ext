@@ -1,4 +1,4 @@
-import type { Stroke } from 'ol/style'
+import type { Stroke, Fill } from 'ol/style'
 import { RegularShape } from 'ol/style'
 import type { Pixel } from 'ol/pixel'
 
@@ -7,8 +7,11 @@ export interface Options {
   crop?: boolean;
   radius?: number;
   shadow?: number;
-  declutterMode?: 'obstacle' | 'none' | undefined
+  declutterMode?: 'declutter' | 'obstacle' | 'none' | undefined
   stroke?: Stroke;
+  fill?: Fill;
+  opacity?: number;
+  rotation?: number;
   src?: string;
   crossOrigin?: string;
   displacement?: number[];
@@ -63,9 +66,7 @@ export default class Photo extends RegularShape {
    * @return {HTMLCanvasElement} Image or Canvas element.
    * @api
    */
-  getImage(pielratio: number): HTMLCanvasElement
-
-  getChecksum(): string;
+  getImage(pixelRatio?: number): HTMLCanvasElement | OffscreenCanvas
 
   /** Returns the photo image
    * @returns {HTMLImageElement}

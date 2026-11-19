@@ -1,5 +1,5 @@
 import type { EventsKey } from 'ol/events'
-import BaseEvent from 'ol/events/Event'
+import type { ListEvent } from './List'
 import type { ObjectEvent } from 'ol/Object'
 import type { Types } from 'ol/ObjectEventType'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
@@ -11,11 +11,9 @@ type SizeOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change:value', SizeEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'change:value', Return>;
 
-export enum SizeType {
-  CHANGE_VALUE = 'change:value',
-}
+export type SizeType = 'change:value'
 
-export interface Options extends ListOptions {
+export interface Options extends Omit<ListOptions, 'options'> {
   className?: string;
   input?: Element;
   parent?: Element;
@@ -27,7 +25,7 @@ export interface Options extends ListOptions {
  * @extends {List}
 
  */
-export default class Size extends List {
+export default class Size extends List<number> {
   /**
    * @param {*} options
    *  @param {string} [options.className]
@@ -35,7 +33,7 @@ export default class Size extends List {
    *  @param {Element} [options.parent] parent element, if create an input
    *  @param {Array<number>} [options.size] a list of size (default 0,2,3,5,8,13,21,34,55)
    */
-  constructor(options: any);
+  constructor(options?: Options);
 
   /** Get the current value
    * @returns {number}
@@ -49,8 +47,4 @@ export default class Size extends List {
   un: SizeOnSignature<void>
 }
 
-export class SizeEvent extends BaseEvent {
-  constructor(type: SizeType, value: number);
-
-  value: number
-}
+export type SizeEvent = ListEvent<number>

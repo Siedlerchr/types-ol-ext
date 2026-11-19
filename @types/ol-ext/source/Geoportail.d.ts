@@ -1,17 +1,21 @@
 import WMTS from 'ol/source/WMTS'
 import type { Options as SourceOptions } from 'ol/source/TileImage'
 import type { Coordinate } from 'ol/coordinate'
-import type { ProjectionLike } from 'ol/proj'
+import type Projection from 'ol/proj/Projection'
+import type { LoadFunction } from 'ol/Tile'
+import type { AjaxEvent } from '../util/Ajax'
 
 export interface Options extends SourceOptions {
   layer?: string;
   minZoom?: number;
+  maxZoom?: number;
   server?: string;
   gppKey?: string | 'gpf';
+  key?: string;
   authentication?: string;
   format?: string;
   style?: string;
-  crossOrigin?: string;
+  crossOrigin?: string | null;
   wrapX?: boolean;
 }
 
@@ -37,14 +41,21 @@ export default class Geoportail extends WMTS {
    *  @param {string} options.crossOrigin default 'anonymous'
    *  @param {string} options.wrapX default true
    */
-  constructor(options?: Options);
+  constructor(layer: string, options?: Options);
+  constructor(options: Options & { layer: string });
 
   /** Get a tile load function to load tiles with basic authentication
    * @param {string} authentication as btoa("login:pwd")
    * @param {string} format mime type
    * @return {function} tile load function to load tiles with basic authentication
    */
-  static tileLoadFunctionWithAuthentication(authentication: string, format: string): Function;
+  static tileLoadFunctionWithAuthentication(authentication: string, format: string): LoadFunction | undefined;
+
+  /** Standard IGN-GEOPORTAIL attribution. */
+  static defaultAttribution: string;
+
+  /** Get service URL according to server URL or standard URL. */
+  static getServiceURL(server?: string, gppKey?: string): string;
 
   /** Get service URL according to server url or standard url
    */
@@ -64,7 +75,7 @@ export default class Geoportail extends WMTS {
    * @param {String} authentication as btoa("login:pwd")
    * @api stable
    */
-  setGPPKey(key: string, authentication: string): void;
+  setGPPKey(key: string, authentication?: string): void;
 
   /** Return the GetFeatureInfo URL for the passed coordinate, resolution, and
    * projection. Return `undefined` if the GetFeatureInfo URL cannot be
@@ -76,8 +87,8 @@ export default class Geoportail extends WMTS {
    *  @param {string} options.INFO_FORMAT response format text/plain, text/html, application/json, default text/plain
    * @return {String|undefined} GetFeatureInfo URL.
    */
-  getFeatureInfoUrl(coord: Coordinate, resolution: number, projection: ProjectionLike, options: {
-    INFO_FORMAT: MimeType;
+  getFeatureInfoUrl(coord: Coordinate, resolution: number, projection?: Projection | null, options?: {
+    INFO_FORMAT?: string;
   }): string | undefined;
 
   /** Get feature info
@@ -89,13 +100,10 @@ export default class Geoportail extends WMTS {
    *  @param {function} options.callback a function that take the response as parameter
    *  @param {function} options.error function called when an error occurred
    */
-  getFeatureInfo(coord: any, resolution: number, options: {
-    INFO_FORMAT: MimeType;
-    callback: (resp: any) => void,
-    error: (err: any) => void
+  getFeatureInfo(coord: Coordinate, resolution: number, options: {
+    INFO_FORMAT?: string;
+    format?: string;
+    callback?: (resp: unknown) => void;
+    error?: (err: AjaxEvent) => void;
   }): void;
-
-  /** Standard IGN-GEOPORTAIL attribution
-   */
-  attribution: string
 }

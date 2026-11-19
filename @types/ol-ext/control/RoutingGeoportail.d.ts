@@ -3,9 +3,33 @@ import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 import type { Coordinate } from 'ol/coordinate'
 import type { Vector } from 'ol/source'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
+
+export interface RoutingEvent extends BaseEvent { type: 'routing'; features: Feature[]; feature: Feature; distance: number; duration: number }
+export interface RoutingStepEvent extends BaseEvent { type: 'step:select' | 'step:hover'; index: number; feature: Feature; hover?: boolean }
+export interface RoutingErrorEvent extends BaseEvent { type: 'error' | 'errror'; status: number | string; statusText: string }
+export type RoutingOnSignature<Return> = OnSignature<'error' | 'errror', RoutingErrorEvent, Return> &
+  OnSignature<EventTypes, BaseEvent, Return> &
+  OnSignature<Types | 'change' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'routing', RoutingEvent, Return> &
+  OnSignature<'step:select' | 'step:hover', RoutingStepEvent, Return> &
+  OnSignature<'routing:start' | 'abort', BaseEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'propertychange' | 'routing' | 'step:select' | 'step:hover' | 'error' | 'errror' | 'routing:start' | 'abort', Return>
 
 export interface Options extends ControlOptions {
   className?: string;
+  lang?: string;
+  search?: { apiKey?: string; authentication?: string };
+  constraints?: Record<string, string>;
+  mode?: 'car' | 'pedestrian';
+  carlabel?: string;
+  pedlabel?: string;
+  runlabel?: string;
+  startlabel?: string;
   apiKey?: string;
   authentication?: string;
   label?: string;
@@ -54,12 +78,16 @@ export default class RoutingGeoportail extends ol_control_Control {
    */
   constructor(options?: Options);
 
+  on: RoutingOnSignature<EventsKey>;
+  once: RoutingOnSignature<EventsKey>;
+  un: RoutingOnSignature<void>;
+
   /**
    * Set the map instance the control is associated with
    * and add its controls associated to this map.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Calculate route
    * @param {Array<ol.coordinate>|undefined} steps an array of steps in EPSG:4326, default use control input values
@@ -72,7 +100,7 @@ export default class RoutingGeoportail extends ol_control_Control {
    * @param {function} onsuccess callback
    * @param {function} onerror callback
    */
-  ajax(url: string, onsuccess: (...params: any[]) => void, onerror: (...params: any[]) => void): void;
+  ajax(url: string, onsuccess: (request: XMLHttpRequest) => void, onerror?: (request: XMLHttpRequest) => void): void;
 
   /** Set the mode (car/pedestrian)
    * @param {string} mode
@@ -90,7 +118,7 @@ export default class RoutingGeoportail extends ol_control_Control {
    * @param {string} type
    * @param {string} [value]
    */
-  setConstraint(type: string, value?: string): void
+  setConstraint(type: string, value?: string | boolean): void
 
   /** Add a new button
    * @param {string} className
@@ -103,6 +131,11 @@ export default class RoutingGeoportail extends ol_control_Control {
    * @return {Vector}
    */
   getSource(): Vector;
+
+  /** Format a duration in seconds. */
+  getTimeString(seconds: number): string;
+  /** Format a distance in meters. */
+  getDistanceString(distance: number): string;
 
   /**
    *  Abort request

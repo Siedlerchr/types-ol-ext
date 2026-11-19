@@ -1,8 +1,8 @@
 import { Interaction } from 'ol/interaction'
 import type { Layer } from 'ol/layer'
 
-export class Options {
-  layer?: Layer
+export interface Options {
+  layer: Layer
 
   radius?: number
 }
@@ -13,10 +13,10 @@ export class Options {
  * @extends {ol_interaction_Interaction}
 
  */
-export class SnapLayerPixel extends Interaction {
+export default class SnapLayerPixel extends Interaction {
   /**
    * @param {olx.interaction.InteractionOptions} options Options
    *  @param {ol.layer.Layer} options.layer layer to snap on
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 }

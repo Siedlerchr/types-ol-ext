@@ -1,9 +1,9 @@
 import type { Map as _ol_Map_ } from 'ol'
 import { Overlay } from 'ol'
-import type { Options as OverlayOptions } from 'ol/Overlay'
+import type { Pixel } from 'ol/pixel'
 import type Base from '../particule/Base'
 
-export interface Options extends OverlayOptions {
+export interface Options {
   className?: string;
   density?: number;
   speed?: number;
@@ -11,6 +11,7 @@ export interface Options extends OverlayOptions {
   animate?: boolean;
   fps?: number;
   particule?: typeof Base;
+  createParticule?: (overlay?: AnimatedCanvas, coordinate?: Pixel) => Base;
 }
 
 /** An overlay to play animations on top of the map
@@ -53,20 +54,23 @@ export default class AnimatedCanvas extends Overlay {
    * Set the map instance the overlay is associated with
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Create particules or return exiting ones
    */
-  getParticules(): any[];
+  getParticules(): Base[];
 
   /** Get random coordinates on canvas
    */
-  randomCoord(): number[];
+  randomCoord(): Pixel;
 
   /** Draw canvas overlay (draw each particules)
    * @param {number} dt timelapes since last call
    */
-  draw(dt: number): void;
+  draw(dt?: number): void;
+
+  /** Wrap a particle around the canvas when it leaves the visible area. */
+  testExit(particle: Base): void;
 
   /** Clear canvas
    */

@@ -1,5 +1,5 @@
 import type { Options, FeatureAnimationEvent } from './FeatureAnimation'
-import { FeatureAnimation } from './FeatureAnimation'
+import FeatureAnimation from './FeatureAnimation'
 
 /** Teleport a feature at a given place
  * @constructor

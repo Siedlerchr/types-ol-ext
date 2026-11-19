@@ -1,11 +1,11 @@
-import type LineString from 'ol/geom/LineString'
+import LineString from 'ol/geom/LineString'
 
 export interface Options {
     area?: number;
     dist?: number;
     ratio?: number;
     minPoints?: number
-    keepEnds?: number;
+    keepEnds?: boolean;
 }
 
 declare module 'ol/geom/LineString' {
@@ -21,5 +21,9 @@ declare module 'ol/geom/LineString' {
      * @return { LineString } A new, simplified version of the original geometry.
      * @api
      */
-    export function simplifyVisvalingam(options?: Options): LineString
+    export default interface LineString {
+      simplifyVisvalingam(options: Options): LineString;
+    }
 }
+
+export default LineString

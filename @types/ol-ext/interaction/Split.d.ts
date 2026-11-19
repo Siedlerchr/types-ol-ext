@@ -6,7 +6,7 @@ import type { Style } from 'ol/style'
 import { Interaction } from 'ol/interaction'
 import type MapBrowserEvent from 'ol/MapBrowserEvent'
 import type VectorSource from 'ol/source/Vector'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
@@ -17,11 +17,7 @@ type SplitOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'beforesplit' | 'aftersplit', SplitEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'beforesplit' | 'aftersplit', Return>
 
-export enum SplitEventType {
-  BEFORESPLIT = 'beforesplit',
-  AFTERSPLIT = 'aftersplit'
-
-}
+export type SplitEventType = 'beforesplit' | 'aftersplit'
 
 export interface Options {
   sources?: VectorSource | VectorSource[];
@@ -29,7 +25,7 @@ export interface Options {
   snapDistance?: number;
   cursor?: string;
   filter?: (f: Feature) => boolean;
-  featureStyle?: Style | Style[];
+  featureStyle?: Style | Style[] | false;
   sketchStyle?: Style | Style[];
   tolerance?: number;
 }
@@ -60,7 +56,7 @@ export default class Split extends Interaction {
    * @param {_ol_Map_} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Get sources to split features in
    * @return {Array<VectorSource>}
@@ -70,25 +66,25 @@ export default class Split extends Interaction {
   /** Set sources to split features in
    * @param {VectorSource|Array<VectorSource>} [sources]
    */
-  setSources(sources: VectorSource | VectorSource[]): void
+  setSources(sources?: VectorSource | VectorSource[] | false): void
 
   /** Get nearest coordinate in a list
    * @param {Coordinate} pt the point to find nearest
    * @param {Array<Coordinate>} coords list of coordinates
    * @return {Coordinate} the nearest coordinate in the list
    */
-  getNearestCoord(pt: Coordinate, coords: Coordinate[]): Coordinate;
+  getNearestCoord(pt: Coordinate, coords: Coordinate[]): Coordinate | undefined;
 
   /**
-   * @param {MapBrowserEvent<UIEvent>} evt Map browser event.
+   * @param {MapBrowserEvent} evt Map browser event.
    * @return {boolean} `true` to start the drag sequence.
    */
-  handleDownEvent(evt: MapBrowserEvent<UIEvent>): boolean;
+  handleDownEvent(evt: MapBrowserEvent): boolean;
 
   /**
-   * @param {MapBrowserEvent<UIEvent>} evt Event.
+   * @param {MapBrowserEvent} evt Event.
    */
-  handleMoveEvent(evt: MapBrowserEvent<UIEvent>): void;
+  handleMoveEvent(evt: MapBrowserEvent): void;
 
   on: SplitOnSignature<EventsKey>
 
@@ -97,13 +93,8 @@ export default class Split extends Interaction {
   un: SplitOnSignature<void>
 }
 
-export class SplitEvent extends BaseEvent {
-  constructor(type: SplitEventType,
-              original: Feature,
-              toSplit: Feature[]
-  );
-
-  original: Feature
-
-  features: Feature[]
+export interface SplitEvent extends BaseEvent {
+  type: SplitEventType;
+  original: Feature;
+  features: Feature[];
 }

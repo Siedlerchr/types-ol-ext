@@ -1,21 +1,20 @@
 import type { Map as _ol_Map_ } from 'ol'
 
 import type { Pixel } from 'ol/pixel'
+import type { Coordinate } from 'ol/coordinate'
 import type { Style } from 'ol/style'
-import type { Options as OverlayOptions } from 'ol/Overlay'
-import type Positioning from 'ol/Overlay'
+import type { Positioning } from 'ol/Overlay'
+import type { Options as PopupOptions } from './Popup'
 import Popup from './Popup'
 
-export interface Options extends OverlayOptions {
-  popupClass?: string;
+/** Options for a popup fixed to the map or viewport. */
+export interface Options extends PopupOptions {
   style?: Style;
+  /** Minimum popup scale. */
   minScale?: number;
+  /** Maximum popup scale. */
   maxScale?: number;
-  closeBox?: boolean;
-  onclose?: () => void;
-  onshow?: () => void;
-  offsetBox?: number | number[];
-  positioning?: typeof Positioning | any | undefined; // workaround with any for 'auto'
+  /** Whether the popup follows the map or viewport. */
   hook?: 'map' | 'viewport'
 }
 
@@ -44,25 +43,32 @@ export default class FixedPopup extends Popup {
    *   the 'auto' positioning var the popup choose its positioning to stay on the map.
    *  @param {string} options.hook popup is hooked on the 'map' (and move with it) or on the 'viewport', default viewport.
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /**
    * Set the map instance the control is associated with
    * and add its controls associated to this map.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Set pixel position
    * @param {ol.pixel} pix
    * @param {string} position top/bottom/middle-left/right/center
    */
-  setPixelPosition(pix: Pixel, position: string): void;
+  setPixelPosition(pix?: Pixel, position?: Positioning): void;
 
   /** Set pixel position
    * @returns {ol.pixel}
    */
-  getPixelPosition(): Pixel;
+  getPixelPosition(): Pixel | undefined;
+
+  /** Get the popup's map coordinate, if set. */
+  getCoordinate(): Coordinate | null | undefined;
+  /** Set the popup's map coordinate. */
+  setCoordinate(position?: Coordinate): void;
+  /** Hook the popup to the map or viewport; defaults to the viewport. */
+  setHook(hook?: 'map' | 'viewport'): void;
 
   /**
    * Set the CSS class of the popup.
@@ -76,14 +82,14 @@ export default class FixedPopup extends Popup {
    * @param {booelan} update update popup, default true
    * @api
    */
-  setRotation(angle: number, update: boolean): void;
+  setRotation(angle: number, update?: boolean): void;
 
   /** Set poppup scale
    * @param {number} scale
    * @param {boolean} update update popup, default true
    * @api
    */
-  setScale(scale: number, update: boolean): void;
+  setScale(scale: number, update?: boolean): void;
 
   /** Set link style
    * @param {Style} style

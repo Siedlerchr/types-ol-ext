@@ -4,7 +4,7 @@ import Button from './Button'
 export interface Options extends ButtonOptions {
   className?: string;
   title?: string;
-  html?: string;
+  html?: string | Element;
   handleClick?: (e: Event) => void;
 }
 
@@ -23,22 +23,4 @@ export default class TextButton extends Button {
    */
   constructor(options?: Options);
 
-  /** Set the control visibility
-   * @param {boolean} b
-   */
-  setVisible(b: boolean): void;
-
-  /**
-   * Set the button title
-   * @param {string} title
-   * @returns {undefined}
-   */
-  setTitle(title: string): undefined;
-
-  /**
-   * Set the button html
-   * @param {string} html
-   * @returns {undefined}
-   */
-  setHtml(html: string): undefined;
 }

@@ -7,15 +7,17 @@ import type { Options as OverlayOptions, Positioning } from 'ol/Overlay'
  * @namespace Overlay
  * @see {@link http://openlayers.org/en/latest/apidoc/module-ol_Overlay.html}
  */
-export interface Options extends OverlayOptions {
+export interface Options extends Omit<OverlayOptions, 'positioning'> {
   popupClass?: string;
   anim?: boolean;
   closeBox?: boolean;
   onclose?: () => void;
   onshow?: () => void;
   offsetBox?: number | number[];
-  positioning?: Positioning | any | undefined; // workaround with any for 'auto'
+  positioning?: Positioning | 'center' | 'auto' | 'auto-auto' | 'auto-left' | 'auto-right' | 'auto-center' | 'top-auto' | 'bottom-auto' | 'center-auto';
   minibar?: boolean;
+  anchor?: boolean;
+  html?: string | HTMLElement;
 }
 
 /**
@@ -106,7 +108,7 @@ export default class Popup extends Overlay {
    popup.show("New informations");
    * @api stable
    */
-  show(coordinate?: Coordinate | string, html?: string | HTMLElement): void;
+  show(coordinate?: Coordinate | string | true, html?: string | HTMLElement): void;
 
   /**
    * Hide the popup

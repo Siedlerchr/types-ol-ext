@@ -56,9 +56,9 @@ const map = new Map({
 })
 
 // The vector graph
-const graph = new VectorSource({
+const graph = new VectorSource<Feature<Geometry>>({
   url: '../data/ROUTE120.geojson',
-  format: new GeoJSON(),
+  format: new GeoJSON<Feature<Geometry>>(),
 })
 const listenerKey = graph.on('change', () => {
   if (graph.getState() === 'ready') {
@@ -106,7 +106,7 @@ dijkstra.on('finish', e => {
     $('#result').hide()
   } else {
     $('#result').show()
-    let t = `${(e.distance / 1000).toFixed(2)}km`
+    let t = e.distance === undefined ? 'Distance unavailable' : `${(e.distance / 1000).toFixed(2)}km`
     // Weighted distance
     if ($('#speed').prop('checked')) {
       const h = e.wDistance / 1000

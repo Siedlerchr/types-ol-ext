@@ -1,9 +1,11 @@
 import Base from './Base'
+import type { Options as BaseOptions } from './Base'
 
-export interface Options {
+export interface Options extends BaseOptions {
+  fold?: number[];
   margin?: number;
   padding?: number;
-  fSize?: number | number[];
+  fsize?: number | number[];
   fill?: boolean;
   shadow?: boolean;
   opacity?: number;

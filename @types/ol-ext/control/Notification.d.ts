@@ -12,7 +12,6 @@ export interface Options extends ControlOptions {
  *
  * @constructor
  * @extends {ol_control_Control}
- * @fire change:visible
  */
 export default class Notification extends ol_control_Control {
   /**
@@ -28,7 +27,7 @@ export default class Notification extends ol_control_Control {
    * @param what the notification to show, default get the last one
    * @param  [duration=3000] duration in ms, if -1 never hide
    */
-  show(what?: string | Node, duration?: number): void;
+  show(what?: string | Node | null, duration?: number): void;
 
   /**
    * Remove a notification on the map

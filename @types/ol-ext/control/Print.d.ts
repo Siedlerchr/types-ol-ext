@@ -1,5 +1,20 @@
 import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
+
+export interface PrintEvent extends BaseEvent {
+  type: 'print'; canvas: HTMLCanvasElement; image: string | null; imageType: string; quality: number;
+  print: { format: string; orientation: string; unit: 'mm'; size: number[]; position: number[] | undefined; imageWidth: number | undefined; imageHeight: number | undefined };
+}
+export interface PrintErrorEvent extends BaseEvent { type: 'error'; canvas: HTMLCanvasElement }
+export type PrintOnSignature<Return> = OnSignature<'error', PrintErrorEvent, Return> &
+  OnSignature<EventTypes, BaseEvent, Return> & OnSignature<Types | 'change' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'print', PrintEvent, Return> & OnSignature<'printing', BaseEvent & PrintOptions, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'propertychange' | 'error' | 'print' | 'printing', Return>
 
 export interface Options extends ControlOptions {
   className?: string;
@@ -11,14 +26,14 @@ export interface Options extends ControlOptions {
 }
 
 export interface PrintOptions {
-  imageType: string;
-  quality: number;
-  immediate: boolean;
+  imageType?: string;
+  quality?: number;
+  immediate?: boolean | 'silent';
   size?: number[] | undefined;
-  format?: PaperSize | undefined;
+  format?: string;
   orient?: string | undefined;
   margin?: number | undefined;
-  any: any;
+  [key: string]: unknown;
 }
 
 export type PaperSize = 'A0' | 'A1' | 'A2' | 'A3' | 'A4' | 'US Letter' | 'A5' | 'B4' | 'B5';
@@ -41,6 +56,10 @@ export default class Print extends ol_control_Control {
    */
   constructor(options?: Options);
 
+  on: PrintOnSignature<EventsKey>;
+  once: PrintOnSignature<EventsKey>;
+  un: PrintOnSignature<void>;
+
   /** Print the map
    * @param {Object} options
    *  @param {string} options.imageType A string indicating the image format, default the control one
@@ -60,9 +79,9 @@ export default class Print extends ol_control_Control {
    *  @param {HTMLCanvasElement|undefined} [options.canvas] if none create one, only for ol@6+
    *  @parama {string} options.imageType
    */
-  fastPrint(options: PrintOptions & {
+  fastPrint(options: (PrintOptions & {
     canvas?: HTMLCanvasElement
-  }, callback: (elem: HTMLCanvasElement) => void): void;
+  }) | undefined, callback: (elem: HTMLCanvasElement) => void): void;
 
   /** Helper function to copy result to clipboard
    * @param {any} options print options

@@ -2,7 +2,7 @@ import type { Map as _ol_Map_ } from 'ol'
 import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 import type { EventsKey } from 'ol/events'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type Feature from 'ol/Feature'
 import type { ObjectEvent } from 'ol/Object'
 import type { Vector as VectorSource } from 'ol/source'
@@ -11,7 +11,7 @@ import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable
 import type { Types } from 'ol/ObjectEventType'
 import type { Geometry } from 'ol/geom'
 
-type ImageLineOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+type ImageLineOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
   OnSignature<Types | 'select', ImageLineSelectEvent, Return> &
   OnSignature<Types | 'collapse', ImageLineCollapseEvent, Return> &
@@ -19,13 +19,14 @@ type ImageLineOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
 
 export interface Options extends ControlOptions {
   className?: string;
-  source?: VectorSource;
+  source?: VectorSource | VectorSource[];
   layers?: VectorLayer<VectorSource<Feature<Geometry>>>[];
-  getImage?: (f: Feature) => string;
+  getImage?: (f: Feature) => string | false;
   getTitle?: (f: Feature) => string;
   collapsed?: boolean;
   collapsible?: boolean;
   maxFeatures?: number;
+  useExtent?: boolean;
   hover?: boolean;
   linkColor?: string | boolean;
 }
@@ -52,14 +53,17 @@ export default class Imageline extends ol_control_Control {
    *  @param {boolean} options.hover select image on hover, default false
    *  @param {string|boolean} options.linkColor link color or false if no link, default false
    */
-  constructor(options?: Options);
+  constructor(options: Options);
+
+  /** Set the layers used to find images. */
+  setLayers(layers: VectorLayer<VectorSource<Feature<Geometry>>>[]): void;
 
   /**
    * Remove the control from its current map and attach it to the new map.
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Set useExtent param and refresh the line
    * @param {boolean} b
@@ -84,7 +88,7 @@ export default class Imageline extends ol_control_Control {
    * Get features
    * @return {Array<Feature>}
    */
-  getFeatures(): Feature[];
+  getFeatures(): Feature[][];
 
   /**
    * Refresh the imageline with new data
@@ -105,20 +109,5 @@ export default class Imageline extends ol_control_Control {
   un: ImageLineOnSignature<void>
 }
 
-export class ImageLineSelectEvent extends BaseEvent {
-  constructor(
-    type: 'select',
-    feature: Feature
-  );
-
-  feature: Feature
-}
-
-export class ImageLineCollapseEvent extends BaseEvent {
-  constructor(
-    type: 'collapse',
-    collapsed: boolean
-  );
-
-  collapsed: boolean
-}
+export interface ImageLineSelectEvent extends BaseEvent { type: 'select'; feature: Feature }
+export interface ImageLineCollapseEvent extends BaseEvent { type: 'collapse'; collapsed: boolean }

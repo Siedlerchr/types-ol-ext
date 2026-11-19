@@ -1,16 +1,16 @@
 import type { Color } from 'ol/color'
 
-/** Converts an RGB color value to HSL.
- * returns hsl as array h:[0,360], s:[0,100], l:[0,100]
- * @param {ol/color~Color|string} rgb
- * @returns {Array<number>} hsl as h:[0,360], s:[0,100], l:[0,100]
- */
-declare function ol_color_toHSL(rgb: Color | string): number[];
+/** Convert an RGB color to HSL, preserving an optional alpha component. */
+export function toHSL(rgb: Color | string, round?: number): number[];
 
-/** Converts an HSL color value to RGB.
- * @param {Array<number>} hsl as h:[0,360], s:[0,100], l:[0,100]
- * @returns {Array<number>} rgb
- */
-declare function ol_color_fromHSL(hsl: number[]): number[];
+/** Convert HSL to RGB, preserving an optional alpha component. */
+export function fromHSL(hsl: number[], round?: number): number[];
 
-export { ol_color_toHSL as toHSL, ol_color_fromHSL as fromHSL }
+/** Convert an RGB color to HSV, preserving an optional alpha component. */
+export function toHSV(rgb: Color | string, round?: number): number[];
+
+/** Convert HSV to RGB, preserving an optional alpha component. */
+export function fromHSV(hsv: number[], round?: number): number[];
+
+/** Convert RGB components to a six-digit hexadecimal color string. */
+export function toHexa(rgb: Color): string;

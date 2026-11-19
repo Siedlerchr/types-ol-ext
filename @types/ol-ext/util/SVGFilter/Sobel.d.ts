@@ -1,8 +1,10 @@
 import SVGFilter from '../SVGFilter'
 
 export interface Options {
+  id?: string;
   grayscale?: boolean;
   alpha?: boolean;
+  gamma?: number;
 }
 
 /** Apply a sobel filter on an image

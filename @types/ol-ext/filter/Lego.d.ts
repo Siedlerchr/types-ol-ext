@@ -1,6 +1,7 @@
 import Base from './Base'
+import type { Options as BaseOptions } from './Base'
 
-export interface Options {
+export interface Options extends BaseOptions {
   img?: string;
   brickSize?: number;
   crossOrigin?: null | string | undefined;
@@ -40,13 +41,13 @@ export default class Lego extends Base {
    *  @param {'brick'|'ol3'|'lego'|undefined} img the pattern, default ol3
    *  @param {string} crossOrigin
    */
-  setBrick(width?: number, img?: 'brick' | 'ol3' | 'lego' | undefined, crossOrigin?: string): void;
+  setBrick(width?: number, img?: string | HTMLImageElement, crossOrigin?: string | null): void;
 
   /** Get translated pattern
    *  @param {number} offsetX x offset
    *  @param {number} offsetY y offset
    */
-  getPattern(offsetX: number, offsetY: number): void;
+  getPattern(offsetX: number, offsetY: number): CanvasPattern | 'transparent' | null;
 
   /** Activate / deactivate filter
    *  @param {boolean} b

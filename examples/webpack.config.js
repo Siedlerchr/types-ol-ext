@@ -8,7 +8,7 @@ module.exports = {
       const basename = path.basename(file).replace(path.extname(file), '')
       const dirname = path.basename(path.dirname(file))
       const key = `${dirname}/${basename}`
-      entries[key] = file
+      entries[key] = path.resolve(file)
     })
     return entries
   },

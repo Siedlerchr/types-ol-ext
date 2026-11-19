@@ -1,13 +1,23 @@
 import type { ColorLike } from 'ol/colorlike'
+import type { Color } from 'ol/color'
 import type { Options as BaseOptions } from './Base'
 import Base from './Base'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { OnSignature } from 'ol/Observable'
+
+export interface PopupVisibilityEvent extends BaseEvent {
+  type: 'collapse' | 'change:visible';
+  visible: boolean;
+}
 
 export interface Options extends BaseOptions {
   className?: string;
-  color?: ColorLike;
+  color?: ColorLike | Color;
   input?: Element;
   parent?: Element;
-  position?: 'popup' | 'fixed' | 'inline';
+  position?: 'popup' | 'fixed' | 'static' | 'inline';
+  ariaLabel?: string;
   autoClose?: boolean;
   hidden?: boolean;
 }
@@ -45,4 +55,8 @@ export default class PopupBase extends Base {
   /** Toggle the popup
    */
   toggle(): void;
+
+  on: Base['on'] & OnSignature<'collapse' | 'change:visible', PopupVisibilityEvent, EventsKey>;
+  once: Base['once'] & OnSignature<'collapse' | 'change:visible', PopupVisibilityEvent, EventsKey>;
+  un: Base['un'] & OnSignature<'collapse' | 'change:visible', PopupVisibilityEvent, void>;
 }

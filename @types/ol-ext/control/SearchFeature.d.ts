@@ -1,11 +1,13 @@
 import type Feature from 'ol/Feature'
-import type { Options as SearchOptions } from './Search'
+import type VectorSource from 'ol/source/Vector'
+import type { EventsKey } from 'ol/events'
+import type { Options as SearchOptions, SearchOnSignature } from './Search'
 import Search from './Search'
 
-export interface Options extends SearchOptions {
+export interface Options extends SearchOptions<Feature> {
   className?: string;
   title?: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   typing?: number;
   minLength?: number;
@@ -13,7 +15,8 @@ export interface Options extends SearchOptions {
   property?: string;
   getTitle?: (f: Feature) => string;
   getSearchString?: (f: Feature) => string;
-  sort: (f1: Feature, f2: Feature) => number;
+  source?: VectorSource;
+  sort?: (f1: Feature, f2: Feature) => number;
 }
 
 /**
@@ -24,7 +27,7 @@ export interface Options extends SearchOptions {
  * @fires select
 
  */
-export default class SearchFeature extends Search {
+export default class SearchFeature extends Search<Feature> {
   /**
    * @param {Object=} Control options.
    *  @param {string} options.className control class name
@@ -41,8 +44,28 @@ export default class SearchFeature extends Search {
    */
   constructor(options?: Options);
 
+  /** Return the title of a feature. */
+  getTitle(feature: Feature): string;
+  /** Select a feature from the search results. */
+  select(feature: Feature, reverse?: boolean, coord?: import('ol/coordinate').Coordinate, options?: any): void;
+  /** Get the feature search history. */
+  getHistory(): Feature[];
+  /** Search features by text. */
+  autocomplete(search: string, callback: (results: Feature[]) => void): Feature[] | false | void;
+
+  /** Return the string used to search a feature. */
+  getSearchString(feature: Feature): string | undefined;
+  /** Get the source searched by the control. */
+  getSource(): VectorSource | undefined;
+  /** Set the source searched by the control. */
+  setSource(source: VectorSource): void;
+
   /** Set function to sort autocomplete results
    * @param {function} sort a sort function that takes 2 features and returns 0, -1 or 1
    */
   setSortFunction(sort: (f1: Feature, f2: Feature) => number): void
+
+  on: SearchOnSignature<EventsKey, Feature>
+  once: SearchOnSignature<EventsKey, Feature>
+  un: SearchOnSignature<void, Feature>
 }

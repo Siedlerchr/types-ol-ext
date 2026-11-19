@@ -1,9 +1,19 @@
 import type { Options as SearchOptions } from './Search'
 import Search from './Search'
+import type { Coordinate } from 'ol/coordinate'
+import type Geolocation from 'ol/Geolocation'
 
-export interface Options extends SearchOptions {
+/** A coordinate search result, in longitude/latitude and the map projection. */
+export interface GPSResult {
+  gps: Coordinate;
+  coordinate: Coordinate;
+  name: string;
+}
+
+export interface Options extends SearchOptions<GPSResult> {
   className?: string;
   label?: string;
+  labelGPS?: string;
   placeholder?: string;
   typing?: number;
   minLength?: number;
@@ -18,7 +28,7 @@ export interface Options extends SearchOptions {
  * @fires select
 
  */
-export default class SearchGPS extends Search {
+export default class SearchGPS extends Search<GPSResult, Coordinate | undefined> {
   /**
    * @param {Object=} Control options.
    *  @param {string} options.className control class name
@@ -36,7 +46,7 @@ export default class SearchGPS extends Search {
    * @return {Array<any>|false} an array of search solutions
    * @api
    */
-  autocomplete(s: string): any[] | false;
+  autocomplete(s: string): GPSResult[];
 
   /** Get the input field
    *  @return {Element}
@@ -44,58 +54,11 @@ export default class SearchGPS extends Search {
    */
   getInputField(): Element;
 
-  /** Returns the text to be displayed in the menu
-   *  @param {any} f feature to be displayed
-   *  @return {string} the text to be displayed in the index, default f.name
-   *  @api
-   */
-  getTitle(f: any): string;
-
-  /** Force search to refresh
-   */
-  search(): void;
-
-  /** Set the input value in the form (for initialisation purpose)
-   *  @param {string} value
-   *  @param {boolean} search to start a search
-   *  @api
-   */
-  setInput(value: string, search: boolean): void;
-
-  /** A ligne has been clicked in the menu > dispatch event
-   *  @param {any} f the feature, as passed in the autocomplete
-   *  @api
-   */
-  select(f: any): void;
-
-  /** Save history (in the localstorage)
-   */
-  saveHistory(): void;
-
-  /** Restore history (from the localstorage)
-   */
-  restoreHistory(): void;
-
-  /**
-   * Remove previous history
-   */
-  clearHistory(): void;
-
-  /**
-   * Get history table
-   */
-  getHistory(): any;
-
-  /** Test if 2 features are equal
-   * @param {any} f1
-   * @param {any} f2
-   * @return {boolean}
-   */
-  equalFeatures(f1: any, f2: any): boolean;
-
   /** Set the input value in the form (for initialisation purpose
   * @param {Array<number>} [coord] if none get the map center
   * @api
   */
-  setInput(coord: number[]): void;
+  setInput(coord?: Coordinate): void;
+
+  geolocation: Geolocation;
 }

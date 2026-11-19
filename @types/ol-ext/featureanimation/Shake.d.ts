@@ -1,9 +1,13 @@
 import type { FeatureAnimationEvent, Options as FeatureAnimationOptions } from './FeatureAnimation'
-import { FeatureAnimation } from './FeatureAnimation'
+import FeatureAnimation from './FeatureAnimation'
 
+/** Options for the shake animation. */
 export interface Options extends FeatureAnimationOptions {
+  /** Number of oscillations. */
   bounce?: number;
+  /** Displacement amplitude. */
   amplitude?: number;
+  /** Shake horizontally instead of vertically. */
   horizontal?: boolean;
 }
 

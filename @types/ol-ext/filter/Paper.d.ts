@@ -1,13 +1,14 @@
-import Feature from 'ol/Feature'
-import { Fill } from 'ol/style'
 import Base from './Base'
 
 export interface Options {
   active?: boolean;
   scale?: number;
+  id?: string;
+  light?: number;
 }
 
 /** Paper filter
+ * @deprecated Use a canvas filter instead.
  * @constructor
  * @extends {ol_filter_Base}
 
@@ -20,9 +21,8 @@ export default class Paper extends Base {
    */
   constructor(options?: Options);
 
-  /** Draw the feature into canvas
-   */
-  drawFeaturePath_(): void;
+  /** Set filter light, from 0 (darker) to 100 (lighter). */
+  setLight(light: number): void;
 
   /** Activate / deactivate filter
    *  @param {boolean} b
@@ -34,5 +34,4 @@ export default class Paper extends Base {
    */
   getActive(): boolean;
 
-  fillColor_: string
 }

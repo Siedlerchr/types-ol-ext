@@ -30,7 +30,7 @@ export default class CanvasScaleLine extends ol_control_ScaleLine {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /**
    * Change the control style

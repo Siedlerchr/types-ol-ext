@@ -6,9 +6,9 @@ export interface Options extends SelectOptions {
   className?: string;
   source?: VectorSource | VectorSource[];
   label?: string;
-  selectAll?: number;
+  selectAll?: boolean;
   condition?: condition | condition[];
-  onchoice: () => void;
+  onchoice?: () => void;
 }
 
 /**
@@ -35,5 +35,5 @@ export default class SelectCondition extends SelectBase {
   /** Add a condition to select on */
   addCondition(condition: condition): void
 
-  setCondition(condition: condition | condition[]): void;
+  setCondition(condition?: condition | condition[]): void;
 }

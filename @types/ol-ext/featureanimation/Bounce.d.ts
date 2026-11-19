@@ -1,10 +1,10 @@
 import type { FeatureAnimationEvent, Options as FeatureAnimationOptions } from './FeatureAnimation'
-import { FeatureAnimation } from './FeatureAnimation'
+import FeatureAnimation from './FeatureAnimation'
 
 export interface Options extends FeatureAnimationOptions {
   bounce?: number;
   amplitude?: number;
-  easing: ((p0: number) => number);
+  easing?: ((p0: number) => number);
   duration?: number;
 }
 

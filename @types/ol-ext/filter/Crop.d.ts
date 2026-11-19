@@ -1,15 +1,7 @@
-import type { ColorLike } from 'ol/colorlike'
-import type Feature from 'ol/Feature'
 import Mask from './Mask'
+import type { Options as MaskOptions } from './Mask'
 
-export interface Options {
-  feature?: Feature;
-  shadowWidth?: number;
-  shadowMapUnits?: boolean;
-  shadowColor?: ColorLike;
-  inner?: boolean;
-  wrapX?: boolean;
-}
+export interface Options extends MaskOptions {}
 
 /** Crop drawing using an ol.Feature
  * @constructor

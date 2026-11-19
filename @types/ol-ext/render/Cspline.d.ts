@@ -3,8 +3,9 @@ import { Geometry } from 'ol/geom'
 
 export interface Options {
   tension?: number;
-  rsolution?: number;
+  resolution?: number;
   pointsPerSeg?: number;
+  normalize?: boolean;
 }
 
 /** Calculate cspline on coordinates
@@ -17,8 +18,8 @@ export interface Options {
  */
 export default function ol_coordinate_cspline(line: Coordinate[], options?: Options): Coordinate[]
 
-declare module 'ol/geom' {
-  interface Geometry {
+declare module 'ol/geom/Geometry' {
+  export default interface Geometry {
     /** Cache cspline calculation on a geometry
      * @param {} options
      *  @param {Number} options.tension a [0,1] number / can be interpreted as the "length" of the tangent, default 0.5

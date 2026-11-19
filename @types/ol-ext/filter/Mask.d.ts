@@ -2,8 +2,9 @@ import type Feature from 'ol/Feature'
 import type { Fill } from 'ol/style'
 import type { ColorLike } from 'ol/colorlike'
 import Base from './Base'
+import type { Options as BaseOptions } from './Base'
 
-export interface Options {
+export interface Options extends BaseOptions {
   feature?: Feature;
   fill?: Fill;
   shadowWidth?: number;
@@ -45,10 +46,10 @@ export default class Mask extends Base {
   /** Set filter fill color
    * @param {ColorLike} color
    */
-  setFillColor(color: ColorLike): void;
+  setFillColor(color?: ColorLike): void;
 
   /** Set filter shadow color
    * @param {ColorLike} color
    */
-  setShadowColor(color: ColorLike): void;
+  setShadowColor(color?: ColorLike): void;
 }

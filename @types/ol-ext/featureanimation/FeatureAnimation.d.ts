@@ -1,28 +1,83 @@
-import type { Style } from 'ol/style'
-import type { FeatureLike } from 'ol/Feature'
-import type { Geometry } from 'ol/geom'
-import type { Extent } from 'ol/extent'
-import type { Coordinate } from 'ol/coordinate'
-import type VectorContext from 'ol/render/VectorContext'
-import type { StyleLike } from 'ol/style/Style'
-import { Object as _OL_OBJECT } from 'ol'
-import type { Type } from 'ol/geom/Geometry'
-import type { FrameState } from 'ol/Map'
+import type {
+  Style
+} from 'ol/style'
+import type Feature
+  from 'ol/Feature'
+import type {
+  Geometry
+} from 'ol/geom'
+import type {
+  Extent
+} from 'ol/extent'
+import type {
+  Coordinate
+} from 'ol/coordinate'
+import type VectorContext
+  from 'ol/render/VectorContext'
+import {
+  Object as _OL_OBJECT
+} from 'ol'
+import type {
+  Type
+} from 'ol/geom/Geometry'
+import type {
+  FrameState
+} from 'ol/Map'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { OnSignature } from 'ol/Observable'
+
+/** An animation lifecycle event dispatched with the animated feature. */
+export interface AnimationLifecycleEvent extends BaseEvent {
+  type: 'animationstart' | 'animationrepeat' | 'animationend';
+  feature: Feature;
+  [key: string]: unknown;
+}
+
+/** Current animation frame, emitted while the animation is playing. */
+export interface AnimationFrameEvent extends BaseEvent {
+  type: 'animating';
+  feature: Feature;
+  step: number;
+  start: number;
+  time: number;
+  elapsed: number;
+  rotation: number;
+  geom: Geometry;
+  coordinate: Coordinate;
+  style: Style[];
+  extra: unknown;
+}
+
+/** Drawing information; listeners can replace the styles before drawing. */
+export interface AnimationDrawingEvent extends BaseEvent {
+  type: 'drawing';
+  feature: Feature;
+  start: number;
+  time: number;
+  stop?: number;
+  rotation?: number;
+  style: Style | Style[];
+  extra?: unknown;
+}
 
 export interface FeatureAnimationEvent {
-  vectorContext: VectorContext,
+  vectorContext: VectorContext | null,
   frameState: FrameState,
   start: number,
   time: number,
   elapsed: number,
-  extent: boolean,
+  extent: Extent,
   // Feature information
-  feature: FeatureLike,
+  feature: Feature,
   geom: Geometry
   typeGeom: Type,
   bbox: Extent
   coord: Coordinate
-  style: StyleLike
+  style: Style[]
+  context: CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D
+  rotation?: number
+  extra?: unknown
 }
 
 export interface Options {
@@ -45,9 +100,9 @@ export interface Options {
  * @property {function} isPlaying - return true if animation is playing.
  */
 export type animationControler = {
-  start: (...params: any[]) => any;
-  stop: (...params: any[]) => any;
-  isPlaying: (...params: any[]) => any;
+  start: (options?: Record<string, unknown>) => void;
+  stop: (options?: Record<string, unknown>) => void;
+  isPlaying: () => boolean;
 };
 
 /** Feature animation base class
@@ -59,7 +114,7 @@ export type animationControler = {
  * @fires animationend
 
  */
-export class FeatureAnimation extends _OL_OBJECT {
+export default class FeatureAnimation extends _OL_OBJECT {
   /**
    * @param {featureAnimationOptions} options
    *  @param {Number} options.duration duration of the animation in ms, default 1000
@@ -74,6 +129,9 @@ export class FeatureAnimation extends _OL_OBJECT {
    */
   constructor(options?: Options);
 
+  /** Transparent style used while a feature is animating. */
+  static hiddenStyle: Style
+
   /** Function to perform manipulations onpostcompose.
    * This function is called with an featureAnimationEvent argument.
    * The function will be overridden by the child implementation.
@@ -83,7 +141,22 @@ export class FeatureAnimation extends _OL_OBJECT {
    * @apis
    */
   animate(e: FeatureAnimationEvent): boolean;
+
+  on: _OL_OBJECT['on'] & OnSignature<AnimationLifecycleEvent['type'], AnimationLifecycleEvent, EventsKey> & OnSignature<'animating', AnimationFrameEvent, EventsKey> & OnSignature<'drawing', AnimationDrawingEvent, EventsKey>;
+  once: _OL_OBJECT['once'] & OnSignature<AnimationLifecycleEvent['type'], AnimationLifecycleEvent, EventsKey> & OnSignature<'animating', AnimationFrameEvent, EventsKey> & OnSignature<'drawing', AnimationDrawingEvent, EventsKey>;
+  un: _OL_OBJECT['un'] & OnSignature<AnimationLifecycleEvent['type'], AnimationLifecycleEvent, void> & OnSignature<'animating', AnimationFrameEvent, void> & OnSignature<'drawing', AnimationDrawingEvent, void>;
 }
 
-export const featureAnimation: { [key: string]: typeof FeatureAnimation }
-export default featureAnimation
+declare module 'ol/layer' {
+  interface Vector<VectorSourceType> {
+    /** Animate a feature on this layer. Importing this module installs the method. */
+    animateFeature(feature: Feature, animation: FeatureAnimation | FeatureAnimation[], useFilter?: boolean): animationControler;
+  }
+}
+
+/** Map augmented by this module at runtime. */
+export type AnimatedMap =
+  import('ol/Map').default
+  & {
+  animateFeature(feature: Feature, animation: FeatureAnimation): animationControler;
+}

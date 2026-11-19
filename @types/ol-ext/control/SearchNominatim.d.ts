@@ -1,23 +1,34 @@
 import type { Coordinate } from 'ol/coordinate'
 import type { EventsKey } from 'ol/events'
-import BaseEvent from 'ol/events/Event'
 import type { ObjectEvent } from 'ol/Object'
 import type { Types } from 'ol/ObjectEventType'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
-import { SearchEvent } from './Search'
+import type { SearchEvent } from './Search'
 import type { Options as SearchJSONOptions } from './SearchJSON'
 import SearchJSON from './SearchJSON'
+
+/** A place returned by the Nominatim search service. */
+export interface NominatimResult {
+  display_name: string;
+  lon: string | number;
+  lat: string | number;
+  class?: string;
+  type?: string;
+  icon?: string;
+  [key: string]: unknown;
+}
+
+export type NominatimResponse = NominatimResult[] | { results: NominatimResult[] }
+export interface NominatimError { error: string; [key: string]: unknown }
 
 type SearchNominatimOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
   OnSignature<Types | 'select', SearchNominatimEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'select', Return>;
 
-export enum SearchNominatimType {
-  SELECT = 'select',
-}
+export type SearchNominatimType = 'select'
 
-export interface Options extends SearchJSONOptions {
+export interface Options extends SearchJSONOptions<NominatimResult, NominatimResponse> {
   polygon?: boolean;
   viewbox?: number[];
   bounded?: boolean;
@@ -32,7 +43,7 @@ export interface Options extends SearchJSONOptions {
 
  * @see {@link https://wiki.openstreetmap.org/wiki/Nominatim}
  */
-export default class SearchNominatim extends SearchJSON {
+export default class SearchNominatim extends SearchJSON<NominatimResult, NominatimResponse> {
   /**
    * @param {Object=} Control options.
    *  @param {string} options.className control class name
@@ -51,6 +62,9 @@ export default class SearchNominatim extends SearchJSON {
    */
   constructor(options?: Options);
 
+  /** Reverse geocode a coordinate, optionally receiving the results. */
+  reverseGeocode(coord: Coordinate, callback?: (results: (NominatimResult | NominatimError)[]) => void): void;
+
   on: SearchNominatimOnSignature<EventsKey>
 
   once: SearchNominatimOnSignature<EventsKey>
@@ -58,10 +72,6 @@ export default class SearchNominatim extends SearchJSON {
   un: SearchNominatimOnSignature<void>
 }
 
-export class SearchNominatimEvent extends SearchEvent {
-  constructor(type: SearchNominatimType, search: any, coordinate: Coordinate);
-
-  search: any
-
-  coordinate: Coordinate
+export interface SearchNominatimEvent extends SearchEvent<NominatimResult> {
+  coordinate: Coordinate;
 }
