@@ -205,7 +205,7 @@ These observations concern the checked-out `v4.0.39` implementation. Unless note
 
 - `geom/GPAltiCode`: a Node check reproduced a `getLength` TypeError when `samplingDist` is used with a point. A mocked point elevation request otherwise returned the expected XYZ coordinate. The coordinate wrapper does not forward `minZ` (source observation).
 
-- `geom/DFCI`: validation character classes include `|`, `^`, and commas as literal allowed characters. Node checks of the expressions confirmed that `|` passes the first-letter test and `,` passes the digit test. Direct module import failed because `proj4` is not installed, so end-to-end DFCI validation was not run.
+- `geom/DFCI`: validation character classes include `|`, `^`, and commas as literal allowed characters. After installing `proj4` for the coordinate-search example, a Node check confirmed that `validDFCI('|B00')` and `validDFCI('AB,0')` both return true for malformed indices.
 
 - `geom/Scribble`: a Node check found a one-polygon MultiPolygon returns two copies of its scribble because the merge appends the first result to itself. The `angle` default also replaces zero, and nonpositive intervals can make the scan loop nonterminating (source observations; the latter was not executed).
 
@@ -426,7 +426,7 @@ The first entries record initially focused comparisons; later entries document s
 
 - `geom/GPAltiCode`: reviewed point and line overloads and excluded distance sampling from the point overload. Type tests cover callbacks and invalid point sampling; a mocked Node request checked point results. Live service requests were not made.
 
-- `geom/DFCI`: reviewed exported conversion and validation signatures; existing type checks cover them. Direct runtime import remains blocked by missing `proj4`; standalone regex checks revealed the validation issue above.
+- `geom/DFCI`: reviewed exported conversion and validation signatures; existing type checks cover them. The initial runtime import was blocked by missing `proj4`; a subsequent check after installation verified a sample conversion and the validation issue above.
 
 - `geom/Scribble`: reviewed the default function and polygon prototype extensions. Existing type checks cover the APIs; a Node comparison reproduced duplicate MultiPolygon output.
 
@@ -574,7 +574,7 @@ The module review and integrated type checks are complete for ol-ext 4.0.39 with
 
 Known declaration limits remain: FontSymbol can return undefined for an omitted fill or stroke, but its declared getters follow the OpenLayers base signatures for override compatibility; some vector-layer prototype augmentations cover the named `ol/layer` import form, and vector clear events require the documented intersection type. Image-style return types follow OpenLayers where cached ImageBitmap behavior is wider. The side-effect modules affect the OpenLayers copy they import.
 
-The release import failures, absent `proj4`, untested live services, browser interactions and rendering paths remain as described above. These limits do not imply that every runtime path was validated. The project release version was not changed.
+The release import failures, untested live services, browser interactions and rendering paths remain as described above. `proj4` was installed later as a development dependency for example migration. These limits do not imply that every runtime path was validated. The project release version was not changed.
 
 - Subsequent example porting exposed two additional declaration details: `interaction/Flashlight.setPosition(false)` hides the light, and `control/Scale.setScale()` refreshes the display without changing the view. Both are used by upstream example controls.
 
