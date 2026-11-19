@@ -9,8 +9,8 @@ AUDIT_STATE := complete
 
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := GeoJSON drop, globe, great-circle, pulse, and remaining mobile examples
-EXAMPLE_LOAD_CHECK := latest ten pages load; pulse and simulated track buttons checked; GPS and touch interactions untested
+EXAMPLE_PORTS_LAST_ROUND := colorize filter example
+EXAMPLE_LOAD_CHECK := colorize page loads; filter interaction and rendering untested
 
 # A completed step records the current evidence, not a release approval.
 BASELINE_STATE := complete
