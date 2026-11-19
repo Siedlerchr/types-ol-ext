@@ -9,7 +9,7 @@ AUDIT_STATE := complete
 
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := collection input example
+EXAMPLE_PORTS_LAST_ROUND := synchronize and WebGL swipe examples
 EXAMPLE_LOAD_CHECK := swipe checked at zoom 13; interaction coverage incomplete
 
 # A completed step records the current evidence, not a release approval.
