@@ -9,17 +9,16 @@ AUDIT_STATE := complete
 
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := drag overlay interaction and overlay menu examples
-EXAMPLE_LOAD_CHECK := both pages load; dragging, menu, and feature selection interactions untested
+EXAMPLE_PORTS_LAST_ROUND := path animation example
+EXAMPLE_LOAD_CHECK := path animation page loads and requests GPX; animation interactions untested
 
 # Refresh the complete unmatched-page snapshot with:
 # python3 scripts/example-inventory.py --update-status
 # Some entries may be support or standalone pages rather than map examples.
 
 # BEGIN GENERATED MISSING EXAMPLES
-# 146 upstream HTML files without a matching TypeScript port.
+# 145 upstream HTML files without a matching TypeScript port.
 #   animation/map.animatedcluster.html (inline scripts: 1)
-#   animation/map.featureanimation.path.html (inline scripts: 1)
 #   animation/map.featureanimation.select.html (inline scripts: 1)
 #   canvas/map.canvas.control.html (inline scripts: 1)
 #   canvas/map.control.graticule.html (inline scripts: 1)
