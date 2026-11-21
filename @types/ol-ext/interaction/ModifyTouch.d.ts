@@ -8,12 +8,14 @@ import type { Coordinate } from 'ol/coordinate'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
 import type { ModifyEvent, Options as ModifyOptions } from 'ol/interaction/Modify'
+import type Interaction from 'ol/interaction/Interaction'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Types } from 'ol/ObjectEventType'
 import type { Positioning } from 'ol/Overlay'
 
 /** ModifyTouch overrides removePoint without returning the OpenLayers boolean. */
-declare const ModifyTouchBase: new (options: ModifyOptions) => Omit<Modify, 'removePoint' | 'setMap'>
+declare const ModifyTouchBase: new (options: ModifyOptions) =>
+  Interaction & Omit<Modify, keyof Interaction | 'removePoint'>
 
 type ModifyTouchOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &

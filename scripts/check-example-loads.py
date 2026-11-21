@@ -26,7 +26,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('cli', help='Path returned by get_chrome_connect_cli')
     parser.add_argument('--base-url', default='http://localhost:8765')
-    parser.add_argument('--match', default='', help='Only check paths containing this text')
+    parser.add_argument('--match', action='append', default=[],
+                        help='Only check paths containing this text (repeat to match several)')
     args = parser.parse_args()
     output = run(args.cli, 'new_page', 'about:blank')
     selected = re.search(r'^\s*(\d+):.*\[selected\]', output, re.MULTILINE)
@@ -36,7 +37,7 @@ def main():
     try:
         for example in sorted((ROOT / 'examples').rglob('*.ts')):
             relative = example.relative_to(ROOT).with_suffix('.html').as_posix()
-            if args.match not in relative:
+            if args.match and not any(match in relative for match in args.match):
                 continue
             url = f'{args.base_url.rstrip("/")}/{relative}'
             try:

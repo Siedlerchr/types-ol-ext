@@ -3,6 +3,15 @@ import Map from 'ol/Map'
 import type { Condition } from 'ol/events/condition'
 import type { Coordinate } from 'ol/coordinate'
 import type { Pixel } from 'ol/pixel'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { OnSignature } from 'ol/Observable'
+
+export interface PerspectiveChangeEvent extends BaseEvent {
+  type: 'change:perspective';
+  angle: number;
+  animating: boolean;
+}
 
 export interface Options extends MapOptions {
   /** Container element or its ID. */
@@ -18,6 +27,12 @@ export interface Options extends MapOptions {
 
  */
 export default class PerspectiveMap extends Map {
+  on: Map['on'] & OnSignature<'change:perspective', PerspectiveChangeEvent, EventsKey>
+
+  once: Map['once'] & OnSignature<'change:perspective', PerspectiveChangeEvent, EventsKey>
+
+  un: Map['un'] & OnSignature<'change:perspective', PerspectiveChangeEvent, void>
+
   /**
    * @param {olx.MapOptions=} options
    *  @param {ol.events.condition} tiltCondition , default altKeyOnly

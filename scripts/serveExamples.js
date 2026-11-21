@@ -24,6 +24,7 @@ for (const example of examples) {
   }
   let replaced = false
   let html = fs.readFileSync(htmlPath, 'utf8')
+  const portSource = fs.readFileSync(path.join(root, example), 'utf8')
   html = html.replace(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi, (whole, attrs, body) => {
     if (/\bsrc\s*=/.test(attrs)) {
       if (/src=["']\/v2\/polyfill\.min\.js/i.test(attrs)) return ''
@@ -36,9 +37,11 @@ for (const example of examples) {
         'examples/misc/map.control.cloud.html': /\/Cloud\.js/i,
       }
       if (bundledExtras[relative]?.test(attrs)) return ''
+      const fontDefinition = attrs.match(/\/dist\/extra\/(Font\w+Def)\.js/)
+      if (fontDefinition && portSource.includes(`ol-ext/style/${fontDefinition[1]}`)) return ''
       return whole
     }
-    if (/ol\.Map|ol\.ext/.test(body)) {
+    if (/ol\.(?:Map|PerspectiveMap|ext)\b/.test(body)) {
       if (replaced) return ''
       replaced = true
       return `<script src="${path.basename(example, '.ts')}.js"></script>`

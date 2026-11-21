@@ -3,10 +3,11 @@ import type Collection from 'ol/Collection'
 import type { Coordinate } from 'ol/coordinate'
 import type Feature from 'ol/Feature'
 import type { Style } from 'ol/style'
-import type { Draw, Modify } from 'ol/interaction'
+import type { Draw } from 'ol/interaction'
 import { Interaction } from 'ol/interaction'
 import type VectorImageLayer from 'ol/layer/VectorImage'
 import type VectorLayer from 'ol/layer/Vector'
+import type ModifyFeature from './ModifyFeature'
 
 export interface Options {
   pixelTolerance?: number;
@@ -72,8 +73,8 @@ export default class SnapGuides extends Interaction {
   setDrawInteraction(drawi: Draw): void;
 
   /** Listen to modify event to add orthogonal guidelines relative to the currently dragged point
-   * @param {_ol_interaction_Modify_} modifyi a modify interaction to listen to
+   * @param {ModifyFeature} modifyi a modify interaction to listen to
    * @api
    */
-  setModifyInteraction(modifyi: Modify): void;
+  setModifyInteraction(modifyi: ModifyFeature): void;
 }

@@ -2,11 +2,12 @@ import type ol_format_GeoJSON from 'ol/format/GeoJSON'
 import type { ProjectionLike } from 'ol/proj'
 import type { Coordinate } from 'ol/coordinate'
 import type { Feature } from 'ol'
+import type FeatureFormat from 'ol/format/Feature'
 import type { WriteOptions } from 'ol/format/Feature'
 import type { Geometry } from 'ol/geom'
 
 export declare type GeoJSONWithoutWriteGeometryObject = new (entries?: ReadonlyArray<ol_format_GeoJSON> | null)
-  => { [P in Exclude<keyof ol_format_GeoJSON, 'writeGeometryObject' | 'writeFeatureObject' | 'writeFeaturesObject'>]: ol_format_GeoJSON[P] };
+  => FeatureFormat<Feature> & Omit<ol_format_GeoJSON<Feature>, 'writeGeometryObject' | 'writeFeatureObject' | 'writeFeaturesObject'>;
 
 // TODO fix redeclare
 // eslint-disable-next-line no-redeclare

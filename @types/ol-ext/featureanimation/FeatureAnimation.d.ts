@@ -86,7 +86,7 @@ export interface Options {
   side?: any;
   revers?: boolean;
   repeat?: number;
-  hiddenStyle?: Style;
+  hiddenStyle?: Style | Style[];
   horizontal?: boolean;
   fade?: ((p0: number) => number);
   easing?: ((p0: number) => number);
