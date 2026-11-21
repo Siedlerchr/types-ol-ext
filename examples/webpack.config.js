@@ -21,6 +21,10 @@ module.exports = {
   devtool: 'source-map',
   resolve: {
     extensions: ['.ts', '.js'],
+    alias: {
+      // ol-ext 4.0.39's TinkerBell import has the wrong case on Linux.
+      '../util/getMapcanvas.js$': require.resolve('ol-ext/util/getMapCanvas.js'),
+    },
   },
   module: {
     rules: [

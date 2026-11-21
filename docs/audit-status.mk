@@ -10,51 +10,35 @@ AUDIT_STATE := complete
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 # Load results and upstream issues are recorded in docs/ol-ext-example-ports.md.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := 35 example ports with declaration fixes
-EXAMPLE_LOAD_CHECK := 35 new bundles served in Chrome, with Overpass service errors
+EXAMPLE_PORTS_LAST_ROUND := 24 canvas, interaction, layer and utility ports
+EXAMPLE_LOAD_CHECK := 24 new pages loaded in Chrome, with out-of-coverage tiles in the two-map print demo
 
 # Refresh the complete unmatched-page snapshot with:
 # python3 scripts/example-inventory.py --update-status
 # Some entries may be support or standalone pages rather than map examples.
 
 # BEGIN GENERATED MISSING EXAMPLES
-# 110 upstream HTML files without a matching TypeScript port.
-#   canvas/map.canvas.control.html (inline scripts: 1)
-#   canvas/map.control.graticule.html (inline scripts: 1)
-#   canvas/map.control.print.html (inline scripts: 1)
-#   canvas/map.control.printdialog.fr.html (inline scripts: 1)
-#   canvas/map.control.printdialog.html (inline scripts: 1)
-#   canvas/map.control.printdialog2x.html (inline scripts: 1)
-#   canvas/map.target.control.html (inline scripts: 1)
+# 86 upstream HTML files without a matching TypeScript port.
 #   control/map.control.profile.html (inline scripts: 1)
-#   control/map.overview.html (inline scripts: 1)
 #   control/map.switcher.shop.html (inline scripts: 1)
-#   filter/map.filter.composite.html (inline scripts: 1)
 #   filter/map.filter.oilpaint.html (inline scripts: 0)
 #   filter/map.filter.pointillism.html (inline scripts: 0)
 #   geom/map.simplify.html (inline scripts: 1)
 #   hackmacarte.html (inline scripts: 0)
 #   interaction/map.ddrop.html (inline scripts: 1)
-#   interaction/map.interaction.copypaste.2.html (inline scripts: 1)
-#   interaction/map.interaction.modifyfeature.html (inline scripts: 1)
-#   interaction/map.interaction.split.html (inline scripts: 1)
-#   interaction/map.interaction.splitter.html (inline scripts: 1)
 #   interaction/map.interaction.transformrectangle.html (inline scripts: 1)
 #   interaction/map.interaction.undoredo.html (inline scripts: 1)
 #   interaction/map.interaction.undoredo2.html (inline scripts: 1)
 #   layer/map.carhab.html (inline scripts: 1)
 #   layer/map.carhab.wfs.html (inline scripts: 1)
 #   layer/map.circle.intersection.html (inline scripts: 1)
-#   layer/map.daynight-2.html (inline scripts: 1)
 #   layer/map.dbpedia.html (inline scripts: 1)
 #   layer/map.flickrfeed.html (inline scripts: 1)
 #   layer/map.geoimage.html (inline scripts: 1)
-#   layer/map.geoportail.wmts.html (inline scripts: 0)
 #   layer/map.intersection.html (inline scripts: 1)
 #   layer/map.layer.altitude-2.html (inline scripts: 1)
 #   layer/map.layer.altitude.html (inline scripts: 1)
 #   layer/map.layer.bdtopo.vtile.html (inline scripts: 1)
-#   layer/map.layer.bw.html (inline scripts: 1)
 #   layer/map.layer.clc.wfs.html (inline scripts: 1)
 #   layer/map.layer.elev.html (inline scripts: 1)
 #   layer/map.layer.featurebin.html (inline scripts: 1)
@@ -77,18 +61,14 @@ EXAMPLE_LOAD_CHECK := 35 new bundles served in Chrome, with Overpass service err
 #   legend/map.control.legend.html (inline scripts: 1)
 #   map/map.clustering.html (inline scripts: 1)
 #   map/map.dbpedia.photo.html (inline scripts: 1)
-#   map/map.layer.3D.1.html (inline scripts: 1)
 #   map/map.watchdogs.html (inline scripts: 1)
 #   map.pirate-old.html (inline scripts: 1)
 #   misc/csv2geojson.html (inline scripts: 1)
-#   misc/dsfr.html (inline scripts: 1)
-#   misc/exif2geojson.html (inline scripts: 1)
 #   misc/geocommune.html (inline scripts: 0)
 #   misc/geoimport.html (inline scripts: 1)
 #   misc/geojson.check.html (inline scripts: 1)
 #   misc/geojson2csv.html (inline scripts: 1)
 #   misc/geojson2geojsonx.html (inline scripts: 1)
-#   misc/geojson2topojson.html (inline scripts: 1)
 #   misc/geojsontile.html (inline scripts: 1)
 #   misc/geojsontile2.html (inline scripts: 1)
 #   misc/geoportail.loader.html (inline scripts: 0)
@@ -98,7 +78,6 @@ EXAMPLE_LOAD_CHECK := 35 new bundles served in Chrome, with Overpass service err
 #   misc/map.georef2wmts.html (inline scripts: 1)
 #   misc/map.iframe.api.html (inline scripts: 0)
 #   misc/map.iframe.html (inline scripts: 1)
-#   misc/map.interaction.tinkerbell.html (inline scripts: 1)
 #   misc/map.lidar.txt.html (inline scripts: 1)
 #   misc/map.openagenda.html (inline scripts: 1)
 #   misc/map.synchro.html (inline scripts: 1)
@@ -122,12 +101,9 @@ EXAMPLE_LOAD_CHECK := 35 new bundles served in Chrome, with Overpass service err
 #   storymap/map.rlt3.html (inline scripts: 0)
 #   style/map.style.chart.html (inline scripts: 1)
 #   style/map.style.flowarrow.html (inline scripts: 1)
-#   style/map.style.flowline.html (inline scripts: 1)
-#   style/map.style.flowline2.html (inline scripts: 1)
 #   style/map.style.gpxline.html (inline scripts: 1)
 #   style/map.style.hashlines.html (inline scripts: 1)
 #   style/map.style.scribblefill.html (inline scripts: 1)
-#   style/map.style.strokepattern.html (inline scripts: 1)
 #   style/map.style.textpath.html (inline scripts: 1)
 # END GENERATED MISSING EXAMPLES
 

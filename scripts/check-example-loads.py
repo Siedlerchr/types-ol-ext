@@ -36,6 +36,8 @@ def main():
     page = selected.group(1)
     try:
         for example in sorted((ROOT / 'examples').rglob('*.ts')):
+            if any(part.startswith('.') for part in example.relative_to(ROOT).parts):
+                continue
             relative = example.relative_to(ROOT).with_suffix('.html').as_posix()
             if args.match and not any(match in relative for match in args.match):
                 continue

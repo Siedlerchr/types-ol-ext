@@ -31,7 +31,10 @@ export interface Options extends ControlOptions {
   jsPDF?: typeof jsPDF;
 }
 
-export type PrintDialogPrintEvent = Omit<PrintEvent, 'quality'> & { quality?: number }
+export type PrintDialogPrintEvent = Omit<PrintEvent, 'quality' | 'print'> & {
+  quality?: number;
+  print: PrintEvent['print'] & { legend?: boolean };
+}
 export interface PrintDialogShowEvent extends BaseEvent { type: 'show'; userElement: Element; dialog: Dialog; page: Element }
 export type PrintDialogOnSignature<Return> = OnSignature<'error', PrintErrorEvent, Return> &
   OnSignature<EventTypes, BaseEvent, Return> & OnSignature<Types | 'change' | 'propertychange', ObjectEvent, Return> &

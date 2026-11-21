@@ -7,7 +7,7 @@ import type { ObjectEvent } from 'ol/Object'
 import type { Types } from 'ol/ObjectEventType'
 
 export interface PrintEvent extends BaseEvent {
-  type: 'print'; canvas: HTMLCanvasElement; image: string | null; imageType: string; quality: number;
+  type: 'print'; pdf?: boolean; canvas: HTMLCanvasElement; image: string | null; imageType: string; quality: number;
   print: { format: string; orientation: string; unit: 'mm'; size: number[]; position: number[] | undefined; imageWidth: number | undefined; imageHeight: number | undefined };
 }
 export interface PrintErrorEvent extends BaseEvent { type: 'error'; canvas: HTMLCanvasElement }

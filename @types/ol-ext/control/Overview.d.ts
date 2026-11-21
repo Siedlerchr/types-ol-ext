@@ -29,6 +29,10 @@ export interface Options extends ControlOptions {
  * @extends {ol_control_Control}
  */
 export default class Overview extends ol_control_Control {
+  minZoom: number;
+  maxZoom: number;
+  rotation?: boolean;
+
   /**
    * @param {Object=} options Control options.
    *  @param {ol.ProjectionLike} options.projection The projection. Default is EPSG:3857 (Spherical Mercator).
@@ -55,6 +59,9 @@ export default class Overview extends ol_control_Control {
    *  @param {top|bottom-left|right}
    */
   setPosition(align: string): void;
+
+  /** Refresh the overview view after changing its zoom bounds or rotation. */
+  setView(event?: { key: 'center' | 'resolution' | 'rotation' }): void;
 
   /**
    * Set the map instance the control associated with.

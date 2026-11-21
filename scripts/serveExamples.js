@@ -39,9 +39,13 @@ for (const example of examples) {
       if (bundledExtras[relative]?.test(attrs)) return ''
       const fontDefinition = attrs.match(/\/dist\/extra\/(Font\w+Def)\.js/)
       if (fontDefinition && portSource.includes(`ol-ext/style/${fontDefinition[1]}`)) return ''
+      if (/\/dist\/extra\/Exif2Geojson\.js/i.test(attrs) && portSource.includes('ol-ext/utils/Exif2Geojson')) return ''
+      if (/\/jspdf[/.]/i.test(attrs) && portSource.includes('from \'jspdf\'')) return ''
+      if (/\/jspdf[/.]/i.test(attrs) && portSource.includes('/.shared/print')) return ''
+      if (/FileSaver(?:\.min)?\.js/i.test(attrs) && portSource.includes('/.shared/download')) return ''
       return whole
     }
-    if (/ol\.(?:Map|PerspectiveMap|ext)\b/.test(body)) {
+    if (/ol\.(?:Map|PerspectiveMap|ext)\b|ol\.layer\.Geoportail\.getCapabilities\(/.test(body)) {
       if (replaced) return ''
       replaced = true
       return `<script src="${path.basename(example, '.ts')}.js"></script>`
