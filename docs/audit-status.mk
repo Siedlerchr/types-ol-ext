@@ -9,8 +9,8 @@ AUDIT_STATE := complete
 
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := cluster convex-hull, profile, selection, search, popup, edition-bar, and switcher examples
-EXAMPLE_LOAD_CHECK := latest fifteen pages load; invalid search expression and Lambert-93 selection checked; other interactions and live elevation service untested
+EXAMPLE_PORTS_LAST_ROUND := layer switcher example
+EXAMPLE_LOAD_CHECK := layer switcher page loads; switcher interactions untested
 
 # A completed step records the current evidence, not a release approval.
 BASELINE_STATE := complete
