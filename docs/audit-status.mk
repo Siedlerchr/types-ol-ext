@@ -10,17 +10,15 @@ AUDIT_STATE := complete
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 # Load results and upstream issues are recorded in docs/ol-ext-example-ports.md.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := 11 imagery, binning and capabilities ports
-EXAMPLE_LOAD_CHECK := all 11 new pages passed Chrome startup checks
+EXAMPLE_PORTS_LAST_ROUND := 7 painting, clustering and timeline ports
+EXAMPLE_LOAD_CHECK := all 7 new pages passed Chrome startup checks
 
 # Refresh the complete unmatched-page snapshot with:
 # python3 scripts/example-inventory.py --update-status
 # Some entries may be support or standalone pages rather than map examples.
 
 # BEGIN GENERATED MISSING EXAMPLES
-# 60 upstream HTML files without a matching TypeScript port.
-#   filter/map.filter.oilpaint.html (inline scripts: 0)
-#   filter/map.filter.pointillism.html (inline scripts: 0)
+# 53 upstream HTML files without a matching TypeScript port.
 #   geom/map.simplify.html (inline scripts: 1)
 #   hackmacarte.html (inline scripts: 0)
 #   interaction/map.interaction.transformrectangle.html (inline scripts: 1)
@@ -41,8 +39,6 @@ EXAMPLE_LOAD_CHECK := all 11 new pages passed Chrome startup checks
 #   layer/map.maplibre.gl.html (inline scripts: 0)
 #   layer/map.stat.wfs.html (inline scripts: 1)
 #   legend/map.control.legend.html (inline scripts: 1)
-#   map/map.clustering.html (inline scripts: 1)
-#   map/map.dbpedia.photo.html (inline scripts: 1)
 #   map/map.watchdogs.html (inline scripts: 1)
 #   map.pirate-old.html (inline scripts: 1)
 #   misc/geocommune.html (inline scripts: 0)
@@ -69,16 +65,13 @@ EXAMPLE_LOAD_CHECK := all 11 new pages passed Chrome startup checks
 #   search/map.control.searchpedia.html (inline scripts: 1)
 #   storymap/geotiff.html (inline scripts: 1)
 #   storymap/map.control.timeinterval.html (inline scripts: 1)
-#   storymap/map.control.timeline.html (inline scripts: 1)
 #   storymap/map.control.timemap.html (inline scripts: 1)
 #   storymap/map.control.timequake.html (inline scripts: 1)
-#   storymap/map.historical.html (inline scripts: 1)
 #   storymap/map.rlt.html (inline scripts: 1)
 #   storymap/map.rlt2.html (inline scripts: 0)
 #   storymap/map.rlt3.html (inline scripts: 0)
 #   style/map.style.flowarrow.html (inline scripts: 1)
 #   style/map.style.gpxline.html (inline scripts: 1)
-#   style/map.style.textpath.html (inline scripts: 1)
 # END GENERATED MISSING EXAMPLES
 
 # A completed step records the current evidence, not a release approval.

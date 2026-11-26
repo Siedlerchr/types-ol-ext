@@ -25,8 +25,17 @@ for (const example of examples) {
   let replaced = false
   let html = fs.readFileSync(htmlPath, 'utf8')
   const portSource = fs.readFileSync(path.join(root, example), 'utf8')
+  const bundleName = path.basename(example, '.ts') + '.js'
+  const bundleScript = `<script src="${bundleName}"></script>`
+  const usesPaintMap = portSource.includes('/.shared/paint')
   html = html.replace(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi, (whole, attrs, body) => {
-    if (/\bsrc\s*=/.test(attrs)) {
+    const src = attrs.match(/\bsrc\s*=\s*["']([^"']+)["']/i)?.[1]
+    if (src) {
+      if (src.replace(/^\.\//, '') === bundleName) {
+        replaced = true
+        return bundleScript
+      }
+      if (usesPaintMap && (src === './paint.js' || /FileSaver(?:\.min)?\.js/i.test(src))) return ''
       if (/src=["']\/v2\/polyfill\.min\.js/i.test(attrs)) return ''
       if (/openlayers\.org\/.*ol\.js|cdn\.jsdelivr\.net\/npm\/ol@[^/]+\/dist\/ol\.js|\.\.\/\.\.\/dist\/ol-ext\.js/i.test(attrs)) return ''
       // These ports import the corresponding ol-ext modules in their bundles.
@@ -47,10 +56,11 @@ for (const example of examples) {
       return whole
     }
     if (replaced && /WebFont\.load\(/.test(body) && portSource.includes('/.shared/font-awesome')) return ''
-    if (/ol\.(?:Map|PerspectiveMap|ext)\b|ol\.layer\.Geoportail\.getCapabilities\(/.test(body)) {
+    if (/ol\.(?:Map|PerspectiveMap|ext)\b|ol\.layer\.Geoportail\.getCapabilities\(/.test(body)
+      || (usesPaintMap && /ol\.(?:source\.OilPainting|filter\.Pointillism)\b/.test(body))) {
       if (replaced) return ''
       replaced = true
-      return `<script src="${path.basename(example, '.ts')}.js"></script>`
+      return bundleScript
     }
     return whole
   })

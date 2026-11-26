@@ -103,3 +103,20 @@ map operations still need separate exercise.
 - The WMTS capabilities page contains a hidden export button that attempts
   to serialize WMS parameters. The port shares the WMS-only export code.
   WMTS serialization remains unsupported.
+
+## Release 4.0.39, round of 7 ports
+
+Both painting pages, the clustering and DBPedia photo examples, the timeline
+and historical imagery demos, and text along paths passed the Chrome startup
+check. The server was stopped afterward. The inventory has 53 unmatched HTML
+files. The test checked startup and left interaction and export behavior
+unverified.
+
+- Oil painting and pointillism relied on the classic `paint.js` script
+  for an OpenLayers global and page state. They now share a TypeScript
+  bootstrap and preserve their individual controls, permalink settings,
+  and downloads.
+- The release's `SetTextPath` module does not export the constructor
+  used by the original text-path example. The port uses OpenLayers line
+  text placement and implements the demo's clipping and width settings.
+  Label placement can differ from the old canvas implementation.

@@ -1,0 +1,2359 @@
+import Feature from 'ol/Feature';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import Geoportail from 'ol-ext/layer/Geoportail';
+import Image from 'ol/layer/Image';
+import GeoImage from 'ol-ext/source/GeoImage';
+import Timeline from 'ol-ext/control/Timeline';
+
+declare const $: JQueryStatic;
+
+// The map
+var map = new Map({
+  target: 'map',
+  view: new View({
+    zoom: 18,
+    center: [269889, 6248507],
+  }),
+  // layers: [ new ol.layer.Geoportail({ layer: 'ORTHOIMAGERY.ORTHOPHOTOS' }) ]
+});
+// Capabilities
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS.1950-1965'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS.1950-1965',
+  title: 'Photographies aériennes historiques 1950-1965',
+  format: 'image/png',
+  style: 'BDORTHOHISTORIQUE',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-67.72138, -21.401262, 55.84643, 51.094486],
+  desc: "<![CDATA[Couverture en photographies aériennes de la France des années 50, telle qu'elle se présentait avant les grands aménagements des années 60. Cette couverture a été réalisée à partir des photographies aériennes historiques numérisées par l'IGN. Elle est disponible sur la France métropolitaine, les départements et régions d'Outre-Mer (la Guyane n'est que partiellement couverte) et les collectivités d'Outre-Mer sauf la Polynésie française.\nLes photographies sont orthorectifiées, c'est-à-dire corrigées des déformations dues à la prise de vue et au relief du terrain, et assemblées pour fournir une visualisation continue superposable avec le Référentiel à Grande Echelle (RGE®) ou les cartes.]]>",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS.1965-1980'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS.1965-1980',
+  title: 'BDOrtho Historique 1965-1980',
+  format: 'image/png',
+  style: 'BDORTHOHISTORIQUE',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-2.2752295, 47.083138, 2.619632, 49.01929],
+  desc: "<![CDATA[Couverture en photographies aériennes de la France des années 1965 à 1980. Cette couverture a été réalisée à partir des photographies aériennes historiques numérisées par l'IGN. Elle est disponible sur la France métropolitaine, les départements et régions d'Outre-Mer (la Guyane n'est que partiellement couverte) et les collectivités d'Outre-Mer sauf la Polynésie française.\nLes photographies sont orthorectifiées, c'est-à-dire corrigées des déformations dues à la prise de vue et au relief du terrain, et assemblées pour fournir une visualisation continue superposable avec le Référentiel à Grande Echelle (RGE®) ou les cartes.]]>",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 3,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 3,
+          maxZoom: 18,
+          bbox: [-2.2752295, 47.083138, 2.619632, 49.01929],
+        },
+      ],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2000-2005'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2000-2005',
+  title: 'Photographies aériennes 2000-2005',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-178.18713, -21.401329, 55.85611, 51.090965],
+  desc: 'Prises de vues aériennes des territoires pour les années 2000 à 2005',
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2006-2010'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2006-2010',
+  title: 'Photographies aériennes 2006-2010',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: 'Prises de vues aériennes des territoires disponibles à la fin des années 2006 à 2010',
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG06: {
+      href: 'http://www.cg06.fr',
+      attribution:
+        'Département Alpes Maritimes (06) en partenariat avec : Groupement Orthophoto 06 (NCA, Ville de Cannes, CARF, CASA,CG06, CA de Grasse) ',
+      logo: 'https://wxs.ign.fr/static/logos/CG06/CG06.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG45: {
+      href: 'http://www.loiret.com',
+      attribution: 'Le conseil général du Loiret',
+      logo: 'https://wxs.ign.fr/static/logos/CG45/CG45.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CRAIG: {
+      href: 'http://www.craig.fr',
+      attribution:
+        "Centre Régional Auvergnat de l'Information Géographique (CRAIG)",
+      logo: 'https://wxs.ign.fr/static/logos/CRAIG/CRAIG.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    RGD_SAVOIE: {
+      href: 'http://www.rgd.fr',
+      attribution: 'Régie de Gestion de Données des Pays de Savoie (RGD 73-74)',
+      logo: 'https://wxs.ign.fr/static/logos/RGD_SAVOIE/RGD_SAVOIE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2011-2015'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2011-2015',
+  title: 'Photographies aériennes 2011-2015',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-178.18713, -21.401329, 55.85611, 51.094486],
+  desc: 'Prises de vues aériennes des territoires disponibles à la fin des années 2011 à 2015',
+  originators: {
+    SIGLR: {
+      href: 'http://www.siglr.org//',
+      attribution: 'SIGLR',
+      logo: 'https://wxs.ign.fr/static/logos/SIGLR/SIGLR.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [1.6784439, 42.316307, 4.8729386, 44.978218],
+        },
+      ],
+    },
+    CRCORSE: {
+      href: 'http://www.corse.fr//',
+      attribution: 'CRCORSE',
+      logo: 'https://wxs.ign.fr/static/logos/CRCORSE/CRCORSE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [8.428783, 41.338627, 9.688606, 43.08541],
+        },
+      ],
+    },
+    CNES: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES/CNES.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-178.18713, -21.401329, 55.85611, 51.090965],
+        },
+      ],
+    },
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-178.18713, -21.401329, 55.85611, 51.094486],
+        },
+      ],
+    },
+    FEDER_PAYSDELALOIRE: {
+      href: 'https://www.europe.paysdelaloire.fr/',
+      attribution: 'Pays-de-la-Loire',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER_PAYSDELALOIRE/FEDER_PAYSDELALOIRE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-2.457367, 46.19304, 0.951426, 48.57609],
+        },
+      ],
+    },
+    FEDER2: {
+      href: 'http://www.europe-en-france.gouv.fr/',
+      attribution: 'Fonds européen de développement économique et régional',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER2/FEDER2.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [1.3577043, 48.824635, 4.269964, 50.37648],
+        },
+      ],
+    },
+    CNES_971: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_971/CNES_971.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-61.82342, 15.819616, -60.99497, 16.521578],
+        },
+      ],
+    },
+    RGD_SAVOIE: {
+      href: 'http://www.rgd.fr',
+      attribution: 'Régie de Gestion de Données des Pays de Savoie (RGD 73-74)',
+      logo: 'https://wxs.ign.fr/static/logos/RGD_SAVOIE/RGD_SAVOIE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [5.5923314, 45.017353, 7.2323394, 46.438328],
+        },
+      ],
+    },
+    CG45: {
+      href: 'http://www.loiret.com',
+      attribution: 'Le conseil général du Loiret',
+      logo: 'https://wxs.ign.fr/static/logos/CG45/CG45.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [1.4883244, 47.471867, 3.1349874, 48.354233],
+        },
+      ],
+    },
+    CRAIG: {
+      href: 'http://www.craig.fr',
+      attribution:
+        "Centre Régional Auvergnat de l'Information Géographique (CRAIG)",
+      logo: 'https://wxs.ign.fr/static/logos/CRAIG/CRAIG.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [2.0398402, 44.60505, 4.5090737, 46.8038],
+        },
+      ],
+    },
+    'e-Megalis': {
+      href: 'http://www.e-megalisbretagne.org//',
+      attribution: 'Syndicat mixte de coopération territoriale (e-Megalis)',
+      logo: 'https://wxs.ign.fr/static/logos/e-Megalis/e-Megalis.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-5.1937118, 47.23789, -0.98568505, 48.980812],
+        },
+      ],
+    },
+    PPIGE: {
+      href: 'http://www.ppige-npdc.fr/',
+      attribution: 'PPIGE',
+      logo: 'https://wxs.ign.fr/static/logos/PPIGE/PPIGE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [1.5212119, 49.957302, 4.2673664, 51.090965],
+        },
+      ],
+    },
+    CNES_972: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_972/CNES_972.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-61.247208, 14.371855, -60.778458, 14.899901],
+        },
+      ],
+    },
+    CG06: {
+      href: 'http://www.cg06.fr',
+      attribution:
+        'Département Alpes Maritimes (06) en partenariat avec : Groupement Orthophoto 06 (NCA, Ville de Cannes, CARF, CASA,CG06, CA de Grasse) ',
+      logo: 'https://wxs.ign.fr/static/logos/CG06/CG06.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [6.6093955, 43.44647, 7.7436337, 44.377018],
+        },
+      ],
+    },
+    CNES_ALSACE: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_ALSACE/CNES_ALSACE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [6.8086324, 47.39981, 7.668318, 48.32695],
+        },
+      ],
+    },
+    CNES_978: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_978/CNES_978.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-63.160706, 18.04345, -62.962185, 18.133898],
+        },
+      ],
+    },
+    FEDER: {
+      href: 'http://www.europe-en-france.gouv.fr/',
+      attribution: 'Fonds européen de développement économique et régional',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER/FEDER.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-1.9662633, 42.316307, 8.25674, 50.18387],
+        },
+      ],
+    },
+    CNES_974: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_974/CNES_974.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [55.205757, -21.401262, 55.84643, -20.862825],
+        },
+      ],
+    },
+    CNES_976: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_976/CNES_976.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [44.916977, -13.089187, 45.30442, -12.564543],
+        },
+      ],
+    },
+    CNES_977: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_977/CNES_977.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-62.952805, 17.862621, -62.78276, 17.98024],
+        },
+      ],
+    },
+    CNES_AUVERGNE: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_AUVERGNE/CNES_AUVERGNE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [2.2656832, 45.279934, 4.0227704, 46.8038],
+        },
+      ],
+    },
+    CNES_975: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_975/CNES_975.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-56.410988, 46.734093, -56.10308, 47.149963],
+        },
+      ],
+    },
+  },
+};
+
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2000'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2000',
+  title: 'Photographies aériennes 2000',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2000.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2001'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2001',
+  title: 'Photographies aériennes 2001',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-61.247208, 4.4715304, 7.2323394, 50.37648],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2001.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2002'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2002',
+  title: 'Photographies aériennes 2002',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-61.247208, 4.498668, 9.688606, 50.37648],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2002",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-61.247208, 4.498668, 9.688606, 50.37648],
+        },
+      ],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2003'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2003',
+  title: 'Photographies aériennes 2003',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2003.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2004'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2004',
+  title: 'Photographies aériennes 2004',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-178.18713, -21.401329, 55.85611, 51.090965],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2004.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-178.18713, -21.401329, 55.85611, 51.090965],
+        },
+      ],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2005'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2005',
+  title: 'Photographies aériennes 2005',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-178.18713, -21.401329, 55.85611, 51.090965],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2005.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-178.18713, -21.401329, 55.85611, 51.090965],
+        },
+      ],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2006'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2006',
+  title: 'Photographies aériennes 2006',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-178.18713, -21.401329, 55.85611, 51.090965],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2006.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-178.18713, -21.401329, 55.85611, 51.090965],
+        },
+      ],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2007'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2007',
+  title: 'Photographies aériennes 2007',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2007.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2008'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2008',
+  title: 'Photographies aériennes 2008',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-178.18713, -21.401329, 55.85611, 51.090965],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2008.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [-178.18713, -21.401329, 55.85611, 51.090965],
+        },
+      ],
+    },
+    RGD_SAVOIE: {
+      href: 'http://www.rgd.fr',
+      attribution: 'Régie de Gestion de Données des Pays de Savoie (RGD 73-74)',
+      logo: 'https://wxs.ign.fr/static/logos/RGD_SAVOIE/RGD_SAVOIE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 6,
+          maxZoom: 18,
+          bbox: [5.7759595, 45.65335, 7.0887337, 46.438328],
+        },
+      ],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2009'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2009',
+  title: 'Photographies aériennes 2009',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2009.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG06: {
+      href: 'http://www.cg06.fr',
+      attribution:
+        'Département Alpes Maritimes (06) en partenariat avec : Groupement Orthophoto 06 (NCA, Ville de Cannes, CARF, CASA,CG06, CA de Grasse) ',
+      logo: 'https://wxs.ign.fr/static/logos/CG06/CG06.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CRAIG: {
+      href: 'http://www.craig.fr',
+      attribution:
+        "Centre Régional Auvergnat de l'Information Géographique (CRAIG)",
+      logo: 'https://wxs.ign.fr/static/logos/CRAIG/CRAIG.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    RGD_SAVOIE: {
+      href: 'http://www.rgd.fr',
+      attribution: 'Régie de Gestion de Données des Pays de Savoie (RGD 73-74)',
+      logo: 'https://wxs.ign.fr/static/logos/RGD_SAVOIE/RGD_SAVOIE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2010'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2010',
+  title: 'Photographies aériennes 2010',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2010.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG06: {
+      href: 'http://www.cg06.fr',
+      attribution:
+        'Département Alpes Maritimes (06) en partenariat avec : Groupement Orthophoto 06 (NCA, Ville de Cannes, CARF, CASA,CG06, CA de Grasse) ',
+      logo: 'https://wxs.ign.fr/static/logos/CG06/CG06.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG45: {
+      href: 'http://www.loiret.com',
+      attribution: 'Le conseil général du Loiret',
+      logo: 'https://wxs.ign.fr/static/logos/CG45/CG45.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CRAIG: {
+      href: 'http://www.craig.fr',
+      attribution:
+        "Centre Régional Auvergnat de l'Information Géographique (CRAIG)",
+      logo: 'https://wxs.ign.fr/static/logos/CRAIG/CRAIG.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    RGD_SAVOIE: {
+      href: 'http://www.rgd.fr',
+      attribution: 'Régie de Gestion de Données des Pays de Savoie (RGD 73-74)',
+      logo: 'https://wxs.ign.fr/static/logos/RGD_SAVOIE/RGD_SAVOIE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2011'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2011',
+  title: 'Photographies aériennes 2011',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2011.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG06: {
+      href: 'http://www.cg06.fr',
+      attribution:
+        'Département Alpes Maritimes (06) en partenariat avec : Groupement Orthophoto 06 (NCA, Ville de Cannes, CARF, CASA,CG06, CA de Grasse) ',
+      logo: 'https://wxs.ign.fr/static/logos/CG06/CG06.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG45: {
+      href: 'http://www.loiret.com',
+      attribution: 'Le conseil général du Loiret',
+      logo: 'https://wxs.ign.fr/static/logos/CG45/CG45.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CRAIG: {
+      href: 'http://www.craig.fr',
+      attribution:
+        "Centre Régional Auvergnat de l'Information Géographique (CRAIG)",
+      logo: 'https://wxs.ign.fr/static/logos/CRAIG/CRAIG.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    RGD_SAVOIE: {
+      href: 'http://www.rgd.fr',
+      attribution: 'Régie de Gestion de Données des Pays de Savoie (RGD 73-74)',
+      logo: 'https://wxs.ign.fr/static/logos/RGD_SAVOIE/RGD_SAVOIE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2012'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2012',
+  title: 'Photographies aériennes 2012',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2012.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES/CNES.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG06: {
+      href: 'http://www.cg06.fr',
+      attribution:
+        'Département Alpes Maritimes (06) en partenariat avec : Groupement Orthophoto 06 (NCA, Ville de Cannes, CARF, CASA,CG06, CA de Grasse) ',
+      logo: 'https://wxs.ign.fr/static/logos/CG06/CG06.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG45: {
+      href: 'http://www.loiret.com',
+      attribution: 'Le conseil général du Loiret',
+      logo: 'https://wxs.ign.fr/static/logos/CG45/CG45.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CRAIG: {
+      href: 'http://www.craig.fr',
+      attribution:
+        "Centre Régional Auvergnat de l'Information Géographique (CRAIG)",
+      logo: 'https://wxs.ign.fr/static/logos/CRAIG/CRAIG.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    RGD_SAVOIE: {
+      href: 'http://www.rgd.fr',
+      attribution: 'Régie de Gestion de Données des Pays de Savoie (RGD 73-74)',
+      logo: 'https://wxs.ign.fr/static/logos/RGD_SAVOIE/RGD_SAVOIE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    'e-Megalis': {
+      href: 'http://www.e-megalisbretagne.org//',
+      attribution: 'Syndicat mixte de coopération territoriale (e-Megalis)',
+      logo: 'https://wxs.ign.fr/static/logos/e-Megalis/e-Megalis.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    SIGLR: {
+      href: 'http://www.siglr.org//',
+      attribution: 'SIGLR',
+      logo: 'https://wxs.ign.fr/static/logos/SIGLR/SIGLR.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    PPIGE: {
+      href: 'http://www.ppige-npdc.fr/',
+      attribution: 'PPIGE',
+      logo: 'https://wxs.ign.fr/static/logos/PPIGE/PPIGE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    FEDER2: {
+      href: 'http://www.europe-en-france.gouv.fr/',
+      attribution: 'Fonds européen de développement économique et régional',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER2/FEDER2.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2013'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2013',
+  title: 'Photographies aériennes 2013',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2013.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES/CNES.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG06: {
+      href: 'http://www.cg06.fr',
+      attribution:
+        'Département Alpes Maritimes (06) en partenariat avec : Groupement Orthophoto 06 (NCA, Ville de Cannes, CARF, CASA,CG06, CA de Grasse) ',
+      logo: 'https://wxs.ign.fr/static/logos/CG06/CG06.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG45: {
+      href: 'http://www.loiret.com',
+      attribution: 'Le conseil général du Loiret',
+      logo: 'https://wxs.ign.fr/static/logos/CG45/CG45.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CRAIG: {
+      href: 'http://www.craig.fr',
+      attribution:
+        "Centre Régional Auvergnat de l'Information Géographique (CRAIG)",
+      logo: 'https://wxs.ign.fr/static/logos/CRAIG/CRAIG.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    RGD_SAVOIE: {
+      href: 'http://www.rgd.fr',
+      attribution: 'Régie de Gestion de Données des Pays de Savoie (RGD 73-74)',
+      logo: 'https://wxs.ign.fr/static/logos/RGD_SAVOIE/RGD_SAVOIE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    'e-Megalis': {
+      href: 'http://www.e-megalisbretagne.org//',
+      attribution: 'Syndicat mixte de coopération territoriale (e-Megalis)',
+      logo: 'https://wxs.ign.fr/static/logos/e-Megalis/e-Megalis.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    SIGLR: {
+      href: 'http://www.siglr.org//',
+      attribution: 'SIGLR',
+      logo: 'https://wxs.ign.fr/static/logos/SIGLR/SIGLR.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    PPIGE: {
+      href: 'http://www.ppige-npdc.fr/',
+      attribution: 'PPIGE',
+      logo: 'https://wxs.ign.fr/static/logos/PPIGE/PPIGE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    FEDER2: {
+      href: 'http://www.europe-en-france.gouv.fr/',
+      attribution: 'Fonds européen de développement économique et régional',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER2/FEDER2.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CRCORSE: {
+      href: 'http://www.corse.fr//',
+      attribution: 'CRCORSE',
+      logo: 'https://wxs.ign.fr/static/logos/CRCORSE/CRCORSE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_ALSACE: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_ALSACE/CNES_ALSACE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_AUVERGNE: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_AUVERGNE/CNES_AUVERGNE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_971: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_971/CNES_971.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_972: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_972/CNES_972.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_974: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_974/CNES_974.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_975: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_975/CNES_975.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_976: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_976/CNES_976.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_977: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_977/CNES_977.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_978: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_978/CNES_978.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2014'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2014',
+  title: 'Photographies aériennes 2014',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2014.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES/CNES.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG06: {
+      href: 'http://www.cg06.fr',
+      attribution:
+        'Département Alpes Maritimes (06) en partenariat avec : Groupement Orthophoto 06 (NCA, Ville de Cannes, CARF, CASA,CG06, CA de Grasse) ',
+      logo: 'https://wxs.ign.fr/static/logos/CG06/CG06.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG45: {
+      href: 'http://www.loiret.com',
+      attribution: 'Le conseil général du Loiret',
+      logo: 'https://wxs.ign.fr/static/logos/CG45/CG45.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CRAIG: {
+      href: 'http://www.craig.fr',
+      attribution:
+        "Centre Régional Auvergnat de l'Information Géographique (CRAIG)",
+      logo: 'https://wxs.ign.fr/static/logos/CRAIG/CRAIG.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    RGD_SAVOIE: {
+      href: 'http://www.rgd.fr',
+      attribution: 'Régie de Gestion de Données des Pays de Savoie (RGD 73-74)',
+      logo: 'https://wxs.ign.fr/static/logos/RGD_SAVOIE/RGD_SAVOIE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    'e-Megalis': {
+      href: 'http://www.e-megalisbretagne.org//',
+      attribution: 'Syndicat mixte de coopération territoriale (e-Megalis)',
+      logo: 'https://wxs.ign.fr/static/logos/e-Megalis/e-Megalis.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    SIGLR: {
+      href: 'http://www.siglr.org//',
+      attribution: 'SIGLR',
+      logo: 'https://wxs.ign.fr/static/logos/SIGLR/SIGLR.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    PPIGE: {
+      href: 'http://www.ppige-npdc.fr/',
+      attribution: 'PPIGE',
+      logo: 'https://wxs.ign.fr/static/logos/PPIGE/PPIGE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    FEDER2: {
+      href: 'http://www.europe-en-france.gouv.fr/',
+      attribution: 'Fonds européen de développement économique et régional',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER2/FEDER2.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    FEDER: {
+      href: 'http://www.europe-en-france.gouv.fr/',
+      attribution: 'Fonds européen de développement économique et régional',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER/FEDER.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CRCORSE: {
+      href: 'http://www.corse.fr//',
+      attribution: 'CRCORSE',
+      logo: 'https://wxs.ign.fr/static/logos/CRCORSE/CRCORSE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_ALSACE: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_ALSACE/CNES_ALSACE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_AUVERGNE: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_AUVERGNE/CNES_AUVERGNE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_971: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_971/CNES_971.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_972: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_972/CNES_972.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_974: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_974/CNES_974.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_975: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_975/CNES_975.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_976: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_976/CNES_976.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_977: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_977/CNES_977.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_978: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_978/CNES_978.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2015'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2015',
+  title: 'Photographies aériennes 2015',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2015.",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG06: {
+      href: 'http://www.cg06.fr',
+      attribution:
+        'Département Alpes Maritimes (06) en partenariat avec : Groupement Orthophoto 06 (NCA, Ville de Cannes, CARF, CASA,CG06, CA de Grasse) ',
+      logo: 'https://wxs.ign.fr/static/logos/CG06/CG06.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG45: {
+      href: 'http://www.loiret.com',
+      attribution: 'Le conseil général du Loiret',
+      logo: 'https://wxs.ign.fr/static/logos/CG45/CG45.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CRAIG: {
+      href: 'http://www.craig.fr',
+      attribution:
+        "Centre Régional Auvergnat de l'Information Géographique (CRAIG)",
+      logo: 'https://wxs.ign.fr/static/logos/CRAIG/CRAIG.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    RGD_SAVOIE: {
+      href: 'http://www.rgd.fr',
+      attribution: 'Régie de Gestion de Données des Pays de Savoie (RGD 73-74)',
+      logo: 'https://wxs.ign.fr/static/logos/RGD_SAVOIE/RGD_SAVOIE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    'e-Megalis': {
+      href: 'http://www.e-megalisbretagne.org//',
+      attribution: 'Syndicat mixte de coopération territoriale (e-Megalis)',
+      logo: 'https://wxs.ign.fr/static/logos/e-Megalis/e-Megalis.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    SIGLR: {
+      href: 'http://www.siglr.org//',
+      attribution: 'SIGLR',
+      logo: 'https://wxs.ign.fr/static/logos/SIGLR/SIGLR.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    PPIGE: {
+      href: 'http://www.ppige-npdc.fr/',
+      attribution: 'PPIGE',
+      logo: 'https://wxs.ign.fr/static/logos/PPIGE/PPIGE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    FEDER2: {
+      href: 'http://www.europe-en-france.gouv.fr/',
+      attribution: 'Fonds européen de développement économique et régional',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER2/FEDER2.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    FEDER: {
+      href: 'http://www.europe-en-france.gouv.fr/',
+      attribution: 'Fonds européen de développement économique et régional',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER/FEDER.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CRCORSE: {
+      href: 'http://www.corse.fr//',
+      attribution: 'CRCORSE',
+      logo: 'https://wxs.ign.fr/static/logos/CRCORSE/CRCORSE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_ALSACE: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_ALSACE/CNES_ALSACE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_AUVERGNE: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_AUVERGNE/CNES_AUVERGNE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_971: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_971/CNES_971.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_972: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_972/CNES_972.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_974: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_974/CNES_974.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_975: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_975/CNES_975.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_976: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_976/CNES_976.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_977: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_977/CNES_977.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_978: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_978/CNES_978.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    FEDER_PAYSDELALOIRE: {
+      href: 'http://www.europe-en-paysdelaloire.eu/',
+      attribution: 'Pays-de-la-Loire',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER_PAYSDELALOIRE/FEDER_PAYSDELALOIRE.gif',
+      minZoom: 6,
+      maxZoom: 18,
+      constraint: [{ minZoom: 6, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHOPHOTOS2016'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHOPHOTOS2016',
+  title: 'Photographies aériennes 2016',
+  format: 'image/jpeg',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Prises de vues aériennes des territoires disponibles à la fin de l'année 2016 (travail en cours).",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG06: {
+      href: 'http://www.cg06.fr',
+      attribution:
+        'Département Alpes Maritimes (06) en partenariat avec : Groupement Orthophoto 06 (NCA, Ville de Cannes, CARF, CASA,CG06, CA de Grasse) ',
+      logo: 'https://wxs.ign.fr/static/logos/CG06/CG06.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CG45: {
+      href: 'http://www.loiret.com',
+      attribution: 'Le conseil général du Loiret',
+      logo: 'https://wxs.ign.fr/static/logos/CG45/CG45.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CRAIG: {
+      href: 'http://www.craig.fr',
+      attribution:
+        "Centre Régional Auvergnat de l'Information Géographique (CRAIG)",
+      logo: 'https://wxs.ign.fr/static/logos/CRAIG/CRAIG.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    RGD_SAVOIE: {
+      href: 'http://www.rgd.fr',
+      attribution: 'Régie de Gestion de Données des Pays de Savoie (RGD 73-74)',
+      logo: 'https://wxs.ign.fr/static/logos/RGD_SAVOIE/RGD_SAVOIE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    'e-Megalis': {
+      href: 'http://www.e-megalisbretagne.org//',
+      attribution: 'Syndicat mixte de coopération territoriale (e-Megalis)',
+      logo: 'https://wxs.ign.fr/static/logos/e-Megalis/e-Megalis.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    SIGLR: {
+      href: 'http://www.siglr.org//',
+      attribution: 'SIGLR',
+      logo: 'https://wxs.ign.fr/static/logos/SIGLR/SIGLR.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    PPIGE: {
+      href: 'http://www.ppige-npdc.fr/',
+      attribution: 'PPIGE',
+      logo: 'https://wxs.ign.fr/static/logos/PPIGE/PPIGE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    FEDER2: {
+      href: 'http://www.europe-en-france.gouv.fr/',
+      attribution: 'Fonds européen de développement économique et régional',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER2/FEDER2.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    FEDER: {
+      href: 'http://www.europe-en-france.gouv.fr/',
+      attribution: 'Fonds européen de développement économique et régional',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER/FEDER.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CRCORSE: {
+      href: 'http://www.corse.fr//',
+      attribution: 'CRCORSE',
+      logo: 'https://wxs.ign.fr/static/logos/CRCORSE/CRCORSE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_ALSACE: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_ALSACE/CNES_ALSACE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_AUVERGNE: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_AUVERGNE/CNES_AUVERGNE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_971: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_971/CNES_971.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_972: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_972/CNES_972.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_974: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_974/CNES_974.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_975: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_975/CNES_975.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_976: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_976/CNES_976.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_977: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_977/CNES_977.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    CNES_978: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES_978/CNES_978.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    FEDER_PAYSDELALOIRE: {
+      href: 'http://www.europe-en-paysdelaloire.eu/',
+      attribution: 'Pays-de-la-Loire',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER_PAYSDELALOIRE/FEDER_PAYSDELALOIRE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+    FEDER_AUVERGNE: {
+      href: 'http://www.europe-en-auvergne.eu/',
+      attribution: 'Auvergne',
+      logo: 'https://wxs.ign.fr/static/logos/FEDER_AUVERGNE/FEDER_AUVERGNE.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [{ minZoom: 0, maxZoom: 18, bbox: [-179.5, -75, 179.5, 75] }],
+    },
+  },
+};
+
+Geoportail.capabilities['ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2013'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2013',
+  title: 'PLEIADES - 2013',
+  format: 'image/png',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Agrégation des images Pleiades de l'année 2013",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.170162, -22.411741, 55.874115, 51.909786],
+        },
+      ],
+    },
+    CNES: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES/CNES.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.170162, -22.411741, 55.874115, 51.909786],
+        },
+      ],
+    },
+    AIRBUS: {
+      href: 'http://www.geo-airbusds.com/',
+      attribution: 'Airbus Defence and Space',
+      logo: 'https://wxs.ign.fr/static/logos/AIRBUS/AIRBUS.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.170162, -22.411741, 55.874115, 51.909786],
+        },
+      ],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2014'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2014',
+  title: 'PLEIADES - 2014',
+  format: 'image/png',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Agrégation des images Pleiades de l'année 2014",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-149.93983, -21.392359, 55.86319, 51.147743],
+        },
+      ],
+    },
+    CNES: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES/CNES.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-149.93983, -21.392359, 55.86319, 51.147743],
+        },
+      ],
+    },
+    AIRBUS: {
+      href: 'http://www.geo-airbusds.com/',
+      attribution: 'Airbus Defence and Space',
+      logo: 'https://wxs.ign.fr/static/logos/AIRBUS/AIRBUS.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-149.93983, -21.392359, 55.86319, 51.147743],
+        },
+      ],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2015'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2015',
+  title: 'PLEIADES - 2015',
+  format: 'image/png',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-179.5, -75, 179.5, 75],
+  desc: "Agrégation des images Pleiades de l'année 2015",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-178.19646, -37.89419, 77.61559, 51.028297],
+        },
+      ],
+    },
+    CNES: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES/CNES.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-178.19646, -37.89419, 77.61559, 51.028297],
+        },
+      ],
+    },
+    AIRBUS: {
+      href: 'http://www.geo-airbusds.com/',
+      attribution: 'Airbus Defence and Space',
+      logo: 'https://wxs.ign.fr/static/logos/AIRBUS/AIRBUS.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-178.19646, -37.89419, 77.61559, 51.028297],
+        },
+      ],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2016'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2016',
+  title: 'PLEIADES - 2016',
+  format: 'image/png',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-54.137337, -21.319962, 55.844067, 50.654903],
+  desc: "Agrégation des images Pleiades de l'année 2016",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-53.331863, -21.319962, 55.844067, 50.654903],
+        },
+      ],
+    },
+    CNES: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES/CNES.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-53.331863, -21.319962, 55.844067, 50.654903],
+        },
+      ],
+    },
+    AIRBUS: {
+      href: 'http://www.geo-airbusds.com/',
+      attribution: 'Airbus Defence and Space',
+      logo: 'https://wxs.ign.fr/static/logos/AIRBUS/AIRBUS.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-53.331863, -21.319962, 55.844067, 50.654903],
+        },
+      ],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2017'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2017',
+  title: 'PLEIADES - 2017',
+  format: 'image/png',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-63.179623, -20.992792, 55.587017, 51.111744],
+  desc: "Agrégation des images Pleiades de l'année 2017",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.179623, -20.992792, 55.587017, 51.111744],
+        },
+      ],
+    },
+    CNES: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES/CNES.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.179623, -20.992792, 55.587017, 51.111744],
+        },
+      ],
+    },
+    AIRBUS: {
+      href: 'http://www.geo-airbusds.com/',
+      attribution: 'Airbus Defence and Space',
+      logo: 'https://wxs.ign.fr/static/logos/AIRBUS/AIRBUS.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.179623, -20.992792, 55.587017, 51.111744],
+        },
+      ],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2018'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2018',
+  title: 'PLEIADES - 2018',
+  format: 'image/png',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-63.17017, -21.409384, 55.864906, 51.08409],
+  desc: "Agrégation des images Pleiades de l'année 2018",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.17017, -21.409384, 55.864906, 51.08409],
+        },
+      ],
+    },
+    CNES: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES/CNES.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.17017, -21.409384, 55.864906, 51.08409],
+        },
+      ],
+    },
+    AIRBUS: {
+      href: 'http://www.geo-airbusds.com/',
+      attribution: 'Airbus Defence and Space',
+      logo: 'https://wxs.ign.fr/static/logos/AIRBUS/AIRBUS.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.17017, -21.409384, 55.864906, 51.08409],
+        },
+      ],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2019'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2019',
+  title: 'PLEIADES - 2019',
+  format: 'image/png',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-63.17017, -21.409384, 55.864906, 51.111744],
+  desc: "Agrégation des images Pleiades de l'année 2019",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.17017, -21.409384, 55.864906, 51.111744],
+        },
+      ],
+    },
+    CNES: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES/CNES.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.17017, -21.409384, 55.864906, 51.111744],
+        },
+      ],
+    },
+    AIRBUS: {
+      href: 'http://www.geo-airbusds.com/',
+      attribution: 'Airbus Defence and Space',
+      logo: 'https://wxs.ign.fr/static/logos/AIRBUS/AIRBUS.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.17017, -21.409384, 55.864906, 51.111744],
+        },
+      ],
+    },
+  },
+};
+Geoportail.capabilities['ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2020'] = {
+  server: 'https://data.geopf.fr/wmts',
+  layer: 'ORTHOIMAGERY.ORTHO-SAT.PLEIADES.2020',
+  title: 'PLEIADES - 2020',
+  format: 'image/png',
+  style: 'normal',
+  queryable: false,
+  tilematrix: 'PM',
+  minZoom: 0,
+  maxZoom: 18,
+  bbox: [-63.17017, -13.016858, 45.313553, 51.111744],
+  desc: "Agrégation des images Pleiades de l'année 2020",
+  originators: {
+    IGN: {
+      href: 'http://www.ign.fr',
+      attribution:
+        "Institut national de l'information géographique et forestière",
+      logo: 'https://wxs.ign.fr/static/logos/IGN/IGN.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.17017, 3.8265102, 9.669795, 50.926514],
+        },
+      ],
+    },
+    CNES: {
+      href: 'http://www.cnes.fr/',
+      attribution: "Centre national d'études spatiales (CNES)",
+      logo: 'https://wxs.ign.fr/static/logos/CNES/CNES.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.17017, 3.8265102, 9.669795, 50.926514],
+        },
+      ],
+    },
+    AIRBUS: {
+      href: 'http://www.geo-airbusds.com/',
+      attribution: 'Airbus Defence and Space',
+      logo: 'https://wxs.ign.fr/static/logos/AIRBUS/AIRBUS.gif',
+      minZoom: 0,
+      maxZoom: 18,
+      constraint: [
+        {
+          minZoom: 0,
+          maxZoom: 18,
+          bbox: [-63.17017, 3.8265102, 9.669795, 50.926514],
+        },
+      ],
+    },
+  },
+};
+
+var histo = [
+  /* no more ?
+    new ol.layer.Geoportail({
+      name: '1970',
+      title: '1965-1980',
+      key: 'orthohisto',
+      layer: 'ORTHOIMAGERY.ORTHOPHOTOS.1965-1980'
+    }),
+    */
+  new Geoportail({
+    name: '1960',
+    title: '1950-1965',
+    key: 'orthohisto',
+    layer: 'ORTHOIMAGERY.ORTHOPHOTOS.1950-1965',
+  }),
+  new Image({
+    ...{ name: '1924' },
+    source: new GeoImage({
+      url: '../data/INGF/IGNF_PVA_1-0__1924-08-11__C2314-1541_1924_NP9_13007.jpg',
+      imageCenter: [269892.63568257954, 6248535.314175406],
+      imageRotate: 3.1401654995959856,
+      imageScale: [0.2670215718130227, 0.2670215718130227],
+    }),
+  }),
+  new Image({
+    ...{ name: '1931' },
+    source: new GeoImage({
+      url: '../data/INGF/IGNF_PVA_1-0__1931__CCF0H-2361_1931_CAF_H-236_0003.jpg',
+      imageCenter: [269917.11527094606, 6248564.182321039],
+      imageRotate: -1.4887750967772184,
+      imageScale: [0.5916825640700804, 0.5916825640700804],
+    }),
+  }),
+  new Image({
+    ...{ name: '1934' },
+    source: new GeoImage({
+      url: '../data/INGF/IGNF_PVA_1-0__1934__CCF0F-54B1_1934_CAF_F-54_0011.jpg',
+      imageCenter: [269884.7536107674, 6248543.448601998],
+      imageRotate: -3.136726258048235,
+      imageScale: [0.6375976820489188, 0.6375976820489188],
+    }),
+  }),
+  new Image({
+    ...{ name: '1936' },
+    source: new GeoImage({
+      url: '../data/INGF/IGNF_PVA_1-0__1936-07-17__C2314-1501_1936_NP2_3010.jpg?raw=true',
+      imageCenter: [269937.2514666198, 6248523.183442762],
+      imageRotate: -2.778805073301242,
+      imageScale: [0.47915761377123306, 0.47915761377123306],
+    }),
+  }),
+  new Image({
+    ...{ name: '1944' },
+    source: new GeoImage({
+      url: '../data/INGF/IGNF_PVA_1-0__1944-08-11__C2214-1091_1944_106G2130_3199.jpg?raw=true',
+      imageCenter: [269998.3656072118, 6248506.391443234],
+      imageRotate: 2.362938966984174,
+      imageScale: [0.473608899531087, 0.4768894853951739],
+    }),
+  }),
+  new Image({
+    ...{ name: '1950' },
+    source: new GeoImage({
+      url: '../data/INGF/IGNF_PVA_1-0__1950-05-30__C2314-1851_1950_CDP3505_0242.jpg?raw=true',
+      imageCenter: [269869.74402191263, 6248527.808891151],
+      imageRotate: -0.028335836913955807,
+      imageScale: [0.3267839610026342, 0.326366151015898],
+    }),
+  }),
+];
+
+var dates = [2000, 2003, 2008, 2011, 2014];
+for (var d = dates.length - 1; d >= 0; d--) {
+  histo.unshift(
+    new Geoportail({
+      name: dates[d] + '',
+      title: dates[d] + '',
+      gppKey: 'orthohisto',
+      layer: 'ORTHOIMAGERY.ORTHOPHOTOS' + dates[d],
+    }),
+  );
+}
+/*
+  dates = [2015,2016,2017,2018,2019,2020];
+  for (var d=dates.length-1; d>=0; d--) {
+    histo.unshift(new ol.layer.Geoportail({
+      name: dates[d]+'',
+      title: dates[d]+'',
+      gppKey: 'h1osiyvfm7c4wu976jv6gpum',
+      layer: 'ORTHOIMAGERY.ORTHO-SAT.PLEIADES.' +dates[d]
+    }));
+  }
+  */
+
+histo.unshift(
+  new Geoportail({
+    name: new Date().getFullYear().toString(),
+    title: new Date().getFullYear().toString(),
+    layer: 'ORTHOIMAGERY.ORTHOPHOTOS',
+  }),
+);
+
+histo.forEach(function (l) {
+  map.addLayer(l);
+});
+
+// Create timeline
+var tline = new Timeline({
+  className: 'ol-pointer ol-zoomhover',
+  features: histo.map((layer) => new Feature({ name: layer.get('name') })),
+  minDate: new Date('1923'),
+  maxDate: new Date(),
+  getFeatureDate: function (l) {
+    return l.get('name');
+  },
+  getHTML: function (l) {
+    return l.get('name');
+  },
+});
+
+tline.on('scroll', function (e) {
+  let layer: (typeof histo)[number] | undefined;
+  let dmin = Infinity;
+  histo.forEach(function (l, i) {
+    var d = new Date(l.get('name'));
+    const dt = Math.abs(e.date.getTime() - d.getTime());
+    if (dt < dmin) {
+      layer = l;
+      dmin = dt;
+    }
+    if (i !== 0) l.setVisible(false);
+  });
+  if (!layer) return;
+  layer.setVisible(true);
+  $('.date').text(layer.get('title') || layer.get('name'));
+});
+tline.on('select', function (e) {
+  tline.setDate(e.feature);
+});
+
+map.addControl(tline);
+tline.setDate('1924');
