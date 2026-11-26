@@ -172,3 +172,20 @@ remain outside the startup check.
 - The Vendée Globe example reads a route from the first generic source
   change. The port waits for the feature load and handles either a line or a
   multiline geometry.
+
+## Release 4.0.39, round of 6 transform, clipping, timeline and elevation ports
+
+Chrome loaded the rectangle transform, two intersection, two timeline and
+GPX elevation pages without startup console errors. The server was
+stopped after the test. The inventory has 28 unmatched HTML files.
+Drawing, animation, selection and playback remain outside the load check.
+
+- The rectangle transform example used a function as the initial
+  `keepRectangle` value. The interaction expects a boolean. The port also
+  preserves the HTML buttons' access to the live rotation-pivot setting.
+- The circle and extent comparisons inject the bundle's OpenLayers
+  geometry constructors into the legacy JSTS parser. The OpenLayers
+  comparison can still run if the JSTS CDN is unavailable.
+- The GPX demo patched the LineString prototype and averaged the same
+  endpoint twice. The port reads interpolated elevation from OpenLayers
+  and waits for the GPX file to finish loading before drawing the legend.

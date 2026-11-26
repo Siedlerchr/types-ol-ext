@@ -10,21 +10,18 @@ AUDIT_STATE := complete
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 # Load results and upstream issues are recorded in docs/ol-ext-example-ports.md.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := 3 file conversion and sailing ports
-EXAMPLE_LOAD_CHECK := 3 new pages passed Chrome startup checks
+EXAMPLE_PORTS_LAST_ROUND := 6 transform, clipping, timeline and elevation ports
+EXAMPLE_LOAD_CHECK := 6 new pages passed Chrome startup checks
 
 # Refresh the complete unmatched-page snapshot with:
 # python3 scripts/example-inventory.py --update-status
 # Some entries may be support or standalone pages rather than map examples.
 
 # BEGIN GENERATED MISSING EXAMPLES
-# 34 upstream HTML files without a matching TypeScript port.
+# 28 upstream HTML files without a matching TypeScript port.
 #   hackmacarte.html (inline scripts: 0)
-#   interaction/map.interaction.transformrectangle.html (inline scripts: 1)
 #   layer/map.carhab.html (inline scripts: 1)
 #   layer/map.carhab.wfs.html (inline scripts: 1)
-#   layer/map.circle.intersection.html (inline scripts: 1)
-#   layer/map.intersection.html (inline scripts: 1)
 #   layer/map.layer.bdtopo.vtile.html (inline scripts: 1)
 #   layer/map.layer.clc.wfs.html (inline scripts: 1)
 #   layer/map.layer.geoportail.wfs.html (inline scripts: 0)
@@ -34,8 +31,8 @@ EXAMPLE_LOAD_CHECK := 3 new pages passed Chrome startup checks
 #   layer/map.layer.ocsge.html (inline scripts: 1)
 #   layer/map.maplibre.gl.html (inline scripts: 0)
 #   layer/map.stat.wfs.html (inline scripts: 1)
-#   map.pirate-old.html (inline scripts: 1)
 #   map/map.watchdogs.html (inline scripts: 1)
+#   map.pirate-old.html (inline scripts: 1)
 #   misc/geocommune.html (inline scripts: 0)
 #   misc/geojsontile.html (inline scripts: 1)
 #   misc/geojsontile2.html (inline scripts: 1)
@@ -45,14 +42,11 @@ EXAMPLE_LOAD_CHECK := 3 new pages passed Chrome startup checks
 #   misc/map.lidar.txt.html (inline scripts: 1)
 #   misc/maplibre.gl.html (inline scripts: 0)
 #   storymap/geotiff.html (inline scripts: 1)
-#   storymap/map.control.timeinterval.html (inline scripts: 1)
 #   storymap/map.control.timemap.html (inline scripts: 1)
-#   storymap/map.control.timequake.html (inline scripts: 1)
 #   storymap/map.rlt.html (inline scripts: 1)
 #   storymap/map.rlt2.html (inline scripts: 0)
 #   storymap/map.rlt3.html (inline scripts: 0)
 #   style/map.style.flowarrow.html (inline scripts: 1)
-#   style/map.style.gpxline.html (inline scripts: 1)
 # END GENERATED MISSING EXAMPLES
 
 # A completed step records the current evidence, not a release approval.
