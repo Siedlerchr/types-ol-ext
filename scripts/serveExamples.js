@@ -45,6 +45,7 @@ for (const example of examples) {
         'examples/style/map.style.font.html': /\/(?:FontMaki(?:2)?Def|FontAwesomeDef)\.js/i,
         'examples/misc/map.control.cloud.html': /\/Cloud\.js/i,
       }
+      if (/\/olms\.js$/.test(src) && portSource.includes("from 'ol-mapbox-style'")) return ''
       if (bundledExtras[relative]?.test(attrs)) return ''
       const fontDefinition = attrs.match(/\/dist\/extra\/(Font\w+Def)\.js/)
       if (fontDefinition && portSource.includes(`ol-ext/style/${fontDefinition[1]}`)) return ''

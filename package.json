@@ -63,6 +63,7 @@
     "node-html-parser": "^7.1.0",
     "ol": "^10.11.0",
     "ol-ext": "^4.0.39",
+    "ol-mapbox-style": "^13.9.0",
     "proj4": "^2.23.0",
     "ts-loader": "^9.6.2",
     "tsd": "^0.33.0",

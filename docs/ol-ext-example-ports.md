@@ -189,3 +189,26 @@ Drawing, animation, selection and playback remain outside the load check.
 - The GPX demo patched the LineString prototype and averaged the same
   endpoint twice. The port reads interpolated elevation from OpenLayers
   and waits for the GPX file to finish loading before drawing the legend.
+
+## Release 4.0.39, round of 6 data processing and vector-tile ports
+
+Chrome loaded the LiDAR, GeoJSON tiling pair, GeoCommune, Watch Dogs and
+BD TOPO pages. The first BD TOPO load found two initialization errors. The
+corrected page passed the follow-up check. Both follow-up servers and
+the initial server were stopped after their checks. The inventory has 22
+unmatched HTML files. File drops, exports and remote data coverage were
+outside the startup check.
+
+- BD TOPO shipped with an OpenLayers 6 global style adapter and service
+  URLs on `wxs.ign.fr`, which failed DNS in this environment. The port
+  uses the module build of ol-mapbox-style and the Géoplateforme style
+  and tile endpoints. The style and a sample tile also returned HTTP 200
+  from the terminal.
+- The GeoJSON tiling pair used `ol.source.Stamen`, which was removed from
+  OpenLayers. The port uses OSM as the background and preserves each
+  page's compact export format.
+- GeoCommune's error path referenced an undefined dialog and its layer
+  loop wrote to an undeclared variable. The port reports fetch failures
+  in the dialog and scopes each layer to its loop.
+- The LiDAR example divided by the elevation range without checking for a
+  flat input. The port handles equal elevations and skips malformed rows.
