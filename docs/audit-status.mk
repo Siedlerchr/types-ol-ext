@@ -10,15 +10,15 @@ AUDIT_STATE := complete
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 # Load results and upstream issues are recorded in docs/ol-ext-example-ports.md.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := 7 Geoportail, legend and iframe ports
-EXAMPLE_LOAD_CHECK := 7 new pages loaded in Chrome, with DNS failures on the historic Geoportail demo
+EXAMPLE_PORTS_LAST_ROUND := 3 file conversion and sailing ports
+EXAMPLE_LOAD_CHECK := 3 new pages passed Chrome startup checks
 
 # Refresh the complete unmatched-page snapshot with:
 # python3 scripts/example-inventory.py --update-status
 # Some entries may be support or standalone pages rather than map examples.
 
 # BEGIN GENERATED MISSING EXAMPLES
-# 37 upstream HTML files without a matching TypeScript port.
+# 34 upstream HTML files without a matching TypeScript port.
 #   hackmacarte.html (inline scripts: 0)
 #   interaction/map.interaction.transformrectangle.html (inline scripts: 1)
 #   layer/map.carhab.html (inline scripts: 1)
@@ -34,10 +34,9 @@ EXAMPLE_LOAD_CHECK := 7 new pages loaded in Chrome, with DNS failures on the his
 #   layer/map.layer.ocsge.html (inline scripts: 1)
 #   layer/map.maplibre.gl.html (inline scripts: 0)
 #   layer/map.stat.wfs.html (inline scripts: 1)
-#   map/map.watchdogs.html (inline scripts: 1)
 #   map.pirate-old.html (inline scripts: 1)
+#   map/map.watchdogs.html (inline scripts: 1)
 #   misc/geocommune.html (inline scripts: 0)
-#   misc/geoimport.html (inline scripts: 1)
 #   misc/geojsontile.html (inline scripts: 1)
 #   misc/geojsontile2.html (inline scripts: 1)
 #   misc/geoportail.loader.html (inline scripts: 0)
@@ -45,8 +44,6 @@ EXAMPLE_LOAD_CHECK := 7 new pages loaded in Chrome, with DNS failures on the his
 #   misc/map.georef2wmts.html (inline scripts: 1)
 #   misc/map.lidar.txt.html (inline scripts: 1)
 #   misc/maplibre.gl.html (inline scripts: 0)
-#   misc/poly2grid.html (inline scripts: 1)
-#   misc/vendeglobe.html (inline scripts: 1)
 #   storymap/geotiff.html (inline scripts: 1)
 #   storymap/map.control.timeinterval.html (inline scripts: 1)
 #   storymap/map.control.timemap.html (inline scripts: 1)

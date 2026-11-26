@@ -158,3 +158,17 @@ has 37 unmatched HTML files.
   the bridges and consume the iframe listener value via its actual `this`
   binding. Startup was exercised, with drawing and the full message
   round trip outside the load test.
+
+## Release 4.0.39, round of 3 file conversion and sailing ports
+
+Chrome loaded the GeoImport, polygon-grid and Vendée Globe bundles without
+startup console errors. The Vendée Globe route and boat image returned
+HTTP 200. The server was stopped after the test. The inventory has 34
+unmatched HTML files. Import/export, grid downloads and route playback
+remain outside the startup check.
+
+- The polygon-grid example has no guard against zero or invalid grid steps.
+  The port requires a positive finite step before building a grid.
+- The Vendée Globe example reads a route from the first generic source
+  change. The port waits for the feature load and handles either a line or a
+  multiline geometry.
