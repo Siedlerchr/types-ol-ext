@@ -10,16 +10,15 @@ AUDIT_STATE := complete
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 # Load results and upstream issues are recorded in docs/ol-ext-example-ports.md.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := 7 painting, clustering and timeline ports
-EXAMPLE_LOAD_CHECK := all 7 new pages passed Chrome startup checks
+EXAMPLE_PORTS_LAST_ROUND := 9 routing, search and utility ports
+EXAMPLE_LOAD_CHECK := all 9 new pages passed Chrome startup checks
 
 # Refresh the complete unmatched-page snapshot with:
 # python3 scripts/example-inventory.py --update-status
 # Some entries may be support or standalone pages rather than map examples.
 
 # BEGIN GENERATED MISSING EXAMPLES
-# 53 upstream HTML files without a matching TypeScript port.
-#   geom/map.simplify.html (inline scripts: 1)
+# 44 upstream HTML files without a matching TypeScript port.
 #   hackmacarte.html (inline scripts: 0)
 #   interaction/map.interaction.transformrectangle.html (inline scripts: 1)
 #   layer/map.carhab.html (inline scripts: 1)
@@ -52,17 +51,9 @@ EXAMPLE_LOAD_CHECK := all 7 new pages passed Chrome startup checks
 #   misc/map.iframe.api.html (inline scripts: 0)
 #   misc/map.iframe.html (inline scripts: 1)
 #   misc/map.lidar.txt.html (inline scripts: 1)
-#   misc/map.openagenda.html (inline scripts: 1)
-#   misc/map.synchro.html (inline scripts: 1)
-#   misc/map.wthit.html (inline scripts: 1)
 #   misc/maplibre.gl.html (inline scripts: 0)
 #   misc/poly2grid.html (inline scripts: 1)
 #   misc/vendeglobe.html (inline scripts: 1)
-#   routing/map.control.isochrone.html (inline scripts: 1)
-#   routing/map.control.routing.dsr.html (inline scripts: 1)
-#   routing/map.control.routing.html (inline scripts: 1)
-#   routing/map.source.dijkstra2.html (inline scripts: 1)
-#   search/map.control.searchpedia.html (inline scripts: 1)
 #   storymap/geotiff.html (inline scripts: 1)
 #   storymap/map.control.timeinterval.html (inline scripts: 1)
 #   storymap/map.control.timemap.html (inline scripts: 1)

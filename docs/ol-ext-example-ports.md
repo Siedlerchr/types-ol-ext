@@ -120,3 +120,23 @@ unverified.
   used by the original text-path example. The port uses OpenLayers line
   text placement and implements the demo's clipping and width settings.
   Label placement can differ from the old canvas implementation.
+
+## Release 4.0.39, round of 9 ports
+
+The four routing and shortest-path pages, Wikipedia search, geometry
+simplification, OpenAgenda, window synchronization, and the ISS tracker
+passed the Chrome startup checks. The server was stopped after the check.
+The inventory has 44 unmatched HTML files. Live route calculation,
+authenticated DSR responses, file drops, EXIF reads, and window-to-window
+synchronization remain unverified.
+
+- The standalone DSR routing script calls the base class as a function and
+  dispatches a misspelled `errror` event. The port uses a subclass and the
+  `error` event. Its remote endpoint and credentials were outside the
+  startup test.
+- The geometry simplification example reused the base layer variable for the
+  edge layer and passed a stroke option named `with`. The port gives the
+  two layers distinct variables and uses `width`.
+- The window synchronization example uses the release's global WSynchro
+  script. The port types the global at the example boundary and exposes its
+  map for the child window to read.

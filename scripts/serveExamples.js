@@ -53,6 +53,7 @@ for (const example of examples) {
       if (/\/jspdf[/.]/i.test(attrs) && portSource.includes('/.shared/print')) return ''
       if (/FileSaver(?:\.min)?\.js/i.test(attrs) && portSource.includes('/.shared/download')) return ''
       if (/\/webfont\.js/i.test(attrs) && portSource.includes('/.shared/font-awesome')) return ''
+      if (src === './RoutingDSR.js' && portSource.includes('/.shared/routing-dsr')) return ''
       return whole
     }
     if (replaced && /WebFont\.load\(/.test(body) && portSource.includes('/.shared/font-awesome')) return ''
