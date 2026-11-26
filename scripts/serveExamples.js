@@ -54,10 +54,12 @@ for (const example of examples) {
       if (/FileSaver(?:\.min)?\.js/i.test(attrs) && portSource.includes('/.shared/download')) return ''
       if (/\/webfont\.js/i.test(attrs) && portSource.includes('/.shared/font-awesome')) return ''
       if (src === './RoutingDSR.js' && portSource.includes('/.shared/routing-dsr')) return ''
+      if (relative === 'examples/misc/map.iframe.html' && (/^\.\/api\//.test(src) || /\/extra\/IFrameAPI\.js$/.test(src))) return ''
+      if (relative === 'examples/misc/map.iframe.api.html' && /\/extra\/MapIFrameAPI\.js$/.test(src)) return ''
       return whole
     }
     if (replaced && /WebFont\.load\(/.test(body) && portSource.includes('/.shared/font-awesome')) return ''
-    if (/ol\.(?:Map|PerspectiveMap|ext)\b|ol\.layer\.Geoportail\.getCapabilities\(/.test(body)
+    if (/ol\.(?:Map|PerspectiveMap|ext)\b|ol\.layer\.Geoportail\.getCapabilities\(|MapIFrameAPI\.ready\(/.test(body)
       || (usesPaintMap && /ol\.(?:source\.OilPainting|filter\.Pointillism)\b/.test(body))) {
       if (replaced) return ''
       replaced = true

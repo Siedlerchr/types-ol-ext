@@ -1,0 +1,308 @@
+import TileLayer from 'ol/layer/Tile';
+import OSM from 'ol/source/OSM';
+import CSS from 'ol-ext/filter/CSS';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import LayerSwitcher from 'ol-ext/control/LayerSwitcher';
+import Permalink from 'ol-ext/control/Permalink';
+import PrintDialog from 'ol-ext/control/PrintDialog';
+import TileWMS from 'ol/source/TileWMS';
+import Geoportail from 'ol-ext/layer/Geoportail';
+import * as imageLoader from 'ol-ext/util/imagesLoader';
+import 'ol-ext/filter/Base';
+
+declare const $: JQueryStatic;
+
+var plan = new TileLayer({
+  properties: { name: 'OSM' },
+  className: 'plan',
+  source: new OSM(),
+  visible: false,
+});
+plan.addFilter(new CSS({ filter: 'grayscale(1)' }));
+
+// The map
+var map = new Map({
+  target: 'map',
+  view: new View({
+    zoom: 3,
+    center: [603942, 3475741],
+  }),
+  layers: [plan],
+});
+var switcher = new LayerSwitcher();
+map.addControl(switcher);
+map.addControl(new Permalink({ visible: false }));
+map.addControl(new PrintDialog({ openWindow: true, pdf: false }));
+
+// A set of elevation layers
+var layers = [
+  {
+    title: 'MNT SRTM3',
+    url: 'https://data.geopf.fr/wms-r/wms',
+    layer: 'ELEVATION.ELEVATIONGRIDCOVERAGE.SRTM3',
+    //extent: [ -20037554.725947514, -8625918.87376409, 20037554.725947514, 8625918.87376409 ]
+  },
+  {
+    title: 'MNS',
+    url: 'https://data.geopf.fr/wms-r/wms',
+    layer: 'ELEVATION.ELEVATIONGRIDCOVERAGE.HIGHRES.MNS',
+    extent: [
+      -578959.605490584, 5203133.393641367, 921974.2487313666, 6643289.75487211,
+    ],
+  },
+  {
+    title: 'MNT-RGE-Alti',
+    url: 'https://data.geopf.fr/wms-r/wms',
+    layer: 'ELEVATION.ELEVATIONGRIDCOVERAGE.HIGHRES',
+    extent: [
+      -7007874.496280316, -1460624.494037931, 5043253.3127169,
+      6639937.650114076,
+    ],
+  },
+  {
+    title: 'MNT BDAlti V1',
+    url: 'https://data.geopf.fr/wms-r/wms',
+    layer: 'ELEVATION.ELEVATIONGRIDCOVERAGE',
+    extent: [
+      -7007874.496280316, -1460624.494037931, 5043253.3127169,
+      6639937.650114076,
+    ],
+  },
+];
+
+// Add tile layer
+var layer = layers[0];
+var elev = new TileLayer({
+  properties: { title: layer.title },
+  extent: layer.extent,
+  minResolution: 0,
+  maxResolution: 197231.79878968254,
+  source: new TileWMS({
+    url: layer.url,
+    projection: 'EPSG:3857',
+    attributions: ['Geoservices-IGN'],
+    crossOrigin: 'anonymous',
+    params: {
+      LAYERS: layer.layer,
+      FORMAT: 'image/x-bil;bits=32',
+      VERSION: '1.3.0',
+    },
+  }),
+});
+elev.addFilter(new CSS({ blend: 'multiply' }));
+map.addLayer(elev);
+elev.on('change', function () {
+  switcher.drawPanel();
+});
+
+Geoportail.register('ELEVATION.ELEVATIONGRIDCOVERAGE.SHADOW', {
+  layer: 'ELEVATION.ELEVATIONGRIDCOVERAGE.SHADOW',
+  theme: 'altimetrie',
+  desc: "Couche d'ombrage calculée à partir des données altimétriques de l'IGN permettant de mieux appréhender le relief. L'estompage proposé est réalisé à partir des données MNT BDAlti au pas de 25m avec deux soleils : un au nord-est de hauteur 45°, l'autre zénithal.",
+  server: 'https://data.geopf.fr/wmts',
+  bbox: [-63.187, -21.4069, 55.8884, 50.9218],
+  format: 'image/png',
+  minZoom: 0,
+  maxZoom: 15,
+  originators: {
+    Geoservices: {
+      attribution: 'Géoservices',
+      href: 'https://geoservices.ign.fr/',
+    },
+  },
+  queryable: false,
+  style: 'estompage_grayscale',
+  tilematrix: 'PM',
+  title: 'Estompage',
+});
+var shadow = new Geoportail({
+  title: 'Estompage - by IGN-France',
+  className: 'blend',
+  layer: 'ELEVATION.ELEVATIONGRIDCOVERAGE.SHADOW',
+  visible: false,
+});
+// enhance opacity
+shadow.getSource()!.setTileLoadFunction(
+  imageLoader.pixelTransform(function (p, i) {
+    p[i + 3] *= 2.5;
+  }),
+);
+map.addLayer(shadow);
+
+var hillshade = new TileLayer({
+  properties: { title: 'SRTM30 Hillshade - by terrestris', queryable: false },
+  className: 'hillshade',
+  opacity: 0.4,
+  extent: [
+    -20037508.342789244, -7558415.656081782, 20037508.342789244,
+    8399737.889818361,
+  ],
+  minResolution: 0,
+  maxResolution: 156543.03392804097,
+  source: new TileWMS({
+    url: 'https://ows.mundialis.de/osm/service?',
+    projection: 'EPSG:3857',
+    attributions: ['&copy; terrestris'],
+    crossOrigin: 'anonymous',
+    params: {
+      LAYERS: 'SRTM30-Hillshade',
+      FORMAT: 'image/png',
+      VERSION: '1.3.0',
+    },
+  }),
+});
+hillshade.addFilter(new CSS({ blend: 'multiply' }));
+map.addLayer(hillshade);
+
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/
+var tints0 = [
+  [113, 171, 216], // sea
+  [217, 242, 255], // sea side
+  [192, 220, 160], // coast
+  [172, 208, 165],
+  [134, 179, 125], // plains
+  [160, 190, 140],
+  [239, 235, 192], // moutains
+  [170, 135, 83],
+  [148, 108, 51], // mountains
+  [230, 230, 230], // snow
+  [250, 250, 250], // ice
+  [255, 255, 255], // ice
+];
+// Steps (for France)
+var steps = [0, 0, 0.15, 2, 2, 8, 8, 20, 70, 50, 10];
+// Steps
+var steps = [0, 0, 0.1, 2, 2, 5, 20, 30, 120, 2, 50];
+var maxAlti = 8600;
+var useRGB = false;
+let tints: number[][];
+function calculateTints() {
+  tints = [];
+  steps.forEach((n0, s) => {
+    var n = 10 * n0;
+    for (var i = 0; i < n; i++) {
+      tints.push([
+        (tints0[s + 1][0] * i + tints0[s][0] * (n - i)) / n,
+        (tints0[s + 1][1] * i + tints0[s][1] * (n - i)) / n,
+        (tints0[s + 1][2] * i + tints0[s][2] * (n - i)) / n,
+      ]);
+    }
+  });
+}
+calculateTints();
+
+function setLayer(layerNumber?: string) {
+  const n = layerNumber === undefined ? undefined : Number(layerNumber);
+  if (n !== undefined && layers[n]) {
+    const layer = layers[n];
+    elev.set('title', layer.title);
+    elev.setSource(
+      new TileWMS({
+        url: layer.url,
+        projection: 'EPSG:3857',
+        attributions: ['Geoservices-IGN'],
+        crossOrigin: 'anonymous',
+        params: {
+          LAYERS: layer.layer,
+          FORMAT: 'image/x-bil;bits=32',
+          VERSION: '1.3.0',
+        },
+      }),
+    );
+    maxAlti = n == 0 ? 8600 : 4800;
+  }
+  elev.getSource()!.setTileLoadFunction(alti);
+}
+
+tints0.forEach((t, i) => {
+  if (i < tints0.length - 1) {
+    $('<input>')
+      .val(steps[i])
+      .css({
+        'background-color': 'rgb(' + t[0] + ',' + t[1] + ',' + t[2] + ')',
+      })
+      .attr('title', i)
+      .on('change', function () {
+        steps[i] = Number($(this).val());
+        calculateTints();
+        elev.getSource()!.setTileLoadFunction(alti);
+      })
+      .appendTo($('#scale'));
+  }
+});
+
+// Color pixel / elevation
+var alti = imageLoader.elevationMap(function (z) {
+  if (!useRGB) {
+    var pos, t;
+    if (z > 0) {
+      pos = Math.min(
+        tints.length - 1,
+        Math.round((z / maxAlti) * tints.length),
+      );
+      t = tints[pos];
+    } else {
+      t = tints0[0];
+    }
+    t[3] = 255;
+    return t;
+  } else {
+    // rgb
+    if (z <= 0) return [0, 0, 0, 0];
+    z = Math.max(0, z / maxAlti);
+    return getColor(180 * (z + 0.1));
+  }
+});
+
+elev.getSource()!.setTileLoadFunction(alti);
+
+// Color pixel / elevation
+tints0.forEach((t) => (t[3] = 255));
+var seuil = [28, 29, 33, 35, 40, 48, 55, 60, 80, 150, 200];
+var alti2 = imageLoader.elevationMap(function (z) {
+  var pos, t;
+  for (var i = 0; i < seuil.length; i++) {
+    if (z < seuil[i]) {
+      if (i > 0) {
+        var n = Math.round((10 * (seuil[i] - z)) / (seuil[i] - seuil[i - 1]));
+        return [
+          (tints0[i - 1][0] * n + tints0[i][0] * (10 - n)) / 10,
+          (tints0[i - 1][1] * n + tints0[i][1] * (10 - n)) / 10,
+          (tints0[i - 1][2] * n + tints0[i][2] * (10 - n)) / 10,
+          255,
+        ];
+      }
+      return tints0[i];
+    }
+  }
+  return tints0[11];
+});
+/*
+elev.getSource().setTileLoadFunction(alti2)
+elev.getSource().refresh()
+*/
+
+var hue2rgb = function (h: number) {
+  h = (h + 6) % 6;
+  if (h < 1) return Math.round(h * 255);
+  if (h < 3) return 255;
+  if (h < 4) return Math.round((4 - h) * 255);
+  return 0;
+};
+
+var getColor = function (v: number) {
+  // Get hue
+  var h = 4 - 0.04 * v;
+  // Convert to RGB
+  return [hue2rgb(h + 2), hue2rgb(h), hue2rgb(h - 2), 255];
+};
+
+Object.assign(window, { useRGB, setLayer });
+
+Object.defineProperty(window, 'useRGB', {
+  get: () => useRGB,
+  set: (value: boolean) => {
+    useRGB = value;
+  },
+});

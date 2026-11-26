@@ -140,3 +140,21 @@ synchronization remain unverified.
 - The window synchronization example uses the release's global WSynchro
   script. The port types the global at the example boundary and exposes its
   map for the child window to read.
+
+## Release 4.0.39, round of 7 Geoportail, legend and iframe ports
+
+Chrome loaded the elevation, Geoportail, legend, and parent/child iframe
+bundles. The Geoportail migration comparison logged DNS failures while
+loading its historical service configuration. The other pages passed the
+startup console check. The server was stopped after the test. The inventory
+has 37 unmatched HTML files.
+
+- The AOC page calls the removed `Map.forEachLayerAtPixel`. The port
+  checks the AOC layer's rendered pixel before requesting feature info.
+- The comparison page deliberately retains historical Geoportail services.
+  Old-layer tile availability remains unverified.
+- The release iframe bridges check protocol identifiers but omit sender
+  checks. The ports install same-origin and expected-window checks before
+  the bridges and consume the iframe listener value via its actual `this`
+  binding. Startup was exercised, with drawing and the full message
+  round trip outside the load test.
