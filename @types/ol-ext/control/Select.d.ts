@@ -1,4 +1,4 @@
-import type { Options as SelectOptions } from './SelectBase'
+import type { condition, Options as SelectOptions } from './SelectBase'
 import SelectBase from './SelectBase'
 
 export interface Options extends SelectOptions {
@@ -8,6 +8,12 @@ export interface Options extends SelectOptions {
   caseLabel?: string;
   attrPlaceHolder?: string;
   valuePlaceHolder?: string;
+}
+
+export interface Conditions {
+  usecase: boolean;
+  all: boolean;
+  conditions: condition[];
 }
 
 /**
@@ -32,5 +38,16 @@ export default class Select extends SelectBase {
    *  @param {string} [options.attrPlaceHolder=attribute]
    *  @param {string} [options.valuePlaceHolder=value]
    */
-  constructor(options?: SelectOptions);
+  constructor(options?: Options);
+
+  /** Add an attribute selection condition. */
+  addCondition(options?: Partial<condition>): void;
+  /** Get the current condition list and matching settings. */
+  getConditions(): Conditions;
+  /** Set the current condition list and matching settings. */
+  setConditions(conditions: Conditions): void;
+  /** Format conditions as a string. */
+  getConditionsString(conditions: Conditions): string;
+  /** Remove the condition at the given index. */
+  removeCondition(index: number): void;
 }

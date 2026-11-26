@@ -1,12 +1,14 @@
 import type { Stroke, Fill } from 'ol/style'
 import { Style } from 'ol/style'
-import type { Geometry } from 'ol/geom'
+import type { Options as StyleOptions } from 'ol/style/Style'
 
 export interface Options {
   stroke?: Stroke;
   fill?: Fill;
   scale?: number;
-  geometry?: Geometry;
+  geometry?: StyleOptions['geometry'];
+  zIndex?: number;
+  vertexSize?: number;
 }
 
 /** Profile style
@@ -29,7 +31,7 @@ export default class Profile extends Style {
   /** Set style stroke
    * @param {ol.style.Stroke}
    */
-  setStroke(stroke: Stroke): void;
+  setStroke(stroke?: Stroke | null): void;
 
   /** Get style stroke
    * @return {ol.style.Stroke}
@@ -39,17 +41,20 @@ export default class Profile extends Style {
   /** Set style stroke
    * @param {ol.style.Fill}
    */
-  setFill(fill: Fill): void;
+  setFill(fill?: Fill | null): void;
 
   /** Get style stroke
    * @return {ol.style.Fill}
    */
   getFill(): Fill;
 
-  /** Set z scale
-   * @param {number}
-   */
-  setScale(sc: number): void;
+  /** Set the vertex size. Use 0 to disable vertex rendering. */
+  setVertexSize(size?: number): void;
+  /** Get the vertex size. */
+  getVertexSize(): number;
+
+  /** Set z scale. */
+  setScale(sc?: number): void;
 
   /** Get z scale
    * @return {number}

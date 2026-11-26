@@ -1,9 +1,10 @@
 import type { Coordinate } from 'ol/coordinate'
+import type { ProjectionLike } from 'ol/proj'
 
 declare module 'ol/source/Source' {
   export default interface Source {
 
-    getPreview(lonlat: Coordinate, resolution: number): string;
+    getPreview(lonlat?: Coordinate, resolution?: number): string;
   }
 }
 
@@ -35,7 +36,7 @@ declare module 'ol/layer/Layer' {
      * @return {Array<String>} list of preview url
      * @api
      */
-    getPreview(lonlat?: Coordinate, resolution?: number): string[];
+    getPreview(lonlat?: Coordinate, resolution?: number, projection?: ProjectionLike): string[];
   }
 }
 /**

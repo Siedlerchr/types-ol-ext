@@ -8,7 +8,7 @@ module.exports = {
       const basename = path.basename(file).replace(path.extname(file), '')
       const dirname = path.basename(path.dirname(file))
       const key = `${dirname}/${basename}`
-      entries[key] = file
+      entries[key] = path.resolve(file)
     })
     return entries
   },
@@ -21,6 +21,12 @@ module.exports = {
   devtool: 'source-map',
   resolve: {
     extensions: ['.ts', '.js'],
+    alias: {
+      // Use the ESM entry with the same OpenLayers classes as the examples.
+      'ol-mapbox-style$': path.resolve(path.dirname(require.resolve('ol-mapbox-style')), '../src/index.js'),
+      // ol-ext 4.0.39's TinkerBell import has the wrong case on Linux.
+      '../util/getMapcanvas.js$': require.resolve('ol-ext/util/getMapCanvas.js'),
+    },
   },
   module: {
     rules: [

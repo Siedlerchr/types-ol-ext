@@ -1,5 +1,14 @@
 import type { Options as BaseOptions } from './Base'
 import Base from './Base'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { OnSignature } from 'ol/Observable'
+
+export interface CheckEvent extends BaseEvent {
+  type: 'check';
+  checked: boolean;
+  value: string;
+}
 
 export interface Options extends BaseOptions {
   className?: string;
@@ -29,4 +38,10 @@ export default class CheckBox extends Base {
    *  @param {boolean} [options.visible=false] display the input
    */
   constructor(options?: Options);
+  /** Return whether the checkbox is checked. */
+  isChecked(): boolean;
+
+  on: Base['on'] & OnSignature<'check', CheckEvent, EventsKey>;
+  once: Base['once'] & OnSignature<'check', CheckEvent, EventsKey>;
+  un: Base['un'] & OnSignature<'check', CheckEvent, void>;
 }

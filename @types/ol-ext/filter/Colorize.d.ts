@@ -1,5 +1,6 @@
-import type { ColorLike } from 'ol/colorlike'
+import type { Color } from 'ol/color'
 import Base from './Base'
+import type { Options as BaseOptions } from './Base'
 
 /** @typedef {Object} FilterColorizeOptions
  *  @property {Color} color style to fill with
@@ -7,12 +8,18 @@ import Base from './Base'
  *  @property {number} value a [0-1] value to modify the effect value
  *  @property {boolean} inner mask inner, default false
  */
-export interface FilterColorizeOptions {
-  color?: ColorLike;
+export interface FilterColorizeOptions extends BaseOptions {
+  color?: Color | string;
   operation?: 'enhance' | string;
   value?: number;
   inner?: boolean;
+  preserveAlpha?: boolean;
+  red?: number;
+  green?: number;
+  blue?: number;
 }
+
+export type ColorizePreset = 'grayscale' | 'invert' | 'sepia'
 
 /** Colorize map or layer
  * @constructor
@@ -25,22 +32,22 @@ export default class Colorize extends Base {
   /**
    * @param {FilterColorizeOptions} options
    */
-  constructor(options?: FilterColorizeOptions);
+  constructor(options?: FilterColorizeOptions | ColorizePreset);
 
   /** Set options to the filter
    * @param {FilterColorizeOptions} [options]
    */
-  setFilter(options?: FilterColorizeOptions): void;
+  setFilter(options?: FilterColorizeOptions | ColorizePreset): void;
 
   /** Set the filter value
-   *  @param {Color} options.color style to fill with
+   *  @param {number} value effect strength from 0 to 1
    */
-  setValue(color: ColorLike): void;
+  setValue(value: number): void;
 
   /** Set the color value
-   *  @param {number} options.value a [0-1] value to modify the effect value
+   *  @param {Color|string} color style to fill with
    */
-  setColor(c: number): void;
+  setColor(color: Color | string): void;
 
   /** Activate / deactivate filter
    *  @param {boolean} b

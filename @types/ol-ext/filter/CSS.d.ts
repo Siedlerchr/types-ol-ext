@@ -1,7 +1,8 @@
-import type { Layer } from 'ol/layer'
+import type BaseLayer from 'ol/layer/Base'
 import Base from './Base'
+import type { Options as BaseOptions } from './Base'
 
-export interface Options {
+export interface Options extends BaseOptions {
   blend?: string;
   filter?: string;
   display?: boolean;
@@ -37,12 +38,12 @@ export default class CSS extends Base {
   /** Add CSS filter to the layer
    * @param {ol_layer_Base} layer
    */
-  addToLayer(layer: Layer): void;
+  addToLayer(layer: BaseLayer): void;
 
   /** Remove CSS filter from the layer
    * @param {ol_layer_Base} layer
    */
-  removeFromLayer(layer: Layer): void;
+  removeFromLayer(layer: BaseLayer): void;
 
   /** Modify layer visibility (but keep it in the layer list)
    * @param {boolean} display

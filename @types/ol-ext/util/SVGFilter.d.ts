@@ -1,7 +1,14 @@
+import BaseObject from 'ol/Object'
 import type ol_ext_SVGOperation from './SVGOperation'
+import type { OperationAttributes } from './SVGOperation'
+
+/** A filter operation instance, descriptor, or primitive tag name. */
+export type Operation = ol_ext_SVGOperation | OperationAttributes | string
+/** One or more filter operations. */
+export type Operations = Operation | Operation[]
 
 export interface Options {
-  operation?: ol_ext_SVGOperation;
+  operation?: Operations;
   id?: string;
   color?: 'linear' | 'sRGB';
 }
@@ -9,7 +16,7 @@ export interface Options {
 /** SVG filter
 
  */
-export default class SVGFilter {
+export default class SVGFilter extends BaseObject {
   /**
    * @param {*} options
    *  @param {ol_ext_SVGOperation} option.operation
@@ -30,22 +37,25 @@ export default class SVGFilter {
   /** Add a new operation
    * @param {ol_ext_SVGOperation} operation
    */
-  addOperation(operation: ol_ext_SVGOperation): void;
+  addOperation(operation: Operations): void;
 
   /** Add a grayscale operation
    * @param {number} value
    */
-  grayscale(value: number): void;
+  grayscale(value?: number): void;
 
   /** Add a luminanceToAlpha operation
    * @param {*} options
    *  @param {number} options.gamma enhance gamma, default 0
    */
-  luminanceToAlpha(options: any): void;
+  luminanceToAlpha(options?: { gamma?: number }): void;
 
-  applyTo(img: any): HTMLElement;
+  /** Draw an image through the filter into a new canvas. */
+  applyTo(img: HTMLImageElement | HTMLCanvasElement | ImageBitmap): HTMLCanvasElement;
 
   NS: string
 
-  svg: any
+  svg: SVGSVGElement
+
+  element: SVGElement
 }

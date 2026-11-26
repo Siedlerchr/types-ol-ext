@@ -1,37 +1,29 @@
 import type { Map as _ol_Map_ } from 'ol'
 import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
-import type { Layer } from 'ol/layer'
+import type Layer from 'ol/layer/Base'
 import type LayerGroup from 'ol/layer/Group'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Types } from 'ol/ObjectEventType'
 
-type LayerSwitcherOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+export type LayerSwitcherOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'drawlist' | 'layer:visible' | 'layer:opacity', LayerSwitcherEvent, Return> &
-  OnSignature<Types | 'toggle', ToggleEvent, Return> &
-  OnSignature<Types | 'reorder-start' | 'reorder-end', LayerSwitcherReorderEvent, Return> &
-  CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'drawlist' | 'layer:visible' | 'layer:opacity' | 'toggle' | 'reroder-start' | 'reroder-end', Return>;
-
-export enum LayerSwitcherEventType {
-  DRAWLIST = 'drawlist',
-  LAYERVISIBLE = 'layer:visible',
-  LAYEROPACITY = 'layer:opacity',
-}
-
-export enum ToggleEventType {
-  TOGGLE = 'toggle',
-}
-
-export enum LayerSwitcherReorderEventType {
-  REODERSTART = 'reoder-start',
-  REORDEREND = 'reorder-end',
-}
+  OnSignature<'drawlist', LayerSwitcherDrawEvent, Return> &
+  OnSignature<'layer:visible' | 'layer:opacity' | 'info' | 'extent' | 'select', LayerSwitcherEvent, Return> &
+  OnSignature<'toggle', ToggleEvent, Return> &
+  OnSignature<'reorder-start' | 'reorder-end', LayerSwitcherReorderEvent, Return> &
+  OnSignature<'layer:keydown', LayerSwitcherKeyEvent, Return> &
+  CombinedOnSignature<Types | EventTypes | 'change' | 'error' | 'propertychange' | 'drawlist' | 'layer:visible' | 'layer:opacity' | 'info' | 'extent' | 'select' | 'toggle' | 'reorder-start' | 'reorder-end' | 'layer:keydown', Return>;
 
 export interface Options extends ControlOptions {
+  selection?: boolean;
+  switcherClass?: string;
+  counter?: boolean;
+  minibar?: boolean;
+  onextent?: (layer: Layer) => void;
   displayInLayerSwitcher?: (layer: Layer) => boolean;
   show_progress?: boolean;
   mouseover?: boolean;
@@ -104,7 +96,7 @@ export default class LayerSwitcher extends ol_control_Control {
    * Set the map instance the control is associated with.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Show control
    */
@@ -139,7 +131,7 @@ export default class LayerSwitcher extends ol_control_Control {
    * @param {ol.layer.Layer} layer
    * @api
    */
-  selectLayer(layer: Layer, silent?: boolean): void;
+  selectLayer(layer?: Layer, silent?: boolean): void;
 
   /**
    *  Draw the panel control (prevent multiple draw due to layers manipulation on the map with a delay function)
@@ -149,7 +141,7 @@ export default class LayerSwitcher extends ol_control_Control {
   /** Get selected layer
    * @returns {ol.layer.Layer}
    */
-  getSelection(): Layer;
+  getSelection(): Layer | undefined;
 
   /** Get control panel
    * @api
@@ -162,6 +154,8 @@ export default class LayerSwitcher extends ol_control_Control {
    * @api
    */
   setLayerVisibility(layer: Layer, li: Element): void;
+
+  setLayerOpacity(layer: Layer, li: Element): void;
 
   /** Render a list of layer
    * @param {Elemen} element to render
@@ -177,24 +171,17 @@ export default class LayerSwitcher extends ol_control_Control {
   un: LayerSwitcherOnSignature<void>
 }
 
-export class ToggleEvent extends BaseEvent {
-  constructor(type: ToggleEventType, collapsed: boolean);
-
-  collapsed: boolean
+export interface ToggleEvent extends BaseEvent { type: 'toggle'; collapsed: boolean }
+export interface LayerSwitcherEvent extends BaseEvent {
+  type: 'layer:visible' | 'layer:opacity' | 'info' | 'extent' | 'select';
+  layer: Layer | undefined;
 }
-
-export class LayerSwitcherEvent extends BaseEvent {
-  constructor(type: LayerSwitcherEventType, layer?: Layer, li?: Text | HTMLElement);
-
-  layer: Layer
-
-  li?: Text | HTMLElement
+export interface LayerSwitcherDrawEvent extends BaseEvent { type: 'drawlist'; layer: Layer; li: HTMLElement }
+export interface LayerSwitcherReorderEvent extends BaseEvent {
+  type: 'reorder-start' | 'reorder-end';
+  layer: Layer;
+  group?: Layer | null;
 }
-
-export class LayerSwitcherReorderEvent extends BaseEvent {
-  constructor(type: LayerSwitcherReorderEventType, layer: Layer, group: LayerGroup);
-
-  layer: Layer
-
-  group: LayerGroup
+export interface LayerSwitcherKeyEvent extends BaseEvent {
+  type: 'layer:keydown'; key: string; group: Layer | null; li: HTMLElement; layer: Layer; originalEvent: KeyboardEvent;
 }

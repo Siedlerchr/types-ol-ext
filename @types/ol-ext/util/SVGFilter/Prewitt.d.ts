@@ -1,6 +1,7 @@
 import SVGFilter from '../SVGFilter'
 
 export interface Options {
+  id?: string;
   grayscale?: boolean;
   alpha?: boolean;
 }

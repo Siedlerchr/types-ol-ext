@@ -1,12 +1,16 @@
 import type Feature from 'ol/Feature'
 import type { LineString } from 'ol/geom'
 import type { FeatureAnimationEvent, Options as FeatureAnimationOptions } from './FeatureAnimation'
-import { FeatureAnimation } from './FeatureAnimation'
+import FeatureAnimation from './FeatureAnimation'
 
+/** Options for animating a feature along a line. */
 export interface Options extends FeatureAnimationOptions {
+  /** Speed used to derive duration; zero uses the configured duration. */
   speed?: number;
+  /** Whether to rotate the symbol, or its initial rotation in radians. */
   rotate?: number | boolean;
-  path?: LineString | Feature;
+  /** Line or line feature to follow. */
+  path: LineString | Feature<LineString>;
   duration?: number;
 }
 
@@ -23,7 +27,7 @@ export default class Path extends FeatureAnimation {
    *  @param {LineString|Feature} options.path the path to follow
    *  @param {Number} options.duration duration of the animation in ms
    */
-  constructor(options?: Options)
+  constructor(options: Options)
 
   /** Animate
    * @param {FeatureAnimationEvent} e

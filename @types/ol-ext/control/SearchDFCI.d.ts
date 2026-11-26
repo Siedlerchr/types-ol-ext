@@ -1,8 +1,13 @@
-import type Feature from 'ol/Feature'
+import type { Coordinate } from 'ol/coordinate'
 import type { Options as SearchOptions } from './Search'
 import Search from './Search'
 
-export interface Options extends SearchOptions {
+export interface DFCIResult {
+  coordinate: Coordinate;
+  name: string;
+}
+
+export interface Options extends SearchOptions<DFCIResult> {
   className?: string;
   title?: string;
   label?: string;
@@ -13,8 +18,6 @@ export interface Options extends SearchOptions {
   maxItems?: number;
   url?: string;
   position?: boolean;
-  getTitle?: (f: Feature) => string;
-  getSearchString?: (f: Feature) => string;
 }
 
 /**
@@ -24,7 +27,7 @@ export interface Options extends SearchOptions {
  * @extends {ol_control_Search}
  * @fires select
  */
-export default class SearchDFCI extends Search {
+export default class SearchDFCI extends Search<DFCIResult> {
   /**
    * @param {Object=} Control options.
    *  @param {string} options.className control class name
@@ -40,4 +43,7 @@ export default class SearchDFCI extends Search {
    *  @param {function | undefined} options.getSearchString a function that take a feature and return a text to be used as search string, default geTitle() is used as search string
    */
   constructor(options?: Options);
+
+  /** Autocomplete a DFCI grid code. */
+  autocomplete(s: string): DFCIResult[];
 }

@@ -3,18 +3,17 @@ import type Collection from 'ol/Collection'
 import type { Coordinate } from 'ol/coordinate'
 import type Feature from 'ol/Feature'
 import type { Style } from 'ol/style'
-import type { Draw, Modify } from 'ol/interaction'
+import type { Draw } from 'ol/interaction'
 import { Interaction } from 'ol/interaction'
 import type VectorImageLayer from 'ol/layer/VectorImage'
 import type VectorLayer from 'ol/layer/Vector'
-import type VectorSource from 'ol/source/Vector'
-import type { Geometry } from 'ol/geom'
+import type ModifyFeature from './ModifyFeature'
 
 export interface Options {
   pixelTolerance?: number;
   enableInitialGuides?: boolean;
   style?: Style | Style[];
-  vectorClass?: VectorLayer<VectorSource<Feature<Geometry>>> | VectorImageLayer<VectorSource<Feature<Geometry>>>;
+  vectorClass?: typeof VectorLayer | typeof VectorImageLayer;
 }
 
 /** Interaction to snap to guidelines
@@ -30,7 +29,7 @@ export default class SnapGuides extends Interaction {
    *  @param {ol_style_Style | Array<ol_style_Style> | undefined} options.style Style for the sektch features.
    *  @param {*} options.vectorClass a vector layer class to create the guides with ol6, use ol/layer/VectorImage using ol6
    */
-  constructor(options: Options);
+  constructor(options?: Options);
 
   /**
    * Remove the interaction from its current map, if any,  and attach it to a new
@@ -38,7 +37,7 @@ export default class SnapGuides extends Interaction {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Activate or deactivate the interaction.
    * @param {boolean} active
@@ -59,13 +58,13 @@ export default class SnapGuides extends Interaction {
    * @param {Array<Coordinate>} v the direction vector
    * @return {Feature} feature guide
    */
-  addGuide(v: Coordinate[], ortho: boolean): Feature;
+  addGuide(v: [Coordinate, Coordinate], ortho?: boolean): Feature[];
 
   /** Add a new orthogonal guide to snap to
    * @param {Array<Coordinate>} v the direction vector
    * @return {Feature} feature guide
    */
-  addOrthoGuide(v: Coordinate[]): Feature;
+  addOrthoGuide(v: [Coordinate, Coordinate]): Feature[];
 
   /** Listen to draw event to add orthogonal guidelines on the first and last point.
    * @param {_ol_interaction_Draw_} drawi a draw interaction to listen to
@@ -74,8 +73,8 @@ export default class SnapGuides extends Interaction {
   setDrawInteraction(drawi: Draw): void;
 
   /** Listen to modify event to add orthogonal guidelines relative to the currently dragged point
-   * @param {_ol_interaction_Modify_} modifyi a modify interaction to listen to
+   * @param {ModifyFeature} modifyi a modify interaction to listen to
    * @api
    */
-  setModifyInteraction(modifyi: Modify): void;
+  setModifyInteraction(modifyi: ModifyFeature): void;
 }

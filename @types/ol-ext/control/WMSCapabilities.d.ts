@@ -5,18 +5,30 @@ import type { Extent } from 'ol/extent'
 import type TileSource from 'ol/source/Tile'
 import type Dialog from './Dialog'
 import Button from './Button'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
+
+export interface CapabilitiesEvent extends BaseEvent { type: 'capabilities'; capabilities?: any }
+export interface CapabilitiesLoadEvent<Result = ReturnCapabilitiesOptions> extends BaseEvent { type: 'load'; layer?: TileLayer<TileSource>; options?: Result; error?: boolean }
+export type CapabilitiesOnSignature<Return, Result = ReturnCapabilitiesOptions> = OnSignature<EventTypes, BaseEvent, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'capabilities', CapabilitiesEvent, Return> & OnSignature<'load', CapabilitiesLoadEvent<Result>, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'capabilities' | 'load', Return>
 
 export interface Capabilities {
   map?: string;
   version?: string;
   timeout?: number;
-  onLoad?: () => void;
+  onload?: (capabilities: any) => void;
 }
 
 export interface ReturnCapabilitiesOptions {
   layer: {
     title: string;
-    extent: Extent;
+    extent: Extent | undefined;
     queryable: any;
     abstract: any;
     minResolution: number;
@@ -24,8 +36,8 @@ export interface ReturnCapabilitiesOptions {
   };
   source: {
     url: string;
-    srs: string;
-    attribution: string[];
+    projection: string;
+    attributions: string[];
     crossOrigin: string | null;
     params: {
       LAYERS: string;
@@ -38,7 +50,7 @@ export interface ReturnCapabilitiesOptions {
     abstract: any;
     logo: string | undefined;
     keyword: any;
-    legend: string;
+    legend: string[];
     opaque: boolean;
     queryable: boolean;
   };
@@ -50,12 +62,16 @@ export interface Options extends ControlOptions {
   title?: string;
   searchLabel?: string;
   loadLabel?: string;
+  previewLabel?: string;
+  className?: string;
   srs?: string[];
   timeout?: number;
   cors?: boolean;
   optional?: string;
   trace?: boolean;
   services?: { [key: string]: string };
+  authentication?: string;
+  onselect?: (layer: TileLayer<TileSource> | undefined, options: ReturnCapabilitiesOptions | undefined) => void;
 }
 
 /** WMSCapabilities
@@ -64,7 +80,7 @@ export interface Options extends ControlOptions {
  * @fires capabilities
  * @extends {ol_control_Button}
  */
-export default class WMSCapabilities extends Button {
+export default class WMSCapabilities<Result = ReturnCapabilitiesOptions, Created = TileLayer<TileSource>> extends Button {
   /**
    * @param {*} options
    *  @param {string|Element} [options.target] the target to set the dialog, use document.body to have fullwindow dialog
@@ -82,17 +98,21 @@ export default class WMSCapabilities extends Button {
    */
   constructor(options?: Options);
 
+  on: CapabilitiesOnSignature<EventsKey, Result>;
+  once: CapabilitiesOnSignature<EventsKey, Result>;
+  un: CapabilitiesOnSignature<void, Result>;
+
   /** Create a new layer using options received by getOptionsFromCap method
    * @param {*} options
    */
-  getLayerFromOptions(options: ReturnCapabilitiesOptions): TileLayer<TileSource>;
+  getLayerFromOptions(options: Result): Created;
 
   /**
    * Set the map instance the control is associated with
    * and add its controls associated to this map.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Get the dialog
    * @returns {ol_control_Dialog}
@@ -124,7 +144,7 @@ export default class WMSCapabilities extends Button {
    * @param {string} layername
    * @param {function} [onload] callback function (or listen to 'load' event)
    */
-  loadLayer(url: string, layerName: string, onload: () => void): void;
+  loadLayer(url: string, layerName: string, onload?: (result: { layer: TileLayer<TileSource>; options: Result }) => void): void;
 
   /** Clear form
    */
@@ -133,7 +153,13 @@ export default class WMSCapabilities extends Button {
   /** Display capabilities in the dialog
    * @param {*} caps JSON capabilities
    */
-  showCapabilitis(caps: any): void;
+  showCapabilities(caps: any): void;
+
+  /** Get the service capabilities request parameters. */
+  getRequestParam(options: { version?: string }): { SERVICE: 'WMS' | 'WMTS'; REQUEST: 'GetCapabilities'; VERSION: string };
+
+  /** Display an error, or clear the displayed error when omitted. */
+  showError(event?: { type: string } | null): void;
 
   /** Test url and return true if it is a valid url string
    * @param {string} url
@@ -147,7 +173,7 @@ export default class WMSCapabilities extends Button {
    * @param {*} parent capabilities
    * @return {*} options
    */
-  getOptionsFromCap(caps: any, parent: any): ReturnCapabilitiesOptions;
+  getOptionsFromCap(caps: any, parent: any): Result;
 
   /** Error list: a key/value list of error to display in the dialog
    * Overwrite it to handle internationalization
@@ -156,7 +182,8 @@ export default class WMSCapabilities extends Button {
     load: string;
     badUrl: string;
     TileMatrix: string;
-    srs: string;
+    noLayer: string;
+    projection: string;
   }
 
   /** Form labels: a key/value list of form labels to display in the dialog

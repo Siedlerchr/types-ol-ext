@@ -1,12 +1,31 @@
 import type { Options as SearchJsonOptions } from './SearchJSON'
 import SearchJSON from './SearchJSON'
+import type { Coordinate } from 'ol/coordinate'
+import type { Extent } from 'ol/extent'
 
 export type AddressType = 'StreetAddress' | 'PositionOfInterest' | 'CadastralParcel' | 'Commune'
 
-export interface Options extends SearchJsonOptions {
+/** A completion or reverse-geocoding result from Geoportail. */
+export interface GeoportailResult {
+  fulltext: string;
+  x?: string | number;
+  y?: string | number;
+  insee?: string;
+  districtcode?: string;
+  city?: string;
+  zipcode?: string;
+  [key: string]: unknown;
+}
+
+export interface GeoportailResponse {
+  results: GeoportailResult[];
+  [key: string]: unknown;
+}
+
+export interface Options extends SearchJsonOptions<GeoportailResult, GeoportailResponse> {
   className?: string;
   apiKey?: string;
-  version?: string;
+  version?: string | number;
   authentication?: string;
   label?: string;
   reverse?: boolean;
@@ -16,6 +35,10 @@ export interface Options extends SearchJsonOptions {
   maxItems?: number;
   type?: AddressType;
   terr?: 'METROPOLE' | 'DOMTOM' | string;
+  position?: boolean;
+  bbox?: Extent;
+  useExtent?: boolean;
+  timeout?: number;
 }
 
 /**
@@ -27,7 +50,7 @@ export interface Options extends SearchJsonOptions {
 
  * @see {@link https://geoservices.ign.fr/documentation/geoservices/geocodage.html}
  */
-export default class SearchGeoportail extends SearchJSON {
+export default class SearchGeoportail extends SearchJSON<GeoportailResult, GeoportailResponse> {
   /**
    * @param {any} options extend ol.control.SearchJSON options
    *  @param {string} options.className control class name
@@ -50,19 +73,12 @@ export default class SearchGeoportail extends SearchJSON {
  */
   constructor(options?: Options);
 
-  /** Send an ajax request (GET)
-   * @param {string} url
-   * @param {function} onsuccess callback
-   * @param {function} onerror callback
-   */
-  ajax(url: string, onsuccess: (...params: any[]) => any, onerror: (...params: any[]) => any): void;
-
   /**
    * @param {string} s the search string
    * @return {Object} request data (as key:value)
    * @api
    */
-  requestData(s: string): { [key: string]: any };
+  requestData(s: string): { text: string; type: string; terr?: string; maximumResponses: number; poiType?: string; lonlat?: string; bbox?: string };
 
   /**
    * Handle server response to pass the features array to the display list
@@ -70,5 +86,11 @@ export default class SearchGeoportail extends SearchJSON {
    * @return {Array<any>} an array of feature
    * @api
    */
-  handleResponse(response: any): any[];
+  handleResponse(response: GeoportailResponse): GeoportailResult[];
+
+  /** Search for the commune associated with a result and optionally receive it. */
+  searchCommune(result: GeoportailResult, callback?: (results: GeoportailResult[]) => void): void;
+
+  /** Reverse geocode a coordinate, or pass options through to the select event. */
+  reverseGeocode(coord: Coordinate, options?: ((results: GeoportailResult[]) => void) | Record<string, unknown>): void;
 }

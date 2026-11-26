@@ -1,14 +1,15 @@
 import Base from './Base'
+import type { Options as BaseOptions } from './Base'
 
-export interface FilterPencilSketchOptions {
+export interface FilterPencilSketchOptions extends BaseOptions {
   /**
    * blur value in pixel, default 8
    */
-  blur: number;
+  blur?: number;
   /**
    * intensity value [0,1], default .8
    */
-  value: number;
+  intensity?: number;
 }
 
 /** @typedef {Object} FilterPencilSketchOptions

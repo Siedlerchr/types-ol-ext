@@ -1,20 +1,3 @@
-declare namespace ext {
-  /** Ajax request
-   * @fires success
-   * @fires error
-   * @param {*} options
-   *  @param {string} options.auth Authorisation as btoa("username:password");
-   *  @param {string} options.dataType The type of data that you're expecting back from the server, default JSON
-   */
-  function Ajax(options: {
-    auth: string;
-    dataType: string;
-  }): void;
-
-  /** Vanilla JS helper to manipulate DOM without jQuery
-   * @see https://github.com/nefe/You-Dont-Need-jQuery
-   * @see https://plainjs.com/javascript/
-   * @see http://youmightnotneedjquery.com/
-   */
-  var element: any
-}
+/** Replace a constructor's prototype with an object inheriting from the parent. */
+export function ol_ext_inherits(child: Function, parent: Function): void;
+export default ol_ext_inherits

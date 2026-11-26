@@ -2,18 +2,18 @@ import type { Coordinate } from 'ol/coordinate'
 import type Feature from 'ol/Feature'
 import type { Type as GeometryType } from 'ol/geom/Geometry'
 import type Geometry from 'ol/geom/Geometry'
-// TODO fix it
-// eslint-disable-next-line import/no-duplicates
-import type Polygon from './Scribble'
-// eslint-disable-next-line import/no-duplicates
-import type MultiPolygon from './Scribble'
+import type { Extent } from 'ol/extent'
+import type Polygon from 'ol/geom/Polygon'
+import type MultiPolygon from 'ol/geom/MultiPolygon'
+import type LineString from 'ol/geom/LineString'
+import type MultiLineString from 'ol/geom/MultiLineString'
 
 /** Create a geometry given a type and coordinates
  * @param {ol.geom.GeometryType} type the geometry type
  * @param {ol.Coordinate[]|number[]} coordinates the geometry coordinates
  * @return {ol.geom.Geometry} the geometry
  */
-export function ol_geom_createFromType(type: GeometryType, coordinates: Coordinate[] | number[]): GeometryType;
+export function ol_geom_createFromType(type: GeometryType | 'LinearRing', coordinates: Coordinate | Coordinate[] | Coordinate[][] | Coordinate[][][]): Geometry | null;
 
 /** Distance beetween 2 points
  *  Useful geometric functions
@@ -41,7 +41,7 @@ export function ol_coordinate_getFeatureCenter(f: Feature): Coordinate;
  * @param {Feature} geom
  * @return {Coordinate} the center
  */
-export function ol_coordinate_getGeomCenter(geom: Feature): Coordinate;
+export function ol_coordinate_getGeomCenter(geom: Geometry): Coordinate;
 
 /** Offset a polyline
  * @param {Array<Coordinate>} coords
@@ -57,7 +57,14 @@ export function ol_coordinate_offsetCoords(coords: Coordinate[], offset: number)
  * @param {Array<Coordinate>} coords
  * @return {} the index (-1 if not found) and the segment
  */
-export function ol_coordinate_findSegment(pt: Coordinate, coords: Coordinate[]): { index: number; coords: number[] };
+export function ol_coordinate_findSegment(pt: Coordinate, coords: Coordinate[]): { index: number; segment?: [Coordinate, Coordinate] };
+
+export interface HorizontalIntersection {
+  contour: number;
+  index: number;
+  pt: Coordinate;
+  abs: number;
+}
 
 /**
  * Split a Polygon geom with horizontal lines
@@ -66,7 +73,33 @@ export function ol_coordinate_findSegment(pt: Coordinate, coords: Coordinate[]):
  * @param {number} n contour index
  * @return {Array<Array<Coordinate>>}
  */
-export function ol_coordinate_splitH(geom: Coordinate[], y: number, n: number): Coordinate[][];
+export function ol_coordinate_splitH(geom: Coordinate[], y: number, n: number): [HorizontalIntersection, HorizontalIntersection][];
+
+/** Intersect two infinite lines; returns false when parallel. */
+export function ol_coordinate_getIntersectionPoint(first: [Coordinate, Coordinate], second: [Coordinate, Coordinate]): Coordinate | false;
+
+/** Intersect a polygon with an extent. */
+export function ol_extent_intersection(extent: Extent, polygon: Polygon): Polygon;
+export function ol_extent_intersection(extent: Extent, polygon: MultiPolygon): MultiPolygon;
+export function ol_extent_intersection(extent: Extent, geometry: Geometry): Polygon | MultiPolygon | null;
+export { ol_extent_intersection as extentIntersection }
+
+/** Add points along a segment, optionally excluding the starting point. */
+export function ol_coordinate_sampleAt(first: Coordinate, second: Coordinate, distance: number, start?: boolean): Coordinate[];
+
+declare module 'ol/geom/LineString' {
+  export default interface LineString {
+    /** Sample a line at a distance. */
+    sampleAt(distance: number): LineString;
+  }
+}
+
+declare module 'ol/geom/MultiLineString' {
+  export default interface MultiLineString {
+    /** Sample a multiline at a distance. */
+    sampleAt(distance: number): MultiLineString;
+  }
+}
 
 declare module 'ol/geom/Circle' {
   export default interface Circle {
@@ -85,7 +118,7 @@ declare module 'ol/geom/Polygon' {
      * @param {number} d
      * @returns {Polygon}
      */
-    sampleAt(d: number): typeof Polygon;
+    sampleAt(d: number): Polygon;
   }
 }
 declare module 'ol/geom/MultiPolygon' {
@@ -94,6 +127,6 @@ declare module 'ol/geom/MultiPolygon' {
      * @param {number} d
      * @returns {MultiPolygon}
      */
-    sampleAt(d: number): typeof MultiPolygon;
+    sampleAt(d: number): MultiPolygon;
   }
 }

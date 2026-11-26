@@ -7,10 +7,11 @@ export interface Options extends SelectOptions {
   className?: string;
   source?: VectorSource | VectorSource[];
   property?: string;
+  label?: string;
   max?: number;
-  selectAll?: number;
+  selectAll?: boolean;
   defaultLabel?: string;
-  onchoice: () => void;
+  onchoice?: () => void;
 }
 
 /**
@@ -39,10 +40,10 @@ export default class SelectPopup extends SelectBase {
    * Set the map instance the control associated with.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /**
    * @param {Object} values a key/value list with key = property value, value = title shown in the popup, default search values in the sources
    */
-  setValues(values: { [key: string]: any }): void;
+  setValues(options?: { values?: string[] | Record<string, string>; sort?: boolean }): void;
 }

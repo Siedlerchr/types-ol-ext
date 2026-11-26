@@ -10,7 +10,7 @@ declare module 'ol/Map' {
     /** Remove a filter to a Map
      *  @param {filter}
      */
-    removeFilter(filter: Base): void;
+    removeFilter(filter?: Base): void;
 
     /** Get filters associated with a Map
      *  @return {Array<filter>}
@@ -19,8 +19,8 @@ declare module 'ol/Map' {
   }
 }
 
-declare module 'ol/layer/Layer' {
-  export default interface Layer {
+declare module 'ol/layer/Base' {
+  export default interface BaseLayer {
     /** Add a filter to an ol.Layer
      *  @param {filter}
      */
@@ -29,7 +29,7 @@ declare module 'ol/layer/Layer' {
     /** Remove a filter to an ol.Layer
      *  @param {filter}
      */
-    removeFilter(filter: Base): void;
+    removeFilter(filter?: Base): void;
 
     /** Get filters associated with an ol.Layer
      *  @return {Array<filter>}
@@ -37,6 +37,9 @@ declare module 'ol/layer/Layer' {
     getFilters(): Base[];
   }
 }
+
+/** Empty filter namespace exported by the release. */
+export const ol_filter: Record<string, unknown>
 
 /** Filters are effects that render over a map or a layer.
  * Use the map methods to add or remove filter on a map

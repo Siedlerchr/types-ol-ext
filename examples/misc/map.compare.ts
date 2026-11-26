@@ -157,7 +157,8 @@ function setMode(mode: string) {
 // Check click and dispatch to map
 map2.on('click', e => {
   if (/swipe/.test(currentMode)) {
-    if (!containsCoordinate(swipe.getRectangle(), e.pixel)) {
+    const rectangle = swipe.getRectangle()
+    if (rectangle && !containsCoordinate(rectangle, e.pixel)) {
       // Simulate map1 selection
       e.map = map
       e.stopPropagation()

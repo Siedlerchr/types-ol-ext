@@ -1,8 +1,22 @@
 import type { MapOptions } from 'ol/Map'
 import Map from 'ol/Map'
 import type { Condition } from 'ol/events/condition'
+import type { Coordinate } from 'ol/coordinate'
+import type { Pixel } from 'ol/pixel'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { OnSignature } from 'ol/Observable'
+
+export interface PerspectiveChangeEvent extends BaseEvent {
+  type: 'change:perspective';
+  angle: number;
+  animating: boolean;
+}
 
 export interface Options extends MapOptions {
+  /** Container element or its ID. */
+  target: HTMLElement | string;
+  /** Condition enabling pointer-driven tilt. */
   tiltCondition?: Condition;
 }
 
@@ -13,11 +27,17 @@ export interface Options extends MapOptions {
 
  */
 export default class PerspectiveMap extends Map {
+  on: Map['on'] & OnSignature<'change:perspective', PerspectiveChangeEvent, EventsKey>
+
+  once: Map['once'] & OnSignature<'change:perspective', PerspectiveChangeEvent, EventsKey>
+
+  un: Map['un'] & OnSignature<'change:perspective', PerspectiveChangeEvent, void>
+
   /**
    * @param {olx.MapOptions=} options
    *  @param {ol.events.condition} tiltCondition , default altKeyOnly
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /** Get pixel ratio for the map
    */
@@ -29,7 +49,7 @@ export default class PerspectiveMap extends Map {
    *  @param {number} options.duration The duration of the animation in milliseconds, default 500
    *  @param {function} options.easing The easing function used during the animation, defaults to ol.easing.inAndOut).
    */
-  setPerspective(angle?: number, options?: {
+  setPerspective(angle: number, options?: {
     duration?: number;
     easing?: ((p0: number) => number);
   }): void;
@@ -37,17 +57,17 @@ export default class PerspectiveMap extends Map {
   /** Get map full teansform matrix3D
    * @return {Array<Array<number>>}
    */
-  getMatrix3D(compute: any): number[][];
+  getMatrix3D(compute?: boolean): number[][];
 
   /** Get pixel at screen from coordinate.
    * The default getPixelFromCoordinate get pixel in the perspective.
    * @param {ol.coordinate} coord
    * @param {ol.pixel}
    */
-  getPixelScreenFromCoordinate(coord: any): number[];
+  getPixelScreenFromCoordinate(coord: Coordinate): Pixel;
 
   /** Not working...
    *
    */
-  getPixelFromPixelScreen(px: any): number[];
+  getPixelFromPixelScreen(px: Pixel): Pixel;
 }

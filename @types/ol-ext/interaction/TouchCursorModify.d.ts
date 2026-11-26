@@ -4,10 +4,11 @@ import type { InteractionOptions } from 'ol/interaction/Interaction'
 import type VectorSource from 'ol/source/Vector'
 import type { StyleLike } from 'ol/style/Style'
 import type ModifyFeature from './ModifyFeature'
-import { TouchCursor } from './TouchCursor'
+import TouchCursor from './TouchCursor'
 
 export interface Options extends InteractionOptions {
   className?: string;
+  anchor?: 'left' | 'center' | 'right';
   coordinate?: Coordinate;
   source?: VectorSource;
   sources?: VectorSource | VectorSource[];
@@ -44,7 +45,7 @@ export default class TouchCursorModify extends TouchCursor {
    * @param {_ol_Map_} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /**
    * Activate or deactivate the interaction.
@@ -53,7 +54,7 @@ export default class TouchCursorModify extends TouchCursor {
    * @observable
    * @api
    */
-  setActive(b: boolean, position: Coordinate | null): void;
+  setActive(b: boolean, position?: Coordinate | null): void;
 
   /**
    * Get the modify interaction.

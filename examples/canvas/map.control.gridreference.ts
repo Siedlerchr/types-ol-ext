@@ -26,10 +26,10 @@ const map = new Map({
 })
 
 // GeoJSON layer
-const vectorSource = new VectorSource({
+const vectorSource = new VectorSource<Feature>({
   url: '../data/fond_guerre.geojson',
   // projection: 'EPSG:3857',
-  format: new GeoJSON(),
+  format: new GeoJSON<Feature>(),
   attributions: [
     '&copy; <a href=\'https://data.culture.gouv.fr/explore/dataset/fonds-de-la-guerre-14-18-extrait-de-la-base-memoire\'>data.culture.gouv.fr</a>',
   ],

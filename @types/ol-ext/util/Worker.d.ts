@@ -5,8 +5,9 @@
  *  @param {function} [options.onMessage] a callback function to get worker result
  */
 export default class ol_ext_Worker {
-  constructor(mainFn: any, options: {
+  constructor(mainFn: (event: MessageEvent) => any, options: {
     onMessage: (callback: any) => void;
+    lib?: Record<string, (...args: any[]) => any>;
   });
 
   /** Terminate current worker and start a new one

@@ -2,19 +2,20 @@ import type { Options as ControlOptions } from 'ol/control/Control'
 import ol_control_Control from 'ol/control/Control'
 import type { Coordinate } from 'ol/coordinate'
 import type { EventsKey } from 'ol/events'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { ObjectEvent } from 'ol/Object'
 import type { Types } from 'ol/ObjectEventType'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 
-export type GeoBookmarkOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
+export type GeoBookmarkOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
   OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'add' | 'remove' | 'select', BookmarkEvent, Return> &
+  OnSignature<'add' | 'remove', BookmarkChangeEvent, Return> &
+  OnSignature<'select', BookmarkSelectEvent, Return> &
   CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'add' | 'remove' | 'select', Return>;
 
 export interface BookmarkContent {
   pos: number[];
-  zoom: number;
+  zoom?: number;
   permanent?: boolean;
   rot?: number;
 }
@@ -23,6 +24,7 @@ export type Bookmarks = { [key: string]: BookmarkContent }
 
 export interface Options extends ControlOptions {
   className?: string;
+  title?: string;
   placeholder?: string;
   deleteTitle?: string;
   editable?: boolean;
@@ -67,7 +69,7 @@ export default class GeoBookmark extends ol_control_Control {
     "London": {pos:_ol_proj_.transform([-0.1275,51.507222], 'EPSG:4326', 'EPSG:3857'), zoom:12}
   });
    */
-  setBookmarks(bmark: Bookmarks): void;
+  setBookmarks(bmark?: Bookmarks): void;
 
   /** Get Geo bookmarks
    * @return {any} a list of bookmarks : { BM1:{pos:Coordinates, zoom: number}, BM2:{pos:Coordinates, zoom: number} }
@@ -87,6 +89,8 @@ export default class GeoBookmark extends ol_control_Control {
    */
   addBookmark(name: string, position?: Coordinate, zoom?: number, permanent?: boolean): void;
 
+  addBookmark(name: string, options: { position: Coordinate; zoom?: number; rotation?: number; permanent?: boolean }): void;
+
   on: GeoBookmarkOnSignature<EventsKey>
 
   once: GeoBookmarkOnSignature<EventsKey>
@@ -94,15 +98,13 @@ export default class GeoBookmark extends ol_control_Control {
   un: GeoBookmarkOnSignature<void>
 }
 
-export class BookmarkEvent extends BaseEvent {
-  constructor(
-    // @ts-ignore TODO fix it
-    type: BookMarkEventType,
-    name: string,
-    bm?: BookmarkContent
-  );
-
-  name: string
-
-  bm?: BookmarkContent
+export interface BookmarkChangeEvent extends BaseEvent {
+  type: 'add' | 'remove';
+  name: string;
 }
+export interface BookmarkSelectEvent extends BaseEvent {
+  type: 'select';
+  name: string;
+  bookmark: BookmarkContent;
+}
+export type BookmarkEvent = BookmarkChangeEvent | BookmarkSelectEvent

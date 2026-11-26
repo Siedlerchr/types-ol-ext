@@ -2,15 +2,16 @@ import type Feature from 'ol/Feature'
 import { Style } from 'ol/style'
 import type { ColorLike } from 'ol/colorlike'
 import type { Size } from 'ol/size'
+import type { Options as StyleOptions } from 'ol/style/Style'
 
-export interface Options {
+export interface Options extends Pick<StyleOptions, 'stroke' | 'text' | 'zIndex' | 'geometry'> {
   visible?: boolean;
   width?: number | ((feature: Feature, step: number) => number);
   width2?: number;
   color?: ColorLike | ((feature: Feature, step: number) => ColorLike);
   color2?: ColorLike;
-  arrowClor?: ColorLike;
-  lineCap: CanvasLineCap;
+  arrowColor?: ColorLike;
+  lineCap?: CanvasLineCap;
   arrowSize?: number | Size;
   arrow?: number;
   noOverlap?: boolean;
@@ -58,7 +59,7 @@ export default class FlowLine extends Style {
   /** Set the LineCap
    * @param {string} cap LineCap (round or butt), default butt
    */
-  setLineCap(cap: 'round' | 'butt'): void;
+  setLineCap(cap?: CanvasLineCap): void;
 
   /** Get the current width at step
    * @param {feature} feature
@@ -70,17 +71,23 @@ export default class FlowLine extends Style {
   /** Set the initial color
    * @param {colorLike} color
    */
-  setColor(color: ColorLike): void;
+  setColor(color?: ColorLike): void;
 
   /** Set the final color
    * @param {colorLike} color
    */
-  setColor2(color: ColorLike): void;
+  setColor2(color?: ColorLike): void;
 
   /** Set the arrow color
    * @param {ol.colorLike} color
    */
-  setArrowColor(color: ColorLike): void;
+  setArrowColor(color?: ColorLike): void;
+
+  /** Get offset at the start (0) or end (1). */
+  getOffset(where: 0 | 1): number;
+  getOffset(where: number): number | undefined;
+  /** Add an offset at the start (0) or end (1). */
+  setOffset(width: number, where: number): void;
 
   getArrow(): number;
 

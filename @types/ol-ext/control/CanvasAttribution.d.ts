@@ -43,5 +43,5 @@ export default class CanvasAttribution extends Attribution {
    * @param {Map} map Map.
    * @api stable
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 }

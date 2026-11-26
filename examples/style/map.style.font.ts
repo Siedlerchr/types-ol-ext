@@ -137,9 +137,9 @@ function getStyle(feature: FeatureLike, resolution: number): Style | Style[] {
 }
 
 // GeoJSON layer
-const vectorSource = new VectorSource({
+const vectorSource = new VectorSource<Feature<Geometry>>({
   url: '../data/fond_guerre.geojson',
-  format: new GeoJSON({
+  format: new GeoJSON<Feature<Geometry>>({
     dataProjection: 'EPSG:4326',
     featureProjection: 'EPSG:3857',
   }),

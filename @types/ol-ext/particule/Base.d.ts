@@ -4,7 +4,7 @@ import type { Pixel } from 'ol/pixel'
 
 export interface Options {
   overlay?: Overlay;
-  pixel?: Pixel;
+  coordinate?: Pixel;
 }
 
 /** Abstract base class; normally only used for creating subclasses.
@@ -14,6 +14,7 @@ export interface Options {
 
  */
 export default class Base extends ol_Object {
+  coordinate: Pixel;
   /**
    * @param {*} options
    *  @param {ol.Overlay} options.overlay
@@ -24,12 +25,12 @@ export default class Base extends ol_Object {
   /** Set the particule overlay
    * @param {ol.Overlay} overl
    */
-  setOverlay(overlay: Overlay): void;
+  setOverlay(overlay?: Overlay): void;
 
   /** Get the particule overlay
    * @return {ol.Overlay}
    */
-  getOverlay(): Overlay;
+  getOverlay(): Overlay | undefined;
 
   /** Draw the particule
    * @param { CanvasRenderingContext2D } ctx
@@ -44,5 +45,5 @@ export default class Base extends ol_Object {
   /** Update the particule
    * @param {number} dt timelapes since last call
    */
-  getRandomCoord(dt: number): any;
+  getRandomCoord(dt: number): Pixel;
 }

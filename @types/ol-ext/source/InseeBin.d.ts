@@ -1,17 +1,12 @@
 import type { Coordinate } from 'ol/coordinate'
 import type { Extent } from 'ol/extent'
-import type { Point, Polygon } from 'ol/geom'
+import type { Polygon } from 'ol/geom'
 import type { ProjectionLike } from 'ol/proj'
-import type VectorSource from 'ol/source/Vector'
-import { Options as VectorSourceOptions } from 'ol/source/Vector'
-import type { Feature } from 'ol'
-import { BinBase } from './BinBase'
+import BinBase from './BinBase'
+import type { Options as BinBaseOptions } from './BinBase'
 
-export interface Options {
-  source: VectorSource;
+export interface Options extends BinBaseOptions {
   size?: number;
-  geometryFunction?: (f: Feature) => Point;
-  flatAttributes?: (bin: Feature, features: Feature[]) => void;
 }
 
 /** A source for INSEE grid
@@ -24,10 +19,10 @@ export default class InseeBin extends BinBase {
    * @param {Object} options VectorSourceOptions + grid option
    *  @param {VectorSource} options.source Source
    *  @param {number} [options.size] size of the grid in meter, default 200m
-   *  @param {(f: Feature) => Point} [options.geometryFunction] Function that takes an Feature as argument and returns an Point as feature's center.
+   *  @param {function} [options.geometryFunction] Function that returns the feature's center coordinate.
    *  @param {(bin: Feature, features: Array<Feature>)} [options.flatAttributes] Function takes a bin and the features it contains and aggragate the features in the bin attributes when saving
    */
-  constructor(options?: Options);
+  constructor(options: Options);
 
   /** Set grid size
    * @param {number} size
@@ -50,9 +45,5 @@ export default class InseeBin extends BinBase {
    * @param {ProjectionLike} proj
    * @return {Extent}
    */
-  getGridExtent(proj: ProjectionLike): Extent;
-
-  /** Overwrite Vector clear to fire clearstart / clearend event
-   */
-  clear(): void;
+  getGridExtent(proj?: ProjectionLike): Extent;
 }

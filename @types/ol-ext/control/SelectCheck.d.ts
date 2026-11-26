@@ -9,10 +9,11 @@ export interface Options extends SelectOptions {
   property?: string;
   label?: string;
   max?: number;
-  selectAll?: number;
-  type?: string;
-  defaultLabel?: number;
-  onchoice: () => void;
+  selectAll?: boolean;
+  type?: 'checkbox' | 'radio';
+  defaultLabel?: string;
+  values?: string[] | Record<string, string>;
+  onchoice?: () => void;
 }
 
 /**
@@ -43,15 +44,12 @@ export default class SelectCheck extends SelectBase {
    * Set the map instance the control associated with.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Set the popup values
    * @param {Object} options
    *  @param {Object} options.values a key/value list with key = property value, value = title shown in the popup, default search values in the sources
    *  @param {boolean} options.sort sort values
    */
-  setValues(options: {
-    values?: { [key: string]: any; }
-    sort?: boolean;
-  }): void;
+  setValues(options?: { values?: string[] | Record<string, string>; sort?: boolean }): void;
 }

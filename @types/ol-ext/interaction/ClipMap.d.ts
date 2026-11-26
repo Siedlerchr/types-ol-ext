@@ -1,7 +1,7 @@
-import type { Layer } from 'ol/layer'
 import { Pointer } from 'ol/interaction'
-import type MapBrowserEvent from 'ol/MapBrowserEvent'
+import type Map from 'ol/Map'
 import type { Pixel } from 'ol/pixel'
+import type { Coordinate } from 'ol/coordinate'
 
 export interface Options {
   radius?: number;
@@ -21,31 +21,22 @@ export default class ClipMap extends Pointer {
 
   /** Set the map > start postcompose
    */
-  setMap(): void;
+  setMap(map: Map | null): void;
 
   /** Set clip radius
    *  @param {number} radius
    */
   setRadius(radius: number): void;
 
-  /** Add a layer to clip
-   *  @param {layer|Array<layer>} layer to clip
-   */
-  addLayer(layer: Layer | Layer[]): void;
-
-  /** Remove all layers
-   */
-  removeLayers(): void;
-
-  /** Remove a layer to clip
-   *  @param {layer|Array<layer>} layer to clip
-   */
-  removeLayer(layer: Layer | Layer[]): void;
+  /** Get clip radius. */
+  getRadius(): number;
+  /** Get position of the clip. */
+  getPosition(): Coordinate | null;
 
   /** Set position of the clip
-   *  @param {Pixel|MapBrowserEvent<UIEvent>}
+   *  @param coordinate Position in map coordinates.
    */
-  setPosition(e: Pixel | MapBrowserEvent<UIEvent>): void;
+  setPosition(coordinate: Coordinate): void;
 
   /** Set position of the clip
    * @param {Pixel} pixel

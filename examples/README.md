@@ -1,5 +1,33 @@
 # Build and debug TypeScript ol-ext examples
 
+## Run TypeScript examples in a browser
+
+Install the root dependencies with `npm ci` and clone `ol-ext` into the repository
+root with its `v4.0.39` tag available locally. Python 3, Git, and `tar` are also required.
+Then run:
+
+```bash
+npm run serve-examples
+```
+
+Open one of the URLs printed by the command, for example
+<http://localhost:8765/examples/layer/map.source.contour.html>. Some examples
+require network access for maps or other external resources. Set `PORT` to use
+a different port, or `OL_EXT_TAG` to select another locally available upstream
+tag. Press Ctrl+C to stop. The command builds all ported TypeScript examples
+and serves copies of the upstream HTML and assets from a temporary directory;
+the upstream checkout remains untouched. It uses the locally installed ol-ext
+implementation. Examples without a corresponding HTML file or identifiable
+main script are reported and skipped.
+
+## Check example page loads
+
+With the example server running, obtain the Chrome DevTools CLI path from the
+IDE and run `python3 scripts/check-example-loads.py "<cli-path>"`. Use
+`--match <text>` to check a subset. The script checks page navigation and console
+errors; inspect external resource failures separately and test interactions as
+needed. It creates and closes its own browser page.
+
 ## Setup environment
 
 1. Clone this [types-ol-ext](https://github.com/Siedlerchr/types-ol-ext) git repository and install dependencies.
@@ -61,6 +89,14 @@
     - Currently, TypeScript ol-ext examples are a quite few.
 
 ## Port original JavaScript examples to TypeScript
+
+Run `python3 scripts/example-inventory.py` to list upstream HTML files without a
+matching TypeScript port and count inline scripts recognized by the local server.
+This inventory includes support and standalone pages, so each entry still needs
+review. The legacy `replace-examples` and `copy-examples` commands modify the
+upstream checkout or overwrite existing ports; use the temporary server above
+for normal development.
+
 
 1. Check still unported example in `./ol-ext/examples/**/*.html` which has `ol-ext` code.
 

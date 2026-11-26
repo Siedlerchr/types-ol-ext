@@ -1,6 +1,6 @@
 import { Interaction } from 'ol/interaction'
 import type { Map as _ol_Map_ } from 'ol'
-import BaseEvent from 'ol/events/Event'
+import type BaseEvent from 'ol/events/Event'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
@@ -12,6 +12,7 @@ type FocusMapOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'focus', Return>;
 
 /** An interaction to focus on the map on click. Usefull when using keyboard event on the map.
+ * @deprecated Use CurrentMap instead.
  * @constructor
  * @fires focus
  * @extends {Interaction}
@@ -19,7 +20,7 @@ type FocusMapOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
 export default class FocusMap extends Interaction {
   /** Set the map > add the focus button and focus on the map when pointerdown to enable keyboard events.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   on: FocusMapOnSignature<EventsKey>
 
@@ -28,6 +29,6 @@ export default class FocusMap extends Interaction {
   un: FocusMapOnSignature<void>
 }
 
-export class FocusEvent extends BaseEvent {
-  constructor(type: 'focus');
+export interface FocusEvent extends BaseEvent {
+  type: 'focus';
 }

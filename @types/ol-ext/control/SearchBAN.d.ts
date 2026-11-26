@@ -1,4 +1,3 @@
-import type Feature from 'ol/Feature'
 import type { Options as SearchOptions } from './SearchPhoton'
 import SearchPhoton from './SearchPhoton'
 
@@ -13,9 +12,11 @@ export interface Options extends SearchOptions {
   maxItems?: number;
   url?: string;
   position?: boolean;
-  getTitle?: (f: Feature) => string;
+  /** Restrict results to an INSEE commune code. */
   citycode?: string;
+  /** Restrict results to a postal code. */
   postcode?: string;
+  /** Restrict results to house numbers or streets. */
   type?: 'housenumber' | 'street';
 }
 

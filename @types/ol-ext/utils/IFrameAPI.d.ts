@@ -1,46 +1,20 @@
-/** IFrame API create an api and wait the target ready
- * @constructor
- */
+/** An iframe-side API that exchanges messages with its parent window. */
 export default class IFrameAPI {
-  /**
-   * @param {string} targetOrigin, default '*'
-   */
+  /** Create an API using the target origin for outgoing messages (default `*`). */
   constructor(targetOrigin?: string);
 
-  /** Add properties
-   * @param {string} key
-   * @param {*} value
-   */
-  set(key: string, value: any): void;
+  /** Store a local property. */
+  set(key: string, value: unknown): void;
 
-  /** Get properties
-   * @param {string} key
-   * @return {*}
-   */
-  get(key: string): any;
+  /** Read a local property, or undefined if it has not been stored. */
+  get(key: string): unknown;
 
-  /**
-   * @typedef {Object} TemplateAPI
-   * @property {string} name api name
-   * @property {function} function if return a Transferable it will be send to the iFrame
-   */
+  /** Register named handlers; returned values are sent to the parent. */
+  setAPI(api: Record<string, (data: any) => any>): void;
 
-  /**
-   * @typedef {Object} TemplateAPI
-   * @property {string} name api name
-   * @property {function} function if return a Transferable it will be send to the iFrame
-   */
-  /** Add functions to the API
-   * @param {Array<TemplateAPI>} list of functions to add to the api
-   *
-   */
-  setAPI(api: any[]): void;
+  /** Send a named message and structured-cloneable data to the parent. */
+  postMessage(name: string, data: unknown): void;
 
-  /** Post a message to the iframe
-   * @param {string} name api name
-   * @param {Transferable } data object to transfer to the iframe
-   */
-  postMessage(name: string, data: Transferable): void;
-
-  addListener(name: string, listener: any): void;
+  /** Register a listener; the message data is supplied as its `this` value. */
+  addListener(name: string, listener: (this: any) => void): void;
 }

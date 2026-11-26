@@ -1,16 +1,14 @@
-import type Attribution from 'ol/control/Attribution'
+import type Feature from 'ol/Feature'
 import { Vector as VectorSource } from 'ol/source'
-import type { LoadingStrategy } from 'ol/source/Vector'
+import type { Options as VectorOptions } from 'ol/source/Vector'
 
-export interface Options {
+export interface Options extends Omit<VectorOptions<Feature>, 'url' | 'loader'> {
   url?: string;
-  filter?: string[];
+  filter: string[];
   node?: boolean;
   way?: boolean;
   rel?: boolean;
   maxResolution?: number;
-  attributions?: string | Attribution | string[];
-  strategy?: LoadingStrategy;
 }
 
 /**
@@ -31,9 +29,5 @@ export default class Overpass extends VectorSource {
    *  @param {string|Attribution|Array<string>} options.attributions source attribution, default OSM attribution
    *  @param {LoadingStrategy} options.strategy loading strategy, default loadingstrategy.bbox
    */
-  constructor(options?: Options);
-
-  /** Overwrite Vector clear to fire clearstart / clearend event
-   */
-  clear(): void;
+  constructor(options: Options);
 }

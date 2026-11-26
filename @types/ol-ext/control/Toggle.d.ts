@@ -1,22 +1,47 @@
 import type { Map as _ol_Map_ } from 'ol'
 import type { Interaction } from 'ol/interaction'
-import type { Options as ControlOptions } from 'ol/control/Control'
+import type { Options as ButtonOptions } from './Button'
+import type BaseEvent from 'ol/events/Event'
+import type { EventsKey } from 'ol/events'
+import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
+import type { ObjectEvent } from 'ol/Object'
+import type { Types } from 'ol/ObjectEventType'
 import type Bar from './Bar'
 import Button from './Button'
 
-export interface Options extends ControlOptions {
+export interface Options extends ButtonOptions {
   className?: string;
   classButton?: string;
   title?: string;
-  html?: string;
+  html?: string | Element;
   interaction?: Interaction;
   active?: boolean;
   disable?: boolean;
   bar?: Bar;
   autoActive?: boolean;
+  autoActivate?: boolean;
+  toggleFn?: (active: boolean) => void;
   onToggle?: (active: boolean) => void;
   attributes?: { [key: string]: string };
 }
+
+export interface ToggleActiveEvent extends BaseEvent {
+  type: 'change:active';
+  key: 'active';
+  oldValue: boolean;
+  active: boolean;
+}
+export interface ToggleDisableEvent extends BaseEvent {
+  type: 'change:disable';
+  key: 'disable';
+  oldValue: boolean;
+  disable: boolean;
+}
+export type ToggleOnSignature<Return> = OnSignature<EventTypes, BaseEvent, Return> &
+  OnSignature<Types | 'change' | 'error' | 'propertychange', ObjectEvent, Return> &
+  OnSignature<'change:active', ToggleActiveEvent, Return> &
+  OnSignature<'change:disable', ToggleDisableEvent, Return> &
+  CombinedOnSignature<EventTypes | Types | 'change' | 'error' | 'propertychange' | 'change:active' | 'change:disable', Return>
 
 /** A simple toggle control
  * The control can be created with an interaction to control its activation.
@@ -43,29 +68,33 @@ export default class Toggle extends Button {
    */
   constructor(options?: Options);
 
+  on: ToggleOnSignature<EventsKey>;
+  once: ToggleOnSignature<EventsKey>;
+  un: ToggleOnSignature<void>;
+
   /**
    * Set the map instance the control is associated with
    * and add interaction attached to it to this map.
    * @param {_ol_Map_} map The map instance.
    */
-  setMap(map: _ol_Map_): void;
+  setMap(map: _ol_Map_ | null): void;
 
   /** Get the subbar associated with a control
    * @return {contrBar}
    */
-  getSubBar(): Bar;
+  getSubBar(): Bar | undefined;
 
   /** Set the subbar associated with a control
    * @param {ol_control_Bar} [bar] a subbar if none remove the current subbar
    */
-  setSubBar(bar: Bar): void
+  setSubBar(bar?: Bar): void
 
   /**
    * Test if the control is disabled.
    * @return {bool}.
    * @api stable
    */
-  getDisable(): boolean;
+  getDisable(): boolean | null;
 
   /** Disable the contr If disable, the control will be deactivated too.
    * @param {bool} b disable (or enable) the control, default false (enable)
@@ -96,5 +125,5 @@ export default class Toggle extends Button {
   /** Get the control interaction
    * @return {_ol_interaction_} interaction associated with the control
    */
-  getInteraction(): Interaction;
+  getInteraction(): Interaction | undefined;
 }

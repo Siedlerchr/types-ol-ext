@@ -1,74 +1,57 @@
 import type Collection from 'ol/Collection'
 import type { Coordinate } from 'ol/coordinate'
 import type Feature from 'ol/Feature'
-import type { Vector as VectorSource } from 'ol/source'
+import type VectorSource from 'ol/source/Vector'
 import { Interaction } from 'ol/interaction'
+import type BaseEvent from 'ol/events/Event'
 import type { EventsKey } from 'ol/events'
 import type { ObjectEvent } from 'ol/Object'
 import type { CombinedOnSignature, EventTypes, OnSignature } from 'ol/Observable'
 import type { Types } from 'ol/ObjectEventType'
-import type { SplitEvent } from './Split'
 
 type SplitterOnSignature<Return> = OnSignature<EventTypes, Event, Return> &
   OnSignature<Types | 'change' | 'change:active' | 'error' | 'propertychange', ObjectEvent, Return> &
-  OnSignature<Types | 'beforesplit' | 'aftersplit', SplitEvent, Return> &
+  OnSignature<'beforesplit', BeforeSplitEvent, Return> &
+  OnSignature<'aftersplit', AfterSplitEvent, Return> &
   CombinedOnSignature<Types | EventTypes | 'change' | 'change:active' | 'error' | 'propertychange' | 'beforesplit' | 'aftersplit', Return>
 
 export interface Options {
-  source?: VectorSource | VectorSource[];
+  /** Target source with spatial indexing enabled. */
+  source?: VectorSource;
+  /** Documented upstream, but ignored by the 4.0.39 constructor. */
   triggerSource?: VectorSource;
+  /** Features to split, used instead of the target source. */
   features?: Collection<Feature>;
-  filter?: (f: Feature) => boolean;
+  /** Features whose additions and changes trigger splits. */
+  triggerFeatures?: Collection<Feature>;
+  /** Documented upstream, but not applied by the 4.0.39 split implementation. */
+  filter?: (feature: Feature) => boolean;
   tolerance?: number;
-  alignTolerance: number;
+  alignTolerance?: number;
 }
 
-/** Interaction splitter: acts as a split feature agent while editing vector features (LineString).
- * @constructor
- * @extends {ol_interaction_Interaction}
- * @fires  beforesplit, aftersplit
- * @todo verify auto intersection on features that split.
- */
-export class Splitter extends Interaction {
-  /**
-   * @param {olx.interaction.SplitOptions} options
-   *  - source {ol.source.Vector|Array{ol.source.Vector}} The target source (or array of source) with features to be split (configured with useSpatialIndex set to true)
-   *  - triggerSource {ol.source.Vector} Any newly created or modified features from this source will be used to split features on the target source. If none is provided the target source is used instead.
-   *  - features {ol_Collection.<ol.Feature>} A collection of feature to be split (replace source target).
-   *  - triggerFeatures {ol_Collection.<ol.Feature>} Any newly created or modified features from this collection will be used to split features on the target source (replace triggerSource).
-   *  - filter {function|undefined} a filter that takes a feature and return true if the feature is eligible for splitting, default always split.
-   *  - tolerance {function|undefined} Distance between the calculated intersection and a vertex on the source geometry below which the existing vertex will be used for the split. Default is 1e-10.
-   * -  alignTolerance Tolerance to check allignment. Default is 1e-3.
+/** Interaction that splits line features while editing. */
+export default class Splitter extends Interaction {
+  constructor(options?: Options);
 
-  constructor(options: Options);
-
-  /** Calculate intersection on 2 segs
-   * @param {Array<Coordinate>} s1 first seg to intersect (2 points)
-   * @param {Array<Coordinate>} s2 second seg to intersect (2 points)
-   * @return { boolean | Coordinate } intersection point or false no intersection
-   */
-  intersectSegs(s1: Coordinate[], s2: Coordinate[]): boolean | Coordinate;
-
-  /** Split the source using a feature
-   * @param {Feature} feature The feature to use to split.
-   */
-  splitSource(feature: Feature): void;
-
-  /** New feature source is added
-   */
-  onAddFeature(): void;
-
-  /** Feature source is removed > count features added/removed
-   */
-  onRemoveFeature(): void;
-
-  /** Feature source is changing
-   */
-  onChangeFeature(): void;
+  /** Calculate the intersection of two segments, or false when they do not intersect. */
+  intersectSegs(first: [Coordinate, Coordinate], second: [Coordinate, Coordinate]): Coordinate | false;
 
   on: SplitterOnSignature<EventsKey>
-
   once: SplitterOnSignature<EventsKey>
-
   un: SplitterOnSignature<void>
+}
+
+/** The upstream payload spells the feature field `feaure`. */
+export interface BeforeSplitEvent extends BaseEvent {
+  type: 'beforesplit';
+  feaure: Feature;
+  source: VectorSource;
+}
+
+export interface AfterSplitEvent extends BaseEvent {
+  type: 'aftersplit';
+  featureAdded: Feature[];
+  featureRemoved: Feature[];
+  source: VectorSource;
 }

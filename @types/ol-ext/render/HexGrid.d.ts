@@ -96,13 +96,13 @@ export default class HexGrid extends Object {
   * @param {Coordinate} o offset coordinate
   * @return {Coordinate} cube coordinate
   */
-  offsetToCube(o: Coordinate): Coordinate
+  offset2cube(o: Coordinate): Coordinate
 
   /** Round cube coords
   * @param {Coordinate} h cube coordinate
   * @return {Coordinate} rounded cube coordinate
   */
-  cube_round(c: Coordinate, o: Coordinate, h: Coordinate): Coordinate;
+  cube_round(h: Coordinate): Coordinate;
 
   /** Round axial coords
    * @param {Coordinate} h axial coordinate
@@ -112,7 +112,7 @@ export default class HexGrid extends Object {
 
   /** Get hexagon corners
    */
-  hex_corner(): void;
+  hex_corner(center: Coordinate, size: number, index: number): Coordinate;
 
   /** Get hexagon coordinates at a coordinate
    * @param {Coordinate} coord
@@ -130,13 +130,13 @@ export default class HexGrid extends Object {
    * @param {hex} hex
    * @return {Coordinate}
    */
-  hex2coord(hex: Array<Coordinate>): Coordinate;
+  hex2coord(hex: Coordinate): Coordinate;
 
   /** Convert coord to hex
    * @param {Coordinate} coord
    * @return {hex}
    */
-  coord2hex(coord: Coordinate): Array<Coordinate>;
+  coord2hex(coord: Coordinate): Coordinate;
 
   /** Calculate distance between to hexagon (number of cube)
    * @param {Coordinate} a first cube coord
@@ -157,12 +157,14 @@ export default class HexGrid extends Object {
    * @param {number} direction
    * @return { Coordinate | Array<Coordinate> } neighbor || array of neighbors
    */
-  hex_neighbors(h: Coordinate, direction: number): Coordinate | Coordinate[];
+  hex_neighbors(h: Coordinate, direction: number): Coordinate;
+  hex_neighbors(h: Coordinate): Coordinate[];
 
   /** Get the neighbors for an hexagon
    * @param {Coordinate} c cube coord
    * @param {number} direction
    * @return { Coordinate | Array<Coordinate> } neighbor || array of neighbors
    */
-  cube_neighbors(c: Coordinate, direction: number): Coordinate | Coordinate[];
+  cube_neighbors(c: Coordinate, direction: number): Coordinate;
+  cube_neighbors(c: Coordinate): Coordinate[];
 }

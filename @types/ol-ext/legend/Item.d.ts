@@ -11,7 +11,7 @@ export type olLegendItemOptions = {
   /**
    * row title
    */
-  title: string;
+  title?: string;
   className?: string;
   /**
    * a feature to draw on the legend
@@ -74,9 +74,14 @@ export default class LegendItem extends BaseObject {
    */
   setTitle(title: string): void;
 
+  /** Set the item width, or use the default width when omitted. */
+  setWidth(width?: number): void;
+  /** Set the item height, or use the default height when omitted. */
+  setHeight(height?: number): void;
+
   /** Get element
    * @param {ol.size} size symbol size
    * @param {function} onclick
    */
-  getElement(size: Size, onclick: (callback: boolean) => void): HTMLElement | Text;
+  getElement(size: Size, onclick: (callback: boolean) => void): HTMLElement;
 }

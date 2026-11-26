@@ -1,4 +1,5 @@
 /** @type {Object<string, string>} A set of texture images */
-export var TextureImage: {
+declare const TextureImage: {
   [x: string]: string;
 }
+export default TextureImage

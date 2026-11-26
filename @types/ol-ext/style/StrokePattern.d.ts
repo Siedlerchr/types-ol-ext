@@ -1,10 +1,11 @@
 import type { Image, Fill } from 'ol/style'
 import { Stroke } from 'ol/style'
+import type { Options as StrokeOptions } from 'ol/style/Stroke'
 import type { ColorLike } from 'ol/colorlike'
 
-export interface Options {
+export interface Options extends Omit<StrokeOptions, 'offset'> {
   image?: Image;
-  opactiy?: number;
+  opacity?: number;
   pattern?: string;
   color?: ColorLike;
   fill?: Fill;
@@ -44,7 +45,7 @@ export default class StrokePattern extends Stroke {
    * Clones the style.
    * @return {style.StrokePattern}
    */
-  clone(): StrokePattern;
+  clone(): Stroke;
 
   /** Get canvas used as pattern
    *  @return {canvas}

@@ -4,7 +4,7 @@ import type { ProjectionLike } from 'ol/proj'
 
 export interface Options {
   dataProjection?: ProjectionLike;
-  featureProjetion?: ProjectionLike;
+  featureProjection?: ProjectionLike;
 }
 
 /** Feature format for reading data in the GeoRSS format.
@@ -31,7 +31,7 @@ export default class GeoRSS extends Object {
    * @return {ol.Feature} Feature or null if no feature read
    * @api
    */
-  readFeature(source: Node | string, options?: Options): Feature | null;
+  readFeature(source: Element, options?: Options): Feature | null;
 
   /**
    * Read all features.  Works with both a single feature and a feature
