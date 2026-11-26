@@ -65,3 +65,23 @@ need exercise. Type checks and lint passed.
   describe those members for the release. Print declarations cover
   the PDF flag carried by the print event and the legend flag on dialog
   output.
+
+## Release 4.0.39, round of 15 ports
+
+Chrome loaded the new LayerShop, editing, conversion, styling, and data-source
+pages. All 15 bundles loaded. The DBPedia and Wikimedia Commons font-loader
+correction passed a focused recheck, with the first navigation reporting
+only a missing local favicon. The inventory has 71 unmatched HTML files.
+The check covered startup. Drag-and-drop input, export output, and editing
+gestures remain outside this check. The server was stopped after the recheck.
+
+- The DBPedia and Commons pages load WebFont after the map script. Moving all
+  the page logic into a bundle exposed the ordering dependency. The ports
+  load the stylesheet and wait for the font before redrawing, with the old
+  inline callbacks removed when serving the ports.
+- The GeoJSONL example uses `ol.source.Stamen`, which is absent from
+  OpenLayers 10. The port uses OSM for the basemap and ol-ext's
+  `TextStreamReader` for the dropped GeoJSONL file.
+- The drag-and-drop example passed a checkbox's value to its style toggle.
+  The port reads its checked state and uses the current OpenLayers
+  `View.fit` options.

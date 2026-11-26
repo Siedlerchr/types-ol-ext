@@ -43,8 +43,10 @@ for (const example of examples) {
       if (/\/jspdf[/.]/i.test(attrs) && portSource.includes('from \'jspdf\'')) return ''
       if (/\/jspdf[/.]/i.test(attrs) && portSource.includes('/.shared/print')) return ''
       if (/FileSaver(?:\.min)?\.js/i.test(attrs) && portSource.includes('/.shared/download')) return ''
+      if (/\/webfont\.js/i.test(attrs) && portSource.includes('/.shared/font-awesome')) return ''
       return whole
     }
+    if (replaced && /WebFont\.load\(/.test(body) && portSource.includes('/.shared/font-awesome')) return ''
     if (/ol\.(?:Map|PerspectiveMap|ext)\b|ol\.layer\.Geoportail\.getCapabilities\(/.test(body)) {
       if (replaced) return ''
       replaced = true

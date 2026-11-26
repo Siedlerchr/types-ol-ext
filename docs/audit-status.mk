@@ -10,30 +10,24 @@ AUDIT_STATE := complete
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 # Load results and upstream issues are recorded in docs/ol-ext-example-ports.md.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := 24 canvas, interaction, layer and utility ports
-EXAMPLE_LOAD_CHECK := 24 new pages loaded in Chrome, with out-of-coverage tiles in the two-map print demo
+EXAMPLE_PORTS_LAST_ROUND := 15 editing, conversion, style and data-source ports
+EXAMPLE_LOAD_CHECK := all 15 new bundles loaded in Chrome after correcting font-loader order
 
 # Refresh the complete unmatched-page snapshot with:
 # python3 scripts/example-inventory.py --update-status
 # Some entries may be support or standalone pages rather than map examples.
 
 # BEGIN GENERATED MISSING EXAMPLES
-# 86 upstream HTML files without a matching TypeScript port.
+# 71 upstream HTML files without a matching TypeScript port.
 #   control/map.control.profile.html (inline scripts: 1)
-#   control/map.switcher.shop.html (inline scripts: 1)
 #   filter/map.filter.oilpaint.html (inline scripts: 0)
 #   filter/map.filter.pointillism.html (inline scripts: 0)
 #   geom/map.simplify.html (inline scripts: 1)
 #   hackmacarte.html (inline scripts: 0)
-#   interaction/map.ddrop.html (inline scripts: 1)
 #   interaction/map.interaction.transformrectangle.html (inline scripts: 1)
-#   interaction/map.interaction.undoredo.html (inline scripts: 1)
-#   interaction/map.interaction.undoredo2.html (inline scripts: 1)
 #   layer/map.carhab.html (inline scripts: 1)
 #   layer/map.carhab.wfs.html (inline scripts: 1)
 #   layer/map.circle.intersection.html (inline scripts: 1)
-#   layer/map.dbpedia.html (inline scripts: 1)
-#   layer/map.flickrfeed.html (inline scripts: 1)
 #   layer/map.geoimage.html (inline scripts: 1)
 #   layer/map.intersection.html (inline scripts: 1)
 #   layer/map.layer.altitude-2.html (inline scripts: 1)
@@ -55,7 +49,6 @@ EXAMPLE_LOAD_CHECK := 24 new pages loaded in Chrome, with out-of-coverage tiles 
 #   layer/map.maplibre.gl.html (inline scripts: 0)
 #   layer/map.source.delaunay.html (inline scripts: 1)
 #   layer/map.stat.wfs.html (inline scripts: 1)
-#   layer/map.wikicommons.html (inline scripts: 1)
 #   layer/map.wmscapabilities.html (inline scripts: 1)
 #   layer/map.wmtscapabilities.html (inline scripts: 1)
 #   legend/map.control.legend.html (inline scripts: 1)
@@ -63,17 +56,12 @@ EXAMPLE_LOAD_CHECK := 24 new pages loaded in Chrome, with out-of-coverage tiles 
 #   map/map.dbpedia.photo.html (inline scripts: 1)
 #   map/map.watchdogs.html (inline scripts: 1)
 #   map.pirate-old.html (inline scripts: 1)
-#   misc/csv2geojson.html (inline scripts: 1)
 #   misc/geocommune.html (inline scripts: 0)
 #   misc/geoimport.html (inline scripts: 1)
-#   misc/geojson.check.html (inline scripts: 1)
-#   misc/geojson2csv.html (inline scripts: 1)
-#   misc/geojson2geojsonx.html (inline scripts: 1)
 #   misc/geojsontile.html (inline scripts: 1)
 #   misc/geojsontile2.html (inline scripts: 1)
 #   misc/geoportail.loader.html (inline scripts: 0)
 #   misc/map.awesome.gpp.html (inline scripts: 1)
-#   misc/map.format.geojsonl.html (inline scripts: 1)
 #   misc/map.geoportail.migration.html (inline scripts: 1)
 #   misc/map.georef2wmts.html (inline scripts: 1)
 #   misc/map.iframe.api.html (inline scripts: 0)
@@ -99,11 +87,8 @@ EXAMPLE_LOAD_CHECK := 24 new pages loaded in Chrome, with out-of-coverage tiles 
 #   storymap/map.rlt.html (inline scripts: 1)
 #   storymap/map.rlt2.html (inline scripts: 0)
 #   storymap/map.rlt3.html (inline scripts: 0)
-#   style/map.style.chart.html (inline scripts: 1)
 #   style/map.style.flowarrow.html (inline scripts: 1)
 #   style/map.style.gpxline.html (inline scripts: 1)
-#   style/map.style.hashlines.html (inline scripts: 1)
-#   style/map.style.scribblefill.html (inline scripts: 1)
 #   style/map.style.textpath.html (inline scripts: 1)
 # END GENERATED MISSING EXAMPLES
 
