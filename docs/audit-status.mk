@@ -10,16 +10,15 @@ AUDIT_STATE := complete
 # Porting the remaining upstream examples is a separate follow-up to the audit.
 # Load results and upstream issues are recorded in docs/ol-ext-example-ports.md.
 EXAMPLE_PORTS_STATE := in progress
-EXAMPLE_PORTS_LAST_ROUND := 15 editing, conversion, style and data-source ports
-EXAMPLE_LOAD_CHECK := all 15 new bundles loaded in Chrome after correcting font-loader order
+EXAMPLE_PORTS_LAST_ROUND := 11 imagery, binning and capabilities ports
+EXAMPLE_LOAD_CHECK := all 11 new pages passed Chrome startup checks
 
 # Refresh the complete unmatched-page snapshot with:
 # python3 scripts/example-inventory.py --update-status
 # Some entries may be support or standalone pages rather than map examples.
 
 # BEGIN GENERATED MISSING EXAMPLES
-# 71 upstream HTML files without a matching TypeScript port.
-#   control/map.control.profile.html (inline scripts: 1)
+# 60 upstream HTML files without a matching TypeScript port.
 #   filter/map.filter.oilpaint.html (inline scripts: 0)
 #   filter/map.filter.pointillism.html (inline scripts: 0)
 #   geom/map.simplify.html (inline scripts: 1)
@@ -28,29 +27,19 @@ EXAMPLE_LOAD_CHECK := all 15 new bundles loaded in Chrome after correcting font-
 #   layer/map.carhab.html (inline scripts: 1)
 #   layer/map.carhab.wfs.html (inline scripts: 1)
 #   layer/map.circle.intersection.html (inline scripts: 1)
-#   layer/map.geoimage.html (inline scripts: 1)
 #   layer/map.intersection.html (inline scripts: 1)
-#   layer/map.layer.altitude-2.html (inline scripts: 1)
-#   layer/map.layer.altitude.html (inline scripts: 1)
 #   layer/map.layer.bdtopo.vtile.html (inline scripts: 1)
 #   layer/map.layer.clc.wfs.html (inline scripts: 1)
 #   layer/map.layer.elev.html (inline scripts: 1)
-#   layer/map.layer.featurebin.html (inline scripts: 1)
 #   layer/map.layer.geoportail.AOC.html (inline scripts: 1)
 #   layer/map.layer.geoportail.html (inline scripts: 1)
 #   layer/map.layer.geoportail.wfs.html (inline scripts: 0)
 #   layer/map.layer.gppvtile.html (inline scripts: 0)
-#   layer/map.layer.gridbin.html (inline scripts: 1)
-#   layer/map.layer.hexbin.html (inline scripts: 1)
-#   layer/map.layer.insee.html (inline scripts: 1)
 #   layer/map.layer.maplibre copy.html (inline scripts: 1)
 #   layer/map.layer.maplibre.html (inline scripts: 1)
 #   layer/map.layer.ocsge.html (inline scripts: 1)
 #   layer/map.maplibre.gl.html (inline scripts: 0)
-#   layer/map.source.delaunay.html (inline scripts: 1)
 #   layer/map.stat.wfs.html (inline scripts: 1)
-#   layer/map.wmscapabilities.html (inline scripts: 1)
-#   layer/map.wmtscapabilities.html (inline scripts: 1)
 #   legend/map.control.legend.html (inline scripts: 1)
 #   map/map.clustering.html (inline scripts: 1)
 #   map/map.dbpedia.photo.html (inline scripts: 1)

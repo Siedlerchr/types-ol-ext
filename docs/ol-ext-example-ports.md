@@ -85,3 +85,21 @@ gestures remain outside this check. The server was stopped after the recheck.
 - The drag-and-drop example passed a checkbox's value to its style toggle.
   The port reads its checked state and uses the current OpenLayers
   `View.fit` options.
+
+## Release 4.0.39, round of 11 ports
+
+The profile, georeferenced image, elevation and shaded relief, spatial
+binning, Delaunay, and WMS/WMTS capabilities pages all passed the Chrome
+startup check. The inventory has 60 unmatched HTML files. The server was
+stopped after the check. Local file imports, data downloads, and interactive
+map operations still need separate exercise.
+
+- The shaded-relief example uses `shade` for both its raster operation and
+  layer. Its operation now returns the `ImageData` required by OpenLayers
+  Raster in image mode.
+- The GridBin projection change previously used the projection code's
+  characters to form a coordinate. The port uses adjacent coordinates at
+  the view center to compare scale across projections.
+- The WMTS capabilities page contains a hidden export button that attempts
+  to serialize WMS parameters. The port shares the WMS-only export code.
+  WMTS serialization remains unsupported.
